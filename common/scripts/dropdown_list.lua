@@ -11,6 +11,8 @@ Lookups = {};
 
 function onInit()
     -- PJ Identité
+    lkp_sexe = {"Masculin", "Féminin"};
+
     Lookups.lkp_sexe = {"Masculin", "Féminin"};
     Lookups.lkp_yeux = {"Bleu", "Bleu gris", "Bleu azure", "Vert", "Vert émeraude", "Marron", "Gris", "Ambre", "Blanc", "Noir"};
     Lookups.lkp_cheveux = {"Blond", "Blond vénitien", "Châtain", "Châtain clair", "Châtain foncé", "Brun", "Gris", "Blanc", "Noir", "Roux"};
