@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Portrait Chat icons -->	
+	<icon name="portraitchat_base" file="graphics/portraits/portrait_chat.png" />
+	<icon name="portraitchat_mask" file="graphics/portraits/portrait_chat_mask.png" />
+	<icon name="portrait_gm_token" file="graphics/portraits/portrait_gm_token.png" />
+	
+	<!-- Other portrait options -->
+	<icon name="charlist_base" file="graphics/portraits/portrait.png" />
+	<icon name="charlist_mask" file="graphics/portraits/portrait_mask.png" />
+	<icon name="portraittoken_base" file="graphics/portraits/portrait_token.png" />
+	<icon name="portraittoken_mask" file="graphics/portraits/portrait_token_mask.png" />
+	<icon name="miniportrait_base" file="graphics/portraits/portrait_mini.png" />
+	<icon name="miniportrait_mask" file="graphics/portraits/portrait_mini_mask.png" />
+
+	<portraitset name="charlist">
+		<base>charlist_base</base>
+		<mask>charlist_mask</mask>
+	</portraitset>
+	
+	<portraitset name="miniportrait">
+		<base>miniportrait_base</base>
+		<mask>miniportrait_mask</mask>
+	</portraitset>
+	
+	<portraitset name="token">
+		<base>portraittoken_base</base>
+		<mask>portraittoken_mask</mask>
+		<createtoken />
+	</portraitset>
+
+	<portraitset name="chat">
+		<base>portraitchat_base</base>
+		<mask>portraitchat_mask</mask>
+	</portraitset>
+</root>

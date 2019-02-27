@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Characters -->
+	<string name="char_label_home_country">HOME COUNTRY</string>
+	
+	<!-- List RACE -->
+	<string name="list_race_human">Human</string>
+	<string name="list_race_elf">Elf</string>
+	<string name="list_race_dwarf">Dwarf</string>
+	<string name="list_race_witcher">Witcher</string>
+	<string name="list_race_mage">Mage</string>
+	
+	<!-- List GENDER -->
+	<string name="list_race_female">Female</string>
+	<string name="list_race_male">Male</string>
+	
+</root>
