@@ -8,6 +8,9 @@
 <root>
 	<!-- Characters -->
 	<string name="char_label_home_country">HOME COUNTRY</string>
+	<string name="char_label_reputation">REPUTATION</string>
+	<string name="char_label_profession">PROFESSION</string>
+	<string name="char_label_improvement_point">IMP. POINTS</string>
 	
 	<!-- List RACE -->
 	<string name="list_race_human">Human</string>
@@ -19,5 +22,16 @@
 	<!-- List GENDER -->
 	<string name="list_race_female">Female</string>
 	<string name="list_race_male">Male</string>
+	
+	<!-- List PROFESSION -->
+	<string name="list_profession_bard">Bard</string>
+	<string name="list_profession_craftsman">Craftsman</string>
+	<string name="list_profession_criminal">Criminal</string>
+	<string name="list_profession_doctor">Doctor</string>
+	<string name="list_profession_mage">Mage</string>
+	<string name="list_profession_man_at_arms">Men At arms</string>
+	<string name="list_profession_merchant">Merchant</string>
+	<string name="list_profession_priest">Priest</string>
+	<string name="list_profession_witcher">Witcher</string>
 	
 </root>
