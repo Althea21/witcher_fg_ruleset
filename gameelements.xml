@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<desktopframe>desktop</desktopframe>
+
+	<tokenroot source="tokens" />
+
+	<characterdbroot>charsheet</characterdbroot>
+	
+	<die name="gmdie" version="&lt;4">
+		<icon>gmdieicon</icon>
+	</die>
+	
+	<die name="dF">
+		<icon>d6icon</icon>
+		<position>420,-68</position>
+	</die>
+	<die name="d4">
+		<icon>d4icon</icon>
+		<position>370,-68</position>
+	</die>
+	<die name="d6">
+		<icon>d6icon</icon>
+		<position>320,-68</position>
+	</die>
+	<die name="d8">
+		<icon>d8icon</icon>
+		<position>270,-68</position>
+	</die>
+	<die name="d10">
+		<icon>d10icon</icon>
+		<position>220,-68</position>
+	</die>
+	<die name="d12">
+		<icon>d12icon</icon>
+		<position>170,-68</position>
+	</die>
+	<die name="d20">
+		<icon>d20icon</icon>
+		<position>120,-68</position>
+	</die>
+	<die name="d100">
+		<icon>d10icon</icon>
+		<menuicon>percent</menuicon>
+	</die>
+
+	<diebox version="&gt;=4">
+		<frame name="diebox" offset="9,4,9,4" />
+		<font expression="diceexpr" total="diemod" dieresult="dieresult"/>
+		<icons secret="gmdieicon" defaultdie="unknowndieicon" />
+	</diebox>
+	<diebox version="&lt;4">
+		<frame name="diebox" />
+		<margin value="16" numbertailmargin="10" />
+		<secreticon name="gmdie" />
+	</diebox>
+	
+	<pollbox version="&gt;=4">
+		<frame name="diebox" offset="4,4,4,4" />
+		<icons empty="poll_empty" positive="poll_check" negative="poll_negative" />
+	</pollbox>
+	<pollbox version="&lt;4">
+		<frame name="diebox" />
+		<margin value="21" numbertailmargin="10" />
+		<icons empty="poll_empty" positive="poll_check" negative="poll_negative" />
+	</pollbox>
+	
+	<viewerlistsettings>
+		<portrait file="data\icons\mini_portrait.png" mask="data\icons\mini_portrait_mask.png" />
+		<spacing value="0" />
+	</viewerlistsettings>
+
+	<hotkeybar>
+		<frame>hotkeybox</frame>
+		<location offset="0" height="33" />
+		<title frame="hotkeytitlebox" frameoffset="2,-2,7,5" margin="2,1" font="hotkey" />
+		<label margin="10,12" font="hotkey" />
+		<iconmargins>0,3,0,0</iconmargins>
+	</hotkeybar>
+
+	<categoryselectionsettings>
+		<iconposition normal="6,6" selected="6,4" />
+		<baseicon normal="tab_base1" selected="tab_base1s" />
+		<baseicon normal="tab_base2" selected="tab_base2s" />
+		<baseicon normal="tab_base3" selected="tab_base3s" />
+		<baseicon normal="tab_base4" selected="tab_base4s" />
+		<baseicon normal="tab_base5" selected="tab_base5s" />
+		<baseicon normal="tab_base6" selected="tab_base6s" />
+		<baseicon normal="tab_base7" selected="tab_base7s" />
+		<baseicon normal="tab_base8" selected="tab_base8s" />
+		<baseicon normal="tab_base9" selected="tab_base9s" />
+		<baseicon normal="tab_base10" selected="tab_base10s" />
+		<baseicon normal="tab_base11" selected="tab_base11s" />
+		<baseicon normal="tab_base12" selected="tab_base12s" />
+		<decalicon name="tab_icon1" />
+		<decalicon name="tab_icon2" />
+		<decalicon name="tab_icon3" />
+		<decalicon name="tab_icon4" />
+		<decalicon name="tab_icon5" />
+		<decalicon name="tab_icon6" />
+		<decalicon name="tab_icon7" />
+		<decalicon name="tab_icon8" />
+		<decalicon name="tab_icon9" />
+		<decalicon name="tab_icon10" />
+		<decalicon name="tab_icon11" />
+		<decalicon name="tab_icon12" />
+		<decalicon name="tab_icon13" />
+		<decalicon name="tab_icon14" />
+		<decalicon name="tab_icon15" />
+	</categoryselectionsettings>
+
+	<tooltip>
+		<frame name="tooltipbox" margins="7,4,10,7" wrapwidth="300" />
+		<radial name="mini_name" margins="7,2,7,2" />
+		<font name="mini_name" />
+	</tooltip>
+	
+	<distance>
+		<font>distancelabel</font>
+	</distance>
+
+	<imagesettings>
+		<shortcut icon="image_pin" iconpublic="image_pin_public" hotspot="2,21" />
+	</imagesettings>
+	
+	<textsettings>
+		<selectioncolor>BCD2E9</selectioncolor>
+		<icon link="button_link" linkshare="button_link_share" emptylink="button_link_empty" chat="button_speak" />
+		<font simple="sheettext" normal="reference-r" bold="reference-b" italic="reference-i" bolditalic="reference-bi" title="reference-h" />
+	</textsettings>
+
+	<imageupdatefolder>
+		<folder>images</folder>
+		<rootnode>image</rootnode>
+		<field>image</field>
+		<namefield>name</namefield>
+	</imageupdatefolder>
+</root>
