@@ -4,15 +4,66 @@
   Please see the license.html file included with this distribution for 
   attribution and copyright information.
 -->
-alist = ["sexe", "Body"];
 
 <root>
 	<windowclass name="charsheet_main">
 		<margins control="0,0,0,2" />
 		<sheetdata>
-			<frame_char name="attributesframe">
-				<bounds>15,0,-29,-5</bounds>
+			<frame_char name="identite_frame">
+				<bounds>15,0,-29,250</bounds>
 			</frame_char>
+			
+			<label>
+				<anchored to="identite_frame" position="insidetopleft" offset="15,15" />
+				<static textres="char_label_race" />
+			</label>
+			<combobox name="race" source="identite.race">
+				<anchored to="identite_frame" position="insidetopleft" offset="70,15" width="100" height="20" />
+				<listdirection>down</listdirection>
+				<script>
+					function onInit()
+						super.onInit();
+						add("Human", list_race_human);
+						add("Elve", list_race_elf);
+						add("Dwarf", list_race_dwarf);
+						add("Witcher", list_race_witcher);
+						add("Mage", list_race_mage);
+					end
+				</script>
+				<default>Human</default>
+			</combobox>
+
+			<label>
+				<anchored to="identite_frame" position="insidetopleft" offset="15,35" />
+				<static textres="char_label_gender" />
+			</label>
+			<combobox name="gender" source="identite.gender">
+				<anchored to="identite_frame" position="insidetopleft" offset="70,35" width="100" height="20" />
+				<listdirection>down</listdirection>
+				<script>
+					function onInit()
+					super.onInit();
+					add("Female", list_race_female);
+					add("Male", list_race_male);
+					end
+				</script>
+				<default>Male</default>
+			</combobox>
+			
+			<label>
+				<anchored to="race" position="right" offset="25,0" />
+				<static textres="char_label_home_country" />
+			</label>
+			<stringu name="home_country" source="identite.home_country">
+				<anchored to="identite_frame">
+					<top offset="15" />
+					<left offset="300" />
+					<right offset="-20" />
+					<size height="20" />
+				</anchored>
+			</stringu>
+			
+			
 <!--			<label_frametop>
 				<anchored to="attributesframe" />
 				<static textres="char_label_attributes" />
@@ -29,29 +80,7 @@ alist = ["sexe", "Body"];
 				<anchored to="categories" />
 				<target>categories</target>
 			</scrollbar_list>
--->
-			<basicnumber name="bonus">
-				<anchored to="attributesframe" width="30" height="20">
-					<top offset="5"/>
-					<right anchor="left" relation="relative" offset="40" />
-				</anchored>
-			</basicnumber>
-
-			<combobox name="test">
-				<anchored to="attributesframe" width="400" height="20">
-					<top offset="25"/>
-					<right anchor="left" relation="relative" offset="40" />
-				</anchored>
-				<listdirection>down</listdirection>
-				<script>
-					function onInit()
-						super.onInit();
-						addItems(Lookups.lkp_sexe);
-					end
-				</script>
-				
-			</combobox>
-			
+-->						
 <!--			<button_iedit name="categories_iedit">
 				<anchored to="categories" position="aboveright" offset="5,5" />
 				<target>categories</target>
