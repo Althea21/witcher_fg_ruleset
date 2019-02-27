@@ -38,8 +38,8 @@
 	<includefile source="graphics/graphics_radial.xml" />-->
 
 	<!-- Strings 
-	<includefile source="strings/strings.xml" />
-	<includefile source="strings/strings_utility2.xml" />-->
+	<includefile source="strings/strings.xml" />-->
+	<includefile source="strings/strings_campaign2.xml" />
 	
 	<!-- Desktop 
 	<includefile source="desktop/desktop_classes.xml" />
