@@ -222,13 +222,6 @@
 				<anchored to="stun" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_stun" />
 			</label>
-			<basicnumber name="stunmax" source="attributs.stunmax">
-				<anchored to="stun" position="right" offset="30,0" width="30" height="20" />
-			</basicnumber>
-			<label>
-				<anchored to="stunmax" position="right" offset="-47,0" />
-				<static textres="char_special_divide" />
-			</label>		
 			<basicnumber name="run" source="attributs.run">
 				<anchored to="stun" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</basicnumber>
