@@ -40,10 +40,9 @@
 	
 	<!-- List RACE -->
 	<string name="list_race_human">Human</string>
-	<string name="list_race_elf">Elf</string>
+	<string name="list_race_elf">Aen Seidhe</string>
 	<string name="list_race_dwarf">Dwarf</string>
 	<string name="list_race_witcher">Witcher</string>
-	<string name="list_race_mage">Mage</string>
 	
 	<!-- List GENDER -->
 	<string name="list_race_female">Female</string>

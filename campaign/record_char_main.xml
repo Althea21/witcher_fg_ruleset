@@ -36,10 +36,9 @@
 					function onInit()
 						super.onInit();
 						add("Human", list_race_human);
-						add("Elve", list_race_elf);
+						add("Aen Seidhe", list_race_elf);
 						add("Dwarf", list_race_dwarf);
 						add("Witcher", list_race_witcher);
-						add("Mage", list_race_mage);
 					end
 				</script>
 				<default>Human</default>
