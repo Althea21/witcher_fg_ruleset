@@ -17,16 +17,20 @@
 			
 			<!-- Frame de placement -->
 			<frame_char name="identite_frame">
-				<bounds>15,0,-29,100</bounds>
+				<bounds>15,0,-29,125</bounds>
 			</frame_char>
-				
+			<label_frametop>
+				<anchored to="identite_frame" />
+				<static textres="char_label_identity" />
+			</label_frametop>	
+			
 			<!-- RACE -->
 			<label>
-				<anchored to="identite_frame" position="insidetopleft" offset="15,15" />
+				<anchored to="identite_frame" position="insidetopleft" offset="15,35" />
 				<static textres="char_label_race" />
 			</label>
 			<combobox name="race" source="identite.race">
-				<anchored to="identite_frame" position="insidetopleft" offset="100,15" width="100" height="20" />
+				<anchored to="identite_frame" position="insidetopleft" offset="100,35" width="100" height="20" />
 				<listdirection>down</listdirection>
 				<script>
 					function onInit()
@@ -48,7 +52,7 @@
 			</label>
 			<stringu name="home_country" source="identite.home_country">
 				<anchored to="identite_frame">
-					<top offset="15" />
+					<top offset="35" />
 					<left offset="320" />
 					<right offset="-20" />
 					<size height="20" />
@@ -57,11 +61,11 @@
 
 			<!-- GENDER -->
 			<label>
-				<anchored to="identite_frame" position="insidetopleft" offset="15,40" />
+				<anchored to="identite_frame" position="insidetopleft" offset="15,60" />
 				<static textres="char_label_gender" />
 			</label>
 			<combobox name="gender" source="identite.gender">
-				<anchored to="identite_frame" position="insidetopleft" offset="100,40" width="100" height="20" />
+				<anchored to="identite_frame" position="insidetopleft" offset="100,60" width="100" height="20" />
 				<listdirection>down</listdirection>
 				<script>
 					function onInit()
@@ -79,8 +83,7 @@
 				<static textres="char_label_age" />
 			</label>
 			<basicnumber name="age" source="identite.age">
-				<anchored to="identite_frame" position="insidetopleft" offset="285,40" width="30" height="20" />
-				
+				<anchored to="identite_frame" position="insidetopleft" offset="285,60" width="30" height="20" />			
 			</basicnumber>
 	
 			<!-- REPUTATION -->
@@ -89,17 +92,16 @@
 				<static textres="char_label_reputation" />
 			</label>
 			<basicnumber name="reputation" source="identite.reputation">
-				<anchored to="identite_frame" position="insidetopleft" offset="425,40" width="30" height="20" />
-				
+				<anchored to="identite_frame" position="insidetopleft" offset="425,60" width="30" height="20" />
 			</basicnumber>
 	
 			<!-- PROFESSION -->
 			<label>
-				<anchored to="identite_frame" position="insidetopleft" offset="15,65" />
+				<anchored to="identite_frame" position="insidetopleft" offset="15,85" />
 				<static textres="char_label_profession" />
 			</label>
 			<combobox name="profession" source="identite.profession">
-				<anchored to="identite_frame" position="insidetopleft" offset="100,65" width="100" height="20" />
+				<anchored to="identite_frame" position="insidetopleft" offset="100,85" width="100" height="20" />
 				<listdirection>down</listdirection>
 				<script>
 					function onInit()
@@ -124,9 +126,197 @@
 				<static textres="char_label_improvement_point" />
 			</label>
 			<basicnumber name="improvement_point" source="identite.improvement_point">
-					<anchored to="identite_frame" position="insidetopleft" offset="425,65" width="30" height="20" />
-					
-				</basicnumber>
+				<anchored to="identite_frame" position="insidetopleft" offset="425,85" width="30" height="20" />				
+			</basicnumber>
+	
+			<!-- ATTRIBUTS -->
+			<!--
+				Branche de la DB : charsheet.ID-XXXXX.attributs.
+			-->
+			
+			<!-- Frame de placement -->
+			<frame_char name="attributs_frame">
+				<bounds>15,130,-29,-10</bounds>
+			</frame_char>
+			<label_frametop>
+				<anchored to="attributs_frame" />
+				<static textres="char_label_stats" />
+			</label_frametop>	
+			
+			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->
+			<basicnumber name="intelligence" source="attributs.intelligence">
+				<anchored to="attributs_frame" position="insidetopleft" offset="120,35" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="intelligence" position="right" offset="-130,0" />
+				<static textres="char_statslabel_intelligence" />
+			</label>
+			<basicnumber name="reflex" source="attributs.reflex">
+				<anchored to="intelligence" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="reflex" position="right" offset="-130,0" />
+				<static textres="char_statslabel_reflex" />
+			</label>
+			<basicnumber name="dexterity" source="attributs.dexterity">
+				<anchored to="reflex" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="dexterity" position="right" offset="-130,0" />
+				<static textres="char_statslabel_dexterity" />
+			</label>
+			<basicnumber name="body" source="attributs.body">
+				<anchored to="dexterity" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="body" position="right" offset="-130,0" />
+				<static textres="char_statslabel_body" />
+			</label>
+			<basicnumber name="speed" source="attributs.speed">
+				<anchored to="body" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="speed" position="right" offset="-130,0" />
+				<static textres="char_statslabel_speed" />
+			</label>
+			<basicnumber name="empathy" source="attributs.empathy">
+				<anchored to="speed" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="empathy" position="right" offset="-130,0" />
+				<static textres="char_statslabel_empathy" />
+			</label>
+			<basicnumber name="crafting" source="attributs.crafting">
+				<anchored to="empathy" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="crafting" position="right" offset="-130,0" />
+				<static textres="char_statslabel_crafting" />
+			</label>
+			<basicnumber name="will" source="attributs.will">
+				<anchored to="crafting" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="will" position="right" offset="-130,0" />
+				<static textres="char_statslabel_will" />
+			</label>
+			<basicnumber name="luck" source="attributs.luck">
+				<anchored to="will" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="luck" position="right" offset="-130,0" />
+				<static textres="char_statslabel_luck" />
+			</label>
+			<basicnumber name="luckmax" source="attributs.luckmax">
+				<anchored to="luck" position="right" offset="30,0" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="luckmax" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			
+			<!-- DERIVED STATS : STUN, RUN, LEAP, HP, STA, ENC, REC, PUNCH, KICK -->
+			<basicnumber name="stun" source="attributs.stun">
+				<anchored to="intelligence" position="right" offset="200,0" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="stun" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_stun" />
+			</label>
+			<basicnumber name="stunmax" source="attributs.stunmax">
+				<anchored to="stun" position="right" offset="30,0" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="stunmax" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>		
+			<basicnumber name="run" source="attributs.run">
+				<anchored to="stun" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="run" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_run" />
+			</label>
+			<basicnumber name="leap" source="attributs.leap">
+				<anchored to="run" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="leap" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_leap" />
+			</label>
+			<basicnumber name="hit_points" source="attributs.hit_points">
+				<anchored to="leap" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="hit_points" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_hit_points" />
+			</label>
+			<basicnumber name="hit_pointsmax" source="attributs.hit_pointsmax">
+				<anchored to="hit_points" position="right" offset="30,0" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="hit_pointsmax" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			<basicnumber name="stamina" source="attributs.stamina">
+				<anchored to="hit_points" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="stamina" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_stamina" />
+			</label>
+			<basicnumber name="staminasmax" source="attributs.staminasmax">
+				<anchored to="stamina" position="right" offset="30,0" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="staminasmax" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			<basicnumber name="encumbrance" source="attributs.encumbrance">
+				<anchored to="stamina" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="encumbrance" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_encumbrance" />
+			</label>
+			<basicnumber name="encumbrancemax" source="attributs.encumbrancemax">
+				<anchored to="encumbrance" position="right" offset="30,0" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="encumbrancemax" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			<basicnumber name="recovery" source="attributs.recovery">
+				<anchored to="encumbrance" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="recovery" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_recovery" />
+			</label>
+			<basicdice name="punch" source="attributs.punch">
+				<anchored to="recovery" width="40" height="20">
+					<top anchor="bottom" relation="relative" offset="5" />
+					<left />
+				</anchored>
+				<frame name="fielddark" offset="7,5,7,5" />			
+			</basicdice>
+			<label>
+				<anchored to="punch" position="right" offset="-140,0" />
+				<static textres="char_derivedstatslabel_punch" />
+			</label>
+			<basicdice name="kick" source="attributs.kick">
+				<anchored to="punch" width="40" height="20">
+					<top anchor="bottom" relation="relative" offset="5" />
+					<left />
+				</anchored>
+				<frame name="fielddark" offset="7,5,7,5" />
+			</basicdice>
+			<label>
+				<anchored to="kick" position="right" offset="-140,0" />
+				<static textres="char_derivedstatslabel_kick" />
+			</label>
+			
+			
 		</sheetdata>
 	</windowclass>
 

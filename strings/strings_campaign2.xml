@@ -6,11 +6,37 @@
 -->
 
 <root>
-	<!-- Characters -->
+	<!-- Characters IDENTITY -->
+	<string name="char_label_identity">IDENTITY</string>
 	<string name="char_label_home_country">HOME COUNTRY</string>
 	<string name="char_label_reputation">REPUTATION</string>
 	<string name="char_label_profession">PROFESSION</string>
 	<string name="char_label_improvement_point">IMP. POINTS</string>
+
+	<!-- Characters Attributes-->
+	<string name="char_label_stats">STATS</string>
+
+	<string name="char_statslabel_intelligence">INTELLIGENCE</string>
+	<string name="char_statslabel_reflex">REFLEX</string>
+	<string name="char_statslabel_dexterity">DEXTERITY</string>
+	<string name="char_statslabel_body">BODY</string>
+	<string name="char_statslabel_speed">SPEED</string>
+	<string name="char_statslabel_empathy">EMPATHY</string>
+	<string name="char_statslabel_crafting">CRAFTING</string>
+	<string name="char_statslabel_will">WILL</string>
+	<string name="char_statslabel_luck">LUCK</string>
+
+	<string name="char_derivedstatslabel_stun">STUN</string>
+	<string name="char_derivedstatslabel_run">RUN</string>
+	<string name="char_derivedstatslabel_leap">LEAP</string>
+	<string name="char_derivedstatslabel_hit_points">HIT POINTS</string>
+	<string name="char_derivedstatslabel_stamina">STAMINA</string>
+	<string name="char_derivedstatslabel_encumbrance">ENCUMBRANCE</string>
+	<string name="char_derivedstatslabel_recovery">RECOVERY</string>
+	<string name="char_derivedstatslabel_punch">PUNCH</string>
+	<string name="char_derivedstatslabel_kick">KICK</string>
+	
+	<string name="char_special_divide">/</string>
 	
 	<!-- List RACE -->
 	<string name="list_race_human">Human</string>
