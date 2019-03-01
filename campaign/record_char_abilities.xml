@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_abilities">
+		<sheetdata>
+			<frame_char name="abilityframe">
+				<bounds>15,0,-29,-5</bounds>
+			</frame_char>
+			<label_frametop>
+				<anchored to="abilityframe" />
+				<static textres="char_label_abilities" />
+			</label_frametop>
+			<list_text name="abilities">
+				<anchored to="abilityframe">
+					<left offset="15" />
+					<top offset="35" />
+					<right offset="-20" />
+					<bottom offset="-20" />
+				</anchored>
+				<columns width="222" filldown="true" />
+				<newfocus>name</newfocus>
+				<datasource>.abilitylist</datasource>
+				<class>char_ability</class>
+				<acceptdrop>
+					<class>referencetext</class>
+					<class>referencetextwide</class>
+					<field>*</field>
+				</acceptdrop>
+			</list_text>
+			<scrollbar_list>
+				<anchored to="abilities" />
+				<target>abilities</target>
+			</scrollbar_list>
+
+			<button_iedit name="abilities_iedit">
+				<anchored to="abilities" position="aboveright" offset="5,5" />
+				<target>abilities</target>
+			</button_iedit>
+			<button_iadd name="abilities_iadd">
+				<anchored to="abilities_iedit" position="lefthigh" offset="5,0" />
+				<target>abilities</target>
+			</button_iadd>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_ability">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top offset="2" />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete>
+			<linkfield name="shortcut">
+				<anchored to="rightanchor" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<class>ability</class>
+				<description field="name" />
+				<readonly />
+			</linkfield>
+			<string_textlistitem name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="5" />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</string_textlistitem>
+		</sheetdata>
+	</windowclass>	
+</root>
