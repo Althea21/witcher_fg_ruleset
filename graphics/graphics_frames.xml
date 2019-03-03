@@ -8,19 +8,10 @@
 <root>
 	<!-- Desktop background -->
 	<framedef name="desktop">
-		<bitmap file="graphics/frames/desktop.png" />
-		<top rect="0,1,324,151" />
-		<middle rect="1,154,200,200" />
-		<right rect="450,0,100,144" />
-		<bottomright rect="450,0,100,144" />
-		<bottom rect="219,437,567,132" />
+		<bitmap file="graphics/frames/background.jpg"/>
+		<decal rect="0,0,2048,1080" />
 	</framedef>
-	<framedef name="shortcuts">
-		<bitmap file="graphics/frames/desktop.png" />
-		<left rect="450,0,25,144" />
-		<middle rect="475,0,50,144" />
-		<right rect="525,0,25,144" />
-	</framedef>
+	<framedef name="shortcuts"></framedef>
 	
 	<!-- Tooltips -->
 	<framedef name="tooltipbox">
