@@ -4,5 +4,5 @@
 	<includefile source="graphics/graphics_frames.xml" />
 	<includefile source="graphics/graphics_fonts.xml" />
 	<includefile source="graphics/graphics_icons.xml" />
-	<script name="DesktopManagerWitcher" file="scripts/data_library_com.lua" />
+	<script name="DesktopManagerWitcher" file="graphics/scripts/data_library_com.lua" />
 </root>
