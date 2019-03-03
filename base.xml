@@ -12,157 +12,21 @@
 		<author>Sylv, Laurent 'Heedio' WITZ</author>
 		<website></website>
 	</description>
+
 	<!-- Layers -->
 	<importruleset source="CoreRPG" />
 
 	<!-- Tabletop settings -->
 	<includefile source="gameelements.xml" />
 
-	<!-- Common 
-	<includefile source="common/base_templates.xml" />-->
-	
-	<!-- Graphics
-	<includefile source="graphics/graphics.xml" />
-	<includefile source="graphics/graphics_frames2.xml" />
-	<includefile source="graphics/graphics_radial.xml" />
-	<includefile source="graphics/graphics_buttons2.xml" />
-	<includefile source="graphics/graphics_minimized.xml" />
-	<includefile source="graphics/graphics_indicators.xml" />
-	
-	<includefile source="graphics/graphics_portraitsets.xml" />
-	
-	<includefile source="graphics/graphics_fonts2.xml" />-->
-	
-<!---	<includefile source="graphics/graphics_fonts.xml" /> 
-	<includefile source="graphics/graphics_icons.xml" />
-	<includefile source="graphics/graphics_radial.xml" />-->
-
-	<!-- Strings 
-	<includefile source="strings/strings.xml" />-->
+	<!-- Strings -->
 	<includefile source="strings/strings_campaign2.xml" />
-	
-	<!-- Desktop 
-	<includefile source="desktop/desktop_classes.xml" />
-	<script name="Desktop" file="desktop/scripts/desktop.lua" />
-	<script name="Desktop2" file="desktop/scripts/desktop2.lua" />-->
-	<!--<includefile source="desktop/desktop_local.xml" /> -->
 
-	<!-- Utility 
-	<includefile source="utility/template_utility.xml" />
-	
-	<includefile source="utility/utility_seuil.xml" />
-	<includefile source="utility/utility_mental.xml" />-->
-	<!--	<includefile source="utility/utility_modifiers.xml" />
-	<includefile source="utility/utility_effects.xml" />-->
-	
-	<!-- Reference 
-	<includefile source="ref/template_ref.xml" />
-	<includefile source="ref/ref_feats.xml" />
-	<includefile source="ref/ref_skills.xml" />
-	<includefile source="ref/ref_equipment.xml" />
-	<includefile source="ref/ref_equipment_lists.xml" />
-	<includefile source="ref/ref_spells.xml" />-->
-
-	<!-- Campaign Records 
-	<includefile source="campaign/template_campaign.xml" />
-	<includefile source="campaign/template_spell.xml" />
-
-	<includefile source="campaign/record_spell.xml" />
-	<includefile source="campaign/record_spell_mini.xml" />
-	<script name="CampaignDataManager" file="scripts/manager_campaigndata.lua" />
-
-	<includefile source="campaign/template_char.xml" />
-	
-	<includefile source="campaign/pj_onglets.xml" />
-	<includefile source="campaign/pj_identite.xml" />
-	<includefile source="campaign/pj_identite2.xml" />
-	<includefile source="campaign/pj_competence.xml" />
-	<includefile source="campaign/pj_combat.xml" />
-	<includefile source="campaign/pj_mental.xml" />
-	<includefile source="campaign/pj_pouvoirs.xml" />
-	<includefile source="campaign/pj_inventaire.xml" />
-	<includefile source="campaign/pj_notes.xml" />-->
-
-	<!--<includefile source="campaign/record_spell.xml" />
-	
-	<includefile source="campaign/pnj_identite.xml" />
-	<includefile source="campaign/pnj_onglets.xml" />
-	<includefile source="campaign/pnj_notes.xml" />
-	<includefile source="campaign/pnj_pouvoirs.xml" />
-
-	<includefile source="campaign/record_item.xml" />
-	<includefile source="campaign/record_citee.xml" />
-	<includefile source="campaign/record_spell.xml" />-->
-	
+	<!-- Campaign PJ -->
 	<includefile source="campaign/record_char_main.xml" />
-	
-<!--
-	<includefile source="campaign/item_menu.xml" />
-	<includefile source="campaign/citee_menu.xml" />
-	<includefile source="campaign/record_char_skills.xml" />
 	<includefile source="campaign/record_char_abilities.xml" />
-	<includefile source="campaign/record_char_inventory.xml" />
-	<includefile source="campaign/record_char_notes.xml" />
-	<includefile source="campaign/record_char_actions.xml" />
-	<includefile source="campaign/record_charmini_main.xml" />
-	<includefile source="campaign/record_charmini_abilities.xml" />
-	<includefile source="campaign/record_charmini_inventory.xml" />
-	<includefile source="campaign/record_charmini_actions.xml" />
-	<includefile source="campaign/record_ability.xml" />
-	<script name="CharManager" file="campaign/scripts/manager_char.lua" />
 
-	<includefile source="campaign/record_npc.xml" />
-	<includefile source="campaign/record_encounter.xml" />
-	<includefile source="campaign/record_item.xml" />
-	<includefile source="campaign/record_quest.xml" />-->
-	
-	<!-- Combat tracker 
+	<!-- PJ Table -->
+	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
 
-	<includefile source="ct/template_ct.xml" />
-	<includefile source="ct/ct_host.xml" />
-	<includefile source="ct/ct_client.xml" />-->
-	
-	<!-- Party sheet 
-	<includefile source="ps/template_ps.xml" />
-	<includefile source="ps/ps.xml" />
-	<includefile source="ps/ps_main.xml" />
-	<includefile source="ps/ps_skills.xml" />
-	<includefile source="ps/ps_xp.xml" />
-	<script name="PartyManager2" file="ps/scripts/manager_ps2.lua" />-->
-
-	<!-- High-level scripts 
-
-	<script name="DataCommon" file="common/scripts/datacommon.lua" />-->
-	<script name="DDGlobal" file="common/scripts/dropdown_list.lua" />
-	<!-- <script name="GameSystem" file="scripts/manager_gamesystem.lua" />
-	<script name="ActionManager2" file="scripts/manager_action2.lua" />
-	<script name="ActionAttributs" file="scripts/manager_action_attributs.lua" />
-	<script name="TableSeuilBlessure" file="campaign/scripts/Table_seuil_blessure.lua" />
-	<script name="TableSeuilFatigue" file="campaign/scripts/Table_seuil_fatigue.lua" />
-	<script name="TableVitesse" file="campaign/scripts/Table_vitesse.lua" />
-	<script name="CharsheetFunction" file="campaign/scripts/manage_charsheet.lua" />
-	
-	<script name="NodeManager" file="scripts/manager_node.lua" />
-	<script name="ExportManager" file="scripts/manager_export.lua" />
-	
-	<script name="LibraryData" file="scripts/data_library.lua" />-->
-	
-<!--	<script name="DataCommon" file="scripts/data_common.lua" />
-
-	<script name="ActorManager2" file="scripts/manager_actor2.lua" />
-	<script name="CombatManager2" file="scripts/manager_combat2.lua" />
-	<script name="EffectManager" file="scripts/manager_effect.lua" />
-	<script name="ItemManager2" file="scripts/manager_item2.lua" />
-	<script name="SpellManager" file="scripts/manager_spell.lua" />
-	<script name="TokenManager2" file="scripts/manager_token2.lua" />
-	<script name="VersionManager2" file="scripts/manager_version2.lua" />
-	
-	<script name="ActionAttack" file="scripts/manager_action_attack.lua" />
-	<script name="ActionDamage" file="scripts/manager_action_damage.lua" />
-	<script name="ActionEffect" file="scripts/manager_action_effect.lua" />
-	<script name="ActionHeal" file="scripts/manager_action_heal.lua" />
-	<script name="ActionInit" file="scripts/manager_action_init.lua" />
-	<script name="ActionSkill" file="scripts/manager_action_skill.lua" />
-	<script name="ActionSpell" file="scripts/manager_action_spell.lua" />-->
-	
 </root>

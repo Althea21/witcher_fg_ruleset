@@ -59,4 +59,13 @@
 	<string name="list_profession_priest">Priest</string>
 	<string name="list_profession_witcher">Witcher</string>
 	
+	<!-- List Skills cycler -->
+	<string name="char_listskillcycler_intelligence">INT</string>
+	<string name="char_listskillcycler_reflex">REF</string>
+	<string name="char_listskillcycler_dexterity">DEX</string>
+	<string name="char_listskillcycler_body">BOD</string>
+	<string name="char_listskillcycler_empathy">EMP</string>
+	<string name="char_listskillcycler_crafting">CRA</string>
+	<string name="char_listskillcycler_will">WIL</string>
+		
 </root>
