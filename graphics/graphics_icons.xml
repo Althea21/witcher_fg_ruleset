@@ -52,6 +52,12 @@
 	<icon name="button_modifiers_down" file="graphics/sidebar/button_modifiers_down.png" />
 	<icon name="button_effects" file="graphics/sidebar/button_effects.png" />
 	<icon name="button_effects_down" file="graphics/sidebar/button_effects_down.png" />
+	
+	
+	<icon name="modcollector" file="graphics/icons/modcollector.png" />
+	
+	<icon name="button_link" file="graphics/buttons/button_link.png" />
+	<icon name="button_link_down" file="graphics/buttons/button_link_down.png" />
 	<!--
 	<icon name="rulesetlogo_CoreRPG" file="graphics/icons/rulesetlogo_CoreRPG.png" />
 	<icon name="desktopdecal_sw" file="graphics/decals/desktopdecal_sw.png" />
