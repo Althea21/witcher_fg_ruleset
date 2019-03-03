@@ -12,6 +12,7 @@
 	<string name="char_label_reputation">REPUTATION</string>
 	<string name="char_label_profession">PROFESSION</string>
 	<string name="char_label_improvement_point">IMP. POINTS</string>
+	<string name="char_label_social_standing">SOC. STANDING</string>
 
 	<!-- Characters Attributes-->
 	<string name="char_label_stats">STATS</string>
@@ -33,6 +34,7 @@
 	<string name="char_derivedstatslabel_stamina">STAMINA</string>
 	<string name="char_derivedstatslabel_encumbrance">ENCUMBRANCE</string>
 	<string name="char_derivedstatslabel_recovery">RECOVERY</string>
+	<string name="char_derivedstatslabel_meleebonusdamage">MELEE BONUS</string>
 	<string name="char_derivedstatslabel_punch">PUNCH</string>
 	<string name="char_derivedstatslabel_kick">KICK</string>
 	
@@ -47,6 +49,13 @@
 	<!-- List GENDER -->
 	<string name="list_race_female">Female</string>
 	<string name="list_race_male">Male</string>
+	
+	<!-- List SOCIAL STANDING -->
+	<string name="list_socialstanding_equal">Equal</string>
+	<string name="list_socialstanding_tolerated">Tolerated</string>
+	<string name="list_socialstanding_hated">Hated</string>
+	<string name="list_socialstanding_feared">Feared</string>
+	<string name="list_socialstanding_hatedfeared">Hated and feared</string>
 	
 	<!-- List PROFESSION -->
 	<string name="list_profession_bard">Bard</string>

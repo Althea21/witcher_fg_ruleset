@@ -8,6 +8,7 @@
 <root>
 
 	<windowclass name="charsheet_main">
+		<script file="campaign/scripts/char_main.lua" />
 		<margins control="0,0,0,5" />
 		<sheetdata>
 			<!-- IDENTITE -->
@@ -17,7 +18,7 @@
 			
 			<!-- Frame de placement -->
 			<frame_char name="identite_frame">
-				<bounds>15,0,-29,125</bounds>
+				<bounds>15,0,-29,150</bounds>
 			</frame_char>
 			<label_frametop>
 				<anchored to="identite_frame" />
@@ -127,7 +128,28 @@
 			<basicnumber name="improvement_point" source="identite.improvement_point">
 				<anchored to="identite_frame" position="insidetopleft" offset="425,85" width="30" height="20" />				
 			</basicnumber>
-	
+
+			<!-- SOCIAL STANDING -->
+			<label>
+				<anchored to="identite_frame" position="insidetopleft" offset="15,110" />
+				<static textres="char_label_social_standing" />
+			</label>
+			<combobox name="social_standing" source="identite.social_standing">
+				<anchored to="identite_frame" position="insidetopleft" offset="100,110" width="100" height="20" />
+				<listdirection>down</listdirection>
+				<script>
+					function onInit()
+						super.onInit();
+						add("Equal", list_socialstanding_equal);
+						add("Tolerated", list_socialstanding_tolerated);
+						add("Hated", list_socialstanding_hated);
+						add("Feared", list_socialstanding_feared);
+						add("Hated and feared", list_socialstanding_hatedfeared);
+					end
+				</script>
+				<default>Equal</default>
+			</combobox>
+			
 			<!-- ATTRIBUTS -->
 			<!--
 				Branche de la DB : charsheet.ID-XXXXX.attributs.
@@ -135,7 +157,7 @@
 			
 			<!-- Frame de placement -->
 			<frame_char name="attributs_frame">
-				<bounds>15,130,-29,-10</bounds>
+				<bounds>15,155,-29,-10</bounds>
 			</frame_char>
 			<label_frametop>
 				<anchored to="attributs_frame" />
@@ -145,13 +167,23 @@
 			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->
 			<basicnumber name="intelligence" source="attributs.intelligence">
 				<anchored to="attributs_frame" position="insidetopleft" offset="120,35" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onIntelligenceChanged();
+				end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="intelligence" position="right" offset="-130,0" />
 				<static textres="char_statslabel_intelligence" />
 			</label>
-			<basicnumber name="reflex" source="attributs.reflex">
+			<basicnumber  name="reflex" source="attributs.reflex">
 				<anchored to="intelligence" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onReflexChanged();
+				end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="reflex" position="right" offset="-130,0" />
@@ -159,6 +191,11 @@
 			</label>
 			<basicnumber name="dexterity" source="attributs.dexterity">
 				<anchored to="reflex" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onDexterityChanged();
+				end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="dexterity" position="right" offset="-130,0" />
@@ -166,6 +203,11 @@
 			</label>
 			<basicnumber name="body" source="attributs.body">
 				<anchored to="dexterity" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onBodyChanged();
+				end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="body" position="right" offset="-130,0" />
@@ -173,6 +215,11 @@
 			</label>
 			<basicnumber name="speed" source="attributs.speed">
 				<anchored to="body" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onSpeedChanged();
+				end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="speed" position="right" offset="-130,0" />
@@ -180,6 +227,11 @@
 			</label>
 			<basicnumber name="empathy" source="attributs.empathy">
 				<anchored to="speed" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onEmpathyChanged();
+				end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="empathy" position="right" offset="-130,0" />
@@ -187,6 +239,11 @@
 			</label>
 			<basicnumber name="crafting" source="attributs.crafting">
 				<anchored to="empathy" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onCraftingChanged();
+				end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="crafting" position="right" offset="-130,0" />
@@ -194,6 +251,11 @@
 			</label>
 			<basicnumber name="will" source="attributs.will">
 				<anchored to="crafting" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onWillChanged();
+				end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="will" position="right" offset="-130,0" />
@@ -217,6 +279,7 @@
 			<!-- DERIVED STATS : STUN, RUN, LEAP, HP, STA, ENC, REC, PUNCH, KICK -->
 			<basicnumber name="stun" source="attributs.stun">
 				<anchored to="intelligence" position="right" offset="200,0" width="30" height="20" />
+				<disabled/> 
 			</basicnumber>
 			<label>
 				<anchored to="stun" position="right" offset="-130,0" />
@@ -224,6 +287,7 @@
 			</label>
 			<basicnumber name="run" source="attributs.run">
 				<anchored to="stun" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<disabled/> 
 			</basicnumber>
 			<label>
 				<anchored to="run" position="right" offset="-130,0" />
@@ -231,6 +295,7 @@
 			</label>
 			<basicnumber name="leap" source="attributs.leap">
 				<anchored to="run" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<disabled/> 
 			</basicnumber>
 			<label>
 				<anchored to="leap" position="right" offset="-130,0" />
@@ -245,6 +310,7 @@
 			</label>
 			<basicnumber name="hit_pointsmax" source="attributs.hit_pointsmax">
 				<anchored to="hit_points" position="right" offset="30,0" width="30" height="20" />
+				<disabled/> 
 			</basicnumber>
 			<label>
 				<anchored to="hit_pointsmax" position="right" offset="-47,0" />
@@ -257,11 +323,12 @@
 				<anchored to="stamina" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_stamina" />
 			</label>
-			<basicnumber name="staminasmax" source="attributs.staminasmax">
+			<basicnumber name="staminamax" source="attributs.staminamax">
 				<anchored to="stamina" position="right" offset="30,0" width="30" height="20" />
+				<disabled/> 
 			</basicnumber>
 			<label>
-				<anchored to="staminasmax" position="right" offset="-47,0" />
+				<anchored to="staminamax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
 			</label>
 			<basicnumber name="encumbrance" source="attributs.encumbrance">
@@ -273,6 +340,7 @@
 			</label>
 			<basicnumber name="encumbrancemax" source="attributs.encumbrancemax">
 				<anchored to="encumbrance" position="right" offset="30,0" width="30" height="20" />
+				<disabled/> 
 			</basicnumber>
 			<label>
 				<anchored to="encumbrancemax" position="right" offset="-47,0" />
@@ -280,13 +348,22 @@
 			</label>
 			<basicnumber name="recovery" source="attributs.recovery">
 				<anchored to="encumbrance" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<disabled/>
 			</basicnumber>
 			<label>
 				<anchored to="recovery" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_recovery" />
 			</label>
+			<basicnumber name="meleebonusdamage" source="attributs.meleebonusdamage">
+				<anchored to="recovery" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<disabled/>
+			</basicnumber>
+			<label>
+				<anchored to="meleebonusdamage" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_meleebonusdamage" />
+			</label>
 			<basicdice name="punch" source="attributs.punch">
-				<anchored to="recovery" width="40" height="20">
+				<anchored to="meleebonusdamage" width="40" height="20">
 					<top anchor="bottom" relation="relative" offset="5" />
 					<left />
 				</anchored>

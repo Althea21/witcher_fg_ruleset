@@ -18,7 +18,10 @@
 
 	<!-- Tabletop settings -->
 	<includefile source="gameelements.xml" />
-
+	
+	<!-- Graphics -->
+	<includefile source="graphics/graphics.xml" />
+	
 	<!-- Strings -->
 	<includefile source="strings/strings_campaign2.xml" />
 
