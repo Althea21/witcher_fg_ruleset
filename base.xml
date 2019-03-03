@@ -21,22 +21,9 @@
 	<!-- Common 
 	<includefile source="common/base_templates.xml" />-->
 	
-	<!-- Graphics
+	<!-- Graphics -->
 	<includefile source="graphics/graphics.xml" />
-	<includefile source="graphics/graphics_frames2.xml" />
-	<includefile source="graphics/graphics_radial.xml" />
-	<includefile source="graphics/graphics_buttons2.xml" />
-	<includefile source="graphics/graphics_minimized.xml" />
-	<includefile source="graphics/graphics_indicators.xml" />
 	
-	<includefile source="graphics/graphics_portraitsets.xml" />
-	
-	<includefile source="graphics/graphics_fonts2.xml" />-->
-	
-<!---	<includefile source="graphics/graphics_fonts.xml" /> 
-	<includefile source="graphics/graphics_icons.xml" />
-	<includefile source="graphics/graphics_radial.xml" />-->
-
 	<!-- Strings 
 	<includefile source="strings/strings.xml" />-->
 	<includefile source="strings/strings_campaign2.xml" />

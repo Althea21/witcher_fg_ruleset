@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<root>
+	<includefile source="graphics/graphics_frames.xml" />
+	<includefile source="graphics/graphics_fonts.xml" />
+	<includefile source="graphics/graphics_icons.xml" />
+	<script name="DesktopManagerWitcher" file="scripts/data_library_com.lua" />
+</root>
