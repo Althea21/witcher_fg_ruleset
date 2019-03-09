@@ -41,6 +41,15 @@
 			<disabled/> 
 		</basicnumber>
 	</template>
+	<!--stat calculé rollable-->
+	<template name="number_derivedstat_rollable">
+		<basicnumber>
+			<frame name="fieldlight" offset="7,5,7,5" />
+			<hideonvalue value="0" />
+			<rollable />
+			<readonly /> 
+		</basicnumber>
+	</template>
 	<!--stat valeur courante-->
 	<template name="number_statcurrentvalue">
 		<basicnumber>

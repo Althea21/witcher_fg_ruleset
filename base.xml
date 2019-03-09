@@ -29,8 +29,11 @@
 	<includefile source="campaign/template_char.xml" />
 	<includefile source="campaign/record_char_main.xml" />
 	<includefile source="campaign/record_char_abilities.xml" />
-
+	
 	<!-- PJ Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
 
+	<!-- High-level scripts -->
+	<script name="GameSystem" file="scripts/manager_gamesystem.lua" />
+	<script name="ActionSave" file="scripts/manager_action_save.lua" />
 </root>

@@ -476,17 +476,31 @@
 			</label_fieldtop>
 			
 			<!-- DERIVED STATS : STUN, RUN, LEAP, HP, STA, ENC, REC, PUNCH, KICK -->
-			<number_derivedstat name="stun" source="attributs.stun">
+			<number_derivedstat_rollable name="stun" source="attributs.stun">
 				<anchored to="intelligence_base" position="right" offset="210,0" width="30" height="20" />
-				<disabled/> 
-			</number_derivedstat>
+				<script>
+					function action(draginfo)
+						local rActor, rAttack = ActorManager.resolveActor(window.getDatabaseNode());
+						
+						ActionSave.performRoll(draginfo, rActor, "stun");
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+
+					function onDoubleClick(x,y)
+						return action();
+					end
+				</script>
+			</number_derivedstat_rollable>
 			<label>
 				<anchored to="stun" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_stun" />
 			</label>
 			<number_derivedstat name="run" source="attributs.run">
 				<anchored to="stun" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-				<disabled/> 
 			</number_derivedstat>
 			<label>
 				<anchored to="run" position="right" offset="-130,0" />
@@ -494,7 +508,6 @@
 			</label>
 			<number_derivedstat name="leap" source="attributs.leap">
 				<anchored to="run" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-				<disabled/> 
 			</number_derivedstat>
 			<label>
 				<anchored to="leap" position="right" offset="-130,0" />
@@ -509,7 +522,6 @@
 			</label>
 			<number_derivedstat name="hit_pointsmax" source="attributs.hit_pointsmax">
 				<anchored to="hit_points" position="right" offset="30,0" width="30" height="20" />
-				<disabled/> 
 			</number_derivedstat>
 			<label>
 				<anchored to="hit_pointsmax" position="right" offset="-47,0" />
@@ -520,11 +532,9 @@
 			</number_statcurrentvalue>
 			<label>
 				<anchored to="stamina" position="right" offset="-130,0" />
-				<static textres="char_derivedstatslabel_stamina" />
 			</label>
 			<number_derivedstat name="staminamax" source="attributs.staminamax">
 				<anchored to="stamina" position="right" offset="30,0" width="30" height="20" />
-				<disabled/> 
 			</number_derivedstat>
 			<label>
 				<anchored to="staminamax" position="right" offset="-47,0" />
@@ -539,7 +549,6 @@
 			</label>
 			<number_derivedstat name="encumbrancemax" source="attributs.encumbrancemax">
 				<anchored to="encumbrance" position="right" offset="30,0" width="30" height="20" />
-				<disabled/> 
 			</number_derivedstat>
 			<label>
 				<anchored to="encumbrancemax" position="right" offset="-47,0" />
@@ -547,7 +556,6 @@
 			</label>
 			<number_derivedstat name="recovery" source="attributs.recovery">
 				<anchored to="encumbrance" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-				<disabled/>
 			</number_derivedstat>
 			<label>
 				<anchored to="recovery" position="right" offset="-130,0" />
@@ -555,7 +563,6 @@
 			</label>
 			<basicnumber name="meleebonusdamage" source="attributs.meleebonusdamage">
 				<anchored to="recovery" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-				<disabled/>
 			</basicnumber>
 			<label>
 				<anchored to="meleebonusdamage" position="right" offset="-130,0" />
