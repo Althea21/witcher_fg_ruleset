@@ -499,6 +499,7 @@
 				<anchored to="stun" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_stun" />
 			</label>
+			
 			<number_derivedstat name="run" source="attributs.run">
 				<anchored to="stun" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</number_derivedstat>
@@ -506,6 +507,7 @@
 				<anchored to="run" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_run" />
 			</label>
+			
 			<number_derivedstat name="leap" source="attributs.leap">
 				<anchored to="run" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</number_derivedstat>
@@ -513,6 +515,7 @@
 				<anchored to="leap" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_leap" />
 			</label>
+			
 			<number_statcurrentvalue name="hit_points" source="attributs.hit_points">
 				<anchored to="leap" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</number_statcurrentvalue>
@@ -527,11 +530,13 @@
 				<anchored to="hit_pointsmax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
 			</label>
+			
 			<number_statcurrentvalue name="stamina" source="attributs.stamina">
 				<anchored to="hit_points" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</number_statcurrentvalue>
 			<label>
 				<anchored to="stamina" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_stamina" />
 			</label>
 			<number_derivedstat name="staminamax" source="attributs.staminamax">
 				<anchored to="stamina" position="right" offset="30,0" width="30" height="20" />
@@ -540,6 +545,7 @@
 				<anchored to="staminamax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
 			</label>
+			
 			<number_statcurrentvalue name="encumbrance" source="attributs.encumbrance">
 				<anchored to="stamina" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</number_statcurrentvalue>
