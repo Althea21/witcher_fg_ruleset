@@ -9,7 +9,7 @@
 	<!-- Attributes -->
 	<description>
 		<text>The Witcher</text>
-		<author>Sylv, Laurent 'Heedio' WITZ</author>
+		<author>Sylv, Laurent 'Heedio' WITZ, U~man</author>
 		<website></website>
 	</description>
 
@@ -26,6 +26,7 @@
 	<includefile source="strings/strings_campaign2.xml" />
 
 	<!-- Campaign PJ -->
+	<includefile source="campaign/template_char.xml" />
 	<includefile source="campaign/record_char_main.xml" />
 	<includefile source="campaign/record_char_abilities.xml" />
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!--label de frame-->
+	<template name="frame_label">
+		<label_frametop>
+			
+		</label_frametop>	
+	</template>
+	
+	<!--stat de base-->
+	<template name="number_charstatbase">
+		<basicnumber>
+			<hideonvalue value="0" />
+		</basicnumber>
+	</template>
+	<!--stat modificateur-->
+	<template name="number_charstatmodifier">
+		<basicnumber>
+			<hideonvalue value="0" />
+		</basicnumber>
+	</template>
+	<!--stat total-->
+	<template name="number_charstattotal">
+		<basicnumber>
+			<frame name="fieldlight" offset="7,5,7,5" />
+			<hideonvalue value="0" />
+			<disabled/> 
+		</basicnumber>
+	</template>
+	<!--stat calculé-->
+	<template name="number_derivedstat">
+		<basicnumber>
+			<frame name="fieldlight" offset="7,5,7,5" />
+			<hideonvalue value="0" />
+			<disabled/> 
+		</basicnumber>
+	</template>
+	<!--stat valeur courante-->
+	<template name="number_statcurrentvalue">
+		<basicnumber>
+		</basicnumber>
+	</template>
+</root>

@@ -20,10 +20,10 @@
 			<frame_char name="identite_frame">
 				<bounds>15,0,-29,150</bounds>
 			</frame_char>
-			<label_frametop>
+			<frame_label>
 				<anchored to="identite_frame" />
 				<static textres="char_label_identity" />
-			</label_frametop>	
+			</frame_label>
 			
 			<!-- RACE -->
 			<label>
@@ -159,115 +159,300 @@
 			<frame_char name="attributs_frame">
 				<bounds>15,155,-29,-10</bounds>
 			</frame_char>
-			<label_frametop>
+			<frame_label>
 				<anchored to="attributs_frame" />
 				<static textres="char_label_stats" />
-			</label_frametop>	
+			</frame_label>	
 			
 			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->
-			<basicnumber name="intelligence" source="attributs.intelligence">
-				<anchored to="attributs_frame" position="insidetopleft" offset="120,35" width="30" height="20" />
+			<number_charstatbase name="intelligence_base" source="attributs.intelligence_base">
+				<anchored to="attributs_frame" position="insidetopleft" offset="120,55" width="30" height="20" />
 				<script>
 				function onValueChanged()
 					window.onIntelligenceChanged();
 				end
 				</script>
-			</basicnumber>
+			</number_charstatbase>
+			<number_charstatmodifier name="intelligence_modifier" source="attributs.intelligence_modifier">
+				<anchored to="intelligence_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onIntelligenceChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal name="intelligence" source="attributs.intelligence">
+				<anchored to="intelligence_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onIntelligenceChanged();
+				end
+				</script>
+			</number_charstattotal>
 			<label>
-				<anchored to="intelligence" position="right" offset="-130,0" />
+				<anchored to="intelligence_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_intelligence" />
 			</label>
-			<basicnumber  name="reflex" source="attributs.reflex">
-				<anchored to="intelligence" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			
+			<number_charstatbase name="reflex_base" source="attributs.reflex_base">
+				<anchored to="intelligence_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<script>
 				function onValueChanged()
 					window.onReflexChanged();
 				end
 				</script>
-			</basicnumber>
+			</number_charstatbase>
+			<number_charstatmodifier name="reflex_modifier" source="attributs.reflex_modifier">
+				<anchored to="reflex_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onReflexChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal  name="reflex" source="attributs.reflex">
+				<anchored to="reflex_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onReflexChanged();
+				end
+				</script>
+			</number_charstattotal>
 			<label>
-				<anchored to="reflex" position="right" offset="-130,0" />
+				<anchored to="reflex_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_reflex" />
 			</label>
-			<basicnumber name="dexterity" source="attributs.dexterity">
-				<anchored to="reflex" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			
+			<number_charstatbase name="dexterity_base" source="attributs.dexterity_base">
+				<anchored to="reflex_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<script>
 				function onValueChanged()
 					window.onDexterityChanged();
 				end
 				</script>
-			</basicnumber>
+			</number_charstatbase>
+			<number_charstatmodifier name="dexterity_modifier" source="attributs.dexterity_modifier">
+				<anchored to="dexterity_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onDexterityChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal  name="dexterity" source="attributs.dexterity">
+				<anchored to="dexterity_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onDexterityChanged();
+				end
+				</script>
+			</number_charstattotal>
 			<label>
-				<anchored to="dexterity" position="right" offset="-130,0" />
+				<anchored to="dexterity_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_dexterity" />
 			</label>
-			<basicnumber name="body" source="attributs.body">
-				<anchored to="dexterity" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			
+			<number_charstatbase name="body_base" source="attributs.body_base">
+				<anchored to="dexterity_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<script>
 				function onValueChanged()
 					window.onBodyChanged();
 				end
 				</script>
-			</basicnumber>
+			</number_charstatbase>
+			<number_charstatmodifier name="body_modifier" source="attributs.body_modifier">
+				<anchored to="body_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onBodyChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal  name="body" source="attributs.body">
+				<anchored to="body_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onBodyChanged();
+				end
+				</script>
+			</number_charstattotal>
 			<label>
-				<anchored to="body" position="right" offset="-130,0" />
+				<anchored to="body_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_body" />
 			</label>
-			<basicnumber name="speed" source="attributs.speed">
-				<anchored to="body" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			
+			<number_charstatbase name="speed_base" source="attributs.speed_base">
+				<anchored to="body_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<script>
 				function onValueChanged()
 					window.onSpeedChanged();
 				end
 				</script>
-			</basicnumber>
+			</number_charstatbase>
+			<number_charstatmodifier name="speed_modifier" source="attributs.speed_modifier">
+				<anchored to="speed_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onSpeedChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal  name="speed" source="attributs.speed">
+				<anchored to="speed_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onSpeedChanged();
+				end
+				</script>
+			</number_charstattotal>
 			<label>
-				<anchored to="speed" position="right" offset="-130,0" />
+				<anchored to="speed_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_speed" />
 			</label>
-			<basicnumber name="empathy" source="attributs.empathy">
-				<anchored to="speed" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			
+			<number_charstatbase name="empathy_base" source="attributs.empathy_base">
+				<anchored to="speed_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<script>
 				function onValueChanged()
 					window.onEmpathyChanged();
 				end
 				</script>
-			</basicnumber>
+			</number_charstatbase>
+			<number_charstatmodifier name="empathy_modifier" source="attributs.empathy_modifier">
+				<anchored to="empathy_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onEmpathyChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal  name="empathy" source="attributs.empathy">
+				<anchored to="empathy_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onEmpathyChanged();
+				end
+				</script>
+			</number_charstattotal>
 			<label>
-				<anchored to="empathy" position="right" offset="-130,0" />
+				<anchored to="empathy_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_empathy" />
 			</label>
-			<basicnumber name="crafting" source="attributs.crafting">
-				<anchored to="empathy" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			
+			<number_charstatbase name="crafting_base" source="attributs.crafting_base">
+				<anchored to="empathy_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<script>
 				function onValueChanged()
 					window.onCraftingChanged();
 				end
 				</script>
-			</basicnumber>
+			</number_charstatbase>
+			<number_charstatmodifier name="crafting_modifier" source="attributs.crafting_modifier">
+				<anchored to="crafting_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onCraftingChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal  name="crafting" source="attributs.crafting">
+				<anchored to="crafting_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onCraftingChanged();
+				end
+				</script>
+			</number_charstattotal>
 			<label>
-				<anchored to="crafting" position="right" offset="-130,0" />
+				<anchored to="crafting_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_crafting" />
 			</label>
-			<basicnumber name="will" source="attributs.will">
-				<anchored to="crafting" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			
+			<number_charstatbase name="will_base" source="attributs.will_base">
+				<anchored to="crafting_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<script>
 				function onValueChanged()
 					window.onWillChanged();
 				end
 				</script>
-			</basicnumber>
+			</number_charstatbase>
+			<number_charstatmodifier name="will_modifier" source="attributs.will_modifier">
+				<anchored to="will_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onWillChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal  name="will" source="attributs.will">
+				<anchored to="will_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onWillChanged();
+				end
+				</script>
+			</number_charstattotal>
 			<label>
-				<anchored to="will" position="right" offset="-130,0" />
+				<anchored to="will_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_will" />
 			</label>
+			
 			<basicnumber name="luck" source="attributs.luck">
-				<anchored to="will" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="will_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</basicnumber>
 			<label>
 				<anchored to="luck" position="right" offset="-130,0" />
 				<static textres="char_statslabel_luck" />
 			</label>
+			
 			<basicnumber name="luckmax" source="attributs.luckmax">
 				<anchored to="luck" position="right" offset="30,0" width="30" height="20" />
 			</basicnumber>
@@ -276,80 +461,94 @@
 				<static textres="char_special_divide" />
 			</label>
 			
+			<!--stats top labels (base + modifier = total) -->
+			<label_fieldtop name="basestat_label">
+				<anchored to="intelligence_base" />
+				<static textres="char_label_basestat" />
+			</label_fieldtop>
+			<label_fieldtop name="basemod_label">
+				<anchored to="intelligence_modifier" />
+				<static textres="char_label_modifierstat" />
+			</label_fieldtop>
+			<label_fieldtop name="basetotal_label">
+				<anchored to="intelligence" />
+				<static textres="char_label_totalstat" />
+			</label_fieldtop>
+			
 			<!-- DERIVED STATS : STUN, RUN, LEAP, HP, STA, ENC, REC, PUNCH, KICK -->
-			<basicnumber name="stun" source="attributs.stun">
-				<anchored to="intelligence" position="right" offset="200,0" width="30" height="20" />
+			<number_derivedstat name="stun" source="attributs.stun">
+				<anchored to="intelligence_base" position="right" offset="210,0" width="30" height="20" />
 				<disabled/> 
-			</basicnumber>
+			</number_derivedstat>
 			<label>
 				<anchored to="stun" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_stun" />
 			</label>
-			<basicnumber name="run" source="attributs.run">
+			<number_derivedstat name="run" source="attributs.run">
 				<anchored to="stun" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<disabled/> 
-			</basicnumber>
+			</number_derivedstat>
 			<label>
 				<anchored to="run" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_run" />
 			</label>
-			<basicnumber name="leap" source="attributs.leap">
+			<number_derivedstat name="leap" source="attributs.leap">
 				<anchored to="run" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<disabled/> 
-			</basicnumber>
+			</number_derivedstat>
 			<label>
 				<anchored to="leap" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_leap" />
 			</label>
-			<basicnumber name="hit_points" source="attributs.hit_points">
+			<number_statcurrentvalue name="hit_points" source="attributs.hit_points">
 				<anchored to="leap" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</basicnumber>
+			</number_statcurrentvalue>
 			<label>
 				<anchored to="hit_points" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_hit_points" />
 			</label>
-			<basicnumber name="hit_pointsmax" source="attributs.hit_pointsmax">
+			<number_derivedstat name="hit_pointsmax" source="attributs.hit_pointsmax">
 				<anchored to="hit_points" position="right" offset="30,0" width="30" height="20" />
 				<disabled/> 
-			</basicnumber>
+			</number_derivedstat>
 			<label>
 				<anchored to="hit_pointsmax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
 			</label>
-			<basicnumber name="stamina" source="attributs.stamina">
+			<number_statcurrentvalue name="stamina" source="attributs.stamina">
 				<anchored to="hit_points" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</basicnumber>
+			</number_statcurrentvalue>
 			<label>
 				<anchored to="stamina" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_stamina" />
 			</label>
-			<basicnumber name="staminamax" source="attributs.staminamax">
+			<number_derivedstat name="staminamax" source="attributs.staminamax">
 				<anchored to="stamina" position="right" offset="30,0" width="30" height="20" />
 				<disabled/> 
-			</basicnumber>
+			</number_derivedstat>
 			<label>
 				<anchored to="staminamax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
 			</label>
-			<basicnumber name="encumbrance" source="attributs.encumbrance">
+			<number_statcurrentvalue name="encumbrance" source="attributs.encumbrance">
 				<anchored to="stamina" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</basicnumber>
+			</number_statcurrentvalue>
 			<label>
 				<anchored to="encumbrance" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_encumbrance" />
 			</label>
-			<basicnumber name="encumbrancemax" source="attributs.encumbrancemax">
+			<number_derivedstat name="encumbrancemax" source="attributs.encumbrancemax">
 				<anchored to="encumbrance" position="right" offset="30,0" width="30" height="20" />
 				<disabled/> 
-			</basicnumber>
+			</number_derivedstat>
 			<label>
 				<anchored to="encumbrancemax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
 			</label>
-			<basicnumber name="recovery" source="attributs.recovery">
+			<number_derivedstat name="recovery" source="attributs.recovery">
 				<anchored to="encumbrance" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<disabled/>
-			</basicnumber>
+			</number_derivedstat>
 			<label>
 				<anchored to="recovery" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_recovery" />

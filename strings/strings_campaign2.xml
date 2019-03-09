@@ -17,6 +17,10 @@
 	<!-- Characters Attributes-->
 	<string name="char_label_stats">STATS</string>
 
+	<string name="char_label_basestat">Base</string>
+	<string name="char_label_modifierstat">Mod.</string>
+	<string name="char_label_totalstat">Total</string>
+	
 	<string name="char_statslabel_intelligence">INTELLIGENCE</string>
 	<string name="char_statslabel_reflex">REFLEX</string>
 	<string name="char_statslabel_dexterity">DEXTERITY</string>
