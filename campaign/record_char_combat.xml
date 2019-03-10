@@ -7,12 +7,121 @@
 
 <root>
 	<windowclass name="charsheet_combat">
+		<script file="campaign/scripts/char_combat.lua" />
 		<sheetdata>
+			<!--COMBAT STATS REMINDER-->
 			<frame_char name="combat_frame">
-				<bounds>15,0,-29,150</bounds>
+				<bounds>15,0,-29,70</bounds>
 			</frame_char>
 			
+			<!--hp-->
+			<label>
+				<anchored to="combat_frame" position="insidetopleft" offset="20,15" width="90"/>
+				<center />
+				<static textres="char_derivedstatslabel_hit_points" />
+			</label>
+			<number_statcurrentvalue name="hit_points_combat" source="attributs.hit_points">
+				<anchored to="combat_frame" position="insidetopleft" offset="20,35" width="30" height="20" />
+			</number_statcurrentvalue>
+			<number_derivedstat name="hit_pointsmax_combat" source="attributs.hit_pointsmax">
+				<anchored to="hit_points_combat" position="right" offset="30,0" width="30" height="20" />
+			</number_derivedstat>
+			<label>
+				<anchored to="hit_pointsmax_combat" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			
+			<!--stamina-->
+			<label>
+				<anchored to="combat_frame" position="insidetopleft" offset="145,15" width="90"/>
+				<center />
+				<static textres="char_derivedstatslabel_stamina" />
+			</label>
+			<number_statcurrentvalue name="stamina_combat" source="attributs.stamina">
+				<anchored to="combat_frame" position="insidetopleft" offset="145,35" width="30" height="20" />
+			</number_statcurrentvalue>
+			<number_derivedstat name="staminamax_combat" source="attributs.staminamax">
+				<anchored to="stamina_combat" position="right" offset="30,0" width="30" height="20" />
+			</number_derivedstat>
+			<label>
+				<anchored to="staminamax_combat" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			
+			<!--recovery-->
+			<label>
+				<anchored to="combat_frame" position="insidetopleft" offset="270,15" width="45"/>
+				<center />
+				<static textres="char_derivedstatslabel_recoveryshort" />
+			</label>
+			<number_derivedstat name="recovery_combat" source="attributs.recovery">
+				<anchored to="combat_frame" position="insidetopleft" offset="270,35" width="30" height="20" />
+			</number_derivedstat>
+			<buttoncontrol name="button_recovery">
+				<anchored to="recovery_combat" position="right" offset="5,0" width="20" height="20" />
+				<icon normal="button_action_heal" pressed="button_action_heal_down" />
+				<nodrag />
+				<script>
+					function action(draginfo)
+						window.onRecoverAction();
+					end
 
+					function onButtonPress()
+						action();
+					end
+				</script>
+			</buttoncontrol>
+			
+			<!--stun-->
+			<label>
+				<anchored to="combat_frame" position="insidetopleft" offset="360,15"/>
+				<static textres="char_derivedstatslabel_stun" />
+			</label>
+			<number_derivedstat_rollable name="stun_combat" source="attributs.stun">
+				<anchored to="combat_frame" position="insidetopleft" offset="360,35" width="30" height="20" />
+				<script>
+					function action(draginfo)
+						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
+						
+						ActionSave.performRoll(draginfo, rActor, "stun");
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+
+					function onDoubleClick(x,y)
+						return action();
+					end
+				</script>
+			</number_derivedstat_rollable>
+			
+			<!--initiative-->
+			<label>
+				<anchored to="combat_frame" position="insidetopleft" offset="430,15" width="30"/>
+				<center />
+				<static textres="char_combat_initiative" />
+			</label>
+			<number_derivedstat_rollable name="init_combat" source="attributs.reflex">
+				<anchored to="combat_frame" position="insidetopleft" offset="430,35" width="30" height="20" />
+				<displaysign /> 
+				<script>
+					function action(draginfo)
+						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
+						ActionInit.performRoll(draginfo, rActor);
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+
+					function onDoubleClick(x,y)
+						return action();
+					end
+				</script>
+			</number_derivedstat_rollable>
 			
 		</sheetdata>
 	</windowclass>
