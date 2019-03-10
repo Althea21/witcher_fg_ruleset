@@ -84,4 +84,7 @@
 		
 	<!-- Combat tab -->
 	<string name="char_combat_initiative">INIT.</string>
+	<string name="char_label_weaponreliability">Rel.</string>
+	<string name="char_label_weapondefense">Defense</string>
+	<string name="char_label_weaponeffects">Effects</string>
 </root>

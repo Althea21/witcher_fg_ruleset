@@ -9,3 +9,15 @@ function onRecoverAction()
 		stamina_combat.setValue(staminamax_combat.getValue());
 	end
 end
+
+function onHeaderClickDown()
+	return true;
+end
+
+function onHeaderClickRelease(listName)
+	if listName=="weapon" then
+		weaponlist.setVisible(not weaponlist.isVisible());
+	end
+	
+	return true;
+end

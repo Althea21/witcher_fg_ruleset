@@ -123,6 +123,117 @@
 				</script>
 			</number_derivedstat_rollable>
 			
+			<frame_char name="combat_details_frame">
+				<bounds>15,75,-29,-10</bounds>
+			</frame_char>
+			
+			<subwindow name="combat_details">
+				<anchored to="combat_details_frame" position="over" offset="-8,-10">
+					<bottom offset="-50" />
+				</anchored>
+				<activate />
+				<class>char_combat_details</class>
+			</subwindow>
+			<scrollbar>
+				<anchored to="combat_details" position="right" offset="-2,-4" width="20">
+					<bottom offset="20" />
+				</anchored>
+				<target>combat_details</target>
+			</scrollbar>
+
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="char_combat_details">
+		<script file="campaign/scripts/char_combat.lua" />
+		<sheetdata>
+			<!-- WEAPONS -->
+			<!-- section header -->
+			<genericcontrol name="icon_weapon">
+				<anchored position="insidetopleft" offset="10,10" width="20" height="20" />
+				<icon>char_weapon</icon>
+			</genericcontrol>
+			<label name="label_weapon">
+				<anchored>
+					<top offset="10" />
+					<left parent="icon_weapon" anchor="right" offset="10" />
+					<right offset="-8" />
+				</anchored>
+				<static textres="char_label_weapons" />
+			</label>
+			<genericcontrol>
+				<bounds>6,6,-6,32</bounds>
+				<frame name="groupbox2" offset="6,6,6,6" />
+				<disabled />
+			</genericcontrol>
+
+			<!-- list headers (show/hide list on click)-->
+			<genericcontrol name="weaponlist_headers">
+				<anchored position="insidetopleft" offset="10,45" />
+				<frame name="rowshade" />
+				<script>
+					function onClickDown(button, x, y)
+						return window.onHeaderClickDown("weapon");
+					end
+					
+					function onClickRelease(button, x, y)
+						return window.onHeaderClickRelease("weapon");
+					end
+				</script>
+			</genericcontrol>
+			<label>
+				<anchored position="insidetopleft" offset="10,45" width="29" />
+				<center />
+				<static textres="char_label_weapontype" />
+			</label>
+			<label>
+				<anchored position="insidetopleft" offset="40,45" />
+				<center />
+				<static textres="char_label_weaponname" />
+			</label>
+			<label>
+				<anchored position="insidetopright" offset="240,45" />
+				<center />
+				<static textres="char_label_weaponreliability" />
+			</label>
+			<label>
+				<anchored position="insidetopright" offset="240,45" />
+				<center />
+				<static textres="char_label_weapondamage" />
+			</label>
+			<label>
+				<anchored position="insidetopright" offset="240,45" />
+				<center />
+				<static textres="char_label_weaponeffects" />
+			</label>
+			<label>
+				<anchored position="insidetopright" offset="51,45" width="100" />
+				<center />
+				<static textres="char_label_weaponattacks" />
+			</label>
+			<label>
+				<anchored position="insidetopright" offset="51,45" width="100" />
+				<center />
+				<static textres="char_label_weapondefense" />
+			</label>
+			
+			<windowlist  name="weaponlist">
+				<datasource>.weaponlist</datasource>
+				<sortby><control>name</control></sortby>
+				<script file="campaign/scripts/char_weaponlist.lua" />
+				<anchored>
+					<top offset="60" />
+					<left />
+					<right />
+				</anchored>
+				<class>char_weapon</class>
+				<noscroll />
+			</windowlist>
+			
+			
+			<!-- Brawling actions -->
+			
+			<!-- Armor actions -->
 		</sheetdata>
 	</windowclass>
 </root>
