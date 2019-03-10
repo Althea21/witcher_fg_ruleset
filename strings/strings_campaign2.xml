@@ -80,6 +80,10 @@
 	<string name="char_listskillcycler_empathy">EMP</string>
 	<string name="char_listskillcycler_crafting">CRA</string>
 	<string name="char_listskillcycler_will">WIL</string>
+	
+	<!-- SKILLS -->
+	<string name="char_label_abilities">ABILITIES</string>
+	<string name="char_label_skills">SKILLS</string>
 		
 	<!-- Combat tab -->
 	
