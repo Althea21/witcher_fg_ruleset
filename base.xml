@@ -27,6 +27,7 @@
 
 	<!-- Campaign PJ -->
 	<includefile source="campaign/template_char.xml" />
+	<includefile source="campaign/record_char.xml" />
 	<includefile source="campaign/record_char_main.xml" />
 	<includefile source="campaign/record_char_abilities.xml" />
 	<includefile source="campaign/record_char_combat.xml" />
@@ -37,4 +38,5 @@
 	<!-- High-level scripts -->
 	<script name="GameSystem" file="scripts/manager_gamesystem.lua" />
 	<script name="ActionSave" file="scripts/manager_action_save.lua" />
+	<script name="ActionInit" file="scripts/manager_action_init.lua" />
 </root>

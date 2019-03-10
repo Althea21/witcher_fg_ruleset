@@ -38,6 +38,7 @@
 	<string name="char_derivedstatslabel_stamina">STAMINA</string>
 	<string name="char_derivedstatslabel_encumbrance">ENCUMBRANCE</string>
 	<string name="char_derivedstatslabel_recovery">RECOVERY</string>
+	<string name="char_derivedstatslabel_recoveryshort">REC.</string>
 	<string name="char_derivedstatslabel_meleebonusdamage">MELEE BONUS</string>
 	<string name="char_derivedstatslabel_punch">PUNCH</string>
 	<string name="char_derivedstatslabel_kick">KICK</string>
@@ -82,5 +83,5 @@
 	<string name="char_listskillcycler_will">WIL</string>
 		
 	<!-- Combat tab -->
-	
+	<string name="char_combat_initiative">INIT.</string>
 </root>
