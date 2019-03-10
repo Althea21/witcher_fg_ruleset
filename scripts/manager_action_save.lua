@@ -15,6 +15,13 @@ function onInit()
 	ActionsManager.registerResultHandler("save", onRoll);
 end
 
+-- method called by performAction to initiate the roll object which will be given 
+-- to high level ActionsManager to actually perform roll
+-- params :
+--	* draginfo	: info given when rolling from onDragStart event (nil if other event trigger the roll)
+--	* sSave		: save type (supported : "stun")
+-- returns : 
+--	* rRoll	: roll object
 function getRoll(rActor, sSave)
 	-- Initialise a blank rRoll record
 	local rRoll = {};
@@ -42,12 +49,17 @@ function getRoll(rActor, sSave)
 	return rRoll;
 end
 
+-- method called to initiate save roll
+-- params :
+--	* draginfo	: info given when rolling from onDragStart event (nil if other event trigger the roll)
+--	* rActor	: actor info retrieved by using ActorManager.resolveActor
+--	* sSave		: save type (supported : "stun")
 function performRoll(draginfo, rActor, sSave)
 	local rRoll = getRoll(rActor, sSave);
-	
 	ActionsManager.performAction(draginfo, rActor, rRoll);
 end
 
+-- callback for ActionsManager called after the dice have stopped rolling : resolve roll status and display chat message
 function onRoll(rSource, rTarget, rRoll)
 	-- Create the base message based off the source and the final rRoll record (includes dice results).
 	local rMessage = ActionsManager.createActionMessage(rSource, rRoll);

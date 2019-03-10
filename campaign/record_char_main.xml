@@ -480,7 +480,7 @@
 				<anchored to="intelligence_base" position="right" offset="210,0" width="30" height="20" />
 				<script>
 					function action(draginfo)
-						local rActor, rAttack = ActorManager.resolveActor(window.getDatabaseNode());
+						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						ActionSave.performRoll(draginfo, rActor, "stun");
 						return true;

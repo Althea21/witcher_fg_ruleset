@@ -29,6 +29,7 @@
 	<includefile source="campaign/template_char.xml" />
 	<includefile source="campaign/record_char_main.xml" />
 	<includefile source="campaign/record_char_abilities.xml" />
+	<includefile source="campaign/record_char_combat.xml" />
 	
 	<!-- PJ Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
