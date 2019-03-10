@@ -8,6 +8,7 @@
 <root>
 	<windowclass name="charsheet_abilities">
 		<sheetdata>
+			<!-- Variables cachées -->
 			<hn name="intelligence" source="attributs.intelligence" />
 			<hn name="reflex" source="attributs.reflex" />
 			<hn name="dexterity" source="attributs.dexterity" />
@@ -16,79 +17,122 @@
 			<hn name="crafting" source="attributs.crafting" />
 			<hn name="will" source="attributs.will" />
 			
-			<hs name="profession_active" source="skills.root_skills_st" />
-			
+			<hn name="profession_initialisation" source="identite.profession_initialisation">
+				<default>0</default>
+			</hn>
 			<hs name="profession" source="identite.profession">
 				<script>
+					function getValStat(sStat)
+						local nVal = 0;
+						if sStat == "INT" then
+							nVal = window.intelligence.getValue();
+						elseif sStat == "REF" then
+							nVal = window.reflex.getValue();
+						elseif sStat == "DEX" then
+							nVal = window.dexterity.getValue();
+						elseif sStat == "BOD" then
+							nVal = window.body.getValue();
+						elseif sStat == "EMP" then
+							nVal = window.empathy.getValue();
+						elseif sStat == "CRA" then
+							nVal = window.crafting.getValue();
+						elseif sStat == "WIL" then
+							nVal = window.will.getValue();
+						end
+						return nVal;
+					end
+					
 					function onValueChanged()
 						local sVal = getValue();
 						local sSkill = "";
 						local sAbility = "";
 						local sStat = "";
-						local sProfessionActive = window.profession_active.getValue();
+						local nValStat = 0;
 						
-						if sProfessionActive == "" then
-							sSkill = ProfessionTable.tbl_profession[sVal]["root"]["skill"];
-							window.root_skills_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal]["root"]["stat"];
-							window.root_skills_bs.setValue(sStat);
-							
-							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch1"];
-							window.a1_label_ss.setValue(sAbility);
-							
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-							window.a1_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-							window.a1_ability_bs.setValue(sStat);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-							window.a2_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-							window.a2_ability_bs.setValue(sStat);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-							window.a3_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-							window.a3_ability_bs.setValue(sStat);
-							
-							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch2"];
-							window.a2_label_ss.setValue(sAbility);
-							
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-							window.b1_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-							window.b1_ability_bs.setValue(sStat);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-							window.b2_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-							window.b2_ability_bs.setValue(sStat);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-							window.b3_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-							window.b3_ability_bs.setValue(sStat);
-							
-							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch3"];
-							window.a3_label_ss.setValue(sAbility);
-							
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-							window.c1_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-							window.c1_ability_bs.setValue(sStat);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-							window.c2_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-							window.c2_ability_bs.setValue(sStat);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-							window.c3_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-							window.c3_ability_bs.setValue(sStat);
-						end
+						sSkill = ProfessionTable.tbl_profession[sVal]["root"]["skill"];
+						window.root_skills_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal]["root"]["stat"];
+						window.root_skills_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.root_skills_nb.setValue(nValStat);
+						
+						sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch1"];
+						window.a1_label_ss.setValue(sAbility);
+						
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
+						window.a1_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
+						window.a1_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.a1_ability_nb.setValue(nValStat);
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
+						window.a2_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
+						window.a2_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.a2_ability_nb.setValue(nValStat);
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
+						window.a3_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
+						window.a3_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.a3_ability_nb.setValue(nValStat);
+						
+						sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch2"];
+						window.a2_label_ss.setValue(sAbility);
+						
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
+						window.b1_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
+						window.b1_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.b1_ability_nb.setValue(nValStat);
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
+						window.b2_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
+						window.b2_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.b2_ability_nb.setValue(nValStat);
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
+						window.b3_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
+						window.b3_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.b3_ability_nb.setValue(nValStat);
+						
+						sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch3"];
+						window.a3_label_ss.setValue(sAbility);
+						
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
+						window.c1_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
+						window.c1_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.c1_ability_nb.setValue(nValStat);
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
+						window.c2_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
+						window.c2_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.c2_ability_nb.setValue(nValStat);
+						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
+						window.c3_ability_st.setValue(sSkill);
+						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
+						window.c3_ability_bs.setValue(sStat);
+						nValStat = getValStat(sStat);
+						window.c3_ability_nb.setValue(nValStat);
 					end
 					
 					function onInit()
-						onValueChanged();
+						if window.profession_initialisation.getValue() == 0 then
+							onValueChanged();
+							window.profession_initialisation.setValue(1);
+						end
 					end
 				</script>
 			</hs> 
-			
+
+			<!-- Frame de l'arbre de compétence -->		
 			<frame_char name="skills_frame">
 				<bounds>15,0,-29,-5</bounds>
 			</frame_char>
@@ -96,7 +140,8 @@
 				<anchored to="skills_frame" />
 				<static textres="char_label_abilities" />
 			</label_frametop>
-	
+
+			<!-- Racine -->
 			<stringu name="root_skills_st" source="skills.root_skills_st">
 				<anchored to="skills_frame">
 					<top offset="35" />
@@ -106,39 +151,12 @@
 			</stringu>
 			<basicstring name="root_skills_bs" source="skills.root_skills_bs">
 				<anchored to="root_skills_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "BOD" then
-								nVal = window.body.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.root_skills_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="root_skills_nb" source="skills.root_skills_nb">
 				<anchored to="root_skills_bs" position="right" offset="10,0" width="20" height="20" />
 			</basicnumber>
-			
+
+			<!-- Entête des branches -->
 			<simplestring name="a1_label_ss" source="skills.a1_label_ss">
 				<anchored to="skills_frame">
 					<top offset="65" />
@@ -157,7 +175,8 @@
 					<left offset="319" />
 				</anchored>
 			</simplestring>
-			
+
+			<!-- Branche A -->
 			<stringu name="a1_ability_st" source="skills.ability.a1_ability_st">
 				<anchored to="skills_frame">
 					<top offset="85" />
@@ -167,36 +186,6 @@
 			</stringu>
 			<basicstring name="a1_ability_bs" source="skills.ability.a1_ability_bs">
 				<anchored to="a1_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "BOD" then
-								nVal = window.body.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.a1_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="a1_ability_nb" source="skills.ability.a1_ability_nb">
 				<anchored to="a1_ability_bs" position="right" offset="10,0" width="20" height="20" />
@@ -210,36 +199,6 @@
 			</stringu>
 			<basicstring name="a2_ability_bs" source="skills.ability.a2_ability_bs">
 				<anchored to="a2_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "BOD" then
-								nVal = window.body.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.a2_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="a2_ability_nb" source="skills.ability.a2_ability_nb">
 				<anchored to="a2_ability_bs" position="right" offset="10,0" width="20" height="20" />
@@ -253,41 +212,12 @@
 			</stringu>
 			<basicstring name="a3_ability_bs" source="skills.ability.a3_ability_bs">
 				<anchored to="a3_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "BOD" then
-								nVal = window.body.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.a3_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="a3_ability_nb" source="skills.ability.a3_ability_nb">
 				<anchored to="a3_ability_bs" position="right" offset="10,0" width="20" height="20" />
 			</basicnumber>		
 
+			<!-- Branche B -->
 			<stringu name="b1_ability_st" source="skills.ability.b1_ability_st">
 				<anchored to="a1_ability_nb">
 					<position>right</position>
@@ -298,36 +228,6 @@
 			</stringu>
 			<basicstring name="b1_ability_bs" source="skills.ability.b1_ability_bs">
 				<anchored to="b1_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "BOD" then
-								nVal = window.body.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.b1_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="b1_ability_nb" source="skills.ability.b1_ability_nb">
 				<anchored to="b1_ability_bs" position="right" offset="10,0" width="20" height="20" />
@@ -341,36 +241,6 @@
 			</stringu>
 			<basicstring name="b2_ability_bs" source="skills.ability.b2_ability_bs">
 				<anchored to="b2_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "BOD" then
-								nVal = window.body.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.b2_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="b2_ability_nb" source="skills.ability.b2_ability_nb">
 				<anchored to="b2_ability_bs" position="right" offset="10,0" width="20" height="20" />
@@ -384,42 +254,12 @@
 			</stringu>
 			<basicstring name="b3_ability_bs" source="skills.ability.b3_ability_bs">
 				<anchored to="b3_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "BOD" then
-								nVal = window.body.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.b3_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="b3_ability_nb" source="skills.ability.b3_ability_nb">
 				<anchored to="b3_ability_bs" position="right" offset="10,0" width="20" height="20" />
 			</basicnumber>		
 			
-
+			<!-- Branche C -->
 			<stringu name="c1_ability_st" source="skills.ability.c1_ability_st">
 				<anchored to="b1_ability_nb">
 					<position>right</position>
@@ -430,36 +270,6 @@
 			</stringu>
 			<basicstring name="c1_ability_bs" source="skills.ability.c1_ability_bs">
 				<anchored to="c1_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "cOD" then
-								nVal = window.cody.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.c1_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="c1_ability_nb" source="skills.ability.c1_ability_nb">
 				<anchored to="c1_ability_bs" position="right" offset="10,0" width="20" height="20" />
@@ -473,36 +283,6 @@
 			</stringu>
 			<basicstring name="c2_ability_bs" source="skills.ability.c2_ability_bs">
 				<anchored to="c2_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "cOD" then
-								nVal = window.cody.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.c2_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="c2_ability_nb" source="skills.ability.c2_ability_nb">
 				<anchored to="c2_ability_bs" position="right" offset="10,0" width="20" height="20" />
@@ -514,108 +294,102 @@
 					<size width="82" height="20" />
 				</anchored>
 			</stringu>
-			<basicstring name="c3_ability_bs" source="skills.ability.c3_ability_bs">99
+			<basicstring name="c3_ability_bs" source="skills.ability.c3_ability_bs">
 				<anchored to="c3_ability_st" position="right" offset="5,0" width="25" height="20" />
-				<script>
-					function onValueChanged()
-						local nVal = 0;
-						
-						if window.profession_active.getValue() == "" then
-							if getValue() == "" then
-								nVal = 0;
-							elseif getValue() == "INT" then
-								nVal = window.intelligence.getValue();
-							elseif getValue() == "REF" then
-								nVal = window.reflex.getValue();
-							elseif getValue() == "DEX" then
-								nVal = window.dexterity.getValue();
-							elseif getValue() == "cOD" then
-								nVal = window.cody.getValue();
-							elseif getValue() == "EMP" then
-								nVal = window.empathy.getValue();
-							elseif getValue() == "CRA" then
-								nVal = window.crafting.getValue();
-							elseif getValue() == "WIL" then
-								nVal = window.will.getValue();
-							end
-							window.c3_ability_nb.setValue(nVal);
-						end
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
 			</basicstring>
 			<basicnumber name="c3_ability_nb" source="skills.ability.c3_ability_nb">
 				<anchored to="c3_ability_bs" position="right" offset="10,0" width="20" height="20" />
 			</basicnumber>		
-			
-			<list_text name="abilities">
+
+			<!-- Liste des compétences -->
+			<list_skills name="skills">
 				<anchored to="skills_frame">
 					<left offset="15" />
-					<top offset="250" />
+					<top offset="190" />
 					<right offset="-20" />
 					<bottom offset="-20" />
 				</anchored>
 				<columns width="222" filldown="true" />
-				<newfocus>name</newfocus>
-				<datasource>.abilitylist</datasource>
-				<class>char_ability</class>
-				<acceptdrop>
-					<class>referencetext</class>
-					<class>referencetextwide</class>
-					<field>*</field>
-				</acceptdrop>
-			</list_text>
+				<datasource>.skills.skillslist</datasource>
+				<class>char_skills</class>
+				<script>
+					function onInit()
+						addSkillsRoot();
+					end
+				</script>
+			</list_skills>
 			<scrollbar_list>
-				<anchored to="abilities" />
-				<target>abilities</target>
+				<anchored to="skills" />
+				<target>skills</target>
 			</scrollbar_list>
-
-			<button_iedit name="abilities_iedit">
-				<anchored to="abilities" position="aboveright" offset="5,5" />
-				<target>abilities</target>
-			</button_iedit>
-			<button_iadd name="abilities_iadd">
-				<anchored to="abilities_iedit" position="lefthigh" offset="5,0" />
-				<target>abilities</target>
-			</button_iadd>
+			<label>
+				<anchored to="skills" position="insidetopleft" offset="205,-20"/>
+				<static textres="char_label_skills" />
+			</label>
 		</sheetdata>
 	</windowclass>
 
-	<windowclass name="char_ability">
+	<windowclass name="char_skills">
 		<margins control="0,0,0,2" />
 		<sheetdata>
+			<hn name="type" />
+			
 			<genericcontrol name="rightanchor">
 				<anchored height="0" width="0">
 					<top offset="2" />
 					<right />
 				</anchored>
 			</genericcontrol>
-			<button_idelete name="idelete">
-				<anchored to="rightanchor">
-					<top />
-					<right anchor="left" relation="relative" offset="-5" />
-				</anchored>
-			</button_idelete>
-			<linkfield name="shortcut">
-				<anchored to="rightanchor" width="20" height="20">
-					<top />
-					<right anchor="left" relation="relative" offset="-5" />
-				</anchored>
-				<class>ability</class>
-				<description field="name" />
-				<readonly />
-			</linkfield>
-			<string_textlistitem name="name">
+			<button_checkbox name="skill_use">
 				<anchored to="rightanchor">
 					<top />
 					<left parent="" offset="5" />
+					<size width="20" height="20" /> 
+				</anchored>
+				<invisible />
+				<script>
+					function onInit()
+						if window.type.getValue() == 1 then
+							setVisible(true);
+						end
+					end
+				</script>
+			</button_checkbox>
+			<simplestring name="name">
+				<anchored to="rightanchor">
+					<top />
+					<left parent="" offset="25" />
 					<right anchor="left" relation="relative" offset="-5" />
 				</anchored>
-				<multilinespacing>20</multilinespacing>
-			</string_textlistitem>
+				<readonly />
+				<script>
+					function onInit()
+						if window.type.getValue() == 0 then
+							setFrame ("headergray");
+							setAnchor("left", "", "", "", 5);
+						else
+							setFrame ("");
+						end
+					end
+				</script>
+			</simplestring>
+			<basicnumber name="skill_value">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="right" relation="relative" offset="-10" />
+					<size width="30" height="20" />
+				</anchored> 
+				<invisible />
+				<script>
+					function onInit()
+						if window.type.getValue() == 1 then
+							setVisible(true);
+						end
+					end
+				</script>
+				
+			</basicnumber>		
+			
 		</sheetdata>
 	</windowclass>	
 </root>

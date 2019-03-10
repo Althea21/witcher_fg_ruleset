@@ -55,4 +55,12 @@
 		<basicnumber>
 		</basicnumber>
 	</template>
+
+	<!-- List Skills -->
+	<template name="list_skills">
+		<windowlist>
+			<script file="campaign/scripts/list_skills.lua" />
+		</windowlist>
+	</template>
+	
 </root>
