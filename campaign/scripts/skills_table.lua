@@ -1,4 +1,38 @@
-tbl_skills_root = {
+tbl_skills_root = {"Body Skills", "Craft Skills", "Dexterity Skills", "Empathy Skills", "Intelligence Skills", "Reflex Skills", "Will Skills"};
+
+tbl_skills = {
+                    ["Body Skills"]  = {
+                                         "Physique",
+                                         "Endurance"
+                                         },
+                    ["Craft Skills"]  = {
+                                         "Alchemy",
+                                         "Crafting",
+                                         "Disguise",
+                                         "First Aid",
+                                         "Forgery",
+                                         "Pick Lock",
+                                         "Trap Crafting"
+                                         },
+                    ["Dexterity Skills"]  = {
+                                         "Archery",
+                                         "Athletics",
+                                         "Crossbow",
+                                         "Sleigh of Hand",
+                                         "Stealth"
+                                         },
+                    ["Empathy Skills"]  = {
+                                         "Charisma",
+                                         "Deceit",
+                                         "Fine Arts",
+                                         "Gambling",
+                                         "Grooming and Style",
+                                         "Human Perception",
+                                         "Leadership",
+                                         "Persuasion",
+                                         "Performance",
+                                         "Seduction"
+                                         },
                     ["Intelligence Skills"]  = {
                                          "Awareness",
                                          "Business",
@@ -23,38 +57,6 @@ tbl_skills_root = {
                                          "Small Blades",
                                          "Staff/Spear",
                                          "Swordmanship"
-                                         },
-                    ["Dexterity Skills"]  = {
-                                         "Archery",
-                                         "Athlitics",
-                                         "Crossbow",
-                                         "Sleigh of Hand",
-                                         "Stealth"
-                                         },
-                    ["Body Skills"]  = {
-                                         "Physique",
-                                         "Endurance"
-                                         },
-                    ["Empathy Skills"]  = {
-                                         "Charisma",
-                                         "Deceit",
-                                         "Fine Arts",
-                                         "Gambling",
-                                         "Grooming and Style",
-                                         "Human Perception",
-                                         "Leadership",
-                                         "Persuasion",
-                                         "Performance",
-                                         "Seduction"
-                                         },
-                    ["Craft Skills"]  = {
-                                         "Alchemy",
-                                         "Crafting",
-                                         "Disguise",
-                                         "First Aid",
-                                         "Forgery",
-                                         "Pick Lock",
-                                         "Trap Crafting"
                                          },
                     ["Will Skills"]  = {
                                          "Courage",

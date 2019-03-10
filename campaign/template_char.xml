@@ -63,4 +63,10 @@
 		</windowlist>
 	</template>
 	
+	<!-- Dice -->
+	<template name="dice_modifier">
+		<basicdice>
+			<script file="campaign/scripts/dice_modifier.lua" />
+		</basicdice>
+	</template>
 </root>
