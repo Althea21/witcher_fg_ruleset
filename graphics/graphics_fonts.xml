@@ -6,39 +6,31 @@
 -->
 
 <root>
+	<!-- Note: FGF tags processed first for FG Classic, and TTF tags processed first for FGU -->
+	
 	<font name="sidebar">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
 		<color value="#98856C" />
 	</font>
-	<font name="hotkey">
+
+	<!-- Default fonts - REQUIRED -->
+	<font name="defaultstringcontrol">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
 		<color value="#98856C" />
 	</font>
-	<!-- Note: FGF tags processed first for FG Classic, and TTF tags processed first for FGU -->
-	
-	<!-- Default fonts - REQUIRED -->
-	<!--
-	<font name="defaultstringcontrol">
-		<fgffile name="graphics/fonts/regular-10.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
-	</font>
+
 	<font name="defaultnumbercontrol">
-		<fgffile name="graphics/fonts/regular-10.fgf" />
-		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="15" />
-		<color value="#000000" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
+		<color value="#98856C" />
 	</font>
-	-->
+	
 	<!-- Distance font - REQUIRED -->
-	<!--
 	<font name="distancelabel">
 		<fgffile name="graphics/fonts/diemod.fgf" />
 		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="23" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Dice fonts - REQUIRED -->
-	<!--
 	<font name="diceexpr" version="&gt;=4">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="15" />
@@ -54,15 +46,12 @@
 		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="15" />
 		<color value="#ffffff" />
 	</font>
-	-->
 	<!-- Drag fonts - REQUIRED -->
-	<!--
 		<font name="draglabel">
 		<fgffile name="graphics/fonts/draglabel.fgf" />
 		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="39" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Chat fonts - REQUIRED -->
 	<font name="chatfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
@@ -102,7 +91,6 @@
 		<color value="#660066" />
 	</font>
 	<!-- Radial menus and character list -->
-	<!--
 		<font name="mini_name">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
@@ -113,9 +101,7 @@
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Identity list -->
-	<!--
 		<font name="idactivefont">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
@@ -126,18 +112,12 @@
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
 		<color value="#FFFFFF" />
 	</font>
-	-->
 	<!-- Hot keys -->
-	<!--
-		<font name="hotkey">
-		<fgffile name="graphics/fonts/regular-10.fgf" />
-		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="15" />
-		<color value="FFFFFF" />
-		<shadow offset="1,1" color="000000" />
+	<font name="hotkey">
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
+		<color value="#98856C" />
 	</font>
-	-->
 	<!-- Modifier stack -->
-	<!--
 		<font name="modcollector">
 		<fgffile name="graphics/fonts/diemod.fgf" />
 		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="23" />
@@ -148,17 +128,13 @@
 		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="11" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Windows -->
-	<!--
 		<font name="windowtitle">
-		<ttf file="graphics/fonts/AlegreyaSansSC-Bold.ttf" name="Alegreya Sans SC Bold" size="26" />
-		<color value="#000000" />
-		<shadow offset="1,1" color="#808080" />
+		<ttf file="graphics/fonts/thewitcher.ttf" name="thewitcher" size="20" />
+		<color value="#968866" />
+		<shadow offset="1,1" color="#49453b" />
 	</font>
-	-->
 	<!-- Formatted text fields -->
-	<!--
 		<font name="reference-h">
 		<ttf file="graphics/fonts/MarcellusSC-Regular.ttf" name="Marcellus SC" size="24" />
 		<color value="#660000" />
@@ -188,30 +164,21 @@
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="18" bold="true" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Standard text fields -->
-	<!--
 		<font name="sheetlabel">
-		<fgffile name="graphics/fonts/bold-10.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
-		<color value="#000000" />
+		<ttf file="graphics/fonts/steelfisheb.ttf" name="SteelfishEb" size="14"/>
+		<color value="#b7ad96" />
 	</font>
 	<font name="sheettext">
-		<fgffile name="graphics/fonts/regular-10.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
+		<ttf file="graphics/fonts/steelfisheb.ttf" name="SteelfishEb" size="14"/>
+		<color value="#b7ad96" />
 	</font>
-	-->
 	<!-- Number fields -->
-	<!--
 		<font name="sheetnumber">
-		<fgffile name="graphics/fonts/bold-10.fgf" />
-		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="15" bold="true" />
-		<color value="#000000" />
+		<ttf file="graphics/fonts/steelfisheb.ttf" name="SteelfishEb" size="16"/>
+		<color value="#b7ad96" />
 	</font>
-	-->
 	<!-- Character selection -->
-	<!--
 		<font name="charselecttitle">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
@@ -222,27 +189,23 @@
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="#261A12" />
 	</font>
-	-->
 	<!-- Options -->
-	<!--
 		<font name="optionset">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="18" bold="true" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<font name="optiontitle">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<font name="optionbody">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
-	-->
 	<!-- Tables -->
-	<!--
 		<font name="tablerange">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
@@ -258,9 +221,7 @@
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Calendar -->
-	<!--
 	<font name="calendarday">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
@@ -296,9 +257,7 @@
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Characters -->
-	<!-- 
 		<font name="sheetlabelinline">
 		<fgffile name="graphics/fonts/regular-8.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="13" />
@@ -309,9 +268,7 @@
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="13" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Reference -->
-	<!--
 		<font name="reference-section">
 		<fgffile name="graphics/fonts/title-regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
@@ -341,9 +298,7 @@
 		<ttf file="graphics/fonts/AlegreyaSansSC-Bold.ttf" name="Alegreya Sans SC" size="24" />
 		<color value="#000000" />
 	</font>
-	-->
 	<!-- Misc -->
-	<!--
 	<font name="list-empty">
 		<fgffile name="graphics/fonts/italic-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" italic="true" />
@@ -361,5 +316,4 @@
 		<color value="#FFFFFF" />
 		<shadow offset="1,1" color="#000000" />
 	</font>
-	-->
 </root>
