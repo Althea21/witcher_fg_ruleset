@@ -5,6 +5,10 @@
 
 local sFocus = "name";
 
+function onInit()
+	addSkillsRoot();
+end
+	
 function addSkillsRoot()
 	local listattribut = {};
 	
@@ -22,10 +26,10 @@ function addSkillsRoot()
 		local matches = listattribut[k];
 		if not matches then
 			local newwin = createWindow();
-			newwin.name.setValue(k);
+			newwin.name.setValue(t);
 			newwin.type.setValue(0);
 			matches = { newwin };
-			addSkills(k);
+			addSkills(t);
 		end
 	end
 end
@@ -35,7 +39,7 @@ function addSkills(sCategorie)
 	
 	for i, j in pairs(getWindows()) do
 		local label = j.name.getValue(); 
-		if SkillsTable.tbl_skills_root[sCategorie][label] then
+		if SkillsTable.tbl_skills[sCategorie][label] then
 			if not listskill[label] then
 				listskill[label] = { j };
 			else
@@ -43,7 +47,7 @@ function addSkills(sCategorie)
 			end
 		end
 	end
-	for k, t in pairs(SkillsTable.tbl_skills_root[sCategorie]) do
+	for k, t in pairs(SkillsTable.tbl_skills[sCategorie]) do
 		local matches = listskill[k];
 		if not matches then
 			local newwin = createWindow();

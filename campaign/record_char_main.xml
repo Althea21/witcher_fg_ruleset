@@ -574,24 +574,26 @@
 				<anchored to="meleebonusdamage" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_meleebonusdamage" />
 			</label>
-			<basicdice name="punch" source="attributs.punch">
+			<dice_modifier name="punch" source="attributs.punch">
 				<anchored to="meleebonusdamage" width="40" height="20">
 					<top anchor="bottom" relation="relative" offset="5" />
 					<left />
 				</anchored>
-				<frame name="fielddark" offset="7,5,7,5" />			
-			</basicdice>
+				<frame name="fielddark" offset="7,5,7,5" />
+				<modifierfield>attributs.punch_modifier</modifierfield>
+			</dice_modifier>
 			<label>
 				<anchored to="punch" position="right" offset="-140,0" />
 				<static textres="char_derivedstatslabel_punch" />
 			</label>
-			<basicdice name="kick" source="attributs.kick">
+			<dice_modifier name="kick" source="attributs.kick">
 				<anchored to="punch" width="40" height="20">
 					<top anchor="bottom" relation="relative" offset="5" />
 					<left />
 				</anchored>
 				<frame name="fielddark" offset="7,5,7,5" />
-			</basicdice>
+				<modifierfield>attributs.kick_modifier</modifierfield>
+			</dice_modifier>
 			<label>
 				<anchored to="kick" position="right" offset="-140,0" />
 				<static textres="char_derivedstatslabel_kick" />

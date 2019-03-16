@@ -312,11 +312,6 @@
 				<columns width="222" filldown="true" />
 				<datasource>.skills.skillslist</datasource>
 				<class>char_skills</class>
-				<script>
-					function onInit()
-						addSkillsRoot();
-					end
-				</script>
 			</list_skills>
 			<scrollbar_list>
 				<anchored to="skills" />
@@ -332,7 +327,22 @@
 	<windowclass name="char_skills">
 		<margins control="0,0,0,2" />
 		<sheetdata>
-			<hn name="type" />
+			<hn name="type">
+				<script>
+					function onValueChanged()
+						if getValue() == 1 then
+							window.skill_use.setVisible(true);
+							window.skill_value.setVisible(true);							
+							window.name.setAnchor("left", "", "", "", 25);
+							window.name.setFrame ("");
+						else
+							window.name.setFrame ("headergray");
+							window.name.setAnchor("left", "", "", "", 5);
+						end
+						window.name.changeStat(getValue());
+					end
+				</script>
+			</hn>
 			
 			<genericcontrol name="rightanchor">
 				<anchored height="0" width="0">
@@ -347,13 +357,6 @@
 					<size width="20" height="20" /> 
 				</anchored>
 				<invisible />
-				<script>
-					function onInit()
-						if window.type.getValue() == 1 then
-							setVisible(true);
-						end
-					end
-				</script>
 			</button_checkbox>
 			<simplestring name="name">
 				<anchored to="rightanchor">
@@ -363,13 +366,16 @@
 				</anchored>
 				<readonly />
 				<script>
-					function onInit()
-						if window.type.getValue() == 0 then
+					function changeStat(nStat)
+						if nStat == 0 then
 							setFrame ("headergray");
 							setAnchor("left", "", "", "", 5);
 						else
 							setFrame ("");
 						end
+					end
+					function onInit()
+						changeStat(window.type.getValue());
 					end
 				</script>
 			</simplestring>
@@ -379,15 +385,7 @@
 					<right anchor="right" relation="relative" offset="-10" />
 					<size width="30" height="20" />
 				</anchored> 
-				<invisible />
-				<script>
-					function onInit()
-						if window.type.getValue() == 1 then
-							setVisible(true);
-						end
-					end
-				</script>
-				
+				<invisible />			
 			</basicnumber>		
 			
 		</sheetdata>
