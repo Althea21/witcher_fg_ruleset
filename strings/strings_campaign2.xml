@@ -149,6 +149,8 @@
 	<string name="weapon_label_weaponaccuracy">WA</string>
 	<string name="weapon_tooltip_weaponaccuracy">Weapon Accuracy</string>
 	<string name="weapon_label_dmgbonusstat">Stat. bonus</string>
-	
+	<string name="weapon_label_enhancementmax">Max</string>
+	<string name="weapon_label_enhancementname">Name</string>
+	<string name="weapon_label_enhancementeffect">Effect</string>
 	
 </root>

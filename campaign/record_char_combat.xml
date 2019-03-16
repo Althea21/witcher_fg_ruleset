@@ -551,7 +551,7 @@
 	<windowclass name="char_weapon_editor">
 		<frame>recordsheet</frame>
 		<placement>
-			<size width="400" height="350" />
+			<size width="400" height="450" />
 		</placement>
 		<sizelimits>
 			<minimum width="400" height="350" />
@@ -765,6 +765,54 @@
 				<static textres="weapon_header_enhancement" />
 				<center />
 			</header_column>
+			<button_iedit name="enhancement_list_iedit">
+				<anchored to="header_enhancement" position="insidetopright" offset="-5,0" />
+				<target>enhancement_list</target>
+			</button_iedit>
+			<button_iadd name="enhancement_list_iadd">
+				<anchored to="enhancement_list_iedit" position="lefthigh" offset="5,0" />
+				<target>enhancement_list</target>
+			</button_iadd>
+			
+			<basicnumber name="enhancementmax">
+				<anchored width="30" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="35" />
+				</anchored>
+			</basicnumber>
+			<label>
+				<anchored to="enhancementmax" position="left" offset="10,0" />
+				<static textres="weapon_label_enhancementmax" />
+			</label>
+			
+			<list_editor name="enhancement_list">
+				<datasource>.enhancementlist</datasource>
+				<class>char_weapon_enhancement_entry</class>
+				<script>
+					function addEntry(bFocus)
+						local n = getWindowCount();
+						
+						local w = createWindow();
+						if w then
+							if bFocus then
+								w.name.setFocus();
+							end
+						end
+						
+						return w;
+					end
+				</script>
+			</list_editor>
+			
+			<label_fieldtop>
+				<anchored to="enhancement_list" position="aboveleft" offset="5,1" width="50" />
+				<static textres="weapon_label_enhancementname" />
+			</label_fieldtop>
+			<label_fieldtop>
+				<anchored to="enhancement_list" position="aboveleft" offset="100,1" width="50" />
+				<static textres="weapon_label_enhancementeffect" />
+			</label_fieldtop>
+			
 		</sheetdata>
 	</windowclass>
 	
@@ -820,4 +868,38 @@
 			</stringu>
 		</sheetdata>
 	</windowclass>
+	
+	<!--Weapon enhancement entry class-->
+	<windowclass name="char_weapon_enhancement_entry">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="5" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete>
+
+			<stringu name="name">
+				<anchored position="insidetopleft" offset="5,5" width="100" height="20" />
+			</stringu>
+			<basicstring name="effect">
+				<anchored width="250" >
+					<top parent="name" anchor="righthigh" relation="relative" offset="-20" />
+					<left parent="name" anchor="right" relation="relative" offset="5" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</basicstring>
+
+		</sheetdata>
+	</windowclass>
+	
 </root>
