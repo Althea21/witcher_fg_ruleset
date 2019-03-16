@@ -341,6 +341,10 @@
 						end
 						window.name.changeStat(getValue());
 					end
+					
+					function onInit()
+						onValueChanged();
+					end
 				</script>
 			</hn>
 			
