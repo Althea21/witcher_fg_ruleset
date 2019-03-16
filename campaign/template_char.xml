@@ -69,4 +69,14 @@
 			<script file="campaign/scripts/dice_modifier.lua" />
 		</basicdice>
 	</template>
+	
+	<!--Ammo counter-->
+	<template name="state_charammocounter">
+		<buttongroup_counter>
+			<sourcefields>
+				<maximum>maxammo</maximum>
+				<current>ammo</current>
+			</sourcefields>
+		</buttongroup_counter>
+	</template>
 </root>

@@ -4,43 +4,43 @@
 --
 
 --
--- Management for save rolls
+-- Management for attack rolls
 --
 
 function onInit()
-	-- Register the save action.  We'll allow use of the modifier stack for this action type.
-	GameSystem.actions["save"] = { bUseModStack = true };
+	-- Register attack actions.  We'll allow use of the modifier stack for those actions.
+	GameSystem.actions["attack"] = { bUseModStack = true , sTargeting = "each"};
 	
 	-- Register the result handler - called after the dice have stopped rolling
-	ActionsManager.registerResultHandler("save", onRoll);
+	ActionsManager.registerResultHandler("attack", onRoll);
 end
 
 -- method called by performAction to initiate the roll object which will be given 
 -- to high level ActionsManager to actually perform roll
 -- params :
 --	* draginfo	: info given when rolling from onDragStart event (nil if other event trigger the roll)
---	* sSave		: save type (supported : "stun")
+--	* weaponType: weapon type (supported : "melee", "range")
+--	* attackType: attack type (supported : "fast", "strong")
 -- returns : 
 --	* rRoll	: roll object
-function getRoll(rActor, sSave)
+function getRoll(rActor, weaponType, attackType)
 	-- Initialise a blank rRoll record
 	local rRoll = {};
 	
 	-- Add the 4 minimum parameters needed:
 	-- the action type.
-	rRoll.sType = "save";
+	rRoll.sType = "attack";
 	-- the dice to roll.
 	rRoll.aDice = { "d10" };
 	-- A modifier to apply to the roll.
 	rRoll.nMod = 0;
 	-- The description to show in the chat window, will be overloaded upon the save type later
-	rRoll.sDesc = "[UNKNOWN SAVE] ";
-
+	rRoll.sDesc = "[Attack] ";
+	
 	-- Look up actor specific information
-	local sSaveDC = nil;
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	if nodeActor then
-		if sSave == "stun" then
+		if weaponType == "melee" then
 			rRoll.sDC = DB.getValue(nodeActor, "attributs.stun", 0);
 			rRoll.sDesc = "[STUN SAVE] ";
 		end
@@ -53,9 +53,10 @@ end
 -- params :
 --	* draginfo	: info given when rolling from onDragStart event (nil if other event trigger the roll)
 --	* rActor	: actor info retrieved by using ActorManager.resolveActor
---	* sSave		: save type (supported : "stun")
-function performRoll(draginfo, rActor, sSave)
-	local rRoll = getRoll(rActor, sSave);
+--	* weaponType: weapon type (supported : "melee", "range")
+--	* attackType: attack type (supported : "fast", "strong")
+function performRoll(draginfo, rActor, weaponType, attackType)
+	local rRoll = getRoll(rActor, sSave, weaponType, attackType);
 	ActionsManager.performAction(draginfo, rActor, rRoll);
 end
 

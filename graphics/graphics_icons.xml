@@ -63,6 +63,14 @@
 	<icon name="char_weapon" file="graphics/icons/char_weapon.png" />
 	<icon name="char_weapon_melee" file="graphics/icons/char_weapon_melee.png" />
 	<icon name="char_weapon_ranged" file="graphics/icons/char_weapon_ranged.png" />
+	<icon name="attack_melee_normal" file="graphics/icons/attack_melee_normal.jpg" />
+	<icon name="attack_melee_fast" file="graphics/icons/attack_melee_fast.jpg" />
+	<icon name="attack_melee_strong" file="graphics/icons/attack_melee_strong.jpg" />
+	<icon name="attack_range_normal" file="graphics/icons/attack_range_normal.jpg" />
+	<icon name="attack_range_fast" file="graphics/icons/attack_range_fast.jpg" />
+	<icon name="attack_range_strong" file="graphics/icons/attack_range_strong.jpg" />
+	<icon name="melee_parry" file="graphics/icons/melee_parry.jpg" />
+	<icon name="melee_block" file="graphics/icons/melee_block.jpg" />
 	
 	<!--
 	<icon name="rulesetlogo_CoreRPG" file="graphics/icons/rulesetlogo_CoreRPG.png" />

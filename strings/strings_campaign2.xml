@@ -88,7 +88,21 @@
 		
 	<!-- Combat tab -->
 	<string name="char_combat_initiative">INIT.</string>
+	<string name="char_label_weapons">Weapons</string>
+	<string name="char_label_weapontype">M/R</string>
+	<string name="char_label_weaponname">Name</string>
 	<string name="char_label_weaponreliability">Rel.</string>
-	<string name="char_label_weapondefense">Defense</string>
+	<string name="char_label_weaponattacks">Attacks</string>
+	<string name="char_tooltip_fastattack">Fast Attack</string>
+	<string name="char_tooltip_strongattack">Strong Attack</string>
+	<string name="char_tooltip_normalattack">Normal Attack</string>
+	<string name="char_tooltip_block">Block</string>
+	<string name="char_tooltip_parry">Parry</string>
+	<string name="char_label_weapondamage">Damage</string>
+	<string name="char_label_weapondefense">Def.</string>
 	<string name="char_label_weaponeffects">Effects</string>
+	<string name="char_label_weaponammo">Ammo</string>
+	<string name="menu_addweapon">Add Weapon</string>
+	<string name="menu_deleteweapon">Delete weapon</string>
+	<string name="list_menu_deleteconfirm">Delete weapon</string>
 </root>
