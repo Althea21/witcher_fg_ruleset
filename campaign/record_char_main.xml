@@ -36,10 +36,10 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Human", list_race_human);
-						add("Aen Seidhe", list_race_elf);
-						add("Dwarf", list_race_dwarf);
-						add("Witcher", list_race_witcher);
+						add("Human", Interface.getString("list_race_human"));
+						add("Aen Seidhe", Interface.getString("list_race_elf"));
+						add("Dwarf", Interface.getString("list_race_dwarf"));
+						add("Witcher", Interface.getString("list_race_witcher"));
 					end
 				</script>
 				<default>Human</default>
@@ -70,8 +70,8 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Female", list_race_female);
-						add("Male", list_race_male);
+						add("Female", Interface.getString("list_race_female"));
+						add("Male", Interface.getString("list_race_male"));
 					end
 				</script>
 				<default>Male</default>
@@ -106,15 +106,15 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Bard", list_profession_bard);
-						add("Craftsman", list_profession_craftsman);
-						add("Criminal", list_profession_criminal);
-						add("Doctor", list_profession_doctor);
-						add("Mage", list_profession_mage);
-						add("Man At Arms", list_profession_man_at_arms);
-						add("Merchant", list_profession_merchant);
-						add("Priest", list_profession_priest);
-						add("Witcher", list_profession_witcher);
+						add("Bard", Interface.getString("list_profession_bard"));
+						add("Craftsman", Interface.getString("list_profession_craftsman"));
+						add("Criminal", Interface.getString("list_profession_criminal"));
+						add("Doctor", Interface.getString("list_profession_doctor"));
+						add("Mage", Interface.getString("list_profession_mage"));
+						add("Man At Arms", Interface.getString("list_profession_man_at_arms"));
+						add("Merchant", Interface.getString("list_profession_merchant"));
+						add("Priest", Interface.getString("list_profession_priest"));
+						add("Witcher", Interface.getString("list_profession_witcher"));
 					end
 				</script>
 				<default>Bard</default>
@@ -140,11 +140,11 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Equal", list_socialstanding_equal);
-						add("Tolerated", list_socialstanding_tolerated);
-						add("Hated", list_socialstanding_hated);
-						add("Feared", list_socialstanding_feared);
-						add("Hated and feared", list_socialstanding_hatedfeared);
+						add("Equal", Interface.getString("list_socialstanding_equal"));
+						add("Tolerated", Interface.getString("list_socialstanding_tolerated"));
+						add("Hated", Interface.getString("list_socialstanding_hated"));
+						add("Feared", Interface.getString("list_socialstanding_feared"));
+						add("Hated and feared", Interface.getString("list_socialstanding_hatedfeared"));
 					end
 				</script>
 				<default>Equal</default>
