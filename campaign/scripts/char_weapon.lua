@@ -48,7 +48,7 @@ local m_sRecord = "";
 
 function onDataChanged()
 	--onLinkChanged();
-	--onDamageChanged();
+	onDamageChanged();
 	
 	local bRanged = (type.getValue() == 1);
 	-- Ranged specific fields
@@ -74,6 +74,8 @@ function onDamageChanged()
 	local nodeWeapon = getDatabaseNode();
 	local nodeChar = nodeWeapon.getChild("...")
 	local rActor = ActorManager.getActor("pc", nodeChar);
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+	
 	
 	local aDamage = {};
 	local aDamageNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "damagelist"));
@@ -81,18 +83,13 @@ function onDamageChanged()
 		local aDice = DB.getValue(v, "dice", {});
 		local nMod = DB.getValue(v, "bonus", 0);
 
-		local sAbility = DB.getValue(v, "stat", "");
-		if sAbility ~= "" then
-			local nMult = DB.getValue(v, "statmult", 1);
-			local nMax = DB.getValue(v, "statmax", 0);
-			local nAbilityBonus = ActorManager2.getAbilityBonus(rActor, sAbility);
-			if nMax > 0 then
-				nAbilityBonus = math.min(nAbilityBonus, nMax);
-			end
-			if nAbilityBonus > 0 and nMult ~= 1 then
-				nAbilityBonus = math.floor(nMult * nAbilityBonus);
-			end
-			nMod = nMod + nAbilityBonus;
+		local sAbility = DB.getValue(v, "dmgbonusstat", "");
+		if (sAbility == "meleebonusdamage") then
+			nMod = nMod + DB.getValue(nodeActor, "attributs.meleebonusdamage", 0);
+		elseif (sAbility == "punch") then
+			-- todo get punch bonus modifier
+		elseif (sAbility == "kick") then
+			-- todo get kick bonus modifier
 		end
 		
 		if #aDice > 0 or nMod ~= 0 then

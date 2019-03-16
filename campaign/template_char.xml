@@ -79,4 +79,46 @@
 			</sourcefields>
 		</buttongroup_counter>
 	</template>
+	
+	<!--cycler stat-->
+	<template name="cycler_ability">
+		<button_stringcycler>
+			<frame mergerule="replace" name="fielddark" offset="7,5,7,5" />
+			<stateframe mergerule="replace">
+				<hover name="fieldfocus" offset="7,5,7,5" />
+			</stateframe>
+			<parameters>
+				<labelsres mergerule="replace">int|ref|dex|bod|spd|emp|cra|wil</labelsres>
+				<values mergerule="replace">intelligence|reflex|dexterity|body|speed|empathy|crafting|will</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+	
+	<!--cycler combat skill-->
+	<template name="cycler_combatskill">
+		<button_stringcycler>
+			<frame mergerule="replace" name="fielddark" offset="7,5,7,5" />
+			<stateframe mergerule="replace">
+				<hover name="fieldfocus" offset="7,5,7,5" />
+			</stateframe>
+			<parameters>
+				<labelsres mergerule="replace">Archery|Crossbow|Melee|Small Blades|Staff/Spear|Swordmanship</labelsres>
+				<values mergerule="replace">Archery|Crossbow|Melee|Small Blades|Staff/Spear|Swordmanship</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
+	
+	<!--cycler combat bonus damage -->
+	<template name="cycler_dmgbonusstat">
+		<button_stringcycler>
+			<frame mergerule="replace" name="fielddark" offset="7,5,7,5" />
+			<stateframe mergerule="replace">
+				<hover name="fieldfocus" offset="7,5,7,5" />
+			</stateframe>
+			<parameters>
+				<labelsres mergerule="replace">dmgbonusstat_none|dmgbonusstat_meleebonus|dmgbonusstat_punch|dmgbonusstat_kick</labelsres>
+				<values mergerule="replace">none|meleebonusdamage|punch|kick</values>
+			</parameters>
+		</button_stringcycler>
+	</template>
 </root>

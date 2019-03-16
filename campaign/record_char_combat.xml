@@ -268,7 +268,7 @@
 				<state icon="char_weapon_ranged" tooltipres="char_tooltip_weapontyperanged" />
 			</buttonfield>
 			
-			<!-- Edit / see details -->
+			<!-- Edit / See details -->
 			<buttoncontrol name="activatedetail">
 				<anchored to="rightanchor" width="20" height="20">
 					<top />
@@ -546,4 +546,278 @@
 		</sheetdata>
 	</windowclass>
 	
+	
+	<!--Weapon editor-->
+	<windowclass name="char_weapon_editor">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="400" height="350" />
+		</placement>
+		<sizelimits>
+			<minimum width="400" height="350" />
+			<dynamic />
+		</sizelimits>
+		<nodelete />
+		<playercontrol />
+		<tooltip control="name" />
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>weapon_title</resource>
+			</windowtitlebar>
+			
+			<genericcontrol name="contentframe">
+				<anchored>
+					<top parent="title" anchor="bottom" offset="15" />
+					<left offset="35" />
+					<right offset="-35" />
+					<bottom offset="-32" />
+				</anchored>
+				<frame name="groupbox" offset="20,17,20,17" />
+				<disabled />
+			</genericcontrol>
+			
+			<subwindow_record name="main">
+				<class>char_weapon_editor_main</class>
+				<activate />
+			</subwindow_record>
+			<scrollbar_record>
+				<target>main</target>
+			</scrollbar_record>
+
+			<resize_recordsheet />
+			<close_recordsheet />
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="char_weapon_editor_main">
+		<script>
+			function onDrop(x, y, draginfo)
+				local sDragType = draginfo.getType();
+				
+				if sDragType == "dice" then
+					local w = list.addEntry(true);
+					for _, vDie in ipairs(draginfo.getDieList()) do
+						w.dice.addDie(vDie.type);
+					end
+					return true;
+				elseif sDragType == "number" then
+					local w = list.addEntry(true);
+					w.bonus.setValue(draginfo.getNumberData());
+					return true;
+				end
+			end
+		</script>
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column>
+				<static textres="weapon_label_name" />
+			</label_column>
+			<string_column name="name" />
+			
+			<label_column>
+				<static textres="weapon_label_effects" />
+			</label_column>
+			<string_column name="effects" />
+			
+			<!-- PROPERTIES -->
+			<header_column name="header_properties">
+				<static textres="weapon_header_properties" />
+				<center />
+			</header_column>
+			<!--Reliability-->
+			<basicnumber name="reliability">
+				<anchored width="30" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="65" />
+				</anchored>
+			</basicnumber>
+			<label>
+				<anchored to="reliability" position="right" offset="-95,0" />
+				<static textres="weapon_property_reliability" />
+			</label>
+			<basicnumber name="reliabilitymax">
+				<anchored to="reliability" position="right" offset="30,0" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="reliabilitymax" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			<!--Concealment-->
+			<combobox name="concealment">
+				<anchored width="100" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="82" />
+				</anchored>
+				<listdirection>down</listdirection>
+				<script>
+					function onInit()
+						super.onInit();
+						add("Tiny", Interface.getString("list_weaponconcealment_tiny"));
+						add("Small", Interface.getString("list_weaponconcealment_small"));
+						add("Large", Interface.getString("list_weaponconcealment_Large"));
+						add("Can't hide", Interface.getString("list_weaponconcealment_canthide"));
+					end
+				</script>
+				<default></default>
+			</combobox>
+			<label>
+				<anchored to="concealment" position="left" offset="10,0" />
+				<static textres="weapon_property_concealment" />
+			</label>
+			
+			<!-- ATTACK -->
+			<header_column name="header_attack">
+				<static textres="weapon_header_attack" />
+				<center />
+			</header_column>
+			
+			<cycler_ability name="attackstat">
+				<anchored width="40" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="22" />
+					<left offset="5" />
+				</anchored>
+				<parameters>
+					<defaultlabelres mergerule="replace">ref</defaultlabelres>
+				</parameters>
+			</cycler_ability>
+			<label_fieldtop>
+				<anchored to="attackstat" />
+				<static textres="weapon_label_attackstat" />
+			</label_fieldtop>
+			<label name="label_atkplus">
+				<anchored to="attackstat" position="righthigh" offset="5,0" width="10" />
+				<static>+</static>
+				<center />
+			</label>
+			<cycler_combatskill name="attackskill">
+				<anchored to="label_atkplus" position="righthigh" offset="5,0" width="80" height="20" />
+				<parameters>
+					<defaultlabelres mergerule="replace">Swordmanship</defaultlabelres>
+				</parameters>
+			</cycler_combatskill>
+			<label_fieldtop>
+				<anchored to="attackskill" />
+				<static textres="weapon_label_attackskill" />
+			</label_fieldtop>
+			<label name="label_atkplus2">
+				<anchored to="attackskill" position="righthigh" offset="5,0" width="10" />
+				<static>+</static>
+				<center />
+			</label>
+			<basicnumber name="weapon_accuracy">
+				<anchored to="label_atkplus2" position="righthigh" offset="5,0" width="30" height="20" />
+			</basicnumber>
+			<label_fieldtop>
+				<anchored to="weapon_accuracy" />
+				<tooltip textres="weapon_tooltip_weaponaccuracy" />
+				<static textres="weapon_label_weaponaccuracy" />
+			</label_fieldtop>
+			
+			<!-- DAMAGE -->
+			<header_column name="header_damage">
+				<static textres="weapon_header_damage" />
+				<center />
+			</header_column>
+			<button_iedit name="list_iedit">
+				<anchored to="header_damage" position="insidetopright" offset="-5,0" />
+				<target>list</target>
+			</button_iedit>
+			<button_iadd name="list_iadd">
+				<anchored to="list_iedit" position="lefthigh" offset="5,0" />
+				<target>list</target>
+			</button_iadd>
+
+			<list_editor name="list">
+				<datasource>.damagelist</datasource>
+				<class>char_weapon_damage_entry</class>
+				<script>
+					function addEntry(bFocus)
+						local n = getWindowCount();
+						
+						local w = createWindow();
+						if w then
+							if bFocus then
+								w.type.setFocus();
+							end
+						end
+						
+						return w;
+					end
+				</script>
+			</list_editor>
+			
+			<label_fieldtop>
+				<anchored to="list" position="aboveleft" offset="5,1" width="60" />
+				<static textres="weapon_label_dmgdice" />
+			</label_fieldtop>
+			<label_fieldtop>
+				<anchored to="list" position="aboveleft" offset="80,1" width="30" />
+				<static textres="weapon_label_dmgbonus" />
+			</label_fieldtop>
+			<label_fieldtop>
+				<anchored to="list" position="aboveleft" offset="150,1" width="55" />
+				<static textres="weapon_label_dmgbonusstat" />
+			</label_fieldtop>
+			
+			<!-- ENHANCEMENT -->
+			<header_column name="header_enhancement">
+				<static textres="weapon_header_enhancement" />
+				<center />
+			</header_column>
+		</sheetdata>
+	</windowclass>
+	
+	<!--Weapon damage entry class-->
+	<windowclass name="char_weapon_damage_entry">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="5" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete>
+
+			<basicdice name="dice">
+				<anchored position="insidetopleft" offset="5,5" width="60" height="20" />
+			</basicdice>
+			<label name="label_plus">
+				<anchored to="dice" position="righthigh" offset="5,0" width="10" />
+				<static>+</static>
+			</label>
+			<basicnumber name="bonus">
+				<anchored to="label_plus" position="righthigh" offset="2,0" width="30" height="20" />
+				<hideonvalue>0</hideonvalue>
+			</basicnumber>
+			<label name="label_plus2">
+				<anchored to="bonus" position="righthigh" offset="5,0" width="10" />
+				<static>+</static>
+			</label>
+			<cycler_dmgbonusstat name="dmgbonusstat">
+				<anchored to="label_plus2" position="righthigh" offset="5,0" width="80" height="20" />
+				<parameters>
+					<defaultlabelres mergerule="replace">dmgbonusstat_none</defaultlabelres>
+				</parameters>
+			</cycler_dmgbonusstat>
+			
+			<label name="label_type">
+				<anchored position="insidetopleft" offset="20,25" />
+				<static textres="weapon_label_dmgtype" />
+			</label>
+			<stringu name="type">
+				<anchored to="label_type" position="righthigh" offset="10,0">
+					<right parent="" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+		</sheetdata>
+	</windowclass>
 </root>

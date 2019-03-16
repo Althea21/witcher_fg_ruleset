@@ -30,7 +30,16 @@
 	<string name="char_statslabel_crafting">CRAFTING</string>
 	<string name="char_statslabel_will">WILL</string>
 	<string name="char_statslabel_luck">LUCK</string>
-
+	
+	<string name="int">Int</string>
+	<string name="ref">Ref</string>
+	<string name="dex">Dex</string>
+	<string name="bod">Bod</string>
+	<string name="spd">Spd</string>
+	<string name="emp">Emp</string>
+	<string name="cra">Cra</string>
+	<string name="wil">Wil</string>
+	
 	<string name="char_derivedstatslabel_stun">STUN</string>
 	<string name="char_derivedstatslabel_run">RUN</string>
 	<string name="char_derivedstatslabel_leap">LEAP</string>
@@ -82,6 +91,26 @@
 	<string name="char_listskillcycler_crafting">CRA</string>
 	<string name="char_listskillcycler_will">WIL</string>
 	
+	<!--Combat skill cycler-->
+	<string name="Archery">Archery</string>
+	<string name="Crossbow">Crossbow</string>
+	<string name="Melee">Melee</string>
+	<string name="Small Blades">Small Blades</string>
+	<string name="Staff/Spear">Staff/Spear</string>
+	<string name="Swordmanship">Swordmanship</string>
+	
+	<!--Combat stat bonus damage cycler-->
+	<string name="dmgbonusstat_none">-</string>
+	<string name="dmgbonusstat_meleebonus">Melee</string>
+	<string name="dmgbonusstat_punch">Punch</string>
+	<string name="dmgbonusstat_kick">Kick</string>
+	
+	<!-- List weapon concealment -->
+	<string name="list_weaponconcealment_tiny">Tiny</string>
+	<string name="list_weaponconcealment_small">Small</string>
+	<string name="list_weaponconcealment_Large">Large</string>
+	<string name="list_weaponconcealment_canthide">Can't Hide</string>
+	
 	<!-- SKILLS -->
 	<string name="char_label_abilities">ABILITIES</string>
 	<string name="char_label_skills">SKILLS</string>
@@ -105,4 +134,21 @@
 	<string name="menu_addweapon">Add Weapon</string>
 	<string name="menu_deleteweapon">Delete weapon</string>
 	<string name="list_menu_deleteconfirm">Delete weapon</string>
+	
+	<!-- Weapon editor -->
+	<string name="weapon_label_name">Name</string>
+	<string name="weapon_label_effects">Effects</string>
+	<string name="weapon_header_properties">Properties</string>
+	<string name="weapon_header_attack">Attack</string>
+	<string name="weapon_header_damage">Damage</string>
+	<string name="weapon_header_enhancement">Enhancement</string>
+	<string name="weapon_property_reliability">Reliability</string>
+	<string name="weapon_property_concealment">Concealment</string>
+	<string name="weapon_label_attackstat">Stat.</string>
+	<string name="weapon_label_attackskill">Skill</string>
+	<string name="weapon_label_weaponaccuracy">WA</string>
+	<string name="weapon_tooltip_weaponaccuracy">Weapon Accuracy</string>
+	<string name="weapon_label_dmgbonusstat">Stat. bonus</string>
+	
+	
 </root>
