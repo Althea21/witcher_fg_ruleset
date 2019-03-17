@@ -18,7 +18,7 @@ end
 -- method called by performAction to initiate the roll object which will be given 
 -- to high level ActionsManager to actually perform roll
 -- params :
---	* draginfo	: info given when rolling from onDragStart event (nil if other event trigger the roll)
+--	* rActor	: actor info retrieved by using ActorManager.resolveActor
 --	* sSave		: save type (supported : "stun")
 -- returns : 
 --	* rRoll	: roll object
