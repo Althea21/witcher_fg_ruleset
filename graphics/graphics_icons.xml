@@ -68,10 +68,10 @@
 	<icon name="button_help_hover" file="graphics/buttons/button_help_hover.png" />
 	<icon name="button_sizeup" file="graphics/buttons/button_sizeup.png" />
 	<icon name="button_sizeup_down" file="graphics/buttons/button_sizeup_down.png" />
-	<icon name="button_sizeup_hover" file="graphics/buttons/button_sizeup_hover.png" />
+	<icon name="button_sizeup_hover" file="graphics/buttons/button_sizeup_down.png" />
 	<icon name="button_sizedown" file="graphics/buttons/button_sizedown.png" />
 	<icon name="button_sizedown_down" file="graphics/buttons/button_sizedown_down.png" />
-	<icon name="button_sizedown_hover" file="graphics/buttons/button_sizedown_hover.png" />
+	<icon name="button_sizedown_hover" file="graphics/buttons/button_sizedown_down.png" />
 	<icon name="button_link" file="graphics/buttons/button_link.png" />
 	<icon name="button_link_down" file="graphics/buttons/button_link_down.png" />
 	<icon name="button_link_empty" file="graphics/buttons/button_link_empty.png" />

@@ -27,8 +27,9 @@
 	<!-- Headers -->
 	<framedef name="headergray">
 		<bitmap file="graphics/frames/headergray.png" />
-		<offset>2,2,2,2</offset>
-		<middle rect="2,2,126,126" />
+		<offset>5,0,5,1</offset>
+		<middle rect="0,0,64,128" />
+		<right rect="0,64,128,128"/>
 	</framedef>
 	<framedef name="headerblack">
 		<bitmap file="graphics/frames/headerblack.png" />
@@ -370,7 +371,7 @@
 	
 	<!-- Token Bag -->
 	<framedef name="tokenbag">
-		<bitmap file="graphics/frames/tokenbag.png" />
+		<bitmap file="graphics/frames/referencepage.png" />
 		<offset>19,19,24,24</offset>
 		<insideoffset>0,0,13,13</insideoffset>
 	</framedef>
@@ -488,7 +489,7 @@
 	
 	<!-- Story and Notes -->
 	<framedef name="storybox">
-		<bitmap file="graphics/frames/storybox.png" />
+		<bitmap file="graphics/frames/charselect.png" />
 		<offset>41,172,41,49</offset>
 		<insideoffset>0,0,10,5</insideoffset>
 	</framedef>
