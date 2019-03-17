@@ -369,7 +369,7 @@
 				<cursor hover="hand" />
 				<script>
 					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "strong");
+						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "fast");
 					end
 
 					function onButtonPress()
@@ -391,7 +391,7 @@
 				<cursor hover="hand" />
 				<script>
 					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "strong");
+						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "normal");
 					end
 
 					function onButtonPress()
@@ -414,8 +414,7 @@
 				<cursor hover="hand" />
 				<script>
 					function action(draginfo)
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						ActionAttack.performRoll(draginfo, rActor, "range", "strong");
+						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "strong");
 					end
 
 					function onButtonPress()
@@ -437,8 +436,7 @@
 				<cursor hover="hand" />
 				<script>
 					function action(draginfo)
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						ActionAttack.performRoll(draginfo, rActor, "range", "fast");
+						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "fast");
 					end
 
 					function onButtonPress()
@@ -460,8 +458,7 @@
 				<cursor hover="hand" />
 				<script>
 					function action(draginfo)
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						ActionAttack.performRoll(draginfo, rActor, "range", "normal");
+						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "normal");
 					end
 
 					function onButtonPress()
@@ -673,9 +670,6 @@
 					<top parent="columnanchor" anchor="bottom" relation="relative" offset="22" />
 					<left offset="5" />
 				</anchored>
-				<parameters>
-					<defaultlabelres mergerule="replace">ref</defaultlabelres>
-				</parameters>
 			</cycler_ability>
 			<label_fieldtop>
 				<anchored to="attackstat" />
@@ -688,9 +682,6 @@
 			</label>
 			<cycler_combatskill name="attackskill">
 				<anchored to="label_atkplus" position="righthigh" offset="5,0" width="80" height="20" />
-				<parameters>
-					<defaultlabelres mergerule="replace">Swordmanship</defaultlabelres>
-				</parameters>
 			</cycler_combatskill>
 			<label_fieldtop>
 				<anchored to="attackskill" />

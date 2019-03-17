@@ -72,6 +72,10 @@
 	<icon name="melee_parry" file="graphics/icons/melee_parry.jpg" />
 	<icon name="melee_block" file="graphics/icons/melee_block.jpg" />
 	
+	<!--colored dice-->
+	<icon name="d10gicon" file="graphics/icons/d10_gicon.png" />
+	<icon name="d10ricon" file="graphics/icons/d10_ricon.png" />
+	
 	<!--
 	<icon name="rulesetlogo_CoreRPG" file="graphics/icons/rulesetlogo_CoreRPG.png" />
 	<icon name="desktopdecal_sw" file="graphics/decals/desktopdecal_sw.png" />

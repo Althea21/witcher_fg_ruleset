@@ -36,6 +36,14 @@
 		<icon>d10icon</icon>
 		<position>220,-68</position>
 	</die>
+	<die name="g10">
+		<model>d10</model>
+		<icon>d10gicon</icon>
+	</die>
+	<die name="r10">
+		<model>d10</model>
+		<icon>d10ricon</icon>
+	</die>
 	<die name="d12">
 		<icon>d12icon</icon>
 		<position>170,-68</position>
