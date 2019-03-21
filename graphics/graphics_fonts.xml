@@ -135,34 +135,34 @@
 		<shadow offset="1,1" color="#49453b" />
 	</font>
 	<!-- Formatted text fields -->
-		<font name="reference-h">
+	<font name="reference-h">
 		<ttf file="graphics/fonts/MarcellusSC-Regular.ttf" name="Marcellus SC" size="24" />
-		<color value="#660000" />
+		<color value="#8a0000" />
 	</font>
 	<font name="reference-r">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
+		<color value="#968866" />
 	</font>
 	<font name="reference-i">
 		<fgffile name="graphics/fonts/italic-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" italic="true" />
-		<color value="#000000" />
+		<color value="#968866" />
 	</font>
 	<font name="reference-b">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
-		<color value="#000000" />
+		<color value="#968866" />
 	</font>
 	<font name="reference-bi">
 		<fgffile name="graphics/fonts/bolditalic-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" italic="true" />
-		<color value="#000000" />
+		<color value="#968866" />
 	</font>
 	<font name="reference-b-large">
 		<fgffile name="graphics/fonts/bold-11.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="18" bold="true" />
-		<color value="#000000" />
+		<color value="#968866" />
 	</font>
 	<!-- Standard text fields -->
 		<font name="sheetlabel">
@@ -182,7 +182,7 @@
 		<font name="charselecttitle">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
-		<color value="#000000" />
+		<color value="#968866" />
 	</font>
 	<font name="charselectbody">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
@@ -225,37 +225,37 @@
 	<font name="calendarday">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<font name="calendarday-b">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<font name="calendarday-bi">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<font name="calendarbold">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<font name="calendarselecttitle">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<font name="calendarselectbody">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<font name="calendarmessage">
 		<fgffile name="graphics/fonts/italic-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<!-- Characters -->
 		<font name="sheetlabelinline">

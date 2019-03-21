@@ -362,7 +362,7 @@
 	<!-- Combat tracker -->
 	<icon name="turn_flag" file="graphics/icons/turn_flag.png" />
 	<icon name="ct_active" file="graphics/icons/ct_active.png" />
-	<icon name="ct_passive" file="graphics/icons/ct_passive.png" />
+	<icon name="ct_passive" file="" />
 	<icon name="ct_faction_empty" file="graphics/icons/ct_faction_empty.png" />
 	<icon name="ct_faction_friend" file="graphics/icons/ct_faction_friend.png" />
 	<icon name="ct_faction_neutral" file="graphics/icons/ct_faction_neutral.png" />
