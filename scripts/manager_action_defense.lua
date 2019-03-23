@@ -4,15 +4,15 @@
 --
 
 --
--- Management for attack rolls
+-- Management for defense rolls
 --
 
 function onInit()
-	-- Register attack actions.  We'll allow use of the modifier stack for those actions.
-	GameSystem.actions["attack"] = { bUseModStack = true };
+	-- Register defense actions.  We'll allow use of the modifier stack for those actions.
+	GameSystem.actions["defense"] = { bUseModStack = true };
 	
 	-- Register the result handler - called after the dice have stopped rolling
-	ActionsManager.registerResultHandler("attack", onAttackRoll);
+	ActionsManager.registerResultHandler("defense", onDefenseRoll);
 end
 
 -- method called by performAction to initiate the roll object which will be given 
@@ -20,23 +20,23 @@ end
 -- params :
 --	* rActor		: actor info retrieved by using ActorManager.resolveActor
 --	* rWeapon		: weapon node
---	* sAttackType	: attack type (supported : "fast", "strong", "normal"). 
---					  Unknown or missing value will be trated like a "normal" attack
+--	* sDefenseType	: defense type (supported : "block", "parry"). 
+--					  Unknown or missing value will generate error chat message
 -- returns : 
 --	* rRoll	: roll object
-function getRoll(rActor, rWeapon, sAttackType)
+function getRoll(rActor, rWeapon, sDefenseType)
 	-- Initialize a blank rRoll record
 	local rRoll = {};
 	
 	-- Add the 4 minimum parameters needed:
 	-- the action type.
-	rRoll.sType = "attack";
+	rRoll.sType = "defense";
 	-- the dice to roll.
 	rRoll.aDice = { "d10" };
 	-- A modifier to apply to the roll, will be overloaded later.
 	rRoll.nMod = 0;
 	-- The description to show in the chat window, will be overloaded later
-	rRoll.sDesc = "[Attack] ";
+	rRoll.sDesc = "[Defense] ";
 	
 	-- Add parameters for exploding dice management
 	rRoll.sExplodeMode  = "none";	-- initial roll, will be "fumble" or "crit" on reroll
@@ -58,17 +58,19 @@ function getRoll(rActor, rWeapon, sAttackType)
 		local sRollDescription = "";
 		local nRollMod = 0;
 		
-		if sAttackType == "fast" then
-			sRollDescription = "[Fast attack with "..rWeapon.label.."]";
-		elseif sAttackType == "strong" then
-			sRollDescription = "[Strong attack with "..rWeapon.label.."][Strong -3]";
+		if sDefenseType == "block" then
+			sRollDescription = "[Block with "..rWeapon.label.."]";
+		elseif sDefenseType == "parry" then
+			sRollDescription = "[Parry with "..rWeapon.label.." (-3)]";
 			nRollMod = nRollMod - 3;
 		else
-			sRollDescription = "[Attack with "..rWeapon.label.."]";
+			local rMessage = {};
+			rMessage.text = Interface.getString("defense_errormsg_unknowndefense")
+			Comm.deliverChatMessage(rMessage);
 		end
 		
 		-- stat modifier
-		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
+		-- Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
 		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0);
 		sRollDescription = sRollDescription.."["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]"
 		
@@ -82,11 +84,6 @@ function getRoll(rActor, rWeapon, sAttackType)
 			end
 		end
 		
-		-- weapon accuracy modifier
-		--Debug.chat("weapon accuracy modifier : "..rWeapon.weaponaccuracy);
-		nRollMod = nRollMod + rWeapon.weaponaccuracy;
-		sRollDescription = sRollDescription.."[WA +"..rWeapon.weaponaccuracy.."]"
-		
 		-- TODO : ARMOR ENCUMBRANCE VALUE TO SUB
 		
 		rRoll.sDesc = sRollDescription;
@@ -96,25 +93,25 @@ function getRoll(rActor, rWeapon, sAttackType)
 	return rRoll;
 end
 
--- method called to initiate attack roll
+-- method called to initiate defense roll
 -- params :
 --	* draginfo		: info given when rolling from onDragStart event (nil if other event trigger the roll)
---	* sAttackType	: attack type (supported : "fast", "strong", "normal"). 
---					  Unknown or missing value will be treated like a "normal" attack
-function performRoll(draginfo, rWeapon, sAttackType)
+--	* sDefenseType	: defense type (supported : "block", "parry"). 
+--					  Unknown or missing value will generate error chat message
+function performRoll(draginfo, rWeapon, sDefenseType)
 	-- retreive attack info and actor node 
-	local rActor, rWeapon = CharManager.getWeaponAttackRollStructures(rWeapon);
+	local rActor, rWeapon = CharManager.getWeaponDefenseRollStructures(rWeapon);
 	
 	-- get roll
-	local rRoll = getRoll(rActor, rWeapon, sAttackType);
+	local rRoll = getRoll(rActor, rWeapon, sDefenseType);
 	
 	-- roll it !
 	ActionsManager.performAction(draginfo, rActor, rRoll);
 end
 
 -- callback for ActionsManager called after the dice have stopped rolling : resolve roll status and display chat message
-function onAttackRoll(rSource, rTarget, rRoll)
-	-- Debug.chat("------- onAttackRoll");
+function onDefenseRoll(rSource, rTarget, rRoll)
+	-- Debug.chat("------- onDefenseRoll");
 	-- Debug.chat("--rSource : ");
 	-- Debug.chat(rSource);
 	-- Debug.chat("--rTarget : ");
@@ -167,10 +164,12 @@ function onAttackRoll(rSource, rTarget, rRoll)
 	elseif (nDiceResult == 10) then
 		-- Debug.chat("rolled a 10 => reroll");
 		bDisplayFinalMessage = false;
+		rRoll.nTotalExplodeValue = rRoll.nTotalExplodeValue + nDiceResult;
+		
 		if rRoll.sExplodeMode == "none" then
 			rRoll.sExplodeMode = "crit";
 		end
-		rRoll.nTotalExplodeValue = rRoll.nTotalExplodeValue + nDiceResult;
+		
 		-- store dice for final message
 		local aStoredDiceTmp = {};
 		if rRoll.sStoredDice ~= "" then
@@ -179,8 +178,10 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		end
 		aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
 		rRoll.sStoredDice = Json.stringify(aStoredDiceTmp);
+		
 		-- reinit rRoll dice
 		rRoll.aDice = { "d10" };
+		
 		-- reroll
 		ActionsManager.performAction(nil, rActor, rRoll);
 	else
@@ -234,25 +235,17 @@ function onAttackRoll(rSource, rTarget, rRoll)
 				rMessage.text = rMessage.text .. Interface.getString("fumble_none");
 			end
 				
-			if (rRoll.sWeaponType == "range") then
-				if (rRoll.nTotalExplodeValue >= 6 and rRoll.nTotalExplodeValue <= 7) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_range_6to7");
-				elseif (rRoll.nTotalExplodeValue >= 8 and rRoll.nTotalExplodeValue <= 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_range_8to9");
-				elseif (rRoll.nTotalExplodeValue > 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
-				end
-			elseif (rRoll.sWeaponType == "melee") then
+			if (rRoll.sWeaponType == "melee") then
 				if (rRoll.nTotalExplodeValue == 6) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_6");
+					rMessage.text = rMessage.text .. Interface.getString("fumble_armeddefense_6");
 				elseif (rRoll.nTotalExplodeValue == 7) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_7");
+					rMessage.text = rMessage.text .. Interface.getString("fumble_armeddefense_7");
 				elseif (rRoll.nTotalExplodeValue == 8) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_8");
+					rMessage.text = rMessage.text .. Interface.getString("fumble_armeddefense_8");
 				elseif (rRoll.nTotalExplodeValue == 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_9");
+					rMessage.text = rMessage.text .. Interface.getString("fumble_armeddefense_9");
 				elseif (rRoll.nTotalExplodeValue > 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
+					rMessage.text = rMessage.text .. Interface.getString("fumble_armeddefense_over9");
 				end
 			end
 

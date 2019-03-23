@@ -177,4 +177,7 @@
 	<string name="fumble_unarmed_8">You trip and fall prone. You must make a Stun save.</string>
 	<string name="fumble_unarmed_9">You trip and hit your head. You are knocked prone, take 1d6 points of non-lethal damage to the head, and must make a Stun save.</string>
 	<string name="fumble_unarmed_over9">You fail horribly and not only fall prone but also take 1d6 lethal damage to the head and must make a Stun save.</string>
+	
+	<!-- Defense messages -->
+	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
 </root>

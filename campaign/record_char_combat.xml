@@ -293,7 +293,7 @@
 				<cursor hover="hand" />
 				<script>
 					function action(draginfo)
-						
+						ActionDefense.performRoll(draginfo, window.getDatabaseNode(), "block");
 					end
 
 					function onButtonPress()
@@ -315,8 +315,7 @@
 				<cursor hover="hand" />
 				<script>
 					function action(draginfo)
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
+						ActionDefense.performRoll(draginfo, window.getDatabaseNode(), "parry");
 					end
 
 					function onButtonPress()

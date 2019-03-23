@@ -43,5 +43,6 @@
 	<script name="ActionSave" file="scripts/manager_action_save.lua" />
 	<script name="ActionInit" file="scripts/manager_action_init.lua" />
 	<script name="ActionAttack" file="scripts/manager_action_attack.lua" />
+	<script name="ActionDefense" file="scripts/manager_action_defense.lua" />
 	<script name="Json" file="scripts/json.lua" />
 </root>
