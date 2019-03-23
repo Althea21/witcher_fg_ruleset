@@ -43,6 +43,15 @@ function getRoll(rActor, rAttack, sAttackType)
 	rRoll.sExplodeMode  = "none";	-- initial roll, will be "fumble" or "crit" on reroll
 	rRoll.nTotalExplodeValue = 0; 	-- cumulative value of exploding rolls
 	rRoll.sStoredDice = "";			-- store all dice for final display message
+	rRoll.sWeaponType = "" ; 		-- range, melee, unarmed (used for fumble resolution)
+	
+	-- Debug.chat(rAttack);
+	
+	if (rAttack.range == "R") then
+		rRoll.sWeaponType = "range";
+	else
+		rRoll.sWeaponType = "melee";
+	end
 	
 	-- Look up actor / weapon specific information
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
@@ -206,6 +215,8 @@ function onAttackRoll(rSource, rTarget, rRoll)
 					if i==1 and tonumber(aNewDice.result)==1 then
 						bFumble = true;
 						aNewDice.type="r10";
+					elseif bFumble then
+						aNewDice.result = 0-tonumber(aNewDice.result)
 					end
 					table.insert(aNewDices, aNewDice);
 				end
@@ -216,11 +227,37 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		-- Create the base message based of the source and the final rRoll record (includes dice results).
 		local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
 		
-		-- update rMessage.diemodifier in case of fumble
-		if (fumble) then
-			-- total will be calculated as dice sum + modifier it's ok in standard case and crit case
-			-- but fumble total is : modifier - nTotalExplodeValue
-			-- TODO
+		-- update rMessage in case of fumble
+		if (bFumble) then
+			rMessage.text = rMessage.text .. "\n[FUMBLE (".. rRoll.nTotalExplodeValue ..") : ";
+			-- check nTotalExplodeValue and attack type to resolve fumble
+			if (rRoll.nTotalExplodeValue <=5) then
+				rMessage.text = rMessage.text .. Interface.getString("fumble_none");
+			end
+				
+			if (rRoll.sWeaponType == "range") then
+				if (rRoll.nTotalExplodeValue >= 6 and rRoll.nTotalExplodeValue <= 7) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_range_6to7");
+				elseif (rRoll.nTotalExplodeValue >= 8 and rRoll.nTotalExplodeValue <= 9) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_range_8to9");
+				elseif (rRoll.nTotalExplodeValue > 9) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
+				end
+			elseif (rRoll.sWeaponType == "melee") then
+				if (rRoll.nTotalExplodeValue == 6) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_6");
+				elseif (rRoll.nTotalExplodeValue == 7) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_7");
+				elseif (rRoll.nTotalExplodeValue == 8) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_8");
+				elseif (rRoll.nTotalExplodeValue == 9) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_9");
+				elseif (rRoll.nTotalExplodeValue > 9) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
+				end
+			end
+
+			rMessage.text = rMessage.text .. "]";
 		end
 		
 		-- Debug.chat(rMessage);

@@ -152,5 +152,29 @@
 	<string name="weapon_label_enhancementmax">Max</string>
 	<string name="weapon_label_enhancementname">Name</string>
 	<string name="weapon_label_enhancementeffect">Effect</string>
+
+	<!--Fumble messages-->
+	<string name="fumble_none">No major fumble.</string>
 	
+	<string name="fumble_melee_6">Your weapon glances off and you are staggered.</string>
+	<string name="fumble_melee_7">Your weapon lodges in a nearby object and it takes 1 round to free.</string>
+	<string name="fumble_melee_8">You damage your weapon severely. Your weapon takes 1d10 points of reliability damage.</string>
+	<string name="fumble_melee_9">You manage to wound yourself. Roll for location.</string>
+	<string name="fumble_melee_over9">You wound a nearby ally. Roll location on a random ally within range.</string>
+	
+	<string name="fumble_range_6to7">The ammunition you fired,or weapon you threw, hits something hard, breaking.</string>
+	<string name="fumble_range_8to9">Your bowstring comes partially undone, your crossbow jams, or you drop your thrown weapon. It takes 1 round to undo this.</string>
+	<string name="fumble_range_over9">You strike one of your allies with a ricochet. Roll location on a random ally within range.</string>
+	
+	<string name="fumble_armeddefense_6">Your weapon takes 1d6 extra points of reliability damage.</string>
+	<string name="fumble_armeddefense_7">Your weapon is knocked from your hand and flies 1d6 meters away in a random direction</string>
+	<string name="fumble_armeddefense_8">You are knocked to the ground. You are now prone and must make a Stun save.</string>
+	<string name="fumble_armeddefense_9">Your weapon takes 2d6 extra points of reliability damage.</string>
+	<string name="fumble_armeddefense_over9">Your weapon ricochets back and hits you. Roll for location.</string>
+	
+	<string name="fumble_unarmed_6">You are knocked off balance and are staggered.</string>
+	<string name="fumble_unarmed_7">You trip on something and fall prone.</string>
+	<string name="fumble_unarmed_8">You trip and fall prone. You must make a Stun save.</string>
+	<string name="fumble_unarmed_9">You trip and hit your head. You are knocked prone, take 1d6 points of non-lethal damage to the head, and must make a Stun save.</string>
+	<string name="fumble_unarmed_over9">You fail horribly and not only fall prone but also take 1d6 lethal damage to the head and must make a Stun save.</string>
 </root>
