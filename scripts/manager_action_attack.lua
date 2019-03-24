@@ -48,8 +48,10 @@ function getRoll(rActor, rWeapon, sAttackType)
 	
 	if (rWeapon.range == "R") then
 		rRoll.sWeaponType = "range";
-	else
+	elseif (rWeapon.range == "M") then
 		rRoll.sWeaponType = "melee";
+	else
+		rRoll.sWeaponType = "unarmed";
 	end
 	
 	-- Look up actor / weapon specific information
@@ -83,9 +85,11 @@ function getRoll(rActor, rWeapon, sAttackType)
 		end
 		
 		-- weapon accuracy modifier
-		--Debug.chat("weapon accuracy modifier : "..rWeapon.weaponaccuracy);
-		nRollMod = nRollMod + rWeapon.weaponaccuracy;
-		sRollDescription = sRollDescription.."[WA +"..rWeapon.weaponaccuracy.."]"
+		if (rWeapon.range ~= "U") then
+			--Debug.chat("weapon accuracy modifier : "..rWeapon.weaponaccuracy);
+			nRollMod = nRollMod + rWeapon.weaponaccuracy;
+			sRollDescription = sRollDescription.."[WA +"..rWeapon.weaponaccuracy.."]"
+		end
 		
 		-- TODO : ARMOR ENCUMBRANCE VALUE TO SUB
 		
@@ -99,11 +103,32 @@ end
 -- method called to initiate attack roll
 -- params :
 --	* draginfo		: info given when rolling from onDragStart event (nil if other event trigger the roll)
---	* sAttackType	: attack type (supported : "fast", "strong", "normal"). 
+--	* sAttackType	: attack type (supported : "fast", "strong", "normal", "punchfast", "punchstrong", "punchnormal", "kickfast", "kickstrong", "kicknormal"). 
 --					  Unknown or missing value will be treated like a "normal" attack
 function performRoll(draginfo, rWeapon, sAttackType)
 	-- retreive attack info and actor node 
-	local rActor, rWeapon = CharManager.getWeaponAttackRollStructures(rWeapon);
+	local rActor; 
+	
+	if (string.find(sAttackType, "punch") or string.find(sAttackType, "kick")) then
+		-- unarmed attack
+		rActor = rWeapon;
+		rWeapon = {};
+		rWeapon.range = "U";
+		if (string.find(sAttackType, "punch"))then
+			rWeapon.label = Interface.getString("char_label_punchlabel");
+		elseif (string.find(sAttackType, "kick"))then
+			rWeapon.label = Interface.getString("char_label_kicklabel");
+		end
+		rWeapon.stat = "reflex";
+		rWeapon.skill= "Brawling";
+		
+		sAttackType = string.gsub(sAttackType, "punch", "");
+		sAttackType = string.gsub(sAttackType, "kick", "");
+		
+	else
+		-- weapon attack
+		rActor, rWeapon = CharManager.getWeaponAttackRollStructures(rWeapon);
+	end
 	
 	-- get roll
 	local rRoll = getRoll(rActor, rWeapon, sAttackType);
@@ -253,6 +278,18 @@ function onAttackRoll(rSource, rTarget, rRoll)
 					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_9");
 				elseif (rRoll.nTotalExplodeValue > 9) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
+				end
+			elseif (rRoll.sWeaponType == "unarmed") then
+				if (rRoll.nTotalExplodeValue == 6) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_6");
+				elseif (rRoll.nTotalExplodeValue == 7) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_7");
+				elseif (rRoll.nTotalExplodeValue == 8) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_8");
+				elseif (rRoll.nTotalExplodeValue == 9) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_9");
+				elseif (rRoll.nTotalExplodeValue > 9) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_over9");
 				end
 			end
 

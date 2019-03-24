@@ -48,8 +48,10 @@ function getRoll(rActor, rWeapon, sDefenseType)
 	
 	if (rWeapon.range == "R") then
 		rRoll.sWeaponType = "range";
-	else
+	elseif (rWeapon.range == "M") then
 		rRoll.sWeaponType = "melee";
+	else
+		rRoll.sWeaponType = "unarmed";
 	end
 	
 	-- Look up actor / weapon specific information
@@ -96,11 +98,31 @@ end
 -- method called to initiate defense roll
 -- params :
 --	* draginfo		: info given when rolling from onDragStart event (nil if other event trigger the roll)
---	* sDefenseType	: defense type (supported : "block", "parry"). 
+--	* sDefenseType	: defense type (supported : "block", "parry", "punchblock", "kickblock"). 
 --					  Unknown or missing value will generate error chat message
 function performRoll(draginfo, rWeapon, sDefenseType)
 	-- retreive attack info and actor node 
-	local rActor, rWeapon = CharManager.getWeaponDefenseRollStructures(rWeapon);
+	local rActor;
+	
+	if (string.find(sDefenseType, "punch") or string.find(sDefenseType, "kick")) then
+		-- unarmed defense
+		rActor = rWeapon;
+		rWeapon = {};
+		rWeapon.range = "U";
+		if (string.find(sDefenseType, "punch"))then
+			rWeapon.label = Interface.getString("char_label_punchlabel");
+		elseif (string.find(sDefenseType, "kick"))then
+			rWeapon.label = Interface.getString("char_label_kicklabel");
+		end
+		rWeapon.stat = "reflex";
+		rWeapon.skill= "Brawling";
+		
+		sDefenseType = string.gsub(sDefenseType, "punch", "");
+		sDefenseType = string.gsub(sDefenseType, "kick", "");
+	else
+		-- weapon attack
+		rActor, rWeapon = CharManager.getWeaponDefenseRollStructures(rWeapon);
+	end
 	
 	-- get roll
 	local rRoll = getRoll(rActor, rWeapon, sDefenseType);
@@ -246,6 +268,18 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 					rMessage.text = rMessage.text .. Interface.getString("fumble_armeddefense_9");
 				elseif (rRoll.nTotalExplodeValue > 9) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_armeddefense_over9");
+				end
+			elseif (rRoll.sWeaponType == "unarmed") then
+				if (rRoll.nTotalExplodeValue == 6) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_6");
+				elseif (rRoll.nTotalExplodeValue == 7) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_7");
+				elseif (rRoll.nTotalExplodeValue == 8) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_8");
+				elseif (rRoll.nTotalExplodeValue == 9) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_9");
+				elseif (rRoll.nTotalExplodeValue > 9) then
+					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_over9");
 				end
 			end
 

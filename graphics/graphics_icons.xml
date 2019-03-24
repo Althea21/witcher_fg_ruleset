@@ -71,6 +71,15 @@
 	<icon name="attack_range_strong" file="graphics/icons/attack_range_strong.jpg" />
 	<icon name="melee_parry" file="graphics/icons/melee_parry.jpg" />
 	<icon name="melee_block" file="graphics/icons/melee_block.jpg" />
+	<icon name="char_brawling" file="graphics/icons/char_brawling.png" />
+	<icon name="attack_punch_normal" file="graphics/icons/attack_punch_normal.jpg" />
+	<icon name="attack_punch_fast" file="graphics/icons/attack_punch_fast.jpg" />
+	<icon name="attack_punch_strong" file="graphics/icons/attack_punch_strong.jpg" />
+	<icon name="attack_punch_block" file="graphics/icons/attack_punch_block.jpg" />
+	<icon name="attack_kick_normal" file="graphics/icons/attack_kick_normal.jpg" />
+	<icon name="attack_kick_fast" file="graphics/icons/attack_kick_fast.jpg" />
+	<icon name="attack_kick_strong" file="graphics/icons/attack_kick_strong.jpg" />
+	<icon name="attack_kick_block" file="graphics/icons/attack_kick_block.jpg" />
 	
 	<!--colored dice-->
 	<icon name="d10gicon" file="graphics/icons/d10_gicon.png" />

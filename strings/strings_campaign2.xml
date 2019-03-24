@@ -130,10 +130,18 @@
 	<string name="char_label_weapondamage">Damage</string>
 	<string name="char_label_weapondefense">Def.</string>
 	<string name="char_label_weaponeffects">Effects</string>
+	<string name="char_label_weaponrange">Range</string>
 	<string name="char_label_weaponammo">Ammo</string>
 	<string name="menu_addweapon">Add Weapon</string>
 	<string name="menu_deleteweapon">Delete weapon</string>
 	<string name="list_menu_deleteconfirm">Delete weapon</string>
+	<string name="char_label_brawling">Brawling</string>
+	<string name="char_label_brawlingname">Name</string>
+	<string name="char_label_brawlingdamage">Damage</string>
+	<string name="char_label_brawlingattacks">Attacks</string>
+	<string name="char_label_brawlingdefense">Def.</string>
+	<string name="char_label_punchlabel">Punch</string>
+	<string name="char_label_kicklabel">Kick</string>
 	
 	<!-- Weapon editor -->
 	<string name="weapon_label_name">Name</string>
@@ -148,6 +156,7 @@
 	<string name="weapon_label_attackskill">Skill</string>
 	<string name="weapon_label_weaponaccuracy">WA</string>
 	<string name="weapon_tooltip_weaponaccuracy">Weapon Accuracy</string>
+	<string name="weapon_label_dmgtype">Type</string>
 	<string name="weapon_label_dmgbonusstat">Stat. bonus</string>
 	<string name="weapon_label_enhancementmax">Max</string>
 	<string name="weapon_label_enhancementname">Name</string>
