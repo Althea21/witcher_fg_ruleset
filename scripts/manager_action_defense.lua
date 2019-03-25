@@ -98,6 +98,7 @@ end
 -- method called to initiate defense roll
 -- params :
 --	* draginfo		: info given when rolling from onDragStart event (nil if other event trigger the roll)
+--	* rWeapon		: weapon node (actor node if unarmed defense)
 --	* sDefenseType	: defense type (supported : "block", "parry", "punchblock", "kickblock"). 
 --					  Unknown or missing value will generate error chat message
 function performRoll(draginfo, rWeapon, sDefenseType)

@@ -7,9 +7,21 @@
 -- Management for attack rolls
 --
 
+-- Queue for tracking pending Attack for defense, then damage resolution (FIFO)
+-- Each item must be formatted like :
+--	* sSourceCT : offender (obtained by ActorManager.getCreatureNodeName(rSource) )
+--	* sTargetCT : defender (obtained by ActorManager.getCTNodeName(rTarget) )
+--	* nAtkValue : value of attack roll (total with modifier, reroll etc...)
+--	* nDefValue : value of defense roll (total with modifier, reroll etc...)
+-- Item must be cleared after damage resolution
+aAttackQueue = {}
+
 function onInit()
 	-- Register attack actions.  We'll allow use of the modifier stack for those actions.
 	GameSystem.actions["attack"] = { bUseModStack = true };
+	
+	-- Register modifier handler
+	ActionsManager.registerModHandler("attack", modAttack);
 	
 	-- Register the result handler - called after the dice have stopped rolling
 	ActionsManager.registerResultHandler("attack", onAttackRoll);
@@ -63,7 +75,7 @@ function getRoll(rActor, rWeapon, sAttackType)
 		if sAttackType == "fast" then
 			sRollDescription = "[Fast attack with "..rWeapon.label.."]";
 		elseif sAttackType == "strong" then
-			sRollDescription = "[Strong attack with "..rWeapon.label.."][Strong -3]";
+			sRollDescription = "[Strong attack with "..rWeapon.label.."][Strong -3]"; -- changing this may affect modAttack function below
 			nRollMod = nRollMod - 3;
 		else
 			sRollDescription = "[Attack with "..rWeapon.label.."]";
@@ -103,6 +115,7 @@ end
 -- method called to initiate attack roll
 -- params :
 --	* draginfo		: info given when rolling from onDragStart event (nil if other event trigger the roll)
+--	* rWeapon		: weapon node (actor node if unarmed attack)
 --	* sAttackType	: attack type (supported : "fast", "strong", "normal", "punchfast", "punchstrong", "punchnormal", "kickfast", "kickstrong", "kicknormal"). 
 --					  Unknown or missing value will be treated like a "normal" attack
 function performRoll(draginfo, rWeapon, sAttackType)
@@ -301,4 +314,108 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		-- Display the message in chat.
 		Comm.deliverChatMessage(rMessage);
 	end
+end
+
+-- Modifier handler : additional modifiers to apply to the roll
+function modAttack(rSource, rTarget, rRoll)
+	local aAddDesc = {};
+	local nAddMod = 0;
+	
+	-- Check modifiers
+	local bFastDraw = ModifierStack.getModifierKey("ATT_FSTDRAW");
+	local bStrongAttack = ModifierStack.getModifierKey("ATT_STRONG");
+	local bTargetSilhouetted = ModifierStack.getModifierKey("ATT_SILTGT");
+	local bAmbush = ModifierStack.getModifierKey("ATT_AMB");
+	local bTargetPinned = ModifierStack.getModifierKey("ATT_TGTPINNED");
+	local bTargetActiveDodge = ModifierStack.getModifierKey("ATT_TGTACTDODGE");
+	local bMovingTarget = ModifierStack.getModifierKey("ATT_MOVTGT");
+	local bRicochetShot = ModifierStack.getModifierKey("ATT_RIC");
+	local bLightLevelModifier = "daylight";
+	if ModifierStack.getModifierKey("LGT_BRI") then
+		bLightLevelModifier = "bright";
+	elseif ModifierStack.getModifierKey("LGT_DIM") then
+		bLightLevelModifier = "dim";
+	elseif ModifierStack.getModifierKey("LGT_DRK") then
+		bLightLevelModifier = "darkness";
+	end
+	
+	-- if needed check range modifiers
+	local sRangeModifier = "";
+	if (rRoll.sWeaponType == "range") then
+		if ModifierStack.getModifierKey("RNG_PB") then
+			sRangeModifier = "pointblank";
+		elseif ModifierStack.getModifierKey("RNG_MED") then
+			sRangeModifier = "medium";
+		elseif ModifierStack.getModifierKey("DMG_LNG") then
+			sRangeModifier = "long";
+		elseif ModifierStack.getModifierKey("DMG_EXT") then
+			sRangeModifier = "extreme";
+		end
+	end
+	
+	
+	if bFastDraw then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_fstdraw").." -3]");
+		nAddMod = nAddMod - 3;
+	end
+	if bStrongAttack then
+		if not string.match(rRoll.sDesc, "%[Strong attack") then
+			table.insert(aAddDesc, "["..Interface.getString("modifier_label_atkstrong").." -3]");
+			nAddMod = nAddMod - 3;
+		end
+	end
+	if bTargetSilhouetted then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_silhouettedtarget").." +2]");
+		nAddMod = nAddMod + 2;
+	end
+	if bAmbush then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_ambush").." +5]");
+		nAddMod = nAddMod + 5;
+	end
+	if bTargetPinned then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_targetpinned").." +4]");
+		nAddMod = nAddMod + 4;
+	end
+	if bTargetActiveDodge then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_targetactdodge").." -2]");
+		nAddMod = nAddMod - 2;
+	end
+	if bMovingTarget then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_movtarget").." -3]");
+		nAddMod = nAddMod - 3;
+	end
+	if bRicochetShot then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_ricshot").." -5]");
+		nAddMod = nAddMod - 5;
+	end
+	if bLightLevelModifier == "bright" then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_light_bright").." -3]");
+		nAddMod = nAddMod - 3;
+	elseif bLightLevelModifier == "darkness" then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_light_dark").." -2]");
+		nAddMod = nAddMod - 2;
+	end
+	if sRangeModifier == "pointblank" then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_range_pointblank").." +5]");
+		nAddMod = nAddMod + 5;
+	elseif sRangeModifier == "medium" then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_range_medium").." -2]");
+		nAddMod = nAddMod - 2;
+	elseif sRangeModifier == "long" then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_range_long").." -4]");
+		nAddMod = nAddMod - 4;
+	elseif sRangeModifier == "extreme" then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_range_extreme").." -6]");
+		nAddMod = nAddMod - 6;
+	end
+	
+	if rSource then
+		-- TODO : Get condition modifiers
+	end
+	
+	if #aAddDesc > 0 then
+		rRoll.sDesc = rRoll.sDesc .. " " .. table.concat(aAddDesc, " ");
+	end
+	
+	rRoll.nMod = rRoll.nMod + nAddMod;
 end

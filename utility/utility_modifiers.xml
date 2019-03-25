@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="modifiers">
+		<frame>utilitybox3</frame>
+		<placement>
+			<size width="600" height="500" />
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum width="600" height="500" />
+		</sizelimits>
+		<playercontrol />
+		<nodelete />
+		<sheetdata>
+			<windowtitlebar>
+				<resource>library_recordtype_label_modifier</resource>
+			</windowtitlebar>
+			
+			<!-- MODIFIER KEYS - ATTACK -->
+			<label name="label_attack">
+				<bounds>30,45,250,20</bounds>
+				<static textres="modifier_label_attack" />
+				<color>FFFFFF</color>
+				<center />
+			</label>
+			<button_modifierkey name="ATT_STRONG">
+				<bounds>35,70,110,20</bounds>
+				<textres>modifier_label_atkstrong</textres>
+			</button_modifierkey>
+			<button_modifierkey name="ATT_FSTDRAW">
+				<bounds>35,105,110,20</bounds>
+				<textres>modifier_label_fstdraw</textres>
+			</button_modifierkey>
+			<button_modifierkey name="ATT_SILTGT">
+				<bounds>35,140,110,20</bounds>
+				<textres>modifier_label_silhouettedtarget</textres>
+			</button_modifierkey>
+			<button_modifierkey name="ATT_AMB">
+				<bounds>35,175,110,20</bounds>
+				<textres>modifier_label_ambush</textres>
+			</button_modifierkey>
+			
+			<button_modifierkey name="ATT_TGTPINNED">
+				<bounds>160,70,110,20</bounds>
+				<textres>modifier_label_targetpinned</textres>
+			</button_modifierkey>
+			<button_modifierkey name="ATT_TGTACTDODGE">
+				<bounds>160,105,110,20</bounds>
+				<textres>modifier_label_targetactdodge</textres>
+			</button_modifierkey>
+			<button_modifierkey name="ATT_MOVTGT">
+				<bounds>160,140,110,20</bounds>
+				<textres>modifier_label_movtarget</textres>
+			</button_modifierkey>
+			<button_modifierkey name="ATT_RIC">
+				<bounds>160,175,110,20</bounds>
+				<textres>modifier_label_ricshot</textres>
+			</button_modifierkey>
+
+			<!-- MODIFIER KEYS - RANGE -->
+			<label name="label_damage">
+				<bounds>30,210,250,20</bounds>
+				<static textres="modifier_label_range" />
+				<color>FFFFFF</color>
+				<center />
+			</label>
+			<button_modifierkey name="RNG_PB">
+				<bounds>35,235,110,20</bounds>
+				<textres>modifier_label_range_pointblank</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["RNG_MED"].setValue(0);
+							window["DMG_LNG"].setValue(0);
+							window["DMG_EXT"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="RNG_MED">
+				<bounds>35,270,110,20</bounds>
+				<textres>modifier_label_range_medium</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["RNG_PB"].setValue(0);
+							window["DMG_LNG"].setValue(0);
+							window["DMG_EXT"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="DMG_LNG">
+				<bounds>160,235,110,20</bounds>
+				<textres>modifier_label_range_long</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["RNG_PB"].setValue(0);
+							window["RNG_MED"].setValue(0);
+							window["DMG_EXT"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="DMG_EXT">
+				<bounds>160,270,110,20</bounds>
+				<textres>modifier_label_range_extreme</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["RNG_PB"].setValue(0);
+							window["RNG_MED"].setValue(0);
+							window["DMG_LNG"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			
+			<!-- MODIFIER KEYS - RANGE -->
+			<label name="label_damage">
+				<bounds>30,305,250,20</bounds>
+				<static textres="modifier_label_light" />
+				<color>FFFFFF</color>
+				<center />
+			</label>
+			<button_modifierkey name="LGT_BRI">
+				<bounds>35,330,110,20</bounds>
+				<textres>modifier_label_light_bright</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["LGT_DRK"].setValue(0);
+							window["LGT_DIM"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="LGT_DRK">
+				<bounds>35,365,110,20</bounds>
+				<textres>modifier_label_light_dark</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["LGT_BRI"].setValue(0);
+							window["LGT_DIM"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="LGT_DIM">
+				<bounds>160,330,110,20</bounds>
+				<textres>modifier_label_light_dim</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["LGT_BRI"].setValue(0);
+							window["LGT_DRK"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			
+			<!-- MODIFIER KEYS - DAMAGE -->
+			<label name="label_damage">
+				<bounds>30,400,250,20</bounds>
+				<static textres="modifier_label_damage" />
+				<color>FFFFFF</color>
+				<center />
+			</label>
+			<button_modifierkey name="DMG_CRTSIM">
+				<bounds>35,425,110,20</bounds>
+				<textres>modifier_label_damage_simple</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["DMG_CRTDIF"].setValue(0);
+							window["DMG_CRTCOM"].setValue(0);
+							window["DMG_CRTDEA"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="DMG_CRTDIF">
+				<bounds>35,460,110,20</bounds>
+				<textres>modifier_label_damage_difficult</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["DMG_CRTSIM"].setValue(0);
+							window["DMG_CRTCOM"].setValue(0);
+							window["DMG_CRTDEA"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="DMG_CRTCOM">
+				<bounds>160,425,110,20</bounds>
+				<textres>modifier_label_damage_complex</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["DMG_CRTSIM"].setValue(0);
+							window["DMG_CRTDIF"].setValue(0);
+							window["DMG_CRTDEA"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="DMG_CRTDEA">
+				<bounds>160,460,110,20</bounds>
+				<textres>modifier_label_damage_deadly</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["DMG_CRTSIM"].setValue(0);
+							window["DMG_CRTDIF"].setValue(0);
+							window["DMG_CRTCOM"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			
+			<!-- MODIFIER LIST -->
+			<list_utility name="list">
+				<bounds>300,55,-40,-80</bounds>
+				<frame name="groupbox" offset="15,15,20,15" />
+				<datasource>.</datasource>
+				<class>modifiersmall</class>
+				<script>
+					function onDrop(x, y, draginfo)
+						if User.isHost() then
+							if draginfo.getType() == "number" then
+								local w = addEntry(true);
+								if w then
+									w.label.setValue(draginfo.getDescription());
+									w.bonus.setValue(draginfo.getNumberData());
+								end
+								return true;
+							end
+						end
+					end
+				</script>
+			</list_utility>
+			<scrollbar_list />
+
+			<anchor_campaign2 />
+			<button_iedit_campaign />
+			<button_iadd_utility />
+			<filter_utility />
+			
+			<resize_utilitybox3 />
+			<helper_modifiers />
+			<close_utilitybox3 />
+		</sheetdata>
+	</windowclass>
+</root>

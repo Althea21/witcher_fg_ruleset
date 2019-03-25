@@ -261,8 +261,8 @@
 				<anchored>
 					<top parent="brawling_divider" anchor="bottom" offset="10" />
 					<bottom parent="brawling_divider" anchor="bottom" offset="42" />
-					<left />
-					<right />
+					<left/>
+					<right/>
 				</anchored>
 				<frame name="groupbox2" offset="6,6,6,6" />
 				<disabled />

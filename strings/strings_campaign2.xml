@@ -189,4 +189,33 @@
 	
 	<!-- Defense messages -->
 	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
+	
+	<!--Modifiers-->
+	<string name="modifier_label_attack">Attack modifiers</string>
+	<string name="modifier_label_atkstrong">Strong attack</string>
+	<string name="modifier_label_fstdraw">Fast draw</string>
+	<string name="modifier_label_targetpinned">Target pinned</string>
+	<string name="modifier_label_targetactdodge">Target act. dodging</string>
+	<string name="modifier_label_movtarget">Mov. target REF >10</string>
+	<string name="modifier_label_ambush">Ambush</string>
+	<string name="modifier_label_ricshot">Ricochet shot</string>
+	<string name="modifier_label_silhouettedtarget">Target silhouetted</string>
+	
+	<string name="modifier_label_range">Range modifiers</string>
+	<string name="modifier_label_range_pointblank">Point blank</string>
+	<string name="modifier_label_range_medium">Medium</string>
+	<string name="modifier_label_range_long">Long</string>
+	<string name="modifier_label_range_extreme">Extreme</string>
+	
+	<string name="modifier_label_light">Light levels modifiers</string>
+	<string name="modifier_label_light_bright">Bright light</string>
+	<string name="modifier_label_light_dim">Dim light</string>
+	<string name="modifier_label_light_dark">Darkness</string>
+	
+	<string name="modifier_label_damage">Damage modifiers</string>
+	<string name="modifier_label_damage_simple">Critical - simple</string>
+	<string name="modifier_label_damage_complex">Critical - complex</string>
+	<string name="modifier_label_damage_difficult">Critical - difficult</string>
+	<string name="modifier_label_damage_deadly">Critical - deadly</string>
+	
 </root>

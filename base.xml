@@ -34,6 +34,9 @@
 	<includefile source="campaign/record_char_combat.xml" />
 	<script name="CharManager" file="campaign/scripts/manager_char.lua" />
 	
+	<!-- Utilities -->
+	<includefile source="utility/utility_modifiers.xml" />
+	
 	<!-- PJ Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
 	<script name="SkillsTable" file="campaign/scripts/skills_table.lua" />
