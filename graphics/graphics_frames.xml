@@ -342,7 +342,7 @@
 	</framedef>
 	<framedef name="utilitybox3">
 		<bitmap file="graphics/frames/charselect.png" />
-		<offset>74,75,77,51</offset>
+		<offset>68,75,77,51</offset>
 		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	<framedef name="campaignlistwithtabs">
@@ -372,7 +372,7 @@
 	<!-- Token Bag -->
 	<framedef name="tokenbag">
 		<bitmap file="graphics/frames/referencepage.png" />
-		<offset>19,19,24,24</offset>
+		<offset>19,0,24,24</offset>
 		<insideoffset>0,0,13,13</insideoffset>
 	</framedef>
 	<framedef name="tokenbagbar">
@@ -384,8 +384,8 @@
 	<!-- Calendar -->
 	<framedef name="calendar">
 		<bitmap file="graphics/frames/charselect.png" />
-		<offset>25,40,25,25</offset>
-		<insideoffset>0,0,7,7</insideoffset>
+		<offset>68,75,77,51</offset>
+		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	<framedef name="calendarhighlight">
 		<bitmap file="graphics/frames/calendarhighlight.png"/>
@@ -454,8 +454,8 @@
 	<!-- Party Sheet -->
 	<framedef name="partysheet">
 		<bitmap file="graphics/frames/charselect.png" />
-		<offset>25,40,25,25</offset>
-		<insideoffset>0,0,7,7</insideoffset>
+		<offset>68,75,77,51</offset>
+		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	<framedef name="partysheetentry">
 		<bitmap file="graphics/frames/charselectentry.png" />
@@ -478,8 +478,8 @@
 	<!-- Images -->
 	<framedef name="imagebox">
 		<bitmap file="graphics/frames/imagebox.png" />
-		<offset>60,30,30,60</offset>
-		<insideoffset>0,0,20,22</insideoffset>
+		<offset>25,80,25,60</offset>
+		<insideoffset>0,0,25,25</insideoffset>
 	</framedef>
 	<framedef name="imagebox_header"></framedef>
 	<framedef name="imagepanel">
@@ -490,8 +490,8 @@
 	<!-- Story and Notes -->
 	<framedef name="storybox">
 		<bitmap file="graphics/frames/charselect.png" />
-		<offset>41,172,41,49</offset>
-		<insideoffset>0,0,10,5</insideoffset>
+		<offset>68,75,77,51</offset>
+		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	
 	<!-- Other Campaign Records -->
