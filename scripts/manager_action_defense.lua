@@ -11,6 +11,9 @@ function onInit()
 	-- Register defense actions.  We'll allow use of the modifier stack for those actions.
 	GameSystem.actions["defense"] = { bUseModStack = true };
 	
+	-- Register modifier handler
+	ActionsManager.registerModHandler("defense", onDefenseModifier);
+	
 	-- Register the result handler - called after the dice have stopped rolling
 	ActionsManager.registerResultHandler("defense", onDefenseRoll);
 end
@@ -292,4 +295,38 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 		-- Display the message in chat.
 		Comm.deliverChatMessage(rMessage);
 	end
+end
+
+-- Modifier handler : additional modifiers to apply to the roll
+function onDefenseModifier(rSource, rTarget, rRoll)
+	local aAddDesc = {};
+	local nAddMod = 0;
+	
+	-- Check modifiers
+	local bLightLevelModifier = "daylight";
+	if ModifierStack.getModifierKey("LGT_BRI") then
+		bLightLevelModifier = "bright";
+	elseif ModifierStack.getModifierKey("LGT_DIM") then
+		bLightLevelModifier = "dim";
+	elseif ModifierStack.getModifierKey("LGT_DRK") then
+		bLightLevelModifier = "darkness";
+	end
+	
+	if bLightLevelModifier == "bright" then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_light_bright").." -3]");
+		nAddMod = nAddMod - 3;
+	elseif bLightLevelModifier == "darkness" then
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_light_dark").." -2]");
+		nAddMod = nAddMod - 2;
+	end
+	
+	if rSource then
+		-- TODO : Get condition modifiers
+	end
+	
+	if #aAddDesc > 0 then
+		rRoll.sDesc = rRoll.sDesc .. " " .. table.concat(aAddDesc, " ");
+	end
+	
+	rRoll.nMod = rRoll.nMod + nAddMod;
 end

@@ -9,11 +9,11 @@
 	<windowclass name="modifiers">
 		<frame>utilitybox3</frame>
 		<placement>
-			<size width="600" height="500" />
+			<size width="575" height="525" />
 		</placement>
 		<sizelimits>
 			<dynamic />
-			<minimum width="600" height="500" />
+			<minimum width="575" height="525" />
 		</sizelimits>
 		<playercontrol />
 		<nodelete />
@@ -249,9 +249,120 @@
 				</script>
 			</button_modifierkey>
 			
+			<!--MODIFIER KEYS - AIMING-->
+			<label name="label_attack">
+				<bounds>300,45,250,20</bounds>
+				<static textres="modifier_label_aiming" />
+				<color>FFFFFF</color>
+				<center />
+			</label>
+			<button_modifierkey name="AIM_HEAD">
+				<bounds>305,70,110,20</bounds>
+				<textres>modifier_label_aimhead</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["AIM_TORSO"].setValue(0);
+							window["AIM_TAIL"].setValue(0);
+							window["AIM_ARM"].setValue(0);
+							window["AIM_LEG"].setValue(0);
+							window["AIM_LIMB"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="AIM_TORSO">
+				<bounds>305,105,110,20</bounds>
+				<textres>modifier_label_aimtorso</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["AIM_HEAD"].setValue(0);
+							window["AIM_TAIL"].setValue(0);
+							window["AIM_ARM"].setValue(0);
+							window["AIM_LEG"].setValue(0);
+							window["AIM_LIMB"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="AIM_TAIL">
+				<bounds>305,140,110,20</bounds>
+				<textres>modifier_label_aimtail</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["AIM_HEAD"].setValue(0);
+							window["AIM_TORSO"].setValue(0);
+							window["AIM_ARM"].setValue(0);
+							window["AIM_LEG"].setValue(0);
+							window["AIM_LIMB"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			
+			<button_modifierkey name="AIM_ARM">
+				<bounds>430,70,110,20</bounds>
+				<textres>modifier_label_aimarm</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["AIM_HEAD"].setValue(0);
+							window["AIM_TORSO"].setValue(0);
+							window["AIM_TAIL"].setValue(0);
+							window["AIM_LEG"].setValue(0);
+							window["AIM_LIMB"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="AIM_LEG">
+				<bounds>430,105,110,20</bounds>
+				<textres>modifier_label_aimleg</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["AIM_HEAD"].setValue(0);
+							window["AIM_TORSO"].setValue(0);
+							window["AIM_TAIL"].setValue(0);
+							window["AIM_ARM"].setValue(0);
+							window["AIM_LIMB"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			<button_modifierkey name="AIM_LIMB">
+				<bounds>430,140,110,20</bounds>
+				<textres>modifier_label_aimlimb</textres>
+				<script>
+					function onValueChanged()
+						super.onValueChanged();
+						
+						if getValue() == 1 then
+							window["AIM_HEAD"].setValue(0);
+							window["AIM_TORSO"].setValue(0);
+							window["AIM_TAIL"].setValue(0);
+							window["AIM_ARM"].setValue(0);
+							window["AIM_LEG"].setValue(0);
+						end
+					end
+				</script>
+			</button_modifierkey>
+			
 			<!-- MODIFIER LIST -->
 			<list_utility name="list">
-				<bounds>300,55,-40,-80</bounds>
+				<bounds>312,200,-48,-80</bounds>
 				<frame name="groupbox" offset="15,15,20,15" />
 				<datasource>.</datasource>
 				<class>modifiersmall</class>

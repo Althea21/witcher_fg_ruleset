@@ -218,4 +218,11 @@
 	<string name="modifier_label_damage_difficult">Critical - difficult</string>
 	<string name="modifier_label_damage_deadly">Critical - deadly</string>
 	
+	<string name="modifier_label_aiming">Aiming modifiers</string>
+	<string name="modifier_label_aimhead">Head</string>
+	<string name="modifier_label_aimtorso">Torso</string>
+	<string name="modifier_label_aimarm">Arm</string>
+	<string name="modifier_label_aimleg">Leg</string>
+	<string name="modifier_label_aimlimb">Monster limb</string>
+	<string name="modifier_label_aimtail">Monster wing/tail</string>
 </root>

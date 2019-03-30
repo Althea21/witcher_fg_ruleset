@@ -21,7 +21,7 @@ function onInit()
 	GameSystem.actions["attack"] = { bUseModStack = true };
 	
 	-- Register modifier handler
-	ActionsManager.registerModHandler("attack", modAttack);
+	ActionsManager.registerModHandler("attack", onAttackModifier);
 	
 	-- Register the result handler - called after the dice have stopped rolling
 	ActionsManager.registerResultHandler("attack", onAttackRoll);
@@ -56,6 +56,9 @@ function getRoll(rActor, rWeapon, sAttackType)
 	rRoll.sStoredDice = "";			-- store all dice for final display message
 	rRoll.sWeaponType = "" ; 		-- range, melee, unarmed (used for fumble resolution)
 	
+	-- Add parameter for damage location, may be modified by modifier (see OnAttackModifier) or by rolling location table
+	rRoll.sDamageLocation = "";
+	
 	-- Debug.chat(rWeapon);
 	
 	if (rWeapon.range == "R") then
@@ -75,7 +78,7 @@ function getRoll(rActor, rWeapon, sAttackType)
 		if sAttackType == "fast" then
 			sRollDescription = "[Fast attack with "..rWeapon.label.."]";
 		elseif sAttackType == "strong" then
-			sRollDescription = "[Strong attack with "..rWeapon.label.."][Strong -3]"; -- changing this may affect modAttack function below
+			sRollDescription = "[Strong attack with "..rWeapon.label.."][Strong -3]"; -- changing this may affect onAttackModifier function below
 			nRollMod = nRollMod - 3;
 		else
 			sRollDescription = "[Attack with "..rWeapon.label.."]";
@@ -317,7 +320,7 @@ function onAttackRoll(rSource, rTarget, rRoll)
 end
 
 -- Modifier handler : additional modifiers to apply to the roll
-function modAttack(rSource, rTarget, rRoll)
+function onAttackModifier(rSource, rTarget, rRoll)
 	local aAddDesc = {};
 	local nAddMod = 0;
 	
@@ -337,6 +340,34 @@ function modAttack(rSource, rTarget, rRoll)
 		bLightLevelModifier = "dim";
 	elseif ModifierStack.getModifierKey("LGT_DRK") then
 		bLightLevelModifier = "darkness";
+	end
+	
+	-- Aiming modifier. If aiming, this info must be stored for later damage resolution.
+	local sAimingModifier = "";
+	if ModifierStack.getModifierKey("AIM_HEAD") then
+		rRoll.sDamageLocation = "AIM_HEAD";
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_aiming").." : "..Interface.getString("modifier_label_aimhead").. " -6]");
+		nAddMod = nAddMod - 6;
+	elseif ModifierStack.getModifierKey("AIM_TORSO") then
+		rRoll.sDamageLocation = "AIM_TORSO";
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_aiming").." : "..Interface.getString("modifier_label_aimtorso").. " -1]");
+		nAddMod = nAddMod - 1;
+	elseif ModifierStack.getModifierKey("AIM_TAIL") then
+		rRoll.sDamageLocation = "AIM_TAIL";
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_aiming").." : "..Interface.getString("modifier_label_aimtail").. " -2]");
+		nAddMod = nAddMod - 2;
+	elseif ModifierStack.getModifierKey("AIM_ARM") then
+		rRoll.sDamageLocation = "AIM_ARM";
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_aiming").." : "..Interface.getString("modifier_label_aimarm").. " -3]");
+		nAddMod = nAddMod - 3;
+	elseif ModifierStack.getModifierKey("AIM_LEG") then
+		rRoll.sDamageLocation = "AIM_LEG";
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_aiming").." : "..Interface.getString("modifier_label_aimleg").. " -2]");
+		nAddMod = nAddMod - 2;
+	elseif ModifierStack.getModifierKey("AIM_LIMB") then
+		rRoll.sDamageLocation = "AIM_LIMB";
+		table.insert(aAddDesc, "["..Interface.getString("modifier_label_aiming").." : "..Interface.getString("modifier_label_aimlimb").. " -3]");
+		nAddMod = nAddMod - 3;
 	end
 	
 	-- if needed check range modifiers
