@@ -54,41 +54,41 @@
 	</font>
 	<!-- Chat fonts - REQUIRED -->
 	<font name="chatfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
-		<color value="#261A12" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#ffffff" />
 	</font>
 	<font name="emotefont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
-		<color value="#CC2222" />
+		<ttf file="graphics/fonts/Casper-Bold-Italic.ttf" name="Casper Bold Italic" size="16" />
+		<color value="#b88455" />
 	</font>
 	<font name="narratorfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
-		<color value="#261A12" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#3e3129" />
 	</font>
 	<font name="systemfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
-		<color value="#660066" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#4c3e35" />
 	</font>
 	<font name="msgfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
-		<color value="#660066" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#b88455" />
 	</font>
 	<font name="oocfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
-		<color value="#005500" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#c8ad7f" />
 	</font>
 	<!-- Chat fonts -->
 	<font name="chatnpcfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
 		<color value="#000066" />
 	</font>
 	<font name="chatgmfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
-		<color value="#000000" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#ffffff" />
 	</font>
 	<font name="whisperfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
-		<color value="#660066" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#ffffff" />
 	</font>
 	<!-- Radial menus and character list -->
 		<font name="mini_name">
