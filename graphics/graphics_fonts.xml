@@ -305,15 +305,11 @@
 		<color value="#000000" />
 	</font>
 	<font name="button-white">
-		<fgffile name="graphics/fonts/regular-10.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#FFFFFF" />
-		<shadow offset="1,1" color="#000000" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
+		<color value="#c0ae8c" />
 	</font>
 	<font name="button-white-large">
-		<fgffile name="graphics/fonts/regular-11.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="18" />
-		<color value="#FFFFFF" />
-		<shadow offset="1,1" color="#000000" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#c0ae8c" />
 	</font>
 </root>
