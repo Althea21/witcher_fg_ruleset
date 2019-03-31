@@ -63,7 +63,7 @@
 	</font>
 	<font name="narratorfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
-		<color value="#3e3129" />
+		<color value="#888801" />
 	</font>
 	<font name="systemfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
