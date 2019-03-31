@@ -56,8 +56,9 @@ function getRoll(rActor, rWeapon, sAttackType)
 	rRoll.sStoredDice = "";			-- store all dice for final display message
 	rRoll.sWeaponType = "" ; 		-- range, melee, unarmed (used for fumble resolution)
 	
-	-- Add parameter for damage location, may be modified by modifier (see OnAttackModifier) or by rolling location table
+	-- Add parameters for damage location, may be modified by modifier (see OnAttackModifier) or by rolling location table
 	rRoll.sDamageLocation = "";
+	rRoll.sIsLocationRoll = "false";
 	
 	-- Debug.chat(rWeapon);
 	
@@ -153,6 +154,8 @@ function performRoll(draginfo, rWeapon, sAttackType)
 	ActionsManager.performAction(draginfo, rActor, rRoll);
 end
 
+-- HANDLERS --------------------------------------------------------
+
 -- callback for ActionsManager called after the dice have stopped rolling : resolve roll status and display chat message
 function onAttackRoll(rSource, rTarget, rRoll)
 	-- Debug.chat("------- onAttackRoll");
@@ -172,139 +175,140 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
 	end
 	
-	-- Check for reroll
-	local nDiceResult = rRoll.aDice[1].result;
-	if (nDiceResult == 1) then
-		-- Debug.chat("rolled a 1 => check case");
-		if rRoll.sExplodeMode == "none" then
-			-- roll 1 on first roll => fumble => reroll
-			rRoll.sExplodeMode = "fumble";
-			bDisplayFinalMessage = false;
-			-- store dice for final message
-			local aStoredDiceTmp = {};
-			if rRoll.sStoredDice ~= "" then
-				--Debug.chat("rRoll.sStoredDice="..rRoll.sStoredDice);
-				aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
+	if (rRoll.sIsLocationRoll == "false") then
+		-- Check for reroll
+		local nDiceResult = tonumber(rRoll.aDice[1].result);
+		if (nDiceResult == 1) then
+			-- Debug.chat("rolled a 1 => check case");
+			if rRoll.sExplodeMode == "none" then
+				-- roll 1 on first roll => fumble => reroll
+				rRoll.sExplodeMode = "fumble";
+				_storeDieForFinalMessage(rRoll);
+				-- reinit rRoll dice
+				rRoll.aDice = { "d10" };
+				-- reroll
+				bDisplayFinalMessage = false;
+				ActionsManager.performAction(nil, rActor, rRoll);
+			else
+				-- roll 1 on crit or fumble reroll
+				_storeDieForFinalMessage(rRoll);
+				rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + tonumber(nDiceResult);
+				bDisplayFinalMessage = true;
 			end
-			aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
-			rRoll.sStoredDice = Json.stringify(aStoredDiceTmp);
+		elseif (nDiceResult == 10) then
+			-- Debug.chat("rolled a 10 => reroll");
+			-- rolled a 10, reroll in any case
+			if rRoll.sExplodeMode == "none" then
+				rRoll.sExplodeMode = "crit";
+			end
+			rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + nDiceResult;
+			_storeDieForFinalMessage(rRoll);
 			-- reinit rRoll dice
 			rRoll.aDice = { "d10" };
 			-- reroll
+			bDisplayFinalMessage = false;
 			ActionsManager.performAction(nil, rActor, rRoll);
 		else
-			-- roll 1 on crit or fumble reroll
-			rRoll.nTotalExplodeValue = rRoll.nTotalExplodeValue + nDiceResult;
-			-- restore dice for final display
-			local aStoredDiceTmp = {};
-			if rRoll.sStoredDice ~= "" then
-				aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
+			-- Debug.chat("rolled between 2 and 9");
+			_storeDieForFinalMessage(rRoll);
+			if rRoll.sExplodeMode ~= "none" then
+				rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + tonumber(nDiceResult);
 			end
-			aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
-			-- Debug.chat(aStoredDiceTmp);
-			rRoll.aDice = aStoredDiceTmp;
 			bDisplayFinalMessage = true;
 		end
-	elseif (nDiceResult == 10) then
-		-- Debug.chat("rolled a 10 => reroll");
-		bDisplayFinalMessage = false;
-		if rRoll.sExplodeMode == "none" then
-			rRoll.sExplodeMode = "crit";
-		end
-		rRoll.nTotalExplodeValue = rRoll.nTotalExplodeValue + nDiceResult;
-		-- store dice for final message
-		local aStoredDiceTmp = {};
-		if rRoll.sStoredDice ~= "" then
-			--Debug.chat("rRoll.sStoredDice="..rRoll.sStoredDice);
-			aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
-		end
-		aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
-		rRoll.sStoredDice = Json.stringify(aStoredDiceTmp);
-		-- reinit rRoll dice
-		rRoll.aDice = { "d10" };
-		-- reroll
-		ActionsManager.performAction(nil, rActor, rRoll);
 	else
-		-- Debug.chat("rolled between 2 and 9");
-		if rRoll.sExplodeMode ~= "none" then
-			rRoll.nTotalExplodeValue = rRoll.nTotalExplodeValue + nDiceResult;
-			-- restore dice for final display
-			local aStoredDiceTmp = {};
-			if rRoll.sStoredDice ~= "" then
-				aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
-			end
-			aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
-			-- Debug.chat(aStoredDiceTmp);
-			rRoll.aDice = aStoredDiceTmp;
-		end
+		-- this roll was for location, this die is not to be stored as the others for main final result
+		rRoll.sDamageLocation = tostring(rRoll.aDice[1].result);
 		bDisplayFinalMessage = true;
 	end
 	
+	-- if no more reroll AND not aiming, roll for location
+	if (bDisplayFinalMessage and rRoll.sDamageLocation == "") then
+		rRoll.sIsLocationRoll = "true";
+		-- reinit rRoll dice
+		rRoll.aDice = { "d10" };
+		-- roll for location
+		bDisplayFinalMessage = false;
+		ActionsManager.performAction(nil, rActor, rRoll);
+	end
+	
 	if bDisplayFinalMessage then
-		-- rearrange rRoll.aDice if needed (serialization seems to mess up array) and color exploding dice
-		local bFumble = false;
-		if rRoll.sExplodeMode ~= "none" then
-			local aNewDices = {};
-			for i = 1, #(rRoll.aDice) do
-				local aDice = rRoll.aDice[i];
-				for j=1,#(aDice) do
-					local aNewDice = aDice[j];
-					if tonumber(aNewDice.result)==10 then
-						aNewDice.type="g10";
-					end
-					if i==1 and tonumber(aNewDice.result)==1 then
-						bFumble = true;
-						aNewDice.type="r10";
-					elseif bFumble then
-						aNewDice.result = 0-tonumber(aNewDice.result)
-					end
-					table.insert(aNewDices, aNewDice);
-				end
-			end
-			rRoll.aDice = aNewDices;
-		end
+		local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
 		
 		-- Create the base message based of the source and the final rRoll record (includes dice results).
 		local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
 		
+		-- update message for auto location
+		local locMessage = "";
+		if rRoll.sDamageLocation == "1" then
+			-- head
+			locMessage = Interface.getString("modifier_label_aimhead");
+		elseif rRoll.sDamageLocation == "2" or rRoll.sDamageLocation == "3" or rRoll.sDamageLocation == "4" then
+			-- torso
+			locMessage = Interface.getString("modifier_label_aimtorso");
+		elseif rRoll.sDamageLocation == "5" then
+			-- human right arm or monster torso
+			locMessage = Interface.getString("modifier_label_location_rightarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertorso");
+		elseif rRoll.sDamageLocation == "6" then
+			-- human left arm or monster right limb
+			locMessage = Interface.getString("modifier_label_location_leftarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
+		elseif rRoll.sDamageLocation == "7" then
+			-- human right leg or monster right limb
+			locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
+		elseif rRoll.sDamageLocation == "8" then
+			-- human right leg or monster left limb
+			locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
+		elseif rRoll.sDamageLocation == "9" then
+			-- human left leg or monster left limb
+			locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
+		elseif rRoll.sDamageLocation == "10" then
+			-- human left leg or monster tail/wing
+			locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertail");
+		end
+		if locMessage ~= "" then
+			rMessage.text = rMessage.text .. "\n["..Interface.getString("modifier_label_location").." ("..rRoll.sDamageLocation..") "..locMessage.."]";
+		end
+		
 		-- update rMessage in case of fumble
 		if (bFumble) then
 			rMessage.text = rMessage.text .. "\n[FUMBLE (".. rRoll.nTotalExplodeValue ..") : ";
+			Debug.chat(rRoll.nTotalExplodeValue);
 			-- check nTotalExplodeValue and attack type to resolve fumble
-			if (rRoll.nTotalExplodeValue <=5) then
+			local nFumbleValue = tonumber(rRoll.nTotalExplodeValue);
+			if ( nFumbleValue <= 5) then
 				rMessage.text = rMessage.text .. Interface.getString("fumble_none");
 			end
 				
 			if (rRoll.sWeaponType == "range") then
-				if (rRoll.nTotalExplodeValue >= 6 and rRoll.nTotalExplodeValue <= 7) then
+				if (nFumbleValue >= 6 and nFumbleValue <= 7) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_range_6to7");
-				elseif (rRoll.nTotalExplodeValue >= 8 and rRoll.nTotalExplodeValue <= 9) then
+				elseif (nFumbleValue >= 8 and nFumbleValue <= 9) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_range_8to9");
-				elseif (rRoll.nTotalExplodeValue > 9) then
+				elseif (nFumbleValue > 9) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
 				end
 			elseif (rRoll.sWeaponType == "melee") then
-				if (rRoll.nTotalExplodeValue == 6) then
+				if (nFumbleValue == 6) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_6");
-				elseif (rRoll.nTotalExplodeValue == 7) then
+				elseif (nFumbleValue == 7) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_7");
-				elseif (rRoll.nTotalExplodeValue == 8) then
+				elseif (nFumbleValue == 8) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_8");
-				elseif (rRoll.nTotalExplodeValue == 9) then
+				elseif (nFumbleValue == 9) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_9");
-				elseif (rRoll.nTotalExplodeValue > 9) then
+				elseif (nFumbleValue > 9) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
 				end
 			elseif (rRoll.sWeaponType == "unarmed") then
-				if (rRoll.nTotalExplodeValue == 6) then
+				if (nFumbleValue == 6) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_6");
-				elseif (rRoll.nTotalExplodeValue == 7) then
+				elseif (nFumbleValue == 7) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_7");
-				elseif (rRoll.nTotalExplodeValue == 8) then
+				elseif (nFumbleValue == 8) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_8");
-				elseif (rRoll.nTotalExplodeValue == 9) then
+				elseif (nFumbleValue == 9) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_9");
-				elseif (rRoll.nTotalExplodeValue > 9) then
+				elseif (nFumbleValue > 9) then
 					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_over9");
 				end
 			end
@@ -450,3 +454,84 @@ function onAttackModifier(rSource, rTarget, rRoll)
 	
 	rRoll.nMod = rRoll.nMod + nAddMod;
 end
+
+
+-- PRIVATE METHODS --------------------------------------------------------
+
+-- store aDice in sStoredDice for final message
+-- params :
+--	* rRoll : roll to work on
+function _storeDieForFinalMessage(rRoll)
+	-- Debug.chat("--------------------- _storeDieForFinalMessage");
+	-- Debug.chat(rRoll.sStoredDice);
+	-- Debug.chat(rRoll.aDice);
+	
+	local aStoredDiceTmp = {};
+	
+	-- get previously stored dice if any
+	if rRoll.sStoredDice ~= "" then
+		aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
+	end
+	
+	-- store last die rolled
+	table.insert(aStoredDiceTmp, rRoll.aDice);
+	
+	-- store for later
+	rRoll.sStoredDice = Json.stringify(aStoredDiceTmp);
+	
+	-- Debug.chat("after :");
+	-- Debug.chat(rRoll.sStoredDice);
+end
+
+-- restore sStoredDice in aDice before final message 
+-- params :
+--	* rRoll : roll to work on
+-- returns : 
+--	* bFumble : true if roll was a fumble false if not
+function _restoreDiceBeforeFinalMessage(rRoll)
+	-- Debug.chat("--------------------- _restoreDiceBeforeFinalMessage");
+	-- Debug.chat(rRoll.sStoredDice);
+	-- Debug.chat(rRoll.aDice);
+	
+	local bFumble = false;
+	
+	-- get previously stored dice
+	local aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
+	
+	-- restore in aDice;
+	rRoll.aDice = aStoredDiceTmp;
+	
+	-- rearrange rRoll.aDice if needed (has reroll or location roll) as serialization seems to mess up array
+	-- and color exploding dice
+	-- if rRoll.sExplodeMode ~= "none" or rRoll.sIsLocationRoll=="true" then
+		local aNewDice = {};
+		for i = 1, #(rRoll.aDice) do
+			local aDiceTmp = rRoll.aDice[i];
+			for j=1,#(aDiceTmp) do
+				local aDieTmp = aDiceTmp[j];
+				
+				-- 10 is always rerolled => set it green
+				if tonumber(aDieTmp.result)==10 then
+					aDieTmp.type="g10";
+				end
+				
+				if i==1 and tonumber(aDieTmp.result)==1 then
+					-- first die was a 1 => fumble, set ir red
+					bFumble = true;
+					aDieTmp.type="r10";
+				elseif bFumble then
+					-- any result between 1 and 9 => get die as it is
+					aDieTmp.result = 0-tonumber(aDieTmp.result)
+				end
+				
+				table.insert(aNewDice, aDieTmp);
+			end
+		end
+		rRoll.aDice = aNewDice;
+	
+	-- Debug.chat("after :");
+	-- Debug.chat(rRoll.aDice);
+	
+	return bFumble;
+end
+

@@ -187,6 +187,20 @@
 	<string name="fumble_unarmed_9">You trip and hit your head. You are knocked prone, take 1d6 points of non-lethal damage to the head, and must make a Stun save.</string>
 	<string name="fumble_unarmed_over9">You fail horribly and not only fall prone but also take 1d6 lethal damage to the head and must make a Stun save.</string>
 	
+	<!--Location messages-->
+	<string name="modifier_label_location">LOCATION : </string>
+	<string name="modifier_label_location_or"> or </string>
+	<string name="modifier_label_location_head">Head</string>
+	<string name="modifier_label_location_torso">Torso</string>
+	<string name="modifier_label_location_monstertorso">Monster torso</string>
+	<string name="modifier_label_location_rightarm">Right arm</string>
+	<string name="modifier_label_location_leftarm">Left arm</string>
+	<string name="modifier_label_location_rightleg">Right leg</string>
+	<string name="modifier_label_location_leftleg">Left leg</string>
+	<string name="modifier_label_location_monsterrightlimb">Monster right limb</string>
+	<string name="modifier_label_location_monsterleftlimb">Monster left limb</string>
+	<string name="modifier_label_location_monstertail">Monster wing/tail</string>
+	
 	<!-- Defense messages -->
 	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
 	
