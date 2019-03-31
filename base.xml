@@ -34,18 +34,16 @@
 	<includefile source="campaign/record_char_combat.xml" />
 	<script name="CharManager" file="campaign/scripts/manager_char.lua" />
 	
-	<!-- Utilities -->
-	<includefile source="utility/utility_modifiers.xml" />
-	
 	<!-- PJ Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
 	<script name="SkillsTable" file="campaign/scripts/skills_table.lua" />
 	
 	<!-- High-level scripts -->
+	<script name="DataCommon" file="scripts/data_common.lua" />
 	<script name="GameSystem" file="scripts/manager_gamesystem.lua" />
+	<script name="ActionSkill" file="scripts/manager_action_skill.lua" />
 	<script name="ActionSave" file="scripts/manager_action_save.lua" />
 	<script name="ActionInit" file="scripts/manager_action_init.lua" />
 	<script name="ActionAttack" file="scripts/manager_action_attack.lua" />
-	<script name="ActionDefense" file="scripts/manager_action_defense.lua" />
 	<script name="Json" file="scripts/json.lua" />
 </root>

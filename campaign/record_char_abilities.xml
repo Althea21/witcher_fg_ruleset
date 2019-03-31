@@ -142,164 +142,181 @@
 			</label_frametop>
 
 			<!-- Racine -->
-			<stringu name="root_skills_st" source="skills.root_skills_st">
+			<simplestring_skilllabel name="root_skills_st" source="skills.root_skills_st">
 				<anchored to="skills_frame">
 					<top offset="35" />
 					<left offset="167" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="root_skills_bs" source="skills.root_skills_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="root_skills_bs" source="skills.root_skills_bs">
 				<anchored to="root_skills_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="root_skills_nb" source="skills.root_skills_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="root_skills_nb" source="skills.root_skills_nb">
 				<anchored to="root_skills_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>
+				<script>
+					function action(draginfo)
+						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
+						
+						--[[performRoll(draginfo, rActor, sSkillName, nSkillMod, sSkillStat, sExtra)]]
+						ActionSkill.performRoll(draginfo, rActor, window.root_skills_st.getValue(), getValue(), window.root_skills_bs.getValue(), 0);
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+					
+					function onDoubleClick(x,y)
+						return action();
+					end
+				</script>
+			</number_skill_rollable>
 
 			<!-- Entête des branches -->
-			<simplestring name="a1_label_ss" source="skills.a1_label_ss">
+			<simplestring_skilllabel name="a1_label_ss" source="skills.a1_label_ss">
 				<anchored to="skills_frame">
 					<top offset="65" />
 					<left offset="15" />
 				</anchored>
-			</simplestring>	
-			<simplestring name="a2_label_ss" source="skills.a2_label_ss">
+			</simplestring_skilllabel>	
+			<simplestring_skilllabel name="a2_label_ss" source="skills.a2_label_ss">
 				<anchored to="skills_frame">
 					<top offset="65" />
 					<left offset="167" />
 				</anchored>
-			</simplestring>		
-			<simplestring name="a3_label_ss" source="skills.a3_label_ss">
+			</simplestring_skilllabel>		
+			<simplestring_skilllabel name="a3_label_ss" source="skills.a3_label_ss">
 				<anchored to="skills_frame">
 					<top offset="65" />
 					<left offset="319" />
 				</anchored>
-			</simplestring>
+			</simplestring_skilllabel>
 
 			<!-- Branche A -->
-			<stringu name="a1_ability_st" source="skills.ability.a1_ability_st">
+			<simplestring_skilllabel name="a1_ability_st" source="skills.ability.a1_ability_st">
 				<anchored to="skills_frame">
 					<top offset="85" />
 					<left offset="15" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="a1_ability_bs" source="skills.ability.a1_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="a1_ability_bs" source="skills.ability.a1_ability_bs">
 				<anchored to="a1_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="a1_ability_nb" source="skills.ability.a1_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="a1_ability_nb" source="skills.ability.a1_ability_nb">
 				<anchored to="a1_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>		
-			<stringu name="a2_ability_st" source="skills.ability.a2_ability_st">
+			</number_skill_rollable>		
+			<simplestring_skilllabel name="a2_ability_st" source="skills.ability.a2_ability_st">
 				<anchored to="a1_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="a2_ability_bs" source="skills.ability.a2_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="a2_ability_bs" source="skills.ability.a2_ability_bs">
 				<anchored to="a2_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="a2_ability_nb" source="skills.ability.a2_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="a2_ability_nb" source="skills.ability.a2_ability_nb">
 				<anchored to="a2_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>
-			<stringu name="a3_ability_st" source="skills.ability.a3_ability_st">
+			</number_skill_rollable>
+			<simplestring_skilllabel name="a3_ability_st" source="skills.ability.a3_ability_st">
 				<anchored to="a2_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="a3_ability_bs" source="skills.ability.a3_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="a3_ability_bs" source="skills.ability.a3_ability_bs">
 				<anchored to="a3_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="a3_ability_nb" source="skills.ability.a3_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="a3_ability_nb" source="skills.ability.a3_ability_nb">
 				<anchored to="a3_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>		
+			</number_skill_rollable>		
 
 			<!-- Branche B -->
-			<stringu name="b1_ability_st" source="skills.ability.b1_ability_st">
+			<simplestring_skilllabel name="b1_ability_st" source="skills.ability.b1_ability_st">
 				<anchored to="a1_ability_nb">
 					<position>right</position>
 					<top offset="0" />
 					<left offset="30" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="b1_ability_bs" source="skills.ability.b1_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="b1_ability_bs" source="skills.ability.b1_ability_bs">
 				<anchored to="b1_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="b1_ability_nb" source="skills.ability.b1_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="b1_ability_nb" source="skills.ability.b1_ability_nb">
 				<anchored to="b1_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>		
-			<stringu name="b2_ability_st" source="skills.ability.b2_ability_st">
+			</number_skill_rollable>		
+			<simplestring_skilllabel name="b2_ability_st" source="skills.ability.b2_ability_st">
 				<anchored to="b1_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="b2_ability_bs" source="skills.ability.b2_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="b2_ability_bs" source="skills.ability.b2_ability_bs">
 				<anchored to="b2_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="b2_ability_nb" source="skills.ability.b2_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="b2_ability_nb" source="skills.ability.b2_ability_nb">
 				<anchored to="b2_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>
-			<stringu name="b3_ability_st" source="skills.ability.b3_ability_st">
+			</number_skill_rollable>
+			<simplestring_skilllabel name="b3_ability_st" source="skills.ability.b3_ability_st">
 				<anchored to="b2_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="b3_ability_bs" source="skills.ability.b3_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="b3_ability_bs" source="skills.ability.b3_ability_bs">
 				<anchored to="b3_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="b3_ability_nb" source="skills.ability.b3_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="b3_ability_nb" source="skills.ability.b3_ability_nb">
 				<anchored to="b3_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>		
+			</number_skill_rollable>		
 			
 			<!-- Branche C -->
-			<stringu name="c1_ability_st" source="skills.ability.c1_ability_st">
+			<simplestring_skilllabel name="c1_ability_st" source="skills.ability.c1_ability_st">
 				<anchored to="b1_ability_nb">
 					<position>right</position>
 					<top offset="0" />
 					<left offset="30" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="c1_ability_bs" source="skills.ability.c1_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="c1_ability_bs" source="skills.ability.c1_ability_bs">
 				<anchored to="c1_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="c1_ability_nb" source="skills.ability.c1_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="c1_ability_nb" source="skills.ability.c1_ability_nb">
 				<anchored to="c1_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>		
-			<stringu name="c2_ability_st" source="skills.ability.c2_ability_st">
+			</number_skill_rollable>		
+			<simplestring_skilllabel name="c2_ability_st" source="skills.ability.c2_ability_st">
 				<anchored to="c1_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="c2_ability_bs" source="skills.ability.c2_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="c2_ability_bs" source="skills.ability.c2_ability_bs">
 				<anchored to="c2_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="c2_ability_nb" source="skills.ability.c2_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="c2_ability_nb" source="skills.ability.c2_ability_nb">
 				<anchored to="c2_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>
-			<stringu name="c3_ability_st" source="skills.ability.c3_ability_st">
+			</number_skill_rollable>
+			<simplestring_skilllabel name="c3_ability_st" source="skills.ability.c3_ability_st">
 				<anchored to="c2_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
 					<size width="82" height="20" />
 				</anchored>
-			</stringu>
-			<basicstring name="c3_ability_bs" source="skills.ability.c3_ability_bs">
+			</simplestring_skilllabel>
+			<simplestring_skilllabel name="c3_ability_bs" source="skills.ability.c3_ability_bs">
 				<anchored to="c3_ability_st" position="right" offset="5,0" width="25" height="20" />
-			</basicstring>
-			<basicnumber name="c3_ability_nb" source="skills.ability.c3_ability_nb">
+			</simplestring_skilllabel>
+			<number_skill_rollable name="c3_ability_nb" source="skills.ability.c3_ability_nb">
 				<anchored to="c3_ability_bs" position="right" offset="10,0" width="20" height="20" />
-			</basicnumber>		
+			</number_skill_rollable>		
 
 			<!-- Liste des compétences -->
 			<list_skills name="skills">
