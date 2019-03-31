@@ -56,20 +56,6 @@
 		</basicnumber>
 	</template>
 
-	<!--skill-->
-	<template name="simplestring_skilllabel">
-		<simplestring>
-			<readonly />
-		</simplestring>
-	</template>
-	<template name="number_skill_rollable">
-		<basicnumber>
-			<frame name="fieldlight" offset="7,5,7,5" />
-			<hideonvalue value="0" />
-			<rollable />
-		</basicnumber>
-	</template>
-	
 	<!-- List Skills -->
 	<template name="list_skills">
 		<windowlist>

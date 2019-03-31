@@ -3,9 +3,8 @@ function onInit()
 		DesktopManager.setDockTitleFont("sidebar");
 		DesktopManager.setDockTitleFrame("", 25, 2, 25, 5);
 		DesktopManager.setDockTitlePosition("bottom", 0, 1);
-		DesktopManager.setStackIconSizeAndSpacing(32, 23, 1, 1, 0, 0);
-		DesktopManager.setStackOffset(0, 32, 0, 0);
-		DesktopManager.setDockIconSizeAndSpacing(90, 80, 6, 6);
-		DesktopManager.setLowerDockOffset(0, 0, 0, 10);
+		DesktopManager.setStackIconSizeAndSpacing(35, 22, 0, 0, 0, 0);
+		DesktopManager.setDockIconSizeAndSpacing(80, 80, 10, 10);
+		DesktopManager.setLowerDockOffset(0, 0, 0, 12);
 end
 

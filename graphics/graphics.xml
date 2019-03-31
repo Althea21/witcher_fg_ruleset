@@ -3,18 +3,6 @@
 <root>
 	<includefile source="graphics/graphics_frames.xml" />
 	<includefile source="graphics/graphics_fonts.xml" />
-	<includefile source="graphics/graphics_portraits.xml" />
 	<includefile source="graphics/graphics_icons.xml" />
 	<script name="DesktopManagerWitcher" file="graphics/scripts/data_library_com.lua" />
-
-	<string name="option_val_DDCL_witcher1">Witcher 1</string>
-	<string name="option_val_DDCL_witcher2">Witcher 2</string>
-	<icon name="desktopdecal_witcher1" file="graphics/decals/decal_witcher1.png" />
-	<icon name="desktopdecal_witcher2" file="graphics/decals/decal_witcher2.png" />
-	<script name="DecalWitcher">
-		function onInit()
-			OptionsManager.addOptionValue("DDCL", "option_val_DDCL_witcher1", "desktopdecal_witcher1", true);	
-			OptionsManager.addOptionValue("DDCL", "option_val_DDCL_witcher2", "desktopdecal_witcher2", true);		
-		end
-	</script>
 </root>
