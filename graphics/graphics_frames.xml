@@ -9,7 +9,7 @@
 	<!-- Desktop background -->
 	<framedef name="desktop">
 		<bitmap file="graphics/frames/background.jpg"/>
-		<decal rect="0,0,2048,1080" />
+		<middle rect="0,0,2048,1080" />
 	</framedef>
 	<framedef name="shortcuts"></framedef>
 	
@@ -20,21 +20,16 @@
 	</framedef>
 	
 	<!-- Windows -->
-	<framedef name="windowtitle">
-		<bitmap file="graphics/frames/windowtitle.png" />
-		<offset>25,0,30,0</offset>
-	</framedef>
-	<framedef name="tabs">
-		<bitmap file="graphics/frames/tabs.png" />
-		<topleft rect="0,0,18,73" />
-		<left rect="0,73,18,335" />
-		<bottomleft rect="0,408,18,86" />
-	</framedef>
+	<framedef name="windowtitle"></framedef>
+	
+	<framedef name="tabs"></framedef>
 
 	<!-- Headers -->
 	<framedef name="headergray">
 		<bitmap file="graphics/frames/headergray.png" />
-		<middle rect="0,0,128,128" />
+		<offset>5,0,5,1</offset>
+		<middle rect="0,0,64,128" />
+		<right rect="0,64,128,128"/>
 	</framedef>
 	<framedef name="headerblack">
 		<bitmap file="graphics/frames/headerblack.png" />
@@ -86,7 +81,9 @@
 	</framedef>
 	<framedef name="groupbox2">
 		<bitmap file="graphics/frames/groupbox2.png" />
-		<offset>15,15,16,16</offset>
+		<offset>4,4,5,5</offset>
+		<middle rect="4,4,136,272"/>
+		<right rect="140,4,136,272"/>
 	</framedef>
 	<framedef name="fielddark">
 		<bitmap file="graphics/frames/fielddark.png" />
@@ -248,13 +245,13 @@
 		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	<framedef name="charselectentry">
-		<bitmap file="graphics/frames/fieldlight.png" />
+		<bitmap file="graphics/frames/charselectentry.png" />
 		<offset>12,12,12,12</offset>
 	</framedef>
 
 	<!-- Modules -->
 	<framedef name="moduleselectentry">
-		<bitmap file="graphics/frames/fieldlight.png" />
+		<bitmap file="graphics/frames/charselectentry.png" />
 		<offset>12,12,12,12</offset>
 	</framedef>
 
@@ -336,18 +333,18 @@
 	
 	<!-- Utility windows -->
 	<framedef name="utilitybox">
-		<bitmap file="graphics/frames/utilitybox.png" />
+		<bitmap file="graphics/frames/referencepage.png" />
 		<offset>22,22,22,22</offset>
 		<insideoffset>0,0,10,10</insideoffset>
 	</framedef>
 	<framedef name="utilitybox2">
-		<bitmap file="graphics/frames/utilitybox2.png" />
+		<bitmap file="graphics/frames/referencepage.png" />
 		<offset>92,100,100,110</offset>
 		<insideoffset>0,0,7,8</insideoffset>
 	</framedef>
 	<framedef name="utilitybox3">
-		<bitmap file="graphics/frames/utilitybox3.png" />
-		<offset>74,75,77,51</offset>
+		<bitmap file="graphics/frames/charselect.png" />
+		<offset>68,75,77,51</offset>
 		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	<framedef name="campaignlistwithtabs">
@@ -376,8 +373,8 @@
 	
 	<!-- Token Bag -->
 	<framedef name="tokenbag">
-		<bitmap file="graphics/frames/tokenbag.png" />
-		<offset>19,19,24,24</offset>
+		<bitmap file="graphics/frames/referencepage.png" />
+		<offset>19,0,24,24</offset>
 		<insideoffset>0,0,13,13</insideoffset>
 	</framedef>
 	<framedef name="tokenbagbar">
@@ -388,16 +385,16 @@
 	
 	<!-- Calendar -->
 	<framedef name="calendar">
-		<bitmap file="graphics/frames/charsheet.png" />
-		<offset>25,40,25,25</offset>
-		<insideoffset>0,0,7,7</insideoffset>
+		<bitmap file="graphics/frames/charselect.png" />
+		<offset>68,75,77,51</offset>
+		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	<framedef name="calendarhighlight">
 		<bitmap file="graphics/frames/calendarhighlight.png"/>
 		<offset>5,5,5,5</offset>
     </framedef>
 	<framedef name="calendarselectentry">
-		<bitmap file="graphics/frames/fieldlight.png" />
+		<bitmap file="graphics/frames/charselectentry.png" />
 		<offset>12,12,12,12</offset>
     </framedef>
 	<framedef name="calendarmonthentry">
@@ -407,7 +404,7 @@
 
 	<!-- Combat tracker -->
 	<framedef name="ctbox">
-		<bitmap file="graphics/frames/ctbox.png" />
+		<bitmap file="graphics/frames/referencepage.png" />
 		<offset>32,32,19,50</offset>
 		<insideoffset>0,0,7,7</insideoffset>
 	</framedef>
@@ -458,12 +455,12 @@
 
 	<!-- Party Sheet -->
 	<framedef name="partysheet">
-		<bitmap file="graphics/frames/partysheet.png" />
-		<offset>25,40,25,25</offset>
-		<insideoffset>0,0,7,7</insideoffset>
+		<bitmap file="graphics/frames/charselect.png" />
+		<offset>68,75,77,51</offset>
+		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	<framedef name="partysheetentry">
-		<bitmap file="graphics/frames/fieldlight.png" />
+		<bitmap file="graphics/frames/charselectentry.png" />
 		<offset>12,12,12,12</offset>
 	</framedef>
 
@@ -483,13 +480,10 @@
 	<!-- Images -->
 	<framedef name="imagebox">
 		<bitmap file="graphics/frames/imagebox.png" />
-		<offset>60,30,30,60</offset>
-		<insideoffset>0,0,20,22</insideoffset>
+		<offset>25,80,25,60</offset>
+		<insideoffset>0,0,25,25</insideoffset>
 	</framedef>
-	<framedef name="imagebox_header">
-		<bitmap file="graphics/frames/imagebox_header.png" />
-		<offset>0,0,0,0</offset>
-	</framedef>
+	<framedef name="imagebox_header"></framedef>
 	<framedef name="imagepanel">
 		<bitmap file="graphics/frames/imagepanel.png" />
 		<offset>16,16,16,16</offset>
@@ -497,14 +491,14 @@
 	
 	<!-- Story and Notes -->
 	<framedef name="storybox">
-		<bitmap file="graphics/frames/storybox.png" />
-		<offset>41,172,41,49</offset>
-		<insideoffset>0,0,10,5</insideoffset>
+		<bitmap file="graphics/frames/charselect.png" />
+		<offset>68,75,77,51</offset>
+		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	
 	<!-- Other Campaign Records -->
 	<framedef name="recordsheet">
-		<bitmap file="graphics/frames/charsheet.png" />
+		<bitmap file="graphics/frames/referencepage.png" />
 		<offset>25,40,25,25</offset>
 		<insideoffset>0,0,7,7</insideoffset>
 	</framedef>

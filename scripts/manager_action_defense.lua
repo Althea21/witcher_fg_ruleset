@@ -135,6 +135,8 @@ function performRoll(draginfo, rWeapon, sDefenseType)
 	ActionsManager.performAction(draginfo, rActor, rRoll);
 end
 
+-- HANDLERS -----------------------------------------------------------------------------------
+
 -- callback for ActionsManager called after the dice have stopped rolling : resolve roll status and display chat message
 function onDefenseRoll(rSource, rTarget, rRoll)
 	-- Debug.chat("------- onDefenseRoll");
@@ -161,35 +163,23 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 		if rRoll.sExplodeMode == "none" then
 			-- roll 1 on first roll => fumble => reroll
 			rRoll.sExplodeMode = "fumble";
-			bDisplayFinalMessage = false;
 			-- store dice for final message
-			local aStoredDiceTmp = {};
-			if rRoll.sStoredDice ~= "" then
-				--Debug.chat("rRoll.sStoredDice="..rRoll.sStoredDice);
-				aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
-			end
-			aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
-			rRoll.sStoredDice = Json.stringify(aStoredDiceTmp);
+			_storeDieForFinalMessage(rRoll);
 			-- reinit rRoll dice
 			rRoll.aDice = { "d10" };
 			-- reroll
+			bDisplayFinalMessage = false;
 			ActionsManager.performAction(nil, rActor, rRoll);
 		else
 			-- roll 1 on crit or fumble reroll
 			rRoll.nTotalExplodeValue = rRoll.nTotalExplodeValue + nDiceResult;
-			-- restore dice for final display
-			local aStoredDiceTmp = {};
-			if rRoll.sStoredDice ~= "" then
-				aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
-			end
-			aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
-			-- Debug.chat(aStoredDiceTmp);
-			rRoll.aDice = aStoredDiceTmp;
+			-- store dice for final message
+			_storeDieForFinalMessage(rRoll);
 			bDisplayFinalMessage = true;
 		end
 	elseif (nDiceResult == 10) then
 		-- Debug.chat("rolled a 10 => reroll");
-		bDisplayFinalMessage = false;
+		-- rolled a 10, reroll in any case
 		rRoll.nTotalExplodeValue = rRoll.nTotalExplodeValue + nDiceResult;
 		
 		if rRoll.sExplodeMode == "none" then
@@ -197,58 +187,26 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 		end
 		
 		-- store dice for final message
-		local aStoredDiceTmp = {};
-		if rRoll.sStoredDice ~= "" then
-			--Debug.chat("rRoll.sStoredDice="..rRoll.sStoredDice);
-			aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
-		end
-		aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
-		rRoll.sStoredDice = Json.stringify(aStoredDiceTmp);
+		_storeDieForFinalMessage(rRoll);
 		
 		-- reinit rRoll dice
 		rRoll.aDice = { "d10" };
 		
 		-- reroll
+		bDisplayFinalMessage = false;
 		ActionsManager.performAction(nil, rActor, rRoll);
 	else
 		-- Debug.chat("rolled between 2 and 9");
+		-- store dice for final message
+		_storeDieForFinalMessage(rRoll);
 		if rRoll.sExplodeMode ~= "none" then
 			rRoll.nTotalExplodeValue = rRoll.nTotalExplodeValue + nDiceResult;
-			-- restore dice for final display
-			local aStoredDiceTmp = {};
-			if rRoll.sStoredDice ~= "" then
-				aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
-			end
-			aStoredDiceTmp[#aStoredDiceTmp+1]=rRoll.aDice;
-			-- Debug.chat(aStoredDiceTmp);
-			rRoll.aDice = aStoredDiceTmp;
 		end
 		bDisplayFinalMessage = true;
 	end
 	
 	if bDisplayFinalMessage then
-		-- rearrange rRoll.aDice if needed (serialization seems to mess up array) and color exploding dice
-		local bFumble = false;
-		if rRoll.sExplodeMode ~= "none" then
-			local aNewDices = {};
-			for i = 1, #(rRoll.aDice) do
-				local aDice = rRoll.aDice[i];
-				for j=1,#(aDice) do
-					local aNewDice = aDice[j];
-					if tonumber(aNewDice.result)==10 then
-						aNewDice.type="g10";
-					end
-					if i==1 and tonumber(aNewDice.result)==1 then
-						bFumble = true;
-						aNewDice.type="r10";
-					elseif bFumble then
-						aNewDice.result = 0-tonumber(aNewDice.result)
-					end
-					table.insert(aNewDices, aNewDice);
-				end
-			end
-			rRoll.aDice = aNewDices;
-		end
+		local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
 		
 		-- Create the base message based of the source and the final rRoll record (includes dice results).
 		local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
@@ -329,4 +287,82 @@ function onDefenseModifier(rSource, rTarget, rRoll)
 	end
 	
 	rRoll.nMod = rRoll.nMod + nAddMod;
+end
+
+-- PRIVATE ------------------------------------------------------------------------------------
+-- store aDice in sStoredDice for final message
+-- params :
+--	* rRoll : roll to work on
+function _storeDieForFinalMessage(rRoll)
+	-- Debug.chat("--------------------- _storeDieForFinalMessage");
+	-- Debug.chat(rRoll.sStoredDice);
+	-- Debug.chat(rRoll.aDice);
+	
+	local aStoredDiceTmp = {};
+	
+	-- get previously stored dice if any
+	if rRoll.sStoredDice ~= "" then
+		aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
+	end
+	
+	-- store last die rolled
+	table.insert(aStoredDiceTmp, rRoll.aDice);
+	
+	-- store for later
+	rRoll.sStoredDice = Json.stringify(aStoredDiceTmp);
+	
+	-- Debug.chat("after :");
+	-- Debug.chat(rRoll.sStoredDice);
+end
+
+-- restore sStoredDice in aDice before final message 
+-- params :
+--	* rRoll : roll to work on
+-- returns : 
+--	* bFumble : true if roll was a fumble false if not
+function _restoreDiceBeforeFinalMessage(rRoll)
+	-- Debug.chat("--------------------- _restoreDiceBeforeFinalMessage");
+	-- Debug.chat(rRoll.sStoredDice);
+	-- Debug.chat(rRoll.aDice);
+	
+	local bFumble = false;
+	
+	-- get previously stored dice
+	local aStoredDiceTmp = Json.parse(rRoll.sStoredDice);
+	
+	-- restore in aDice;
+	rRoll.aDice = aStoredDiceTmp;
+	
+	-- rearrange rRoll.aDice if needed (has reroll or location roll) as serialization seems to mess up array
+	-- and color exploding dice
+	-- if rRoll.sExplodeMode ~= "none" or rRoll.sIsLocationRoll=="true" then
+		local aNewDice = {};
+		for i = 1, #(rRoll.aDice) do
+			local aDiceTmp = rRoll.aDice[i];
+			for j=1,#(aDiceTmp) do
+				local aDieTmp = aDiceTmp[j];
+				
+				-- 10 is always rerolled => set it green
+				if tonumber(aDieTmp.result)==10 then
+					aDieTmp.type="g10";
+				end
+				
+				if i==1 and tonumber(aDieTmp.result)==1 then
+					-- first die was a 1 => fumble, set ir red
+					bFumble = true;
+					aDieTmp.type="r10";
+				elseif bFumble then
+					-- any result between 1 and 9 => get die as it is
+					aDieTmp.result = 0-tonumber(aDieTmp.result)
+				end
+				
+				table.insert(aNewDice, aDieTmp);
+			end
+		end
+		rRoll.aDice = aNewDice;
+	
+	-- Debug.chat("after :");
+	-- Debug.chat(rRoll.aDice);
+	
+	return bFumble;
 end
