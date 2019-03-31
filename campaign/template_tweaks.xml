@@ -214,4 +214,12 @@
 			<anchored position="insidetopright" offset="66,22" />
 		</button_window_sizeup>
 	</template>
+	<!-- Remove line -->
+	<template name="stringu">
+		<stringfield>
+			<font>sheettext</font>
+			<lineoffset default="off"/>
+			<frame mergerule="replace" name="separatorline" hidereadonly="true" />
+		</stringfield>
+	</template>
 </root>
