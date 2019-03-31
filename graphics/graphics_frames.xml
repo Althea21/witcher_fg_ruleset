@@ -81,7 +81,9 @@
 	</framedef>
 	<framedef name="groupbox2">
 		<bitmap file="graphics/frames/groupbox2.png" />
-		<offset>15,15,16,16</offset>
+		<offset>4,4,5,5</offset>
+		<middle rect="4,4,136,272"/>
+		<right rect="140,4,136,272"/>
 	</framedef>
 	<framedef name="fielddark">
 		<bitmap file="graphics/frames/fielddark.png" />

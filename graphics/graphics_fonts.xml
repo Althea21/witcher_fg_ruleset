@@ -80,7 +80,7 @@
 	<!-- Chat fonts -->
 	<font name="chatnpcfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
-		<color value="#000066" />
+		<color value="#c8ad7f" />
 	</font>
 	<font name="chatgmfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
