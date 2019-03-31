@@ -55,6 +55,7 @@
 
 	<!-- Graphics tweaks -->
 	<includefile source="campaign/template_tweaks.xml" />
+	<includefile source="campaign/ps_order.xml" />
 	
 	<!-- High-level scripts -->
 	<script name="DataCommon" file="scripts/data_common.lua" />
