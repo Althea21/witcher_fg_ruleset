@@ -52,6 +52,9 @@
 	<!-- PJ Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
 	<script name="SkillsTable" file="campaign/scripts/skills_table.lua" />
+
+	<!-- Graphics tweaks -->
+	<includefile source="campaign/template_tweaks.xml" />
 	
 	<!-- High-level scripts -->
 	<script name="DataCommon" file="scripts/data_common.lua" />

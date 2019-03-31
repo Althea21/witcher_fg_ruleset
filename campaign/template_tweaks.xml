@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+<!-- Close buttons -->
+	<template name="close_calendar">
+		<close>
+			<anchored>
+				<top offset="10" />
+				<right offset="-10" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_campaignlist">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_referencepage">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_referencelist">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_charselect">
+		<close>
+			<anchored>
+				<top offset="10" />
+				<right offset="-10" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_tokenbag">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_utilitybox">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_utilitybox2">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_utilitybox3">
+		<close>
+			<anchored>
+				<top offset="10" />
+				<right offset="-10" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_imagebox">
+		<close>
+			<anchored>
+				<top offset="22" />
+				<right offset="-14" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_storybox">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_charsheet">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_recordsheet">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_ctbox">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_partysheet">
+		<close>
+			<anchored>
+				<top offset="10" />
+				<right offset="-10" />
+			</anchored>
+		</close>
+	</template>
+	<!-- Help Buttons -->
+	<template name="help_calendar">
+		<help>
+			<anchored>
+				<top offset="10" />
+				<right offset="-36" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_ctbox">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_partysheet">
+		<help>
+			<anchored>
+				<top offset="10" />
+				<right offset="-36" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_utilitybox">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_utilitybox2">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_utilitybox3">
+		<help>
+			<anchored>
+				<top offset="10" />
+				<right offset="-36" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_referencelist">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_charselect">
+		<help>
+			<anchored>
+				<top offset="10" />
+				<right offset="-36" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_tokenbag">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_imagebox">
+		<help>
+			<anchored>
+				<top offset="22" />
+				<right offset="-40" />
+			</anchored>
+		</help>
+	</template>
+	<!-- sizeup -->
+	<template name="button_imagewindow_sizeup">
+		<button_window_sizeup>
+			<anchored position="insidetopright" offset="66,22" />
+		</button_window_sizeup>
+	</template>
+</root>

@@ -480,8 +480,8 @@
 	<!-- Images -->
 	<framedef name="imagebox">
 		<bitmap file="graphics/frames/imagebox.png" />
-		<offset>25,80,25,60</offset>
-		<insideoffset>0,0,25,25</insideoffset>
+		<offset>21,56,30,29</offset>
+		<insideoffset>0,0,5,5</insideoffset>
 	</framedef>
 	<framedef name="imagebox_header"></framedef>
 	<framedef name="imagepanel">
