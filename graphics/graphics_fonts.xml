@@ -67,7 +67,7 @@
 	</font>
 	<font name="systemfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
-		<color value="#4c3e35" />
+		<color value="#bc9d32" />
 	</font>
 	<font name="msgfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
