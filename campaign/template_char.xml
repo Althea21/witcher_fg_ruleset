@@ -62,6 +62,18 @@
 			<script file="campaign/scripts/list_skills.lua" />
 		</windowlist>
 	</template>
+	<template name="basicstring_label">
+		<basicstring>
+			<readonly />
+		</basicstring>
+	</template>
+	<template name="number_skill_rollable">
+		<basicnumber>
+			<frame name="fieldlight" offset="7,5,7,5" />
+			<hideonvalue value="0" />
+			<rollable />
+		</basicnumber>
+	</template>
 	
 	<!-- Dice -->
 	<template name="dice_modifier">
