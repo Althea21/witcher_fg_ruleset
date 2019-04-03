@@ -189,7 +189,7 @@
 			<!-- list headers -->
 			<genericcontrol name="weaponlist_headers">
 				<bounds>6,36,-6,32</bounds>
-				<frame name="rowshade" />
+				<frame name="headertitle" />
 			</genericcontrol>
 			<label>
 				<anchored position="insidetopleft" offset="5,45" width="29" />
@@ -283,7 +283,7 @@
 					<left offset="5"/>
 					<right offset="-5" />
 				</anchored>
-				<frame name="rowshade" />
+				<frame name="headertitle" />
 			</genericcontrol>
 			<label name="brawling_damage_label">
 				<anchored to="brawlinglist_headers" position="insidetopright" offset="140,7" width="50" />

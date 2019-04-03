@@ -41,9 +41,15 @@
 	</framedef>
 
 	<!-- Lists -->
+	<framedef name="headertitle">
+		<bitmap file="graphics/frames/headertitle.png" />
+		<middle rect="0,0,200,95" />
+		<bottom rect="0,95,200,5"/>
+	</framedef>
 	<framedef name="rowshade">
 		<bitmap file="graphics/frames/rowshade.png" />
-		<middle rect="0,0,200,100" />
+		<middle rect="0,0,200,95" />
+		<bottom rect="0,95,200,5"/>
 	</framedef>
 	<framedef name="search">
 		<bitmap file="graphics/frames/search.png" />
