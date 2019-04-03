@@ -516,7 +516,7 @@
 	</framedef>
 	<framedef name="separatorline">
 		<bitmap file="graphics/frames/textline.png" />
-		<offset>0,0,0,5</offset>
+		<offset>0,0,0,0</offset>
 	</framedef>
 	<framedef name="headersimple">
 		<bitmap file="graphics/frames/headersimple.png" />
