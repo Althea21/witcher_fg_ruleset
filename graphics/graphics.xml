@@ -5,6 +5,7 @@
 	<includefile source="graphics/graphics_fonts.xml" />
 	<includefile source="graphics/graphics_portraits.xml" />
 	<includefile source="graphics/graphics_icons.xml" />
+	<includefile source="graphics/graphics_radial.xml" />
 	<script name="DesktopManagerWitcher" file="graphics/scripts/data_library_com.lua" />
 
 	<string name="option_val_DDCL_witcher1">Witcher 1</string>
