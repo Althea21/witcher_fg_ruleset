@@ -5,6 +5,7 @@
 
 function onInit()
 	registerMenuItem(Interface.getString("menu_addweapon"), "insert", 3);
+	registerMenuItem(Interface.getString("menu_addarmor"), "insert", 4);
 	
 	updateAbility();
 	update();
@@ -12,22 +13,33 @@ function onInit()
 	local node = getDatabaseNode();
 	DB.addHandler(DB.getPath(node, "attributs"), "onChildUpdate", updateAbility);
 	DB.addHandler(DB.getPath(node, "weaponlist"), "onChildUpdate", updateAbility);
+	DB.addHandler(DB.getPath(node, "armorlist"), "onChildUpdate", updateAbility);
 end
 
 function onClose()
 	local node = getDatabaseNode();
 	DB.removeHandler(DB.getPath(node, "attributs"), "onChildUpdate", updateAbility);
 	DB.removeHandler(DB.getPath(node, "weaponlist"), "onChildUpdate", updateAbility);
+	DB.removeHandler(DB.getPath(node, "armorlist"), "onChildUpdate", updateAbility);
 end
 
 function onMenuSelection(selection)
 	if selection == 3 then
 		addWeapon();
+	elseif selection == 4 then
+		addArmor();
 	end
 end
 
 function addWeapon()
 	local w = weaponlist.createWindow();
+	if w then
+		w.name.setFocus();
+	end
+end
+
+function addArmor()
+	local w = armorlist.createWindow();
 	if w then
 		w.name.setFocus();
 	end
@@ -62,6 +74,8 @@ function onHeaderClickRelease(listName)
 	--Debug.chat("onHeaderClickRelease");
 	if listName=="weapon" then
 		weaponlist.setVisible(not weaponlist.isVisible());
+	elseif listName=="armor" then
+		armorlist.setVisible(not weaponlist.isVisible());
 	end
 	
 	return true;

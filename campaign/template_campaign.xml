@@ -45,4 +45,44 @@
 			</script>
 		</windowlist>
 	</template>
+
+	<template name="enhancement_list_editor">
+		<windowlist name="enhancement_list">
+			<anchored>
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="22" />
+				<left />
+				<right />
+			</anchored>
+			<allowdelete />
+			<child></child>
+			<child><backcolor>1A40301E</backcolor></child>
+			<noscroll />
+			<script>
+				function onInit()
+					registerMenuItem(Interface.getString("list_menu_createitem"), "insert", 5);
+				end
+				
+				function onMenuSelection(selection)
+					if selection == 5 then
+						self.addEntry(true);
+					end
+				end
+				
+				function onListChanged()
+					update();
+				end
+
+				function update()
+					local bEditMode = (window.enhancement_list_iedit.getValue() == 1);
+					for _,w in pairs(getWindows()) do
+						w.enhancement_list_idelete.setVisibility(bEditMode);
+					end
+				end
+				
+				function addEntry(bFocus)
+					return createWindow();
+				end
+			</script>
+		</windowlist>
+	</template>
 </root>

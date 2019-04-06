@@ -4,8 +4,8 @@
 --
 
 function onInit()
-	registerMenuItem(Interface.getString("menu_deleteweapon"), "delete", 4);
-	registerMenuItem(Interface.getString("list_menu_deleteconfirm"), "delete", 4, 3);
+	registerMenuItem(Interface.getString("menu_deleteweapon"), "delete", 5);
+	registerMenuItem(Interface.getString("list_menu_deleteweaponconfirm"), "delete", 5, 3);
 	
 	local sNode = getDatabaseNode().getNodeName();
 	DB.addHandler(sNode, "onChildUpdate", onDataChanged);
@@ -19,7 +19,7 @@ end
 
 -- radial menu : delete weapon
 function onMenuSelection(selection, subselection)
-	if selection == 4 and subselection == 3 then
+	if selection == 5 and subselection == 3 then
 		local node = getDatabaseNode();
 		if node then
 			node.delete();

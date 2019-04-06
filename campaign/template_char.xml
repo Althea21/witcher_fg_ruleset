@@ -33,7 +33,7 @@
 			<disabled/> 
 		</basicnumber>
 	</template>
-	<!--stat calculé-->
+	<!--stat calculÃ©e-->
 	<template name="number_derivedstat">
 		<basicnumber>
 			<frame name="fieldlight" offset="7,5,7,5" />
@@ -41,7 +41,7 @@
 			<disabled/> 
 		</basicnumber>
 	</template>
-	<!--stat calculé rollable-->
+	<!--stat calculÃ©e rollable-->
 	<template name="number_derivedstat_rollable">
 		<basicnumber>
 			<frame name="fieldlight" offset="7,5,7,5" />

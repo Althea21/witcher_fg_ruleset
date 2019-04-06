@@ -37,6 +37,7 @@
 	<icon name="melee_parry" file="graphics/icons/melee_parry.jpg" />
 	<icon name="melee_block" file="graphics/icons/melee_block.jpg" />
 	<icon name="char_brawling" file="graphics/icons/char_brawling.png" />
+	<icon name="char_armor" file="graphics/icons/char_armor.png" />
 	<icon name="attack_punch_normal" file="graphics/icons/attack_punch_normal.jpg" />
 	<icon name="attack_punch_fast" file="graphics/icons/attack_punch_fast.jpg" />
 	<icon name="attack_punch_strong" file="graphics/icons/attack_punch_strong.jpg" />

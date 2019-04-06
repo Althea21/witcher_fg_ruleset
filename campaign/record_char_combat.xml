@@ -129,7 +129,7 @@
 				<bounds>15,75,-29,-10</bounds>
 			</frame_char>
 			
-			<!--weapons-->
+			<!-- weapons / brawling -->
 			<subwindow name="combat_details">
 				<anchored to="combat_details_frame" position="over" offset="-8,-10">
 					<bottom offset="-50" />
@@ -144,9 +144,11 @@
 				<target>combat_details</target>
 			</scrollbar>
 
+			
 		</sheetdata>
 	</windowclass>
 	
+	<!--WEAPONS AND BRAWLING DETAILS -->
 	<windowclass name="char_combat_details">
 		<script file="campaign/scripts/char_combat_details.lua" />
 		<sheetdata>
@@ -278,10 +280,6 @@
 				</anchored>
 				<frame name="rowshade" />
 			</genericcontrol>
-			<!-- <label> -->
-				<!-- <anchored to="brawlinglist_headers" position="insidetopleft" offset="5,7" width="250"/> -->
-				<!-- <static textres="char_label_brawlingname" /> -->
-			<!-- </label> -->
 			<label name="brawling_damage_label">
 				<anchored to="brawlinglist_headers" position="insidetopright" offset="140,7" width="50" />
 				<center />
@@ -400,7 +398,7 @@
 			</buttoncontrol>
 			
 			<!--kick-->
-			<simplestringc>
+			<simplestringc name="kicklabel">
 				<anchored to="brawlinglist_headers" position="belowleft" offset="5,30" width="250"/>
 				<!-- <center /> -->
 				<static textres="char_label_kicklabel" />
@@ -498,8 +496,88 @@
 					end
 				</script>
 			</buttoncontrol>
-			
-			<!-- Armor infos -->
+		
+			<!-- ARMOR -->
+			<genericcontrol name="armor_divider">
+				<anchored to="kicklabel" position="below" offset="10,5" height="3" />
+				<frame name="separatorline" />
+				<invisible />
+			</genericcontrol>
+			<!-- section header (show/hide list on click) -->
+			<genericcontrol name="icon_armor">
+				<anchored to="armor_divider" position="belowleft" offset="10,14" width="20" height="20" />
+				<icon>char_armor</icon>
+			</genericcontrol>
+			<label name="label_armor">
+				<anchored>
+					<top parent="icon_armor" offset="0" />
+					<left parent="icon_armor" anchor="right" offset="10" />
+					<right offset="-8" />
+				</anchored>
+				<static textres="char_label_armor" />
+				<script>
+					function onClickDown(button, x, y)
+						return window.onHeaderClickDown("armor");
+					end
+					
+					function onClickRelease(button, x, y)
+						return window.onHeaderClickRelease("armor");
+					end
+				</script>
+			</label>
+			<genericcontrol name="armorheaderframe">
+				<anchored>
+					<top parent="armor_divider" anchor="bottom" offset="10" />
+					<bottom parent="armor_divider" anchor="bottom" offset="42" />
+					<left/>
+					<right/>
+				</anchored>
+				<frame name="groupbox2" offset="6,6,6,6" />
+				<disabled />
+			</genericcontrol>
+
+			<!-- list headers-->
+			<genericcontrol name="armorlist_headers">
+				<anchored>
+					<top parent="armorheaderframe" anchor="bottom" offset="0" />
+					<bottom parent="armorheaderframe" anchor="bottom" offset="32" />
+					<left offset="5"/>
+					<right offset="-5" />
+				</anchored>
+				<frame name="rowshade" />
+			</genericcontrol>
+			<label>
+				<anchored to="armorlist_headers" position="insidetopleft" offset="5,7" width="250"/>
+				<static textres="char_label_brawlingname" />
+			</label>
+			<label name="armor_location_label">
+				<anchored to="armorlist_headers" position="insidetopright" offset="150,7" width="50" />
+				<center />
+				<static textres="char_label_armorlocation" />
+			</label>
+			<label name="armor_sp_label">
+				<anchored to="armor_location_label" position="right" offset="55,0" width="20" />
+				<center />
+				<static textres="char_label_armorsp" />
+			</label>
+			<label name="armor_ev_label">
+				<anchored to="armor_sp_label" position="right" offset="25,0" width="20" />
+				<center />
+				<static textres="char_label_armorev" />
+			</label> 
+
+			<windowlist  name="armorlist">
+				<datasource>.armorlist</datasource>
+				<sortby><control>name</control></sortby>
+				<script file="campaign/scripts/char_armorlist.lua" />
+				<anchored>
+					<top parent="armorlist_headers" anchor="bottom" offset="0" />
+					<left />
+					<right />
+				</anchored>
+				<class>char_armor</class>
+				<noscroll />
+			</windowlist>
 		</sheetdata>
 	</windowclass>
 	
@@ -803,7 +881,6 @@
 		</sheetdata>
 	</windowclass>
 	
-	
 	<!--Weapon editor-->
 	<windowclass name="char_weapon_editor">
 		<frame>recordsheet</frame>
@@ -1036,9 +1113,9 @@
 				<static textres="weapon_label_enhancementmax" />
 			</label>
 			
-			<list_editor name="enhancement_list">
+			<enhancement_list_editor name="enhancement_list">
 				<datasource>.enhancementlist</datasource>
-				<class>char_weapon_enhancement_entry</class>
+				<class>char_enhancement_entry</class>
 				<script>
 					function addEntry(bFocus)
 						local n = getWindowCount();
@@ -1053,7 +1130,7 @@
 						return w;
 					end
 				</script>
-			</list_editor>
+			</enhancement_list_editor>
 			
 			<label_fieldtop>
 				<anchored to="enhancement_list" position="aboveleft" offset="5,1" width="50" />
@@ -1120,8 +1197,301 @@
 		</sheetdata>
 	</windowclass>
 	
-	<!--Weapon enhancement entry class-->
-	<windowclass name="char_weapon_enhancement_entry">
+	<!--Armor class-->
+	<windowclass name="char_armor">
+		<margins control="0,0,0,5" />
+		<script file="campaign/scripts/char_armor.lua" />
+		<sheetdata>
+			<genericcontrol name="leftanchor">
+				<anchored width="0" height="0">
+					<top offset="10" />
+					<left offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="10" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			
+			<!-- Edit / See details -->
+			<buttoncontrol name="activatedetail">
+				<anchored to="rightanchor" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="3" />
+				</anchored>
+				<state icon="button_details" pressed="button_details_down" />
+				<script>
+					function onButtonPress()
+						Interface.openWindow("char_armor_editor", window.getDatabaseNode());
+					end
+				</script>
+			</buttoncontrol>
+
+			<!--Encumbrance Value-->
+			<basicnumber name="ev">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+			</basicnumber>
+
+			<!--Stoping power-->
+			<number_statcurrentvalue name="sp">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+			</number_statcurrentvalue>
+			
+			<!--name-->
+			<stringu name="name">
+				<anchored height="20">
+					<top offset="10" />
+					<left parent="leftanchor" anchor="right" relation="relative" offset="10" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-150" />
+				</anchored>
+			</stringu>
+
+			<!--Location-->
+			<basicstring name="locationview">
+				<anchored>
+					<top parent="name" offset="0"/>
+					<left parent="name" anchor="right" relation="relative" offset="5" />
+					<right parent="sp" anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<frame name="fielddark" offset="7,5,7,5" />
+				<readonly />
+			</basicstring>
+			
+		</sheetdata>
+	</windowclass>
+
+	<!--Armor part editor-->
+	<windowclass name="char_armor_editor">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="400" height="450" />
+		</placement>
+		<sizelimits>
+			<minimum width="400" height="350" />
+			<dynamic />
+		</sizelimits>
+		<nodelete />
+		<playercontrol />
+		<tooltip control="name" />
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>armor_title</resource>
+			</windowtitlebar>
+			
+			<genericcontrol name="contentframe">
+				<anchored>
+					<top parent="title" anchor="bottom" offset="15" />
+					<left offset="35" />
+					<right offset="-35" />
+					<bottom offset="-32" />
+				</anchored>
+				<frame name="groupbox" offset="20,17,20,17" />
+				<disabled />
+			</genericcontrol>
+			
+			<subwindow_record name="main">
+				<class>char_armor_editor_main</class>
+				<activate />
+			</subwindow_record>
+			<scrollbar_record>
+				<target>main</target>
+			</scrollbar_record>
+
+			<resize_recordsheet />
+			<close_recordsheet />
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="char_armor_editor_main">
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column>
+				<static textres="armor_label_name" />
+			</label_column>
+			<string_column name="name" />
+			
+			<label_column>
+				<static textres="armor_label_effects" />
+			</label_column>
+			<string_column name="effects" />
+			
+			<!-- PROPERTIES -->
+			<header_column name="header_properties">
+				<static textres="armor_header_properties" />
+				<center />
+			</header_column>
+			<!--SP-->
+			<basicnumber name="sp">
+				<anchored width="30" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="100" />
+				</anchored>
+			</basicnumber>
+			<label>
+				<anchored to="sp" position="right" offset="-130,0" />
+				<static textres="armor_property_sp" />
+			</label>
+			<basicnumber name="spmax">
+				<anchored to="sp" position="right" offset="30,0" width="30" height="20" />
+			</basicnumber>
+			<label>
+				<anchored to="spmax" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			<!--EV-->
+			<basicnumber name="ev">
+				<anchored width="30" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="100" />
+				</anchored>
+			</basicnumber>
+			<label>
+				<anchored to="ev" position="right" offset="-130,0" />
+				<static textres="armor_property_ev" />
+			</label>
+			
+			<!-- LOCATION -->
+			<header_column name="header_location">
+				<static textres="armor_header_location" />
+				<center />
+			</header_column>
+			
+			<button_checkbox name="location_head">
+				<anchored width="20" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="0" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="location_head" position="right" offset="0,0" />
+				<static textres="char_armor_label_location_head" />
+			</label>
+
+			<button_checkbox name="location_leftarm">
+				<anchored width="20" height="20">
+					<top parent="location_head" anchor="top" offset="0" />
+					<right offset="-200" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="location_leftarm" position="right" offset="0,0" />
+				<static textres="char_armor_label_location_leftarm" />
+			</label>
+
+			<button_checkbox name="location_rightarm">
+				<anchored width="20" height="20">
+					<top parent="location_head" anchor="top" offset="0" />
+					<right offset="-80" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="location_rightarm" position="right" offset="0,0" />
+				<static textres="char_armor_label_location_rightarm" />
+			</label>
+
+			<button_checkbox name="location_torso">
+				<anchored width="20" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="0" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="location_torso" position="right" offset="0,0" />
+				<static textres="char_armor_label_location_torso" />
+			</label>
+
+			<button_checkbox name="location_leftleg">
+				<anchored width="20" height="20">
+					<top parent="location_torso" anchor="top" offset="0" />
+					<right offset="-200" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="location_leftleg" position="right" offset="0,0" />
+				<static textres="char_armor_label_location_leftleg" />
+			</label>
+
+			<button_checkbox name="location_rightleg">
+				<anchored width="20" height="20">
+					<top parent="location_torso" anchor="top" offset="0" />
+					<right offset="-80" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="location_rightleg" position="right" offset="0,0" />
+				<static textres="char_armor_label_location_rightleg" />
+			</label>
+			
+			<!-- ENHANCEMENT -->
+			<header_column name="header_enhancement">
+				<static textres="armor_header_enhancement" />
+				<center />
+			</header_column>
+			<button_iedit name="enhancement_list_iedit">
+				<anchored to="header_enhancement" position="insidetopright" offset="-5,0" />
+				<target>enhancement_list</target>
+			</button_iedit>
+			<button_iadd name="enhancement_list_iadd">
+				<anchored to="enhancement_list_iedit" position="lefthigh" offset="5,0" />
+				<target>enhancement_list</target>
+			</button_iadd>
+			
+			<basicnumber name="enhancementmax">
+				<anchored width="30" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="35" />
+				</anchored>
+			</basicnumber>
+			<label>
+				<anchored to="enhancementmax" position="left" offset="10,0" />
+				<static textres="armor_label_enhancementmax" />
+			</label>
+			
+			<enhancement_list_editor name="enhancement_list">
+				<datasource>.enhancementlist</datasource>
+				<class>char_enhancement_entry</class>
+				<script>
+					function addEntry(bFocus)
+						local n = getWindowCount();
+						
+						local w = createWindow();
+						if w then
+							if bFocus then
+								w.name.setFocus();
+							end
+						end
+						
+						return w;
+					end
+				</script>
+			</enhancement_list_editor>
+			
+			<label_fieldtop>
+				<anchored to="enhancement_list" position="aboveleft" offset="5,1" width="50" />
+				<static textres="armor_label_enhancementname" />
+			</label_fieldtop>
+			<label_fieldtop>
+				<anchored to="enhancement_list" position="aboveleft" offset="100,1" width="50" />
+				<static textres="armor_label_enhancementeffect" />
+			</label_fieldtop>
+			
+		</sheetdata>
+	</windowclass>
+
+	<!-- Enhancement entry class-->
+	<windowclass name="char_enhancement_entry">
 		<margins control="0,0,0,2" />
 		<sheetdata>
 			<genericcontrol name="rightanchor">
@@ -1131,7 +1501,7 @@
 				</anchored>
 				<invisible />
 			</genericcontrol>
-			<button_idelete name="idelete">
+			<button_idelete name="enhancement_list_idelete">
 				<anchored to="rightanchor">
 					<top />
 					<right anchor="left" relation="relative" offset="-5" />
@@ -1152,5 +1522,5 @@
 
 		</sheetdata>
 	</windowclass>
-	
+
 </root>
