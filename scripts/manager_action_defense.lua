@@ -89,7 +89,18 @@ function getRoll(rActor, rWeapon, sDefenseType)
 			end
 		end
 		
-		-- TODO : ARMOR ENCUMBRANCE VALUE TO SUB
+		-- Substract equipped armor part EV
+		local nTotalEV = 0;
+		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
+			--Debug.chat("armor "..DB.getValue(v, "name", "").." : Eq="..DB.getValue(v, "equipped", "").." EV="..DB.getValue(v, "ev", ""));
+			if (DB.getValue(v, "equipped", "") == 1) then
+				nTotalEV = nTotalEV + DB.getValue(v, "ev", 0);
+			end
+		end
+		if (nTotalEV > 0) then
+			nRollMod = nRollMod - nTotalEV;
+			sRollDescription = sRollDescription.."["..Interface.getString("rolldescription_totalev").." -"..nTotalEV.."]"
+		end
 		
 		rRoll.sDesc = sRollDescription;
 		rRoll.nMod = nRollMod;

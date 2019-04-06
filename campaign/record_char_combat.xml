@@ -148,7 +148,7 @@
 		</sheetdata>
 	</windowclass>
 	
-	<!--WEAPONS AND BRAWLING DETAILS -->
+	<!--WEAPONS, BRAWLING AND ARMOR DETAILS -->
 	<windowclass name="char_combat_details">
 		<script file="campaign/scripts/char_combat_details.lua" />
 		<sheetdata>
@@ -1217,6 +1217,17 @@
 				<invisible />
 			</genericcontrol>
 			
+			<!--Equipped toggle-->
+			<buttonfield name="equipped">
+				<anchored width="20" height="20">
+					<top offset="10" />
+					<left parent="leftanchor" anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<state icon="button_char_inv_none" tooltipres="char_tooltip_inv_none" />
+				<state icon="button_char_inv_equipped" tooltipres="char_tooltip_inv_equipped" />
+				<default>1</default>
+			</buttonfield>
+
 			<!-- Edit / See details -->
 			<buttoncontrol name="activatedetail">
 				<anchored to="rightanchor" width="20" height="20">
@@ -1251,7 +1262,7 @@
 			<stringu name="name">
 				<anchored height="20">
 					<top offset="10" />
-					<left parent="leftanchor" anchor="right" relation="relative" offset="10" />
+					<left parent="leftanchor" anchor="right" relation="relative" offset="5" />
 					<right parent="rightanchor" anchor="left" relation="relative" offset="-150" />
 				</anchored>
 			</stringu>

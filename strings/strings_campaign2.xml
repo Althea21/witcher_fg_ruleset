@@ -195,6 +195,7 @@
 	<string name="armor_header_properties">Properties</string>
 	<string name="armor_property_sp">Stoping power</string>
 	<string name="armor_property_ev">Encumbrance value</string>
+	<string name="rolldescription_totalev">Total Armor EV</string>
 	<string name="armor_header_location">Location</string>
 	<string name="armor_header_enhancement">Enhancement</string>
 	<string name="armor_label_enhancementmax">Max</string>
