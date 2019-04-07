@@ -106,8 +106,8 @@ function onDamageChanged()
 end
 
 function onDamageAction(draginfo)
-	-- local rActor, rDamage = CharManager.getWeaponDamageRollStructures(getDatabaseNode());
+	local rActor, rDamage = CharManager.getWeaponDamageRollStructures(getDatabaseNode());
 	
-	-- ActionDamage.performRoll(draginfo, rActor, rDamage);
+	ActionDamage.performRoll(draginfo, rActor, rDamage);
 	return true;
 end

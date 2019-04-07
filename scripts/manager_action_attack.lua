@@ -7,7 +7,7 @@
 -- Management for attack rolls
 --
 
--- Queue for tracking pending Attack for defense, then damage resolution (FIFO)
+-- Queue for tracking pending Attacks for defense, then damage resolution (FIFO)
 -- Each item must be formatted like :
 --	* sSourceCT : offender (obtained by ActorManager.getCreatureNodeName(rSource) )
 --	* sTargetCT : defender (obtained by ActorManager.getCTNodeName(rTarget) )

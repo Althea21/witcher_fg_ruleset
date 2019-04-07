@@ -307,6 +307,14 @@
 				<anchored to="brawlinglist_headers" position="belowright" offset="145,5" width="40" height="20"/>
 				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.punch_modifier</modifierfield>
+				<script>
+					function onDoubleClick(x,y)
+						return window.onUnarmedDamageAction(nil, "punch");
+					end			
+					function onDragStart(button, x, y, draginfo)
+						return window.onUnarmedDamageAction(draginfo, "punch");
+					end
+				</script>
 			</dice_modifier>
 			<buttoncontrol name="button_punch_attack">
 				<anchored to="punchdamage" width="20" height="20">
@@ -407,6 +415,14 @@
 				<anchored to="brawlinglist_headers" position="belowright" offset="145,30" width="40" height="20"/>
 				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.kick_modifier</modifierfield>
+				<script>
+					function onDoubleClick(x,y)
+						return window.onUnarmedDamageAction(nil, "kick");
+					end			
+					function onDragStart(button, x, y, draginfo)
+						return window.onUnarmedDamageAction(draginfo, "kick");
+					end
+				</script>
 			</dice_modifier>
 			<buttoncontrol name="button_kick_attack">
 				<anchored to="kickdamage" width="20" height="20">

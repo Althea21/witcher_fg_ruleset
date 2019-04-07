@@ -446,7 +446,7 @@
 			</label>
 			
 			<basicnumber name="luck" source="attributs.luck">
-				<anchored to="will_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="will_base" position="insidebottomleft" offset="0,-50" width="30" height="20" />
 			</basicnumber>
 			<label>
 				<anchored to="luck" position="right" offset="-130,0" />

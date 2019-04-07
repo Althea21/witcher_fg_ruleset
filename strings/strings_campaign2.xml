@@ -166,7 +166,6 @@
 	<string name="char_armor_label_location_leftarm_short">L. arm</string>
 	<string name="char_armor_label_location_rightleg_short">R. leg</string>
 	<string name="char_armor_label_location_leftleg_short">L. leg</string>
-
 	
 	<!-- Weapon editor -->
 	<string name="weapon_title">Weapon</string>
@@ -201,6 +200,22 @@
 	<string name="armor_label_enhancementmax">Max</string>
 	<string name="armor_label_enhancementname">Name</string>
 	<string name="armor_label_enhancementeffect">Effect</string>
+
+	<!--Damage-->
+	<string name="damage_roll_title">Damage</string>
+	<string name="damage_for_label">for</string>
+	<string name="damage_afterarmor_label">after armor</string>
+	<string name="damage_label_strongattack">Strong attack x2 before armor</string>
+	<string name="damage_label_critical_simple">Critical - Simple</string>
+	<string name="damage_label_critical_complex">Critical - Complex</string>
+	<string name="damage_label_critical_difficult">Critical - Difficult</string>
+	<string name="damage_label_critical_deadly">Critical - Deadly</string>
+	<string name="damage_label_location_head">Location - Head</string>
+	<string name="damage_label_location_torso">Location - Torso</string>
+	<string name="damage_label_location_arm">Location - Arm</string>
+	<string name="damage_label_location_leg">Location - Leg</string>
+	<string name="damage_label_location_limb">Location - Monster limb</string>
+	<string name="damage_label_location_tail">Location - Monster wing/tail</string>
 
 	<!--Fumble messages-->
 	<string name="fumble_none">No major fumble.</string>

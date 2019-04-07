@@ -150,3 +150,89 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	
 	return rActor, rAttack;
 end
+
+-- get character and damage info for damage roll
+-- param :
+--	* nodeWeapon : dbNode for source weapon
+-- returns : 
+--	* rActor	 : actor info retrieved by using ActorManager.resolveActor
+--	* rDamage	 : object containing all needed info to resolve damage (range, type, label, clauses)
+function getWeaponDamageRollStructures(nodeWeapon)
+	-- Retreive rActor
+	local nodeChar = nodeWeapon.getChild("...");
+	local rActor = ActorManager.getActor("pc", nodeChar);
+	
+	-- construct rDamage
+	local rDamage = {};
+	
+	-- range or melee
+	local bRanged = (DB.getValue(nodeWeapon, "type", 0) == 1);
+	if bRanged then
+		rDamage.range = "R";
+	else
+		rDamage.range = "M";
+	end
+
+	rDamage.type = "damage";
+	rDamage.label = DB.getValue(nodeWeapon, "name", "");
+	
+	-- compile all weapon damage entries
+	rDamage.clauses = {};
+	local aDamageNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "damagelist"));
+	for _,v in ipairs(aDamageNodes) do
+		local sDmgType = DB.getValue(v, "type", "");
+		local aDmgDice = DB.getValue(v, "dice", {});
+		local nDmgMod = DB.getValue(v, "bonus", 0);
+		
+		local sDmgAbility = DB.getValue(v, "dmgbonusstat", "");
+		if sDmgAbility == "meleebonusdamage" then
+			nDmgMod = nDmgMod + DB.getValue(nodeChar, "attributs.meleebonusdamage", 0);
+		elseif sDmgAbility == "punch" or sDmgAbility == "kick" then
+			-- todo
+		end
+		
+		table.insert(rDamage.clauses, {	dice = aDmgDice, 
+										modifier = nDmgMod, 
+										stat = sDmgAbility, 
+										dmgtype = sDmgType, });
+	end
+	
+	return rActor, rDamage;
+end
+
+-- get character and damage info for damage roll
+-- param :
+--	* nodeChar	: dbNode for character
+--  * sType		: "punch" or "kick"
+-- returns : 
+--	* rActor	: actor info retrieved by using ActorManager.resolveActor
+--	* rDamage	: object containing all needed info to resolve damage (range, type, label, clauses)
+function getUnarmedDamageRollStructures(nodeChar, sType)
+	-- Retreive rActor
+	local rActor = ActorManager.getActor("pc", nodeChar);
+	
+	-- construct rDamage
+	local rDamage = {};
+	
+	-- range or melee
+	rDamage.range = "M";
+	
+	rDamage.type = "damage";
+	rDamage.label = sType;
+	
+	-- compile all weapon damage entries
+	rDamage.clauses = {};
+	
+	local unarmedNode = DB.getValue(nodeChar, "attributs."..sType, "");
+	
+	local sDmgType = "";
+	local aDmgDice = DB.getValue(nodeChar, "attributs."..sType, "");
+	local nDmgMod = DB.getValue(nodeChar, "attributs."..sType.."_modifier", 0);
+	
+	table.insert(rDamage.clauses, {	dice = aDmgDice, 
+									modifier = nDmgMod, 
+									stat = "", 
+									dmgtype = sDmgType, });
+	
+	return rActor, rDamage;
+end

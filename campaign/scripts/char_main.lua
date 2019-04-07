@@ -16,6 +16,7 @@ function onDexterityChanged()
 end
 
 function onBodyChanged()
+	Debug.chat(punch);
 	body.setValue(body_base.getValue()+body_modifier.getValue());
 	
 	local bodyValue = body.getValue();
@@ -23,18 +24,46 @@ function onBodyChanged()
 	
 	if bodyValue <= 2 then
 		meleebonusdamage.setValue(-4);
+		punch.setDice({"d6"});
+		punch.setModifier(-4);
+		kick.setDice({"d6"});
+		kick.setModifier(0);
 	elseif bodyValue <= 4 then
 		meleebonusdamage.setValue(-2);
+		punch.setDice({"d6"});
+		punch.setModifier(-2);
+		kick.setDice({"d6"});
+		kick.setModifier(2);
 	elseif bodyValue <= 6 then
 		meleebonusdamage.setValue(0);
+		punch.setDice({"d6"});
+		punch.setModifier(0);
+		kick.setDice({"d6"});
+		kick.setModifier(4);
 	elseif bodyValue <= 8 then
 		meleebonusdamage.setValue(2);
+		punch.setDice({"d6"});
+		punch.setModifier(2);
+		kick.setDice({"d6"});
+		kick.setModifier(6);
 	elseif bodyValue <= 10 then
 		meleebonusdamage.setValue(4);
+		punch.setDice({"d6"});
+		punch.setModifier(4);
+		kick.setDice({"d6"});
+		kick.setModifier(8);
 	elseif bodyValue <= 12 then
 		meleebonusdamage.setValue(6);
+		punch.setDice({"d6"});
+		punch.setModifier(6);
+		kick.setDice({"d6"});
+		kick.setModifier(10);
 	elseif bodyValue <= 14 then
 		meleebonusdamage.setValue(8);
+		punch.setDice({"d6"});
+		punch.setModifier(8);
+		kick.setDice({"d6"});
+		kick.setModifier(12);
 	end
 	
 	local physical = math.floor((bodyValue + will.getValue())/2);

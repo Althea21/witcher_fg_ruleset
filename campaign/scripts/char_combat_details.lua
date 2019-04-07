@@ -80,3 +80,11 @@ function onHeaderClickRelease(listName)
 	
 	return true;
 end
+
+
+function onUnarmedDamageAction(draginfo, sType)
+	local rActor, rDamage = CharManager.getUnarmedDamageRollStructures(getDatabaseNode(), sType);
+	
+	ActionDamage.performRoll(draginfo, rActor, rDamage);
+	return true;
+end
