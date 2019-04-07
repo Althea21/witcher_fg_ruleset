@@ -16,7 +16,6 @@ function onDexterityChanged()
 end
 
 function onBodyChanged()
-	Debug.chat(punch);
 	body.setValue(body_base.getValue()+body_modifier.getValue());
 	
 	local bodyValue = body.getValue();
