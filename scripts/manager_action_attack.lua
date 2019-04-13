@@ -88,14 +88,14 @@ function getRoll(rActor, rWeapon, sAttackType)
 		-- stat modifier
 		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
 		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0);
-		sRollDescription = sRollDescription.."["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]"
+		--sRollDescription = sRollDescription.."["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]"
 		
 		-- skill modifier
 		for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
 			if (DB.getValue(v, "name", "") == rWeapon.skill) then
 				--Debug.chat("skill modifier ("..rWeapon.skill.."): "..DB.getValue(v, "skill_value", 0));
 				nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
-				sRollDescription = sRollDescription.."["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]"
+				--sRollDescription = sRollDescription.."["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]"
 				break;
 			end
 		end
@@ -104,7 +104,7 @@ function getRoll(rActor, rWeapon, sAttackType)
 		if (rWeapon.range ~= "U") then
 			--Debug.chat("weapon accuracy modifier : "..rWeapon.weaponaccuracy);
 			nRollMod = nRollMod + rWeapon.weaponaccuracy;
-			sRollDescription = sRollDescription.."[WA +"..rWeapon.weaponaccuracy.."]"
+			--sRollDescription = sRollDescription.."[WA +"..rWeapon.weaponaccuracy.."]"
 		end
 		
 		-- Substract equipped armor part EV
@@ -117,7 +117,7 @@ function getRoll(rActor, rWeapon, sAttackType)
 		end
 		if (nTotalEV > 0) then
 			nRollMod = nRollMod - nTotalEV;
-			sRollDescription = sRollDescription.."["..Interface.getString("rolldescription_totalev").." -"..nTotalEV.."]"
+			--sRollDescription = sRollDescription.."["..Interface.getString("rolldescription_totalev").." -"..nTotalEV.."]"
 		end
 		
 		rRoll.sDesc = sRollDescription;
