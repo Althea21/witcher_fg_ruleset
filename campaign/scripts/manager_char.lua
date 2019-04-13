@@ -8,22 +8,23 @@ function onInit()
 end
 
 function updateEncumbrance(nodeChar)
-	-- local nEncTotal = 0;
+	local nEncTotal = 0;
 
-	-- local nCount, nWeight;
-	-- for _,vNode in pairs(DB.getChildren(nodeChar, "inventorylist")) do
-		-- if DB.getValue(vNode, "carried", 0) ~= 0 then
-			-- nCount = DB.getValue(vNode, "count", 0);
-			-- if nCount < 1 then
-				-- nCount = 1;
-			-- end
-			-- nWeight = DB.getValue(vNode, "weight", 0);
+	local nCount, nWeight;
+	for _,vNode in pairs(DB.getChildren(nodeChar, "inventorylist")) do
+		if DB.getValue(vNode, "carried", 0) ~= 0 then
+			nCount = DB.getValue(vNode, "count", 0);
+			if nCount < 1 then
+				nCount = 1;
+			end
+			nWeight = DB.getValue(vNode, "weight", 0);
 			
-			-- nEncTotal = nEncTotal + (nCount * nWeight);
-		-- end
-	-- end
+			nEncTotal = nEncTotal + (nCount * nWeight);
+		end
+	end
 
-	-- DB.setValue(nodeChar, "encumbrance.load", "number", nEncTotal);
+	DB.setValue(nodeChar, "encumbrance.load", "number", nEncTotal);
+	DB.setValue(nodeChar, "attributs.encumbrance", "number", nEncTotal);
 end
 
 function onCharItemAdd(nodeItem)

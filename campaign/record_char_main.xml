@@ -546,9 +546,9 @@
 				<static textres="char_special_divide" />
 			</label>
 			
-			<number_statcurrentvalue name="encumbrance" source="attributs.encumbrance">
+			<number_derivedstat name="encumbrance" source="attributs.encumbrance">
 				<anchored to="stamina" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</number_statcurrentvalue>
+			</number_derivedstat>
 			<label>
 				<anchored to="encumbrance" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_encumbrance" />
