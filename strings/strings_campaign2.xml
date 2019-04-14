@@ -337,6 +337,9 @@
 	<string name="spell_components_label">Components</string>
 	<string name="spell_danger_label">Danger</string>
 	<string name="spell_reqlift_label">Requirement to lift</string>
+	
+	<string name="spellcasting_notenoughSTA">Not enough Stamina to cast this spell</string>
+	<string name="spellcasting_overexertion">[OVEREXERTION : - %i HP]</string>
 
 	<!--Magic fumble messages-->
 	<string name="fumble_magic_6">Magic sparks and crackles and you take 1 point of damage for every point you fumbled by, but the spell still goes off.</string>

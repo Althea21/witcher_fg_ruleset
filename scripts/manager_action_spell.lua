@@ -85,7 +85,6 @@ function getRoll(rActor, rSpell)
 		-- stat modifier
 		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
 		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs.will", 0);
-		--sRollDescription = sRollDescription.."["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]"
 		
 		-- skill modifier
 		local sSkill = "";
@@ -123,6 +122,9 @@ function getRoll(rActor, rSpell)
 		rRoll.nMod = nRollMod;
 	end
 	
+	-- update caster stats
+	rRoll.sDesc = rRoll.sDesc .. _impactSpellCaster(nodeActor, rSpell);
+
 	return rRoll;
 end
 
@@ -135,11 +137,21 @@ function performRoll(draginfo, rSpell)
 	local nodeChar = rSpell.getChild(".....");
 	local rActor = ActorManager.getActor("pc", nodeChar);
 	
-	-- get roll
-	local rRoll = getRoll(rActor, rSpell);
+	-- first check if caster has enough Stamina
+	local nCurrentSTA = tonumber(DB.getValue(nodeChar, "attributs.stamina", 0));
+	local nSTACost = tonumber(DB.getValue(rSpell, "stacost", 0));
+	if nSTACost > nCurrentSTA then
+		local msg = {};
+		msg.text = Interface.getString("spellcasting_notenoughSTA");
+		Comm.deliverChatMessage(msg);
+	else
+		-- get roll
+		local rRoll = getRoll(rActor, rSpell);
+			
+		-- roll it !
+		ActionsManager.performAction(draginfo, rActor, rRoll);
+	end
 	
-	-- roll it !
-	ActionsManager.performAction(draginfo, rActor, rRoll);
 end
 
 -- HANDLERS --------------------------------------------------------
@@ -483,6 +495,12 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 	return bFumble;
 end
 
+-- build fumble message 
+-- params :
+--	* sSpellType			: mage, priest, sign, hex or ritual
+--	* nTotalExplodeValue	: fumble amount
+-- returns : 
+--	* sMessage : fumble message
 function _buildFumbleMessage(sSpellType, nTotalExplodeValue)
 	local nFumbleValue = tonumber(nTotalExplodeValue);
 	local sMessage = "\n[FUMBLE (".. nTotalExplodeValue ..") : ";
@@ -503,5 +521,33 @@ function _buildFumbleMessage(sSpellType, nTotalExplodeValue)
 
 	sMessage = sMessage .. "]";
 
+	return sMessage;
+end
+
+-- Stamina, Overexertion management 
+-- params :
+--	* nodeActor : actor node
+--	* nodeSpell : spell node
+function _impactSpellCaster(nodeActor, nodeSpell)
+	local sMessage = "";
+	local nSTACost = tonumber(DB.getValue(nodeSpell, "stacost", 0));
+	
+	if nSTACost > 0 then
+		-- STA cost
+		local nCurrentSTA = tonumber(DB.getValue(nodeActor, "attributs.stamina", 0));
+		if nCurrentSTA > 0 then
+			DB.setValue(nodeActor, "attributs.stamina", "number", nCurrentSTA-nSTACost);
+		end
+
+		-- Check for overexertion
+		local nCurrentVIG = tonumber(DB.getValue(nodeActor, "attributs.vigor", 0));
+		local nCurrentFOC = tonumber(DB.getValue(nodeActor, "attributs.focus", 0));
+		local nExcess = (nSTACost - nCurrentFOC) - nCurrentVIG;
+		if nExcess > 0 then
+			local nCurrentHP = tonumber(DB.getValue(nodeActor, "attributs.hit_points", 0));
+			DB.setValue(nodeActor, "attributs.hit_points", "number", nCurrentHP-(nExcess*5));
+			sMessage = sMessage .. string.format(Interface.getString("spellcasting_overexertion"), nExcess*5);
+		end
+	end
 	return sMessage;
 end

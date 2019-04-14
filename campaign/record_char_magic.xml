@@ -456,9 +456,7 @@
 			<label_column name="effectlabel">
 				<static textres="spell_effect_label" />
 			</label_column>
-			<string_column name="effect">
-				<anchored height="60"/>
-			</string_column>
+			<string_column name="effect"/>
 		</sheetdata>
 	</windowclass>
 	
