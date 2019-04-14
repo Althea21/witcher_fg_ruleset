@@ -35,25 +35,8 @@ end
 local m_sClass = "";
 local m_sRecord = "";
 
--- function onLinkChanged()
-	-- local node = getDatabaseNode();
-	-- local sClass, sRecord = DB.getValue(node, "shortcut", "", "");
-	-- if sClass ~= m_sClass or sRecord ~= m_sRecord then
-		-- m_sClass = sClass;
-		-- m_sRecord = sRecord;
-		
-		-- local sInvList = DB.getPath(DB.getChild(node, "..."), "inventorylist") .. ".";
-		-- if sRecord:sub(1, #sInvList) == sInvList then
-			-- carried.setLink(DB.findNode(DB.getPath(sRecord, "carried")));
-		-- end
-	-- end
--- end
-
 function addSpell()
 	local w = spelllist.createWindow();
-	-- if w then
-	-- 	w.name.setFocus();
-	-- end
 end
 
 function onDataChanged()

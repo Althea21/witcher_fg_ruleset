@@ -28,9 +28,6 @@ end
 
 function addSpellClass()
 	local w = spellclasslist.createWindow();
-	-- if w then
-	-- 	w.name.setFocus();
-	-- end
 end
 
 local bUpdateLock = false;
@@ -52,27 +49,3 @@ end
 function getEditMode()
 	return (parentcontrol.window.actions_iedit.getValue() == 1);
 end
-
--- function onHeaderClickDown()
--- 	--Debug.chat("onHeaderClickDown");
--- 	return true;
--- end
-
--- function onHeaderClickRelease(listName)
--- 	--Debug.chat("onHeaderClickRelease");
--- 	if listName=="weapon" then
--- 		weaponlist.setVisible(not weaponlist.isVisible());
--- 	elseif listName=="armor" then
--- 		armorlist.setVisible(not weaponlist.isVisible());
--- 	end
-	
--- 	return true;
--- end
-
-
--- function onUnarmedDamageAction(draginfo, sType)
--- 	local rActor, rDamage = CharManager.getUnarmedDamageRollStructures(getDatabaseNode(), sType);
-	
--- 	ActionDamage.performRoll(draginfo, rActor, rDamage);
--- 	return true;
--- end
