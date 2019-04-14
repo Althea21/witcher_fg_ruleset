@@ -1,0 +1,518 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_magic">
+		<script file="campaign/scripts/char_magic.lua" />
+		<sheetdata>
+			<!--MAGIC STATS REMINDER-->
+			<frame_char name="magic_frame">
+				<bounds>15,0,-29,70</bounds>
+			</frame_char>
+			
+			<!--vigor-->
+			<label>
+				<anchored to="magic_frame" position="insidetopleft" offset="20,15"/>
+				<center />
+				<static textres="char_statslabel_vigor" />
+			</label>
+			<number_charstattotal  name="vigor" source="attributs.vigor">
+				<anchored to="magic_frame" position="insidetopleft" offset="20,35" width="30" height="20" />
+			</number_charstattotal>
+
+			<!--focus-->
+			<label>
+				<anchored to="magic_frame" position="insidetopleft" offset="80,15"/>
+				<center />
+				<static textres="char_label_focus" />
+			</label>
+			<number_statcurrentvalue  name="focus" source="attributs.focus">
+				<anchored to="magic_frame" position="insidetopleft" offset="80,35" width="30" height="20" />
+			</number_statcurrentvalue>
+
+			<!--stamina-->
+			<label>
+				<anchored to="magic_frame" position="insidetopleft" offset="145,15" width="90"/>
+				<center />
+				<static textres="char_derivedstatslabel_stamina" />
+			</label>
+			<number_statcurrentvalue name="stamina_combat" source="attributs.stamina">
+				<anchored to="magic_frame" position="insidetopleft" offset="145,35" width="30" height="20" />
+			</number_statcurrentvalue>
+			<number_derivedstat name="staminamax_combat" source="attributs.staminamax">
+				<anchored to="stamina_combat" position="right" offset="30,0" width="30" height="20" />
+			</number_derivedstat>
+			<label>
+				<anchored to="staminamax_combat" position="right" offset="-47,0" />
+				<static textres="char_special_divide" />
+			</label>
+			
+			<!--recovery-->
+			<label>
+				<anchored to="magic_frame" position="insidetopleft" offset="270,15" width="45"/>
+				<center />
+				<static textres="char_derivedstatslabel_recoveryshort" />
+			</label>
+			<number_derivedstat name="recovery_combat" source="attributs.recovery">
+				<anchored to="magic_frame" position="insidetopleft" offset="270,35" width="30" height="20" />
+			</number_derivedstat>
+			<buttoncontrol name="button_recovery">
+				<anchored to="recovery_combat" position="right" offset="5,0" width="20" height="20" />
+				<icon normal="button_action_heal" pressed="button_action_heal_down" />
+				<cursor hover="hand" />
+				<nodrag />
+				<script>
+					function action(draginfo)
+						window.onRecoverAction();
+					end
+
+					function onButtonPress()
+						action();
+					end
+				</script>
+			</buttoncontrol>
+			
+			<!--stun-->
+			<label>
+				<anchored to="magic_frame" position="insidetopleft" offset="360,15"/>
+				<static textres="char_derivedstatslabel_stun" />
+			</label>
+			<number_derivedstat_rollable name="stun_combat" source="attributs.stun">
+				<anchored to="magic_frame" position="insidetopleft" offset="360,35" width="30" height="20" />
+				<script>
+					function action(draginfo)
+						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
+						
+						ActionSave.performRoll(draginfo, rActor, "stun");
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+
+					function onDoubleClick(x,y)
+						return action();
+					end
+				</script>
+			</number_derivedstat_rollable>
+			
+			<!--initiative-->
+			<label>
+				<anchored to="magic_frame" position="insidetopleft" offset="430,15" width="30"/>
+				<center />
+				<static textres="char_combat_initiative" />
+			</label>
+			<number_derivedstat_rollable name="init_combat" source="attributs.reflex">
+				<anchored to="magic_frame" position="insidetopleft" offset="430,35" width="30" height="20" />
+				<displaysign /> 
+				<script>
+					function action(draginfo)
+						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
+						ActionInit.performRoll(draginfo, rActor);
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+
+					function onDoubleClick(x,y)
+						return action();
+					end
+				</script>
+			</number_derivedstat_rollable>
+			
+			<!-- Magic Actions frame-->
+			<frame_char name="magic_details_frame">
+				<bounds>15,75,-29,-10</bounds>
+			</frame_char>
+			
+			<!-- spell class -->
+			<subwindow name="magic_details">
+				<anchored to="magic_details_frame" position="over" offset="-8,-10">
+					<bottom offset="-50" />
+				</anchored>
+				<activate />
+				<class>char_magic_details</class>
+			</subwindow>
+			<scrollbar>
+				<anchored to="magic_details" position="right" offset="-2,-4" width="20">
+					<bottom offset="20" />
+				</anchored>
+				<target>magic_details</target>
+			</scrollbar>
+
+			
+		</sheetdata>
+	</windowclass>
+	
+	<!--MAGIC DETAILS -->
+	<windowclass name="char_magic_details">
+		<script file="campaign/scripts/char_magic_details.lua" />
+		<sheetdata>
+			<!-- SPELL CLASSES -->
+			<windowlist  name="spellclasslist">
+				<datasource>.spellclasslist</datasource>
+				<sortby><control>name</control></sortby>
+				<script file="campaign/scripts/char_spellclasslist.lua" />
+				<anchored>
+					<top />
+					<left />
+					<right />
+				</anchored>
+				<class>char_spellclass</class>
+				<noscroll />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+	
+	<!--Spell list class-->
+	<windowclass name="char_spellclass">
+		<margins control="0,0,0,5" />
+		<script file="campaign/scripts/char_spellclass.lua" />
+		<sheetdata>
+			<!-- section header (show/hide list on click) -->
+			<buttonfield name="type">
+				<anchored position="insidetopleft" offset="10,10" width="20" height="20" />
+				<state icon="spellclass_mage" tooltipres="char_spellclass_mage" />
+				<state icon="spellclass_hexes" tooltipres="char_spellclass_hexes" />
+				<state icon="spellclass_ritual" tooltipres="char_spellclass_rituals" />
+				<state icon="spellclass_priest" tooltipres="char_spellclass_priest" />
+				<state icon="spellclass_signs" tooltipres="char_spellclass_signs" />
+			</buttonfield>
+			<label name="label_spellclass">
+				<anchored>
+					<top offset="10" />
+					<left parent="type" anchor="right" offset="10" />
+					<right offset="-8" />
+				</anchored>
+				<static textres="char_spellclass_mage" />
+				<script>
+					<!-- function onClickDown(button, x, y)
+						return window.onHeaderClickDown("weapon");
+					end
+					
+					function onClickRelease(button, x, y)
+						return window.onHeaderClickRelease("weapon");
+					end -->
+				</script>
+			</label>
+			<genericcontrol>
+				<bounds>6,6,-6,32</bounds>
+				<frame name="groupbox2" offset="6,6,6,6" />
+				<disabled />
+			</genericcontrol>
+
+			<!--Novice header-->
+			<genericcontrol name="spellclass_headers">
+				<bounds>6,36,-6,32</bounds>
+				<frame name="rowshade" />
+			</genericcontrol>
+			<label>
+				<anchored position="insidetopleft" offset="5,45"/>
+				<center />
+				<static textres="char_spellclass_name_header" />
+			</label>
+			<label name="spellclass_stacost_label">
+				<anchored position="insidetopright" offset="215,45" width="29"/>
+				<center />
+				<static textres="char_spellclass_stacost_header" />
+			</label>
+			<label>
+				<anchored to="spellclass_stacost_label" position="right" offset="20,0" width="50" />
+				<center />
+				<static textres="char_spellclass_summary_header" />
+			</label>
+			
+			<windowlist  name="spelllist">
+				<datasource>.spelllist</datasource>
+				<sortby><control>name</control></sortby>
+				<script file="campaign/scripts/char_spelllist.lua" />
+				<anchored>
+					<top offset="60" />
+					<left />
+					<right />
+				</anchored>
+				<class>char_spell</class>
+				<noscroll />
+			</windowlist>
+
+		</sheetdata>
+	</windowclass>
+	
+	<!--Spell class-->
+	<windowclass name="char_spell">
+		<margins control="0,0,0,5" />
+		<script file="campaign/scripts/char_spell.lua" />
+		<sheetdata>
+			<genericcontrol name="leftanchor">
+				<anchored width="0" height="0">
+					<top offset="10" />
+					<left offset="5" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="10" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			
+			<!-- Edit / See details -->
+			<buttoncontrol name="activatedetail">
+				<anchored to="rightanchor" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="3" />
+				</anchored>
+				<state icon="button_details" pressed="button_details_down" />
+				<script>
+					function onButtonPress()
+						Interface.openWindow("char_spell_editor", window.getDatabaseNode());
+					end
+				</script>
+			</buttoncontrol>
+
+			<!--cast actions-->
+			<buttoncontrol name="button_cast">
+				<anchored to="rightanchor" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-2" />
+				</anchored>
+				<icon normal="spell_cast" pressed="spell_cast" />
+				<tooltip textres="char_tooltip_castspell" />
+				<cursor hover="hand" />
+				<!-- <script>
+					function action(draginfo)
+						ActionDefense.performRoll(draginfo, window.getDatabaseNode(), "block");
+					end
+
+					function onButtonPress()
+						action();
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+				</script> -->
+			</buttoncontrol>
+			
+			<!--summary-->
+			<basicstring name="summary">
+				<anchored to="rightanchor" width="150" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<frame name="fielddark" offset="7,5,7,5" />
+			</basicstring>
+			
+			<!-- STA cost-->
+			<basicnumber name="stacost">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+			</basicnumber>
+
+			<!--name-->
+			<stringu name="name">
+				<anchored height="20">
+					<top offset="10" />
+					<left parent="leftanchor" anchor="right" relation="relative" offset="0" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</stringu>
+			
+		</sheetdata>
+	</windowclass>
+
+	<!--Spell editor-->
+	<windowclass name="char_spell_editor">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="400" height="450" />
+		</placement>
+		<sizelimits>
+			<minimum width="400" height="350" />
+			<dynamic />
+		</sizelimits>
+		<nodelete />
+		<playercontrol />
+		<tooltip control="name" />
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>spell_title</resource>
+			</windowtitlebar>
+			
+			<genericcontrol name="contentframe">
+				<anchored>
+					<top parent="title" anchor="bottom" offset="15" />
+					<left offset="35" />
+					<right offset="-35" />
+					<bottom offset="-32" />
+				</anchored>
+				<frame name="groupbox" offset="20,17,20,17" />
+				<disabled />
+			</genericcontrol>
+			
+			<subwindow_record name="main">
+				<class>char_spell_editor_main</class>
+				<activate />
+			</subwindow_record>
+			<scrollbar_record>
+				<target>main</target>
+			</scrollbar_record>
+
+			<resize_recordsheet />
+			<close_recordsheet />
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="char_spell_editor_main">
+		<script file="campaign/scripts/char_spelleditor.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<!--name-->
+			<label_column>
+				<static textres="spell_name_label" />
+			</label_column>
+			<string_column name="name" />
+			
+			<!--level-->
+			<label_column name="levellabel">
+				<static textres="spell_level_label" />
+			</label_column>
+			<string_column name="level"/>
+
+			<!--element-->
+			<label_column name="elementlabel">
+				<static textres="spell_element_label" />
+			</label_column>
+			<string_column name="element"/>
+			
+			<!--STA Cost-->
+			<label_column name="stacostlabel">
+				<static textres="spell_stacost_label" />
+			</label_column>
+			<number_column name="stacost"/>
+
+			<!--Range-->
+			<label_column name="rangelabel">
+				<static textres="spell_range_label" />
+			</label_column>
+			<string_column name="range"/>
+
+			<!--Duration-->
+			<label_column name="durationlabel">
+				<static textres="spell_duration_label" />
+			</label_column>
+			<string_column name="duration"/>
+
+			<!--Defense-->
+			<label_column name="defenselabel">
+				<static textres="spell_defense_label" />
+			</label_column>
+			<string_column name="defense"/>
+
+			<!--Preparation time-->
+			<label_column name="preptimelabel">
+				<static textres="spell_preptime_label" />
+			</label_column>
+			<string_column name="preptime"/>
+			
+			<!--DC-->
+			<label_column name="dclabel">
+				<static textres="spell_dc_label" />
+			</label_column>
+			<string_column name="dc"/>
+
+			<!--Components-->
+			<label_column name="componentslabel">
+				<static textres="spell_components_label" />
+			</label_column>
+			<string_column name="components"/>
+
+			<!--Danger-->
+			<label_column name="dangerlabel">
+				<static textres="spell_danger_label" />
+			</label_column>
+			<string_column name="danger"/>
+
+			<!--Requirement to lift-->
+			<label_column name="reqliftlabel">
+				<static textres="spell_reqlift_label" />
+			</label_column>
+			<string_column name="reqlift"/>
+
+			<!--Effect-->
+			<label_column name="effectlabel">
+				<static textres="spell_effect_label" />
+			</label_column>
+			<string_column name="effect">
+				<anchored height="60"/>
+			</string_column>
+		</sheetdata>
+	</windowclass>
+	
+	<!--Weapon damage entry class-->
+	<windowclass name="char_weapon_damage_entry">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="5" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete>
+
+			<basicdice name="dice">
+				<anchored position="insidetopleft" offset="5,5" width="60" height="20" />
+			</basicdice>
+			<label name="label_plus">
+				<anchored to="dice" position="righthigh" offset="5,0" width="10" />
+				<static>+</static>
+			</label>
+			<basicnumber name="bonus">
+				<anchored to="label_plus" position="righthigh" offset="2,0" width="30" height="20" />
+				<hideonvalue>0</hideonvalue>
+			</basicnumber>
+			<label name="label_plus2">
+				<anchored to="bonus" position="righthigh" offset="5,0" width="10" />
+				<static>+</static>
+			</label>
+			<cycler_dmgbonusstat name="dmgbonusstat">
+				<anchored to="label_plus2" position="righthigh" offset="5,0" width="80" height="20" />
+				<parameters>
+					<defaultlabelres mergerule="replace">dmgbonusstat_none</defaultlabelres>
+				</parameters>
+			</cycler_dmgbonusstat>
+			
+			<label name="label_type">
+				<anchored position="insidetopleft" offset="20,25" />
+				<static textres="weapon_label_dmgtype" />
+			</label>
+			<stringu name="type">
+				<anchored to="label_type" position="righthigh" offset="10,0">
+					<right parent="" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+			</stringu>
+		</sheetdata>
+	</windowclass>
+	
+</root>

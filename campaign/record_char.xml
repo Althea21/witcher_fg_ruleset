@@ -73,6 +73,10 @@
 				<bounds>0,65,-1,-20</bounds>
 				<class>charsheet_combat</class>
 			</subwindow>
+			<subwindow name="magic">
+				<bounds>0,65,-1,-20</bounds>
+				<class>charsheet_magic</class>
+			</subwindow>
 			<subwindow name="inventory">
 				<bounds>0,65,-1,-20</bounds>
 				<class>charsheet_inventory</class>
@@ -94,6 +98,10 @@
 				<tab>
 					<icon>tab_combat</icon>
 					<subwindow>combat</subwindow>
+				</tab>
+				<tab>
+					<icon>tab_magic</icon>
+					<subwindow>magic</subwindow>
 				</tab>
 				<tab>
 					<icon>tab_inventory</icon>

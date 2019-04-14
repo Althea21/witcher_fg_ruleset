@@ -33,7 +33,8 @@
 	<string name="char_statslabel_crafting">CRAFTING</string>
 	<string name="char_statslabel_will">WILL</string>
 	<string name="char_statslabel_luck">LUCK</string>
-	
+	<string name="char_statslabel_vigor">VIGOR</string>
+
 	<string name="int">Int</string>
 	<string name="ref">Ref</string>
 	<string name="dex">Dex</string>
@@ -294,4 +295,48 @@
 	<string name="modifier_label_aimleg">Leg</string>
 	<string name="modifier_label_aimlimb">Monster limb</string>
 	<string name="modifier_label_aimtail">Monster wing/tail</string>
+
+	<!--Magic tab-->
+	<string name="char_label_focus">FOCUS</string>
+	<string name="menu_addspellclass">Add Magical Class</string>
+	<string name="menu_deletespellclass">Delete Magical Class</string>
+	<string name="menu_deletespellclassconfirm">Delete Magical Class</string>
+	<string name="menu_addspell">Add Spell</string>
+	<string name="menu_deletespell">Delete Spell</string>
+	<string name="menu_deletespellconfirm">Delete Spell</string>
+	<string name="char_spellclass_mage">Mage spells</string>
+	<string name="char_spellclass_priest">Priest Invocations</string>
+	<string name="char_spellclass_signs">Witcher Signs</string>
+	<string name="char_spellclass_rituals">Rituals</string>
+	<string name="char_spellclass_hexes">Hexes</string>
+	<string name="char_spellclass_name_header">Name</string>
+	<string name="char_spellclass_stacost_header">STA</string>
+	<string name="char_spellclass_summary_header">Summary</string>
+	<string name="char_tooltip_castspell">Cast Spell</string>
+
+	<!--spell editor-->
+	<string name="spell_title">Spell</string>
+	<string name="spell_name_label">Name</string>
+	<string name="spell_level_label">Level</string>
+	<string name="spelllevel_novice_label">Novice</string>
+	<string name="spelllevel_journeyman_label">Journeyman</string>
+	<string name="spelllevel_master_label">Master</string>
+	<string name="spell_element_label">Element</string>
+	<string name="spellelement_water_label">Water</string>
+	<string name="spellelement_fire_label">Fire</string>
+	<string name="spellelement_air_label">Air</string>
+	<string name="spellelement_earth_label">Earth</string>
+	<string name="spellelement_mixed_label">Mixed</string>
+	<string name="spell_stacost_label">STA Cost</string>
+	<string name="spell_effect_label">Effect</string>
+	<string name="spell_range_label">Range</string>
+	<string name="spell_duration_label">Duration</string>
+	<string name="spell_defense_label">Defense</string>
+	<string name="spell_preptime_label">Preparation time</string>
+	<string name="spell_dc_label">DC</string>
+	<string name="spell_components_label">Components</string>
+	<string name="spell_danger_label">Danger</string>
+	<string name="spell_reqlift_label">Requirement to lift</string>
+	
+	
 </root>

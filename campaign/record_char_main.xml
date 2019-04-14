@@ -444,9 +444,39 @@
 				<anchored to="will_base" position="right" offset="-130,0" />
 				<static textres="char_statslabel_will" />
 			</label>
+
+			<number_charstatbase name="vigor_base" source="attributs.vigor_base">
+				<anchored to="will_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+				function onValueChanged()
+					window.onVigorChanged();
+				end
+				</script>
+			</number_charstatbase>
+			<number_charstatmodifier name="vigor_modifier" source="attributs.vigor_modifier">
+				<anchored to="vigor_base" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<script>
+				function onValueChanged()
+					window.onVigorChanged();
+				end
+				</script>
+			</number_charstatmodifier>
+			<number_charstattotal  name="vigor" source="attributs.vigor">
+				<anchored to="vigor_modifier"width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+			</number_charstattotal>
+			<label>
+				<anchored to="vigor_base" position="right" offset="-130,0" />
+				<static textres="char_statslabel_vigor" />
+			</label>
 			
 			<basicnumber name="luck" source="attributs.luck">
-				<anchored to="will_base" position="insidebottomleft" offset="0,-50" width="30" height="20" />
+				<anchored to="vigor_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</basicnumber>
 			<label>
 				<anchored to="luck" position="right" offset="-130,0" />

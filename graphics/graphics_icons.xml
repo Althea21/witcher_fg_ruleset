@@ -47,6 +47,14 @@
 	<icon name="attack_kick_strong" file="graphics/icons/attack_kick_strong.jpg" />
 	<icon name="attack_kick_block" file="graphics/icons/attack_kick_block.jpg" />
 	
+	<!-- Character Sheet : Magic tab-->
+	<icon name="spellclass_mage" file="graphics/icons/caster_mage.png" />
+	<icon name="spellclass_priest" file="graphics/icons/caster_priest.png" />
+	<icon name="spellclass_hexes" file="graphics/icons/caster_hexes.png" />
+	<icon name="spellclass_ritual" file="graphics/icons/caster_ritual.png" />
+	<icon name="spellclass_signs" file="graphics/icons/caster_sign.png" />
+	<icon name="spell_cast" file="graphics/icons/spell_cast.jpg" />
+
 	<!--colored dice-->
 	<icon name="d10gicon" file="graphics/icons/d10_gicon.png" />
 	<icon name="d10ricon" file="graphics/icons/d10_ricon.png" />
@@ -289,6 +297,7 @@
 	<icon name="tab_other" file="graphics/tabs/tab_other.png" />
 	<icon name="tab_powers" file="graphics/tabs/tab_powers.png" />
 	<icon name="tab_skills" file="graphics/tabs/tab_skills.png" />
+	<icon name="tab_magic" file="graphics/tabs/tab_magic.png" />
 	<icon name="tab_spells" file="graphics/tabs/tab_spells.png" />
 	<icon name="tab_xp" file="graphics/tabs/tab_xp.png" />
 	<icon name="tab_log" file="graphics/tabs/tab_log.png" />
@@ -435,4 +444,5 @@
 	<icon name="padlock_closed" file="graphics/icons/padlock_closed.png" />
 	<icon name="record_identified" file="graphics/icons/record_identified.png" />
 	<icon name="record_unidentified" file="graphics/icons/record_unidentified.png" />
+
 </root>

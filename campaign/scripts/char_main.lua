@@ -96,3 +96,7 @@ function onWillChanged()
 	recovery.setValue(physical);
 	stun.setValue(physical);
 end
+
+function onVigorChanged()
+	vigor.setValue(vigor_base.getValue()+vigor_modifier.getValue());
+end
