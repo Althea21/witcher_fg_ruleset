@@ -51,6 +51,7 @@
 	<script name="ActionAttack" file="scripts/manager_action_attack.lua" />
 	<script name="ActionDefense" file="scripts/manager_action_defense.lua" />
 	<script name="ActionDamage" file="scripts/manager_action_damage.lua" />
+	<script name="ActionSpell" file="scripts/manager_action_spell.lua" />
 	<script name="Json" file="scripts/json.lua" />
 	
 </root>

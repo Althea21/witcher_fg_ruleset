@@ -4,109 +4,108 @@
 --
 
 --
--- Management for attack rolls
+-- Management for spell casting rolls
 --
 
--- Queue for tracking pending Attacks for defense, then damage resolution (FIFO)
--- Each item must be formatted like :
---	* sSourceCT : offender (obtained by ActorManager.getCreatureNodeName(rSource) )
---	* sTargetCT : defender (obtained by ActorManager.getCTNodeName(rTarget) )
---	* nAtkValue : value of attack roll (total with modifier, reroll etc...)
---	* nDefValue : value of defense roll (total with modifier, reroll etc...)
--- Item must be cleared after damage resolution
-aAttackQueue = {}
-
 function onInit()
-	-- Register attack actions.  We'll allow use of the modifier stack for those actions.
-	GameSystem.actions["attack"] = { bUseModStack = true };
+	-- Register spell actions.  We'll allow use of the modifier stack for those actions.
+	GameSystem.actions["spellcast"] = { bUseModStack = true };
 	
 	-- Register modifier handler
-	ActionsManager.registerModHandler("attack", onAttackModifier);
+	--ActionsManager.registerModHandler("spellcast", onSpellCastModifier);
 	
 	-- Register the result handler - called after the dice have stopped rolling
-	ActionsManager.registerResultHandler("attack", onAttackRoll);
+	ActionsManager.registerResultHandler("spellcast", onSpellCastRoll);
 end
 
 -- method called by performAction to initiate the roll object which will be given 
 -- to high level ActionsManager to actually perform roll
 -- params :
 --	* rActor		: actor info retrieved by using ActorManager.resolveActor
---	* rWeapon		: weapon node
---	* sAttackType	: attack type (supported : "fast", "strong", "normal"). 
---					  Unknown or missing value will be trated like a "normal" attack
+--	* rSpell		: spell node
 -- returns : 
 --	* rRoll	: roll object
-function getRoll(rActor, rWeapon, sAttackType)
+function getRoll(rActor, rSpell)
+	--Debug.chat(rActor);
+	--Debug.chat(rSpell);
 	-- Initialize a blank rRoll record
 	local rRoll = {};
 	
 	-- Add the 4 minimum parameters needed:
 	-- the action type.
-	rRoll.sType = "attack";
+	rRoll.sType = "spellcast";
 	-- the dice to roll.
 	rRoll.aDice = { "d10" };
 	-- A modifier to apply to the roll, will be overloaded later.
 	rRoll.nMod = 0;
 	-- The description to show in the chat window, will be overloaded later
-	rRoll.sDesc = "[Attack] ";
+	rRoll.sDesc = "[Spell casting] ";
 	
 	-- Add parameters for exploding dice management
 	rRoll.sExplodeMode  = "none";	-- initial roll, will be "fumble" or "crit" on reroll
 	rRoll.nTotalExplodeValue = 0; 	-- cumulative value of exploding rolls
 	rRoll.sStoredDice = "";			-- store all dice for final display message
-	rRoll.sWeaponType = "" ; 		-- range, melee, unarmed (used for fumble resolution)
+	rRoll.sSpellType = "" ; 		-- mage, priest, sign, hex, ritual
 	
+	-- NO LOCATION FOR TIME BEING, SEE LATER
 	-- Add parameters for damage location, may be modified by modifier (see OnAttackModifier) or by rolling location table
-	rRoll.sDamageLocation = "";
+	-- rRoll.sDamageLocation = "";
 	rRoll.sIsLocationRoll = "false";
 	
-	-- Debug.chat(rWeapon);
-	
-	if (rWeapon.range == "R") then
-		rRoll.sWeaponType = "range";
-	elseif (rWeapon.range == "M") then
-		rRoll.sWeaponType = "melee";
-	else
-		rRoll.sWeaponType = "unarmed";
+	-- Debug.chat(rSpell);
+	local parentNode = rSpell.getParent().getParent();
+	if parentNode then
+		local nSpellType = DB.getValue(parentNode, "type", -1);
+		if (nSpellType == 0) then
+			-- mage spell
+			rRoll.sSpellType = "mage" ;
+		elseif (nSpellType == 1) then
+			-- hexes spell class
+			rRoll.sSpellType = "hex" ;
+		elseif (nSpellType == 2) then
+			-- ritual spell class
+			rRoll.sSpellType = "ritual" ;
+		elseif (nSpellType == 3) then
+			-- priest spell class
+			rRoll.sSpellType = "priest" ;
+		elseif (nSpellType == 4) then
+			-- signs spell class
+			rRoll.sSpellType = "sign" ;
+		end
 	end
-	
+
 	-- Look up actor / weapon specific information
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	if nodeActor then
 		local sRollDescription = "";
 		local nRollMod = 0;
 		
-		if sAttackType == "fast" then
-			sRollDescription = "[Fast attack with "..rWeapon.label.."]";
-		elseif sAttackType == "strong" then
-			sRollDescription = "[Strong attack with "..rWeapon.label.."][Strong -3]"; -- changing this may affect onAttackModifier function below
-			nRollMod = nRollMod - 3;
-		else
-			sRollDescription = "[Attack with "..rWeapon.label.."]";
-		end
-		
+		sRollDescription = "[Cast "..DB.getValue(rSpell, "name", "").."]";
+
 		-- stat modifier
 		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
-		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0);
+		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs.will", 0);
 		--sRollDescription = sRollDescription.."["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]"
 		
 		-- skill modifier
+		local sSkill = "";
+		if rRoll.sSpellType == "mage" or rRoll.sSpellType == "priest" or rRoll.sSpellType == "sign" then
+			sSkill = "Spell Casting";
+		elseif rRoll.sSpellType == "hex" then
+			sSkill = "Hex Weaving";
+		elseif rRoll.sSpellType == "ritual" then
+			sSkill = "Ritual Crafting";
+		end
+		
 		for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
-			if (DB.getValue(v, "name", "") == rWeapon.skill) then
+			if (DB.getValue(v, "name", "") == sSkill) then
 				--Debug.chat("skill modifier ("..rWeapon.skill.."): "..DB.getValue(v, "skill_value", 0));
 				nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
 				--sRollDescription = sRollDescription.."["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]"
 				break;
 			end
 		end
-		
-		-- weapon accuracy modifier
-		if (rWeapon.range ~= "U") then
-			--Debug.chat("weapon accuracy modifier : "..rWeapon.weaponaccuracy);
-			nRollMod = nRollMod + rWeapon.weaponaccuracy;
-			--sRollDescription = sRollDescription.."[WA +"..rWeapon.weaponaccuracy.."]"
-		end
-		
+
 		-- Substract equipped armor part EV
 		local nTotalEV = 0;
 		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
@@ -130,36 +129,14 @@ end
 -- method called to initiate attack roll
 -- params :
 --	* draginfo		: info given when rolling from onDragStart event (nil if other event trigger the roll)
---	* rWeapon		: weapon node (actor node if unarmed attack)
---	* sAttackType	: attack type (supported : "fast", "strong", "normal", "punchfast", "punchstrong", "punchnormal", "kickfast", "kickstrong", "kicknormal"). 
---					  Unknown or missing value will be treated like a "normal" attack
-function performRoll(draginfo, rWeapon, sAttackType)
-	-- retreive attack info and actor node 
-	local rActor; 
-	
-	if (string.find(sAttackType, "punch") or string.find(sAttackType, "kick")) then
-		-- unarmed attack
-		rActor = rWeapon;
-		rWeapon = {};
-		rWeapon.range = "U";
-		if (string.find(sAttackType, "punch"))then
-			rWeapon.label = Interface.getString("char_label_punchlabel");
-		elseif (string.find(sAttackType, "kick"))then
-			rWeapon.label = Interface.getString("char_label_kicklabel");
-		end
-		rWeapon.stat = "reflex";
-		rWeapon.skill= "Brawling";
-		
-		sAttackType = string.gsub(sAttackType, "punch", "");
-		sAttackType = string.gsub(sAttackType, "kick", "");
-		
-	else
-		-- weapon attack
-		rActor, rWeapon = CharManager.getWeaponAttackRollStructures(rWeapon);
-	end
+--	* rSpell		: spell node
+function performRoll(draginfo, rSpell)
+	-- retreiveactor node 
+	local nodeChar = rSpell.getChild(".....");
+	local rActor = ActorManager.getActor("pc", nodeChar);
 	
 	-- get roll
-	local rRoll = getRoll(rActor, rWeapon, sAttackType);
+	local rRoll = getRoll(rActor, rSpell);
 	
 	-- roll it !
 	ActionsManager.performAction(draginfo, rActor, rRoll);
@@ -168,8 +145,8 @@ end
 -- HANDLERS --------------------------------------------------------
 
 -- callback for ActionsManager called after the dice have stopped rolling : resolve roll status and display chat message
-function onAttackRoll(rSource, rTarget, rRoll)
-	-- Debug.chat("------- onAttackRoll");
+function onSpellCastRoll(rSource, rTarget, rRoll)
+	-- Debug.chat("------- onSpellCastRoll");
 	-- Debug.chat("--rSource : ");
 	-- Debug.chat(rSource);
 	-- Debug.chat("--rTarget : ");
@@ -233,15 +210,16 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		bDisplayFinalMessage = true;
 	end
 	
+	-- NO LOCATION FOR TIME BEING, SEE LATER
 	-- if no more reroll AND not aiming, roll for location
-	if (bDisplayFinalMessage and rRoll.sDamageLocation == "") then
-		rRoll.sIsLocationRoll = "true";
-		-- reinit rRoll dice
-		rRoll.aDice = { "d10" };
-		-- roll for location
-		bDisplayFinalMessage = false;
-		ActionsManager.performAction(nil, rActor, rRoll);
-	end
+	-- if (bDisplayFinalMessage and rRoll.sDamageLocation == "") then
+	-- 	rRoll.sIsLocationRoll = "true";
+	-- 	-- reinit rRoll dice
+	-- 	rRoll.aDice = { "d10" };
+	-- 	-- roll for location
+	-- 	bDisplayFinalMessage = false;
+	-- 	ActionsManager.performAction(nil, rActor, rRoll);
+	-- end
 	
 	if bDisplayFinalMessage then
 		local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
@@ -249,82 +227,41 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		-- Create the base message based of the source and the final rRoll record (includes dice results).
 		local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
 		
+		-- NO LOCATION FOR TIME BEING, SEE LATER
 		-- update message for auto location
-		local locMessage = "";
-		if rRoll.sDamageLocation == "1" then
-			-- head
-			locMessage = Interface.getString("modifier_label_aimhead");
-		elseif rRoll.sDamageLocation == "2" or rRoll.sDamageLocation == "3" or rRoll.sDamageLocation == "4" then
-			-- torso
-			locMessage = Interface.getString("modifier_label_aimtorso");
-		elseif rRoll.sDamageLocation == "5" then
-			-- human right arm or monster torso
-			locMessage = Interface.getString("modifier_label_location_rightarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertorso");
-		elseif rRoll.sDamageLocation == "6" then
-			-- human left arm or monster right limb
-			locMessage = Interface.getString("modifier_label_location_leftarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
-		elseif rRoll.sDamageLocation == "7" then
-			-- human right leg or monster right limb
-			locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
-		elseif rRoll.sDamageLocation == "8" then
-			-- human right leg or monster left limb
-			locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
-		elseif rRoll.sDamageLocation == "9" then
-			-- human left leg or monster left limb
-			locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
-		elseif rRoll.sDamageLocation == "10" then
-			-- human left leg or monster tail/wing
-			locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertail");
-		end
-		if locMessage ~= "" then
-			rMessage.text = rMessage.text .. "\n["..Interface.getString("modifier_label_location").." ("..rRoll.sDamageLocation..") "..locMessage.."]";
-		end
+		-- local locMessage = "";
+		-- if rRoll.sDamageLocation == "1" then
+		-- 	-- head
+		-- 	locMessage = Interface.getString("modifier_label_aimhead");
+		-- elseif rRoll.sDamageLocation == "2" or rRoll.sDamageLocation == "3" or rRoll.sDamageLocation == "4" then
+		-- 	-- torso
+		-- 	locMessage = Interface.getString("modifier_label_aimtorso");
+		-- elseif rRoll.sDamageLocation == "5" then
+		-- 	-- human right arm or monster torso
+		-- 	locMessage = Interface.getString("modifier_label_location_rightarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertorso");
+		-- elseif rRoll.sDamageLocation == "6" then
+		-- 	-- human left arm or monster right limb
+		-- 	locMessage = Interface.getString("modifier_label_location_leftarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
+		-- elseif rRoll.sDamageLocation == "7" then
+		-- 	-- human right leg or monster right limb
+		-- 	locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
+		-- elseif rRoll.sDamageLocation == "8" then
+		-- 	-- human right leg or monster left limb
+		-- 	locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
+		-- elseif rRoll.sDamageLocation == "9" then
+		-- 	-- human left leg or monster left limb
+		-- 	locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
+		-- elseif rRoll.sDamageLocation == "10" then
+		-- 	-- human left leg or monster tail/wing
+		-- 	locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertail");
+		-- end
+		-- if locMessage ~= "" then
+		-- 	rMessage.text = rMessage.text .. "\n["..Interface.getString("modifier_label_location").." ("..rRoll.sDamageLocation..") "..locMessage.."]";
+		-- end
 		
 		-- update rMessage in case of fumble
 		if (bFumble) then
-			rMessage.text = rMessage.text .. "\n[FUMBLE (".. rRoll.nTotalExplodeValue ..") : ";
-			--Debug.chat(rRoll.nTotalExplodeValue);
-			-- check nTotalExplodeValue and attack type to resolve fumble
-			local nFumbleValue = tonumber(rRoll.nTotalExplodeValue);
-			if ( nFumbleValue <= 5) then
-				rMessage.text = rMessage.text .. Interface.getString("fumble_none");
-			end
-				
-			if (rRoll.sWeaponType == "range") then
-				if (nFumbleValue >= 6 and nFumbleValue <= 7) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_range_6to7");
-				elseif (nFumbleValue >= 8 and nFumbleValue <= 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_range_8to9");
-				elseif (nFumbleValue > 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
-				end
-			elseif (rRoll.sWeaponType == "melee") then
-				if (nFumbleValue == 6) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_6");
-				elseif (nFumbleValue == 7) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_7");
-				elseif (nFumbleValue == 8) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_8");
-				elseif (nFumbleValue == 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_melee_9");
-				elseif (nFumbleValue > 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_range_over9");
-				end
-			elseif (rRoll.sWeaponType == "unarmed") then
-				if (nFumbleValue == 6) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_6");
-				elseif (nFumbleValue == 7) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_7");
-				elseif (nFumbleValue == 8) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_8");
-				elseif (nFumbleValue == 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_9");
-				elseif (nFumbleValue > 9) then
-					rMessage.text = rMessage.text .. Interface.getString("fumble_unarmed_over9");
-				end
-			end
-
-			rMessage.text = rMessage.text .. "]";
+			rMessage.text = rMessage.text .. _buildFumbleMessage(rRoll.sSpellType, rRoll.nTotalExplodeValue);
 		end
 		
 		-- Debug.chat(rMessage);
@@ -335,7 +272,7 @@ function onAttackRoll(rSource, rTarget, rRoll)
 end
 
 -- Modifier handler : additional modifiers to apply to the roll
-function onAttackModifier(rSource, rTarget, rRoll)
+function onSpellCastModifier(rSource, rTarget, rRoll)
 	local aAddDesc = {};
 	local nAddMod = 0;
 	
@@ -546,3 +483,25 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 	return bFumble;
 end
 
+function _buildFumbleMessage(sSpellType, nTotalExplodeValue)
+	local nFumbleValue = tonumber(nTotalExplodeValue);
+	local sMessage = "\n[FUMBLE (".. nTotalExplodeValue ..") : ";
+	-- check nTotalExplodeValue and spell type to resolve fumble
+	if sSpellType == "mage" or sSpellType == "priest" or sSpellType == "sign" then
+		if nFumbleValue <= 6 then
+			sMessage = sMessage .. Interface.getString("fumble_magic_6");
+		elseif nFumbleValue <= 9 then
+			sMessage = sMessage .. Interface.getString("fumble_magic_9");
+		else
+			sMessage = sMessage .. Interface.getString("fumble_magic_over9");
+		end
+	elseif sSpellType == "hex" then
+		sMessage = sMessage .. Interface.getString("fumble_hex");
+	elseif sSpellType == "ritual" then
+		sMessage = sMessage .. Interface.getString("fumble_ritual");
+	end
+
+	sMessage = sMessage .. "]";
+
+	return sMessage;
+end

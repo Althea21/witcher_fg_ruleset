@@ -288,9 +288,9 @@
 				<icon normal="spell_cast" pressed="spell_cast" />
 				<tooltip textres="char_tooltip_castspell" />
 				<cursor hover="hand" />
-				<!-- <script>
+				<script>
 					function action(draginfo)
-						ActionDefense.performRoll(draginfo, window.getDatabaseNode(), "block");
+						ActionSpell.performRoll(draginfo, window.getDatabaseNode());
 					end
 
 					function onButtonPress()
@@ -300,7 +300,7 @@
 					function onDragStart(button, x, y, draginfo)
 						return action(draginfo);
 					end
-				</script> -->
+				</script>
 			</buttoncontrol>
 			
 			<!--summary-->
@@ -462,7 +462,7 @@
 		</sheetdata>
 	</windowclass>
 	
-	<!--Weapon damage entry class-->
+	<!--Weapon damage entry class
 	<windowclass name="char_weapon_damage_entry">
 		<margins control="0,0,0,2" />
 		<sheetdata>
@@ -513,6 +513,6 @@
 				<multilinespacing>20</multilinespacing>
 			</stringu>
 		</sheetdata>
-	</windowclass>
+	</windowclass>-->
 	
 </root>

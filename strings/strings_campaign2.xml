@@ -337,6 +337,11 @@
 	<string name="spell_components_label">Components</string>
 	<string name="spell_danger_label">Danger</string>
 	<string name="spell_reqlift_label">Requirement to lift</string>
-	
-	
+
+	<!--Magic fumble messages-->
+	<string name="fumble_magic_6">Magic sparks and crackles and you take 1 point of damage for every point you fumbled by, but the spell still goes off.</string>
+	<string name="fumble_magic_9">The magic that is already partially through you ignites inside you. The spell fails and you suffer an elemental fumble effect.</string>
+	<string name="fumble_magic_over9">Your magic explodes with a catastrophic effect. Not only do you suffer an elemental fumble effect, but any focusing item you are carrying explodes as if it were a bomb (doing 1d10 damage) with a 2 meter radius.</string>
+	<string name="fumble_ritual">You take 1 point of damage for each point of Stamina spent.</string>
+	<string name="fumble_hex">You have a 50% chance of inficting the hex on yourself.</string>
 </root>
