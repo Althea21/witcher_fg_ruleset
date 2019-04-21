@@ -141,7 +141,7 @@ function performRoll(draginfo, rSpell)
 	local nCurrentSTA = tonumber(DB.getValue(nodeChar, "attributs.stamina", 0));
 	local nSTACost = tonumber(DB.getValue(rSpell, "stacost", 0));
 	if nSTACost > nCurrentSTA then
-		local msg = {};
+		local msg = ChatManager.createBaseMessage(rActor, nil);
 		msg.text = Interface.getString("spellcasting_notenoughSTA");
 		Comm.deliverChatMessage(msg);
 	else

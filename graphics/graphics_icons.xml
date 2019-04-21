@@ -6,7 +6,9 @@
 -->
 
 <root>
+	<icon name="rulesetlogo" file="graphics/icons/rulesetlogo.png" />
 	
+
 	<icon name="button_ct" file="graphics/sidebar/button_ct.png" />
 	<icon name="button_ct_down" file="graphics/sidebar/button_ct_down.png" />
 	<icon name="button_partysheet" file="graphics/sidebar/button_partysheet.png" />

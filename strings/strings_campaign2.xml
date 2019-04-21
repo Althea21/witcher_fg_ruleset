@@ -57,6 +57,8 @@
 	<string name="char_derivedstatslabel_kick">KICK</string>
 	
 	<string name="char_special_divide">/</string>
+
+	<string name="char_recoveryaction">take a round to recover %i Stamina</string>
 	
 	<!-- List RACE -->
 	<string name="list_race_human">Human</string>

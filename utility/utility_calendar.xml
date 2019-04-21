@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="calendar">
+		<frame>calendar</frame>
+		<placement>
+			<size width="655" height="500" />
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum width="460" height="300" />
+		</sizelimits>
+		<softclose />
+		<nodelete />
+		<script file="utility/scripts/calendar_top.lua" />
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>calendar_window_title</resource>
+			</windowtitlebar>
+			<anchor_title_calendar name="contentanchor" />
+		
+			<anchor_calendar />
+			<subwindow_record name="sub_main">
+				<class>calendar_main</class>
+			</subwindow_record>
+			<subwindow_record name="sub_select">
+				<class>calendar_select</class>
+			</subwindow_record>
+			<subwindow_record name="sub_empty">
+				<class>calendar_empty</class>
+			</subwindow_record>
+			
+			<resize_calendar />
+			<helper_calendar />
+			<close_calendar />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="calendar_empty">
+		<sheetdata>
+			<genericcontrol name="list">
+				<bounds>25,15,-30,-15</bounds>
+				<frame name="groupbox" offset="15,15,20,15" />
+			</genericcontrol>
+			
+			<stringcontrol name="emptymessage">
+				<anchored>
+					<top anchor="center" offset="-8" />
+					<left />
+					<right />
+				</anchored>
+				<font>calendarmessage</font>
+				<static textres="calendar_msg_empty" />
+				<center />
+			</stringcontrol>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="calendar_select">
+		<script>
+			function onListChanged()
+				local bEmpty = (list.getWindowCount() == 0);
+				string_listadd.setVisible(bEmpty);
+				button_listadd.setVisible(bEmpty);
+			end
+		</script>
+		<sheetdata>
+			<windowlist name="list">
+				<bounds>25,15,-30,-15</bounds>
+				<frame name="groupbox" offset="15,15,20,15" />
+				<datasource>.base</datasource>
+				<useallmodules />
+				<class>calendar_base</class>
+				<columns width="250" fillwidth="true" />
+				<script>
+					function onListChanged()
+						window.onListChanged();
+					end
+				</script>
+			</windowlist>
+			<scrollbar_list />
+			
+			<stringcontrol name="string_listadd">
+				<anchored to="list">
+					<top anchor="center" offset="-8" />
+					<left />
+					<right />
+				</anchored>
+				<font>reference-i</font>
+				<center />
+				<invisible />
+				<static textres="calendar_msg_activate" />
+			</stringcontrol>
+			<button_text name="button_listadd">
+				<anchored to="string_listadd" width="60" height="25">
+					<top anchor="bottom" offset="10" />
+					<left anchor="center" offset="-30" />
+				</anchored>
+				<state textres="calendar_button_modules" />
+				<invisible />
+				<script>
+					function onButtonPress()
+						local w = Interface.openWindow("moduleselection", "");
+						w.setDataFilter();
+					end
+				</script>
+			</button_text>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="calendar_base">
+		<frame>calendarselectentry</frame>
+		<sizelimits>
+			<minimum height="100" />
+		</sizelimits>
+		<sheetdata>
+			<genericcontrol>
+				<bounds>10,20,63,63</bounds>
+				<icon>calendar</icon>
+				<disabled />
+			</genericcontrol>
+			<stringfield name="name">
+				<bounds>80,23,-10,15</bounds>
+				<font>calendarselecttitle</font>
+				<static />
+				<disabled />
+			</stringfield>
+			<stringfield name="setting">
+				<bounds>80,40,-10,15</bounds>
+				<font>calendarselectbody</font>
+				<static />
+				<disabled />
+			</stringfield>
+			<genericcontrol>
+				<bounds>0,0,-1,-1</bounds>
+				<script>
+					function onDoubleClick(x, y)
+						CalendarManager.select(window.getDatabaseNode());
+					end
+				</script>
+			</genericcontrol>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="calendar_main">
+		<script file="utility/scripts/calendar_log.lua" />
+		<sheetdata>
+			<genericcontrol name="dateframe">
+				<bounds>10,0,-10,60</bounds>
+				<frame name="groupbox" />
+				<disabled />
+			</genericcontrol>
+
+			<buttoncontrol name="button_dateoutput">
+				<anchored to="dateframe" position="insidetopleft" offset="15,22" width="25" height="25" />
+				<icon normal="button_speak" pressed="button_speak_down" />
+				<tooltip textres="calendar_tooltip_dateoutput" />
+				<gmvisibleonly />
+				<script>
+					function onButtonPress()
+						CalendarManager.outputDate();
+					end
+				</script>
+			</buttoncontrol>
+
+			<hn name="currentday" source="current.day">
+				<script>
+					function onValueChanged()
+						window.onDateChanged();
+					end
+				</script>
+			</hn>
+			<hn name="currentmonth" source="current.month">
+				<script>
+					function onValueChanged()
+						window.onDateChanged();
+					end
+				</script>
+			</hn>
+			<stringcontrol name="viewdate">
+				<anchored to="dateframe" height="20">
+					<right anchor="center" offset="-80" />
+					<top offset="25" />
+				</anchored>
+				<!-- <color>5A1E33</color> -->
+				<font>calendarbold</font>
+				<nodrag />
+				<nodragselect />
+				<readonly />
+			</stringcontrol>
+			<label_fieldtop>
+				<anchored to="viewdate" />
+				<static textres="calendar_label_date" />
+			</label_fieldtop>
+			<basicnumber name="currentyear" source="current.year">
+				<anchored to="dateframe" width="40" height="20">
+					<left anchor="center" offset="-70" />
+					<top offset="25" />
+				</anchored>
+				<!-- <color>5A1E33</color> -->
+				<hideonvalue>0</hideonvalue>
+				<delaykeyupdate />
+				<script>
+					function onValueChanged()
+						window.onYearChanged();
+					end
+				</script>
+			</basicnumber>
+			<label_fieldtop>
+				<anchored to="currentyear" />
+				<static textres="calendar_label_year" />
+			</label_fieldtop>
+			<basicstring name="currentepoch" source="current.epoch">
+				<anchored to="currentyear" position="righthigh" offset="10,0" width="30" height="20" />
+				<font>calendarbold</font>
+				<!-- <color>5A1E33</color> -->
+				<center />
+			</basicstring>
+			<label_fieldtop>
+				<anchored to="currentepoch" />
+				<static textres="calendar_label_epoch" />
+			</label_fieldtop>
+			<buttoncontrol name="button_setdate">
+				<anchored to="currentepoch" position="righthigh" offset="10,0" width="20" height="20" />
+				<tooltip textres="calendar_tooltip_dateset" />
+				<icon normal="arrowleft" pressed="arrowleft" />
+				<gmvisibleonly />
+				<script>
+					function onButtonPress()
+						window.onSetButtonPressed();
+					end
+				</script>
+			</buttoncontrol>
+
+			<label name="currenthour">
+				<anchored to="dateframe" width="20">
+					<left anchor="center" offset="70" />
+					<top offset="25" />
+				</anchored>
+				<frame name="fieldlight" offset="7,5,7,5" />
+				<stateframe>
+					<hover name="fieldfocus" offset="7,5,7,5" />
+				</stateframe>
+				<font>calendarbold</font>
+				<!-- <color>5A1E33</color> -->
+				<center />
+				<script>
+					function onInit()
+						DB.addHandler("calendar.current.hour", "onUpdate", onSourceChanged);
+						onSourceChanged();
+					end
+					
+					function onClose()
+						DB.removeHandler("calendar.current.hour", "onUpdate", onSourceChanged);
+					end
+					
+					function onSourceChanged()
+						local nHour, sPhase = CalendarManager.getDisplayHour();
+						setValue(string.format("%2d", nHour));
+						window.currentphase.setValue(sPhase);
+					end
+					
+					function onWheel(n)
+						if not Input.isControlPressed() then
+							return false;
+						end
+						CalendarManager.adjustHours(n);
+						return true;
+					end
+				</script>
+			</label>
+			<label name="timesep">
+				<anchored to="currenthour" position="righthigh" offset="5" />
+				<static>:</static>
+			</label>
+			<label name="currentminute">
+				<anchored to="timesep" position="righthigh" offset="6" width="20" />
+				<frame name="fieldlight" offset="7,5,7,5" />
+				<stateframe>
+					<hover name="fieldfocus" offset="7,5,7,5" />
+				</stateframe>
+				<font>calendarbold</font>
+				<!-- <color>5A1E33</color> -->
+				<readonly />
+				<center />
+				<script>
+					function onInit()
+						DB.addHandler("calendar.current.minute", "onUpdate", onSourceChanged);
+						onSourceChanged();
+					end
+					
+					function onClose()
+						DB.removeHandler("calendar.current.minute", "onUpdate", onSourceChanged);
+					end
+					
+					function onSourceChanged()
+						setValue(string.format("%02d", DB.getValue("calendar.current.minute", 0)));
+					end
+					
+					function onWheel(n)
+						if not Input.isControlPressed() then
+							return false;
+						end
+						CalendarManager.adjustMinutes(n);
+						return true;
+					end
+				</script>
+			</label>
+			<label name="currentphase">
+				<anchored to="currentminute" position="righthigh" offset="5" />
+				<font>calendarbold</font>
+				<!-- <color>5A1E33</color> -->
+			</label>
+
+			<buttoncontrol name="button_timeoutput">
+				<anchored to="dateframe" position="insidetopright" offset="15,22" width="25" height="25" />
+				<icon normal="button_speak" pressed="button_speak_down" />
+				<tooltip textres="calendar_tooltip_timeoutput" />
+				<gmvisibleonly />
+				<script>
+					function onButtonPress()
+						CalendarManager.outputTime();
+					end
+				</script>
+			</buttoncontrol>
+
+			<windowlist name="list">
+				<bounds>25,75,-30,-65</bounds>
+				<frame name="groupbox" offset="15,15,20,15" />
+				<class>calendar_month</class>
+				<skipempty />
+				<columns width="155" fillwidth="true" />
+				<script file="utility/scripts/calendar_period_list.lua" />
+			</windowlist>
+			<scrollbar_list />
+			
+			<genericcontrol name="logframe">
+				<bounds>10,-50,-10,50</bounds>
+				<frame name="groupbox" />
+				<disabled />
+			</genericcontrol>
+
+			<button_text name="button_view">
+				<anchored to="logframe" position="insidetopleft" offset="20,15" width="100" height="20" />
+				<state textres="calendar_button_logview" />
+				<invisible />
+				<script>
+					function onButtonPress()
+						window.addLogEntryToSelected();
+					end
+				</script>
+			</button_text>
+			<button_text name="button_addlog">
+				<anchored to="logframe" position="insidetopleft" offset="20,15" width="100" height="20" />
+				<state textres="calendar_button_logadd" />
+				<invisible />
+				<script>
+					function onButtonPress()
+						window.addLogEntryToSelected();
+					end
+				</script>
+			</button_text>
+			
+			<button_text name="button_viewall">
+				<anchored to="logframe" position="insidetopright" offset="20,15" width="70" height="20" />
+				<state textres="calendar_button_logviewall" />
+				<script>
+					function onButtonPress()
+						Interface.openWindow("loglist", "calendar.log");
+					end
+				</script>
+			</button_text>
+		</sheetdata>
+	</windowclass>
+	
+	<windowclass name="calendar_month">
+		<margins control="0,0,0,10" />
+		<frame>calendarmonthentry</frame>
+		<sheetdata>
+			<hnc name="month">
+				<script>
+					function onInit()
+						onValueChanged();
+					end
+					
+					function onValueChanged()
+						window.label_period.setValue(CalendarManager.getMonthName(getValue()));
+					end
+				</script>
+			</hnc>
+			
+			<label name="label_period">
+				<anchored position="insidetop" offset="0,5" height="15" />
+				<center />
+				<font>calendarbold</font>
+				<empty textres="calendar_label_month" />
+			</label>
+			<windowlist name="list_days">
+				<anchored>
+					<top offset="20" />
+					<left offset="7" />
+					<right />
+				</anchored>
+				<class>calendar_day</class>
+				<skipempty />
+				<noscroll />
+				<columns width="25" fillwidth="true" />
+			</windowlist>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="calendar_day">
+		<sizelimits>
+			<minimum width="20" height="20" />
+			<maximum width="20" height="20" />
+		</sizelimits>
+		<script file="utility/scripts/calendar_day.lua" />
+		<sheetdata>
+			<hnc name="day"/>
+
+			<genericcontrol name="icon_gmevent">
+				<anchored position="insidebottomleft" width="8" height="8" />
+				<icon>dot_blue</icon>
+				<invisible />
+			</genericcontrol>
+			<genericcontrol name="icon_event">
+				<anchored position="insidebottomright" width="8" height="8" />
+				<icon>dot_red</icon>
+				<invisible />
+			</genericcontrol>
+
+			<stringcontrol name="label_day">
+				<bounds>0,3,20,16</bounds>
+				<stateframe>
+					<hover name="fieldfocus" offset="4,5,4,5" />
+				</stateframe>
+				<font>calendarday</font>
+				<underlineoffset>-1</underlineoffset>
+				<center />
+				<nodrag />
+				<nodragselect />
+				<readonly />
+				<script>
+					function onClickDown(button,x,y)
+						return true;
+					end
+					
+					function onClickRelease(x,y)
+						local nDay = window.day.getValue();
+						if nDay > 0 then
+							local nMonth = window.windowlist.window.month.getValue();
+							window.windowlist.window.windowlist.window.setSelectedDate(nMonth, nDay);
+						end
+						return true;
+					end
+
+					function onDoubleClick(button,x,y) 
+						local nDay = window.day.getValue();
+						if nDay > 0 then
+							local nMonth = window.windowlist.window.month.getValue();
+							window.windowlist.window.windowlist.window.addLogEntry(nMonth, nDay);
+						end
+					end
+				</script>
+			</stringcontrol>
+		</sheetdata>
+	</windowclass>
+</root>

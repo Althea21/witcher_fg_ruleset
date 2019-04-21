@@ -6,6 +6,11 @@
 -->
 
 <root version="3.1" release="7" logo="logo.png">
+	<announcement text="The Witcher TRPG ruleset v0.1.1 for Fantasy Grounds\r
+	The Witcher TRPG is edited by Talsorian Games Inc.
+	The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved. 
+	The Witcher game is based on the prose of Andrzej Sapkowski.\r\r
+	This ruleset is a fan made project and not an official product from Talsorian Inc. nor CD Project Red." font="emotefont" icon="rulesetlogo" />
 	<!-- Attributes -->
 	<description>
 		<text>The Witcher</text>
@@ -37,6 +42,7 @@
 	
 	<!-- Utilities -->
 	<includefile source="utility/utility_modifiers.xml" />
+	<includefile source="utility/utility_calendar.xml" />
 	
 	<!-- PJ Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
