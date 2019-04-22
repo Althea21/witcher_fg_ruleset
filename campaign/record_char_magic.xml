@@ -298,7 +298,8 @@
 					end
 					
 					function onDragStart(button, x, y, draginfo)
-						return action(draginfo);
+						action(draginfo);
+						return true;
 					end
 				</script>
 			</buttoncontrol>
