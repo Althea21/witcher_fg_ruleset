@@ -31,6 +31,24 @@ function onCharItemAdd(nodeItem)
 	-- DB.setValue(nodeItem, "carried", "number", 1);
 end
 
+function onActionDrop(draginfo, nodeChar)
+	-- if draginfo.isType("spellmove") then
+	-- 	ChatManager.Message(Interface.getString("spell_error_dropclassmissing"));
+	-- 	return true;
+	-- elseif draginfo.isType("spelldescwithlevel") then
+	-- 	ChatManager.Message(Interface.getString("spell_error_dropclassmissing"));
+	-- 	return true;
+	-- elseif draginfo.isType("shortcut") then
+	-- 	local sClass, sRecord = draginfo.getShortcutData();
+		
+	-- 	if sClass == "spelldesc" or sClass == "spelldesc2" then
+	-- 		ChatManager.Message(Interface.getString("spell_error_dropclasslevelmissing"));
+	-- 		return true;
+	-- 	elseif LibraryData.isRecordDisplayClass("item", sClass) and ItemManager2.isWeapon(sRecord) then
+	-- 		return ItemManager.handleAnyDrop(nodeChar, draginfo);
+	-- 	end
+	-- end
+end
 --
 -- weapon management
 --

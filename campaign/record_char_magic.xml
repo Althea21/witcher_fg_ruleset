@@ -266,19 +266,15 @@
 			</genericcontrol>
 			
 			<!-- Edit / See details -->
-			<buttoncontrol name="activatedetail">
-				<anchored to="rightanchor" width="20" height="20">
-					<top />
-					<right anchor="left" relation="relative" offset="3" />
+			<linkcontrol name="activatedetail">
+				<anchored to="rightanchor" width="12" height="12">
+					<top offset="4"/>
+					<right anchor="left" relation="relative" offset="0" />
 				</anchored>
-				<state icon="button_details" pressed="button_details_down" />
-				<script>
-					function onButtonPress()
-						Interface.openWindow("char_spell_editor", window.getDatabaseNode());
-					end
-				</script>
-			</buttoncontrol>
-
+				<class>spelldesc</class>
+				<readonly />
+			</linkcontrol>
+			
 			<!--cast actions-->
 			<buttoncontrol name="button_cast">
 				<anchored to="rightanchor" width="20" height="20">
@@ -305,7 +301,7 @@
 			</buttoncontrol>
 			
 			<!--summary-->
-			<basicstring name="summary">
+			<basicstring name="shortdescription">
 				<anchored to="rightanchor" width="150" height="20">
 					<top />
 					<right anchor="left" relation="relative" offset="-10" />
@@ -335,7 +331,7 @@
 	</windowclass>
 
 	<!--Spell editor-->
-	<windowclass name="char_spell_editor">
+	<windowclass name="spelldesc">
 		<frame>recordsheet</frame>
 		<placement>
 			<size width="400" height="450" />
@@ -364,7 +360,7 @@
 			</genericcontrol>
 			
 			<subwindow_record name="main">
-				<class>char_spell_editor_main</class>
+				<class>spelldesc_main</class>
 				<activate />
 			</subwindow_record>
 			<scrollbar_record>
@@ -376,7 +372,7 @@
 		</sheetdata>
 	</windowclass>
 	
-	<windowclass name="char_spell_editor_main">
+	<windowclass name="spelldesc_main">
 		<script file="campaign/scripts/char_spelleditor.lua" />
 		<sheetdata>
 			<anchor_column name="columnanchor" />

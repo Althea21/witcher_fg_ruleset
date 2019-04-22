@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<!-- Class spell lists -->
+	<!-- Display a <spelllists> section of spells module-->
+	<windowclass name="reference_classspelllist">
+		<frame>referencelist</frame>
+		<placement>
+			<size width="750" height="450" />
+		</placement>
+		<sizelimits>
+			<minimum width="750" height="450" />
+			<dynamic />
+		</sizelimits>
+		<minimize>minimized_reference</minimize>
+		<tooltip field="description" />
+		<nodelete />
+		<sheetdata>
+			<windowtitlebar name="reftitle">
+				<field>description</field>
+			</windowtitlebar>
+			<anchor_reftitle name="contentanchor" />
+
+			<list_reftablegroup name="grouplist">
+				<datasource>.groups</datasource>
+				<class>reference_spellgroup</class>
+			</list_reftablegroup>
+			<scrollbar_reftablegroup />
+			
+			<filter_reftable name="filter">
+				<target>grouplist,spelllist</target>
+			</filter_reftable>
+			<button_reftable_expand>
+				<target>grouplist,spelllist</target>
+			</button_reftable_expand>
+			<button_reftable_collapse>
+				<target>grouplist,spelllist</target>
+			</button_reftable_collapse>
+			
+			<resize_referencelist />
+			<close_referencelist />
+		</sheetdata>
+	</windowclass>
+
+	<!-- Spell group (level) -->
+	<windowclass name="reference_spellgroup">
+		<script file="ref/scripts/ref_listgroup.lua" />
+		<sheetdata>
+			<anchor_column name="topanchor" />
+			
+			<frame_groupdesc name="descframe" />
+			<string_groupdesc name="description">
+				<target>spelllist</target>
+			</string_groupdesc>
+
+			<list_reftablegroupitems name="spelllist">
+				<datasource>.spells</datasource>
+				<class>reference_spellitem</class>
+			</list_reftablegroupitems>
+		</sheetdata>
+	</windowclass>
+
+	<!-- Spell item -->
+	<windowclass name="reference_spellitem">
+		<margins control="0,0,0,2" />
+		<script>
+			function onInit()
+				spellnode = link.getTargetDatabaseNode();
+				if spellnode then
+					shortdescription.setValue(DB.getValue(spellnode, "shortdescription", ""));
+				end
+			end
+		</script>
+		<sheetdata>
+			<linkfield name="link">
+				<bounds>5,2,20,20</bounds>
+				<script>
+					function onDragStart(button, x, y, draginfo)
+						draginfo.setType("spelldesc");
+						draginfo.setIcon("button_link");
+						draginfo.setShortcutData(getValue());
+						draginfo.setDescription(DB.getValue(getTargetDatabaseNode(), "name", ""));
+						
+						local base = draginfo.createBaseData("shortcut");
+						base.setShortcutData(getValue());
+						
+						return true;
+					end
+				</script>
+			</linkfield>
+
+			<stringc_list_link name="name">
+				<bounds>30,2,140,20</bounds>
+			</stringc_list_link>
+			<stringcontrol name="shortdescription">
+				<bounds>235,2,-1,20</bounds>
+				<font>reference-r</font>
+				<static />
+			</stringcontrol>
+		</sheetdata>
+	</windowclass>
+
+</root>

@@ -44,6 +44,9 @@
 	<includefile source="utility/utility_modifiers.xml" />
 	<includefile source="utility/utility_calendar.xml" />
 	
+	<!-- Reference -->
+	<includefile source="ref/ref_spells.xml" />
+
 	<!-- PJ Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
 	<script name="SkillsTable" file="campaign/scripts/skills_table.lua" />

@@ -343,6 +343,8 @@
 	<string name="spellcasting_notenoughSTA">Not enough Stamina to cast this spell</string>
 	<string name="spellcasting_overexertion">[OVEREXERTION : - %i HP]</string>
 
+	<string name="spell_droptargeterror">The spell is not compatible with the target magical class.</string>
+
 	<!--Magic fumble messages-->
 	<string name="fumble_magic_6">Magic sparks and crackles and you take 1 point of damage for every point you fumbled by, but the spell still goes off.</string>
 	<string name="fumble_magic_9">The magic that is already partially through you ignites inside you. The spell fails and you suffer an elemental fumble effect.</string>

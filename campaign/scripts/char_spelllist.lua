@@ -35,6 +35,7 @@ function addEntry(bFocus)
 end
 
 function onDrop(x, y, draginfo)
+	--Debug.chat("spelllist onDrop");
 	return CharManager.onActionDrop(draginfo, window.getDatabaseNode());
 end
 
