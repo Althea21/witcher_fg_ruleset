@@ -997,16 +997,10 @@
 				<center />
 			</header_column>
 			<!--Reliability-->
-			<basicnumber name="reliability">
-				<anchored width="30" height="20">
-					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
-					<left offset="65" />
-				</anchored>
-			</basicnumber>
-			<label>
-				<anchored to="reliability" position="right" offset="-95,0" />
+			<label_column>
 				<static textres="weapon_property_reliability" />
-			</label>
+			</label_column>
+			<number_column name="reliability"/>
 			<basicnumber name="reliabilitymax">
 				<anchored to="reliability" position="right" offset="30,0" width="30" height="20" />
 			</basicnumber>
@@ -1015,10 +1009,13 @@
 				<static textres="char_special_divide" />
 			</label>
 			<!--Concealment-->
+			<label_column>
+				<static textres="weapon_property_concealment" />
+			</label_column>
 			<combobox name="concealment">
 				<anchored width="100" height="20">
-					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
-					<left offset="82" />
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+					<left offset="97" />
 				</anchored>
 				<listdirection>down</listdirection>
 				<script>
@@ -1032,10 +1029,6 @@
 				</script>
 				<default></default>
 			</combobox>
-			<label>
-				<anchored to="concealment" position="left" offset="10,0" />
-				<static textres="weapon_property_concealment" />
-			</label>
 			
 			<!-- ATTACK -->
 			<header_column name="header_attack">

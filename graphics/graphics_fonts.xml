@@ -266,7 +266,7 @@
 	<font name="sheetlabelmini">
 		<fgffile name="graphics/fonts/regular-8.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="13" />
-		<color value="#000000" />
+		<color value="#98856C" />
 	</font>
 	<!-- Reference -->
 		<font name="reference-section">
