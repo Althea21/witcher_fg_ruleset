@@ -7,6 +7,8 @@
 
 <root>
 	<windowclass name="charsheet_abilities">
+		<script>
+		</script>
 		<sheetdata>
 			<!-- Variables cachées -->
 			<hn name="intelligence" source="attributs.intelligence" />
@@ -21,106 +23,77 @@
 				<default>0</default>
 			</hn>
 			<hs name="profession" source="identite.profession">
-				<script>
-					function getValStat(sStat)
-						local nVal = 0;
-						if sStat == "INT" then
-							nVal = window.intelligence.getValue();
-						elseif sStat == "REF" then
-							nVal = window.reflex.getValue();
-						elseif sStat == "DEX" then
-							nVal = window.dexterity.getValue();
-						elseif sStat == "BOD" then
-							nVal = window.body.getValue();
-						elseif sStat == "EMP" then
-							nVal = window.empathy.getValue();
-						elseif sStat == "CRA" then
-							nVal = window.crafting.getValue();
-						elseif sStat == "WIL" then
-							nVal = window.will.getValue();
-						end
-						return nVal;
-					end
-					
+				<script>				
 					function onValueChanged()
 						local sVal = getValue();
 						local sSkill = "";
 						local sAbility = "";
 						local sStat = "";
-						local nValStat = 0;
 						
-						sSkill = ProfessionTable.tbl_profession[sVal]["root"]["skill"];
-						window.root_skills_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal]["root"]["stat"];
-						window.root_skills_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.root_skills_nb.setValue(nValStat);
-						
-						sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch1"];
-						window.a1_label_ss.setValue(sAbility);
-						
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-						window.a1_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-						window.a1_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.a1_ability_nb.setValue(nValStat);
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-						window.a2_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-						window.a2_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.a2_ability_nb.setValue(nValStat);
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-						window.a3_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-						window.a3_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.a3_ability_nb.setValue(nValStat);
-						
-						sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch2"];
-						window.a2_label_ss.setValue(sAbility);
-						
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-						window.b1_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-						window.b1_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.b1_ability_nb.setValue(nValStat);
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-						window.b2_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-						window.b2_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.b2_ability_nb.setValue(nValStat);
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-						window.b3_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-						window.b3_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.b3_ability_nb.setValue(nValStat);
-						
-						sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch3"];
-						window.a3_label_ss.setValue(sAbility);
-						
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-						window.c1_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-						window.c1_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.c1_ability_nb.setValue(nValStat);
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-						window.c2_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-						window.c2_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.c2_ability_nb.setValue(nValStat);
-						sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-						window.c3_ability_st.setValue(sSkill);
-						sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-						window.c3_ability_bs.setValue(sStat);
-						nValStat = getValStat(sStat);
-						window.c3_ability_nb.setValue(nValStat);
+						if window.root_skills_nb.getValue() &gt; 0 then
+							sSkill = ProfessionTable.tbl_profession[sVal]["root"]["skill"];
+							window.root_skills_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal]["root"]["stat"];
+							window.root_skills_bs.setValue(sStat);
+							window.root_skills_nb.setValue(0);
+							
+							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch1"];
+							window.a1_label_ss.setValue(sAbility);
+							
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
+							window.a1_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
+							window.a1_ability_bs.setValue(sStat);
+							window.a1_ability_nb.setValue(0);
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
+							window.a2_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
+							window.a2_ability_bs.setValue(sStat);
+							window.a2_ability_nb.setValue(0);
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
+							window.a3_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
+							window.a3_ability_bs.setValue(sStat);
+							window.a3_ability_nb.setValue(0);
+							
+							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch2"];
+							window.a2_label_ss.setValue(sAbility);
+							
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
+							window.b1_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
+							window.b1_ability_bs.setValue(sStat);
+							window.b1_ability_nb.setValue(0);
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
+							window.b2_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
+							window.b2_ability_bs.setValue(sStat);
+							window.b2_ability_nb.setValue(0);
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
+							window.b3_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
+							window.b3_ability_bs.setValue(sStat);
+							window.b3_ability_nb.setValue(0);
+							
+							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch3"];
+							window.a3_label_ss.setValue(sAbility);
+							
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
+							window.c1_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
+							window.c1_ability_bs.setValue(sStat);
+							window.c1_ability_nb.setValue(0);
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
+							window.c2_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
+							window.c2_ability_bs.setValue(sStat);
+							window.c2_ability_nb.setValue(0);
+							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
+							window.c3_ability_st.setValue(sSkill);
+							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
+							window.c3_ability_bs.setValue(sStat);
+							window.c3_ability_nb.setValue(0);
+						end
 					end
 					
 					function onInit()
@@ -156,9 +129,16 @@
 				<anchored to="root_skills_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-					
-						ActionSkill.performRoll(draginfo, rActor, window.root_skills_st.getValue(), getValue(), window.root_skills_bs.getValue());
+						
+						sStat = window.root_skills_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.root_skills_st.getValue(), getValue() + nStat, "");
 						return true;
 					end
 					
@@ -168,6 +148,20 @@
 					
 					function onDoubleClick(x,y)
 						return action();
+					end
+					
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.a1_ability_nb.setReadOnly(false);
+							window.b1_ability_nb.setReadOnly(false);
+							window.c1_ability_nb.setReadOnly(false);
+						end
+					end
+					
+					function onInit()
+						setReadOnly(false);
+						super.onInit();
+						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>
@@ -207,9 +201,16 @@
 				<anchored to="a1_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						ActionSkill.performRoll(draginfo, rActor, window.a1_ability_st.getValue(), getValue(), window.a1_ability_bs.getValue(), 0);
+						sStat = window.a1_ability_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a1_ability_st.getValue(), getValue() + nStat, "");
 						return true;
 					end
 					
@@ -219,6 +220,17 @@
 					
 					function onDoubleClick(x,y)
 						return action();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.a2_ability_nb.setReadOnly(false);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>		
@@ -236,9 +248,16 @@
 				<anchored to="a2_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						ActionSkill.performRoll(draginfo, rActor, window.a2_ability_st.getValue(), getValue(), window.a2_ability_bs.getValue(), 0);
+						sStat = window.a2_ability_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a2_ability_st.getValue(), getValue() + nStat, "");
 						return true;
 					end
 					
@@ -248,6 +267,17 @@
 					
 					function onDoubleClick(x,y)
 						return action();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.a3_ability_nb.setReadOnly(false);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>
@@ -265,9 +295,16 @@
 				<anchored to="a3_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						ActionSkill.performRoll(draginfo, rActor, window.a3_ability_st.getValue(), getValue(), window.a3_ability_bs.getValue(), 0);
+						sStat = window.a3_ability_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a3_ability_st.getValue(), getValue() + nStat, "");
 						return true;
 					end
 					
@@ -297,9 +334,16 @@
 				<anchored to="b1_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						ActionSkill.performRoll(draginfo, rActor, window.b1_ability_st.getValue(), getValue(), window.b1_ability_bs.getValue(), 0);
+						sStat = window.b1_ability_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b1_ability_st.getValue(), getValue() + nStat, "");
 						return true;
 					end
 					
@@ -309,6 +353,17 @@
 					
 					function onDoubleClick(x,y)
 						return action();
+					end
+					
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.b2_ability_nb.setReadOnly(false);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>		
@@ -326,9 +381,16 @@
 				<anchored to="b2_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						ActionSkill.performRoll(draginfo, rActor, window.b2_ability_st.getValue(), getValue(), window.b2_ability_bs.getValue(), 0);
+						sStat = window.b2_ability_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b2_ability_st.getValue(), getValue() + nStat, "");
 						return true;
 					end
 					
@@ -338,6 +400,17 @@
 					
 					function onDoubleClick(x,y)
 						return action();
+					end
+					
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.b3_ability_nb.setReadOnly(false);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>
@@ -355,9 +428,16 @@
 				<anchored to="b3_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						ActionSkill.performRoll(draginfo, rActor, window.b3_ability_st.getValue(), getValue(), window.b3_ability_bs.getValue(), 0);
+						sStat = window.b3_ability_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b3_ability_st.getValue(), getValue() + nStat, "");
 						return true;
 					end
 					
@@ -387,10 +467,17 @@
 				<anchored to="c1_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						ActionSkill.performRoll(draginfo, rActor, window.c1_ability_st.getValue(), getValue(), window.c1_ability_bs.getValue(), 0);
-						return true;
+						sStat = window.c1_ability_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c1_ability_st.getValue(), getValue() + nStat, "");
+					return true;
 					end
 					
 					function onDragStart(button, x, y, draginfo)
@@ -399,6 +486,17 @@
 					
 					function onDoubleClick(x,y)
 						return action();
+					end
+					
+					function onValueChanged()
+						if getValue() &gt; 4 then
+						window.c2_ability_nb.setReadOnly(false);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>		
@@ -416,9 +514,16 @@
 				<anchored to="c2_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
+						local nStat = 0;
+						local sStat = "";
+						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						ActionSkill.performRoll(draginfo, rActor, window.c2_ability_st.getValue(), getValue(), window.c2_ability_bs.getValue(), 0);
+						sStat = window.c2_ability_bs.getValue();
+						nStat = getStat(sStat);
+						sStat = DataCommon.ability_stol[sStat];
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c2_ability_st.getValue(), getValue() + nStat, "");
 						return true;
 					end
 					
@@ -428,6 +533,17 @@
 					
 					function onDoubleClick(x,y)
 						return action();
+					end
+					
+					function onValueChanged()
+						if getValue() &gt; 4 then
+						window.c3_ability_nb.setReadOnly(false);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>
@@ -445,10 +561,17 @@
 				<anchored to="c3_ability_bs" position="right" offset="10,0" width="20" height="20" />
 				<script>
 					function action(draginfo)
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						ActionSkill.performRoll(draginfo, rActor, window.c3_ability_st.getValue(), getValue(), window.c3_ability_bs.getValue(), 0);
-						return true;
+					local nStat = 0;
+					local sStat = "";
+					
+					local rActor = ActorManager.resolveActor(window.getDatabaseNode());
+					
+					sStat = window.c3_ability_bs.getValue();
+					nStat = getStat(sStat);
+					sStat = DataCommon.ability_stol[sStat];
+					
+					ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c3_ability_st.getValue(), getValue() + nStat, "");
+					return true;
 					end
 					
 					function onDragStart(button, x, y, draginfo)
