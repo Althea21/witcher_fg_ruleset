@@ -30,7 +30,7 @@
 						local sAbility = "";
 						local sStat = "";
 						
-						if window.root_skills_nb.getValue() &gt; 0 then
+						if window.root_skills_nb.getValue() == 0 then
 							sSkill = ProfessionTable.tbl_profession[sVal]["root"]["skill"];
 							window.root_skills_st.setValue(sSkill);
 							sStat = ProfessionTable.tbl_profession[sVal]["root"]["stat"];

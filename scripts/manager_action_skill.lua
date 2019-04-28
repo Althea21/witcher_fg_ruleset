@@ -126,6 +126,7 @@ function onSkillRoll(rSource, rTarget, rRoll)
 			_storeDieForFinalMessage(rRoll);
 			-- reinit rRoll dice
 			rRoll.aDice = { "d10" };
+			-- rRoll.nMod = tonumber(rRoll.nMod) - 1;
 			-- reroll
 			bDisplayFinalMessage = false;
 			ActionsManager.performAction(nil, rActor, rRoll);
@@ -161,9 +162,12 @@ function onSkillRoll(rSource, rTarget, rRoll)
     	local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
     	
     	-- Create the base message based of the source and the final rRoll record (includes dice results).
+    	print("------------------------------------------------------------------------------------------------------");
+    	-- Debug.console(rSource);
+    	-- Debug.console(rRoll);
     	local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
     	rMessage.text = string.gsub(rMessage.text, " %[MOD:[^]]*%]", "");
-    	
+    	-- Debug.console(rMessage);
     	-- update rMessage in case of fumble
     	if (bFumble) then
     		rMessage.text = rMessage.text .. "\n[FUMBLE (".. rRoll.nTotalExplodeValue ..") : ";
@@ -245,6 +249,8 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 					-- first die was a 1 => fumble, set ir red
 					bFumble = true;
 					aDieTmp.type="r10";
+					-- Reset dice value
+					aDieTmp.result = 0;
 				elseif bFumble then
 					-- any result between 1 and 9 => get die as it is
 					aDieTmp.result = 0-tonumber(aDieTmp.result)
