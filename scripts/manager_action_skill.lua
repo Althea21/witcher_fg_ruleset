@@ -27,11 +27,11 @@ end
 
 function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
     --print("getRoll");
-    --Debug.console(rActor);
-    --Debug.console(sSkillName);
-    --Debug.console(nSkillMod);
-    --Debug.console(sSkillStat);
-    --Debug.console(sExtra);
+    -- Debug.chat(rActor);
+    -- Debug.chat(sSkillName);
+    -- Debug.chat(nSkillMod);
+    -- Debug.chat(sSkillStat);
+    -- Debug.chat(sExtra);
 
 	local rRoll = {};
 	rRoll.sType = "skill";
@@ -48,10 +48,10 @@ function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
 	rRoll.sStoredDice = "";			-- store all dice for final display message
 	
 	if sSkillStat then
-   	local sAbilityEffect = sSkillStat;
-   	if sAbilityEffect then
-   		rRoll.sDesc = rRoll.sDesc .. " [MOD:" .. sAbilityEffect .. "]";
-   	end
+		local sAbilityEffect = sSkillStat;
+		if sAbilityEffect then
+			rRoll.sDesc = rRoll.sDesc .. " [MOD:" .. sAbilityEffect .. "]";
+		end
 	end
 		
 	return rRoll;
@@ -111,10 +111,7 @@ function onSkillRoll(rSource, rTarget, rRoll)
 
 	local bDisplayFinalMessage = true;
 	
-	local rActor;
-	if (rSource.sType=="pc") then
-		rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
-	end
+	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
 
 	-- Check for reroll
 	local nDiceResult = tonumber(rRoll.aDice[1].result);
@@ -165,7 +162,7 @@ function onSkillRoll(rSource, rTarget, rRoll)
     	print("------------------------------------------------------------------------------------------------------");
     	-- Debug.console(rSource);
     	-- Debug.console(rRoll);
-    	local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
+    	local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
     	rMessage.text = string.gsub(rMessage.text, " %[MOD:[^]]*%]", "");
     	-- Debug.console(rMessage);
     	-- update rMessage in case of fumble

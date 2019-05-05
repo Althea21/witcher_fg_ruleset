@@ -61,8 +61,9 @@ end
 
 -- callback for ActionsManager called after the dice have stopped rolling : resolve roll status and display chat message
 function onRoll(rSource, rTarget, rRoll)
+	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
 	-- Create the base message based off the source and the final rRoll record (includes dice results).
-	local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
+	local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
 	
 	if rRoll.sDC then
 		local nTotal = ActionsManager.total(rRoll);

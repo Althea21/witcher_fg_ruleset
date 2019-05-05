@@ -47,7 +47,7 @@ function getRoll(rActor, rSpell)
 	rRoll.sStoredDice = "";			-- store all dice for final display message
 	rRoll.sSpellType = "" ; 		-- mage, priest, sign, hex, ritual
 	
-	-- NO LOCATION FOR TIME BEING, SEE LATER
+	-- NO LOCATION FOR TIME BEING, TODO
 	-- Add parameters for damage location, may be modified by modifier (see OnAttackModifier) or by rolling location table
 	-- rRoll.sDamageLocation = "";
 	rRoll.sIsLocationRoll = "false";
@@ -96,12 +96,41 @@ function getRoll(rActor, rSpell)
 			sSkill = "Ritual Crafting";
 		end
 		
-		for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
-			if (DB.getValue(v, "name", "") == sSkill) then
-				--Debug.chat("skill modifier ("..rWeapon.skill.."): "..DB.getValue(v, "skill_value", 0));
-				nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
-				--sRollDescription = sRollDescription.."["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]"
-				break;
+		if nodeActor.getParent().getName()=="npc" then
+			-- NPC case
+			local sSkills =  DB.getValue(nodeActor, "skills", 0);
+			--Debug.chat(sSkills);
+			-- Get the comma-separated strings
+			local aClauses, aClauseStats = StringManager.split(sSkills, ",;\r", true);
+			
+			-- Check each comma-separated string 
+			for i = 1, #aClauses do
+				local nStarts, nEnds, sLabel, sSign, sMod = string.find(aClauses[i], "([%w%s\(\)]*[%w\(\)]+)%s*([%+%--]?)(%d*)");
+				if string.lower(sLabel) == string.lower(sSkill) then
+					if nStarts then
+						-- Calculate modifier based on mod value and sign value, if any
+						local nMod = 0;
+						if sMod ~= "" then
+							nMod = tonumber(sMod) or 0;
+							if sSign == "-" or sSign == "-" then
+								nMod = 0 - nMod;
+							end
+						end
+						--Debug.chat("skill modifier ("..sSkill.."): "..nMod);
+						nRollMod = nRollMod + nMod;
+					end
+					break;
+				end
+			end
+		else
+			-- PC case
+			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
+				if (DB.getValue(v, "name", "") == sSkill) then
+					--Debug.chat("skill modifier ("..sSkill.."): "..DB.getValue(v, "skill_value", 0));
+					nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
+					--sRollDescription = sRollDescription.."["..sSkill.." +"..DB.getValue(v, "skill_value", 0).."]"
+					break;
+				end
 			end
 		end
 
@@ -170,10 +199,7 @@ function onSpellCastRoll(rSource, rTarget, rRoll)
 	
 	local bDisplayFinalMessage = true;
 	
-	local rActor;
-	if (rSource.sType=="pc") then
-		rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
-	end
+	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
 	
 	if (rRoll.sIsLocationRoll == "false") then
 		-- Check for reroll
@@ -237,7 +263,7 @@ function onSpellCastRoll(rSource, rTarget, rRoll)
 		local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
 		
 		-- Create the base message based of the source and the final rRoll record (includes dice results).
-		local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
+		local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
 		
 		-- NO LOCATION FOR TIME BEING, SEE LATER
 		-- update message for auto location

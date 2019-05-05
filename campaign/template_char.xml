@@ -15,21 +15,16 @@
 	
 	<!--stat de base-->
 	<template name="number_charstatbase">
-		<basicnumber>
-			<hideonvalue value="0" />
-		</basicnumber>
+		<basicnumber/>
 	</template>
 	<!--stat modificateur-->
 	<template name="number_charstatmodifier">
-		<basicnumber>
-			<hideonvalue value="0" />
-		</basicnumber>
+		<basicnumber/>
 	</template>
 	<!--stat total-->
 	<template name="number_charstattotal">
 		<basicnumber>
 			<frame name="fieldlight" offset="7,5,7,5" />
-			<hideonvalue value="0" />
 			<disabled/> 
 		</basicnumber>
 	</template>
@@ -37,7 +32,6 @@
 	<template name="number_derivedstat">
 		<basicnumber>
 			<frame name="fieldlight" offset="7,5,7,5" />
-			<hideonvalue value="0" />
 			<disabled/> 
 		</basicnumber>
 	</template>
@@ -45,15 +39,13 @@
 	<template name="number_derivedstat_rollable">
 		<basicnumber>
 			<frame name="fieldlight" offset="7,5,7,5" />
-			<hideonvalue value="0" />
 			<rollable />
 			<readonly /> 
 		</basicnumber>
 	</template>
 	<!--stat valeur courante-->
 	<template name="number_statcurrentvalue">
-		<basicnumber>
-		</basicnumber>
+		<basicnumber/>
 	</template>
 
 	<!-- List Skills -->

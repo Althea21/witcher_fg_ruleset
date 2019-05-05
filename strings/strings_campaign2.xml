@@ -43,6 +43,8 @@
 	<string name="emp">Emp</string>
 	<string name="cra">Cra</string>
 	<string name="wil">Wil</string>
+	<string name="vig">Vig</string>
+	<string name="lck">Luck</string>
 	
 	<string name="char_derivedstatslabel_stun">STUN</string>
 	<string name="char_derivedstatslabel_run">RUN</string>
@@ -195,7 +197,7 @@
 	<string name="armor_label_name">Name</string>
 	<string name="armor_label_effects">Effects</string>
 	<string name="armor_header_properties">Properties</string>
-	<string name="armor_property_sp">Stoping power</string>
+	<string name="armor_property_sp">Stopping power</string>
 	<string name="armor_property_ev">Encumbrance value</string>
 	<string name="rolldescription_totalev">Total Armor EV</string>
 	<string name="armor_header_location">Location</string>
@@ -351,4 +353,102 @@
 	<string name="fumble_magic_over9">Your magic explodes with a catastrophic effect. Not only do you suffer an elemental fumble effect, but any focusing item you are carrying explodes as if it were a bomb (doing 1d10 damage) with a 2 meter radius.</string>
 	<string name="fumble_ritual">You take 1 point of damage for each point of Stamina spent.</string>
 	<string name="fumble_hex">You have a 50% chance of inficting the hex on yourself.</string>
+
+	<!--Item reference tables-->
+	<string name="item_grouped_title_armor">Armor</string>
+	<string name="item_grouped_title_weapons">Weapons</string>
+	<string name="item_grouped_title_alchemicalitems">Alchemical Items</string>
+	<string name="item_grouped_title_armorenhancements">Armor Enhancements</string>
+	<string name="item_grouped_title_transportationmounts">Transportation - Mounts</string>
+	<string name="item_grouped_title_transportationmountequipment">Transportation - Mount Equipement</string>
+	<string name="item_grouped_title_toolkits">Tool Kits</string>
+	<string name="item_grouped_title_generalgear">General Gear</string>
+	
+
+	<string name="item_grouped_label_name">Name</string>
+	<string name="item_grouped_label_sp">SP</string>
+	<string name="item_grouped_tooltip_sp">Stopping Power</string>
+	<string name="item_grouped_label_availability">Avail.</string>
+	<string name="item_grouped_tooltip_availability">Availability</string>
+	<string name="item_grouped_label_ae">AE</string>
+	<string name="item_grouped_tooltip_ae">Armor Enhancement</string>
+	<string name="item_grouped_label_effect">Effect</string>
+	<string name="item_grouped_label_cover">Cover</string>
+	<string name="item_grouped_label_ev">EV</string>
+	<string name="item_grouped_tooltip_ev">Encumbrance Value</string>
+	<string name="item_grouped_label_weight">Wt</string>
+	<string name="item_grouped_tooltip_weight">Weight</string>
+	<string name="item_grouped_label_price">Price</string>
+	<string name="item_grouped_label_damagetype">Type</string>
+	<string name="item_grouped_tooltip_damagetype">Damage Type</string>
+	<string name="item_grouped_label_wa">WA</string>
+	<string name="item_grouped_tooltip_wa">Weapon Accuracy</string>
+	<string name="item_grouped_label_damage">Dmg</string>
+	<string name="item_grouped_label_reliability">Rel</string>
+	<string name="item_grouped_tooltip_reliability">Reliability</string>
+	<string name="item_grouped_label_hands">Hands</string>
+	<string name="item_grouped_tooltip_reliability">Hands</string>
+	<string name="item_grouped_label_range">Rng</string>
+	<string name="item_grouped_tooltip_range">Range</string>
+	<string name="item_grouped_label_concealment">Conc</string>
+	<string name="item_grouped_tooltip_concealment">Concealment</string>
+	<string name="item_grouped_label_concealment">Conc</string>
+	<string name="item_grouped_tooltip_concealment">Concealment</string>
+	<string name="item_grouped_label_enhancement">EN</string>
+	<string name="item_grouped_tooltip_enhancement">Enhancement</string>
+	<string name="item_grouped_label_resistance">Res.</string>
+	<string name="item_grouped_tooltip_resistance">Resistance</string>
+	<string name="item_grouped_label_athletics">Ath.</string>
+	<string name="item_grouped_tooltip_athletics">Athletics</string>
+	<string name="item_grouped_label_controlmod">CM</string>
+	<string name="item_grouped_tooltip_controlmod">Control Mod</string>
+	<string name="item_grouped_label_speed">Sp</string>
+	<string name="item_grouped_tooltip_speed">speed</string>
+	<string name="item_grouped_label_health">Health</string>
+	<string name="item_grouped_tooltip_health">Health</string>
+
+	<!--NPC-->
+	<string name="npc_label_type">Type</string>
+	<string name="npc_type_humanoid">Humanoid</string>
+	<string name="npc_type_beast">Beast</string>
+	<string name="npc_type_cursed">Cursed Ones</string>
+	<string name="npc_type_draconid">Draconid</string>
+	<string name="npc_type_elementa">Elementa</string>
+	<string name="npc_type_hybrid">Hybrid</string>
+	<string name="npc_type_insectoid">Insectoid</string>
+	<string name="npc_type_necrophage">Necrophage</string>
+	<string name="npc_type_ogroid">Ogroid</string>
+	<string name="npc_type_relict">Relict</string>
+	<string name="npc_type_specter">Specter</string>
+	<string name="npc_type_vampire">Vampire</string>
+	
+	<string name="npc_label_threat">Threat</string>
+	<string name="npc_threat_easy">Easy</string>
+	<string name="npc_threat_medium">Medium</string>
+	<string name="npc_threat_hard">Hard</string>
+	<string name="npc_threat_simple">Simple</string>
+	<string name="npc_threat_complex">Complex</string>
+	<string name="npc_threat_difficult">Difficult</string>
+
+	<string name="npc_threat_vulnerabilities">Vulnerabilities</string>
+	<string name="npc_threat_abilities">Abilities</string>
+
+	<string name="npc_header_stats">STATS</string>
+	<string name="npc_label_stun">Stun</string>
+	<string name="npc_label_run">Run</string>
+	<string name="npc_label_leap">Leap</string>
+	<string name="npc_label_hitpoints">HP</string>
+	<string name="npc_label_stamina">Sta</string>
+	<string name="npc_label_encumbrance">Enc</string>
+	<string name="npc_label_recovery">Rec</string>
+
+	
+	<string name="npc_label_height">Height</string>
+	<string name="npc_label_weight">Weight</string>
+	<string name="npc_label_intelligence">Intelligence</string>
+	<string name="npc_label_loot">Loot</string>
+
+	<string name="npc_header_skills">SKILLS</string>
+	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
 </root>
+

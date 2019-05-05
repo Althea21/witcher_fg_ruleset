@@ -4,7 +4,7 @@
 --
 
 function onRecoverAction()
-	local rActor = ActorManager.getActor("pc", getDatabaseNode());
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
 	local msg = ChatManager.createBaseMessage(rActor, nil);
 	msg.text = string.format(Interface.getString("char_recoveryaction"), recovery_combat.getValue())
 	Comm.deliverChatMessage(msg);

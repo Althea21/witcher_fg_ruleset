@@ -200,7 +200,17 @@ end
 
 -- callback for ActionsManager, called after the dice have stopped rolling : resolve roll status and display chat message
 function onDamage(rSource, rTarget, rRoll)
-	local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
+	-- Debug.chat("------- onDamage");
+	-- Debug.chat("--rSource : ");
+	-- Debug.chat(rSource);
+	-- Debug.chat("--rTarget : ");
+	-- Debug.chat(rTarget);
+	-- Debug.chat("--rRoll : ");
+	-- Debug.chat(rRoll);
+
+	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
+	
+	local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
 	-- rMessage.text = string.gsub(rMessage.text, " %[MOD:[^]]*%]", "");
 	-- rMessage.text = string.gsub(rMessage.text, " %[MULT:[^]]*%]", "");
 

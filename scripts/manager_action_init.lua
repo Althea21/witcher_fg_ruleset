@@ -68,7 +68,9 @@ function performRoll(draginfo, rActor, bSecretRoll)
 end
 
 function onResolve(rSource, rTarget, rRoll)
-	local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
+	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
+
+	local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
 	Comm.deliverChatMessage(rMessage);
 	
 	local nTotal = ActionsManager.total(rRoll);

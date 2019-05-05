@@ -91,12 +91,41 @@ function getRoll(rActor, rWeapon, sAttackType)
 		--sRollDescription = sRollDescription.."["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]"
 		
 		-- skill modifier
-		for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
-			if (DB.getValue(v, "name", "") == rWeapon.skill) then
-				--Debug.chat("skill modifier ("..rWeapon.skill.."): "..DB.getValue(v, "skill_value", 0));
-				nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
-				--sRollDescription = sRollDescription.."["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]"
-				break;
+		if nodeActor.getParent().getName()=="npc" then
+			-- NPC case
+			local sSkills =  DB.getValue(nodeActor, "skills", 0);
+			--Debug.chat(sSkills);
+			-- Get the comma-separated strings
+			local aClauses, aClauseStats = StringManager.split(sSkills, ",;\r", true);
+			
+			-- Check each comma-separated string 
+			for i = 1, #aClauses do
+				local nStarts, nEnds, sLabel, sSign, sMod = string.find(aClauses[i], "([%w%s\(\)]*[%w\(\)]+)%s*([%+%--]?)(%d*)");
+				if string.lower(sLabel) == string.lower(rWeapon.skill) then
+					if nStarts then
+						-- Calculate modifier based on mod value and sign value, if any
+						local nMod = 0;
+						if sMod ~= "" then
+							nMod = tonumber(sMod) or 0;
+							if sSign == "-" or sSign == "-" then
+								nMod = 0 - nMod;
+							end
+						end
+						--Debug.chat("skill modifier ("..rWeapon.skill.."): "..nMod);
+						nRollMod = nRollMod + nMod;
+					end
+					break;
+				end
+			end
+		else
+			-- PC case
+			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
+				if (DB.getValue(v, "name", "") == rWeapon.skill) then
+					--Debug.chat("skill modifier ("..rWeapon.skill.."): "..DB.getValue(v, "skill_value", 0));
+					nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
+					--sRollDescription = sRollDescription.."["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]"
+					break;
+				end
 			end
 		end
 		
@@ -152,7 +181,6 @@ function performRoll(draginfo, rWeapon, sAttackType)
 		
 		sAttackType = string.gsub(sAttackType, "punch", "");
 		sAttackType = string.gsub(sAttackType, "kick", "");
-		
 	else
 		-- weapon attack
 		rActor, rWeapon = CharManager.getWeaponAttackRollStructures(rWeapon);
@@ -181,10 +209,7 @@ function onAttackRoll(rSource, rTarget, rRoll)
 	
 	local bDisplayFinalMessage = true;
 	
-	local rActor;
-	if (rSource.sType=="pc") then
-		rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
-	end
+	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
 	
 	if (rRoll.sIsLocationRoll == "false") then
 		-- Check for reroll
@@ -247,7 +272,7 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
 		
 		-- Create the base message based of the source and the final rRoll record (includes dice results).
-		local rMessage = ActionsManager.createActionMessage(rSource, rRoll);
+		local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
 		
 		-- update message for auto location
 		local locMessage = "";

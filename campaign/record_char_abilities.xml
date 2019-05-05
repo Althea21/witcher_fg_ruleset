@@ -10,7 +10,7 @@
 		<script>
 		</script>
 		<sheetdata>
-			<!-- Variables cachées -->
+			<!-- Variables cachï¿½es -->
 			<hn name="intelligence" source="attributs.intelligence" />
 			<hn name="reflex" source="attributs.reflex" />
 			<hn name="dexterity" source="attributs.dexterity" />
@@ -105,7 +105,7 @@
 				</script>
 			</hs> 
 
-			<!-- Frame de l'arbre de compétence -->		
+			<!-- Frame de l'arbre de compï¿½tence -->		
 			<frame_char name="skills_frame">
 				<bounds>15,0,-29,-5</bounds>
 			</frame_char>
@@ -166,7 +166,7 @@
 				</script>
 			</number_skill_rollable>
 
-			<!-- Entête des branches -->
+			<!-- Entï¿½te des branches -->
 			<basicstring_label name="a1_label_ss" source="skills.a1_label_ss">
 				<anchored to="skills_frame">
 					<top offset="65" />
@@ -584,7 +584,7 @@
 				</script>
 			</number_skill_rollable>		
 
-			<!-- Liste des compétences -->
+			<!-- Liste des compï¿½tences -->
 			<list_skills name="skills">
 				<anchored to="skills_frame">
 					<left offset="15" />
@@ -699,6 +699,8 @@
 							nStat = window.windowlist.window.reflex.getValue();
 						elseif sStat == "Will" then
 							nStat = window.windowlist.window.will.getValue();
+						elseif sStat == "Dexterity" then
+							nStat = window.windowlist.window.dexterity.getValue();
 						end
 						return sStat,nStat;
 					end
