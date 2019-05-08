@@ -10,7 +10,7 @@
 		<script>
 		</script>
 		<sheetdata>
-			<!-- Variables cach�es -->
+			<!-- Variables cachees -->
 			<hn name="intelligence" source="attributs.intelligence" />
 			<hn name="reflex" source="attributs.reflex" />
 			<hn name="dexterity" source="attributs.dexterity" />
@@ -105,15 +105,15 @@
 				</script>
 			</hs> 
 
-			<!-- Frame de l'arbre de comp�tence -->		
+			<!-- Frame de l'arbre de competence -->		
 			<frame_char name="skills_frame">
 				<bounds>15,0,-29,-5</bounds>
 			</frame_char>
 			<label_frametop>
-				<anchored to="skills_frame" />
+				<anchored to="skills_frame" offset="-7,8" />
 				<static textres="char_label_abilities" />
+				<frame name="headerref" />
 			</label_frametop>
-
 			<!-- Racine -->
 			<basicstring_label name="root_skills_st" source="skills.root_skills_st">
 				<anchored to="skills_frame">
@@ -584,7 +584,7 @@
 				</script>
 			</number_skill_rollable>		
 
-			<!-- Liste des comp�tences -->
+			<!-- Liste des comp�tences -->	
 			<list_skills name="skills">
 				<anchored to="skills_frame">
 					<left offset="15" />
@@ -600,10 +600,11 @@
 				<anchored to="skills" />
 				<target>skills</target>
 			</scrollbar_list>
-			<label>
-				<anchored to="skills" position="insidetopleft" offset="205,-20"/>
+			<label_frametop>
+				<bounds>21,163,-37,20</bounds>
 				<static textres="char_label_skills" />
-			</label>
+				<frame name="headerref" />
+			</label_frametop>
 		</sheetdata>
 	</windowclass>
 

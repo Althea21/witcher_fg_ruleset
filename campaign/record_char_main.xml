@@ -162,6 +162,7 @@
 			<frame_label>
 				<anchored to="attributs_frame" />
 				<static textres="char_label_stats" />
+				<frame name="headerref" />
 			</frame_label>	
 			
 			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->

@@ -37,7 +37,9 @@
 	</framedef>
 	<framedef name="headerref">
 		<bitmap file="graphics/frames/headerref.png" />
-		<middle rect="0,0,128,128" />
+		<bottom rect="40,127,48,1"/>
+		<bottomright rect="88,127,40,1"/>
+		<bottomleft rect="0,127,40,1"/>
 	</framedef>
 
 	<!-- Lists -->

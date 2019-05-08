@@ -449,6 +449,8 @@
 	<string name="npc_label_loot">Loot</string>
 
 	<string name="npc_header_skills">SKILLS</string>
+	<string name="npc_header_ecology">ECOLOGY</string>
+	
 	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
 </root>
 
