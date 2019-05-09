@@ -203,23 +203,23 @@
 				</script>
 			</label>
 			<genericcontrol>
-				<bounds>6,6,-6,32</bounds>
+				<bounds>6,8,-3,24</bounds>
 				<frame name="groupbox2" offset="6,6,6,6" />
 				<disabled />
 			</genericcontrol>
 
 			<!--Novice header-->
 			<genericcontrol name="spellclass_headers">
-				<bounds>6,36,-6,32</bounds>
-				<frame name="rowshade" />
+				<bounds>6,24,-6,36</bounds>
+				<frame name="headertitle" />
 			</genericcontrol>
 			<label>
-				<anchored position="insidetopleft" offset="5,45"/>
+				<anchored position="insidetopleft" offset="5,36"/>
 				<center />
 				<static textres="char_spellclass_name_header" />
 			</label>
 			<label name="spellclass_stacost_label">
-				<anchored position="insidetopright" offset="215,45" width="29"/>
+				<anchored position="insidetopright" offset="215,36" width="29"/>
 				<center />
 				<static textres="char_spellclass_stacost_header" />
 			</label>
