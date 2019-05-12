@@ -91,7 +91,7 @@
 		<color value="#ffffff" />
 	</font>
 	<!-- Radial menus and character list -->
-		<font name="mini_name">
+	<font name="mini_name">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="#000000" />
@@ -102,7 +102,7 @@
 		<color value="#000000" />
 	</font>
 	<!-- Identity list -->
-		<font name="idactivefont">
+	<font name="idactivefont">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
 		<color value="#000000" />
@@ -165,7 +165,7 @@
 		<color value="#968866" />
 	</font>
 	<!-- Standard text fields -->
-		<font name="sheetlabel">
+	<font name="sheetlabel">
 		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
 		<color value="#b7ad96" />
 	</font>
@@ -206,7 +206,7 @@
 		<color value="#98856C" />
 	</font>
 	<!-- Tables -->
-		<font name="tablerange">
+	<font name="tablerange">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="#000000" />
@@ -258,7 +258,7 @@
 		<color value="#98856C" />
 	</font>
 	<!-- Characters -->
-		<font name="sheetlabelinline">
+	<font name="sheetlabelinline">
 		<fgffile name="graphics/fonts/regular-8.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="13" />
 		<color value="#808080" />
@@ -269,7 +269,7 @@
 		<color value="#98856C" />
 	</font>
 	<!-- Reference -->
-		<font name="reference-section">
+	<font name="reference-section">
 		<fgffile name="graphics/fonts/title-regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="3B2C21" />

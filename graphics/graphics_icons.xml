@@ -30,6 +30,8 @@
 	<icon name="char_weapon" file="graphics/icons/char_weapon.png" />
 	<icon name="char_weapon_melee" file="graphics/icons/char_weapon_melee.png" />
 	<icon name="char_weapon_ranged" file="graphics/icons/char_weapon_ranged.png" />
+	<icon name="char_weapon_punch" file="graphics/icons/char_weapon_punch.png" />
+	<icon name="char_weapon_kick" file="graphics/icons/char_weapon_kick.png" />
 	<icon name="attack_melee_normal" file="graphics/icons/attack_melee_normal.png" />
 	<icon name="attack_melee_fast" file="graphics/icons/attack_melee_fast.png" />
 	<icon name="attack_melee_strong" file="graphics/icons/attack_melee_strong.png" />

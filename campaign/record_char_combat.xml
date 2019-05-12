@@ -305,7 +305,6 @@
 			<!--punch-->
 			<simplestringc>
 				<anchored to="brawlinglist_headers" position="belowleft" offset="5,5" width="250"/>
-				<!-- <center /> -->
 				<static textres="char_label_punchlabel" />
 			</simplestringc>
 			<dice_modifier name="punchdamage" source="attributs.punch">
@@ -535,7 +534,6 @@
 			<!-- section header (show/hide list on click) -->
 			<genericcontrol name="icon_armor">
 				<anchored to="armor_divider" position="belowleft" offset="10,14" width="20" height="20" />
-				<icon>char_armor</icon>
 			</genericcontrol>
 			<label name="label_armor">
 				<anchored>
