@@ -606,11 +606,10 @@
 				<static textres="char_derivedstatslabel_meleebonusdamage" />
 			</label>
 			<dice_modifier name="punch" source="attributs.punch">
-				<anchored to="meleebonusdamage" width="40" height="20">
-					<top anchor="bottom" relation="relative" offset="5" />
+				<anchored to="meleebonusdamage" width="47" height="20">
+					<top anchor="bottom" relation="relative" offset="7" />
 					<left />
 				</anchored>
-				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.punch_modifier</modifierfield>
 			</dice_modifier>
 			<label>
@@ -618,11 +617,10 @@
 				<static textres="char_derivedstatslabel_punch" />
 			</label>
 			<dice_modifier name="kick" source="attributs.kick">
-				<anchored to="punch" width="40" height="20">
-					<top anchor="bottom" relation="relative" offset="5" />
+				<anchored to="punch" width="47" height="20">
+					<top anchor="bottom" relation="relative" offset="7" />
 					<left />
 				</anchored>
-				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.kick_modifier</modifierfield>
 			</dice_modifier>
 			<label>

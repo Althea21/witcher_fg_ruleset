@@ -267,8 +267,8 @@
 			
 			<!-- Edit / See details -->
 			<linkcontrol name="activatedetail">
-				<anchored to="rightanchor" width="12" height="12">
-					<top offset="4"/>
+				<anchored to="rightanchor" width="18" height="18">
+					<top offset="2"/>
 					<right anchor="left" relation="relative" offset="0" />
 				</anchored>
 				<class>spelldesc</class>

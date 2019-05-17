@@ -308,7 +308,7 @@
 				<static textres="char_label_punchlabel" />
 			</simplestringc>
 			<dice_modifier name="punchdamage" source="attributs.punch">
-				<anchored to="brawlinglist_headers" position="belowright" offset="145,5" width="40" height="20"/>
+				<anchored to="brawlinglist_headers" position="belowright" offset="145,5" width="46" height="20"/>
 				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.punch_modifier</modifierfield>
 				<script>
@@ -420,7 +420,7 @@
 				<static textres="char_label_kicklabel" />
 			</simplestringc>
 			<dice_modifier name="kickdamage" source="attributs.kick">
-				<anchored to="brawlinglist_headers" position="belowright" offset="145,30" width="40" height="20"/>
+				<anchored to="brawlinglist_headers" position="belowright" offset="145,30" width="46" height="20"/>
 				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.kick_modifier</modifierfield>
 				<script>
@@ -640,11 +640,12 @@
 			
 			<!-- Edit / See details -->
 			<buttoncontrol name="activatedetail">
-				<anchored to="rightanchor" width="20" height="20">
-					<top />
-					<right anchor="left" relation="relative" offset="3" />
+				<anchored to="rightanchor" width="15" height="25">
+					<top/>
+					<right anchor="left" relation="relative" offset="0" />
 				</anchored>
-				<state icon="button_details" pressed="button_details_down" />
+				<state icon="button_details" />
+				<cursor hover="hand" />
 				<script>
 					function onButtonPress()
 						Interface.openWindow("char_weapon_editor", window.getDatabaseNode());

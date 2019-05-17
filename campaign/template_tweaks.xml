@@ -266,4 +266,24 @@
 			</script>
 		</stringfield>
 	</template>
+	<!-- Inventory list  -->
+	<template name="list_charinv">
+		<windowlist>
+			<child></child>
+			<datasource>.inventorylist</datasource>
+			<class>char_invitem</class>
+			<allowdelete />
+			<script file="campaign/scripts/char_invlist.lua" />
+		</windowlist>
+	</template>
+	<template name="list_text">
+		<windowlist>
+			<child mergerule="resetandadd"></child>
+			<child></child>
+			<allowcreate />
+			<allowdelete />
+			<sortby mergerule="replace"><control>name</control></sortby>
+			<script file="common/scripts/list_text.lua" />
+		</windowlist>
+	</template>
 </root>
