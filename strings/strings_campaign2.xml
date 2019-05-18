@@ -10,30 +10,33 @@
 	<string name="list_menu_createitem">Create Item</string>
 
 	<!-- Characters IDENTITY -->
-	<string name="char_label_identity">IDENTITY</string>
-	<string name="char_label_home_country">HOME COUNTRY</string>
-	<string name="char_label_reputation">REPUTATION</string>
-	<string name="char_label_profession">PROFESSION</string>
-	<string name="char_label_improvement_point">IMP. POINTS</string>
-	<string name="char_label_social_standing">SOC. STANDING</string>
+	<string name="char_label_identity">Identity</string>
+	<string name="char_label_home_country">Home Country</string>
+	<string name="char_label_reputation">Reputation</string>
+	<string name="char_main_label_race">Race</string>
+	<string name="char_main_label_gender">Gender</string>
+	<string name="char_main_label_age">Age</string>
+	<string name="char_label_profession">Profession</string>
+	<string name="char_label_improvement_point">Imp. Points</string>
+	<string name="char_label_social_standing">Soc. Standing</string>
 
 	<!-- Characters Attributes-->
-	<string name="char_label_stats">STATS</string>
+	<string name="char_label_stats">Stats</string>
 
 	<string name="char_label_basestat">Base</string>
 	<string name="char_label_modifierstat">Mod.</string>
 	<string name="char_label_totalstat">Total</string>
 	
-	<string name="char_statslabel_intelligence">INTELLIGENCE</string>
-	<string name="char_statslabel_reflex">REFLEX</string>
-	<string name="char_statslabel_dexterity">DEXTERITY</string>
-	<string name="char_statslabel_body">BODY</string>
-	<string name="char_statslabel_speed">SPEED</string>
-	<string name="char_statslabel_empathy">EMPATHY</string>
-	<string name="char_statslabel_crafting">CRAFTING</string>
-	<string name="char_statslabel_will">WILL</string>
-	<string name="char_statslabel_luck">LUCK</string>
-	<string name="char_statslabel_vigor">VIGOR</string>
+	<string name="char_statslabel_intelligence">Intelligence</string>
+	<string name="char_statslabel_reflex">Reflex</string>
+	<string name="char_statslabel_dexterity">Dexterity</string>
+	<string name="char_statslabel_body">Body</string>
+	<string name="char_statslabel_speed">Speed</string>
+	<string name="char_statslabel_empathy">Empathy</string>
+	<string name="char_statslabel_crafting">Crafting</string>
+	<string name="char_statslabel_will">Will</string>
+	<string name="char_statslabel_luck">Luck</string>
+	<string name="char_statslabel_vigor">Vigor</string>
 
 	<string name="int">Int</string>
 	<string name="ref">Ref</string>
@@ -46,17 +49,17 @@
 	<string name="vig">Vig</string>
 	<string name="lck">Luck</string>
 	
-	<string name="char_derivedstatslabel_stun">STUN</string>
-	<string name="char_derivedstatslabel_run">RUN</string>
-	<string name="char_derivedstatslabel_leap">LEAP</string>
-	<string name="char_derivedstatslabel_hit_points">HIT POINTS</string>
-	<string name="char_derivedstatslabel_stamina">STAMINA</string>
-	<string name="char_derivedstatslabel_encumbrance">ENCUMBRANCE</string>
-	<string name="char_derivedstatslabel_recovery">RECOVERY</string>
-	<string name="char_derivedstatslabel_recoveryshort">REC.</string>
-	<string name="char_derivedstatslabel_meleebonusdamage">MELEE BONUS</string>
-	<string name="char_derivedstatslabel_punch">PUNCH</string>
-	<string name="char_derivedstatslabel_kick">KICK</string>
+	<string name="char_derivedstatslabel_stun">Stun</string>
+	<string name="char_derivedstatslabel_run">Run</string>
+	<string name="char_derivedstatslabel_leap">Leap</string>
+	<string name="char_derivedstatslabel_hit_points">Hit Points</string>
+	<string name="char_derivedstatslabel_stamina">Stamina</string>
+	<string name="char_derivedstatslabel_encumbrance">Encumbrance</string>
+	<string name="char_derivedstatslabel_recovery">Recovery</string>
+	<string name="char_derivedstatslabel_recoveryshort">Rec.</string>
+	<string name="char_derivedstatslabel_meleebonusdamage">Melee Bonus</string>
+	<string name="char_derivedstatslabel_punch">Punch</string>
+	<string name="char_derivedstatslabel_kick">Kick</string>
 	
 	<string name="char_special_divide">/</string>
 
@@ -120,11 +123,11 @@
 	<string name="list_weaponconcealment_canthide">Can't Hide</string>
 	
 	<!-- SKILLS -->
-	<string name="char_label_abilities">ABILITIES</string>
-	<string name="char_label_skills">SKILLS</string>
+	<string name="char_label_abilities">Abilities</string>
+	<string name="char_label_skills">Skills</string>
 		
 	<!-- Combat tab -->
-	<string name="char_combat_initiative">INIT.</string>
+	<string name="char_combat_initiative">Init.</string>
 	<string name="char_label_weapons">Weapons</string>
 	<string name="char_label_weapontype">M/R</string>
 	<string name="char_label_weaponname">Name</string>
@@ -248,7 +251,7 @@
 	<string name="fumble_unarmed_over9">You fail horribly and not only fall prone but also take 1d6 lethal damage to the head and must make a Stun save.</string>
 	
 	<!--Location messages-->
-	<string name="modifier_label_location">LOCATION : </string>
+	<string name="modifier_label_location">Location : </string>
 	<string name="modifier_label_location_or"> or </string>
 	<string name="modifier_label_location_head">Head</string>
 	<string name="modifier_label_location_torso">Torso</string>
@@ -301,7 +304,7 @@
 	<string name="modifier_label_aimtail">Monster wing/tail</string>
 
 	<!--Magic tab-->
-	<string name="char_label_focus">FOCUS</string>
+	<string name="char_label_focus">Focus</string>
 	<string name="menu_addspellclass">Add Magical Class</string>
 	<string name="menu_deletespellclass">Delete Magical Class</string>
 	<string name="menu_deletespellclassconfirm">Delete Magical Class</string>
@@ -433,7 +436,7 @@
 	<string name="npc_threat_vulnerabilities">Vulnerabilities</string>
 	<string name="npc_threat_abilities">Abilities</string>
 
-	<string name="npc_header_stats">STATS</string>
+	<string name="npc_header_stats">Stats</string>
 	<string name="npc_label_stun">Stun</string>
 	<string name="npc_label_run">Run</string>
 	<string name="npc_label_leap">Leap</string>
@@ -448,8 +451,8 @@
 	<string name="npc_label_intelligence">Intelligence</string>
 	<string name="npc_label_loot">Loot</string>
 
-	<string name="npc_header_skills">SKILLS</string>
-	<string name="npc_header_ecology">ECOLOGY</string>
+	<string name="npc_header_skills">Skills</string>
+	<string name="npc_header_ecology">Ecology</string>
 	
 	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
 </root>

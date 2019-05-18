@@ -286,4 +286,60 @@
 			<script file="common/scripts/list_text.lua" />
 		</windowlist>
 	</template>
+	<template name="label_frametop">
+		<label>
+			<font>sheetlabelheader</font>
+			<anchored position="insidetop" offset="0,10" />
+			<center />
+		</label>
+	</template>
+	<template name="basicstring">
+		<simplestring>
+			<font>sheetlabel</font>
+			<frame mergerule="replace" name="fielddark" offset="7,5,7,5" hidereadonly="true" />
+			<stateframe>
+				<keyedit name="fieldfocus" offset="7,5,7,5" />
+				<hover name="fieldfocus" offset="7,5,7,5" hidereadonly="true" />
+				<drophilight name="fieldfocus" offset="7,5,7,5" hidereadonly="true" />
+			</stateframe>
+		</simplestring>
+	</template>
+	<template name="list_text">
+		<windowlist>
+			<font>sheetlabelheader</font>
+			<child mergerule="resetandadd"></child>
+			<child><backcolor>1A40301E</backcolor></child>
+			<allowcreate />
+			<allowdelete />
+			<sortby mergerule="replace"><control>name</control></sortby>
+			<script file="common/scripts/list_text.lua" />
+		</windowlist>
+	</template>
+	<template name="combobox_list">
+		<windowlist>
+			<anchored height="50">
+				<right />
+				<bottom />
+			</anchored>
+			<frame name="combobox_list" offset="2,2,2,2" />
+			<datasource/>
+			<class>comboxbox_item</class>
+			<invisible/>
+			<skipempty/>
+			<sortby><control>Order</control></sortby>
+			<script file="common/scripts/combobox_list.lua" />
+		</windowlist>
+	</template>
+	<template name="combobox">
+		<simplestring>
+			<frame>
+				<name>fieldlight</name>
+				<offset>7,5,7,5</offset>
+			</frame>
+			<readonly />
+			<listdirection mergerule="replace">up</listdirection>
+			<buttonoffset mergerule="replace">0,1</buttonoffset>
+			<script file="common/scripts/combobox.lua"/>
+		</simplestring>
+	</template>
 </root>

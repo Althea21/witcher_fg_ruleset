@@ -165,7 +165,7 @@
 	<!-- Drop down list -->
 	<framedef name="combobox_list">
 		<bitmap file="graphics/frames/combobox_list.png"/>
-		<offset>1,1,1,1</offset>
+		<offset>2,0,4,2</offset>
 	</framedef>
 	<framedef name="combobox_scrollbar">
 		<bitmap file="graphics/frames/combobox_scrollbar.png"/>
@@ -520,7 +520,11 @@
 	</framedef>
 	<framedef name="headersimple">
 		<bitmap file="graphics/frames/headersimple.png" />
-		<offset>0,3,0,3</offset>
+		<offset>3,3,3,3</offset>
+	</framedef>
+	<framedef name="headerunderlined">
+		<bitmap file="graphics/frames/headerunderlined.png" />
+		<offset>0,0,0,0</offset>
 	</framedef>
 	<framedef name="border">
 		<bitmap file="graphics/frames/border.png" />

@@ -534,6 +534,7 @@
 			<!-- section header (show/hide list on click) -->
 			<genericcontrol name="icon_armor">
 				<anchored to="armor_divider" position="belowleft" offset="10,14" width="20" height="20" />
+				<icon>char_armor</icon>
 			</genericcontrol>
 			<label name="label_armor">
 				<anchored>

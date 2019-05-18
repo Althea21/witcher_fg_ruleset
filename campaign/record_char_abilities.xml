@@ -169,30 +169,30 @@
 			<!-- Ent�te des branches -->
 			<basicstring_label name="a1_label_ss" source="skills.a1_label_ss">
 				<anchored to="skills_frame">
-					<top offset="60" />
+					<top offset="58" />
 					<left offset="15" />
-					<size width="152" height="20" />
+					<size width="152" height="24" />
 				</anchored>
 				 <center />
-				<frame name="headersimple" />
+				<frame name="headertitle" />
 			</basicstring_label>	
 			<basicstring_label name="a2_label_ss" source="skills.a2_label_ss">
 				<anchored to="skills_frame">
-					<top offset="60" />
+					<top offset="58" />
 					<left offset="167" />
-					<size width="152" height="20" />
+					<size width="152" height="24" />
 				</anchored>
 				 <center />
-				<frame name="headersimple" />
+				<frame name="headertitle" />
 			</basicstring_label>		
 			<basicstring_label name="a3_label_ss" source="skills.a3_label_ss">
 				<anchored to="skills_frame">
-					<top offset="60" />
+					<top offset="58" />
 					<left offset="319" />
-					<size width="152" height="20" />
+					<size width="152" height="24" />
 				</anchored>
 				 <center />
-				<frame name="headersimple" />
+				<frame name="headertitle" />
 			</basicstring_label>
 
 			<!-- Branche A -->

@@ -9,7 +9,7 @@
 	<!-- Note: FGF tags processed first for FG Classic, and TTF tags processed first for FGU -->
 	
 	<font name="sidebar">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="14" />
 		<color value="#98856C" />
 	</font>
 
@@ -259,15 +259,27 @@
 	</font>
 	<!-- Characters -->
 	<font name="sheetlabelinline">
-		<fgffile name="graphics/fonts/regular-8.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="13" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="10" />
 		<color value="#808080" />
 	</font>
 	<font name="sheetlabelmini">
-		<fgffile name="graphics/fonts/regular-8.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="13" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
 		<color value="#98856C" />
 	</font>
+	<font name="sheetlabelheader">
+		<ttf file="graphics/fonts/Rise of Kingdom.ttf" name="Rise of Kingdom" size="15"/>
+		<color value="#98856C" />
+	</font>
+	<!-- Combobox -->
+	<font name="comboboxselected">
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="12" />
+		<color value="#b7ad96" />
+	</font>
+	<font name="combobox">
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
+		<color value="#98856C" />
+	</font>
+	
 	<!-- Reference -->
 	<font name="reference-section">
 		<fgffile name="graphics/fonts/title-regular-10.fgf" />
