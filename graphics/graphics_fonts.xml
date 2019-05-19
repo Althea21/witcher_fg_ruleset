@@ -9,7 +9,7 @@
 	<!-- Note: FGF tags processed first for FG Classic, and TTF tags processed first for FGU -->
 	
 	<font name="sidebar">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="14" />
 		<color value="#98856C" />
 	</font>
 
@@ -54,44 +54,44 @@
 	</font>
 	<!-- Chat fonts - REQUIRED -->
 	<font name="chatfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#ffffff" />
 	</font>
 	<font name="emotefont">
-		<ttf file="graphics/fonts/Casper-Bold-Italic.ttf" name="Casper Bold Italic" size="16" />
+		<ttf file="graphics/fonts/Casper-BoldItalic.ttf" name="Casper Bold Italic" size="14" />
 		<color value="#b88455" />
 	</font>
 	<font name="narratorfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#888801" />
 	</font>
 	<font name="systemfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#bc9d32" />
 	</font>
 	<font name="msgfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#b88455" />
 	</font>
 	<font name="oocfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#c8ad7f" />
 	</font>
 	<!-- Chat fonts -->
 	<font name="chatnpcfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#c8ad7f" />
 	</font>
 	<font name="chatgmfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#ffffff" />
 	</font>
 	<font name="whisperfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#ffffff" />
 	</font>
 	<!-- Radial menus and character list -->
-		<font name="mini_name">
+	<font name="mini_name">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="#000000" />
@@ -102,7 +102,7 @@
 		<color value="#000000" />
 	</font>
 	<!-- Identity list -->
-		<font name="idactivefont">
+	<font name="idactivefont">
 		<fgffile name="graphics/fonts/bold-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" bold="true" />
 		<color value="#000000" />
@@ -114,7 +114,7 @@
 	</font>
 	<!-- Hot keys -->
 	<font name="hotkey">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="15" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="14" />
 		<color value="#98856C" />
 	</font>
 	<!-- Modifier stack -->
@@ -165,17 +165,17 @@
 		<color value="#968866" />
 	</font>
 	<!-- Standard text fields -->
-		<font name="sheetlabel">
-		<ttf file="graphics/fonts/steelfisheb.ttf" name="SteelfishEb" size="14"/>
+	<font name="sheetlabel">
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
 		<color value="#b7ad96" />
 	</font>
 	<font name="sheettext">
-		<ttf file="graphics/fonts/steelfisheb.ttf" name="SteelfishEb" size="14"/>
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
 		<color value="#b7ad96" />
 	</font>
 	<!-- Number fields -->
 		<font name="sheetnumber">
-		<ttf file="graphics/fonts/steelfisheb.ttf" name="SteelfishEb" size="16"/>
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#b7ad96" />
 	</font>
 	<!-- Character selection -->
@@ -206,7 +206,7 @@
 		<color value="#98856C" />
 	</font>
 	<!-- Tables -->
-		<font name="tablerange">
+	<font name="tablerange">
 		<fgffile name="graphics/fonts/regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="#000000" />
@@ -258,18 +258,30 @@
 		<color value="#98856C" />
 	</font>
 	<!-- Characters -->
-		<font name="sheetlabelinline">
-		<fgffile name="graphics/fonts/regular-8.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="13" />
+	<font name="sheetlabelinline">
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="10" />
 		<color value="#808080" />
 	</font>
 	<font name="sheetlabelmini">
-		<fgffile name="graphics/fonts/regular-8.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="13" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
 		<color value="#98856C" />
 	</font>
+	<font name="sheetlabelheader">
+		<ttf file="graphics/fonts/Rise of Kingdom.ttf" name="Rise of Kingdom" size="15"/>
+		<color value="#98856C" />
+	</font>
+	<!-- Combobox -->
+	<font name="comboboxselected">
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="12" />
+		<color value="#b7ad96" />
+	</font>
+	<font name="combobox">
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
+		<color value="#98856C" />
+	</font>
+	
 	<!-- Reference -->
-		<font name="reference-section">
+	<font name="reference-section">
 		<fgffile name="graphics/fonts/title-regular-10.fgf" />
 		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
 		<color value="3B2C21" />
@@ -305,15 +317,11 @@
 		<color value="#000000" />
 	</font>
 	<font name="button-white">
-		<fgffile name="graphics/fonts/regular-10.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="15" />
-		<color value="#FFFFFF" />
-		<shadow offset="1,1" color="#000000" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="13" />
+		<color value="#c0ae8c" />
 	</font>
 	<font name="button-white-large">
-		<fgffile name="graphics/fonts/regular-11.fgf" />
-		<ttf file="graphics/fonts/Candara.ttf" name="Candara SDF" size="18" />
-		<color value="#FFFFFF" />
-		<shadow offset="1,1" color="#000000" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="14" />
+		<color value="#c0ae8c" />
 	</font>
 </root>

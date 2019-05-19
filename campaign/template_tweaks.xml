@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+<!-- Close buttons -->
+	<template name="close_calendar">
+		<close>
+			<anchored>
+				<top offset="10" />
+				<right offset="-10" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_campaignlist">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_referencepage">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_referencelist">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_charselect">
+		<close>
+			<anchored>
+				<top offset="10" />
+				<right offset="-10" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_tokenbag">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_utilitybox">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_utilitybox2">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_utilitybox3">
+		<close>
+			<anchored>
+				<top offset="10" />
+				<right offset="-10" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_imagebox">
+		<close>
+			<anchored>
+				<top offset="22" />
+				<right offset="-14" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_storybox">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_charsheet">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_recordsheet">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_ctbox">
+		<close>
+			<anchored>
+				<top offset="5" />
+				<right offset="-5" />
+			</anchored>
+		</close>
+	</template>
+	<template name="close_partysheet">
+		<close>
+			<anchored>
+				<top offset="10" />
+				<right offset="-10" />
+			</anchored>
+		</close>
+	</template>
+	<!-- Help Buttons -->
+	<template name="help_calendar">
+		<help>
+			<anchored>
+				<top offset="10" />
+				<right offset="-36" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_ctbox">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_partysheet">
+		<help>
+			<anchored>
+				<top offset="10" />
+				<right offset="-36" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_utilitybox">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_utilitybox2">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_utilitybox3">
+		<help>
+			<anchored>
+				<top offset="10" />
+				<right offset="-36" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_referencelist">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_charselect">
+		<help>
+			<anchored>
+				<top offset="10" />
+				<right offset="-36" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_tokenbag">
+		<help>
+			<anchored>
+				<top offset="5" />
+				<right offset="-31" />
+			</anchored>
+		</help>
+	</template>
+	<template name="help_imagebox">
+		<help>
+			<anchored>
+				<top offset="22" />
+				<right offset="-40" />
+			</anchored>
+		</help>
+	</template>
+	<!-- sizeup -->
+	<template name="button_imagewindow_sizeup">
+		<button_window_sizeup>
+			<anchored position="insidetopright" offset="66,22" />
+		</button_window_sizeup>
+	</template>
+	<!-- Remove lines -->
+	<template name="stringu">
+		<stringfield>
+			<font>sheettext</font>
+			<lineoffset default="off"/>
+			<frame mergerule="replace" name="separatorline" hidereadonly="true" />
+		</stringfield>
+	</template>
+	<template name="string_labeled">
+		<stringfield>
+			<font>sheettext</font>
+			<lineoffset default="off"></lineoffset>
+			<frame mergerule="replace" name="separatorline" hidereadonly="true" />
+			<script>
+				labelwidget = nil;
+			
+				function onInit()
+					if labelres then
+						labelwidget = addTextWidget("sheetlabelinline", string.upper(Interface.getString(labelres[1])));
+					else
+						labelwidget = addTextWidget("sheetlabelinline", string.upper(label[1]));
+					end
+					if labelwidget then
+						local w,h = labelwidget.getSize();
+						labelwidget.setPosition("bottomleft", w/2, h/2-4);
+					end
+				end
+			</script>
+		</stringfield>
+	</template>
+	<template name="stringc_labeled">
+		<stringfield>
+			<font>sheettext</font>
+			<lineoffset default="off"></lineoffset>
+			<frame mergerule="replace" name="separatorline" hidereadonly="true" />
+			<script>
+				labelwidget = nil;
+			
+				function onInit()
+					if labelres then
+						labelwidget = addTextWidget("sheetlabelinline", string.upper(Interface.getString(labelres[1])));
+					else
+						labelwidget = addTextWidget("sheetlabelinline", string.upper(label[1]));
+					end
+					if labelwidget then
+						local w,h = labelwidget.getSize();
+						labelwidget.setPosition("bottomleft", w/2, h/2-4);
+					end
+				end
+			</script>
+		</stringfield>
+	</template>
+	<!-- Inventory list  -->
+	<template name="list_charinv">
+		<windowlist>
+			<child></child>
+			<datasource>.inventorylist</datasource>
+			<class>char_invitem</class>
+			<allowdelete />
+			<script file="campaign/scripts/char_invlist.lua" />
+		</windowlist>
+	</template>
+	<template name="list_text">
+		<windowlist>
+			<child mergerule="resetandadd"></child>
+			<child></child>
+			<allowcreate />
+			<allowdelete />
+			<sortby mergerule="replace"><control>name</control></sortby>
+			<script file="common/scripts/list_text.lua" />
+		</windowlist>
+	</template>
+	<template name="label_frametop">
+		<label>
+			<font>sheetlabelheader</font>
+			<anchored position="insidetop" offset="0,10" />
+			<center />
+		</label>
+	</template>
+	<template name="basicstring">
+		<simplestring>
+			<font>sheetlabel</font>
+			<frame mergerule="replace" name="fielddark" offset="7,5,7,5" hidereadonly="true" />
+			<stateframe>
+				<keyedit name="fieldfocus" offset="7,5,7,5" />
+				<hover name="fieldfocus" offset="7,5,7,5" hidereadonly="true" />
+				<drophilight name="fieldfocus" offset="7,5,7,5" hidereadonly="true" />
+			</stateframe>
+		</simplestring>
+	</template>
+	<template name="list_text">
+		<windowlist>
+			<font>sheetlabelheader</font>
+			<child mergerule="resetandadd"></child>
+			<child><backcolor>1A40301E</backcolor></child>
+			<allowcreate />
+			<allowdelete />
+			<sortby mergerule="replace"><control>name</control></sortby>
+			<script file="common/scripts/list_text.lua" />
+		</windowlist>
+	</template>
+	<template name="combobox_list">
+		<windowlist>
+			<anchored height="50">
+				<right />
+				<bottom />
+			</anchored>
+			<frame name="combobox_list" offset="2,2,2,2" />
+			<datasource/>
+			<class>comboxbox_item</class>
+			<invisible/>
+			<skipempty/>
+			<sortby><control>Order</control></sortby>
+			<script file="common/scripts/combobox_list.lua" />
+		</windowlist>
+	</template>
+	<template name="combobox">
+		<simplestring>
+			<frame>
+				<name>fieldlight</name>
+				<offset>7,5,7,5</offset>
+			</frame>
+			<readonly />
+			<listdirection mergerule="replace">up</listdirection>
+			<buttonoffset mergerule="replace">0,1</buttonoffset>
+			<script file="common/scripts/combobox.lua"/>
+		</simplestring>
+	</template>
+	<framedef name="toolbar_back">
+		<bitmap file="graphics/toolbar/toolbar_back.png"/>
+		<middle rect="0,0,128,128" />
+	</framedef>
+</root>

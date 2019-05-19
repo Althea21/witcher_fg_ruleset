@@ -195,9 +195,9 @@
 			</number_derivedstat_rollable>
 	
 			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->
-			<header_column>
+			<header_npc>
 				<static textres="npc_header_stats" />
-			</header_column>
+			</header_npc>
 
 			<!-- <label_column name="abilities_label">
 				<anchored>
@@ -423,10 +423,10 @@
 				<modifierfield>attributs.punch_modifier</modifierfield>
 			</dice_modifier>
 
-			<header_column>
+			<header_npc>
 				<static textres="npc_header_skills" />
 				
-			</header_column>
+			</header_npc>
 
 			<string_columnh name="skills">
 				<anchored>
@@ -445,9 +445,9 @@
 				<tooltip textres="npc_tooltip_skills"/>
 			</genericcontrol>
 			
-			<header_column>
+			<header_npc>
 				<static textres="npc_header_ecology" />
-			</header_column>
+			</header_npc>
 			
 			<label_column name="height_label">
 				<static textres="npc_label_height" />

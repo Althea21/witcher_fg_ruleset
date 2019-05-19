@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ps_order">
+		<sheetdata>
+			<windowlist name="list">
+				<anchored position="insidetopleft" offset="5,30" width="240">
+					<bottom offset="-30" />
+				</anchored>
+				<frame name="groupbox" offset="5,10,15,10" />
+				<datasource>.partyinformation</datasource>
+				<class>ps_watchitem</class>
+				<sortby><control>watchid</control></sortby>
+				<allowdelete />
+				<empty font="list-empty" textres="ps_emptylist" />
+				<script file="ps/scripts/ps_list.lua" />
+			</windowlist>
+			
+			<label_ps>
+				<anchored to="list" position="above" offset="0,5" />
+				<static textres="ps_label_order" />
+				<center />
+			</label_ps>
+			<button_iedit name="list_iedit">
+				<anchored to="list" position="aboveright" offset="10,10" />
+				<target>list</target>
+			</button_iedit>
+
+			<imagecontrol name="image">
+				<anchored position="insidetopright" offset="10,30">
+					<left offset="270" />
+					<bottom offset="-30" />
+				</anchored>
+				<frame name="imagepanel" offset="0,0,0,10" />
+				<indicators locked="image_locked" loading="image_loading" />
+				<default snap="on" drawingsize="500,500" gridsize="50" />
+				<script>
+					function onInit()
+						ImageManager.registerImage(self);
+					end
+					function onClose()
+						ImageManager.unregisterImage(self);
+					end
+	
+					function onMaskingStateChanged(tool)
+						window.drawtools.onValueChanged();
+					end
+
+					function onDrawStateChanged(tool)
+						window.drawtools.onValueChanged();
+					end
+				</script>
+			</imagecontrol>
+			<scrollercontrol>
+				<anchored to="image" position="insidebottomright" offset="15,-5" width="27" height="45" />
+				<target>image</target>
+				<button normal="button_scrollerpan" pressed="button_scrollerpan_down" zoom="button_zoomer" zoompressed="button_zoomer_down" />
+			</scrollercontrol>
+
+			<label_ps>
+				<anchored to="image" position="above" offset="0,5" />
+				<static textres="ps_label_formation" />
+				<center />
+			</label_ps>		
+
+			<toolbar_20 name="drawtools">
+				<anchored to="image" position="insidetopleft" offset="1,1" width="43" height="24" />
+				<button>
+					<id>paint</id>
+					<icon>tool_paint_20</icon>
+					<tooltipres>image_tooltip_toolbardraw</tooltipres>
+				</button>
+				<button>
+					<id>erase</id>
+					<icon>tool_erase_20</icon>
+					<tooltipres>image_tooltip_toolbarerase</tooltipres>
+				</button>
+				<toggle />
+				<script>
+					function onValueChanged()
+						local sDrawTool = window.image.getDrawingTool();
+						if sDrawTool then
+							if sDrawTool == "erase" then
+								setActive("erase");
+							else
+								setActive("paint");
+							end
+							return;
+						end
+						
+						setActive("");
+					end
+					
+					function onButtonPress(id)
+						if id == "paint" then
+							if window.image.getDrawingTool() ~= "paint" then
+								window.image.setDrawingTool("paint");
+							else
+								window.image.setDrawingTool("");
+							end
+						elseif id == "erase" then
+							if window.image.getDrawingTool() ~= "erase" then
+								window.image.setDrawingTool("erase");
+							else
+								window.image.setDrawingTool("");
+							end
+						end
+					end
+				</script>
+			</toolbar_20>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="ps_watchitem">
+		<margins control="0,0,0,10" />
+		<frame>partysheetentry</frame>
+		<script>
+			function onInit()
+				local imageinstance = token.populateFromImageNode(tokenrefnode.getValue(), tokenrefid.getValue());
+				if imageinstance then
+					PartyManager.linkToken(getDatabaseNode(), imageinstance);
+				end
+			end
+		</script>
+		<sheetdata>
+			<hlink name="link" />
+			<hs name="tokenrefid" />
+			<hs name="tokenrefnode" />
+
+			<basicnumber name="watchid">
+				<bounds>12,20,20,20</bounds>
+			</basicnumber>
+			<tokenfield name="token">
+				<bounds>40,10,40,40</bounds>
+				<empty>token_empty</empty>
+				<script file="ps/scripts/ps_token.lua" />
+			</tokenfield>
+
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top />
+					<right offset="-5" />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored>
+					<top anchor="center" offset="-10" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete>
+
+			<stringu name="name">
+				<anchored height="20">
+					<top offset="20" />
+					<left offset="85" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<empty textres="library_recordtype_empty_charsheet" />
+				<readonly />
+				<nodrag />
+				<nolinkwidget />
+				<script file="common/scripts/string_crosslink.lua" />
+			</stringu>
+		</sheetdata>
+	</windowclass>		
+</root>

@@ -10,7 +10,7 @@
 		<script>
 		</script>
 		<sheetdata>
-			<!-- Variables cach�es -->
+			<!-- Variables cachees -->
 			<hn name="intelligence" source="attributs.intelligence" />
 			<hn name="reflex" source="attributs.reflex" />
 			<hn name="dexterity" source="attributs.dexterity" />
@@ -105,15 +105,15 @@
 				</script>
 			</hs> 
 
-			<!-- Frame de l'arbre de comp�tence -->		
+			<!-- Frame de l'arbre de competence -->		
 			<frame_char name="skills_frame">
 				<bounds>15,0,-29,-5</bounds>
 			</frame_char>
 			<label_frametop>
-				<anchored to="skills_frame" />
+				<anchored to="skills_frame" offset="-7,8" />
 				<static textres="char_label_abilities" />
+				<frame name="headerref" />
 			</label_frametop>
-
 			<!-- Racine -->
 			<basicstring_label name="root_skills_st" source="skills.root_skills_st">
 				<anchored to="skills_frame">
@@ -169,21 +169,30 @@
 			<!-- Ent�te des branches -->
 			<basicstring_label name="a1_label_ss" source="skills.a1_label_ss">
 				<anchored to="skills_frame">
-					<top offset="65" />
+					<top offset="58" />
 					<left offset="15" />
+					<size width="152" height="24" />
 				</anchored>
+				 <center />
+				<frame name="headertitle" />
 			</basicstring_label>	
 			<basicstring_label name="a2_label_ss" source="skills.a2_label_ss">
 				<anchored to="skills_frame">
-					<top offset="65" />
+					<top offset="58" />
 					<left offset="167" />
+					<size width="152" height="24" />
 				</anchored>
+				 <center />
+				<frame name="headertitle" />
 			</basicstring_label>		
 			<basicstring_label name="a3_label_ss" source="skills.a3_label_ss">
 				<anchored to="skills_frame">
-					<top offset="65" />
+					<top offset="58" />
 					<left offset="319" />
+					<size width="152" height="24" />
 				</anchored>
+				 <center />
+				<frame name="headertitle" />
 			</basicstring_label>
 
 			<!-- Branche A -->
@@ -584,7 +593,7 @@
 				</script>
 			</number_skill_rollable>		
 
-			<!-- Liste des comp�tences -->
+			<!-- Liste des comp�tences -->	
 			<list_skills name="skills">
 				<anchored to="skills_frame">
 					<left offset="15" />
@@ -600,10 +609,11 @@
 				<anchored to="skills" />
 				<target>skills</target>
 			</scrollbar_list>
-			<label>
-				<anchored to="skills" position="insidetopleft" offset="205,-20"/>
+			<label_frametop>
+				<bounds>21,163,-37,20</bounds>
 				<static textres="char_label_skills" />
-			</label>
+				<frame name="headerref" />
+			</label_frametop>
 		</sheetdata>
 	</windowclass>
 
@@ -641,15 +651,15 @@
 			</genericcontrol>
 			<button_checkbox name="skill_use">
 				<anchored to="rightanchor">
-					<top />
+					<top offset="4"/>
 					<left parent="" offset="5" />
-					<size width="20" height="20" /> 
+					<size width="12" height="12" /> 
 				</anchored>
 				<invisible />
 			</button_checkbox>
 			<simplestring name="name">
 				<anchored to="rightanchor">
-					<top />
+					<top offset="4"/>
 					<left parent="" offset="25" />
 					<right anchor="left" relation="relative" offset="-5" />
 				</anchored>

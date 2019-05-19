@@ -181,28 +181,28 @@
 				</script>
 			</label>
 			<genericcontrol>
-				<bounds>6,6,-6,32</bounds>
+				<bounds>6,8,-3,24</bounds>
 				<frame name="groupbox2" offset="6,6,6,6" />
 				<disabled />
 			</genericcontrol>
 
 			<!-- list headers -->
 			<genericcontrol name="weaponlist_headers">
-				<bounds>6,36,-6,32</bounds>
-				<frame name="rowshade" />
+				<bounds>6,24,-6,36</bounds>
+				<frame name="headertitle" />
 			</genericcontrol>
 			<label>
-				<anchored position="insidetopleft" offset="5,45" width="29" />
+				<anchored position="insidetopleft" offset="5,36" width="29" />
 				<center />
 				<static textres="char_label_weapontype" />
 			</label>
 			<label>
-				<anchored position="insidetopleft" offset="40,45" width="250"/>
+				<anchored position="insidetopleft" offset="40,36" width="250"/>
 				<!-- <center /> -->
 				<static textres="char_label_weaponname" />
 			</label>
 			<label name="weapon_reliability_label">
-				<anchored position="insidetopright" offset="215,45" width="29"/>
+				<anchored position="insidetopright" offset="215,36" width="29"/>
 				<center />
 				<static textres="char_label_weaponreliability" />
 			</label>
@@ -266,8 +266,8 @@
 			</label>
 			<genericcontrol name="brawlingheaderframe">
 				<anchored>
-					<top parent="brawling_divider" anchor="bottom" offset="10" />
-					<bottom parent="brawling_divider" anchor="bottom" offset="42" />
+					<top parent="brawling_divider" anchor="bottom" offset="13" />
+					<bottom parent="brawling_divider" anchor="bottom" offset="38" />
 					<left/>
 					<right/>
 				</anchored>
@@ -279,14 +279,14 @@
 			<genericcontrol name="brawlinglist_headers">
 				<anchored>
 					<top parent="brawlingheaderframe" anchor="bottom" offset="0" />
-					<bottom parent="brawlingheaderframe" anchor="bottom" offset="32" />
+					<bottom parent="brawlingheaderframe" anchor="bottom" offset="26" />
 					<left offset="5"/>
 					<right offset="-5" />
 				</anchored>
-				<frame name="rowshade" />
+				<frame name="headertitle" />
 			</genericcontrol>
 			<label name="brawling_damage_label">
-				<anchored to="brawlinglist_headers" position="insidetopright" offset="140,7" width="50" />
+				<anchored to="brawlinglist_headers" position="insidetopright" offset="140,3" width="50" />
 				<center />
 				<static textres="char_label_brawlingdamage" />
 			</label>
@@ -305,11 +305,10 @@
 			<!--punch-->
 			<simplestringc>
 				<anchored to="brawlinglist_headers" position="belowleft" offset="5,5" width="250"/>
-				<!-- <center /> -->
 				<static textres="char_label_punchlabel" />
 			</simplestringc>
 			<dice_modifier name="punchdamage" source="attributs.punch">
-				<anchored to="brawlinglist_headers" position="belowright" offset="145,5" width="40" height="20"/>
+				<anchored to="brawlinglist_headers" position="belowright" offset="145,5" width="46" height="20"/>
 				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.punch_modifier</modifierfield>
 				<script>
@@ -421,7 +420,7 @@
 				<static textres="char_label_kicklabel" />
 			</simplestringc>
 			<dice_modifier name="kickdamage" source="attributs.kick">
-				<anchored to="brawlinglist_headers" position="belowright" offset="145,30" width="40" height="20"/>
+				<anchored to="brawlinglist_headers" position="belowright" offset="145,30" width="46" height="20"/>
 				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.kick_modifier</modifierfield>
 				<script>
@@ -556,8 +555,8 @@
 			</label>
 			<genericcontrol name="armorheaderframe">
 				<anchored>
-					<top parent="armor_divider" anchor="bottom" offset="10" />
-					<bottom parent="armor_divider" anchor="bottom" offset="42" />
+					<top parent="armor_divider" anchor="bottom" offset="13" />
+					<bottom parent="armor_divider" anchor="bottom" offset="38" />
 					<left/>
 					<right/>
 				</anchored>
@@ -569,18 +568,18 @@
 			<genericcontrol name="armorlist_headers">
 				<anchored>
 					<top parent="armorheaderframe" anchor="bottom" offset="0" />
-					<bottom parent="armorheaderframe" anchor="bottom" offset="32" />
+					<bottom parent="armorheaderframe" anchor="bottom" offset="26" />
 					<left offset="5"/>
 					<right offset="-5" />
 				</anchored>
-				<frame name="rowshade" />
+				<frame name="headertitle" />
 			</genericcontrol>
 			<label>
-				<anchored to="armorlist_headers" position="insidetopleft" offset="5,7" width="250"/>
+				<anchored to="armorlist_headers" position="insidetopleft" offset="5,3" width="250"/>
 				<static textres="char_label_brawlingname" />
 			</label>
 			<label name="armor_location_label">
-				<anchored to="armorlist_headers" position="insidetopright" offset="150,7" width="50" />
+				<anchored to="armorlist_headers" position="insidetopright" offset="150,3" width="50" />
 				<center />
 				<static textres="char_label_armorlocation" />
 			</label>
@@ -642,11 +641,12 @@
 			
 			<!-- Edit / See details -->
 			<buttoncontrol name="activatedetail">
-				<anchored to="rightanchor" width="20" height="20">
-					<top />
-					<right anchor="left" relation="relative" offset="3" />
+				<anchored to="rightanchor" width="15" height="25">
+					<top/>
+					<right anchor="left" relation="relative" offset="0" />
 				</anchored>
-				<state icon="button_details" pressed="button_details_down" />
+				<state icon="button_details" />
+				<cursor hover="hand" />
 				<script>
 					function onButtonPress()
 						Interface.openWindow("char_weapon_editor", window.getDatabaseNode());
@@ -992,10 +992,10 @@
 			<string_column name="effects" />
 			
 			<!-- PROPERTIES -->
-			<header_column name="header_properties">
+			<header_weapon name="header_properties">
 				<static textres="weapon_header_properties" />
 				<center />
-			</header_column>
+			</header_weapon>
 			<!--Reliability-->
 			<label_column>
 				<static textres="weapon_property_reliability" />
@@ -1031,10 +1031,10 @@
 			</combobox>
 			
 			<!-- ATTACK -->
-			<header_column name="header_attack">
+			<header_weapon name="header_attack">
 				<static textres="weapon_header_attack" />
 				<center />
-			</header_column>
+			</header_weapon>
 			
 			<cycler_ability name="attackstat">
 				<anchored width="40" height="20">
@@ -1073,12 +1073,12 @@
 			</label_fieldtop>
 			
 			<!-- DAMAGE -->
-			<header_column name="header_damage">
+			<header_weapon name="header_damage">
 				<static textres="weapon_header_damage" />
 				<center />
-			</header_column>
+			</header_weapon>
 			<button_iedit name="list_iedit">
-				<anchored to="header_damage" position="insidetopright" offset="-5,0" />
+				<anchored to="header_damage" position="insidetopright" offset="-5,5" />
 				<target>list</target>
 			</button_iedit>
 			<button_iadd name="list_iadd">
@@ -1119,12 +1119,12 @@
 			</label_fieldtop>
 			
 			<!-- ENHANCEMENT -->
-			<header_column name="header_enhancement">
+			<header_weapon name="header_enhancement">
 				<static textres="weapon_header_enhancement" />
 				<center />
-			</header_column>
+			</header_weapon>
 			<button_iedit name="enhancement_list_iedit">
-				<anchored to="header_enhancement" position="insidetopright" offset="-5,0" />
+				<anchored to="header_enhancement" position="insidetopright" offset="-5,5" />
 				<target>enhancement_list</target>
 			</button_iedit>
 			<button_iadd name="enhancement_list_iadd">

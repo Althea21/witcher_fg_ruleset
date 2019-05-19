@@ -37,13 +37,21 @@
 	</framedef>
 	<framedef name="headerref">
 		<bitmap file="graphics/frames/headerref.png" />
-		<middle rect="0,0,128,128" />
+		<bottom rect="40,127,48,1"/>
+		<bottomright rect="88,127,40,1"/>
+		<bottomleft rect="0,127,40,1"/>
 	</framedef>
 
 	<!-- Lists -->
+	<framedef name="headertitle">
+		<bitmap file="graphics/frames/headertitle.png" />
+		<middle rect="0,0,200,95" />
+		<bottom rect="0,95,200,5"/>
+	</framedef>
 	<framedef name="rowshade">
 		<bitmap file="graphics/frames/rowshade.png" />
-		<middle rect="0,0,200,100" />
+		<middle rect="0,0,200,95" />
+		<bottom rect="0,95,200,5"/>
 	</framedef>
 	<framedef name="search">
 		<bitmap file="graphics/frames/search.png" />
@@ -157,7 +165,7 @@
 	<!-- Drop down list -->
 	<framedef name="combobox_list">
 		<bitmap file="graphics/frames/combobox_list.png"/>
-		<offset>1,1,1,1</offset>
+		<offset>2,0,4,2</offset>
 	</framedef>
 	<framedef name="combobox_scrollbar">
 		<bitmap file="graphics/frames/combobox_scrollbar.png"/>
@@ -348,17 +356,9 @@
 		<insideoffset>0,0,5,7</insideoffset>
 	</framedef>
 	<framedef name="campaignlistwithtabs">
-		<bitmap file="graphics/frames/scrollbox.png" />
-		<topleft rect="0,0,115,110" />
-		<top rect="115,0,355,110" />
-		<topright rect="470,0,85,110" />
-		<left rect="0,110,85,400" />
-		<middle rect="85,110,385,400" />
-		<right rect="470,110,85,400" />
-		<bottomleft rect="0,533,85,37" />
-		<bottom rect="85,533,385,37" />
-		<bottomright rect="470,533,85,37" />
-		<insideoffset>0,0,10,8</insideoffset>
+		<bitmap file="graphics/frames/referencepage.png" />
+		<offset>22,22,22,22</offset>
+		<insideoffset>0,0,10,10</insideoffset>
 	</framedef>
 	<framedef name="referencepage">
 		<bitmap file="graphics/frames/referencepage.png" />
@@ -480,8 +480,8 @@
 	<!-- Images -->
 	<framedef name="imagebox">
 		<bitmap file="graphics/frames/imagebox.png" />
-		<offset>25,80,25,60</offset>
-		<insideoffset>0,0,25,25</insideoffset>
+		<offset>21,56,30,29</offset>
+		<insideoffset>0,0,5,5</insideoffset>
 	</framedef>
 	<framedef name="imagebox_header"></framedef>
 	<framedef name="imagepanel">
@@ -516,11 +516,15 @@
 	</framedef>
 	<framedef name="separatorline">
 		<bitmap file="graphics/frames/textline.png" />
-		<middle rect="1,14,98,3" />
+		<offset>0,0,0,0</offset>
 	</framedef>
 	<framedef name="headersimple">
 		<bitmap file="graphics/frames/headersimple.png" />
-		<offset>0,3,0,3</offset>
+		<offset>3,3,3,3</offset>
+	</framedef>
+	<framedef name="headerunderlined">
+		<bitmap file="graphics/frames/headerunderlined.png" />
+		<offset>0,0,0,0</offset>
 	</framedef>
 	<framedef name="border">
 		<bitmap file="graphics/frames/border.png" />

@@ -30,24 +30,26 @@
 	<icon name="char_weapon" file="graphics/icons/char_weapon.png" />
 	<icon name="char_weapon_melee" file="graphics/icons/char_weapon_melee.png" />
 	<icon name="char_weapon_ranged" file="graphics/icons/char_weapon_ranged.png" />
-	<icon name="attack_melee_normal" file="graphics/icons/attack_melee_normal.jpg" />
-	<icon name="attack_melee_fast" file="graphics/icons/attack_melee_fast.jpg" />
-	<icon name="attack_melee_strong" file="graphics/icons/attack_melee_strong.jpg" />
-	<icon name="attack_range_normal" file="graphics/icons/attack_range_normal.jpg" />
-	<icon name="attack_range_fast" file="graphics/icons/attack_range_fast.jpg" />
-	<icon name="attack_range_strong" file="graphics/icons/attack_range_strong.jpg" />
-	<icon name="melee_parry" file="graphics/icons/melee_parry.jpg" />
-	<icon name="melee_block" file="graphics/icons/melee_block.jpg" />
+	<icon name="char_weapon_punch" file="graphics/icons/char_weapon_punch.png" />
+	<icon name="char_weapon_kick" file="graphics/icons/char_weapon_kick.png" />
+	<icon name="attack_melee_normal" file="graphics/icons/attack_melee_normal.png" />
+	<icon name="attack_melee_fast" file="graphics/icons/attack_melee_fast.png" />
+	<icon name="attack_melee_strong" file="graphics/icons/attack_melee_strong.png" />
+	<icon name="attack_range_normal" file="graphics/icons/attack_range_normal.png" />
+	<icon name="attack_range_fast" file="graphics/icons/attack_range_fast.png" />
+	<icon name="attack_range_strong" file="graphics/icons/attack_range_strong.png" />
+	<icon name="melee_parry" file="graphics/icons/melee_parry.png" />
+	<icon name="melee_block" file="graphics/icons/melee_block.png" />
 	<icon name="char_brawling" file="graphics/icons/char_brawling.png" />
 	<icon name="char_armor" file="graphics/icons/char_armor.png" />
-	<icon name="attack_punch_normal" file="graphics/icons/attack_punch_normal.jpg" />
-	<icon name="attack_punch_fast" file="graphics/icons/attack_punch_fast.jpg" />
-	<icon name="attack_punch_strong" file="graphics/icons/attack_punch_strong.jpg" />
-	<icon name="attack_punch_block" file="graphics/icons/attack_punch_block.jpg" />
-	<icon name="attack_kick_normal" file="graphics/icons/attack_kick_normal.jpg" />
-	<icon name="attack_kick_fast" file="graphics/icons/attack_kick_fast.jpg" />
-	<icon name="attack_kick_strong" file="graphics/icons/attack_kick_strong.jpg" />
-	<icon name="attack_kick_block" file="graphics/icons/attack_kick_block.jpg" />
+	<icon name="attack_punch_normal" file="graphics/icons/attack_punch_normal.png" />
+	<icon name="attack_punch_fast" file="graphics/icons/attack_punch_fast.png" />
+	<icon name="attack_punch_strong" file="graphics/icons/attack_punch_strong.png" />
+	<icon name="attack_punch_block" file="graphics/icons/attack_punch_block.png" />
+	<icon name="attack_kick_normal" file="graphics/icons/attack_kick_normal.png" />
+	<icon name="attack_kick_fast" file="graphics/icons/attack_kick_fast.png" />
+	<icon name="attack_kick_strong" file="graphics/icons/attack_kick_strong.png" />
+	<icon name="attack_kick_block" file="graphics/icons/attack_kick_block.png" />
 	
 	<!-- Character Sheet : Magic tab-->
 	<icon name="spellclass_mage" file="graphics/icons/caster_mage.png" />
@@ -55,7 +57,7 @@
 	<icon name="spellclass_hexes" file="graphics/icons/caster_hexes.png" />
 	<icon name="spellclass_ritual" file="graphics/icons/caster_ritual.png" />
 	<icon name="spellclass_signs" file="graphics/icons/caster_sign.png" />
-	<icon name="spell_cast" file="graphics/icons/spell_cast.jpg" />
+	<icon name="spell_cast" file="graphics/icons/spell_cast.png" />
 
 	<!--colored dice-->
 	<icon name="d10gicon" file="graphics/icons/d10_gicon.png" />
