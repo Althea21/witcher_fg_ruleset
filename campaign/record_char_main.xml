@@ -167,13 +167,20 @@
 			
 			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->
 			<number_charstatbase name="intelligence_base" source="attributs.intelligence_base">
-				<anchored to="attributs_frame" position="insidetopleft" offset="120,55" width="30" height="20" />
+				<anchored to="attributs_frame" position="insidetopleft" offset="90,55" width="30" height="20"/>
 				<script>
 				function onValueChanged()
 					window.onIntelligenceChanged();
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="intelligence_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="intelligence_modifier" source="attributs.intelligence_modifier">
 				<anchored to="intelligence_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -185,6 +192,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="intelligence_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal name="intelligence" source="attributs.intelligence">
 				<anchored to="intelligence_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -197,7 +211,7 @@
 				</script>
 			</number_charstattotal>
 			<label>
-				<anchored to="intelligence_base" position="right" offset="-130,0" />
+				<anchored to="intelligence_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_intelligence" />
 			</label>
 			
@@ -209,6 +223,13 @@
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="reflex_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="reflex_modifier" source="attributs.reflex_modifier">
 				<anchored to="reflex_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -220,6 +241,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="reflex_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal  name="reflex" source="attributs.reflex">
 				<anchored to="reflex_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -232,7 +260,7 @@
 				</script>
 			</number_charstattotal>
 			<label>
-				<anchored to="reflex_base" position="right" offset="-130,0" />
+				<anchored to="reflex_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_reflex" />
 			</label>
 			
@@ -244,6 +272,13 @@
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="dexterity_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="dexterity_modifier" source="attributs.dexterity_modifier">
 				<anchored to="dexterity_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -255,6 +290,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="dexterity_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal  name="dexterity" source="attributs.dexterity">
 				<anchored to="dexterity_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -267,7 +309,7 @@
 				</script>
 			</number_charstattotal>
 			<label>
-				<anchored to="dexterity_base" position="right" offset="-130,0" />
+				<anchored to="dexterity_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_dexterity" />
 			</label>
 			
@@ -279,6 +321,13 @@
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="body_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="body_modifier" source="attributs.body_modifier">
 				<anchored to="body_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -290,6 +339,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="body_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal  name="body" source="attributs.body">
 				<anchored to="body_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -302,7 +358,7 @@
 				</script>
 			</number_charstattotal>
 			<label>
-				<anchored to="body_base" position="right" offset="-130,0" />
+				<anchored to="body_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_body" />
 			</label>
 			
@@ -314,6 +370,13 @@
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="speed_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="speed_modifier" source="attributs.speed_modifier">
 				<anchored to="speed_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -325,6 +388,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="speed_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal  name="speed" source="attributs.speed">
 				<anchored to="speed_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -337,7 +407,7 @@
 				</script>
 			</number_charstattotal>
 			<label>
-				<anchored to="speed_base" position="right" offset="-130,0" />
+				<anchored to="speed_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_speed" />
 			</label>
 			
@@ -349,6 +419,13 @@
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="empathy_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="empathy_modifier" source="attributs.empathy_modifier">
 				<anchored to="empathy_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -360,6 +437,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="empathy_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal  name="empathy" source="attributs.empathy">
 				<anchored to="empathy_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -372,7 +456,7 @@
 				</script>
 			</number_charstattotal>
 			<label>
-				<anchored to="empathy_base" position="right" offset="-130,0" />
+				<anchored to="empathy_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_empathy" />
 			</label>
 			
@@ -384,6 +468,13 @@
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="crafting_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="crafting_modifier" source="attributs.crafting_modifier">
 				<anchored to="crafting_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -395,6 +486,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="crafting_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal  name="crafting" source="attributs.crafting">
 				<anchored to="crafting_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -407,7 +505,7 @@
 				</script>
 			</number_charstattotal>
 			<label>
-				<anchored to="crafting_base" position="right" offset="-130,0" />
+				<anchored to="crafting_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_crafting" />
 			</label>
 			
@@ -419,6 +517,13 @@
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="will_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="will_modifier" source="attributs.will_modifier">
 				<anchored to="will_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -430,6 +535,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="will_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal  name="will" source="attributs.will">
 				<anchored to="will_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -442,7 +554,7 @@
 				</script>
 			</number_charstattotal>
 			<label>
-				<anchored to="will_base" position="right" offset="-130,0" />
+				<anchored to="will_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_will" />
 			</label>
 
@@ -454,6 +566,13 @@
 				end
 				</script>
 			</number_charstatbase>
+			<label>
+				<anchored to="vigor_base">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_plus" />
+			</label>
 			<number_charstatmodifier name="vigor_modifier" source="attributs.vigor_modifier">
 				<anchored to="vigor_base" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -465,6 +584,13 @@
 				end
 				</script>
 			</number_charstatmodifier>
+			<label>
+				<anchored to="vigor_modifier">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_equal" />
+			</label>
 			<number_charstattotal  name="vigor" source="attributs.vigor">
 				<anchored to="vigor_modifier"width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
@@ -472,7 +598,7 @@
 				</anchored>
 			</number_charstattotal>
 			<label>
-				<anchored to="vigor_base" position="right" offset="-130,0" />
+				<anchored to="vigor_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_vigor" />
 			</label>
 			
@@ -480,7 +606,7 @@
 				<anchored to="vigor_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</basicnumber>
 			<label>
-				<anchored to="luck" position="right" offset="-130,0" />
+				<anchored to="luck" position="right" offset="-110,0" />
 				<static textres="char_statslabel_luck" />
 			</label>
 			
@@ -508,7 +634,7 @@
 			
 			<!-- DERIVED STATS : STUN, RUN, LEAP, HP, STA, ENC, REC, PUNCH, KICK -->
 			<number_derivedstat_rollable name="stun" source="attributs.stun">
-				<anchored to="intelligence_base" position="right" offset="210,0" width="30" height="20" />
+				<anchored to="intelligence_base" position="right" offset="240,0" width="30" height="20" />
 				<script>
 					function action(draginfo)
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
@@ -608,12 +734,12 @@
 			<dice_modifier name="punch" source="attributs.punch">
 				<anchored to="meleebonusdamage" width="47" height="20">
 					<top anchor="bottom" relation="relative" offset="7" />
-					<left anchor="left" offset="-7"/>
+					<left anchor="left" offset="0"/>
 				</anchored>
 				<modifierfield>attributs.punch_modifier</modifierfield>
 			</dice_modifier>
 			<label>
-				<anchored to="punch" position="right" offset="-140,0" />
+				<anchored to="punch" position="right" offset="-147,0" />
 				<static textres="char_derivedstatslabel_punch" />
 			</label>
 			<dice_modifier name="kick" source="attributs.kick">
@@ -624,7 +750,7 @@
 				<modifierfield>attributs.kick_modifier</modifierfield>
 			</dice_modifier>
 			<label>
-				<anchored to="kick" position="right" offset="-140,0" />
+				<anchored to="kick" position="right" offset="-147,0" />
 				<static textres="char_derivedstatslabel_kick" />
 			</label>
 			

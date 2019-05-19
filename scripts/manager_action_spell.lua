@@ -74,16 +74,15 @@ function getRoll(rActor, rSpell)
 		end
 	end
 
-	-- Look up actor / weapon specific information
+	-- Look up actor / spell specific information
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	if nodeActor then
 		local sRollDescription = "";
 		local nRollMod = 0;
 		
-		sRollDescription = "[Cast "..DB.getValue(rSpell, "name", "").."]";
+		sRollDescription = "[Cast "..DB.getValue(rSpell, "name", "").." (STA cost="..DB.getValue(rSpell, "stacost", "not found")..")]";
 
 		-- stat modifier
-		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
 		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs.will", 0);
 		
 		-- skill modifier
@@ -99,7 +98,6 @@ function getRoll(rActor, rSpell)
 		if nodeActor.getParent().getName()=="npc" then
 			-- NPC case
 			local sSkills =  DB.getValue(nodeActor, "skills", 0);
-			--Debug.chat(sSkills);
 			-- Get the comma-separated strings
 			local aClauses, aClauseStats = StringManager.split(sSkills, ",;\r", true);
 			
@@ -116,7 +114,6 @@ function getRoll(rActor, rSpell)
 								nMod = 0 - nMod;
 							end
 						end
-						--Debug.chat("skill modifier ("..sSkill.."): "..nMod);
 						nRollMod = nRollMod + nMod;
 					end
 					break;
@@ -126,7 +123,6 @@ function getRoll(rActor, rSpell)
 			-- PC case
 			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
 				if (DB.getValue(v, "name", "") == sSkill) then
-					--Debug.chat("skill modifier ("..sSkill.."): "..DB.getValue(v, "skill_value", 0));
 					nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
 					--sRollDescription = sRollDescription.."["..sSkill.." +"..DB.getValue(v, "skill_value", 0).."]"
 					break;

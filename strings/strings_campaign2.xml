@@ -62,6 +62,8 @@
 	<string name="char_derivedstatslabel_kick">Kick</string>
 	
 	<string name="char_special_divide">/</string>
+	<string name="char_special_plus">+</string>
+	<string name="char_special_equal">=</string>
 
 	<string name="char_recoveryaction">take a round to recover %i Stamina</string>
 	

@@ -4,19 +4,35 @@
 --
 
 function onIntelligenceChanged()
-	intelligence.setValue(intelligence_base.getValue()+intelligence_modifier.getValue());
+	local v = intelligence_base.getValue()+intelligence_modifier.getValue();
+	if v < 1 then
+		v=1;
+	end
+	intelligence.setValue(v);
 end
 
 function onReflexChanged()
-	reflex.setValue(reflex_base.getValue()+reflex_modifier.getValue());
+	local v = reflex_base.getValue()+reflex_modifier.getValue();
+	if v < 1 then
+		v=1;
+	end
+	reflex.setValue(v);
 end
 
 function onDexterityChanged()
-	dexterity.setValue(dexterity_base.getValue()+dexterity_modifier.getValue());
+	local v = dexterity_base.getValue()+dexterity_modifier.getValue();
+	if v < 1 then
+		v=1;
+	end
+	dexterity.setValue(v);
 end
 
 function onBodyChanged()
-	body.setValue(body_base.getValue()+body_modifier.getValue());
+	local v = body_base.getValue()+body_modifier.getValue();
+	if v < 1 then
+		v=1;
+	end
+	body.setValue(v);
 	
 	local bodyValue = body.getValue();
 	encumbrancemax.setValue(bodyValue*10);
@@ -73,22 +89,38 @@ function onBodyChanged()
 end
 
 function onSpeedChanged()
-	speed.setValue(speed_base.getValue()+speed_modifier.getValue());
+	local v = speed_base.getValue()+speed_modifier.getValue();
+	if v < 1 then
+		v=1;
+	end
+	speed.setValue(v);
 
 	run.setValue(speed.getValue()*3);
 	leap.setValue(math.floor(run.getValue()/5));
 end
 
 function onEmpathyChanged()
-	empathy.setValue(empathy_base.getValue()+empathy_modifier.getValue());
+	local v = empathy_base.getValue()+empathy_modifier.getValue();
+	if v < 1 then
+		v=1;
+	end
+	empathy.setValue(v);
 end
 
 function onCraftingChanged()
-	crafting.setValue(crafting_base.getValue()+crafting_modifier.getValue());
+	local v = crafting_base.getValue()+crafting_modifier.getValue();
+	if v < 1 then
+		v=1;
+	end
+	crafting.setValue(v);
 end
 
 function onWillChanged()
-	will.setValue(will_base.getValue()+will_modifier.getValue());
+	local v = will_base.getValue()+will_modifier.getValue();
+	if v < 1 then
+		v=1;
+	end
+	will.setValue(v);
 	
 	local physical = math.floor((body.getValue() + will.getValue())/2);
 	hit_pointsmax.setValue(physical*5);
@@ -98,5 +130,9 @@ function onWillChanged()
 end
 
 function onVigorChanged()
-	vigor.setValue(vigor_base.getValue()+vigor_modifier.getValue());
+	local v = vigor_base.getValue()+vigor_modifier.getValue();
+	if v < 0 then
+		v=0;
+	end
+	vigor.setValue(v);
 end
