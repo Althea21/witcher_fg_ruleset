@@ -992,10 +992,10 @@
 			<string_column name="effects" />
 			
 			<!-- PROPERTIES -->
-			<header_column name="header_properties">
+			<header_weapon name="header_properties">
 				<static textres="weapon_header_properties" />
 				<center />
-			</header_column>
+			</header_weapon>
 			<!--Reliability-->
 			<label_column>
 				<static textres="weapon_property_reliability" />
@@ -1031,10 +1031,10 @@
 			</combobox>
 			
 			<!-- ATTACK -->
-			<header_column name="header_attack">
+			<header_weapon name="header_attack">
 				<static textres="weapon_header_attack" />
 				<center />
-			</header_column>
+			</header_weapon>
 			
 			<cycler_ability name="attackstat">
 				<anchored width="40" height="20">
@@ -1073,12 +1073,12 @@
 			</label_fieldtop>
 			
 			<!-- DAMAGE -->
-			<header_column name="header_damage">
+			<header_weapon name="header_damage">
 				<static textres="weapon_header_damage" />
 				<center />
-			</header_column>
+			</header_weapon>
 			<button_iedit name="list_iedit">
-				<anchored to="header_damage" position="insidetopright" offset="-5,0" />
+				<anchored to="header_damage" position="insidetopright" offset="-5,5" />
 				<target>list</target>
 			</button_iedit>
 			<button_iadd name="list_iadd">
@@ -1119,12 +1119,12 @@
 			</label_fieldtop>
 			
 			<!-- ENHANCEMENT -->
-			<header_column name="header_enhancement">
+			<header_weapon name="header_enhancement">
 				<static textres="weapon_header_enhancement" />
 				<center />
-			</header_column>
+			</header_weapon>
 			<button_iedit name="enhancement_list_iedit">
-				<anchored to="header_enhancement" position="insidetopright" offset="-5,0" />
+				<anchored to="header_enhancement" position="insidetopright" offset="-5,5" />
 				<target>enhancement_list</target>
 			</button_iedit>
 			<button_iadd name="enhancement_list_iadd">

@@ -126,4 +126,30 @@
 			</parameters>
 		</button_stringcycler>
 	</template>
+
+	<template name="header_npc">
+		<label>
+			<font>sheetlabelheader</font>
+			<anchored height="35">
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="8" />
+				<left offset="10" />
+				<right offset="-10" />
+			</anchored>
+			<frame name="headersimple" offset="10,-5,10,-5" />
+			<center />
+		</label>
+	</template>
+
+	<template name="header_weapon">
+		<label>
+			<font>sheetlabelheader</font>
+			<anchored height="30">
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="8" />
+				<left offset="10" />
+				<right offset="-10" />
+			</anchored>
+			<frame name="headersimple" offset="10,-3,10,-3" />
+			<center />
+		</label>
+	</template>
 </root>

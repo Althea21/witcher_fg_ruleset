@@ -342,4 +342,8 @@
 			<script file="common/scripts/combobox.lua"/>
 		</simplestring>
 	</template>
+	<framedef name="toolbar_back">
+		<bitmap file="graphics/toolbar/toolbar_back.png"/>
+		<middle rect="0,0,128,128" />
+	</framedef>
 </root>

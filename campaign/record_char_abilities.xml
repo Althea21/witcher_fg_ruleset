@@ -651,7 +651,7 @@
 			</genericcontrol>
 			<button_checkbox name="skill_use">
 				<anchored to="rightanchor">
-					<top />
+					<top offset="4"/>
 					<left parent="" offset="5" />
 					<size width="12" height="12" /> 
 				</anchored>
@@ -659,7 +659,7 @@
 			</button_checkbox>
 			<simplestring name="name">
 				<anchored to="rightanchor">
-					<top />
+					<top offset="4"/>
 					<left parent="" offset="25" />
 					<right anchor="left" relation="relative" offset="-5" />
 				</anchored>
