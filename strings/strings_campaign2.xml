@@ -52,6 +52,7 @@
 	<string name="char_derivedstatslabel_stun">Stun</string>
 	<string name="char_derivedstatslabel_run">Run</string>
 	<string name="char_derivedstatslabel_leap">Leap</string>
+	<string name="char_derivedstatslabel_woundthreshold">Wound Threshold</string>
 	<string name="char_derivedstatslabel_hit_points">Hit Points</string>
 	<string name="char_derivedstatslabel_stamina">Stamina</string>
 	<string name="char_derivedstatslabel_encumbrance">Encumbrance</string>

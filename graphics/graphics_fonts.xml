@@ -174,9 +174,13 @@
 		<color value="#b7ad96" />
 	</font>
 	<!-- Number fields -->
-		<font name="sheetnumber">
+	<font name="sheetnumber">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#b7ad96" />
+	</font>
+	<font name="sheetnumber_critical">
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
+		<color value="#ff0000" />
 	</font>
 	<!-- Character selection -->
 		<font name="charselecttitle">

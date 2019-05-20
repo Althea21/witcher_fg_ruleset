@@ -673,8 +673,27 @@
 				<static textres="char_derivedstatslabel_leap" />
 			</label>
 			
-			<number_statcurrentvalue name="hit_points" source="attributs.hit_points">
+			<number_derivedstat name="woundthreshold" source="attributs.woundthreshold">
 				<anchored to="leap" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</number_derivedstat>
+			<label>
+				<anchored to="woundthreshold" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_woundthreshold" />
+			</label>
+			<buttonfield name="woundthreshold_state" source="attributs.woundthreshold_state">
+				<anchored to="woundthreshold" position="right" offset="5,0" width="10" height="10" />
+				<state icon="button_woundthreshold_off" tooltipres="button_woundthreshold_off" />
+				<state icon="button_woundthreshold_on" tooltipres="button_woundthreshold_on" />
+				<default>0</default>
+				<script>
+					function onValueChanged()
+						window.onWoundThresholdStateChanged(window.getDatabaseNode());
+					end
+				</script>
+			</buttonfield>
+
+			<number_statcurrentvalue name="hit_points" source="attributs.hit_points">
+				<anchored to="woundthreshold" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</number_statcurrentvalue>
 			<label>
 				<anchored to="hit_points" position="right" offset="-130,0" />
@@ -702,9 +721,37 @@
 				<anchored to="staminamax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
 			</label>
-			
-			<number_derivedstat name="encumbrance" source="attributs.encumbrance">
+
+			<number_derivedstat name="recovery" source="attributs.recovery">
 				<anchored to="stamina" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			</number_derivedstat>
+			<label>
+				<anchored to="recovery" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_recovery" />
+			</label>
+			<buttoncontrol name="button_recovery">
+				<anchored to="recovery" position="right" offset="5,0" width="20" height="20" />
+				<icon normal="button_action_heal" pressed="button_action_heal_down" />
+				<cursor hover="hand" />
+				<nodrag />
+				<script>
+					function action(draginfo)
+						window.onRecoverAction();
+					end
+
+					function onButtonPress()
+						action();
+					end
+
+					function onDragStart(button, x, y, draginfo)
+						action(draginfo);
+						return true;
+					end
+				</script>
+			</buttoncontrol>
+
+			<number_derivedstat name="encumbrance" source="attributs.encumbrance">
+				<anchored to="recovery" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</number_derivedstat>
 			<label>
 				<anchored to="encumbrance" position="right" offset="-130,0" />
@@ -717,30 +764,29 @@
 				<anchored to="encumbrancemax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
 			</label>
-			<number_derivedstat name="recovery" source="attributs.recovery">
-				<anchored to="encumbrance" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</number_derivedstat>
-			<label>
-				<anchored to="recovery" position="right" offset="-130,0" />
-				<static textres="char_derivedstatslabel_recovery" />
-			</label>
+
 			<basicnumber name="meleebonusdamage" source="attributs.meleebonusdamage">
-				<anchored to="recovery" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="encumbrance" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</basicnumber>
 			<label>
 				<anchored to="meleebonusdamage" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_meleebonusdamage" />
 			</label>
+			
+			
+			<!-- punch and kick damage bonus are set to invisible (useless here as we don't have enough space)-->
 			<dice_modifier name="punch" source="attributs.punch">
 				<anchored to="meleebonusdamage" width="47" height="20">
 					<top anchor="bottom" relation="relative" offset="7" />
 					<left anchor="left" offset="0"/>
 				</anchored>
+				<invisible/>
 				<modifierfield>attributs.punch_modifier</modifierfield>
 			</dice_modifier>
 			<label>
 				<anchored to="punch" position="right" offset="-147,0" />
 				<static textres="char_derivedstatslabel_punch" />
+				<invisible/>
 			</label>
 			<dice_modifier name="kick" source="attributs.kick">
 				<anchored to="punch" width="47" height="20">
@@ -748,10 +794,12 @@
 					<left />
 				</anchored>
 				<modifierfield>attributs.kick_modifier</modifierfield>
+				<invisible/>
 			</dice_modifier>
 			<label>
 				<anchored to="kick" position="right" offset="-147,0" />
 				<static textres="char_derivedstatslabel_kick" />
+				<invisible/>
 			</label>
 			
 			

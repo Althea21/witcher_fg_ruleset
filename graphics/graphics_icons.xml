@@ -26,6 +26,10 @@
 	<icon name="button_effects" file="graphics/sidebar/button_effects.png" />
 	<icon name="button_effects_down" file="graphics/sidebar/button_effects_down.png" />
 	
+	<!-- Character Sheet : main tab-->
+	<icon name="button_woundthreshold_off" file="graphics/icons/woundthreshold_off.png" />
+	<icon name="button_woundthreshold_on" file="graphics/icons/woundthreshold_on.png" />
+
 	<!-- Character Sheet : combat tab-->
 	<icon name="char_weapon" file="graphics/icons/char_weapon.png" />
 	<icon name="char_weapon_melee" file="graphics/icons/char_weapon_melee.png" />
