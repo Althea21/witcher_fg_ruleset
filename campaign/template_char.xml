@@ -65,6 +65,24 @@
 			<frame name="fieldlight" offset="7,5,7,5" />
 			<hideonvalue value="0" />
 			<rollable />
+			<readonly />
+			<script>
+				function getStat(rActor, sFindStat)
+					local sStat = "";
+					local nStat = 0;
+					
+					local rActor = DB.findNode(rActor.sCreatureNode);
+					sStat = DataCommon.ability_stol [sFindStat];
+					
+					nStat = rActor.getChild("attributs." .. sStat).getValue();
+					
+					local sFirstChar = string.sub(sStat, 1, 1);
+					local sEndChar = string.sub(sStat, 2, string.len(sStat));
+					sStat = string.upper(sFirstChar) .. sEndChar;
+					
+					return sStat,nStat;
+				end
+			</script>
 		</basicnumber>
 	</template>
 	

@@ -7,8 +7,6 @@
 
 <root>
 	<windowclass name="charsheet_abilities">
-		<script>
-		</script>
 		<sheetdata>
 			<!-- Variables cachees -->
 			<hn name="intelligence" source="attributs.intelligence" />
@@ -135,8 +133,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.root_skills_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.root_skills_st.getValue(), getValue() + nStat, "");
 						return true;
@@ -216,8 +213,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.a1_ability_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a1_ability_st.getValue(), getValue() + nStat, "");
 						return true;
@@ -263,8 +259,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.a2_ability_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a2_ability_st.getValue(), getValue() + nStat, "");
 						return true;
@@ -310,8 +305,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.a3_ability_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a3_ability_st.getValue(), getValue() + nStat, "");
 						return true;
@@ -349,8 +343,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.b1_ability_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b1_ability_st.getValue(), getValue() + nStat, "");
 						return true;
@@ -396,8 +389,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.b2_ability_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b2_ability_st.getValue(), getValue() + nStat, "");
 						return true;
@@ -443,8 +435,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.b3_ability_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b3_ability_st.getValue(), getValue() + nStat, "");
 						return true;
@@ -482,8 +473,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.c1_ability_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c1_ability_st.getValue(), getValue() + nStat, "");
 					return true;
@@ -529,8 +519,7 @@
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
 						sStat = window.c2_ability_bs.getValue();
-						nStat = getStat(sStat);
-						sStat = DataCommon.ability_stol[sStat];
+						sStat, nStat = getStat(rActor, sStat);
 						
 						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c2_ability_st.getValue(), getValue() + nStat, "");
 						return true;
@@ -576,8 +565,7 @@
 					local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 					
 					sStat = window.c3_ability_bs.getValue();
-					nStat = getStat(sStat);
-					sStat = DataCommon.ability_stol[sStat];
+					sStat, nStat = getStat(rActor, sStat);
 					
 					ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c3_ability_st.getValue(), getValue() + nStat, "");
 					return true;
