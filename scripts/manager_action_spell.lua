@@ -95,31 +95,7 @@ function getRoll(rActor, rSpell)
 			sSkill = "Ritual Crafting";
 		end
 		
-		if nodeActor.getParent().getName()=="npc" then
-			-- NPC case
-			local sSkills =  DB.getValue(nodeActor, "skills", 0);
-			-- Get the comma-separated strings
-			local aClauses, aClauseStats = StringManager.split(sSkills, ",;\r", true);
-			
-			-- Check each comma-separated string 
-			for i = 1, #aClauses do
-				local nStarts, nEnds, sLabel, sSign, sMod = string.find(aClauses[i], "([%w%s\(\)]*[%w\(\)]+)%s*([%+%--]?)(%d*)");
-				if string.lower(sLabel) == string.lower(sSkill) then
-					if nStarts then
-						-- Calculate modifier based on mod value and sign value, if any
-						local nMod = 0;
-						if sMod ~= "" then
-							nMod = tonumber(sMod) or 0;
-							if sSign == "-" or sSign == "-" then
-								nMod = 0 - nMod;
-							end
-						end
-						nRollMod = nRollMod + nMod;
-					end
-					break;
-				end
-			end
-		else
+		if nodeActor.getParent().getName()=="charsheet" then
 			-- PC case
 			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
 				if (DB.getValue(v, "name", "") == sSkill) then
@@ -128,6 +104,9 @@ function getRoll(rActor, rSpell)
 					break;
 				end
 			end
+		else
+			-- NPC case
+			nRollMod = nRollMod + CharManager.getNPCSkillValue(nodeActor, sSkill);
 		end
 
 		-- Substract equipped armor part EV

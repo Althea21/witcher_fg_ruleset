@@ -80,33 +80,7 @@ function getRoll(rActor, rWeapon, sDefenseType)
 		--sRollDescription = sRollDescription.."["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]"
 		
 		-- skill modifier
-		if nodeActor.getParent().getName()=="npc" then
-			-- NPC case
-			local sSkills =  DB.getValue(nodeActor, "skills", 0);
-			--Debug.chat(sSkills);
-			-- Get the comma-separated strings
-			local aClauses, aClauseStats = StringManager.split(sSkills, ",;\r", true);
-			
-			-- Check each comma-separated string 
-			for i = 1, #aClauses do
-				local nStarts, nEnds, sLabel, sSign, sMod = string.find(aClauses[i], "([%w%s\(\)]*[%w\(\)]+)%s*([%+%--]?)(%d*)");
-				if string.lower(sLabel) == string.lower(rWeapon.skill) then
-					if nStarts then
-						-- Calculate modifier based on mod value and sign value, if any
-						local nMod = 0;
-						if sMod ~= "" then
-							nMod = tonumber(sMod) or 0;
-							if sSign == "-" or sSign == "-" then
-								nMod = 0 - nMod;
-							end
-						end
-						--Debug.chat("skill modifier ("..rWeapon.skill.."): "..nMod);
-						nRollMod = nRollMod + nMod;
-					end
-					break;
-				end
-			end
-		else
+		if nodeActor.getParent().getName()=="charsheet" then
 			-- PC case
 			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
 				if (DB.getValue(v, "name", "") == rWeapon.skill) then
@@ -116,6 +90,10 @@ function getRoll(rActor, rWeapon, sDefenseType)
 					break;
 				end
 			end
+			
+		else
+			-- NPC case
+			nRollMod = nRollMod + CharManager.getNPCSkillValue(nodeActor, rWeapon.skill);
 		end
 
 		-- Substract equipped armor part EV

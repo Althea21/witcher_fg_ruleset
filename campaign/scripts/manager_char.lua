@@ -255,3 +255,36 @@ function getUnarmedDamageRollStructures(nodeChar, sType)
 	
 	return rActor, rDamage;
 end
+
+-- get NPC skill value
+-- params :
+--  * nodeActor : npc node
+--  * skillName : skill to retreive
+-- returns : 
+--	* value	: value for skill, else 0
+function getNPCSkillValue(nodeActor, skillName)
+	local value = 0;
+	
+	-- Get the comma-separated strings
+	local sSkills =  DB.getValue(nodeActor, "skills", 0);
+	local aClauses, aClauseStats = StringManager.split(sSkills, ",;\r", true);
+	
+	-- Check each comma-separated string 
+	for i = 1, #aClauses do
+		local nStarts, nEnds, sLabel, sSign, sMod = string.find(aClauses[i], "([%w%s\(\)]*[%w\(\)]+)%s*([%+%--]?)(%d*)");
+		if string.lower(sLabel) == string.lower(skillName) then
+			if nStarts then
+				-- Calculate modifier based on mod value and sign value, if any
+				if sMod ~= "" then
+					value = tonumber(sMod) or 0;
+					if sSign == "-" then
+						value = 0 - value;
+					end
+				end
+			end
+			break;
+		end
+	end
+
+	return value;
+end
