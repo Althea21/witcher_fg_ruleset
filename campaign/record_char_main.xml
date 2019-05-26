@@ -754,7 +754,7 @@
 				<anchored to="recovery" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 				<script>
 					function onValueChanged()
-						window.onToxicityChanged(window.getDatabaseNode());
+						window.onToxicityChanged();
 					end
 				</script>
 			</number_statcurrentvalue>

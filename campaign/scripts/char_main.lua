@@ -2,6 +2,24 @@
 -- Please see the license.html file included with this distribution for 
 -- attribution and copyright information.
 --
+function onInit()
+	Update();
+end
+
+function Update()
+	onIntelligenceChanged();
+	onReflexChanged();
+	onDexterityChanged();
+	onBodyChanged();
+	onSpeedChanged();
+	onEmpathyChanged();
+	onCraftingChanged();
+	onWillChanged();
+	onVigorChanged();
+	onWoundThresholdStateChanged(getDatabaseNode());
+	onToxicityChanged();
+	
+end
 
 function onIntelligenceChanged()
 	local v = intelligence_base.getValue()+intelligence_modifier.getValue();
@@ -187,8 +205,8 @@ function onWoundThresholdStateChanged(nodeActor)
 	end
 end
 
-function onToxicityChanged(nodeActor)
-	local value = DB.getValue(nodeActor, "attributs.toxicity", 0);
+function onToxicityChanged()
+	local value = toxicity.getValue();
 	
 	if value < 100 then
 		toxicity.setFont("sheetnumber");
