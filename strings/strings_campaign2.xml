@@ -461,5 +461,15 @@
 	<string name="npc_header_ecology">Ecology</string>
 	
 	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
+
+	<!--Combat tracker-->
+	<string name="ct_menu_init">Initiative</string>
+	<string name="ct_menu_initall">Roll All Initiatives</string>
+	<string name="ct_menu_initnpc">Roll NPC Initiatives</string>
+	<string name="ct_menu_initpc">Roll PC Initiatives</string>
+	<string name="ct_menu_initclear">Clear All Initiatives</string>
+	<string name="ct_menu_itemdelete">Delete From Tracker</string>
+	<string name="ct_menu_itemdeletenonfriendly">Delete All Non-Friendly</string>
+	<string name="ct_menu_itemdeletefoe">Delete Only Foes</string>
 </root>
 

@@ -30,7 +30,7 @@
 	<!-- Strings -->
 	<includefile source="strings/strings_campaign2.xml" />
 
-	<!-- Campaign PJ -->
+	<!-- Campaign PC -->
 	<includefile source="campaign/template_char.xml" />
 	<includefile source="campaign/template_campaign.xml" />
 	<includefile source="campaign/record_char.xml" />
@@ -49,7 +49,10 @@
 	<!-- Reference -->
 	<includefile source="ref/ref_spells.xml" />
 
-	<!-- PJ Table -->
+	<!-- Combat tracker -->
+	<includefile source="ct/template_ct2.xml" />
+
+	<!-- PC Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
 	<script name="SkillsTable" file="campaign/scripts/skills_table.lua" />
 
@@ -67,6 +70,7 @@
 	<script name="ActionDefense" file="scripts/manager_action_defense.lua" />
 	<script name="ActionDamage" file="scripts/manager_action_damage.lua" />
 	<script name="ActionSpell" file="scripts/manager_action_spell.lua" />
+	<script name="CombatManager2" file="scripts/manager_combat2.lua" />
 	<script name="Json" file="scripts/json.lua" />
 	
 </root>
