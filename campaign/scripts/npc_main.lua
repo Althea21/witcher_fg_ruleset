@@ -72,7 +72,7 @@ function onBodyChanged()
 		punch.setModifier(6);
 		kick.setDice({"d6"});
 		kick.setModifier(10);
-	elseif bodyValue <= 14 then
+	elseif bodyValue >= 13 then
 		meleebonusdamage.setValue(8);
 		punch.setDice({"d6"});
 		punch.setModifier(8);
