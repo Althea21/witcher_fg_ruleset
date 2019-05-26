@@ -54,6 +54,7 @@
 	<string name="char_derivedstatslabel_leap">Leap</string>
 	<string name="char_derivedstatslabel_woundthreshold">Wound Threshold</string>
 	<string name="char_derivedstatslabel_hit_points">Hit Points</string>
+	<string name="char_derivedstatslabel_toxicity">Potion toxicity</string>
 	<string name="char_derivedstatslabel_stamina">Stamina</string>
 	<string name="char_derivedstatslabel_encumbrance">Encumbrance</string>
 	<string name="char_derivedstatslabel_recovery">Recovery</string>
@@ -63,6 +64,7 @@
 	<string name="char_derivedstatslabel_kick">Kick</string>
 	
 	<string name="char_special_divide">/</string>
+	<string name="char_special_percent">%</string>
 	<string name="char_special_plus">+</string>
 	<string name="char_special_equal">=</string>
 

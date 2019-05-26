@@ -187,6 +187,18 @@ function onWoundThresholdStateChanged(nodeActor)
 	end
 end
 
+function onToxicityChanged(nodeActor)
+	local value = DB.getValue(nodeActor, "attributs.toxicity", 0);
+	
+	if value < 100 then
+		toxicity.setFont("sheetnumber");
+	elseif value == 100 then
+		toxicity.setFont("sheetnumber_warning");
+	else
+		toxicity.setFont("sheetnumber_critical");
+	end
+end
+
 function onRecoverAction()
 	local rActor = ActorManager.resolveActor(getDatabaseNode());
 	local msg = ChatManager.createBaseMessage(rActor, nil);

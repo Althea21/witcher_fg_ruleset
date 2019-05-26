@@ -750,8 +750,25 @@
 				</script>
 			</buttoncontrol>
 
-			<number_derivedstat name="encumbrance" source="attributs.encumbrance">
+			<number_statcurrentvalue name="toxicity" source="attributs.toxicity">
 				<anchored to="recovery" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+					function onValueChanged()
+						window.onToxicityChanged(window.getDatabaseNode());
+					end
+				</script>
+			</number_statcurrentvalue>
+			<label>
+				<anchored to="toxicity" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_toxicity" />
+			</label>
+			<label>
+				<anchored to="toxicity" position="right" offset="10,0" />
+				<static textres="char_special_percent" />
+			</label>
+
+			<number_derivedstat name="encumbrance" source="attributs.encumbrance">
+				<anchored to="toxicity" position="insidebottomleft" offset="0,-25" width="30" height="20" />
 			</number_derivedstat>
 			<label>
 				<anchored to="encumbrance" position="right" offset="-130,0" />
