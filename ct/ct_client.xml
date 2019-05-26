@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="combattracker_client">
+		<frame>ctbox</frame>
+		<placement>
+			<size width="500" height="600" />
+		</placement>
+		<sizelimits>
+			<minimum width="500" height="400" />
+			<dynamic />
+		</sizelimits>
+		<softclose />
+		<nodelete />
+		<script>
+			function onInit()
+				OptionsManager.registerCallback("CTSI", updateShowOrder);
+				updateShowOrder();
+			end
+			
+			function onClose()
+				OptionsManager.unregisterCallback("CTSI", updateShowOrder);
+			end
+			
+			function updateShowOrder()
+				local bShowInit = not OptionsManager.isOption("CTSI", "off");
+				label_init.setVisible(bShowInit);
+			end
+		</script>
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>ct_window_title</resource>
+			</windowtitlebar>
+			<anchor_title_ctbox name="contentanchor" />
+
+			<anchor_ctbox_client_header />
+			<anchor_ct_label_right />
+			<label_ct_init name="label_init" />
+			<label_ct_name name="label_name" />
+
+			<list_ctbox_client />
+			<scrollbar_list />
+			
+			<button_ct_endturn name="turn_complete" />
+			
+			<label_ct_client_rounds />
+			<number_ct_client_rounds />
+
+			<resize_ctbox />
+			<helper_ct />
+			<close_ctbox />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="client_ct_entry">
+		<margins control="0,0,0,2" />
+		<frame>ctentrybox</frame>
+		<script file="ct/scripts/clientct_entry.lua" />
+		<sheetdata>
+			<hidden_record_isidentified name="isidentified" />
+			<hlink_clientct name="link" />
+			<hs name="tokenrefid" />
+			<hs name="tokenrefnode" />
+			<hn name="tokenvis" />
+
+			<spacer_ctentry_active_top name="active_spacer_top" />
+
+			<button_clientct_active name="active" />
+			<token_clientct name="token" />
+
+			<anchor_ctentry_right name="rightanchor" />
+			<button_clientct_activateeffects name="activateeffects" />
+			<button_ctentry_friendfoe name="friendfoe" />
+			<number_clientct_init name="initresult" />
+
+			<string_clientct_name name="name" />
+			<string_clientct_name name="nonid_name">
+				<empty textres="library_recordtype_empty_nonid_npc" />
+				<invisible />
+			</string_clientct_name>
+
+			<icon_clientctsection_effect name="effecticon" />
+			<spacer_clientctsection_effect name="effectspacer" />
+			<list_clientct_effect name="effects" />
+ 
+			<string_ctentry_targets name="target_summary" />
+			<string_ctentry_effects name="effect_summary" />
+			
+			<spacer_ctentry_middle name="spacer" />
+			<spacer_ctentry_active_bottom name="active_spacer_bottom" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="clientct_effect">
+		<frame>cteffect</frame>
+		<margins control="0,0,0,3" />
+		<script file="ct/scripts/ct_effect.lua" />
+		<sheetdata>
+			<anchor_clientct_effect_left name="leftanchor" />
+			<button_clientct_effect_isactive name="isactive" />
+
+			<anchor_clientct_effect_right name="rightanchor" />
+			<button_clientct_effect_idelete name="idelete" />
+			<button_ct_effect_targetadd name="targeting_add_button" />
+
+			<string_clientct_effect name="label" />
+
+			<string_ct_effect_targets name="target_summary" />
+		</sheetdata>
+	</windowclass>
+</root>

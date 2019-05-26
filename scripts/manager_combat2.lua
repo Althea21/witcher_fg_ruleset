@@ -6,9 +6,11 @@
 function onInit()
 	CombatManager.setCustomSort(CombatManager.sortfuncStandard);
 	
-	CombatManager.setCustomRoundStart(onRoundStart);
-	CombatManager.setCustomTurnStart(onTurnStart);
-	CombatManager.setCustomTurnEnd(onTurnEnd);
+	CombatManager.setCustomAddNPC(addNPC);
+
+	--CombatManager.setCustomRoundStart(onRoundStart);
+	--CombatManager.setCustomTurnStart(onTurnStart);
+	--CombatManager.setCustomTurnEnd(onTurnEnd);
 
 	CombatManager.setCustomCombatReset(resetInit);
 end
@@ -53,4 +55,25 @@ end
 
 function rollInit(sType)
 	CombatManager.rollTypeInit(sType, rollEntryInit);
+end
+
+
+--
+-- NPC
+--
+function addNPC(sClass, nodeNPC, sName)
+	-- Debug.chat(nodeNPC);
+	-- Debug.chat(nodeNPC.getPath());
+
+	local nodeEntry, nodeLastMatch = CombatManager.addNPCHelper(nodeNPC, sName);
+
+	-- HP
+	local nHP = DB.getValue(nodeNPC, "attributs.hit_pointsmax", 0);
+	DB.setValue(nodeEntry, "hit_points", "number", nHP);
+
+	-- Stamina
+	local nSta = DB.getValue(nodeNPC, "attributs.staminamax", 0);
+	DB.setValue(nodeEntry, "stamina", "number", nSta);
+
+	return nodeEntry;
 end
