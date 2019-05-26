@@ -159,17 +159,17 @@
 			</combobox>
 
 			<label_column name="vulnerabilities_label">
-				<static textres="npc_threat_vulnerabilities" />
+				<static textres="npc_label_vulnerabilities" />
 			</label_column>
 			<string_columnh name="vulnerabilities"/>
 
 			<label_column name="abilities_label">
-				<static textres="npc_threat_abilities" />
+				<static textres="npc_label_abilities" />
 			</label_column>
 			<string_columnh name="abilities"/>
 
 			<label_column name="init_label">
-				<static textres="initiative" />
+				<static textres="npc_label_initiative" />
 			</label_column>
 			<number_derivedstat_rollable name="init_combat" source="attributs.reflex">
 				<anchored width="40" height="20">
