@@ -422,7 +422,7 @@
 	</framedef>
 	<framedef name="ctentrybox_active">
 		<bitmap file="graphics/frames/ctentrybox_active.png" />
-		<offset>37,16,14,17</offset>
+		<offset>150,16,14,17</offset>
 	</framedef>
 	<framedef name="ctentrybox_friend">
 		<bitmap file="graphics/frames/ctentrybox_friend.png" />
@@ -430,7 +430,7 @@
 	</framedef>
 	<framedef name="ctentrybox_friend_active">
 		<bitmap file="graphics/frames/ctentrybox_friend_active.png" />
-		<offset>37,16,14,17</offset>
+		<offset>150,16,14,17</offset>
 	</framedef>
 	<framedef name="ctentrybox_neutral">
 		<bitmap file="graphics/frames/ctentrybox_neutral.png" />
@@ -438,7 +438,7 @@
 	</framedef>
 	<framedef name="ctentrybox_neutral_active">
 		<bitmap file="graphics/frames/ctentrybox_neutral_active.png" />
-		<offset>37,16,14,17</offset>
+		<offset>150,16,14,17</offset>
 	</framedef>
 	<framedef name="ctentrybox_foe">
 		<bitmap file="graphics/frames/ctentrybox_foe.png" />
@@ -446,7 +446,7 @@
 	</framedef>
 	<framedef name="ctentrybox_foe_active">
 		<bitmap file="graphics/frames/ctentrybox_foe_active.png" />
-		<offset>37,16,14,17</offset>
+		<offset>150,16,14,17</offset>
 	</framedef>
 	<framedef name="cteffect">
 		<bitmap file="graphics/frames/cteffect.png" />
