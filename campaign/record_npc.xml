@@ -194,6 +194,25 @@
 				</script>
 			</number_derivedstat_rollable>
 	
+			<number_derivedstat name="woundthreshold" source="attributs.woundthreshold">
+				<anchored to="init_combat" position="right" offset="170,0" width="30" height="20" />
+			</number_derivedstat>
+			<label name="woundthreshold_label">
+				<anchored to="woundthreshold" position="right" offset="-130,0" />
+				<static textres="npc_label_woundthreshold" />
+			</label>
+			<buttonfield name="woundthreshold_state" source="attributs.woundthreshold_state">
+				<anchored to="woundthreshold" position="right" offset="5,0" width="10" height="10" />
+				<state icon="button_woundthreshold_off" tooltipres="button_woundthreshold_off" />
+				<state icon="button_woundthreshold_on" tooltipres="button_woundthreshold_on" />
+				<default>0</default>
+				<script>
+					function onValueChanged()
+						window.onWoundThresholdStateChanged(window.getDatabaseNode());
+					end
+				</script>
+			</buttonfield>
+			
 			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->
 			<header_npc>
 				<static textres="npc_header_stats" />
@@ -211,6 +230,13 @@
 					<left offset="5" />
 				</anchored>
 			</number_charstatbase>
+			<number_charstatbase name="intelligence_backup" source="attributs.intelligence_backup">
+				<anchored width="25" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="20" />
+					<left offset="5" />
+				</anchored>
+				<invisible/>
+			</number_charstatbase>
 			<label_fieldtop name="intelligence_label">
 				<anchored to="intelligence" />
 				<static textres="int" />
@@ -221,6 +247,13 @@
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
 			</number_charstatbase>
+			<number_charstatbase name="reflex_backup" source="attributs.reflex_backup">
+				<anchored to="intelligence" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<invisible/>
+			</number_charstatbase>
 			<label_fieldtop name="reflex_label">
 				<anchored to="reflex" />
 				<static textres="ref" />
@@ -230,6 +263,13 @@
 					<top />
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
+			</number_charstatbase>
+			<number_charstatbase name="dexterity_backup" source="attributs.dexterity_backup">
+				<anchored to="intelligence" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<invisible/>
 			</number_charstatbase>
 			<label_fieldtop name="dexterity_label">
 				<anchored to="dexterity" />
@@ -295,6 +335,13 @@
 						window.onWillChanged();
 					end
 				</script>
+			</number_charstatbase>
+			<number_charstatbase name="will_backup" source="attributs.will_backup">
+				<anchored to="intelligence" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<invisible/>
 			</number_charstatbase>
 			<label_fieldtop name="will_label">
 				<anchored to="will" />

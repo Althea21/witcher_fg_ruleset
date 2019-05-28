@@ -18,7 +18,6 @@ function Update()
 	onVigorChanged();
 	onWoundThresholdStateChanged(getDatabaseNode());
 	onToxicityChanged();
-	
 end
 
 function onIntelligenceChanged()

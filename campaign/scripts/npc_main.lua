@@ -28,10 +28,17 @@ function update()
 	end
 	divider.setVisible(bSection1);
 	
+	updateStats();
+end
+
+function updateStats()
+	onBodyChanged();
+	onSpeedChanged();
+	onWillChanged();
+	onWoundThresholdStateChanged(getDatabaseNode());
 end
 
 -- derived stat functions
-
 function onBodyChanged()
 	local bodyValue = body.getValue();
 	encumbrancemax.setValue(bodyValue*10);
@@ -82,6 +89,7 @@ function onBodyChanged()
 	
 	local physical = math.floor((bodyValue + will.getValue())/2);
 	hit_pointsmax.setValue(physical*5);
+	woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
 	staminamax.setValue(physical*5);
 	recovery.setValue(physical);
 	stun.setValue(physical);
@@ -93,9 +101,48 @@ function onSpeedChanged()
 end
 
 function onWillChanged()
-	local physical = math.floor((body.getValue() + will.getValue())/2);
-	hit_pointsmax.setValue(physical*5);
-	staminamax.setValue(physical*5);
-	recovery.setValue(physical);
-	stun.setValue(physical);
+	local woundthreshold_state = woundthreshold_state.getValue();
+	
+	if (woundthreshold_state==0) then
+		-- change derived stat only if not under woundthreshold_state
+		local physical = math.floor((body.getValue() + will.getValue())/2);
+		hit_pointsmax.setValue(physical*5);
+		woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
+		staminamax.setValue(physical*5);
+		recovery.setValue(physical);
+		stun.setValue(physical);
+	end
+end
+
+function onWoundThresholdStateChanged(nodeActor)
+	local state = DB.getValue(nodeActor, "attributs.woundthreshold_state", -1);
+	if (state==1) then
+		-- Activate 
+		-- backup stat to restore later
+		will_backup.setValue(will.getValue());
+		dexterity_backup.setValue(dexterity.getValue());
+		reflex_backup.setValue(reflex.getValue());
+		intelligence_backup.setValue(intelligence.getValue());
+
+		-- halve REF, DEX, INT, and WILL
+		reflex.setValue(math.floor(reflex.getValue()/2));
+		reflex.setFont("sheetnumber_critical");
+		dexterity.setValue(math.floor(dexterity.getValue()/2));
+		dexterity.setFont("sheetnumber_critical");
+		intelligence.setValue(math.floor(intelligence.getValue()/2));
+		intelligence.setFont("sheetnumber_critical");
+		will.setValue(math.floor(will.getValue()/2));
+		will.setFont("sheetnumber_critical");
+	elseif (state==0) then
+		-- Desactivate : restore REF, DEX, INT, and WILL
+		will.setValue(will_backup.getValue());
+		dexterity.setValue(dexterity_backup.getValue());
+		reflex.setValue(reflex_backup.getValue());
+		intelligence.setValue(intelligence_backup.getValue());
+		
+		reflex.setFont("sheetnumber");
+		dexterity.setFont("sheetnumber");
+		intelligence.setFont("sheetnumber");
+		will.setFont("sheetnumber");
+	end
 end

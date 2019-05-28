@@ -441,6 +441,7 @@
 	<string name="npc_label_vulnerabilities">Vulnerabilities</string>
 	<string name="npc_label_abilities">Abilities</string>
 	<string name="npc_label_initiative">Initiative</string>
+	<string name="npc_label_woundthreshold">Wound Threshold</string>
 
 	<string name="npc_header_stats">Stats</string>
 	<string name="npc_label_stun">Stun</string>
