@@ -32,19 +32,17 @@
 	</font>
 	<!-- Dice fonts - REQUIRED -->
 	<font name="diceexpr" version="&gt;=4">
-		<fgffile name="graphics/fonts/regular-10.fgf" />
-		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="15" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
 		<color value="#000000" />
 	</font>
 	<font name="diemod">
-		<fgffile name="graphics/fonts/diemod.fgf" />
-		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="23" />
-		<color value="#000000" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#b9a887" />
 	</font>
 	<font name="dieresult">
-		<fgffile name="graphics/fonts/regular-10.fgf" />
-		<ttf file="graphics/fonts/Tahoma.ttf" name="Tahoma SDF" size="15" />
-		<color value="#ffffff" />
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="16" />
+		<color value="#d4d1c5" />
+		<shadow offset="1,1" color="#000000" />
 	</font>
 	<!-- Drag fonts - REQUIRED -->
 		<font name="draglabel">
@@ -54,8 +52,8 @@
 	</font>
 	<!-- Chat fonts - REQUIRED -->
 	<font name="chatfont">
-		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
-		<color value="#ffffff" />
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="14" />
+		<color value="#b9a887" />
 	</font>
 	<font name="emotefont">
 		<ttf file="graphics/fonts/Casper-BoldItalic.ttf" name="Casper Bold Italic" size="14" />
@@ -67,7 +65,7 @@
 	</font>
 	<font name="systemfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
-		<color value="#bc9d32" />
+		<color value="#b9a887" />
 	</font>
 	<font name="msgfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
@@ -84,11 +82,11 @@
 	</font>
 	<font name="chatgmfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
-		<color value="#ffffff" />
+		<color value="#b9a887" />
 	</font>
 	<font name="whisperfont">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
-		<color value="#ffffff" />
+		<color value="#b9a887" />
 	</font>
 	<!-- Radial menus and character list -->
 	<font name="mini_name">
