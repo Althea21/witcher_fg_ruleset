@@ -142,7 +142,6 @@
 					<top />
 					<right anchor="left" relation="relative" offset="-10" />
 				</anchored>
-				<hideonvalue>0</hideonvalue>
 				<tabtarget prev="hit_points" />
 			</number_ct_crosslink>
 			<number_ct_crosslink name="hit_points">
@@ -150,8 +149,12 @@
 					<top />
 					<right anchor="left" relation="relative" offset="-10" />
 				</anchored>
-				<hideonvalue>0</hideonvalue>
 				<tabtarget prev="initresult" />
+				<script>
+					function update()
+						window.updateHPDisplay();
+					end
+				</script>
 			</number_ct_crosslink>
 			<number_ctentry_initresult name="initresult" />
 			

@@ -18,6 +18,7 @@ function Update()
 	onVigorChanged();
 	onWoundThresholdStateChanged(getDatabaseNode());
 	onToxicityChanged();
+	onHPChanged();
 end
 
 function onIntelligenceChanged()
@@ -225,5 +226,23 @@ function onRecoverAction()
 	stamina.setValue(stamina.getValue()+recovery.getValue());
 	if stamina.getValue() > staminamax.getValue() then
 		stamina.setValue(staminamax.getValue());
+	end
+end
+
+function onHPChanged()
+	local node = getDatabaseNode();
+	local hpMax = hit_pointsmax.getValue();
+	local wt = woundthreshold.getValue();
+	
+	
+	if hit_points.getValue() < wt then
+		hit_points.setFont("sheetnumber_critical");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
+	elseif hit_points.getValue() < (hpMax/2) then
+		hit_points.setFont("sheetnumber_warning");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 0);
+	else
+		hit_points.setFont("sheetnumber");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 0);
 	end
 end

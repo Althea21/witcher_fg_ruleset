@@ -22,6 +22,11 @@
 			</label>
 			<number_statcurrentvalue name="hit_points_combat" source="attributs.hit_points">
 				<anchored to="combat_frame" position="insidetopleft" offset="20,35" width="30" height="20" />
+				<script>
+					function onValueChanged()
+						window.onHPChanged();
+					end
+				</script>
 			</number_statcurrentvalue>
 			<number_derivedstat name="hit_pointsmax_combat" source="attributs.hit_pointsmax">
 				<anchored to="hit_points_combat" position="right" offset="30,0" width="30" height="20" />

@@ -14,4 +14,3 @@ function onRecoverAction()
 		stamina_combat.setValue(staminamax_combat.getValue());
 	end
 end
-

@@ -694,6 +694,11 @@
 
 			<number_statcurrentvalue name="hit_points" source="attributs.hit_points">
 				<anchored to="woundthreshold" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+					function onValueChanged()
+						window.onHPChanged();
+					end
+				</script>
 			</number_statcurrentvalue>
 			<label>
 				<anchored to="hit_points" position="right" offset="-130,0" />
