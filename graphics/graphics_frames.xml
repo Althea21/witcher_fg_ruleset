@@ -126,8 +126,12 @@
 		<bottomright rect="212,199,12,12" />
 		<decal rect="175,212,49,16" />
 	</framedef>
-	<framedef name="tempmodsmall">
+	<framedef name="tempmodbase">
 		<bitmap file="graphics/frames/tempmodsmall.png" />
+		<offset>12,12,11,12</offset>
+	</framedef>
+	<framedef name="tempmodsmall">
+		<bitmap file="graphics/frames/tempmodlanguage.png" />
 		<offset>12,12,11,12</offset>
 	</framedef>
 	<framedef name="tempmodmini">
