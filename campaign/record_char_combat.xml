@@ -308,8 +308,12 @@
 			
 			<!--brawling actions -->
 			<!--punch-->
+			<genericcontrol name="icon_brawling">
+				<anchored to="brawlinglist_headers" position="belowleft" offset="5,-2" width="25" height="25" />
+				<icon>char_weapon_punch</icon>
+			</genericcontrol>
 			<simplestringc>
-				<anchored to="brawlinglist_headers" position="belowleft" offset="5,5" width="250"/>
+				<anchored to="brawlinglist_headers" position="belowleft" offset="35,5" width="250"/>
 				<static textres="char_label_punchlabel" />
 			</simplestringc>
 			<dice_modifier name="punchdamage" source="attributs.punch">
@@ -419,8 +423,12 @@
 			</buttoncontrol>
 			
 			<!--kick-->
+			<genericcontrol name="icon_kick">
+				<anchored to="brawlinglist_headers" position="belowleft" offset="5,24" width="25" height="25" />
+				<icon>char_weapon_kick</icon>
+			</genericcontrol>
 			<simplestringc name="kicklabel">
-				<anchored to="brawlinglist_headers" position="belowleft" offset="5,30" width="250"/>
+				<anchored to="brawlinglist_headers" position="belowleft" offset="35,30" width="250"/>
 				<!-- <center /> -->
 				<static textres="char_label_kicklabel" />
 			</simplestringc>
