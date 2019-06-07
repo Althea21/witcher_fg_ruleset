@@ -308,7 +308,6 @@
 		<windowlist>
 			<font>sheetlabelheader</font>
 			<child mergerule="resetandadd"></child>
-			<child><backcolor>1A40301E</backcolor></child>
 			<allowcreate />
 			<allowdelete />
 			<sortby mergerule="replace"><control>name</control></sortby>

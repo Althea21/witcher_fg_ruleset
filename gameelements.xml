@@ -86,7 +86,7 @@
 	<hotkeybar>
 		<frame>hotkeybox</frame>
 		<location offset="0" height="33" />
-		<title frame="hotkeytitlebox" frameoffset="2,-2,7,5" margin="2,1" font="hotkey" />
+		<title frame="hotkeytitlebox" frameoffset="2,-2,7,5" margin="2,6" font="hotkey" />
 		<label margin="10,12" font="hotkey" />
 		<iconmargins>0,3,0,0</iconmargins>
 	</hotkeybar>
