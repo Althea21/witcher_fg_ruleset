@@ -455,7 +455,9 @@
 	
 	<string name="npc_label_height">Height</string>
 	<string name="npc_label_weight">Weight</string>
+	<string name="npc_label_environment">Environment</string>
 	<string name="npc_label_intelligence">Intelligence</string>
+	<string name="npc_label_organization">Organization</string>
 	<string name="npc_label_loot">Loot</string>
 
 	<string name="npc_header_skills">Skills</string>
