@@ -106,6 +106,7 @@
 					function onInit()
 						super.onInit();
 						add(Interface.getString("npc_type_humanoid"));
+						add(Interface.getString("npc_type_animal"));
 						add(Interface.getString("npc_type_beast"));
 						add(Interface.getString("npc_type_cursed"));
 						add(Interface.getString("npc_type_draconid"));

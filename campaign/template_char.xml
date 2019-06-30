@@ -125,8 +125,8 @@
 				<hover name="fieldfocus" offset="7,5,7,5" />
 			</stateframe>
 			<parameters>
-				<labelsres mergerule="replace">Archery|Crossbow|Melee|Small Blades|Staff/Spear|Swordmanship</labelsres>
-				<values mergerule="replace">Archery|Crossbow|Melee|Small Blades|Staff/Spear|Swordmanship</values>
+				<labelsres mergerule="replace">Archery|Brawling|Crossbow|Melee|Small Blades|Staff/Spear|Swordmanship</labelsres>
+				<values mergerule="replace">Archery|Brawling|Crossbow|Melee|Small Blades|Staff/Spear|Swordmanship</values>
 			</parameters>
 		</button_stringcycler>
 	</template>

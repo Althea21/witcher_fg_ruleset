@@ -6,15 +6,15 @@
 -->
 
 <root version="3.1" release="7" logo="logo.png">
-	<announcement text="The Witcher TRPG ruleset v0.1.1 for Fantasy Grounds\r
+	<announcement text="The Witcher TRPG ruleset v0.2.0 for Fantasy Grounds\r
 	The Witcher TRPG is edited by Talsorian Games Inc.
 	The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved. 
 	The Witcher game is based on the prose of Andrzej Sapkowski.\r\r
-	This ruleset is a fan made project and not an official product from Talsorian Inc. nor CD Project Red." font="emotefont" icon="rulesetlogo" />
+	This ruleset is a fan made project and not an official product from Talsorian Inc. nor CD Projekt Red.\r\r" font="emotefont" icon="rulesetlogo" />
 	<!-- Attributes -->
 	<description>
 		<text>The Witcher</text>
-		<author>Sylv, Laurent 'Heedio' WITZ, U~man</author>
+		<author>Althea, Laurent 'Heedio' WITZ, U~man</author>
 		<website></website>
 	</description>
 
