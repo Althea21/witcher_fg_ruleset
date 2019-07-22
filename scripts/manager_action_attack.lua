@@ -85,6 +85,9 @@ function getRoll(rActor, rWeapon, sAttackType)
 			sRollDescription = "[Attack with "..rWeapon.label.."]";
 		end
 		
+		-- weapon effects and enhancements
+		sRollDescription = sRollDescription .. "\n" .. rWeapon.effects;
+
 		-- stat modifier
 		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
 		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0);
