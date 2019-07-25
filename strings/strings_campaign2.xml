@@ -352,6 +352,7 @@
 	<string name="spell_reqlift_label">Requirement to lift</string>
 	
 	<string name="spellcasting_notenoughSTA">Not enough Stamina to cast this spell</string>
+	<string name="spellcasting_signSTAmax">Stamina Max for casting a witcher sign is 7.</string>
 	<string name="spellcasting_overexertion">[OVEREXERTION : - %i HP]</string>
 
 	<string name="spell_droptargeterror">The spell is not compatible with the target magical class.</string>

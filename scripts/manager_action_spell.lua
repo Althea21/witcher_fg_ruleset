@@ -137,7 +137,7 @@ end
 --	* draginfo		: info given when rolling from onDragStart event (nil if other event trigger the roll)
 --	* rSpell		: spell node
 function performRoll(draginfo, rSpell)
-	-- retreiveactor node 
+	-- retreive actor node 
 	local nodeChar = rSpell.getChild(".....");
 	local rActor = ActorManager.getActor("pc", nodeChar);
 	
@@ -148,6 +148,17 @@ function performRoll(draginfo, rSpell)
 		local msg = ChatManager.createBaseMessage(rActor, nil);
 		msg.text = Interface.getString("spellcasting_notenoughSTA");
 		Comm.deliverChatMessage(msg);
+	-- STA cost for casting sign is 7 max
+	elseif nSTACost > 7 then
+		local parentNode = rSpell.getParent().getParent();
+		if parentNode then
+			local nSpellType = DB.getValue(parentNode, "type", -1);
+			if (nSpellType == 4) then
+				local msg = ChatManager.createBaseMessage(rActor, nil);
+				msg.text = Interface.getString("spellcasting_signSTAmax");
+				Comm.deliverChatMessage(msg);
+			end
+		end
 	else
 		-- get roll
 		local rRoll = getRoll(rActor, rSpell);
@@ -155,7 +166,6 @@ function performRoll(draginfo, rSpell)
 		-- roll it !
 		ActionsManager.performAction(draginfo, rActor, rRoll);
 	end
-	
 end
 
 -- HANDLERS --------------------------------------------------------
