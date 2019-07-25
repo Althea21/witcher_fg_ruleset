@@ -205,6 +205,7 @@
 			</basicstring_label>
 			<number_skill_rollable name="a1_ability_nb" source="skills.ability.a1_ability_nb">
 				<anchored to="a1_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -251,6 +252,7 @@
 			</basicstring_label>
 			<number_skill_rollable name="a2_ability_nb" source="skills.ability.a2_ability_nb">
 				<anchored to="a2_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -297,6 +299,7 @@
 			</basicstring_label>
 			<number_skill_rollable name="a3_ability_nb" source="skills.ability.a3_ability_nb">
 				<anchored to="a3_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -335,6 +338,7 @@
 			</basicstring_label>
 			<number_skill_rollable name="b1_ability_nb" source="skills.ability.b1_ability_nb">
 				<anchored to="b1_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -381,6 +385,7 @@
 			</basicstring_label>
 			<number_skill_rollable name="b2_ability_nb" source="skills.ability.b2_ability_nb">
 				<anchored to="b2_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -427,6 +432,7 @@
 			</basicstring_label>
 			<number_skill_rollable name="b3_ability_nb" source="skills.ability.b3_ability_nb">
 				<anchored to="b3_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -465,6 +471,7 @@
 			</basicstring_label>
 			<number_skill_rollable name="c1_ability_nb" source="skills.ability.c1_ability_nb">
 				<anchored to="c1_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -511,6 +518,7 @@
 			</basicstring_label>
 			<number_skill_rollable name="c2_ability_nb" source="skills.ability.c2_ability_nb">
 				<anchored to="c2_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -557,18 +565,19 @@
 			</basicstring_label>
 			<number_skill_rollable name="c3_ability_nb" source="skills.ability.c3_ability_nb">
 				<anchored to="c3_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<readonly />
 				<script>
 					function action(draginfo)
-					local nStat = 0;
-					local sStat = "";
-					
-					local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-					
-					sStat = window.c3_ability_bs.getValue();
-					sStat, nStat = getStat(rActor, sStat);
-					
-					ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c3_ability_st.getValue(), getValue() + nStat, "");
-					return true;
+						local nStat = 0;
+						local sStat = "";
+						
+						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
+						
+						sStat = window.c3_ability_bs.getValue();
+						sStat, nStat = getStat(rActor, sStat);
+						
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c3_ability_st.getValue(), getValue() + nStat, "");
+						return true;
 					end
 					
 					function onDragStart(button, x, y, draginfo)

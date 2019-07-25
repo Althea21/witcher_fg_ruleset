@@ -65,7 +65,6 @@
 			<frame name="fieldlight" offset="7,5,7,5" />
 			<hideonvalue value="0" />
 			<rollable />
-			
 			<script>
 				function getStat(rActor, sFindStat)
 					local sStat = "";
