@@ -135,7 +135,7 @@
 						sStat = window.root_skills_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.root_skills_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.root_skills_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -216,7 +216,7 @@
 						sStat = window.a1_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a1_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a1_ability_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -263,7 +263,7 @@
 						sStat = window.a2_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a2_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a2_ability_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -310,7 +310,7 @@
 						sStat = window.a3_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a3_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a3_ability_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -349,7 +349,7 @@
 						sStat = window.b1_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b1_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b1_ability_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -396,7 +396,7 @@
 						sStat = window.b2_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b2_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b2_ability_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -443,7 +443,7 @@
 						sStat = window.b3_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b3_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b3_ability_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -482,7 +482,7 @@
 						sStat = window.c1_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c1_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c1_ability_st.getValue(), getValue() + nStat, sStat);
 					return true;
 					end
 					
@@ -529,7 +529,7 @@
 						sStat = window.c2_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c2_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c2_ability_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -576,7 +576,7 @@
 						sStat = window.c3_ability_bs.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c3_ability_st.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c3_ability_st.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -719,7 +719,7 @@
 						
 						sStat, nStat = getStat(window.name.getValue());
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat.." "..window.name.getValue(), getValue() + nStat, "");
+						ActionSkill.performRoll(draginfo, rActor, sStat.." "..window.name.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					

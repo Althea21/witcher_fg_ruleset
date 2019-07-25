@@ -178,7 +178,7 @@ function action(draginfo)
 
 		sDragLabel = sDragLabel .. " ("..sStat..")";
 		nDragMod = nDragMod + nStatMod;
-		ActionSkill.performRoll(draginfo, rActor, sDragLabel, nDragMod, nil);
+		ActionSkill.performRoll(draginfo, rActor, sDragLabel, nDragMod, sStat);
 	end
 end
 
