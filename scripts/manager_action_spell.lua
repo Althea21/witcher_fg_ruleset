@@ -26,8 +26,8 @@ end
 -- returns : 
 --	* rRoll	: roll object
 function getRoll(rActor, rSpell)
-	--Debug.chat(rActor);
-	--Debug.chat(rSpell);
+	-- Debug.chat(rActor);
+	-- Debug.chat(rSpell);
 	-- Initialize a blank rRoll record
 	local rRoll = {};
 	
@@ -142,18 +142,20 @@ function performRoll(draginfo, rSpell)
 		local msg = ChatManager.createBaseMessage(rActor, nil);
 		msg.text = Interface.getString("spellcasting_notenoughSTA");
 		Comm.deliverChatMessage(msg);
-	-- STA cost for casting sign is 7 max
-	elseif nSTACost > 7 then
-		local parentNode = rSpell.getParent().getParent();
-		if parentNode then
-			local nSpellType = DB.getValue(parentNode, "type", -1);
-			if (nSpellType == 4) then
-				local msg = ChatManager.createBaseMessage(rActor, nil);
-				msg.text = Interface.getString("spellcasting_signSTAmax");
-				Comm.deliverChatMessage(msg);
+	else
+		-- STA cost for casting sign is 7 max
+		if nSTACost > 7 then
+			local parentNode = rSpell.getParent().getParent();
+			if parentNode then
+				local nSpellType = DB.getValue(parentNode, "type", -1);
+				if (nSpellType == 4) then -- sign
+					local msg = ChatManager.createBaseMessage(rActor, nil);
+					msg.text = Interface.getString("spellcasting_signSTAmax");
+					Comm.deliverChatMessage(msg);
+					return;
+				end
 			end
 		end
-	else
 		-- get roll
 		local rRoll = getRoll(rActor, rSpell);
 			
