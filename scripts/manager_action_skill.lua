@@ -50,13 +50,7 @@ function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
 	-- Substract equipped armor part EV
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	if (sSkillStat == "Reflex") or (sSkillStat=="Dexterity") then
-		local nTotalEV = 0;
-		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
-			--Debug.chat("armor "..DB.getValue(v, "name", "").." : Eq="..DB.getValue(v, "equipped", "").." EV="..DB.getValue(v, "ev", ""));
-			if (DB.getValue(v, "equipped", "") == 1) then
-				nTotalEV = nTotalEV + DB.getValue(v, "ev", 0);
-			end
-		end
+		local nTotalEV = CharManager.getTotalEV(nodeActor);
 		if (nTotalEV > 0) then
 			rRoll.nMod = rRoll.nMod - nTotalEV;
 			--rRoll.sDesc = rRoll.sDesc .. "["..Interface.getString("rolldescription_totalev").." -"..nTotalEV.."]"

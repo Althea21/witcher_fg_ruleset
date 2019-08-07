@@ -288,3 +288,19 @@ function getNPCSkillValue(nodeActor, skillName)
 
 	return value;
 end
+
+-- get total equipped EV (work for PC / NPC)
+-- params :
+--  * nodeActor : pc or npc node
+-- returns : 
+--	* value	: value for total EV, else 0
+function getTotalEV(nodeActor)
+	local nTotalEV = 0;
+	for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
+		--Debug.chat("armor "..DB.getValue(v, "name", "").." : Eq="..DB.getValue(v, "equipped", "").." EV="..DB.getValue(v, "ev", ""));
+		if (DB.getValue(v, "equipped", "") == 1) then
+			nTotalEV = nTotalEV + DB.getValue(v, "ev", 0);
+		end
+	end
+	return nTotalEV;
+end
