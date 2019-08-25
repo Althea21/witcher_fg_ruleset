@@ -92,7 +92,7 @@
 					<subwindow>main</subwindow>
 				</tab>
 				<tab>
-					<icon>tab_abilities</icon>
+					<icon>tab_skills</icon>
 					<subwindow>abilities</subwindow>
 				</tab>
 				<tab>

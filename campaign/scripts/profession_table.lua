@@ -38,7 +38,7 @@ tbl_profession = {
                                                         ["skill3"]  = "Rally",                  ["stat3"]   = "WIL"},
                                  ["The Assassin"]    = {["skill1"]  = "Careful Aim",            ["stat1"]   = "DEX",
                                                         ["skill2"]  = "Eye Gouge",              ["stat2"]   = "DEX",
-                                                        ["skill3"]  = "Assassin’s Strike",      ["stat3"]   = "DEX"},
+                                                        ["skill3"]  = "Assassinï¿½s Strike",      ["stat3"]   = "DEX"},
                                 },
                                 
                     ["Doctor"] = {
@@ -94,7 +94,7 @@ tbl_profession = {
                                                         ["skill3"]  = "Treasure Map",           ["stat3"]   = "INT"},
                                  ["The Havekar"]     = {["skill1"]  = "Well Connected",         ["stat1"]   = "WIL",
                                                         ["skill2"]  = "Fence",                  ["stat2"]   = "INT",
-                                                        ["skill3"]  = "Warrior’s Debt",         ["stat3"]   = "EMP"},
+                                                        ["skill3"]  = "Warriorï¿½s Debt",         ["stat3"]   = "EMP"},
                                 },
 
                     ["Priest"] = {

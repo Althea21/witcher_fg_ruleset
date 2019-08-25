@@ -1,6 +1,6 @@
 A Fantasy Grounds Ruleset for Witcher TRPG
 
-The Witcher TRPG ruleset v0.1.1 for Fantasy Grounds
+The Witcher TRPG ruleset v0.2.1 for Fantasy Grounds
 
 The Witcher TRPG is edited by Talsorian Games Inc.
 The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved. 

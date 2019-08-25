@@ -74,6 +74,7 @@
 	<string name="list_race_human">Human</string>
 	<string name="list_race_elf">Aen Seidhe</string>
 	<string name="list_race_dwarf">Dwarf</string>
+	<string name="list_race_halfling">Halfling</string>
 	<string name="list_race_witcher">Witcher</string>
 	
 	<!-- List GENDER -->
@@ -98,6 +99,9 @@
 	<string name="list_profession_priest">Priest</string>
 	<string name="list_profession_witcher">Witcher</string>
 	
+	<!--Profession skill trees-->
+
+
 	<!-- List Skills cycler -->
 	<string name="char_listskillcycler_intelligence">INT</string>
 	<string name="char_listskillcycler_reflex">REF</string>
@@ -129,7 +133,7 @@
 	<string name="list_weaponconcealment_canthide">Can't Hide</string>
 	
 	<!-- SKILLS -->
-	<string name="char_label_abilities">Abilities</string>
+	<string name="char_label_abilities">Profession</string>
 	<string name="char_label_skills">Skills</string>
 		
 	<!-- Combat tab -->

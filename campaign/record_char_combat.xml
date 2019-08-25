@@ -1034,10 +1034,10 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Tiny", Interface.getString("list_weaponconcealment_tiny"));
-						add("Small", Interface.getString("list_weaponconcealment_small"));
-						add("Large", Interface.getString("list_weaponconcealment_Large"));
-						add("Can't hide", Interface.getString("list_weaponconcealment_canthide"));
+						add(Interface.getString("list_weaponconcealment_tiny"), Interface.getString("list_weaponconcealment_tiny"));
+						add(Interface.getString("list_weaponconcealment_small"), Interface.getString("list_weaponconcealment_small"));
+						add(Interface.getString("list_weaponconcealment_Large"), Interface.getString("list_weaponconcealment_Large"));
+						add(Interface.getString("list_weaponconcealment_canthide"), Interface.getString("list_weaponconcealment_canthide"));
 					end
 				</script>
 				<default></default>

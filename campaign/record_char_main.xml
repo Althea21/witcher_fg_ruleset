@@ -36,10 +36,11 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Human", Interface.getString("list_race_human"));
-						add("Aen Seidhe", Interface.getString("list_race_elf"));
-						add("Dwarf", Interface.getString("list_race_dwarf"));
-						add("Witcher", Interface.getString("list_race_witcher"));
+						add(Interface.getString("list_race_human"), Interface.getString("list_race_human"));
+						add(Interface.getString("list_race_elf"), Interface.getString("list_race_elf"));
+						add(Interface.getString("list_race_dwarf"), Interface.getString("list_race_dwarf"));
+						add(Interface.getString("list_race_halfling"), Interface.getString("list_race_halfling"));
+						add(Interface.getString("list_race_witcher"), Interface.getString("list_race_witcher"));
 					end
 				</script>
 				<default>Human</default>
@@ -70,8 +71,8 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Female", Interface.getString("list_race_female"));
-						add("Male", Interface.getString("list_race_male"));
+						add(Interface.getString("list_race_female"), Interface.getString("list_race_female"));
+						add(Interface.getString("list_race_male"), Interface.getString("list_race_male"));
 					end
 				</script>
 				<default>Male</default>
@@ -106,18 +107,18 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Bard", Interface.getString("list_profession_bard"));
-						add("Craftsman", Interface.getString("list_profession_craftsman"));
-						add("Criminal", Interface.getString("list_profession_criminal"));
-						add("Doctor", Interface.getString("list_profession_doctor"));
-						add("Mage", Interface.getString("list_profession_mage"));
-						add("Man At Arms", Interface.getString("list_profession_man_at_arms"));
-						add("Merchant", Interface.getString("list_profession_merchant"));
-						add("Priest", Interface.getString("list_profession_priest"));
-						add("Witcher", Interface.getString("list_profession_witcher"));
+						add(Interface.getString("list_profession_bard"), Interface.getString("list_profession_bard"));
+						add(Interface.getString("list_profession_craftsman"), Interface.getString("list_profession_craftsman"));
+						add(Interface.getString("list_profession_criminal"), Interface.getString("list_profession_criminal"));
+						add(Interface.getString("list_profession_doctor"), Interface.getString("list_profession_doctor"));
+						add(Interface.getString("list_profession_mage"), Interface.getString("list_profession_mage"));
+						add(Interface.getString("list_profession_man_at_arms"), Interface.getString("list_profession_man_at_arms"));
+						add(Interface.getString("list_profession_merchant"), Interface.getString("list_profession_merchant"));
+						add(Interface.getString("list_profession_priest"), Interface.getString("list_profession_priest"));
+						add(Interface.getString("list_profession_witcher"), Interface.getString("list_profession_witcher"));
 					end
 				</script>
-				<default>Bard</default>
+				<!-- <default>Bard</default> -->
 			</combobox>
 
 			<!-- IMPROVEMENT POINTS -->
@@ -140,11 +141,11 @@
 				<script>
 					function onInit()
 						super.onInit();
-						add("Equal", Interface.getString("list_socialstanding_equal"));
-						add("Tolerated", Interface.getString("list_socialstanding_tolerated"));
-						add("Hated", Interface.getString("list_socialstanding_hated"));
-						add("Feared", Interface.getString("list_socialstanding_feared"));
-						add("Hated and feared", Interface.getString("list_socialstanding_hatedfeared"));
+						add(Interface.getString("list_socialstanding_equal"), Interface.getString("list_socialstanding_equal"));
+						add(Interface.getString("list_socialstanding_tolerated"), Interface.getString("list_socialstanding_tolerated"));
+						add(Interface.getString("list_socialstanding_hated"), Interface.getString("list_socialstanding_hated"));
+						add(Interface.getString("list_socialstanding_feared"), Interface.getString("list_socialstanding_feared"));
+						add(Interface.getString("list_socialstanding_hatedfeared"), Interface.getString("list_socialstanding_hatedfeared"));
 					end
 				</script>
 				<default>Equal</default>
