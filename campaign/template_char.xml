@@ -124,7 +124,7 @@
 			</stateframe>
 			<parameters>
 				<labelsres mergerule="replace">Archery|Brawling|Crossbow|Melee|Small Blades|Staff/Spear|Swordmanship</labelsres>
-				<values mergerule="replace">Archery|Brawling|Crossbow|Melee|Small Blades|Staff/Spear|Swordmanship</values>
+				<values mergerule="replace">archery|brawling|crossbow|melee|smallBlades|staffSpear|swordmanship</values>
 			</parameters>
 		</button_stringcycler>
 	</template>

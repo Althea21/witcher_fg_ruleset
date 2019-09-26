@@ -99,7 +99,7 @@ function getRoll(rActor, rWeapon, sAttackType)
 		if nodeActor.getParent().getName()=="charsheet" then
 			-- PC case
 			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
-				if (DB.getValue(v, "name", "") == rWeapon.skill) then
+				if (DB.getValue(v, "id", "") == rWeapon.skill) then
 					--Debug.chat("skill modifier ("..rWeapon.skill.."): "..DB.getValue(v, "skill_value", 0));
 					nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
 					--sRollDescription = sRollDescription.."["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]"
@@ -153,7 +153,7 @@ function performRoll(draginfo, rWeapon, sAttackType)
 			rWeapon.label = Interface.getString("char_label_kicklabel");
 		end
 		rWeapon.stat = "reflex";
-		rWeapon.skill= "Brawling";
+		rWeapon.skill= "brawling";
 		
 		sAttackType = string.gsub(sAttackType, "punch", "");
 		sAttackType = string.gsub(sAttackType, "kick", "");

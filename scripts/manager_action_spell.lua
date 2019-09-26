@@ -88,17 +88,17 @@ function getRoll(rActor, rSpell)
 		-- skill modifier
 		local sSkill = "";
 		if rRoll.sSpellType == "mage" or rRoll.sSpellType == "priest" or rRoll.sSpellType == "sign" then
-			sSkill = "Spell Casting";
+			sSkill = "spellCasting";
 		elseif rRoll.sSpellType == "hex" then
-			sSkill = "Hex Weaving";
+			sSkill = "hexWeaving";
 		elseif rRoll.sSpellType == "ritual" then
-			sSkill = "Ritual Crafting";
+			sSkill = "ritualCrafting";
 		end
 		
 		if nodeActor.getParent().getName()=="charsheet" then
 			-- PC case
 			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
-				if (DB.getValue(v, "name", "") == sSkill) then
+				if (DB.getValue(v, "id", "") == sSkill) then
 					nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
 					--sRollDescription = sRollDescription.."["..sSkill.." +"..DB.getValue(v, "skill_value", 0).."]"
 					break;
