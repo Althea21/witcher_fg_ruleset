@@ -65,9 +65,9 @@
 				<bounds>0,65,-1,-20</bounds>
 				<class>charsheet_main</class>
 			</subwindow>
-			<subwindow name="abilities">
+			<subwindow name="skills">
 				<bounds>0,65,-1,-20</bounds>
-				<class>charsheet_abilities</class>
+				<class>charsheet_skills</class>
 			</subwindow>
 			<subwindow name="combat">
 				<bounds>0,65,-1,-20</bounds>
@@ -93,8 +93,12 @@
 				</tab>
 				<tab>
 					<icon>tab_skills</icon>
-					<subwindow>abilities</subwindow>
+					<subwindow>skills</subwindow>
 				</tab>
+				<!-- <tab>
+					<icon>tab_abilities</icon>
+					<subwindow>abilities</subwindow>
+				</tab> -->
 				<tab>
 					<icon>tab_combat</icon>
 					<subwindow>combat</subwindow>

@@ -6,8 +6,110 @@
 -->
 
 <root>
-	<windowclass name="charsheet_abilities">
+	<!--window-->
+	<windowclass name="charsheet_skills">
 		<sheetdata>
+			<frame_char name="skills_frame">
+				<bounds>15,0,-29,-10</bounds>
+			</frame_char>
+		
+			<subwindow name="skills_details">
+				<anchored to="skills_frame" position="over" offset="-8,-10">
+					<bottom offset="-50" />
+				</anchored>
+				<activate />
+				<class>char_skills_details</class>
+			</subwindow>
+			<scrollbar>
+				<anchored to="skills_details" position="right" offset="-2,-4" width="20">
+					<bottom offset="20" />
+				</anchored>
+				<target>skills_details</target>
+			</scrollbar>
+		</sheetdata>
+	</windowclass>
+
+	<!-- MAIN LAYOUT-->
+	<windowclass name="char_skills_details">
+		<script file="campaign/scripts/char_skills_details.lua" />
+		<sheetdata>
+			<!-- PROFESSION -->
+			<!-- section header (show/hide list on click) -->
+			<genericcontrol name="label_profession_frame">
+				<bounds>6,8,-3,24</bounds>
+				<frame name="groupbox2" offset="6,6,6,6" />
+				<disabled/>
+			</genericcontrol>
+			<label_frametop name="label_profession">
+				<anchored to="label_profession_frame" offset="-7,0" />
+				<static textres="char_label_abilities" />
+				<script>
+					function onClickDown(button, x, y)
+						return window.onHeaderClickDown("profession");
+					end
+					function onClickRelease(button, x, y)
+						return window.onHeaderClickRelease("profession");
+					end
+				</script>
+			</label_frametop>
+			<!--content-->
+			<subwindow name="profession_details">
+				<anchored>
+					<top parent="label_profession" anchor="bottom" offset="0" />
+					<left />
+					<right />
+				</anchored>
+				<activate />
+				<class>char_profession_details</class>
+			</subwindow>
+
+			<genericcontrol name="skills_divider">
+				<anchored to="profession_details" position="below" offset="0,5" height="3" />
+				<frame name="separatorline" />
+				<invisible />
+			</genericcontrol>
+
+			<!-- SKILL LIST -->
+			<!-- section header (show/hide list on click) -->
+			<genericcontrol name="label_skilllist_frame">
+				<anchored>
+					<top parent="skills_divider" anchor="bottom" offset="13" />
+					<bottom parent="skills_divider" anchor="bottom" offset="38" />
+					<left/>
+					<right/>
+				</anchored>
+				<frame name="groupbox2" offset="6,6,6,6" />
+				<disabled />
+			</genericcontrol>
+			<label_frametop name="label_skilllist">
+				<anchored to="label_skilllist_frame" offset="-7,0" />
+				<static textres="char_label_skills" />
+			</label_frametop>
+			<!--content-->
+			<subwindow name="skilllist_details">
+				<anchored>
+					<top parent="label_skilllist" anchor="bottom" offset="0" />
+					<left />
+					<right />
+				</anchored>
+				<activate />
+				<class>char_skilllist_details</class>
+			</subwindow>
+
+		</sheetdata>
+	</windowclass>
+
+	<!-- PROFESSION CONTENT-->
+	<windowclass name="char_profession_details">
+		<script file="campaign/scripts/char_profession_details.lua" />
+		<sheetdata>
+			<genericcontrol name="leftanchor">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
 			<!-- Variables cachees -->
 			<hn name="intelligence" source="attributs.intelligence" />
 			<hn name="reflex" source="attributs.reflex" />
@@ -17,114 +119,37 @@
 			<hn name="crafting" source="attributs.crafting" />
 			<hn name="will" source="attributs.will" />
 			
-			<hn name="profession_initialisation" source="identite.profession_initialisation">
-				<default>0</default>
-			</hn>
 			<hs name="profession" source="identite.profession">
 				<script>				
 					function onValueChanged()
-						local sVal = getValue();
-						local sSkill = "";
-						local sAbility = "";
-						local sStat = "";
-						
-						if window.root_skills_nb.getValue() == 0 then
-							sSkill = ProfessionTable.tbl_profession[sVal]["root"]["skill"];
-							window.root_skills_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal]["root"]["stat"];
-							window.root_skills_bs.setValue(sStat);
-							window.root_skills_nb.setValue(0);
-							
-							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch1"];
-							window.a1_label_ss.setValue(sAbility);
-							
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-							window.a1_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-							window.a1_ability_bs.setValue(sStat);
-							window.a1_ability_nb.setValue(0);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-							window.a2_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-							window.a2_ability_bs.setValue(sStat);
-							window.a2_ability_nb.setValue(0);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-							window.a3_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-							window.a3_ability_bs.setValue(sStat);
-							window.a3_ability_nb.setValue(0);
-							
-							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch2"];
-							window.a2_label_ss.setValue(sAbility);
-							
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-							window.b1_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-							window.b1_ability_bs.setValue(sStat);
-							window.b1_ability_nb.setValue(0);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-							window.b2_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-							window.b2_ability_bs.setValue(sStat);
-							window.b2_ability_nb.setValue(0);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-							window.b3_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-							window.b3_ability_bs.setValue(sStat);
-							window.b3_ability_nb.setValue(0);
-							
-							sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch3"];
-							window.a3_label_ss.setValue(sAbility);
-							
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-							window.c1_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-							window.c1_ability_bs.setValue(sStat);
-							window.c1_ability_nb.setValue(0);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-							window.c2_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-							window.c2_ability_bs.setValue(sStat);
-							window.c2_ability_nb.setValue(0);
-							sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-							window.c3_ability_st.setValue(sSkill);
-							sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-							window.c3_ability_bs.setValue(sStat);
-							window.c3_ability_nb.setValue(0);
-						end
+						window.onProfessionValueChanged(getValue());
+					end
+					function onInit()
+						window.onProfessionValueChanged(getValue());
 					end
 					
-					function onInit()
-						if window.profession_initialisation.getValue() == 0 then
-							onValueChanged();
-							window.profession_initialisation.setValue(1);
-						end
-					end
 				</script>
+				<!-- function onInit()
+						if window.profession_initialisation.getValue() == 0 then
+							window.profession_initialisation.setValue(1);
+							window.onProfessionValueChanged();
+						end
+					end -->
 			</hs> 
 
-			<!-- Frame de l'arbre de competence -->		
-			<frame_char name="skills_frame">
-				<bounds>15,0,-29,-5</bounds>
-			</frame_char>
-			<label_frametop>
-				<anchored to="skills_frame" offset="-7,8" />
-				<static textres="char_label_abilities" />
-				<frame name="headerref" />
-			</label_frametop>
 			<!-- Racine -->
 			<basicstring_label name="root_skills_st" source="skills.root_skills_st">
-				<anchored to="skills_frame">
-					<top offset="35" />
+				<anchored to="leftanchor">
+					<top offset="15" />
 					<left offset="167" />
 					<size width="82" height="20" />
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="root_skills_bs" source="skills.root_skills_bs">
-				<anchored to="root_skills_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="root_skills_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="root_skills_nb" source="skills.root_skills_nb">
-				<anchored to="root_skills_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="root_skills_bs" position="right" offset="10,0" width="20"/>
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -163,10 +188,10 @@
 				</script>
 			</number_skill_rollable>
 
-			<!-- Ent�te des branches -->
+			<!-- Entete des branches -->
 			<basicstring_label name="a1_label_ss" source="skills.a1_label_ss">
-				<anchored to="skills_frame">
-					<top offset="58" />
+				<anchored to="leftanchor">
+					<top offset="38" />
 					<left offset="15" />
 					<size width="152" height="24" />
 				</anchored>
@@ -174,8 +199,8 @@
 				<frame name="headertitle" />
 			</basicstring_label>	
 			<basicstring_label name="a2_label_ss" source="skills.a2_label_ss">
-				<anchored to="skills_frame">
-					<top offset="58" />
+				<anchored to="leftanchor">
+					<top offset="38" />
 					<left offset="167" />
 					<size width="152" height="24" />
 				</anchored>
@@ -183,8 +208,8 @@
 				<frame name="headertitle" />
 			</basicstring_label>		
 			<basicstring_label name="a3_label_ss" source="skills.a3_label_ss">
-				<anchored to="skills_frame">
-					<top offset="58" />
+				<anchored to="leftanchor">
+					<top offset="38" />
 					<left offset="319" />
 					<size width="152" height="24" />
 				</anchored>
@@ -194,17 +219,17 @@
 
 			<!-- Branche A -->
 			<basicstring_label name="a1_ability_st" source="skills.ability.a1_ability_st">
-				<anchored to="skills_frame">
-					<top offset="85" />
+				<anchored to="leftanchor">
+					<top offset="65" />
 					<left offset="15" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="a1_ability_bs" source="skills.ability.a1_ability_bs">
-				<anchored to="a1_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="a1_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="a1_ability_nb" source="skills.ability.a1_ability_nb">
-				<anchored to="a1_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="a1_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -244,14 +269,14 @@
 				<anchored to="a1_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="a2_ability_bs" source="skills.ability.a2_ability_bs">
-				<anchored to="a2_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="a2_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="a2_ability_nb" source="skills.ability.a2_ability_nb">
-				<anchored to="a2_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="a2_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -291,14 +316,14 @@
 				<anchored to="a2_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="a3_ability_bs" source="skills.ability.a3_ability_bs">
-				<anchored to="a3_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="a3_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="a3_ability_nb" source="skills.ability.a3_ability_nb">
-				<anchored to="a3_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="a3_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -330,14 +355,14 @@
 					<position>right</position>
 					<top offset="0" />
 					<left offset="30" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="b1_ability_bs" source="skills.ability.b1_ability_bs">
-				<anchored to="b1_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="b1_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="b1_ability_nb" source="skills.ability.b1_ability_nb">
-				<anchored to="b1_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="b1_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -377,14 +402,14 @@
 				<anchored to="b1_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="b2_ability_bs" source="skills.ability.b2_ability_bs">
-				<anchored to="b2_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="b2_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="b2_ability_nb" source="skills.ability.b2_ability_nb">
-				<anchored to="b2_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="b2_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -424,14 +449,14 @@
 				<anchored to="b2_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="b3_ability_bs" source="skills.ability.b3_ability_bs">
-				<anchored to="b3_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="b3_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="b3_ability_nb" source="skills.ability.b3_ability_nb">
-				<anchored to="b3_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="b3_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -463,14 +488,14 @@
 					<position>right</position>
 					<top offset="0" />
 					<left offset="30" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="c1_ability_bs" source="skills.ability.c1_ability_bs">
-				<anchored to="c1_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="c1_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="c1_ability_nb" source="skills.ability.c1_ability_nb">
-				<anchored to="c1_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="c1_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -510,14 +535,14 @@
 				<anchored to="c1_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="c2_ability_bs" source="skills.ability.c2_ability_bs">
-				<anchored to="c2_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="c2_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="c2_ability_nb" source="skills.ability.c2_ability_nb">
-				<anchored to="c2_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="c2_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -557,14 +582,14 @@
 				<anchored to="c2_ability_st">
 					<bottom offset="25" />
 					<left offset="0" />
-					<size width="82" height="20" />
+					<size width="82"/>
 				</anchored>
 			</basicstring_label>
 			<basicstring_label name="c3_ability_bs" source="skills.ability.c3_ability_bs">
-				<anchored to="c3_ability_st" position="right" offset="5,0" width="25" height="20" />
+				<anchored to="c3_ability_st" position="right" offset="5,0" width="25"/>
 			</basicstring_label>
 			<number_skill_rollable name="c3_ability_nb" source="skills.ability.c3_ability_nb">
-				<anchored to="c3_ability_bs" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="c3_ability_bs" position="right" offset="10,0" width="20"/>
 				<readonly />
 				<script>
 					function action(draginfo)
@@ -588,138 +613,234 @@
 						return action();
 					end
 				</script>
-			</number_skill_rollable>		
+			</number_skill_rollable>
 
-			<!-- Liste des comp�tences -->	
-			<list_skills name="skills">
-				<anchored to="skills_frame">
-					<left offset="15" />
-					<top offset="190" />
-					<right offset="-20" />
-					<bottom offset="-20" />
-				</anchored>
-				<columns width="222" filldown="true" />
-				<datasource>.skills.skillslist</datasource>
-				<class>char_skills</class>
-			</list_skills>
-			<scrollbar_list>
-				<anchored to="skills" />
-				<target>skills</target>
-			</scrollbar_list>
-			<label_frametop>
-				<bounds>21,163,-37,20</bounds>
-				<static textres="char_label_skills" />
-				<frame name="headerref" />
-			</label_frametop>
 		</sheetdata>
 	</windowclass>
 
-	<windowclass name="char_skills">
-		<margins control="0,0,0,2" />
-		<script>
-		</script>
+	<!-- SKILL LIST CONTENT-->
+	<windowclass name="char_skilllist_details">
 		<sheetdata>
-			<hn name="type">
-				<script>
-					function onValueChanged()
-						if getValue() == 1 then
-							window.skill_use.setVisible(true);
-							window.skill_value.setVisible(true);							
-							window.name.setAnchor("left", "", "", "", 25);
-							window.name.setFrame ("");
-						else
-							window.name.setFrame ("headergray");
-							window.name.setAnchor("left", "", "", "", 5);
-						end
-						window.name.changeStat(getValue());
-					end
-					
-					function onInit()
-						onValueChanged();
-					end
-				</script>
-			</hn>
-			
 			<genericcontrol name="rightanchor">
-				<anchored height="0" width="0">
-					<top offset="2" />
-					<right />
-				</anchored>
-			</genericcontrol>
-			<button_checkbox name="skill_use">
-				<anchored to="rightanchor">
-					<top offset="4"/>
-					<left parent="" offset="5" />
-					<size width="12" height="12" /> 
+				<anchored width="0" height="0">
+					<top offset="10" />
+					<right offset="0" />
 				</anchored>
 				<invisible />
+			</genericcontrol>
+
+			<genericcontrol name="skilllist_headers">
+				<anchored>
+					<top parent="rightanchor" anchor="bottom" offset="0" />
+					<bottom parent="rightanchor" anchor="bottom" offset="26" />
+					<left offset="5"/>
+					<right offset="-5" />
+				</anchored>
+				<frame name="headertitle" />
+			</genericcontrol>
+
+			<simplestring name="skilllist_sortCriteria">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+
+			<label name="skillname_label">
+				<anchored position="insidetopleft" offset="25,10" />
+				<static textres="char_skillname_label" />
+				<script>
+					function onClickDown(button, x, y)
+						if(window.skilllist_sortCriteria.getValue()=="name_asc") then
+							window.skilllist_sortCriteria.setValue("name_desc");
+						else
+							window.skilllist_sortCriteria.setValue("name_asc");
+						end
+
+						window.skills.applySort();
+					end
+					
+					function onClickRelease(button, x, y)
+					end
+				</script>
+			</label>
+
+			<label>
+				<anchored to="rightanchor" width="70">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<center />
+				<static textres="char_label_skillstat" />
+				<script>
+					function onClickDown(button, x, y)
+						if(window.skilllist_sortCriteria.getValue()=="stat_asc") then
+							window.skilllist_sortCriteria.setValue("stat_desc");
+						else
+							window.skilllist_sortCriteria.setValue("stat_asc");
+						end
+						window.skills.applySort();
+					end
+					
+					function onClickRelease(button, x, y)
+					end
+				</script>
+			</label>
+			<label>
+				<anchored to="rightanchor" width="44">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_label_skilltotal" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor" width="32">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<static textres="char_label_skillmisc" />
+				<center />
+			</label>
+			<label>
+				<anchored to="rightanchor" width="42">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<center />
+				<static textres="char_label_skillranks" />
+			</label>
+
+			<list_skills name="skills">
+				<anchored>
+					<top offset="35" />
+					<left />
+					<right />
+				</anchored>
+				<datasource>.skills.skillslist</datasource>
+				<sortby><control>name</control></sortby>
+				<class>char_skill</class>
+			</list_skills>
+
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_skill">
+		<script file="campaign/scripts/char_skill.lua" />
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<genericcontrol name="leftanchor">
+				<anchored width="0" height="0">
+					<top offset="0"/>
+					<left offset="25" />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="00" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
+			<!--hidden fields-->
+			<simplestring name="id">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<simplestring name="skill_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<basicnumber name="isDoubleIP">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</basicnumber>
+			<basicnumber name="isArmorImpacted">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</basicnumber>
+			<basicnumber name="isClassSkill">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</basicnumber>
+
+			<!-- Checkbox -->
+			<button_checkbox name="skill_use">
+				<anchored width="12" height="12">
+					<top offset="5" />
+					<right parent="leftanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
 			</button_checkbox>
-			<simplestring name="name">
-				<anchored to="rightanchor">
-					<top offset="4"/>
-					<left parent="" offset="25" />
+
+			<!-- See details -->
+			<buttoncontrol name="activatedetail">
+				<anchored to="rightanchor" width="15" height="25">
+					<top/>
+					<right anchor="left" relation="relative" offset="0" />
+				</anchored>
+				<state icon="button_details" />
+				<cursor hover="hand" />
+				<script>
+					function onButtonPress()
+						Interface.openWindow("reference_skill", window.getDatabaseNode());
+					end
+				</script>
+			</buttoncontrol>
+
+			<!-- Associated stat -->
+			<cycler_ability name="skill_stat">
+				<anchored to="rightanchor" width="40" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<!-- <readonly /> -->
+				<disabled/>
+			</cycler_ability>
+
+			<!-- + -->
+			<label>
+				<anchored to="rightanchor" width="15" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_special_plus" />
+				<center/>
+			</label>
+
+			<!-- Total (rollable) -->
+			<number_skill_rollable name="skill_value">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
 					<right anchor="left" relation="relative" offset="-5" />
 				</anchored>
 				<readonly />
 				<script>
-					function changeStat(nStat)
-						if nStat == 0 then
-							setFrame ("headergray");
-							setAnchor("left", "", "", "", 5);
-						else
-							setFrame ("");
-						end
-					end
-					function onInit()
-						changeStat(window.type.getValue());
-					end
-				</script>
-			</simplestring>
-			<number_skill_rollable name="skill_value">
-				<anchored to="rightanchor">
-					<top />
-					<right anchor="right" relation="relative" offset="-10" />
-					<size width="30" height="20" />
-				</anchored> 
-				<invisible />			
-				<script>
-					function getStat(sFindStat)
-						local sStat = "";
-						local nStat = 0;
-						
-						for k, v in pairs(DataCommon.skilldata) do
-							if k == sFindStat then
-								sStat = v.stat;
-								break;
-							end
-						end
-						
-						if sStat == "Body" then
-							nStat = window.windowlist.window.body.getValue();
-						elseif sStat == "Craft" then
-							nStat = window.windowlist.window.crafting.getValue();
-						elseif sStat == "Empathy" then
-							nStat = window.windowlist.window.empathy.getValue();
-						elseif sStat == "Intelligence" then
-							nStat = window.windowlist.window.intelligence.getValue();
-						elseif sStat == "Reflex" then
-							nStat = window.windowlist.window.reflex.getValue();
-						elseif sStat == "Will" then
-							nStat = window.windowlist.window.will.getValue();
-						elseif sStat == "Dexterity" then
-							nStat = window.windowlist.window.dexterity.getValue();
-						end
-						return sStat,nStat;
-					end
-					
 					function action(draginfo)
-						local rActor = ActorManager.resolveActor(window.windowlist.window.getDatabaseNode());
-						local sStat = "";
-						local nStat = 0;
-						
-						sStat, nStat = getStat(window.name.getValue());
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat.." "..window.name.getValue(), getValue() + nStat, sStat);
+						window.performSkillRoll();
 						return true;
 					end
 					
@@ -731,8 +852,134 @@
 						return action();
 					end
 				</script>
-			</number_skill_rollable>		
-			
+			</number_skill_rollable>
+
+			<!-- = -->
+			<label>
+				<anchored to="rightanchor" width="15" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_special_equal" />
+				<center/>
+			</label>
+
+			<!-- Misc bonus -->
+			<basicnumber name="skill_bonus">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<script>
+					function onValueChanged()
+						window.onSkillValueChanged();
+					end
+					function onInit()
+						window.onSkillValueChanged();
+					end
+				</script>
+			</basicnumber>
+
+			<!-- + -->
+			<label>
+				<anchored to="rightanchor" width="15" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_special_plus" />
+				<center/>
+			</label>
+
+			<!-- Rank -->
+			<basicnumber name="skill_rank">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<script>
+					function onValueChanged()
+						window.onSkillValueChanged();
+					end
+					function onInit()
+						window.onSkillValueChanged();
+					end
+				</script>
+			</basicnumber>
+
+			<!-- armor widget-->
+			<genericcontrol to="rightanchor" name="skill_armorwidget">
+				<anchored width="8" height="9">
+					<top offset="5"/>
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</genericcontrol>
+
+			<!-- double IP-->
+			<label name="skill_doubleIPLabel">
+				<anchored to="rightanchor" width="20" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<static textres="char_label_skilldoubleIP" />
+				<invisible/>
+				<center/>
+			</label>
+
+			<simplestring name="name">
+				<anchored height="20">
+					<top offset="0" />
+					<left parent="leftanchor" anchor="right" relation="relative" offset="10" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<readonly />
+			</simplestring>
 		</sheetdata>
 	</windowclass>	
+
+	<!-- Skill description-->
+	<windowclass name="reference_skill">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="300" height="200" />
+		</placement>
+		<sizelimits>
+			<dynamic />
+		</sizelimits>
+		<tooltip field="title"/>
+		<nodelete />
+		<playercontrol />
+		<script>
+			function onInit()
+				update();
+			end
+			function update()
+				title.setValue(DB.getValue(getDatabaseNode(), "name", "skill name"));
+				skill_desc.setValue(DB.getValue(getDatabaseNode(), "skill_desc", "skill desc"));
+			end
+		</script>
+		<sheetdata>
+			<windowtitlebar name="title">
+			</windowtitlebar>
+
+			<simplestring name="skill_desc">
+				<anchored>
+					<top parent="title" anchor="bottom" offset="15" />
+					<left offset="35" />
+					<right offset="-35" />
+					<bottom offset="-32" />
+				</anchored>
+				<frame name="groupbox" offset="20,17,20,17" />
+				<multilinespacing>20</multilinespacing>
+				<disabled />
+			</simplestring>
+
+			<scrollbar>
+				<anchored to="skill_desc" />
+				<target>skill_desc</target>
+			</scrollbar>
+			
+			<resize_referencepage />
+			<close_referencepage />
+		</sheetdata>
+	</windowclass>
 </root>

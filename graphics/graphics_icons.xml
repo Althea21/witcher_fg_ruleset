@@ -30,6 +30,8 @@
 	<icon name="button_woundthreshold_off" file="graphics/icons/woundthreshold_off.png" />
 	<icon name="button_woundthreshold_on" file="graphics/icons/woundthreshold_on.png" />
 
+	<icon name="char_armorcheck" file="graphics/icons/char_armorcheck.png" />
+	
 	<!-- Character Sheet : combat tab-->
 	<icon name="char_weapon" file="graphics/icons/char_weapon.png" />
 	<icon name="char_weapon_melee" file="graphics/icons/char_weapon_melee.png" />
@@ -160,6 +162,7 @@
 	<icon name="button_page_next" file="graphics/icons/arrow_sm_right.png" />
 	<icon name="button_page_end" file="graphics/icons/arrow_sm_last.png" />
 	<icon name="button_page_top" file="graphics/icons/arrow_sm_up.png" />
+	<icon name="button_page_down" file="graphics/icons/arrow_sm_down.png" />
 	
 	<!-- Dragging -->
 	<icon name="action_roll" file="graphics/icons/action_roll.png" />
