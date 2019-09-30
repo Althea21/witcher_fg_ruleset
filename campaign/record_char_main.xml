@@ -95,48 +95,14 @@
 			<basicnumber name="reputation" source="identite.reputation">
 				<anchored to="identite_frame" position="insidetopleft" offset="425,60" width="30" height="20" />
 			</basicnumber>
-	
-			<!-- PROFESSION -->
-			<label>
-				<anchored to="identite_frame" position="insidetopleft" offset="15,85" />
-				<static textres="char_label_profession" />
-			</label>
-			<combobox name="profession" source="identite.profession">
-				<anchored to="identite_frame" position="insidetopleft" offset="100,85" width="100" height="20" />
-				<listdirection>down</listdirection>
-				<script>
-					function onInit()
-						super.onInit();
-						add(Interface.getString("list_profession_bard"), Interface.getString("list_profession_bard"));
-						add(Interface.getString("list_profession_craftsman"), Interface.getString("list_profession_craftsman"));
-						add(Interface.getString("list_profession_criminal"), Interface.getString("list_profession_criminal"));
-						add(Interface.getString("list_profession_doctor"), Interface.getString("list_profession_doctor"));
-						add(Interface.getString("list_profession_mage"), Interface.getString("list_profession_mage"));
-						add(Interface.getString("list_profession_man_at_arms"), Interface.getString("list_profession_man_at_arms"));
-						add(Interface.getString("list_profession_merchant"), Interface.getString("list_profession_merchant"));
-						add(Interface.getString("list_profession_priest"), Interface.getString("list_profession_priest"));
-						add(Interface.getString("list_profession_witcher"), Interface.getString("list_profession_witcher"));
-					end
-				</script>
-				<!-- <default>Bard</default> -->
-			</combobox>
-
-			<!-- IMPROVEMENT POINTS -->
-			<label>
-				<anchored to="profession" position="right" offset="130,0" />
-				<static textres="char_label_improvement_point" />
-			</label>
-			<basicnumber name="improvement_point" source="identite.improvement_point">
-				<anchored to="identite_frame" position="insidetopleft" offset="425,85" width="30" height="20" />				
-			</basicnumber>
 
 			<!-- SOCIAL STANDING -->
 			<label>
-				<anchored to="identite_frame" position="insidetopleft" offset="15,110" />
+				<anchored to="identite_frame" position="insidetopleft" offset="15,85" />
 				<static textres="char_label_social_standing" />
 			</label>
 			<combobox name="social_standing" source="identite.social_standing">
-				<anchored to="identite_frame" position="insidetopleft" offset="100,110" width="100" height="20" />
+				<anchored to="identite_frame" position="insidetopleft" offset="100,85" width="100" height="20" />
 				<listdirection>down</listdirection>
 				<script>
 					function onInit()
@@ -150,7 +116,64 @@
 				</script>
 				<default>Equal</default>
 			</combobox>
+	
+			<!-- PROFESSION -->
+			<label>
+				<anchored to="identite_frame" position="insidetopleft" offset="15,110" />
+				<static textres="char_label_profession" />
+			</label>
+			<stringu name="custom_profession" source="identite.custom_profession">
+				<anchored to="identite_frame" height="20">
+					<top offset="110" />
+					<left offset="220" />
+					<right offset="-20" />
+				</anchored>
+				<default>
+					<textres>char_label_profession</textres>
+				</default> 
+			</stringu>
+			<combobox name="profession" source="identite.profession">
+				<anchored to="identite_frame" position="insidetopleft" offset="100,110" width="100" height="20" />
+				<listdirection>down</listdirection>
+				<script>
+					function onInit()
+						super.onInit();
+						add(Interface.getString("list_profession_bard"), Interface.getString("list_profession_bard"));
+						add(Interface.getString("list_profession_craftsman"), Interface.getString("list_profession_craftsman"));
+						add(Interface.getString("list_profession_criminal"), Interface.getString("list_profession_criminal"));
+						add(Interface.getString("list_profession_doctor"), Interface.getString("list_profession_doctor"));
+						add(Interface.getString("list_profession_mage"), Interface.getString("list_profession_mage"));
+						add(Interface.getString("list_profession_manAtArms"), Interface.getString("list_profession_manAtArms"));
+						add(Interface.getString("list_profession_merchant"), Interface.getString("list_profession_merchant"));
+						add(Interface.getString("list_profession_priest"), Interface.getString("list_profession_priest"));
+						add(Interface.getString("list_profession_witcher"), Interface.getString("list_profession_witcher"));
+						add(Interface.getString("list_profession_peasant"), Interface.getString("list_profession_peasant"));
+						add(Interface.getString("list_profession_custom"), Interface.getString("list_profession_custom"));
+						if getValue()==Interface.getString("list_profession_custom") then
+							window.custom_profession.setVisible(true);
+						else
+							window.custom_profession.setVisible(false);
+						end
+					end
+					function onValueChanged()
+						if getValue()==Interface.getString("list_profession_custom") then
+							window.custom_profession.setVisible(true);
+						else
+							window.custom_profession.setVisible(false);
+						end
+					end
+				</script>
+			</combobox>
 			
+			<!-- IMPROVEMENT POINTS -->
+			<label>
+				<anchored to="social_standing" position="right" offset="130,0" />
+				<static textres="char_label_improvement_point" />
+			</label>
+			<basicnumber name="improvement_point" source="identite.improvement_point">
+				<anchored to="identite_frame" position="insidetopleft" offset="425,85" width="30" height="20" />				
+			</basicnumber>
+
 			<!-- ATTRIBUTS -->
 			<!--
 				Branche de la DB : charsheet.ID-XXXXX.attributs.

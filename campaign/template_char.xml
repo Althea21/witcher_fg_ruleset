@@ -111,6 +111,7 @@
 			<parameters>
 				<labelsres mergerule="replace">int|ref|dex|bod|spd|emp|cra|wil</labelsres>
 				<values mergerule="replace">intelligence|reflex|dexterity|body|speed|empathy|crafting|will</values>
+				<defaultlabelres>char_listskillcycler_</defaultlabelres>
 			</parameters>
 		</button_stringcycler>
 	</template>

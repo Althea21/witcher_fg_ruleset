@@ -64,7 +64,7 @@
 			</subwindow>
 
 			<genericcontrol name="skills_divider">
-				<anchored to="profession_details" position="below" offset="0,5" height="3" />
+				<anchored to="profession_details" position="below" offset="0,15" height="3" />
 				<frame name="separatorline" />
 				<invisible />
 			</genericcontrol>
@@ -110,6 +110,13 @@
 				</anchored>
 				<invisible />
 			</genericcontrol>
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
 			<!-- Variables cachees -->
 			<hn name="intelligence" source="attributs.intelligence" />
 			<hn name="reflex" source="attributs.reflex" />
@@ -119,37 +126,29 @@
 			<hn name="crafting" source="attributs.crafting" />
 			<hn name="will" source="attributs.will" />
 			
-			<hs name="profession" source="identite.profession">
-				<script>				
-					function onValueChanged()
-						window.onProfessionValueChanged(getValue());
-					end
-					function onInit()
-						window.onProfessionValueChanged(getValue());
-					end
-					
-				</script>
-				<!-- function onInit()
-						if window.profession_initialisation.getValue() == 0 then
-							window.profession_initialisation.setValue(1);
-							window.onProfessionValueChanged();
-						end
-					end -->
-			</hs> 
-
-			<!-- Racine -->
-			<basicstring_label name="root_skills_st" source="skills.root_skills_st">
-				<anchored to="leftanchor">
+			<!-- DEFINING SKILL -->
+			<label name="definingSkill_label">
+				<anchored to="leftanchor" width="70" height="20">
 					<top offset="15" />
-					<left offset="167" />
-					<size width="82" height="20" />
+					<left offset="5" />
 				</anchored>
-			</basicstring_label>
-			<basicstring_label name="root_skills_bs" source="skills.root_skills_bs">
-				<anchored to="root_skills_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="root_skills_nb" source="skills.root_skills_nb">
-				<anchored to="root_skills_bs" position="right" offset="10,0" width="20"/>
+				<static textres="char_label_definingSkill" />
+			</label>
+			<!--hidden description-->
+			<simplestring name="definingSkill_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--value-->
+			<number_skill_rollable name="definingSkill_value" source="skills.definingSkill_value">
+				<anchored width="30" height="20">
+					<top parent="definingSkill_label" offset="0" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
 				<script>
 					function action(draginfo)
 						local nStat = 0;
@@ -157,10 +156,10 @@
 						
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 						
-						sStat = window.root_skills_bs.getValue();
+						sStat = window.definingSkill_stat.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.root_skills_st.getValue(), getValue() + nStat, sStat);
+						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.definingSkill_stat.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					
@@ -174,9 +173,13 @@
 					
 					function onValueChanged()
 						if getValue() &gt; 4 then
-							window.a1_ability_nb.setReadOnly(false);
-							window.b1_ability_nb.setReadOnly(false);
-							window.c1_ability_nb.setReadOnly(false);
+							window.branch1_ability1_value.setReadOnly(false);
+							window.branch2_ability1_value.setReadOnly(false);
+							window.branch3_ability1_value.setReadOnly(false);
+						else
+							window.branch1_ability1_value.setReadOnly(true);
+							window.branch2_ability1_value.setReadOnly(true);
+							window.branch3_ability1_value.setReadOnly(true);
 						end
 					end
 					
@@ -187,241 +190,59 @@
 					end
 				</script>
 			</number_skill_rollable>
-
-			<!-- Entete des branches -->
-			<basicstring_label name="a1_label_ss" source="skills.a1_label_ss">
-				<anchored to="leftanchor">
-					<top offset="38" />
-					<left offset="15" />
-					<size width="152" height="24" />
+			<!--stat-->
+			<cycler_ability name="definingSkill_stat">
+				<anchored width="40" height="20">
+					<top parent="definingSkill_value" offset="0" />
+					<right parent="definingSkill_value" anchor="left" offset="-10" />
 				</anchored>
-				 <center />
-				<frame name="headertitle" />
-			</basicstring_label>	
-			<basicstring_label name="a2_label_ss" source="skills.a2_label_ss">
-				<anchored to="leftanchor">
-					<top offset="38" />
-					<left offset="167" />
-					<size width="152" height="24" />
-				</anchored>
-				 <center />
-				<frame name="headertitle" />
-			</basicstring_label>		
-			<basicstring_label name="a3_label_ss" source="skills.a3_label_ss">
-				<anchored to="leftanchor">
-					<top offset="38" />
-					<left offset="319" />
-					<size width="152" height="24" />
-				</anchored>
-				 <center />
-				<frame name="headertitle" />
-			</basicstring_label>
-
-			<!-- Branche A -->
-			<basicstring_label name="a1_ability_st" source="skills.ability.a1_ability_st">
-				<anchored to="leftanchor">
-					<top offset="65" />
-					<left offset="15" />
-					<size width="82"/>
-				</anchored>
-			</basicstring_label>
-			<basicstring_label name="a1_ability_bs" source="skills.ability.a1_ability_bs">
-				<anchored to="a1_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="a1_ability_nb" source="skills.ability.a1_ability_nb">
-				<anchored to="a1_ability_bs" position="right" offset="10,0" width="20"/>
-				<readonly />
-				<script>
-					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.a1_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a1_ability_st.getValue(), getValue() + nStat, sStat);
-						return true;
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						return action(draginfo);
-					end
-					
-					function onDoubleClick(x,y)
-						return action();
-					end
-
-					function onValueChanged()
-						if getValue() &gt; 4 then
-							window.a2_ability_nb.setReadOnly(false);
-						end
-					end
-					
-					function onInit()
-						super.onInit();
-						onValueChanged();
-					end
-				</script>
-			</number_skill_rollable>		
-			<basicstring_label name="a2_ability_st" source="skills.ability.a2_ability_st">
-				<anchored to="a1_ability_st">
-					<bottom offset="25" />
-					<left offset="0" />
-					<size width="82"/>
-				</anchored>
-			</basicstring_label>
-			<basicstring_label name="a2_ability_bs" source="skills.ability.a2_ability_bs">
-				<anchored to="a2_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="a2_ability_nb" source="skills.ability.a2_ability_nb">
-				<anchored to="a2_ability_bs" position="right" offset="10,0" width="20"/>
-				<readonly />
-				<script>
-					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.a2_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a2_ability_st.getValue(), getValue() + nStat, sStat);
-						return true;
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						return action(draginfo);
-					end
-					
-					function onDoubleClick(x,y)
-						return action();
-					end
-
-					function onValueChanged()
-						if getValue() &gt; 4 then
-							window.a3_ability_nb.setReadOnly(false);
-						end
-					end
-					
-					function onInit()
-						super.onInit();
-						onValueChanged();
-					end
-				</script>
-			</number_skill_rollable>
-			<basicstring_label name="a3_ability_st" source="skills.ability.a3_ability_st">
-				<anchored to="a2_ability_st">
-					<bottom offset="25" />
-					<left offset="0" />
-					<size width="82"/>
-				</anchored>
-			</basicstring_label>
-			<basicstring_label name="a3_ability_bs" source="skills.ability.a3_ability_bs">
-				<anchored to="a3_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="a3_ability_nb" source="skills.ability.a3_ability_nb">
-				<anchored to="a3_ability_bs" position="right" offset="10,0" width="20"/>
-				<readonly />
-				<script>
-					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.a3_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.a3_ability_st.getValue(), getValue() + nStat, sStat);
-						return true;
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						return action(draginfo);
-					end
-					
-					function onDoubleClick(x,y)
-						return action();
-					end
-				</script>
-			</number_skill_rollable>		
-
-			<!-- Branche B -->
-			<basicstring_label name="b1_ability_st" source="skills.ability.b1_ability_st">
-				<anchored to="a1_ability_nb">
-					<position>right</position>
+				<disabled/>
+			</cycler_ability>
+			<!--name-->
+			<stringu name="definingSkill_name" source="skills.definingSkill_name">
+				<anchored to="definingSkill_label" height="20">
 					<top offset="0" />
-					<left offset="30" />
-					<size width="82"/>
+					<left anchor="right" offset="10" />
+					<right parent="definingSkill_stat" anchor="left" offset="-10" />
 				</anchored>
-			</basicstring_label>
-			<basicstring_label name="b1_ability_bs" source="skills.ability.b1_ability_bs">
-				<anchored to="b1_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="b1_ability_nb" source="skills.ability.b1_ability_nb">
-				<anchored to="b1_ability_bs" position="right" offset="10,0" width="20"/>
-				<readonly />
-				<script>
-					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.b1_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b1_ability_st.getValue(), getValue() + nStat, sStat);
-						return true;
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						return action(draginfo);
-					end
-					
-					function onDoubleClick(x,y)
-						return action();
-					end
-					
-					function onValueChanged()
-						if getValue() &gt; 4 then
-							window.b2_ability_nb.setReadOnly(false);
-						end
-					end
-					
-					function onInit()
-						super.onInit();
-						onValueChanged();
-					end
-				</script>
-			</number_skill_rollable>		
-			<basicstring_label name="b2_ability_st" source="skills.ability.b2_ability_st">
-				<anchored to="b1_ability_st">
-					<bottom offset="25" />
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!-- Branche A -->
+			<simplestringc name="branch1_label" source="skills.branch1_label">
+				<anchored height="24">
+					<top parent="leftanchor" offset="38" />
+					<left parent="leftanchor" offset="5" />
+					<right parent="rightanchor" offset="5" />
+				</anchored>
+				<frame name="headertitle" />
+				<default>
+					<textres>char_label_defaultBranchName</textres>
+				</default>
+				<disabled/>
+			</simplestringc>	
+			<!--A1 hidden description-->
+			<simplestring name="branch1_ability1_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
 					<left offset="0" />
-					<size width="82"/>
 				</anchored>
-			</basicstring_label>
-			<basicstring_label name="b2_ability_bs" source="skills.ability.b2_ability_bs">
-				<anchored to="b2_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="b2_ability_nb" source="skills.ability.b2_ability_nb">
-				<anchored to="b2_ability_bs" position="right" offset="10,0" width="20"/>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--A1 value-->
+			<number_skill_rollable name="branch1_ability1_value" source="skills.ability.branch1_ability1_value">
+				<anchored width="30" height="20">
+					<top parent="branch1_label" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
 				<readonly />
 				<script>
 					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.b2_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b2_ability_st.getValue(), getValue() + nStat, sStat);
+						window.performProfessionSkillRoll("1", "1")
 						return true;
 					end
 					
@@ -432,10 +253,14 @@
 					function onDoubleClick(x,y)
 						return action();
 					end
-					
+
 					function onValueChanged()
 						if getValue() &gt; 4 then
-							window.b3_ability_nb.setReadOnly(false);
+							window.branch1_ability2_value.setReadOnly(false);
+							window.branch1_ability3_value.setReadOnly(false);
+						else
+							window.branch1_ability2_value.setReadOnly(true);
+							window.branch1_ability3_value.setReadOnly(true);
 						end
 					end
 					
@@ -445,30 +270,46 @@
 					end
 				</script>
 			</number_skill_rollable>
-			<basicstring_label name="b3_ability_st" source="skills.ability.b3_ability_st">
-				<anchored to="b2_ability_st">
-					<bottom offset="25" />
-					<left offset="0" />
-					<size width="82"/>
+			<!--A1 stat-->
+			<cycler_ability name="branch1_ability1_stat" source="skills.ability.branch1_ability1_stat">
+				<anchored width="40" height="20">
+					<top parent="branch1_ability1_value" offset="0" />
+					<right parent="branch1_ability1_value" anchor="left" offset="-10" />
 				</anchored>
-			</basicstring_label>
-			<basicstring_label name="b3_ability_bs" source="skills.ability.b3_ability_bs">
-				<anchored to="b3_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="b3_ability_nb" source="skills.ability.b3_ability_nb">
-				<anchored to="b3_ability_bs" position="right" offset="10,0" width="20"/>
+				<disabled/>
+			</cycler_ability>
+			<!--A1 name-->
+			<stringu name="branch1_ability1_name" source="skills.ability.branch1_ability1_name">
+				<anchored to="branch1_label" height="20">
+					<top offset="25" />
+					<left offset="10" />
+					<right parent="branch1_ability1_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!--A2 hidden description-->
+			<simplestring name="branch1_ability2_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--A2 value-->
+			<number_skill_rollable name="branch1_ability2_value" source="skills.ability.branch1_ability2_value">
+				<anchored width="30" height="20">
+					<top parent="branch1_ability1_stat" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
 				<readonly />
 				<script>
 					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.b3_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.b3_ability_st.getValue(), getValue() + nStat, sStat);
+						window.performProfessionSkillRoll("1", "2")
 						return true;
 					end
 					
@@ -479,82 +320,349 @@
 					function onDoubleClick(x,y)
 						return action();
 					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.branch1_ability3_value.setReadOnly(false);
+						else
+							window.branch1_ability3_value.setReadOnly(true);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
 				</script>
-			</number_skill_rollable>		
+			</number_skill_rollable>
+			<!--A2 stat-->
+			<cycler_ability name="branch1_ability2_stat" source="skills.ability.branch1_ability2_stat">
+				<anchored width="40" height="20">
+					<top parent="branch1_ability2_value" offset="0" />
+					<right parent="branch1_ability2_value" anchor="left" offset="-10" />
+				</anchored>
+				<disabled/>
+			</cycler_ability>
+			<!--A2 name-->
+			<stringu name="branch1_ability2_name" source="skills.ability.branch1_ability2_name">
+				<anchored to="branch1_ability1_name" height="20">
+					<top offset="25" />
+					<left offset="0" />
+					<right parent="branch1_ability2_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!--A3 hidden description-->
+			<simplestring name="branch1_ability3_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--A3 value-->
+			<number_skill_rollable name="branch1_ability3_value" source="skills.ability.branch1_ability3_value">
+				<anchored width="30" height="20">
+					<top parent="branch1_ability2_stat" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
+				<readonly />
+				<script>
+					function action(draginfo)
+						window.performProfessionSkillRoll("1", "3")
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+					
+					function onDoubleClick(x,y)
+						return action();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.branch1_ability3_value.setReadOnly(false);
+						else
+							window.branch1_ability3_value.setReadOnly(true);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
+				</script>
+			</number_skill_rollable>
+			<!--A3 stat-->
+			<cycler_ability name="branch1_ability3_stat" source="skills.ability.branch1_ability3_stat">
+				<anchored width="40" height="20">
+					<top parent="branch1_ability3_value" offset="0" />
+					<right parent="branch1_ability3_value" anchor="left" offset="-10" />
+				</anchored>
+				<disabled/>
+			</cycler_ability>
+			<!--A3 name-->
+			<stringu name="branch1_ability3_name" source="skills.ability.branch1_ability3_name">
+				<anchored to="branch1_ability2_name" height="20">
+					<top offset="25" />
+					<left offset="0" />
+					<right parent="branch1_ability3_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!-- Branche B -->
+			<simplestringc name="branch2_label" source="skills.branch2_label">
+				<anchored height="24">
+					<top parent="branch1_ability3_name" offset="30" />
+					<left parent="branch1_ability3_name" offset="-10" />
+					<right parent="rightanchor" offset="5" />
+				</anchored>
+				<frame name="headertitle" />
+				<default>
+					<textres>char_label_defaultBranchName</textres>
+				</default>
+				<disabled/>
+			</simplestringc>	
+			<!--B1 hidden description-->
+			<simplestring name="branch2_ability1_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--B1 value-->
+			<number_skill_rollable name="branch2_ability1_value" source="skills.ability.branch2_ability1_value">
+				<anchored width="30" height="20">
+					<top parent="branch2_label" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
+				<readonly />
+				<script>
+					function action(draginfo)
+						window.performProfessionSkillRoll("2", "1")
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+					
+					function onDoubleClick(x,y)
+						return action();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.branch2_ability2_value.setReadOnly(false);
+							window.branch2_ability3_value.setReadOnly(false);
+						else
+							window.branch2_ability2_value.setReadOnly(true);
+							window.branch2_ability3_value.setReadOnly(true);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
+				</script>
+			</number_skill_rollable>
+			<!--B1 stat-->
+			<cycler_ability name="branch2_ability1_stat" source="skills.ability.branch2_ability1_stat">
+				<anchored width="40" height="20">
+					<top parent="branch2_ability1_value" offset="0" />
+					<right parent="branch2_ability1_value" anchor="left" offset="-10" />
+				</anchored>
+				<disabled/>
+			</cycler_ability>
+			<!--B1 name-->
+			<stringu name="branch2_ability1_name" source="skills.ability.branch2_ability1_name">
+				<anchored to="branch2_label" height="20">
+					<top offset="25" />
+					<left offset="10" />
+					<right parent="branch2_ability1_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!--B2 hidden description-->
+			<simplestring name="branch2_ability2_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--B2 value-->
+			<number_skill_rollable name="branch2_ability2_value" source="skills.ability.branch2_ability2_value">
+				<anchored width="30" height="20">
+					<top parent="branch2_ability1_stat" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
+				<readonly />
+				<script>
+					function action(draginfo)
+						window.performProfessionSkillRoll("2", "2")
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+					
+					function onDoubleClick(x,y)
+						return action();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.branch2_ability3_value.setReadOnly(false);
+						else
+							window.branch2_ability3_value.setReadOnly(true);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
+				</script>
+			</number_skill_rollable>
+			<!--B2 stat-->
+			<cycler_ability name="branch2_ability2_stat" source="skills.ability.branch2_ability2_stat">
+				<anchored width="40" height="20">
+					<top parent="branch2_ability2_value" offset="0" />
+					<right parent="branch2_ability2_value" anchor="left" offset="-10" />
+				</anchored>
+				<disabled/>
+			</cycler_ability>
+			<!--B2 name-->
+			<stringu name="branch2_ability2_name" source="skills.ability.branch2_ability2_name">
+				<anchored to="branch2_ability1_name" height="20">
+					<top offset="25" />
+					<left offset="0" />
+					<right parent="branch2_ability2_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!--B3 hidden description-->
+			<simplestring name="branch2_ability3_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--B3 value-->
+			<number_skill_rollable name="branch2_ability3_value" source="skills.ability.branch2_ability3_value">
+				<anchored width="30" height="20">
+					<top parent="branch2_ability2_stat" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
+				<readonly />
+				<script>
+					function action(draginfo)
+						window.performProfessionSkillRoll("2", "3")
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+					
+					function onDoubleClick(x,y)
+						return action();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.branch2_ability3_value.setReadOnly(false);
+						else
+							window.branch2_ability3_value.setReadOnly(true);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
+				</script>
+			</number_skill_rollable>
+			<!--B3 stat-->
+			<cycler_ability name="branch2_ability3_stat" source="skills.ability.branch2_ability3_stat">
+				<anchored width="40" height="20">
+					<top parent="branch2_ability3_value" offset="0" />
+					<right parent="branch2_ability3_value" anchor="left" offset="-10" />
+				</anchored>
+				<disabled/>
+			</cycler_ability>
+			<!--B3 name-->
+			<stringu name="branch2_ability3_name" source="skills.ability.branch2_ability3_name">
+				<anchored to="branch2_ability2_name" height="20">
+					<top offset="25" />
+					<left offset="0" />
+					<right parent="branch2_ability3_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
 			
 			<!-- Branche C -->
-			<basicstring_label name="c1_ability_st" source="skills.ability.c1_ability_st">
-				<anchored to="b1_ability_nb">
-					<position>right</position>
+			<simplestringc name="branch3_label" source="skills.branch3_label">
+				<anchored height="24">
+					<top parent="branch2_ability3_name" offset="30" />
+					<left parent="branch2_ability3_name" offset="-10" />
+					<right parent="rightanchor" offset="5" />
+				</anchored>
+				<frame name="headertitle" />
+				<default>
+					<textres>char_label_defaultBranchName</textres>
+				</default>
+				<disabled/>
+			</simplestringc>	
+			<!--C1 hidden description-->
+			<simplestring name="branch3_ability1_desc">
+				<anchored width="0" height="0">
 					<top offset="0" />
-					<left offset="30" />
-					<size width="82"/>
-				</anchored>
-			</basicstring_label>
-			<basicstring_label name="c1_ability_bs" source="skills.ability.c1_ability_bs">
-				<anchored to="c1_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="c1_ability_nb" source="skills.ability.c1_ability_nb">
-				<anchored to="c1_ability_bs" position="right" offset="10,0" width="20"/>
-				<readonly />
-				<script>
-					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.c1_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c1_ability_st.getValue(), getValue() + nStat, sStat);
-					return true;
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						return action(draginfo);
-					end
-					
-					function onDoubleClick(x,y)
-						return action();
-					end
-					
-					function onValueChanged()
-						if getValue() &gt; 4 then
-						window.c2_ability_nb.setReadOnly(false);
-						end
-					end
-					
-					function onInit()
-						super.onInit();
-						onValueChanged();
-					end
-				</script>
-			</number_skill_rollable>		
-			<basicstring_label name="c2_ability_st" source="skills.ability.c2_ability_st">
-				<anchored to="c1_ability_st">
-					<bottom offset="25" />
 					<left offset="0" />
-					<size width="82"/>
 				</anchored>
-			</basicstring_label>
-			<basicstring_label name="c2_ability_bs" source="skills.ability.c2_ability_bs">
-				<anchored to="c2_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="c2_ability_nb" source="skills.ability.c2_ability_nb">
-				<anchored to="c2_ability_bs" position="right" offset="10,0" width="20"/>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--C1 value-->
+			<number_skill_rollable name="branch3_ability1_value" source="skills.ability.branch3_ability1_value">
+				<anchored width="30" height="20">
+					<top parent="branch3_label" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
 				<readonly />
 				<script>
 					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.c2_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c2_ability_st.getValue(), getValue() + nStat, sStat);
+						window.performProfessionSkillRoll("3", "1")
 						return true;
 					end
 					
@@ -565,56 +673,186 @@
 					function onDoubleClick(x,y)
 						return action();
 					end
-					
-					function onValueChanged()
-						if getValue() &gt; 4 then
-						window.c3_ability_nb.setReadOnly(false);
-						end
-					end
-					
-					function onInit()
-						super.onInit();
-						onValueChanged();
-					end
-				</script>
-			</number_skill_rollable>
-			<basicstring_label name="c3_ability_st" source="skills.ability.c3_ability_st">
-				<anchored to="c2_ability_st">
-					<bottom offset="25" />
-					<left offset="0" />
-					<size width="82"/>
-				</anchored>
-			</basicstring_label>
-			<basicstring_label name="c3_ability_bs" source="skills.ability.c3_ability_bs">
-				<anchored to="c3_ability_st" position="right" offset="5,0" width="25"/>
-			</basicstring_label>
-			<number_skill_rollable name="c3_ability_nb" source="skills.ability.c3_ability_nb">
-				<anchored to="c3_ability_bs" position="right" offset="10,0" width="20"/>
-				<readonly />
-				<script>
-					function action(draginfo)
-						local nStat = 0;
-						local sStat = "";
-						
-						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
-						sStat = window.c3_ability_bs.getValue();
-						sStat, nStat = getStat(rActor, sStat);
-						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.c3_ability_st.getValue(), getValue() + nStat, sStat);
-						return true;
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						return action(draginfo);
-					end
-					
-					function onDoubleClick(x,y)
-						return action();
-					end
-				</script>
-			</number_skill_rollable>
 
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.branch3_ability2_value.setReadOnly(false);
+							window.branch3_ability3_value.setReadOnly(false);
+						else
+							window.branch3_ability2_value.setReadOnly(true);
+							window.branch3_ability3_value.setReadOnly(true);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
+				</script>
+			</number_skill_rollable>
+			<!--C1 stat-->
+			<cycler_ability name="branch3_ability1_stat" source="skills.ability.branch3_ability1_stat">
+				<anchored width="40" height="20">
+					<top parent="branch3_ability1_value" offset="0" />
+					<right parent="branch3_ability1_value" anchor="left" offset="-10" />
+				</anchored>
+				<disabled/>
+			</cycler_ability>
+			<!--C1 name-->
+			<stringu name="branch3_ability1_name" source="skills.ability.branch3_ability1_name">
+				<anchored to="branch3_label" height="20">
+					<top offset="25" />
+					<left offset="10" />
+					<right parent="branch3_ability1_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!--C2 hidden description-->
+			<simplestring name="branch3_ability2_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--C2 value-->
+			<number_skill_rollable name="branch3_ability2_value" source="skills.ability.branch3_ability2_value">
+				<anchored width="30" height="20">
+					<top parent="branch3_ability1_stat" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
+				<readonly />
+				<script>
+					function action(draginfo)
+						window.performProfessionSkillRoll("3", "2")
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+					
+					function onDoubleClick(x,y)
+						return action();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.branch3_ability3_value.setReadOnly(false);
+						else
+							window.branch3_ability3_value.setReadOnly(true);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
+				</script>
+			</number_skill_rollable>
+			<!--C2 stat-->
+			<cycler_ability name="branch3_ability2_stat" source="skills.ability.branch3_ability2_stat">
+				<anchored width="40" height="20">
+					<top parent="branch3_ability2_value" offset="0" />
+					<right parent="branch3_ability2_value" anchor="left" offset="-10" />
+				</anchored>
+				<disabled/>
+			</cycler_ability>
+			<!--C2 name-->
+			<stringu name="branch3_ability2_name" source="skills.ability.branch3_ability2_name">
+				<anchored to="branch3_ability1_name" height="20">
+					<top offset="25" />
+					<left offset="0" />
+					<right parent="branch2_ability2_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!--C3 hidden description-->
+			<simplestring name="branch3_ability3_desc">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<readonly />
+				<invisible />
+			</simplestring>
+			<!--C3 value-->
+			<number_skill_rollable name="branch3_ability3_value" source="skills.ability.branch3_ability3_value">
+				<anchored width="30" height="20">
+					<top parent="branch3_ability2_stat" offset="25" />
+					<right parent="rightanchor" anchor="left" offset="-10" />
+				</anchored>
+				<readonly />
+				<script>
+					function action(draginfo)
+						window.performProfessionSkillRoll("3S", "3")
+						return true;
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						return action(draginfo);
+					end
+					
+					function onDoubleClick(x,y)
+						return action();
+					end
+
+					function onValueChanged()
+						if getValue() &gt; 4 then
+							window.branch3_ability3_value.setReadOnly(false);
+						else
+							window.branch3_ability3_value.setReadOnly(true);
+						end
+					end
+					
+					function onInit()
+						super.onInit();
+						onValueChanged();
+					end
+				</script>
+			</number_skill_rollable>
+			<!--C3 stat-->
+			<cycler_ability name="branch3_ability3_stat" source="skills.ability.branch3_ability3_stat">
+				<anchored width="40" height="20">
+					<top parent="branch3_ability3_value" offset="0" />
+					<right parent="branch3_ability3_value" anchor="left" offset="-10" />
+				</anchored>
+				<disabled/>
+			</cycler_ability>
+			<!--C3 name-->
+			<stringu name="branch3_ability3_name" source="skills.ability.branch3_ability3_name">
+				<anchored to="branch3_ability2_name" height="20">
+					<top offset="25" />
+					<left offset="0" />
+					<right parent="branch2_ability2_stat" anchor="left" offset="-10" />
+				</anchored>
+				<default>
+					<textres>char_label_defaultSkillName</textres>
+				</default>
+				<disabled/>
+			</stringu>
+			
+			<!-- profession needs to be here to be init last-->
+			<hs name="profession" source="identite.profession">
+				<script>				
+					function onValueChanged()
+						window.onProfessionValueChanged(getValue());
+					end
+					function onInit()
+						window.onProfessionValueChanged(getValue());
+					end
+					
+				</script>
+			</hs> 
 		</sheetdata>
 	</windowclass>
 
@@ -798,7 +1036,7 @@
 
 			<!-- See details -->
 			<buttoncontrol name="activatedetail">
-				<anchored to="rightanchor" width="15" height="25">
+				<anchored to="rightanchor" width="15" height="20">
 					<top/>
 					<right anchor="left" relation="relative" offset="0" />
 				</anchored>
@@ -817,7 +1055,6 @@
 					<top />
 					<right anchor="left" relation="relative" offset="-5" />
 				</anchored>
-				<!-- <readonly /> -->
 				<disabled/>
 			</cycler_ability>
 

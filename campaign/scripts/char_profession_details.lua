@@ -4,76 +4,100 @@
 --
 
 function onProfessionValueChanged(sVal)
-    -- Debug.chat("onProfessionValueChanged");
-    -- Debug.chat(sVal);
-    
     if not sVal then
         return;
     end
 
-    --local sVal = getValue();
-    local sSkill = "";
+    local id = getIdFromLabel(sVal);
+
+    local sSkill;
     local sAbility = "";
     local sStat = "";
     
-    sSkill = ProfessionTable.tbl_profession[sVal]["root"]["skill"];
-    root_skills_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal]["root"]["stat"];
-    root_skills_bs.setValue(sStat);
-        
-    sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch1"];
-    a1_label_ss.setValue(sAbility);
-    
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-    a1_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-    a1_ability_bs.setValue(sStat);
-
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-    a2_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-    a2_ability_bs.setValue(sStat);
-
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-    a3_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-    a3_ability_bs.setValue(sStat);
-
-    
-    sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch2"];
-    a2_label_ss.setValue(sAbility);
-    
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-    b1_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-    b1_ability_bs.setValue(sStat);
-
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-    b2_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-    b2_ability_bs.setValue(sStat);
-
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-    b3_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-    b3_ability_bs.setValue(sStat);
-    
-    sAbility = ProfessionTable.tbl_profession[sVal]["ability"]["branch3"];
-    a3_label_ss.setValue(sAbility);
-    
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill1"];
-    c1_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat1"];
-    c1_ability_bs.setValue(sStat);
-
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill2"];
-    c2_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat2"];
-    c2_ability_bs.setValue(sStat);
-
-    sSkill = ProfessionTable.tbl_profession[sVal][sAbility]["skill3"];
-    c3_ability_st.setValue(sSkill);
-    sStat = ProfessionTable.tbl_profession[sVal][sAbility]["stat3"];
-    c3_ability_bs.setValue(sStat);
+    if (sVal == Interface.getString("list_profession_custom")) then
+        setProfessionEditable(true);
+    elseif not ProfessionTable.tbl_professions[id] then
+        return;
+    else
+        setProfessionEditable(false);
+        -- init defining skill
+        sSkill = ProfessionTable.tbl_professions[id]["definingSkill"];
+        definingSkill_name.setValue(Interface.getString("char_label_definingSkill_"..sSkill[1]));
+        definingSkill_desc.setValue(Interface.getString("char_prof_skill_"..sSkill[1].."_desc"));
+        definingSkill_stat.setStringValue(sSkill[2]);
+        --Debug.chat(self["branch1_label"]);
+        -- branch init
+        local branchNumber = 0
+        for k,v in pairs(ProfessionTable.tbl_professions[id]) do
+            if k~="definingSkill" then
+                branchNumber = branchNumber + 1;
+                self["branch"..branchNumber.."_label"].setValue((Interface.getString("char_label_branch_"..k)));
+                local aBranch = ProfessionTable.tbl_professions[id][k];
+                for i=1, #aBranch do
+                    local branchSkill = aBranch[i];
+                    self["branch"..branchNumber.."_ability"..i.."_desc"].setValue((Interface.getString("char_prof_skill_"..branchSkill[1].."_desc")));
+                    self["branch"..branchNumber.."_ability"..i.."_name"].setValue((Interface.getString("char_prof_skill_"..branchSkill[1].."_label")));
+                    self["branch"..branchNumber.."_ability"..i.."_stat"].setStringValue(branchSkill[2]);
+                end
+            end
+        end
+    end
 end
 
+function performProfessionSkillRoll(branchNumber, skillNumber)
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
+    local sStat, nStat = getAssociatedStat(rActor, self["branch"..branchNumber.."_ability"..skillNumber.."_stat"].getStringValue());
+    local sName = self["branch"..branchNumber.."_ability"..skillNumber.."_name"].getValue();
+    local sValue = self["branch"..branchNumber.."_ability"..skillNumber.."_value"].getValue();
+    
+	ActionSkill.performRoll(draginfo, rActor, sStat .. " " .. sName, sValue + nStat, sStat);
+	
+	return true;
+end
+
+--------------------------------------------------------------------------
+-- Transform a string (label) into a valid id
+-- An id :
+--  * start by a lower case letter
+--  * has no whitespace
+--  * don't change the string internal case 
+--------------------------------------------------------------------------
+function getIdFromLabel (label)
+    local id = "";
+    
+    local aWords = StringManager.parseWords(label);
+    id = aWords[1]:lower();
+    for k = 2, #aWords do
+        id = id .. aWords[k];
+    end
+
+    return id;
+end
+
+--------------------------------------------------------------------------
+-- Retreive the value of a specified stat
+--------------------------------------------------------------------------
+function getAssociatedStat(rActor, sStat)
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+	local nStat = DB.getValue(nodeActor, "attributs."..sStat, 0);
+
+	return sStat,nStat;
+end
+
+--------------------------------------------------------------------------
+-- Set the enable/disable status of all labels and stat cyler
+--------------------------------------------------------------------------
+function setProfessionEditable(bEditable)
+    -- defining skill
+    definingSkill_name.setEnabled(bEditable);
+    definingSkill_stat.setEnabled(bEditable);
+    
+    -- branch
+    for i=1, 3 do
+        self["branch"..i.."_label"].setEnabled(bEditable);
+        for j=1, 3 do
+            self["branch"..i.."_ability"..j.."_name"].setEnabled(bEditable);
+            self["branch"..i.."_ability"..j.."_stat"].setEnabled(bEditable);
+        end
+    end
+end

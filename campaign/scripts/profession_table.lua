@@ -1,3 +1,52 @@
+tbl_professions = {
+        bard = { definingSkill = { "busking", "empathy"},
+                charmer = { {"returnAct", "empathy"}, {"raiseACrowd", "empathy"}, {"goodFriend", "empathy"} },
+                informant = { {"fade", "intelligence"}, {"spreadTheWord", "intelligence"}, {"acclimatize", "intelligence"} },
+                manipulator = { {"poisonTheWell", "empathy"}, {"needling", "empathy"}, {"etTuBrute", "empathy"} } },
+        craftsman = { definingSkill = { "patchJob", "crafting"},
+                forgeMaster = { {"extensiveCatalogue", "intelligence"}, {"journeyman", "crafting"}, {"masterCrafting", "crafting"} },
+                alchemist = { {"mentalPharmacy", "intelligence"}, {"doubleDose", "crafting"}, {"adaptation", "crafting"} },
+                improviser = { {"augmentation", "crafting"}, {"silverCoating", "crafting"}, {"pinpoint", "crafting"} } },
+        criminal = { definingSkill = { "practicedParanoia", "intelligence"},
+                thief = { {"caseTheArea", "intelligence"}, {"mentalKey", "intelligence"}, {"goToGround", "intelligence"} },
+                gangBoss = { {"weakSpot", "empathy"}, {"markedMan", "will"}, {"rally", "will"} },
+                assassin = { {"carefulAim", "dexterity"}, {"eyeGouge", "dexterity"}, {"assassinsStrike", "dexterity"} } },
+        doctor = { definingSkill = { "healingHands", "crafting"},
+                surgeon = { {"diagnose", "intelligence"}, {"analysis", "intelligence"}, {"effectiveSurgery", "crafting"} },
+                herbalist = { {"healingTent", "crafting"}, {"improvisation", "intelligence"}, {"herbalRemedy", "crafting"} },
+                anatomist = { {"bleedingWound", "intelligence"}, {"practicalCarnage", "intelligence"}, {"cripplingWound", "intelligence"} } },
+        mage = { definingSkill = { "magicalTraining", "intelligence"},
+                politician = { {"scheming", "intelligence"}, {"grapeVine", "intelligence"}, {"assets", "intelligence"} },
+                scientist = { {"reverseEngineer", "intelligence"}, {"distillation", "crafting"}, {"mutate", "intelligence"} },
+                archMage = { {"inTouch", ""}, {"immutable", "will"}, {"expandedMagic", "will"} } },
+        manAtArms = { definingSkill = { "toughAsNails", "body"},
+                marksman = { {"extremeRange", "dexterity"}, {"twinShot", "dexterity"}, {"pinPointAim", "dexterity"} },
+                bountyHunter = { {"bloodhound", "intelligence"}, {"boobyTrap", "crafting"}, {"tacticalAwareness", "intelligence"} },
+                reaver = { {"fury", "will"}, {"zweihand", "body"}, {"shrugItOff", "body"} } },
+        merchant = { definingSkill = { "wellTraveled", "intelligence"},
+                broker = { {"options", "intelligence"}, {"hardBargain", "empathy"}, {"promise", "empathy"} },
+                contact = { {"rookery", "empathy"}, {"insider", "intelligence"}, {"treasureMap", "intelligence"} },
+                havekar = { {"wellConnected", "will"}, {"fence", "intelligence"}, {"warriorsDebt", "empathy"} } },
+        priest = { definingSkill = { "initiateOfTheGods", "empathy"},
+                preacher = { {"divinePower", ""}, {"divineAuthority", "empathy"}, {"precognition", "will"} },
+                druid = { {"natureAttunement", ""}, {"readNature", "intelligence"}, {"animalCompact", "will"} },
+                fanatic = { {"bloodRituals", "will"}, {"fervor", "empathy"}, {"wordOfGod", "empathy"} } },
+        witcher = { definingSkill = { "witcherTraining", "intelligence"},
+                spellsword = { {"meditation", ""}, {"magicalSource", ""}, {"heliotrope", "will"} },
+                mutant = { {"ironStomach", ""}, {"frenzy", ""}, {"transmutation", "body"} },
+                slayer = { {"parryArrows", "dexterity"}, {"quickStrike", "reflex"}, {"whirl", "reflex"} } },
+        peasant = { definingSkill = { "intolerance", "will"},
+                farmer = { {"harvestTime", ""}, {"animalWhisper", "empathy"}, {"farmWisdom", "crafting"} },
+                cook = { {"butchery", "crafting"}, {"cureAll", "crafting"}, {"masStew", "crafting"} },
+                laborer = { {"ditchDigger", ""}, {"grog", "crafting"}, {"biteTheEar", "body"} } }
+        -- noble = { definingSkill = { "intolerance", ""},
+        --         farmer = { {"harvestTime", ""}, {"animalWhisper", ""}, {"farmWisdom", ""} },
+        --         cook = { {"butchery", ""}, {"cureAll", ""}, {"masStew", ""} },
+        --         laborer = { {"ditchDigger", ""}, {"grog", ""}, {"biteTheEar", ""} } }
+};
+
+
+
 tbl_profession = {
                     ["Bard"]  = {
                                  ["root"]            = {["skill"]   = "Busking",         ["stat"]    = "EMP"},
@@ -125,4 +174,4 @@ tbl_profession = {
                                                         ["skill3"]  = "Whirl",                  ["stat3"]   = "REF"},
                                 },
 
-                 };
+                };
