@@ -22,6 +22,34 @@ function onRecoverAction()
 	end
 end
 
+function onDodgeAction(draginfo)
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+			
+	for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
+		if (DB.getValue(v, "id", "") == "dodgeEscape") then
+			local sStat = DB.getValue(v, "skill_stat", "");
+			local nStat = DB.getValue(nodeActor, "attributs."..sStat, 0);
+
+			ActionSkill.performRoll(draginfo, rActor, sStat .. " " .. DB.getValue(v, "name", ""), DB.getValue(v, "skill_value", "") + nStat, sStat);
+		end
+	end
+end
+
+function onRepositionAction(draginfo)
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+			
+	for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
+		if (DB.getValue(v, "id", "") == "athletics") then
+			local sStat = DB.getValue(v, "skill_stat", "");
+			local nStat = DB.getValue(nodeActor, "attributs."..sStat, 0);
+
+			ActionSkill.performRoll(draginfo, rActor, sStat .. " " .. DB.getValue(v, "name", ""), DB.getValue(v, "skill_value", "") + nStat, sStat);
+		end
+	end
+end
+
 function onHPChanged()
 	local node = getDatabaseNode();
 	local hpMax = hit_pointsmax_combat.getValue();

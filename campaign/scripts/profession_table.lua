@@ -38,11 +38,11 @@ tbl_professions = {
         peasant = { definingSkill = { "intolerance", "will"},
                 farmer = { {"harvestTime", ""}, {"animalWhisper", "empathy"}, {"farmWisdom", "crafting"} },
                 cook = { {"butchery", "crafting"}, {"cureAll", "crafting"}, {"masStew", "crafting"} },
-                laborer = { {"ditchDigger", ""}, {"grog", "crafting"}, {"biteTheEar", "body"} } }
-        -- noble = { definingSkill = { "intolerance", ""},
-        --         farmer = { {"harvestTime", ""}, {"animalWhisper", ""}, {"farmWisdom", ""} },
-        --         cook = { {"butchery", ""}, {"cureAll", ""}, {"masStew", ""} },
-        --         laborer = { {"ditchDigger", ""}, {"grog", ""}, {"biteTheEar", ""} } }
+                laborer = { {"ditchDigger", ""}, {"grog", "crafting"}, {"biteTheEar", "body"} } },
+        noble = { definingSkill = { "notoriety", ""},
+                dilettante = { {"dabble", ""}, {"expertGuise", "empathy"}, {"host", "empathy"} },
+                leader = { {"command", "will"}, {"servants", "empathy"}, {"estate", ""} },
+                knight = { {"resolute", ""}, {"chevalier", "empathy"}, {"armoredBuffer", "reflex"} } }
 };
 
 

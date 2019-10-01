@@ -99,6 +99,7 @@
 	<string name="list_profession_priest">Priest</string>
 	<string name="list_profession_witcher">Witcher</string>
 	<string name="list_profession_peasant">Peasant</string>
+	<string name="list_profession_noble">Noble</string>
 	<string name="list_profession_custom">-- Custom --</string>
 	
 	<!-- List Skills cycler -->
@@ -149,6 +150,7 @@
 	<string name="char_label_definingSkill_initiateOfTheGods">Initiate Of The Gods</string>
 	<string name="char_label_definingSkill_witcherTraining">Witcher Training</string>
 	<string name="char_label_definingSkill_intolerance">Intolerance</string>
+	<string name="char_label_definingSkill_notoriety">Notoriety</string>
 
 	<!-- Profession branch name -->
 	<string name="char_label_branch_charmer">The Charmer</string>
@@ -181,6 +183,10 @@
 	<string name="char_label_branch_farmer">The Farmer</string>
 	<string name="char_label_branch_cook">The Cook</string>
 	<string name="char_label_branch_laborer">The Laborer</string>
+
+	<string name="char_label_branch_dilettante">The Dilettante</string>
+	<string name="char_label_branch_leader">The Leader</string>
+	<string name="char_label_branch_knight">The Knight</string>
 
 	<!-- Profession skills -->
 	<string name="char_prof_skill_returnAct_label">Return Act</string>
@@ -273,6 +279,17 @@
 	<string name="char_prof_skill_ditchDigger_label">Ditch Digger</string>
 	<string name="char_prof_skill_grog_label">Grog</string>
 	<string name="char_prof_skill_biteTheEar_label">Bite The Ear</string>
+
+	<string name="char_prof_skill_dabble_label">Dabble</string>
+	<string name="char_prof_skill_expertGuise_label">Expert Guise</string>
+	<string name="char_prof_skill_host_label">Host</string>
+	<string name="char_prof_skill_butchery_label">Butchery</string>
+	<string name="char_prof_skill_command_label">Command</string>
+	<string name="char_prof_skill_servants_label">Servants</string>
+	<string name="char_prof_skill_estate_label">Estate</string>
+	<string name="char_prof_skill_resolute_label">Resolute</string>
+	<string name="char_prof_skill_chevalier_label">Chevalier</string>
+	<string name="char_prof_skill_armoredBuffer_label">Armored Buffer</string>
 	
 	<string name="char_prof_skill_busking_desc">A Bard is a wonderful thing to have around, especially when the party's low on money. A Bard can take an hour and make a Busking roll in the nearest town center. The total of this roll is the amount of money raked in by the Bard while they perform on the street. A fumble can lower the roll, and a negative value means that not only do you fail to make any coin but you are also harrassed by the locals for your poor performance, resulting in a -2 to Charisma with anyone in the town for the rest of the day.</string>
 	<string name="char_prof_skill_returnAct_desc">Before attempting a Busking roll a Bard can roll Return Act at a DC set by the GM to see whether they have played in this town before. If the roll is successful the Bard has made a name for themselves in this town already. Not only is their Busking income doubled but they gain a +2 Charisma with everyone in at that venue.</string>
@@ -494,6 +511,8 @@
 	<string name="char_skill_ritualCrafting_desc">Ritualistic magic. At a base 10 you know how to perform some rituals and are fairly talented at them. At a base 13 you routinely perform rituals. At a base 16 you can undertake rituals under pressure and attain the outcome you are looking for. At a base 20 you are a skilled ritualist and can perform any ritual you lay your hands on.</string>
 		
 	<!-- Combat tab -->
+	<string name="char_label_defenseActions">DEFENSE ACTIONS : </string>
+	<string name="char_label_reposition">Reposition</string>
 	<string name="char_combat_initiative">Init.</string>
 	<string name="char_label_weapons">Weapons</string>
 	<string name="char_label_weapontype">M/R</string>

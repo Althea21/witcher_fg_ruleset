@@ -148,6 +148,7 @@
 						add(Interface.getString("list_profession_priest"), Interface.getString("list_profession_priest"));
 						add(Interface.getString("list_profession_witcher"), Interface.getString("list_profession_witcher"));
 						add(Interface.getString("list_profession_peasant"), Interface.getString("list_profession_peasant"));
+						add(Interface.getString("list_profession_noble"), Interface.getString("list_profession_noble"));
 						add(Interface.getString("list_profession_custom"), Interface.getString("list_profession_custom"));
 						if getValue()==Interface.getString("list_profession_custom") then
 							window.custom_profession.setVisible(true);

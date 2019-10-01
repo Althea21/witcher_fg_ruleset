@@ -11,7 +11,7 @@
 		<sheetdata>
 			<!--COMBAT STATS REMINDER-->
 			<frame_char name="combat_frame">
-				<bounds>15,0,-29,70</bounds>
+				<bounds>15,0,-29,100</bounds>
 			</frame_char>
 			
 			<!--hp-->
@@ -133,10 +133,69 @@
 					end
 				</script>
 			</number_derivedstat_rollable>
+
+			<label name="label_defense">
+				<anchored to="combat_frame" position="insidetopleft" offset="20,65" width="100"/>
+				<static textres="char_label_defenseActions"/>
+			</label>
+			
+			<!-- Dodge / Escape -->
+			<label name="label_dodgeaction">
+				<anchored to="combat_frame" position="insidetopleft" offset="145,65" width="80"/>
+				<static textres="char_skill_dodgeEscape_label"/>
+			</label>
+			<buttoncontrol name="button_dodge">
+				<anchored to="label_dodgeaction" position="right" offset="10,0" width="20" height="20" />
+				<icon normal="button_action_dodge" />
+				<cursor hover="hand" />
+				<nodrag />
+				<script>
+					function action(draginfo)
+						window.onDodgeAction(draginfo);
+					end
+
+					function onButtonPress()
+						action();
+					end
+
+					function onDragStart(button, x, y, draginfo)
+						action(draginfo);
+						return true;
+					end
+				</script>
+			</buttoncontrol>
+			
+			<!-- Reposition -->
+			<buttoncontrol name="button_reposition">
+				<anchored to="combat_frame" position="insidetopleft" offset="440,65" width="20" height="20" />
+				<icon normal="button_action_reposition" />
+				<cursor hover="hand" />
+				<nodrag />
+				<script>
+					function action(draginfo)
+						window.onRepositionAction(draginfo);
+					end
+
+					function onButtonPress()
+						action();
+					end
+
+					function onDragStart(button, x, y, draginfo)
+						action(draginfo);
+						return true;
+					end
+				</script>
+			</buttoncontrol>
+			<label name="label_reposition">
+				<anchored to="button_reposition" position="left" offset="10,0" width="60"/>
+				<right/>
+				<static textres="char_label_reposition"/>
+			</label>
+			
 			
 			<!-- Combat Actions frame-->
 			<frame_char name="combat_details_frame">
-				<bounds>15,75,-29,-10</bounds>
+				<bounds>15,105,-29,-10</bounds>
 			</frame_char>
 			
 			<!-- weapons / brawling -->
@@ -153,8 +212,6 @@
 				</anchored>
 				<target>combat_details</target>
 			</scrollbar>
-
-			
 		</sheetdata>
 	</windowclass>
 	
