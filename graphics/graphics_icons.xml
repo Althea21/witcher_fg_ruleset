@@ -367,6 +367,7 @@
 	
 	<!-- Character Sheet -->
 	<icon name="char_encumbrance" file="graphics/icons/char_encumbrance.png" />
+	<icon name="char_overburdened" file="graphics/icons/char_overburdened.png" />
 	<icon name="char_inv_carried_header" file="graphics/icons/char_inv_carried_header.png" />
 	<icon name="button_char_inv_none" file="graphics/buttons/button_inv_none.png" />
 	<icon name="button_char_inv_carried" file="graphics/buttons/button_inv_carried.png" />

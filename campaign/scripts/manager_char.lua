@@ -304,3 +304,22 @@ function getTotalEV(nodeActor)
 	end
 	return nTotalEV;
 end
+
+-- get encumbrance malus if any (work for PC / NPC)
+-- params :
+--  * nodeActor : pc or npc node
+-- returns : 
+--	* value	: encumbrance malus if any, else 0
+function getEncumbranceMalus(nodeActor)
+	local nEncMalus = 0;
+
+	local encumbranceMax = DB.getValue(nodeActor, "attributs.encumbranceMax", 0);
+	local encumbrance = DB.getValue(nodeActor, "attributs.encumbrance", 0);
+
+	if (encumbrance > encumbranceMax) then
+		local supp = encumbrance - encumbranceMax;
+		nEncMalus = supp % 5;
+	end
+	
+	return nEncMalus;
+end

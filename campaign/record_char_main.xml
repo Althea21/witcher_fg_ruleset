@@ -284,6 +284,11 @@
 				end
 				</script>
 			</number_charstattotal>
+			<genericcontrol name="ref_overburdened">
+				<anchored to="reflex" position="right" offset="10,0" width="10" height="10"/>
+				<icon>char_overburdened</icon>
+				<invisible/>
+			</genericcontrol>
 			<label>
 				<anchored to="reflex_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_reflex" />
@@ -333,6 +338,12 @@
 				end
 				</script>
 			</number_charstattotal>
+			<genericcontrol name="dex_overburdened">
+				<anchored to="dexterity" position="right" offset="10,0" width="10" height="10"/>
+				<icon>char_overburdened</icon>
+				<invisible/>
+			</genericcontrol>
+			
 			<label>
 				<anchored to="dexterity_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_dexterity" />
@@ -431,6 +442,11 @@
 				end
 				</script>
 			</number_charstattotal>
+			<genericcontrol name="spd_overburdened">
+				<anchored to="speed" position="right" offset="10,0" width="10" height="10"/>
+				<icon>char_overburdened</icon>
+				<invisible/>
+			</genericcontrol>
 			<label>
 				<anchored to="speed_base" position="right" offset="-110,0" />
 				<static textres="char_statslabel_speed" />
@@ -711,6 +727,9 @@
 				<state icon="button_woundthreshold_on" tooltipres="button_woundthreshold_on" />
 				<default>0</default>
 				<script>
+					function onInit()
+						window.onWoundThresholdStateChanged(window.getDatabaseNode());
+					end
 					function onValueChanged()
 						window.onWoundThresholdStateChanged(window.getDatabaseNode());
 					end
@@ -799,6 +818,14 @@
 
 			<number_derivedstat name="encumbrance" source="attributs.encumbrance">
 				<anchored to="toxicity" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<script>
+					function onValueChanged()
+						window.onEncumbranceChanged();
+					end
+					function onInit()
+						window.onEncumbranceChanged();
+					end
+				</script>
 			</number_derivedstat>
 			<label>
 				<anchored to="encumbrance" position="right" offset="-130,0" />

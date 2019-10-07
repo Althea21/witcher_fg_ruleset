@@ -124,7 +124,7 @@ function getRoll(rActor, rWeapon, sAttackType)
 			nRollMod = nRollMod - nTotalEV;
 			--sRollDescription = sRollDescription.."["..Interface.getString("rolldescription_totalev").." -"..nTotalEV.."]"
 		end
-		
+
 		rRoll.sDesc = sRollDescription;
 		rRoll.nMod = nRollMod;
 	end
