@@ -122,7 +122,7 @@ function initSkills()
 
 		-- class Skill
 		if (v.isClassSkill.getValue()==1) then
-			v.name.setFont("sheettextbold");
+			v.name.setFont("sheettext-alt");--sheettextbold
 		end
 	end
 end

@@ -171,6 +171,10 @@
 		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
 		<color value="#b7ad96" />
 	</font>
+	<font name="sheettext-alt">
+		<ttf file="graphics/fonts/Casper-Regular.ttf" name="Casper Regular" size="12" />
+		<color value="#98856C" />
+	</font>
 	<font name="sheettextbold">
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="12" />
 		<color value="#b7ad96" />
