@@ -77,3 +77,52 @@ function addNPC(sClass, nodeNPC, sName)
 
 	return nodeEntry;
 end
+
+--
+-- COMBAT RESOLUTION
+--
+
+-- Queue for tracking pending Attacks for defense, then damage resolution (FIFO)
+-- Each item must be formatted like :
+--	* sSourceCT : offender (obtained by ActorManager.getCreatureNodeName(rSource) )
+--	* sTargetCT : defender (obtained by ActorManager.getCTNodeName(rTarget) )
+--	* nAtkValue : value of attack roll (total with modifier, reroll etc...)
+--	* nDefValue : value of defense roll (total with modifier, reroll etc...)
+-- Item must be cleared after damage resolution
+aAttackQueue = {};
+
+-- Add pengin attack to the queue
+-- params :
+--	* rSource	: offender 
+--	* rTarget	: defender 
+--	* nAtkValue : value of attack roll (total with modifier, reroll etc...)
+--	* sLocation : only if attack was aimed
+function addPendingAttack(rSource, rTarget, nAtkValue, sLocation)
+	Debug.chat(rSource);
+	Debug.chat(rTarget);
+	Debug.chat(nAtkValue);
+	Debug.chat(sLocation);
+
+	local sSourceCT = ActorManager.getCreatureNodeName(rSource);
+	if sSourceCT == "" then
+		return;
+	end
+	Debug.chat(sSourceCT);
+	
+	local sTargetCT = "";
+	if rTarget then
+		sTargetCT = ActorManager.getCTNodeName(rTarget);
+	end
+	Debug.chat(sTargetCT);
+	
+	local att = {nAtkValue, sLocation};
+	
+	if not aAttackQueue[sSourceCT] then
+		aAttackQueue[sSourceCT] = {};
+	end
+	if not aAttackQueue[sSourceCT][sTargetCT] then
+		aAttackQueue[sSourceCT][sTargetCT] = {};
+	end
+
+	table.insert(aAttackQueue[sSourceCT][sTargetCT], att);
+end

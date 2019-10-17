@@ -8,9 +8,6 @@
 --
 
 function onInit()
-	-- Register spell actions.  We'll allow use of the modifier stack for those actions.
-	GameSystem.actions["spellcast"] = { bUseModStack = true };
-	
 	-- Register modifier handler
 	--ActionsManager.registerModHandler("spellcast", onSpellCastModifier);
 	

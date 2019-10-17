@@ -8,9 +8,6 @@
 --
 
 function onInit()
-	-- Register defense actions.  We'll allow use of the modifier stack for those actions.
-	GameSystem.actions["defense"] = { bUseModStack = true };
-	
 	-- Register modifier handler
 	ActionsManager.registerModHandler("defense", onDefenseModifier);
 	

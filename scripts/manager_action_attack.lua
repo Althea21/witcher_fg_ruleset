@@ -7,27 +7,18 @@
 -- Management for attack rolls
 --
 
--- Queue for tracking pending Attacks for defense, then damage resolution (FIFO)
--- Each item must be formatted like :
---	* sSourceCT : offender (obtained by ActorManager.getCreatureNodeName(rSource) )
---	* sTargetCT : defender (obtained by ActorManager.getCTNodeName(rTarget) )
---	* nAtkValue : value of attack roll (total with modifier, reroll etc...)
---	* nDefValue : value of defense roll (total with modifier, reroll etc...)
--- Item must be cleared after damage resolution
-aAttackQueue = {}
-
 function onInit()
-	-- Register attack actions.  We'll allow use of the modifier stack for those actions.
-	GameSystem.actions["attack"] = { bUseModStack = true };
-	
 	-- Register modifier handler
 	ActionsManager.registerModHandler("attack", onAttackModifier);
 	
 	-- Register the result handler - called after the dice have stopped rolling
 	ActionsManager.registerResultHandler("attack", onAttackRoll);
+	ActionsManager.registerResultHandler("attackreroll", onAttackRoll);
+	ActionsManager.registerResultHandler("attacklocation", onAttackRoll);
+	
 end
 
--- method called by performAction to initiate the roll object which will be given 
+-- method called by performRoll to initiate the roll object which will be given 
 -- to high level ActionsManager to actually perform roll
 -- params :
 --	* rActor		: actor info retrieved by using ActorManager.resolveActor
@@ -50,6 +41,8 @@ function getRoll(rActor, rWeapon, sAttackType)
 	-- The description to show in the chat window, will be overloaded later
 	rRoll.sDesc = "[Attack] ";
 	
+	rRoll.rTarget = {};
+
 	-- Add parameters for exploding dice management
 	rRoll.sExplodeMode  = "none";	-- initial roll, will be "fumble" or "crit" on reroll
 	rRoll.nTotalExplodeValue = 0; 	-- cumulative value of exploding rolls
@@ -58,7 +51,7 @@ function getRoll(rActor, rWeapon, sAttackType)
 	
 	-- Add parameters for damage location, may be modified by modifier (see OnAttackModifier) or by rolling location table
 	rRoll.sDamageLocation = "";
-	rRoll.sIsLocationRoll = "false";
+	--rRoll.sIsLocationRoll = "false";
 	
 	-- Debug.chat(rWeapon);
 	
@@ -77,12 +70,12 @@ function getRoll(rActor, rWeapon, sAttackType)
 		local nRollMod = 0;
 		
 		if sAttackType == "fast" then
-			sRollDescription = "[Fast attack with "..rWeapon.label.."]";
+			sRollDescription = "["..Interface.getString("combat_fastattack_message").." "..rWeapon.label.."]";
 		elseif sAttackType == "strong" then
-			sRollDescription = "[Strong attack with "..rWeapon.label.."][Strong -3]"; -- changing this may affect onAttackModifier function below
+			sRollDescription = "["..Interface.getString("combat_strongattack_message").." "..rWeapon.label.."][Strong -3]"; -- changing this may affect onAttackModifier function below
 			nRollMod = nRollMod - 3;
 		else
-			sRollDescription = "[Attack with "..rWeapon.label.."]";
+			sRollDescription = "["..Interface.getString("combat_attack_message").." "..rWeapon.label.."]";
 		end
 		
 		-- weapon effects and enhancements
@@ -139,6 +132,7 @@ end
 --	* sAttackType	: attack type (supported : "fast", "strong", "normal", "punchfast", "punchstrong", "punchnormal", "kickfast", "kickstrong", "kicknormal"). 
 --					  Unknown or missing value will be treated like a "normal" attack
 function performRoll(draginfo, rWeapon, sAttackType)
+	Debug.chat("------- performRoll");
 	-- retreive attack info and actor node 
 	local rActor; 
 	
@@ -173,13 +167,16 @@ end
 
 -- callback for ActionsManager called after the dice have stopped rolling : resolve roll status and display chat message
 function onAttackRoll(rSource, rTarget, rRoll)
-	-- Debug.chat("------- onAttackRoll");
+	Debug.chat("------- onAttackRoll");
+	Debug.chat(rRoll.sType);
 	-- Debug.chat("--rSource : ");
 	-- Debug.chat(rSource);
-	-- Debug.chat("--rTarget : ");
-	-- Debug.chat(rTarget);
-	-- Debug.chat("--rRoll : ");
-	-- Debug.chat(rRoll);
+	Debug.chat("--rTarget : ");
+	Debug.chat(rTarget);
+	-- Debug.chat("--rRoll.rTarget : ");
+	-- Debug.chat(rRoll.rTarget);
+	Debug.chat("--rRoll : ");
+	Debug.chat(rRoll);
 	
 	-- Debug.chat(rRoll.aDice[1].result);
 	
@@ -187,7 +184,15 @@ function onAttackRoll(rSource, rTarget, rRoll)
 	
 	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
 	
-	if (rRoll.sIsLocationRoll == "false") then
+	if rTarget then
+		Debug.chat("-- SET rRoll.rTarget : ");
+		rRoll.rTarget = rTarget;
+		rRoll.sDesc = rRoll.sDesc:format(rTarget.sName);
+	else
+		rRoll.sDesc = rRoll.sDesc:format("");
+	end
+	
+	if (rRoll.sType ~= "attacklocation") then
 		-- Check for reroll
 		local nDiceResult = tonumber(rRoll.aDice[1].result);
 		if (nDiceResult == 1) then
@@ -198,6 +203,8 @@ function onAttackRoll(rSource, rTarget, rRoll)
 				_storeDieForFinalMessage(rRoll);
 				-- reinit rRoll dice
 				rRoll.aDice = { "d10" };
+				-- change roll type to avoid throwing to much dice if multi-targeting
+				rRoll.sType = "attackreroll";
 				-- reroll
 				bDisplayFinalMessage = false;
 				ActionsManager.performAction(nil, rActor, rRoll);
@@ -217,6 +224,8 @@ function onAttackRoll(rSource, rTarget, rRoll)
 			_storeDieForFinalMessage(rRoll);
 			-- reinit rRoll dice
 			rRoll.aDice = { "d10" };
+			-- change roll type to avoid throwing to much dice if multi-targeting
+			rRoll.sType = "attackreroll";
 			-- reroll
 			bDisplayFinalMessage = false;
 			ActionsManager.performAction(nil, rActor, rRoll);
@@ -236,9 +245,11 @@ function onAttackRoll(rSource, rTarget, rRoll)
 	
 	-- if no more reroll AND not aiming, roll for location
 	if (bDisplayFinalMessage and rRoll.sDamageLocation == "") then
-		rRoll.sIsLocationRoll = "true";
+		--rRoll.sIsLocationRoll = "true";
 		-- reinit rRoll dice
 		rRoll.aDice = { "d10" };
+		-- change roll type to avoid throwing to much dice if multi-targeting
+		rRoll.sType = "attacklocation";
 		-- roll for location
 		bDisplayFinalMessage = false;
 		ActionsManager.performAction(nil, rActor, rRoll);
@@ -330,6 +341,18 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		
 		-- Debug.chat(rMessage);
 		
+		-- add pending attack to queue
+		local nAtkValue = rRoll.nMod;
+		for i=1, #rRoll.aDice do
+			nAtkValue = nAtkValue + rRoll.aDice[i]["result"];
+		end
+
+		if rRoll.sDamageLocation:match("^AIM_") then
+			CombatManager2.addPendingAttack(rSource, rTarget, nAtkValue, sLocation);
+		else
+			CombatManager2.addPendingAttack(rSource, rTarget, nAtkValue, "");
+		end
+		
 		-- Display the message in chat.
 		Comm.deliverChatMessage(rMessage);
 	end
@@ -337,6 +360,9 @@ end
 
 -- Modifier handler : additional modifiers to apply to the roll
 function onAttackModifier(rSource, rTarget, rRoll)
+	Debug.chat("------- onAttackModifier");
+	Debug.chat("--rTarget : ");
+	Debug.chat(rTarget);
 	local aAddDesc = {};
 	local nAddMod = 0;
 	
@@ -469,6 +495,10 @@ end
 
 
 -- PRIVATE METHODS --------------------------------------------------------
+
+--
+function _rollForLocation()
+end
 
 -- store aDice in sStoredDice for final message
 -- params :

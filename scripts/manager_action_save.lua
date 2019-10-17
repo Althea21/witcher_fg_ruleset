@@ -8,9 +8,6 @@
 --
 
 function onInit()
-	-- Register the save action.  We'll allow use of the modifier stack for this action type.
-	GameSystem.actions["save"] = { bUseModStack = true };
-	
 	-- Register the result handler - called after the dice have stopped rolling
 	ActionsManager.registerResultHandler("save", onRoll);
 end
