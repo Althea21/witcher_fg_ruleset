@@ -18,6 +18,7 @@ function onInit()
 end
 
 function handleApplyInit(msgOOB)
+	-- Debug.chat("---- handleApplyInit");
 	local rSource = ActorManager.getActor(msgOOB.sSourceType, msgOOB.sSourceNode);
 	local nTotal = tonumber(msgOOB.nTotal) or 0;
 

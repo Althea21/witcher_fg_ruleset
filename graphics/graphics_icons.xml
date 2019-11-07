@@ -173,6 +173,13 @@
 	
 	<!-- Rolls -->
 	<icon name="roll_effect" file="graphics/icons/roll_effect.png" />
+	<icon name="roll_attack" file="graphics/icons/roll_attack.png" />
+	<icon name="roll_defense" file="graphics/icons/roll_defense.png" />
+	<icon name="roll_attack_crit" file="graphics/icons/roll_attack_crit.png" />
+	<icon name="roll_attack_hit" file="graphics/icons/roll_attack_hit.png" />
+	<icon name="roll_attack_miss" file="graphics/icons/roll_attack_miss.png" />
+	<icon name="roll_damage" file="graphics/icons/roll_damage.png" />
+	
 	<!-- Categories -->
 	<icon name="tab_base1" file="graphics/tabs/tab_base1.png" />
 	<icon name="tab_base2" file="graphics/tabs/tab_base2.png" />

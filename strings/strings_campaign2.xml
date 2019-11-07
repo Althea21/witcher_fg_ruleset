@@ -565,7 +565,10 @@
 	<string name="combat_attack_message">Attack %s with</string>
 	<string name="combat_fastattack_message">Fast attack %s with</string>
 	<string name="combat_strongattack_message">Fast attack %s with</string>
-
+	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
+	<string name="defense_succeeded_message">Defense succeeded.</string>
+	<string name="defense_failed_message">Defense failed. %s must roll for damage.</string>
+	
 	<!-- Weapon editor -->
 	<string name="weapon_title">Weapon</string>
 	<string name="weapon_label_name">Name</string>
@@ -654,9 +657,6 @@
 	<string name="modifier_label_location_monsterrightlimb">Monster right limb</string>
 	<string name="modifier_label_location_monsterleftlimb">Monster left limb</string>
 	<string name="modifier_label_location_monstertail">Monster wing/tail</string>
-	
-	<!-- Defense messages -->
-	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
 	
 	<!--Modifiers-->
 	<string name="modifier_label_attack">Attack modifiers</string>
@@ -852,6 +852,7 @@
 	<string name="npc_header_ecology">Ecology</string>
 	
 	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
+	<string name="npc_unknownskill_errormessage">Try to roll unknown skill "%s"</string>
 
 	<!--Combat tracker-->
 	<string name="ct_menu_init">Initiative</string>

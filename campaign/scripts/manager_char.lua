@@ -58,7 +58,7 @@ function getWeaponAttackRollStructures(nodeWeapon)
 	end
 	
 	local nodeChar = nodeWeapon.getChild("...");
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.getActor("", nodeChar);
 
 	--create attack object
 	local rAttack = {};
@@ -296,12 +296,16 @@ end
 --	* value	: value for total EV, else 0
 function getTotalEV(nodeActor)
 	local nTotalEV = 0;
-	for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
-		--Debug.chat("armor "..DB.getValue(v, "name", "").." : Eq="..DB.getValue(v, "equipped", "").." EV="..DB.getValue(v, "ev", ""));
-		if (DB.getValue(v, "equipped", "") == 1) then
-			nTotalEV = nTotalEV + DB.getValue(v, "ev", 0);
+	local armorlist = nodeActor.getChild("armorlist");
+	if armorlist then
+		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
+			--Debug.chat("armor "..DB.getValue(v, "name", "").." : Eq="..DB.getValue(v, "equipped", "").." EV="..DB.getValue(v, "ev", ""));
+			if (DB.getValue(v, "equipped", "") == 1) then
+				nTotalEV = nTotalEV + DB.getValue(v, "ev", 0);
+			end
 		end
 	end
+
 	return nTotalEV;
 end
 

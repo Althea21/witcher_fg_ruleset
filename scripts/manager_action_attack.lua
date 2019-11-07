@@ -41,7 +41,7 @@ function getRoll(rActor, rWeapon, sAttackType)
 	-- The description to show in the chat window, will be overloaded later
 	rRoll.sDesc = "[Attack] ";
 	
-	rRoll.rTarget = {};
+	rRoll.sTarget = "";
 
 	-- Add parameters for exploding dice management
 	rRoll.sExplodeMode  = "none";	-- initial roll, will be "fumble" or "crit" on reroll
@@ -132,7 +132,7 @@ end
 --	* sAttackType	: attack type (supported : "fast", "strong", "normal", "punchfast", "punchstrong", "punchnormal", "kickfast", "kickstrong", "kicknormal"). 
 --					  Unknown or missing value will be treated like a "normal" attack
 function performRoll(draginfo, rWeapon, sAttackType)
-	Debug.chat("------- performRoll");
+	-- Debug.chat("------- performRoll");
 	-- retreive attack info and actor node 
 	local rActor; 
 	
@@ -167,16 +167,16 @@ end
 
 -- callback for ActionsManager called after the dice have stopped rolling : resolve roll status and display chat message
 function onAttackRoll(rSource, rTarget, rRoll)
-	Debug.chat("------- onAttackRoll");
-	Debug.chat(rRoll.sType);
+	-- Debug.chat("------- onAttackRoll");
+	-- Debug.chat(rRoll.sType);
 	-- Debug.chat("--rSource : ");
 	-- Debug.chat(rSource);
-	Debug.chat("--rTarget : ");
-	Debug.chat(rTarget);
-	-- Debug.chat("--rRoll.rTarget : ");
-	-- Debug.chat(rRoll.rTarget);
-	Debug.chat("--rRoll : ");
-	Debug.chat(rRoll);
+	-- Debug.chat("--rTarget : ");
+	-- Debug.chat(rTarget);
+	-- Debug.chat("--rRoll.sTarget : ");
+	-- Debug.chat(rRoll.sTarget);
+	-- Debug.chat("--rRoll : ");
+	-- Debug.chat(rRoll);
 	
 	-- Debug.chat(rRoll.aDice[1].result);
 	
@@ -185,11 +185,12 @@ function onAttackRoll(rSource, rTarget, rRoll)
 	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
 	
 	if rTarget then
-		Debug.chat("-- SET rRoll.rTarget : ");
-		rRoll.rTarget = rTarget;
-		rRoll.sDesc = rRoll.sDesc:format(rTarget.sName);
+		-- Debug.chat("-- SET rRoll.sTarget : "..rTarget.sName);
+		-- Debug.chat(rRoll.sDesc);
+		_storeTarget(rRoll, rTarget);
+		rRoll.sDesc = string.gsub(rRoll.sDesc, "%%s", rTarget.sName);
 	else
-		rRoll.sDesc = rRoll.sDesc:format("");
+		rRoll.sDesc = string.gsub(rRoll.sDesc, "%%s", "");
 	end
 	
 	if (rRoll.sType ~= "attacklocation") then
@@ -342,15 +343,16 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		-- Debug.chat(rMessage);
 		
 		-- add pending attack to queue
-		local nAtkValue = rRoll.nMod;
-		for i=1, #rRoll.aDice do
-			nAtkValue = nAtkValue + rRoll.aDice[i]["result"];
-		end
+		-- local nAtkValue = rRoll.nMod;
+		-- for i=1, #rRoll.aDice do
+		-- 	nAtkValue = nAtkValue + rRoll.aDice[i]["result"];
+		-- end
+		local nAtkValue = ActionsManager.total(rRoll);
 
 		if rRoll.sDamageLocation:match("^AIM_") then
-			CombatManager2.addPendingAttack(rSource, rTarget, nAtkValue, sLocation);
+			CombatManager2.addPendingAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "true");
 		else
-			CombatManager2.addPendingAttack(rSource, rTarget, nAtkValue, "");
+			CombatManager2.addPendingAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "false");
 		end
 		
 		-- Display the message in chat.
@@ -360,9 +362,9 @@ end
 
 -- Modifier handler : additional modifiers to apply to the roll
 function onAttackModifier(rSource, rTarget, rRoll)
-	Debug.chat("------- onAttackModifier");
-	Debug.chat("--rTarget : ");
-	Debug.chat(rTarget);
+	-- Debug.chat("------- onAttackModifier");
+	-- Debug.chat("--rTarget : ");
+	-- Debug.chat(rTarget);
 	local aAddDesc = {};
 	local nAddMod = 0;
 	
@@ -496,8 +498,29 @@ end
 
 -- PRIVATE METHODS --------------------------------------------------------
 
---
-function _rollForLocation()
+-- store target object for attack roll
+-- param :
+--  * rTarget	: target of the attack
+--	* rRoll		: roll to work on
+function _storeTarget(rRoll, rTarget)
+	if (rRoll.sTarget ~= "") then
+		return;
+	end
+
+	rRoll.sTarget = Json.stringify(rTarget);
+end
+
+-- store target object for attack roll
+-- param :
+--	* rRoll		: roll to work on
+-- returns :
+--  * rTarget	: rTarget object
+function _getTargetFromRoll(rRoll)
+	if (rRoll.sTarget == "") then
+		return nil;
+	end
+
+	return Json.parse(rRoll.sTarget);
 end
 
 -- store aDice in sStoredDice for final message
@@ -546,30 +569,30 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 	-- rearrange rRoll.aDice if needed (has reroll or location roll) as serialization seems to mess up array
 	-- and color exploding dice
 	-- if rRoll.sExplodeMode ~= "none" or rRoll.sIsLocationRoll=="true" then
-		local aNewDice = {};
-		for i = 1, #(rRoll.aDice) do
-			local aDiceTmp = rRoll.aDice[i];
-			for j=1,#(aDiceTmp) do
-				local aDieTmp = aDiceTmp[j];
-				
-				-- 10 is always rerolled => set it green
-				if tonumber(aDieTmp.result)==10 then
-					aDieTmp.type="g10";
-				end
-				
-				if i==1 and tonumber(aDieTmp.result)==1 then
-					-- first die was a 1 => fumble, set ir red
-					bFumble = true;
-					aDieTmp.type="r10";
-				elseif bFumble then
-					-- any result between 1 and 9 => get die as it is
-					aDieTmp.result = 0-tonumber(aDieTmp.result)
-				end
-				
-				table.insert(aNewDice, aDieTmp);
+	local aNewDice = {};
+	for i = 1, #(rRoll.aDice) do
+		local aDiceTmp = rRoll.aDice[i];
+		for j=1,#(aDiceTmp) do
+			local aDieTmp = aDiceTmp[j];
+			
+			-- 10 is always rerolled => set it green
+			if tonumber(aDieTmp.result)==10 then
+				aDieTmp.type="g10";
 			end
+			
+			if i==1 and tonumber(aDieTmp.result)==1 then
+				-- first die was a 1 => fumble, set ir red
+				bFumble = true;
+				aDieTmp.type="r10";
+			elseif bFumble then
+				-- any result between 1 and 9 => get die as it is
+				aDieTmp.result = 0-tonumber(aDieTmp.result)
+			end
+			
+			table.insert(aNewDice, aDieTmp);
 		end
-		rRoll.aDice = aNewDice;
+	end
+	rRoll.aDice = aNewDice;
 	
 	-- Debug.chat("after :");
 	-- Debug.chat(rRoll.aDice);
