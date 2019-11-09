@@ -567,7 +567,13 @@
 	<string name="combat_strongattack_message">Fast attack %s with</string>
 	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
 	<string name="defense_succeeded_message">Defense succeeded.</string>
-	<string name="defense_failed_message">Defense failed. %s must roll for damage.</string>
+	<string name="defense_failed_message">Defense failed. </string>
+	<string name="deadly_crit_message">[DEADLY CRIT. (%i)]</string>
+	<string name="difficult_crit_message">[DIFFICULT CRIT. (%i)]</string>
+	<string name="complex_crit_message">[COMPLEX CRIT. (%i)]</string>
+	<string name="simple_crit_message">[SIMPLE CRIT. (%i)]</string>
+	<string name="no_crit_message">[HIT (%i)]</string>
+	<string name="rollfordamage_message">%s must roll for damage.</string>
 	
 	<!-- Weapon editor -->
 	<string name="weapon_title">Weapon</string>

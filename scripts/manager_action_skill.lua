@@ -26,7 +26,7 @@ function performRoll(draginfo, rActor, sSkillName, nSkillMod, sSkillStat)
 end
 
 function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
-    --print("getRoll");
+    --Debug.chat("---- getRoll");
     --Debug.chat(rActor);
     --Debug.chat(sSkillName);
     --Debug.chat(nSkillMod);
@@ -40,6 +40,12 @@ function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
 	rRoll.sDesc = "[SKILL] " .. sSkillName;
 	if sExtra then
 		rRoll.sDesc = rRoll.sDesc .. " " .. sExtra;
+	end
+
+	-- Check if roll is a potential defense action (dodge/escape or athletics)
+	rRoll.nIsDefense = 0;
+	if (sSkillName=="dodgeEscape" or sSkillName=="athletics") then
+		rRoll.nIsDefense = 1;
 	end
 
 	-- Add parameters for exploding dice management
@@ -189,7 +195,17 @@ function onSkillRoll(rSource, rTarget, rRoll)
     	end
     	
         -- Display the message in chat.
-        Comm.deliverChatMessage(rMessage);    
+		Comm.deliverChatMessage(rMessage);
+		
+		if rRoll.nIsDefense == 1 then
+			---- Resolve Defense
+			local nDefValue = ActionsManager.total(rRoll);
+			if nDefValue < 0 then
+				nDefValue = 0;
+			end
+			CombatManager2.resolvePendingAttack(rSource, nDefValue)
+		end
+		
     end
 end
 

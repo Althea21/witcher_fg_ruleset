@@ -159,7 +159,7 @@
 						sStat = window.definingSkill_stat.getValue();
 						sStat, nStat = getStat(rActor, sStat);
 						
-						ActionSkill.performRoll(draginfo, rActor, sStat .. " : " .. window.definingSkill_stat.getValue(), getValue() + nStat, sStat);
+						ActionSkill.performRoll(draginfo, rActor, window.definingSkill_name.getValue(), getValue() + nStat, sStat);
 						return true;
 					end
 					

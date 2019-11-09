@@ -13,7 +13,7 @@ function performSkillRoll()
 	local rActor = ActorManager.resolveActor(windowlist.window.getDatabaseNode());
 	local sStat, nStat = getAssociatedStat(rActor);
 	
-	ActionSkill.performRoll(draginfo, rActor, sStat .. " " .. name.getValue(), skill_value.getValue() + nStat, sStat);
+	ActionSkill.performRoll(draginfo, rActor, name.getValue(), skill_value.getValue() + nStat, sStat);
 	
 	return true;
 end

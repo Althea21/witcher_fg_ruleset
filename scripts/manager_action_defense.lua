@@ -260,14 +260,10 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 		Comm.deliverChatMessage(rMessage);
 
 		---- Resolve Defense
-		
-		-- update pending attack from the queue
-		-- local nDefValue = rRoll.nMod;
-		-- for i=1, #rRoll.aDice do
-		-- 	nAtkValue = nAtkValue + rRoll.aDice[i]["result"];
-		-- end
 		local nDefValue = ActionsManager.total(rRoll);
-
+		if nDefValue < 0 then
+			nDefValue = 0;
+		end
 		CombatManager2.resolvePendingAttack(rSource, nDefValue)
 	end
 end

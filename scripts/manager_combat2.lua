@@ -63,6 +63,8 @@ function onRoundStart(nCurrent)
 end
 
 function onTurnStart(nodeEntry)
+	resetPendingAttacks();
+	notifyResetAtttacks();
 end
 
 function onTurnEnd(nodeEntry)
@@ -224,30 +226,55 @@ function resolvePendingAttack(rTarget, nDefValue)
 		-- Debug.chat("no pending attack : resolve aborted");
 		return;
 	end
-	-- Debug.chat("-- aAttack");
-	-- Debug.chat(aAttack);
+	Debug.chat("-- aAttack");
+	Debug.chat(aAttack);
 
-	local message = ChatManager.createBaseMessage(rTarget, nil);
+	local rMessage = ChatManager.createBaseMessage(rTarget, nil);
+	rMessage.sender = "";
 	
 	-- compare attack roll vs defense roll
 	if aAttack.nAtkValue <= nDefValue then
 		-- defense win : delete pending attack and create message
 		-- Debug.chat("defense win");
 		removePendingAttack(aAttack.sSourceCT, sTargetCT);
-		message.text = Interface.getString("defense_succeeded_message");
-		message.icon = "roll_attack_miss";
+		rMessage.text = Interface.getString("defense_succeeded_message");
+		rMessage.icon = "roll_attack_miss";
 	else
 		-- attack win : update pending attack and create message
 		-- Debug.chat("attack win");
 		aAttack.nDefValue = nDefValue;
 		updatePendingAttack(aAttack.sSourceCT, sTargetCT, aAttack);
 		notifyDefense(aAttack.sSourceCT, sTargetCT, aAttack);
-		message.text = string.format(Interface.getString("defense_failed_message"), ActorManager.getDisplayName(ActorManager.getActor("ct", aAttack.sSourceCT)));
-		message.icon = "roll_attack_hit";
+		rMessage.text = Interface.getString("defense_failed_message") .. "\n";
+		
+		-- check for critical
+		local successMargin = aAttack.nAtkValue - nDefValue;
+		if successMargin >= 15 then
+			-- Deadly crit
+			rMessage.text = rMessage.text .. string.format(Interface.getString("deadly_crit_message"), successMargin);
+			rMessage.icon = "roll_attack_crit";
+		elseif successMargin >= 13 then
+			-- Difficult crit
+			rMessage.text = rMessage.text .. string.format(Interface.getString("difficult_crit_message"), successMargin);
+			rMessage.icon = "roll_attack_crit";
+		elseif successMargin >= 10 then
+			-- Complex crit
+			rMessage.text = rMessage.text .. string.format(Interface.getString("complex_crit_message"), successMargin);
+			rMessage.icon = "roll_attack_crit";
+		elseif successMargin >= 7 then
+			-- Simple crit
+			rMessage.text = rMessage.text .. string.format(Interface.getString("simple_crit_message"), successMargin);
+			rMessage.icon = "roll_attack_crit";
+		else
+			-- Hit
+			rMessage.text = rMessage.text .. string.format(Interface.getString("no_crit_message"), successMargin);
+			rMessage.icon = "roll_attack_hit";
+		end
+		rMessage.text = rMessage.text .. " " .. string.format(Interface.getString("rollfordamage_message"), ActorManager.getDisplayName(ActorManager.getActor("ct", aAttack.sSourceCT)));
 	end
 
 	-- display message
-	Comm.deliverChatMessage(message);
+	Comm.deliverChatMessage(rMessage);
 end
 
 ------------------------------------------------------------------------------------
@@ -256,18 +283,11 @@ end
 
 -- Notify attack to keep attack queues up to date between GM and players
 function notifyAttack(sSourceCT, sTargetCT, aAttack)
-	-- Debug.chat("---- notifyAttack");
-	-- Debug.chat("-- aAttack");
-	-- Debug.chat(aAttack);
-
 	local msgOOB = {};
 	msgOOB.type = OOB_MSGTYPE_APPLYATTACK;
 	msgOOB.sSourceCT = sSourceCT;
 	msgOOB.sTargetCT = sTargetCT;
 	msgOOB.sAttack = Json.stringify(aAttack);
-	
-	-- Debug.chat("-- msgOOB");
-	-- Debug.chat(msgOOB);
 	
 	-- deliver msgOOB to all connected clients
 	Comm.deliverOOBMessage(msgOOB);
@@ -275,15 +295,8 @@ end
 
 -- Handle OOB attack notification to keep attack queues up to date between GM and players
 function handleAttack(msgOOB)
-	-- Debug.chat("---- handleAttack");
-	-- Debug.chat("-- msgOOB");
-	-- Debug.chat(msgOOB);
-
 	local aAttack = Json.parse(msgOOB.sAttack)
 	
-	-- Debug.chat("-- aAttack");
-	-- Debug.chat(aAttack);
-
 	--updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack)
 	if not aAttackQueueByOffender[msgOOB.sSourceCT] then
 		aAttackQueueByOffender[msgOOB.sSourceCT] = {};
@@ -301,18 +314,11 @@ end
 
 -- Notify defense to keep attack queues up to date between GM and players
 function notifyDefense(sSourceCT, sTargetCT, aAttack)
-	-- Debug.chat("---- notifyDefense");
-	-- Debug.chat("-- aAttack");
-	-- Debug.chat(aAttack);
-
 	local msgOOB = {};
 	msgOOB.type = OOB_MSGTYPE_APPLYDEFENSE;
 	msgOOB.sSourceCT = sSourceCT;
 	msgOOB.sTargetCT = sTargetCT;
 	msgOOB.sAttack = Json.stringify(aAttack);
-	
-	-- Debug.chat("-- msgOOB");
-	-- Debug.chat(msgOOB);
 	
 	-- deliver msgOOB to all connected clients
 	Comm.deliverOOBMessage(msgOOB);
@@ -320,22 +326,12 @@ end
 
 -- Handle OOB defense notification to keep attack queues up to date between GM and players
 function handleDefense(msgOOB)
-	-- Debug.chat("---- handleDefense");
-	-- Debug.chat("-- msgOOB");
-	-- Debug.chat(msgOOB);
-
 	local aAttack = Json.parse(msgOOB.sAttack)
-	
-	-- Debug.chat("-- aAttack");
-	-- Debug.chat(aAttack);
-
 	updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
 end
 
 -- Notify reset of pending attacks queues
 function notifyResetAtttacks()
-	Debug.chat("---- notifyResetAtttacks");
-
 	local msgOOB = {};
 	msgOOB.type = OOB_MSGTYPE_RESETATTACKS;
 	
@@ -345,7 +341,6 @@ end
 
 -- Handle OOB defense notification to keep attack queues up to date between GM and players
 function handleResetAtttacks()
-	Debug.chat("---- handleResetAtttacks");
 	resetPendingAttacks();
 end
 

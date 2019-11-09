@@ -348,6 +348,9 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		-- 	nAtkValue = nAtkValue + rRoll.aDice[i]["result"];
 		-- end
 		local nAtkValue = ActionsManager.total(rRoll);
+		if nAtkValue < 0 then
+			nAtkValue=0;
+		end
 
 		if rRoll.sDamageLocation:match("^AIM_") then
 			CombatManager2.addPendingAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "true");

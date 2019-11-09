@@ -181,7 +181,7 @@ function action(draginfo)
 			return;
 		end
 
-		sDragLabel = sDragLabel .. " ("..sStat..")";
+		--sDragLabel = sDragLabel .. " ("..sStat..")";
 		nDragMod = nDragMod + nStatMod;
 		ActionSkill.performRoll(draginfo, rActor, sDragLabel, nDragMod, sStat);
 	end
