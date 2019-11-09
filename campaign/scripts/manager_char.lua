@@ -58,7 +58,7 @@ function getWeaponAttackRollStructures(nodeWeapon)
 	end
 	
 	local nodeChar = nodeWeapon.getChild("...");
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.getActor("", nodeChar);
 
 	--create attack object
 	local rAttack = {};
@@ -263,16 +263,28 @@ end
 -- returns : 
 --	* value	: value for skill, else 0
 function getNPCSkillValue(nodeActor, skillName)
+	-- Debug.chat("---- getNPCSkillValue");
+	-- Debug.chat(string.lower(skillName));
+	-- Debug.chat(nodeActor);
+	-- Debug.chat("----");
 	local value = 0;
-	
+	skillName = string.lower(skillName);
 	-- Get the comma-separated strings
 	local sSkills =  DB.getValue(nodeActor, "skills", 0);
 	local aClauses, aClauseStats = StringManager.split(sSkills, ",;\r", true);
 	
 	-- Check each comma-separated string 
 	for i = 1, #aClauses do
-		local nStarts, nEnds, sLabel, sSign, sMod = string.find(aClauses[i], "([%w%s\(\)]*[%w\(\)]+)%s*([%+%--]?)(%d*)");
-		if string.lower(sLabel) == string.lower(skillName) then
+		-- Debug.chat(aClauses[i]);
+		local nStarts, nEnds, sLabel, sSign, sMod = string.find(aClauses[i], "([%w%s/\(\)]*[%w\(\)]+)%s*([%+%--]?)(%d*)");
+		
+		-- remove space and put to lower case
+		sLabel = string.lower(sLabel);
+		sLabel = string.gsub(sLabel, "%s+", "") -- remove spaces
+		sLabel = string.gsub(sLabel, "/", "") -- remove /
+		-- Debug.chat(sLabel);
+		-- there's a hack here for dodge /escape that may not be recognized because of '/'
+		if sLabel == skillName then
 			if nStarts then
 				-- Calculate modifier based on mod value and sign value, if any
 				if sMod ~= "" then
@@ -296,12 +308,16 @@ end
 --	* value	: value for total EV, else 0
 function getTotalEV(nodeActor)
 	local nTotalEV = 0;
-	for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
-		--Debug.chat("armor "..DB.getValue(v, "name", "").." : Eq="..DB.getValue(v, "equipped", "").." EV="..DB.getValue(v, "ev", ""));
-		if (DB.getValue(v, "equipped", "") == 1) then
-			nTotalEV = nTotalEV + DB.getValue(v, "ev", 0);
+	local armorlist = nodeActor.getChild("armorlist");
+	if armorlist then
+		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
+			--Debug.chat("armor "..DB.getValue(v, "name", "").." : Eq="..DB.getValue(v, "equipped", "").." EV="..DB.getValue(v, "ev", ""));
+			if (DB.getValue(v, "equipped", "") == 1) then
+				nTotalEV = nTotalEV + DB.getValue(v, "ev", 0);
+			end
 		end
 	end
+
 	return nTotalEV;
 end
 

@@ -174,9 +174,14 @@ function action(draginfo)
 			nStatMod = DB.getValue(nodeActor, "attributs.will", 0);
 		elseif sStat == "Dexterity" then
 			nStatMod = DB.getValue(nodeActor, "attributs.dexterity", 0);
+		else
+			local msg = ChatManager.createBaseMessage(rActor, nil);
+			msg.text = string.format(Interface.getString("npc_unknownskill_errormessage"), sDragLabel)
+			Comm.deliverChatMessage(msg);
+			return;
 		end
 
-		sDragLabel = sDragLabel .. " ("..sStat..")";
+		--sDragLabel = sDragLabel .. " ("..sStat..")";
 		nDragMod = nDragMod + nStatMod;
 		ActionSkill.performRoll(draginfo, rActor, sDragLabel, nDragMod, sStat);
 	end

@@ -25,28 +25,38 @@ end
 function onDodgeAction(draginfo)
 	local rActor = ActorManager.resolveActor(getDatabaseNode());
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
-			
-	for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
-		if (DB.getValue(v, "id", "") == "dodgeEscape") then
-			local sStat = DB.getValue(v, "skill_stat", "");
-			local nStat = DB.getValue(nodeActor, "attributs."..sStat, 0);
+	
+	local sStat = DB.getValue(v, "skill_stat", "reflex");
+	local nStat = DB.getValue(nodeActor, "attributs."..sStat, 0);
 
-			ActionSkill.performRoll(draginfo, rActor, sStat .. " " .. DB.getValue(v, "name", ""), DB.getValue(v, "skill_value", "") + nStat, sStat);
+	if sActorType == "pc" then
+		for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
+			if (DB.getValue(v, "id", "") == "dodgeEscape") then
+				ActionSkill.performRoll(draginfo, rActor, DB.getValue(v, "name", ""), DB.getValue(v, "skill_value", "") + nStat, sStat);
+			end
 		end
+	else
+		-- npc 
+		ActionSkill.performRoll(draginfo, rActor, Interface.getString("char_skill_dodgeEscape_label"), CharManager.getNPCSkillValue(nodeActor, "dodgeEscape") + nStat, sStat);
 	end
 end
 
 function onRepositionAction(draginfo)
 	local rActor = ActorManager.resolveActor(getDatabaseNode());
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
-			
-	for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
-		if (DB.getValue(v, "id", "") == "athletics") then
-			local sStat = DB.getValue(v, "skill_stat", "");
-			local nStat = DB.getValue(nodeActor, "attributs."..sStat, 0);
+	
+	local sStat = DB.getValue(v, "skill_stat", "dexterity");
+	local nStat = DB.getValue(nodeActor, "attributs."..sStat, 0);
 
-			ActionSkill.performRoll(draginfo, rActor, sStat .. " " .. DB.getValue(v, "name", ""), DB.getValue(v, "skill_value", "") + nStat, sStat);
+	if sActorType == "pc" then
+		for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
+			if (DB.getValue(v, "id", "") == "athletics") then
+				ActionSkill.performRoll(draginfo, rActor, DB.getValue(v, "name", ""), DB.getValue(v, "skill_value", "") + nStat, sStat);
+			end
 		end
+	else
+		-- npc
+		ActionSkill.performRoll(draginfo, rActor, Interface.getString("char_skill_athletics_label"), CharManager.getNPCSkillValue(nodeActor, "athletics") + nStat, sStat);
 	end
 end
 

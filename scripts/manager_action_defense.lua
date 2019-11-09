@@ -8,9 +8,6 @@
 --
 
 function onInit()
-	-- Register defense actions.  We'll allow use of the modifier stack for those actions.
-	GameSystem.actions["defense"] = { bUseModStack = true };
-	
 	-- Register modifier handler
 	ActionsManager.registerModHandler("defense", onDefenseModifier);
 	
@@ -261,6 +258,13 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 		
 		-- Display the message in chat.
 		Comm.deliverChatMessage(rMessage);
+
+		---- Resolve Defense
+		local nDefValue = ActionsManager.total(rRoll);
+		if nDefValue < 0 then
+			nDefValue = 0;
+		end
+		CombatManager2.resolvePendingAttack(rSource, nDefValue)
 	end
 end
 

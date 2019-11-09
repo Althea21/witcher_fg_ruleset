@@ -560,6 +560,20 @@
 	<string name="char_armor_label_location_leftarm_short">L. arm</string>
 	<string name="char_armor_label_location_rightleg_short">R. leg</string>
 	<string name="char_armor_label_location_leftleg_short">L. leg</string>
+
+	<!-- Combat messages-->
+	<string name="combat_attack_message">Attack %s with</string>
+	<string name="combat_fastattack_message">Fast attack %s with</string>
+	<string name="combat_strongattack_message">Fast attack %s with</string>
+	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
+	<string name="defense_succeeded_message">Defense succeeded.</string>
+	<string name="defense_failed_message">Defense failed. </string>
+	<string name="deadly_crit_message">[DEADLY CRIT. (%i)]</string>
+	<string name="difficult_crit_message">[DIFFICULT CRIT. (%i)]</string>
+	<string name="complex_crit_message">[COMPLEX CRIT. (%i)]</string>
+	<string name="simple_crit_message">[SIMPLE CRIT. (%i)]</string>
+	<string name="no_crit_message">[HIT (%i)]</string>
+	<string name="rollfordamage_message">%s must roll for damage.</string>
 	
 	<!-- Weapon editor -->
 	<string name="weapon_title">Weapon</string>
@@ -649,9 +663,6 @@
 	<string name="modifier_label_location_monsterrightlimb">Monster right limb</string>
 	<string name="modifier_label_location_monsterleftlimb">Monster left limb</string>
 	<string name="modifier_label_location_monstertail">Monster wing/tail</string>
-	
-	<!-- Defense messages -->
-	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
 	
 	<!--Modifiers-->
 	<string name="modifier_label_attack">Attack modifiers</string>
@@ -847,6 +858,7 @@
 	<string name="npc_header_ecology">Ecology</string>
 	
 	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
+	<string name="npc_unknownskill_errormessage">Try to roll unknown skill "%s"</string>
 
 	<!--Combat tracker-->
 	<string name="ct_menu_init">Initiative</string>

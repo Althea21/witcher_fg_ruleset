@@ -50,7 +50,7 @@ function performProfessionSkillRoll(branchNumber, skillNumber)
     local sName = self["branch"..branchNumber.."_ability"..skillNumber.."_name"].getValue();
     local sValue = self["branch"..branchNumber.."_ability"..skillNumber.."_value"].getValue();
     
-	ActionSkill.performRoll(draginfo, rActor, sStat .. " " .. sName, sValue + nStat, sStat);
+	ActionSkill.performRoll(draginfo, rActor, sName, sValue + nStat, sStat);
 	
 	return true;
 end

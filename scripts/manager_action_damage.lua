@@ -7,9 +7,6 @@ OOB_MSGTYPE_APPLYDMG = "applydmg";
 OOB_MSGTYPE_APPLYDMGSTATE = "applydmgstate";
 
 function onInit()
-	-- Register attack actions.  We'll allow use of the modifier stack for those actions.
-	GameSystem.actions["damage"] = { sTargeting = "each", bUseModStack = true },
-	
 	-- Register modifier handler TODO
 	--ActionsManager.registerModHandler("damage", onDamageModifier);
 	
