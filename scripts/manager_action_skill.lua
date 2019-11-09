@@ -55,7 +55,7 @@ function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
 	
 	-- Substract equipped armor part EV
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
-	if (sSkillStat == "Reflex") or (sSkillStat=="Dexterity") then
+	if (string.lower(sSkillStat) == "reflex") or (string.lower(sSkillStat)=="dexterity") then
 		local nTotalEV = CharManager.getTotalEV(nodeActor);
 		if (nTotalEV > 0) then
 			rRoll.nMod = rRoll.nMod - nTotalEV;
