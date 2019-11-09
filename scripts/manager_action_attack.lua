@@ -353,9 +353,9 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		end
 
 		if rRoll.sDamageLocation:match("^AIM_") then
-			CombatManager2.addPendingAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "true");
+			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "true");
 		else
-			CombatManager2.addPendingAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "false");
+			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "false");
 		end
 		
 		-- Display the message in chat.
