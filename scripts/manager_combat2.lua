@@ -115,30 +115,18 @@ aAttackQueueByDefender = {};
 --	* nAtkValue : value of attack roll (total with modifier, reroll etc...)
 --	* sLocation : strike location
 --	* sIsAimed 	: if attack was aimed or not ("true"/"false")
-function addPendingAttack(rSource, rTarget, nAtkValue, sLocation, bAimed)
+function addPendingAttack(sSourceCT, sTargetCT, nAtkValue, sLocation, sIsAimed)
 	-- Debug.chat("---- addPendingAttack");
-	-- Debug.chat(rSource);
+	-- Debug.chat(sSourceCT);
 	-- Debug.chat(rTarget);
 	-- Debug.chat(nAtkValue);
 	-- Debug.chat(sLocation);
+	-- Debug.chat(bAimed);
 
-	local sSourceCT = ActorManager.getCTNodeName(rSource);
-	if sSourceCT == "" then
-		return;
-	end
-	-- Debug.chat(sSourceCT);
-	
-	local sTargetCT = "";
-	if rTarget then
-		sTargetCT = ActorManager.getCTNodeName(rTarget);
-	end
 	if sTargetCT == "" then
 		return;
 	end
-	-- Debug.chat(sTargetCT);
 	
-	-- Debug.chat("aAttack");
-
 	local aAttack = {};
 	aAttack.sSourceCT = sSourceCT;
 	aAttack.sTargetCT = sTargetCT;
@@ -161,8 +149,8 @@ function addPendingAttack(rSource, rTarget, nAtkValue, sLocation, bAimed)
 		aAttackQueueByDefender[sTargetCT] = {};
 	end
 	table.insert(aAttackQueueByDefender[sTargetCT], aAttack);
-
-	notifyAttack(sSourceCT, sTargetCT, aAttack);
+	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
+	--notifyAttack(sSourceCT, sTargetCT, aAttack);
 end
 
 -- Update pending attack in the queues
@@ -171,14 +159,21 @@ end
 --	* sTargetCT	: defender 
 --  * aAttack 	: array standing for the updated attack (see above for format)
 function updatePendingAttack(sSourceCT, sTargetCT, aAttack)
+	-- Debug.chat("---- updatePendingAttack")
 	if aAttackQueueByOffender[sSourceCT] then
 		if aAttackQueueByOffender[sSourceCT][sTargetCT] then
 			aAttackQueueByOffender[sSourceCT][sTargetCT] = aAttack;
 		end
 	end
+	-- Debug.chat("--- Before update")
+	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
+	
 	if aAttackQueueByDefender[sTargetCT] then
 		aAttackQueueByDefender[sTargetCT][1] = aAttack;
 	end
+
+	-- Debug.chat("--- After update")
+	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
 end
 
 -- Remove pending attack from the queues
@@ -191,9 +186,13 @@ function removePendingAttack (sSourceCT, sTargetCT)
 			table.remove(aAttackQueueByOffender[sSourceCT][sTargetCT],1);
 		end
 	end
+	-- Debug.chat("--- Before remove")
+	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
 	if aAttackQueueByDefender[sTargetCT] then
 		table.remove(aAttackQueueByDefender[sTargetCT],1);
 	end
+	-- Debug.chat("--- After remove")
+	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
 end
 
 -- Remove all pending attacks from the queues
@@ -226,8 +225,8 @@ function resolvePendingAttack(rTarget, nDefValue)
 		-- Debug.chat("no pending attack : resolve aborted");
 		return;
 	end
-	Debug.chat("-- aAttack");
-	Debug.chat(aAttack);
+	--Debug.chat("-- aAttack");
+	--Debug.chat(aAttack);
 
 	local rMessage = ChatManager.createBaseMessage(rTarget, nil);
 	rMessage.sender = "";
@@ -236,15 +235,16 @@ function resolvePendingAttack(rTarget, nDefValue)
 	if aAttack.nAtkValue <= nDefValue then
 		-- defense win : delete pending attack and create message
 		-- Debug.chat("defense win");
-		removePendingAttack(aAttack.sSourceCT, sTargetCT);
+		--removePendingAttack(aAttack.sSourceCT, sTargetCT);
+		notifyDefense(aAttack.sSourceCT, sTargetCT, nil, "true");
 		rMessage.text = Interface.getString("defense_succeeded_message");
 		rMessage.icon = "roll_attack_miss";
 	else
 		-- attack win : update pending attack and create message
 		-- Debug.chat("attack win");
 		aAttack.nDefValue = nDefValue;
-		updatePendingAttack(aAttack.sSourceCT, sTargetCT, aAttack);
-		notifyDefense(aAttack.sSourceCT, sTargetCT, aAttack);
+		--updatePendingAttack(aAttack.sSourceCT, sTargetCT, aAttack);
+		notifyDefense(aAttack.sSourceCT, sTargetCT, aAttack, "false");
 		rMessage.text = Interface.getString("defense_failed_message") .. "\n";
 		
 		-- check for critical
@@ -282,12 +282,30 @@ end
 ------------------------------------------------------------------------------------
 
 -- Notify attack to keep attack queues up to date between GM and players
-function notifyAttack(sSourceCT, sTargetCT, aAttack)
+function notifyAttack(rSource, rTarget, nAtkValue, sLocation, sIsAimed)
 	local msgOOB = {};
+	
+	local sSourceCT = ActorManager.getCTNodeName(rSource);
+	if sSourceCT == "" then
+		return;
+	end
+	-- Debug.chat(sSourceCT);
+	
+	local sTargetCT = "";
+	if rTarget then
+		sTargetCT = ActorManager.getCTNodeName(rTarget);
+	end
+	if sTargetCT == "" then
+		return;
+	end
+	
+	
 	msgOOB.type = OOB_MSGTYPE_APPLYATTACK;
 	msgOOB.sSourceCT = sSourceCT;
 	msgOOB.sTargetCT = sTargetCT;
-	msgOOB.sAttack = Json.stringify(aAttack);
+	msgOOB.sAtkValue = nAtkValue;
+	msgOOB.sLocation = sLocation;
+	msgOOB.sIsAimed = sIsAimed;
 	
 	-- deliver msgOOB to all connected clients
 	Comm.deliverOOBMessage(msgOOB);
@@ -295,30 +313,18 @@ end
 
 -- Handle OOB attack notification to keep attack queues up to date between GM and players
 function handleAttack(msgOOB)
-	local aAttack = Json.parse(msgOOB.sAttack)
-	
-	--updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack)
-	if not aAttackQueueByOffender[msgOOB.sSourceCT] then
-		aAttackQueueByOffender[msgOOB.sSourceCT] = {};
-	end
-	if not aAttackQueueByOffender[msgOOB.sSourceCT][msgOOB.sTargetCT] then
-		aAttackQueueByOffender[msgOOB.sSourceCT][msgOOB.sTargetCT] = {};
-	end
-	table.insert(aAttackQueueByOffender[msgOOB.sSourceCT][msgOOB.sTargetCT], aAttack);
-
-	if not aAttackQueueByDefender[msgOOB.sTargetCT] then
-		aAttackQueueByDefender[msgOOB.sTargetCT] = {};
-	end
-	table.insert(aAttackQueueByDefender[msgOOB.sTargetCT], aAttack);
+	-- Debug.chat("---- handleAttack")
+	addPendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, tonumber(msgOOB.sAtkValue), msgOOB.sLocation, msgOOB.sIsAimed)
 end
 
 -- Notify defense to keep attack queues up to date between GM and players
-function notifyDefense(sSourceCT, sTargetCT, aAttack)
+function notifyDefense(sSourceCT, sTargetCT, aAttack, sRemove)
 	local msgOOB = {};
 	msgOOB.type = OOB_MSGTYPE_APPLYDEFENSE;
 	msgOOB.sSourceCT = sSourceCT;
 	msgOOB.sTargetCT = sTargetCT;
 	msgOOB.sAttack = Json.stringify(aAttack);
+	msgOOB.sRemove = sRemove;
 	
 	-- deliver msgOOB to all connected clients
 	Comm.deliverOOBMessage(msgOOB);
@@ -327,7 +333,11 @@ end
 -- Handle OOB defense notification to keep attack queues up to date between GM and players
 function handleDefense(msgOOB)
 	local aAttack = Json.parse(msgOOB.sAttack)
-	updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
+	if (msgOOB.sRemove == "true") then
+		removePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT);
+	else
+		updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
+	end
 end
 
 -- Notify reset of pending attacks queues
