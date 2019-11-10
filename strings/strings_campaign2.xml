@@ -511,7 +511,7 @@
 	<string name="char_skill_ritualCrafting_desc">Ritualistic magic. At a base 10 you know how to perform some rituals and are fairly talented at them. At a base 13 you routinely perform rituals. At a base 16 you can undertake rituals under pressure and attain the outcome you are looking for. At a base 20 you are a skilled ritualist and can perform any ritual you lay your hands on.</string>
 		
 	<!-- Combat tab -->
-	<string name="char_label_defenseActions">DEFENSE ACTIONS : </string>
+	<string name="char_label_defenseActions">Defense Actions</string>
 	<string name="char_label_reposition">Reposition</string>
 	<string name="char_combat_initiative">Init.</string>
 	<string name="char_label_weapons">Weapons</string>
