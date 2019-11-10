@@ -219,14 +219,15 @@ function resolvePendingAttack(rTarget, nDefValue)
 	-- Debug.chat(sTargetCT);
 
 	local aAttack = {};
-	if aAttackQueueByDefender[sTargetCT] then
+	if aAttackQueueByDefender[sTargetCT] and aAttackQueueByDefender[sTargetCT][1] then
 		aAttack = aAttackQueueByDefender[sTargetCT][1];
 	else
 		-- Debug.chat("no pending attack : resolve aborted");
 		return;
 	end
-	--Debug.chat("-- aAttack");
-	--Debug.chat(aAttack);
+
+	-- Debug.chat("-- aAttack");
+	-- Debug.chat(aAttack);
 
 	local rMessage = ChatManager.createBaseMessage(rTarget, nil);
 	rMessage.sender = "";
@@ -323,7 +324,12 @@ function notifyDefense(sSourceCT, sTargetCT, aAttack, sRemove)
 	msgOOB.type = OOB_MSGTYPE_APPLYDEFENSE;
 	msgOOB.sSourceCT = sSourceCT;
 	msgOOB.sTargetCT = sTargetCT;
-	msgOOB.sAttack = Json.stringify(aAttack);
+	
+	if not aAttack then
+		msgOOB.sAttack = "";
+	else
+		msgOOB.sAttack = Json.stringify(aAttack);
+	end
 	msgOOB.sRemove = sRemove;
 	
 	-- deliver msgOOB to all connected clients
@@ -331,11 +337,14 @@ function notifyDefense(sSourceCT, sTargetCT, aAttack, sRemove)
 end
 
 -- Handle OOB defense notification to keep attack queues up to date between GM and players
-function handleDefense(msgOOB)
-	local aAttack = Json.parse(msgOOB.sAttack)
+function handleDefense(msgOOB) 
+	-- Debug.chat("---- handleDefense")
 	if (msgOOB.sRemove == "true") then
+		-- Debug.chat("removePendingAttack")
 		removePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT);
 	else
+		-- Debug.chat("updatePendingAttack")
+		local aAttack = Json.parse(msgOOB.sAttack)
 		updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
 	end
 end
