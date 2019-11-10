@@ -345,7 +345,10 @@ function handleDefense(msgOOB)
 	else
 		-- Debug.chat("updatePendingAttack")
 		local aAttack = Json.parse(msgOOB.sAttack)
-		updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
+		
+		-- temporary delete pending attack until damage resolution is done (TODO)
+		removePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT);
+		--updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
 	end
 end
 

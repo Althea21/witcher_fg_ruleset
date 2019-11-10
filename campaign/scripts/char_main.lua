@@ -212,7 +212,10 @@ function onHPChanged()
 	local wt = woundthreshold.getValue();
 	
 	
-	if hit_points.getValue() < wt then
+	if hit_points.getValue() <= 0 then
+		hit_points.setFont("sheetnumber_dead");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
+	elseif hit_points.getValue() < wt then
 		hit_points.setFont("sheetnumber_critical");
 		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
 	elseif hit_points.getValue() < (hpMax/2) then

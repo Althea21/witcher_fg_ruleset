@@ -192,6 +192,10 @@
 		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
 		<color value="#ff0000" />
 	</font>
+	<font name="sheetnumber_dead">
+		<ttf file="graphics/fonts/Casper-Bold.ttf" name="Casper Bold" size="14" />
+		<color value="#444444" />
+	</font>
 	<!-- Character selection -->
 		<font name="charselecttitle">
 		<fgffile name="graphics/fonts/bold-10.fgf" />

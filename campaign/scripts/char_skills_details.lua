@@ -14,6 +14,8 @@ function onHeaderClickRelease(listName)
 	--Debug.chat("onHeaderClickRelease");
 	if listName=="profession" then
 		profession_details.setVisible(not profession_details.isVisible());
+		profession_collapse_button.setVisible(profession_details.isVisible());
+		profession_expand_button.setVisible(not profession_details.isVisible());
 	elseif listName=="skills" then
 		skilllist_details.setVisible(not skilllist_details.isVisible());
 	end

@@ -143,6 +143,16 @@
 					<right anchor="left" relation="relative" offset="-10" />
 				</anchored>
 				<tabtarget prev="hit_points" />
+				<script>
+					function handleDrop(draginfo)
+						local sDragType = draginfo.getType();
+						if (sDragType == "number" or sDragType=="heal") then
+							window.stamina.setValue(window.stamina.getValue() + draginfo.getNumberData());
+						elseif sDragType == "damage" then
+							window.stamina.setValue(window.stamina.getValue() - draginfo.getNumberData());
+						end
+					end
+				</script>
 			</number_ct_crosslink>
 			<number_ct_crosslink name="hit_points">
 				<anchored to="rightanchor" width="30" height="20">
@@ -153,6 +163,14 @@
 				<script>
 					function update()
 						window.updateHPDisplay();
+					end
+					function handleDrop(draginfo)
+						local sDragType = draginfo.getType();
+						if (sDragType == "number" or sDragType=="heal") then
+							window.hit_points.setValue(window.hit_points.getValue() + draginfo.getNumberData());
+						elseif sDragType == "damage" then
+							window.hit_points.setValue(window.hit_points.getValue() - draginfo.getNumberData());
+						end
 					end
 				</script>
 			</number_ct_crosslink>

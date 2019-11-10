@@ -66,7 +66,10 @@ function onHPChanged()
 	local wt = DB.getValue(node, "attributs.woundthreshold", 0);
 	
 	
-	if hit_points_combat.getValue() < wt then
+	if hit_points_combat.getValue() <= 0 then
+		hit_points_combat.setFont("sheetnumber_dead");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
+	elseif hit_points_combat.getValue() < wt then
 		hit_points_combat.setFont("sheetnumber_critical");
 		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
 		--Debug.chat(DB.getValue(node, "attributs.woundthreshold_state", -2));

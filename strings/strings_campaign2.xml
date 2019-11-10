@@ -8,6 +8,8 @@
 <root>
 	<!--Generic-->
 	<string name="list_menu_createitem">Create Item</string>
+	<string name="tooltip_collapse">Collapse</string>
+	<string name="tooltip_expand">Expand</string>
 
 	<!-- Characters IDENTITY -->
 	<string name="char_label_identity">Identity</string>

@@ -839,9 +839,9 @@
 				<static textres="char_special_divide" />
 			</label>
 
-			<basicnumber name="meleebonusdamage" source="attributs.meleebonusdamage">
+			<number_derivedstat name="meleebonusdamage" source="attributs.meleebonusdamage">
 				<anchored to="encumbrance" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</basicnumber>
+			</number_derivedstat>
 			<label>
 				<anchored to="meleebonusdamage" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_meleebonusdamage" />

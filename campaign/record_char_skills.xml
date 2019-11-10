@@ -52,6 +52,44 @@
 					end
 				</script>
 			</label_frametop>
+			<genericcontrol name="profession_collapse_button">
+				<anchored height="10" width="10">
+					<top parent="label_profession" anchor="top" offset="5" />
+					<right parent="label_profession_frame" anchor="right" offset="-10"/>
+				</anchored>
+				<icon>button_collapse_w</icon>
+				<script>
+					function onInit()
+						window.profession_collapse_button.setVisible(window.profession_details.isVisible());
+					end
+					function onClickDown(button, x, y)
+						return window.onHeaderClickDown("profession");
+					end
+					function onClickRelease(button, x, y)
+						return window.onHeaderClickRelease("profession");
+					end
+				</script>
+				<tooltip textres="tooltip_collapse"/>
+			</genericcontrol>
+			<genericcontrol name="profession_expand_button">
+				<anchored height="10" width="10">
+					<top parent="label_profession" anchor="top" offset="5" />
+					<right parent="label_profession_frame" anchor="right" offset="-10"/>
+				</anchored>
+				<icon>button_expand_w</icon>
+				<script>
+					function onInit()
+						window.profession_expand_button.setVisible(not window.profession_details.isVisible());
+					end
+					function onClickDown(button, x, y)
+						return window.onHeaderClickDown("profession");
+					end
+					function onClickRelease(button, x, y)
+						return window.onHeaderClickRelease("profession");
+					end
+				</script>
+				<tooltip textres="tooltip_expand"/>
+			</genericcontrol>
 			<!--content-->
 			<subwindow name="profession_details">
 				<anchored>
