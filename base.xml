@@ -38,6 +38,7 @@
 	<includefile source="campaign/record_char_skills.xml" />
 	<includefile source="campaign/record_char_combat.xml" />
 	<includefile source="campaign/record_char_magic.xml" />
+	<includefile source="campaign/record_char_notes.xml" />
 	<script name="CharManager" file="campaign/scripts/manager_char.lua" />
 
 	<includefile source="campaign/record_npc.xml" />

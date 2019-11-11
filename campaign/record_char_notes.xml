@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="charsheet_notes">
+		<sheetdata>
+			<!-- <frame_char name="detailframe">
+				<bounds>15,0,-29,45</bounds>
+			</frame_char>
+			<string_labeled name="race">
+				<anchored to="detailframe" position="insidetopleft" offset="15,10" width="150" height="20" />
+				<labelres>char_label_race</labelres>
+			</string_labeled>
+			<string_labeled name="gender">
+				<anchored to="race" position="right" offset="5,0" width="70" />
+				<labelres>char_label_gender</labelres>
+			</string_labeled>
+			<string_labeled name="age">
+				<anchored to="gender" position="right" offset="5,0" width="70" />
+				<labelres>char_label_age</labelres>
+			</string_labeled>
+			<string_labeled name="height">
+				<anchored to="age" position="right" offset="5,0" width="70" />
+				<labelres>char_label_height</labelres>
+			</string_labeled>
+			<string_labeled name="weight">
+				<anchored to="height" position="right" offset="5,0" width="70" />
+				<labelres>char_label_weight</labelres>
+			</string_labeled> -->
+
+			<frame_char name="appearanceframe">
+				<bounds>15,0,320,190</bounds>
+			</frame_char>
+			<label_frametop>
+				<anchored to="appearanceframe" />
+				<static textres="char_label_appearance" />
+			</label_frametop>
+			<stringu name="appearance">
+				<anchored to="appearanceframe">
+					<top offset="30" />
+					<left offset="15" />
+					<right offset="-20" />
+					<bottom offset="-15" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<nodrag />
+			</stringu>
+			<scrollbar_list>
+				<anchored to="appearance" />
+				<target>appearance</target>
+			</scrollbar_list>
+			
+			<frame_char name="languageframe">
+				<bounds>335,0,-29,190</bounds>
+			</frame_char>
+			<label_frametop>
+				<anchored to="languageframe" />
+				<static textres="char_label_languages" />
+			</label_frametop>
+			<list_language name="languages">
+				<anchored to="languageframe">
+					<top offset="35" />
+					<left offset="15" />
+					<right offset="-20" />
+					<bottom offset="-15" />
+				</anchored>
+			</list_language>
+			<scrollbar_list>
+				<anchored to="languages" />
+				<target>languages</target>
+			</scrollbar_list>
+			<button_iedit name="languages_iedit">
+				<anchored to="languages" position="aboveright" offset="5,5" />
+				<target>languages</target>
+			</button_iedit>
+			<button_iadd name="languages_iadd">
+				<anchored to="languages" position="aboveleft" offset="10,5" />
+				<target>languages</target>
+			</button_iadd>
+
+			<frame_char name="notesframe">
+				<bounds>15,195,-29,-5</bounds>
+			</frame_char>
+			<label_frametop>
+				<anchored to="notesframe" />
+				<static textres="char_label_notes" />
+			</label_frametop>
+			<stringu name="notes">
+				<anchored to="notesframe">
+					<top offset="30" />
+					<left offset="15" />
+					<right offset="-20" />
+					<bottom offset="-15" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<nodrag />
+			</stringu>
+			<scrollbar_list>
+				<anchored to="notes" />
+				<target>notes</target>
+			</scrollbar_list>
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="char_language">
+		<margins control="0,0,0,2" />
+		<script>
+			function onDragStart(button, x, y, draginfo)
+				local sLang = name.getValue()
+				if sLang ~= "" then
+					draginfo.setType("language")
+					draginfo.setIcon("button_speak")
+					draginfo.setStringData(sLang)
+					return true
+				end
+			end
+		</script>
+		<sheetdata>
+			<genericcontrol name="rightanchor">
+				<anchored height="0" width="0">
+					<top />
+					<right />
+				</anchored>
+			</genericcontrol>
+			<button_idelete name="idelete">
+				<anchored>
+					<top />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete>
+			<string_textlistitem name="name">
+				<anchored height="20">
+					<top />
+					<left />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<script>
+					function onDragStart(...)
+						return window.onDragStart(...)
+					end
+				</script>
+			</string_textlistitem>
+		</sheetdata>
+	</windowclass>
+</root>
