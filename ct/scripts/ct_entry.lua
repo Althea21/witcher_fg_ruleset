@@ -99,11 +99,17 @@ function delete()
 end
 
 function onLinkChanged()
-	-- If a PC, then set up the links to the char sheet
+	-- Set up the links to the char sheet
 	local sClass, sRecord = link.getValue();
+	
+	
 	if sClass == "charsheet" then
+		-- PC case
 		linkPCFields();
 		name.setLine(false);
+	else
+		-- NPC case
+		linkNPCFields();
 	end
 	onIDChanged();
 end
@@ -141,6 +147,15 @@ function onVisibilityChanged()
 end
 
 function linkPCFields()
+	local nodeChar = link.getTargetDatabaseNode();
+	if nodeChar then
+		name.setLink(nodeChar.createChild("name", "string"), true);
+		hit_points.setLink(nodeChar.createChild("attributs.hit_points", "number"), false);
+		stamina.setLink(nodeChar.createChild("attributs.stamina", "number"), false);
+	end
+end
+
+function linkNPCFields()
 	local nodeChar = link.getTargetDatabaseNode();
 	if nodeChar then
 		name.setLink(nodeChar.createChild("name", "string"), true);

@@ -421,6 +421,13 @@
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
 			</number_derivedstat>
+			<number_charstatbase name="hit_point" source="attributs.hit_point">
+				<anchored to="leap" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<invisible/>
+			</number_charstatbase>
 			<label_fieldtop name="hitpoints_label">
 				<anchored to="hit_pointsmax" />
 				<static textres="npc_label_hitpoints" />

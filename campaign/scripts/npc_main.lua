@@ -35,7 +35,7 @@ function updateStats()
 	onBodyChanged();
 	onSpeedChanged();
 	onWillChanged();
-	onWoundThresholdStateChanged(getDatabaseNode());
+	--onWoundThresholdStateChanged(getDatabaseNode());
 end
 
 -- derived stat functions
@@ -135,10 +135,18 @@ function onWoundThresholdStateChanged(nodeActor)
 		will.setFont("sheetnumber_critical");
 	elseif (state==0) then
 		-- Desactivate : restore REF, DEX, INT, and WILL
-		will.setValue(will_backup.getValue());
-		dexterity.setValue(dexterity_backup.getValue());
-		reflex.setValue(reflex_backup.getValue());
-		intelligence.setValue(intelligence_backup.getValue());
+		if (will_backup.getValue() > 0) then
+			will.setValue(will_backup.getValue());
+		end
+		if dexterity_backup.getValue() > 0 then
+			dexterity.setValue(dexterity_backup.getValue());
+		end
+		if reflex_backup.getValue() > 0 then
+			reflex.setValue(reflex_backup.getValue());
+		end
+		if intelligence_backup.getValue() > 0 then
+			intelligence.setValue(intelligence_backup.getValue());
+		end
 		
 		reflex.setFont("sheetnumber");
 		dexterity.setFont("sheetnumber");
