@@ -116,6 +116,7 @@
 	
 	<!--Combat skill cycler-->
 	<string name="Archery">Archery</string>
+	<string name="Athletics">Athletics</string>
 	<string name="Brawling">Brawling</string>
 	<string name="Crossbow">Crossbow</string>
 	<string name="Melee">Melee</string>
