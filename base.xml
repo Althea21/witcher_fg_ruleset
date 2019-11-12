@@ -42,6 +42,7 @@
 	<script name="CharManager" file="campaign/scripts/manager_char.lua" />
 
 	<includefile source="campaign/record_npc.xml" />
+	<includefile source="campaign/record_npc_combat.xml" />
 	
 	<!-- Utilities -->
 	<includefile source="utility/utility_modifiers.xml" />

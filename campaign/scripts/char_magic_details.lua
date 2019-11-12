@@ -21,8 +21,12 @@ function onClose()
 end
 
 function onMenuSelection(selection)
-	if selection == 3 then
-		addSpellClass();
+	local nodeRecord = getDatabaseNode();
+	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+	if not bReadOnly then
+		if selection == 3 then
+			addSpellClass();
+		end
 	end
 end
 

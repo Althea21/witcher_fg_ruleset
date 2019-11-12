@@ -30,7 +30,13 @@ function onModeChanged()
 end
 
 function update()
-	
+	local nodeRecord = window.getDatabaseNode();
+	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+	for _,w in ipairs(getWindows()) do
+		w.ev.setReadOnly(bReadOnly);
+		w.activatedetail.setEnabled(not bReadOnly);
+		-- todo disable "i" and adjust its size (both pc end npc)
+	end
 end
 
 function addEntry(bFocus)

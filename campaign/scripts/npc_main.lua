@@ -28,6 +28,33 @@ function update()
 	end
 	divider.setVisible(bSection1);
 	
+	-- update locked/unlocked state
+	nonid_name.setReadOnly(bReadOnly);
+	npctype.setReadOnly(bReadOnly);
+	threat1.setReadOnly(bReadOnly);
+	threat2.setReadOnly(bReadOnly);
+	vulnerabilities.setReadOnly(bReadOnly);
+	abilities.setReadOnly(bReadOnly);
+	hit_points.setReadOnly(bReadOnly);
+	stamina.setReadOnly(bReadOnly);
+	intelligence.setReadOnly(bReadOnly);
+	reflex.setReadOnly(bReadOnly);
+	dexterity.setReadOnly(bReadOnly);
+	body.setReadOnly(bReadOnly);
+	speed.setReadOnly(bReadOnly);
+	empathy.setReadOnly(bReadOnly);
+	crafting.setReadOnly(bReadOnly);
+	will.setReadOnly(bReadOnly);
+	vigor.setReadOnly(bReadOnly);
+	luck.setReadOnly(bReadOnly);
+	skills.setReadOnly(bReadOnly);
+	height.setReadOnly(bReadOnly);
+	weight.setReadOnly(bReadOnly);
+	environment.setReadOnly(bReadOnly);
+	intelligencelevel.setReadOnly(bReadOnly);
+	organization.setReadOnly(bReadOnly);
+	loot.setReadOnly(bReadOnly);
+
 	updateStats();
 end
 
@@ -152,5 +179,27 @@ function onWoundThresholdStateChanged(nodeActor)
 		dexterity.setFont("sheetnumber");
 		intelligence.setFont("sheetnumber");
 		will.setFont("sheetnumber");
+	end
+end
+
+function onHPChanged()
+	local node = getDatabaseNode();
+	local hpMax = hit_pointsmax.getValue();
+	local wt = DB.getValue(node, "attributs.woundthreshold", 0);
+	
+	
+	if hit_points.getValue() <= 0 then
+		hit_points.setFont("sheetnumber_dead");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
+	elseif hit_points.getValue() < wt then
+		hit_points.setFont("sheetnumber_critical");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
+		--Debug.chat(DB.getValue(node, "attributs.woundthreshold_state", -2));
+	elseif hit_points.getValue() < (hpMax/2) then
+		hit_points.setFont("sheetnumber_warning");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 0);
+	else
+		hit_points.setFont("sheetnumber");
+		DB.setValue(node, "attributs.woundthreshold_state", "number", 0);
 	end
 end

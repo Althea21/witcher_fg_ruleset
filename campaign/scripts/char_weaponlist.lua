@@ -30,7 +30,14 @@ function onModeChanged()
 end
 
 function update()
-	
+	local nodeRecord = window.getDatabaseNode();
+	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+	for _,w in ipairs(getWindows()) do
+		if (w.rof) then
+			w.rof.setReadOnly(bReadOnly);
+		end
+		w.activatedetail.setEnabled(not bReadOnly);
+	end
 end
 
 function addEntry(bFocus)

@@ -14,3 +14,19 @@ function onRecoverAction()
 		stamina_combat.setValue(staminamax_combat.getValue());
 	end
 end
+
+function update()
+	-- update locked/unlocked state (for npc only)
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+	if sActorType ~= "pc" then
+		local nodeRecord = getDatabaseNode();
+		local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+		focus.setReadOnly(bReadOnly);
+		stamina_combat.setReadOnly(bReadOnly);
+		
+		if magic_details.subwindow then
+			magic_details.subwindow.update();
+		end
+	end
+end

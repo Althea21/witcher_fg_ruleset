@@ -18,16 +18,31 @@ function onClose()
 	DB.removeHandler(sNode, "onChildUpdate", onDataChanged);
 end
 
+function update()
+	-- update locked/unlocked state (for npc only)
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+	if sActorType ~= "pc" then
+		local nodeRecord = getDatabaseNode();
+		local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+		type.setEnabled(not bReadOnly);
+		spelllist.update();
+	end
+end
 -- radial menu : delete weapon
 function onMenuSelection(selection, subselection)
-	if selection == 4 then
-		addSpell();
-	elseif selection == 5 and subselection == 3 then
-		local node = getDatabaseNode();
-		if node then
-			node.delete();
-		else
-			close();
+	local nodeRecord = getDatabaseNode().getParent().getParent();
+	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+	if not bReadOnly then
+		if selection == 4 then
+			addSpell();
+		elseif selection == 5 and subselection == 3 then
+			local node = getDatabaseNode();
+			if node then
+				node.delete();
+			else
+				close();
+			end
 		end
 	end
 end

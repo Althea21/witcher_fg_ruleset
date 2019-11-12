@@ -24,10 +24,16 @@ function onClose()
 end
 
 function onMenuSelection(selection)
-	if selection == 3 then
-		addWeapon();
-	elseif selection == 4 then
-		addArmor();
+	local nodeRecord = getDatabaseNode();
+	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+	if not bReadOnly then
+		if selection == 3 then
+			addWeapon();
+		elseif selection == 4 then
+			addArmor();
+		end
+	else
+		-- TODO message in chat box
 	end
 end
 
@@ -59,6 +65,7 @@ end
 
 function update()
 	weaponlist.update();
+	armorlist.update();
 end
 
 function getEditMode()
@@ -75,7 +82,7 @@ function onHeaderClickRelease(listName)
 	if listName=="weapon" then
 		weaponlist.setVisible(not weaponlist.isVisible());
 	elseif listName=="armor" then
-		armorlist.setVisible(not weaponlist.isVisible());
+		armorlist.setVisible(not armorlist.isVisible());
 	end
 	
 	return true;

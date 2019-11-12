@@ -19,12 +19,16 @@ end
 
 -- radial menu : delete armor
 function onMenuSelection(selection, subselection)
-	if selection == 5 and subselection == 4 then
-		local node = getDatabaseNode();
-		if node then
-			node.delete();
-		else
-			close();
+	local nodeRecord = getDatabaseNode().getParent().getParent();
+	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+	if not bReadOnly then
+		if selection == 5 and subselection == 4 then
+			local node = getDatabaseNode();
+			if node then
+				node.delete();
+			else
+				close();
+			end
 		end
 	end
 end

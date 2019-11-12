@@ -19,12 +19,16 @@ end
 
 -- radial menu : delete weapon
 function onMenuSelection(selection, subselection)
-	if selection == 5 and subselection == 3 then
-		local node = getDatabaseNode();
-		if node then
-			node.delete();
-		else
-			close();
+	local nodeRecord = getDatabaseNode().getParent().getParent();
+	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+	if not bReadOnly then
+		if selection == 5 and subselection == 3 then
+			local node = getDatabaseNode();
+			if node then
+				node.delete();
+			else
+				close();
+			end
 		end
 	end
 end
@@ -57,16 +61,24 @@ function onDataChanged()
 	label_ammo.setVisible(bRanged);
 	maxammo.setVisible(bRanged);
 	ammocounter.setVisible(bRanged);
-	-- Attack actions
-	button_melee_strongattack.setVisible(not bRanged);
-	button_melee_fastattack.setVisible(not bRanged);
+	-- Attack actions (some actions don't exist in npc sheet)
+	if button_melee_strongattack then
+		button_melee_strongattack.setVisible(not bRanged);
+	end
+	if button_melee_fastattack then 
+		button_melee_fastattack.setVisible(not bRanged);
+	end
 	button_melee_attack.setVisible(not bRanged);
-	button_range_strongattack.setVisible(bRanged);
-	button_range_fastattack.setVisible(bRanged);
+	if button_range_strongattack then
+		button_range_strongattack.setVisible(bRanged);
+	end
+	if button_range_fastattack then
+		button_range_fastattack.setVisible(bRanged);
+	end
 	button_range_attack.setVisible(bRanged);
 	-- Defense actions
 	button_melee_parry.setVisible(not bRanged);
-	button_melee_block.setVisible(not bRanged);
+	--button_melee_block.setVisible(not bRanged);
 	spacer_for_ranged_defense.setVisible(bRanged);
 end
 

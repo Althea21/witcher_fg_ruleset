@@ -35,7 +35,7 @@
 			</subwindow_record>
 			<subwindow name="combat">
 				<bounds>10,65,-1,-20</bounds>
-				<class>charsheet_combat</class>
+				<class>npc_combat</class>
 			</subwindow>
 			<subwindow name="magic">
 				<bounds>10,65,-1,-20</bounds>
@@ -67,7 +67,7 @@
 					<subwindow>magic</subwindow>
 				</tab>
 				<tab>
-					<icon>tab_other</icon>
+					<icon>tab_notes</icon>
 					<subwindow>text</subwindow>
 				</tab>
 			</tabs_recordsheet>
@@ -86,6 +86,7 @@
 		<sheetdata>
 			<anchor_column name="columnanchor" />
 			
+			<!-- Basic information -->
 			<label_column name="nonid_name_label">
 				<static textres="npc_label_unidentified" />
 			</label_column>
@@ -213,18 +214,62 @@
 					end
 				</script>
 			</buttonfield>
+
+			<label_column name="hp_label">
+				<static textres="char_derivedstatslabel_hit_points" />
+			</label_column>
+			<number_charstatbase name="hit_points" source="attributs.hit_points">
+				<anchored width="25" height="20">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="7" />
+					<left offset="97" />
+				</anchored>
+				<script>
+					function onValueChanged()
+						window.onHPChanged();
+					end
+				</script>
+			</number_charstatbase>
+			<label name="hit_points_divider">
+				<anchored to="hit_points">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<static textres="char_special_divide" />
+			</label>
+			<number_derivedstat name="hit_pointsmax" source="attributs.hit_pointsmax">
+				<anchored to="hit_points_divider" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_derivedstat>
+
+			<number_charstatbase name="stamina" source="attributs.stamina">
+				<anchored to="hit_points_divider" position="right" offset="172,0" width="25" height="20" />
+			</number_charstatbase>
+			<label name="stamina_divider">
+				<anchored to="stamina">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<static textres="char_special_divide" />
+			</label>
+			<number_derivedstat name="staminamax" source="attributs.staminamax">
+				<anchored to="stamina_divider" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_derivedstat>
+			<label name="stamina_label">
+				<anchored to="stamina" position="right" offset="-130,0" />
+				<static textres="char_derivedstatslabel_stamina" />
+			</label>
+			
 			
 			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->
 			<header_npc>
 				<static textres="npc_header_stats" />
 			</header_npc>
 
-			<!-- <label_column name="abilities_label">
-				<anchored>
-					<top offset="20" />
-				</anchored>
-				<static textres="npc_label_abilities" />
-			</label_column> -->
 			<number_charstatbase name="intelligence" source="attributs.intelligence">
 				<anchored width="25" height="20">
 					<top parent="columnanchor" anchor="bottom" relation="relative" offset="20" />
@@ -415,35 +460,8 @@
 				<anchored to="leap" />
 				<static textres="npc_label_leap" />
 			</label_fieldtop>
-			<number_derivedstat name="hit_pointsmax" source="attributs.hit_pointsmax">
-				<anchored to="leap" width="25" height="20">
-					<top />
-					<left anchor="right" relation="relative" offset="10" />
-				</anchored>
-			</number_derivedstat>
-			<number_charstatbase name="hit_point" source="attributs.hit_point">
-				<anchored to="leap" width="25" height="20">
-					<top />
-					<left anchor="right" relation="relative" offset="10" />
-				</anchored>
-				<invisible/>
-			</number_charstatbase>
-			<label_fieldtop name="hitpoints_label">
-				<anchored to="hit_pointsmax" />
-				<static textres="npc_label_hitpoints" />
-			</label_fieldtop>
-			<number_derivedstat name="staminamax" source="attributs.staminamax">
-				<anchored to="hit_pointsmax" width="25" height="20">
-					<top />
-					<left anchor="right" relation="relative" offset="10" />
-				</anchored>
-			</number_derivedstat>
-			<label_fieldtop name="stamina_label">
-				<anchored to="staminamax" />
-				<static textres="npc_label_stamina" />
-			</label_fieldtop>
 			<number_derivedstat name="encumbrancemax" source="attributs.encumbrancemax">
-				<anchored to="staminamax" width="25" height="20">
+				<anchored to="leap" width="25" height="20">
 					<top />
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
@@ -462,6 +480,65 @@
 				<anchored to="recovery" />
 				<static textres="npc_label_recovery" />
 			</label_fieldtop>
+			
+			<!-- <number_charstatbase name="hit_points" source="attributs.hit_points">
+				<anchored to="recovery" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="30" />
+				</anchored>
+			</number_charstatbase>
+			<label name="hit_points_divider">
+				<anchored to="hit_points">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<static textres="char_special_divide" />
+			</label>
+			<number_derivedstat name="hit_pointsmax" source="attributs.hit_pointsmax">
+				<anchored to="hit_points_divider" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_derivedstat>
+			<stringcontrol name="hitpoints_label">
+				<anchored width="80">
+					<top parent="hit_points" offset="-13"/>
+					<left parent="hit_points" offset="0" />
+				</anchored>
+				<font>sheetlabelmini</font>
+				<center />
+				<static textres="npc_label_hitpoints" />
+			</stringcontrol> -->
+
+			<!-- <number_charstatbase name="stamina" source="attributs.stamina">
+				<anchored to="hit_pointsmax" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="30" />
+				</anchored>
+			</number_charstatbase>
+			<label name="stamina_divider">
+				<anchored to="stamina">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+				<static textres="char_special_divide" />
+			</label>
+			<number_derivedstat name="staminamax" source="attributs.staminamax">
+				<anchored to="stamina_divider" width="25" height="20">
+					<top />
+					<left anchor="right" relation="relative" offset="10" />
+				</anchored>
+			</number_derivedstat> 
+			<stringcontrol name="stamina_label">
+				<anchored width="80">
+					<top parent="stamina" offset="-13"/>
+					<left parent="stamina" offset="0" />
+				</anchored>
+				<font>sheetlabelmini</font>
+				<center />
+				<static textres="npc_label_stamina" />
+			</stringcontrol>-->
+			
 			<!--invisible stats-->
 			<number_derivedstat name="meleebonusdamage" source="attributs.meleebonusdamage">
 				<anchored to="recovery" position="over" offset="0,0" height="1" />
@@ -478,9 +555,9 @@
 				<modifierfield>attributs.punch_modifier</modifierfield>
 			</dice_modifier>
 
+			<!-- SKILLS -->
 			<header_npc>
 				<static textres="npc_header_skills" />
-				
 			</header_npc>
 
 			<string_columnh name="skills">
@@ -500,6 +577,7 @@
 				<tooltip textres="npc_tooltip_skills"/>
 			</genericcontrol>
 			
+			<!-- ECOLOGY -->
 			<header_npc>
 				<static textres="npc_header_ecology" />
 			</header_npc>

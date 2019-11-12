@@ -858,6 +858,8 @@
 
 	<string name="npc_header_skills">Skills</string>
 	<string name="npc_header_ecology">Ecology</string>
+	<string name="npc_header_combat">Combat</string>
+	<string name="npc_label_weaponattacks">Att. (ROF)</string>
 	
 	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
 	<string name="npc_unknownskill_errormessage">Try to roll unknown skill "%s"</string>

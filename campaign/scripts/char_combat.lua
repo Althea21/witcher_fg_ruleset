@@ -3,11 +3,25 @@
 -- attribution and copyright information.
 --
 function onInit()
-	Update();
+	update();
 end
 
-function Update()
+function update()
 	onHPChanged();
+	
+	-- update locked/unlocked state (for npc only)
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+	if sActorType ~= "pc" then
+		local nodeRecord = getDatabaseNode();
+		local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
+		--hit_points_combat.setReadOnly(bReadOnly);
+		--stamina_combat.setReadOnly(bReadOnly);
+		
+		if combat_details.subwindow then
+			combat_details.subwindow.update();
+		end
+	end
 end
 
 function onRecoverAction()

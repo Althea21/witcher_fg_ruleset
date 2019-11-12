@@ -6,7 +6,7 @@
 -->
 
 <root>
-	<windowclass name="charsheet_combat">
+	<windowclass name="npc_combat">
 		<script file="campaign/scripts/char_combat.lua" />
 		<sheetdata>
 			<!--COMBAT STATS REMINDER-->
@@ -204,7 +204,7 @@
 					<bottom offset="-50" />
 				</anchored>
 				<activate />
-				<class>char_combat_details</class>
+				<class>npc_combat_details</class>
 			</subwindow>
 			<scrollbar>
 				<anchored to="combat_details" position="right" offset="-2,-4" width="20">
@@ -216,7 +216,7 @@
 	</windowclass>
 	
 	<!--WEAPONS, BRAWLING AND ARMOR DETAILS -->
-	<windowclass name="char_combat_details">
+	<windowclass name="npc_combat_details">
 		<script file="campaign/scripts/char_combat_details.lua" />
 		<sheetdata>
 			<!-- WEAPONS -->
@@ -264,22 +264,22 @@
 				<static textres="char_label_weaponname" />
 			</label>
 			<label name="weapon_reliability_label">
-				<anchored position="insidetopright" offset="215,36" width="29"/>
+				<anchored position="insidetopright" offset="223,36" width="29"/>
 				<center />
 				<static textres="char_label_weaponreliability" />
 			</label>
 			<label name="weapon_damage_label">
-				<anchored to="weapon_reliability_label" position="right" offset="20,0" width="50" />
+				<anchored to="weapon_reliability_label" position="right" offset="23,0" width="50" />
 				<center />
 				<static textres="char_label_weapondamage" />
 			</label>
 			<label name="weapon_attacks_label">
-				<anchored to="weapon_damage_label" position="right" offset="20,0" width="50" />
+				<anchored to="weapon_damage_label" position="right" offset="22,0" width="50" />
 				<center />
-				<static textres="char_label_weaponattacks" />
+				<static textres="npc_label_weaponattacks" />
 			</label>
 			<label>
-				<anchored to="weapon_attacks_label" position="right" offset="10,0" width="50" />
+				<anchored to="weapon_attacks_label" position="right" offset="15,0" width="50" />
 				<center />
 				<static textres="char_label_weapondefense" />
 			</label>
@@ -293,317 +293,20 @@
 					<left />
 					<right />
 				</anchored>
-				<class>char_weapon</class>
+				<class>npc_weapon</class>
 				<noscroll />
 			</windowlist>
 			
-			<genericcontrol name="brawling_divider">
+			<!-- ARMOR -->
+			<genericcontrol name="armor_divider">
 				<anchored to="weaponlist" position="below" offset="0,5" height="3" />
 				<frame name="separatorline" />
 				<invisible />
 			</genericcontrol>
 			
-			<!-- BRAWLING -->
-			<!-- section header (show/hide list on click) -->
-			<genericcontrol name="icon_brawling">
-				<anchored to="brawling_divider" position="belowleft" offset="10,14" width="20" height="20" />
-				<icon>char_brawling</icon>
-			</genericcontrol>
-			<label name="label_brawling">
-				<anchored>
-					<top parent="icon_brawling" offset="0" />
-					<left parent="icon_brawling" anchor="right" offset="10" />
-					<right offset="-8" />
-				</anchored>
-				<static textres="char_label_brawling" />
-				<!-- <script> -->
-					<!-- function onClickDown(button, x, y) -->
-						<!-- return window.onHeaderClickDown("weapon"); -->
-					<!-- end -->
-					
-					<!-- function onClickRelease(button, x, y) -->
-						<!-- return window.onHeaderClickRelease("weapon"); -->
-					<!-- end -->
-				<!-- </script> -->
-			</label>
-			<genericcontrol name="brawlingheaderframe">
-				<anchored>
-					<top parent="brawling_divider" anchor="bottom" offset="13" />
-					<bottom parent="brawling_divider" anchor="bottom" offset="38" />
-					<left/>
-					<right/>
-				</anchored>
-				<frame name="groupbox2" offset="6,6,6,6" />
-				<disabled />
-			</genericcontrol>
-			
-			<!-- list headers -->
-			<genericcontrol name="brawlinglist_headers">
-				<anchored>
-					<top parent="brawlingheaderframe" anchor="bottom" offset="0" />
-					<bottom parent="brawlingheaderframe" anchor="bottom" offset="26" />
-					<left offset="5"/>
-					<right offset="-5" />
-				</anchored>
-				<frame name="headertitle" />
-			</genericcontrol>
-			<label name="brawling_damage_label">
-				<anchored to="brawlinglist_headers" position="insidetopright" offset="140,3" width="50" />
-				<center />
-				<static textres="char_label_brawlingdamage" />
-			</label>
-			<label name="brawling_attacks_label">
-				<anchored to="brawling_damage_label" position="right" offset="20,0" width="50" />
-				<center />
-				<static textres="char_label_brawlingattacks" />
-			</label>
-			<label>
-				<anchored to="brawling_attacks_label" position="right" offset="10,0" width="50" />
-				<center />
-				<static textres="char_label_brawlingdefense" />
-			</label>
-			
-			<!--brawling actions -->
-			<!--punch-->
-			<genericcontrol name="icon_brawling">
-				<anchored to="brawlinglist_headers" position="belowleft" offset="5,-2" width="25" height="25" />
-				<icon>char_weapon_punch</icon>
-			</genericcontrol>
-			<simplestringc>
-				<anchored to="brawlinglist_headers" position="belowleft" offset="35,5" width="250"/>
-				<static textres="char_label_punchlabel" />
-			</simplestringc>
-			<dice_modifier name="punchdamage" source="attributs.punch">
-				<anchored to="brawlinglist_headers" position="belowright" offset="145,5" width="46" height="20"/>
-				<frame name="fielddark" offset="7,5,7,5" />
-				<modifierfield>attributs.punch_modifier</modifierfield>
-				<script>
-					function onDoubleClick(x,y)
-						return window.onUnarmedDamageAction(nil, "punch");
-					end			
-					function onDragStart(button, x, y, draginfo)
-						return window.onUnarmedDamageAction(draginfo, "punch");
-					end
-				</script>
-			</dice_modifier>
-			<buttoncontrol name="button_punch_attack">
-				<anchored to="punchdamage" width="20" height="20">
-					<top />
-					<left anchor="right" offset="18" />
-				</anchored>
-				<icon normal="attack_punch_normal" pressed="attack_punch_normal" />
-				<tooltip textres="char_tooltip_normalattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "punchnormal");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_punch_fastattack">
-				<anchored to="button_punch_attack" width="20" height="20">
-					<top />
-					<left anchor="right" offset="2" />
-				</anchored>
-				<icon normal="attack_punch_fast" pressed="attack_punch_fast" />
-				<tooltip textres="char_tooltip_fastattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "punchfast");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_punch_strongattack">
-				<anchored to="button_punch_fastattack" width="20" height="20">
-					<top />
-					<left anchor="right" offset="2" />
-				</anchored>
-				<icon normal="attack_punch_strong" pressed="attack_punch_strong" />
-				<tooltip textres="char_tooltip_strongattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "punchstrong");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_punch_block">
-				<anchored to="button_punch_strongattack" width="20" height="20">
-					<top />
-					<left anchor="right" offset="20" />
-				</anchored>
-				<icon normal="attack_punch_block" pressed="attack_punch_block" />
-				<tooltip textres="char_tooltip_block" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionDefense.performRoll(draginfo, window.getDatabaseNode(), "punchblock");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			
-			<!--kick-->
-			<genericcontrol name="icon_kick">
-				<anchored to="brawlinglist_headers" position="belowleft" offset="5,24" width="25" height="25" />
-				<icon>char_weapon_kick</icon>
-			</genericcontrol>
-			<simplestringc name="kicklabel">
-				<anchored to="brawlinglist_headers" position="belowleft" offset="35,30" width="250"/>
-				<!-- <center /> -->
-				<static textres="char_label_kicklabel" />
-			</simplestringc>
-			<dice_modifier name="kickdamage" source="attributs.kick">
-				<anchored to="brawlinglist_headers" position="belowright" offset="145,30" width="46" height="20"/>
-				<frame name="fielddark" offset="7,5,7,5" />
-				<modifierfield>attributs.kick_modifier</modifierfield>
-				<script>
-					function onDoubleClick(x,y)
-						return window.onUnarmedDamageAction(nil, "kick");
-					end			
-					function onDragStart(button, x, y, draginfo)
-						return window.onUnarmedDamageAction(draginfo, "kick");
-					end
-				</script>
-			</dice_modifier>
-			<buttoncontrol name="button_kick_attack">
-				<anchored to="kickdamage" width="20" height="20">
-					<top />
-					<left anchor="right" offset="18" />
-				</anchored>
-				<icon normal="attack_kick_normal" pressed="attack_kick_normal" />
-				<tooltip textres="char_tooltip_normalattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "kicknormal");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_kick_fastattack">
-				<anchored to="button_kick_attack" width="20" height="20">
-					<top />
-					<left anchor="right" offset="2" />
-				</anchored>
-				<icon normal="attack_kick_fast" pressed="attack_kick_fast" />
-				<tooltip textres="char_tooltip_fastattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "kickfast");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_kick_strongattack">
-				<anchored to="button_kick_fastattack" width="20" height="20">
-					<top />
-					<left anchor="right" offset="2" />
-				</anchored>
-				<icon normal="attack_kick_strong" pressed="attack_kick_strong" />
-				<tooltip textres="char_tooltip_strongattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "kickstrong");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_kick_block">
-				<anchored to="button_kick_strongattack" width="20" height="20">
-					<top />
-					<left anchor="right" offset="20" />
-				</anchored>
-				<icon normal="attack_kick_block" pressed="attack_kick_block" />
-				<tooltip textres="char_tooltip_block" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionDefense.performRoll(draginfo, window.getDatabaseNode(), "kickblock");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-		
-			<!-- ARMOR -->
-			<genericcontrol name="armor_divider">
-				<anchored to="kicklabel" position="below" offset="10,5" height="3" />
-				<frame name="separatorline" />
-				<invisible />
-			</genericcontrol>
 			<!-- section header (show/hide list on click) -->
 			<genericcontrol name="icon_armor">
-				<anchored to="armor_divider" position="belowleft" offset="-10,14" width="20" height="20" />
+				<anchored to="armor_divider" position="belowleft" offset="10,14" width="20" height="20" />
 				<icon>char_armor</icon>
 			</genericcontrol>
 			<label name="label_armor">
@@ -680,7 +383,7 @@
 	</windowclass>
 	
 	<!--Weapon class-->
-	<windowclass name="char_weapon">
+	<windowclass name="npc_weapon">
 		<margins control="0,0,0,5" />
 		<script file="campaign/scripts/char_weapon.lua" />
 		<sheetdata>
@@ -772,64 +475,26 @@
 				</script>
 			</buttoncontrol>
 			<genericcontrol name="spacer_for_ranged_defense">
-				<anchored to="rightanchor" width="25" height="20">
+				<anchored to="rightanchor" width="20" height="20">
 					<top />
 					<right anchor="left" relation="relative" offset="-2" />
 				</anchored>
 				<disabled />
 			</genericcontrol>
 			<!--attack actions-->
+			<!--ROF-->
+			<number_statcurrentvalue name="rof">
+				<anchored to="rightanchor" width="25" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-20" />
+				</anchored>
+			</number_statcurrentvalue>
+
 			<!--melee-->
-			<buttoncontrol name="button_melee_strongattack">
-				<anchored to="rightanchor" width="20" height="20">
-					<top />
-					<right anchor="left" relation="relative" offset="-6" />
-				</anchored>
-				<icon normal="attack_melee_strong" pressed="attack_melee_strong" />
-				<tooltip textres="char_tooltip_strongattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "strong");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_melee_fastattack">
-				<anchored to="rightanchor" width="20" height="20">
-					<top />
-					<right anchor="left" relation="relative" offset="-2" />
-				</anchored>
-				<icon normal="attack_melee_fast" pressed="attack_melee_fast" />
-				<tooltip textres="char_tooltip_fastattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "fast");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
 			<buttoncontrol name="button_melee_attack">
 				<anchored to="rightanchor" width="20" height="20">
 					<top />
-					<right anchor="left" relation="relative" offset="-2" />
+					<right anchor="left" relation="relative" offset="-5" />
 				</anchored>
 				<icon normal="attack_melee_normal" pressed="attack_melee_normal" />
 				<tooltip textres="char_tooltip_normalattack" />
@@ -850,56 +515,10 @@
 				</script>
 			</buttoncontrol>
 			<!--range-->
-			<buttoncontrol name="button_range_strongattack">
-				<anchored to="rightanchor" width="20" height="20">
-					<top />
-					<right anchor="left" relation="relative" offset="-2" />
-				</anchored>
-				<icon normal="attack_range_strong" pressed="attack_range_strong" />
-				<tooltip textres="char_tooltip_strongattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "strong");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_range_fastattack">
-				<anchored to="rightanchor" width="20" height="20">
-					<top />
-					<right anchor="left" relation="relative" offset="-2" />
-				</anchored>
-				<icon normal="attack_range_fast" pressed="attack_range_fast" />
-				<tooltip textres="char_tooltip_fastattack" />
-				<cursor hover="hand" />
-				<script>
-					function action(draginfo)
-						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "fast");
-					end
-
-					function onButtonPress()
-						action();
-					end
-					
-					function onDragStart(button, x, y, draginfo)
-						action(draginfo);
-						return true;
-					end
-				</script>
-			</buttoncontrol>
 			<buttoncontrol name="button_range_attack">
 				<anchored to="rightanchor" width="20" height="20">
 					<top />
-					<right anchor="left" relation="relative" offset="-2" />
+					<right anchor="left" relation="relative" offset="-5" />
 				</anchored>
 				<icon normal="attack_range_normal" pressed="attack_range_normal" />
 				<tooltip textres="char_tooltip_normalattack" />
@@ -924,7 +543,7 @@
 			<simplestringc name="damageview">
 				<anchored to="rightanchor" width="60">
 					<top />
-					<right anchor="left" relation="relative" offset="-10" />
+					<right anchor="left" relation="relative" offset="-15" />
 				</anchored>
 				<multilinespacing>20</multilinespacing>
 				<frame name="fielddark" offset="7,5,7,5" />
@@ -944,7 +563,7 @@
 			<number_statcurrentvalue name="reliability">
 				<anchored to="rightanchor" width="30" height="20">
 					<top />
-					<right anchor="left" relation="relative" offset="-15" />
+					<right anchor="left" relation="relative" offset="-20" />
 				</anchored>
 			</number_statcurrentvalue>
 			

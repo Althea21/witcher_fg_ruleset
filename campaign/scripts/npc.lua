@@ -26,26 +26,29 @@ function onLockChanged()
 end
 
 function StateChanged()
+	local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+	
+	-- npc header (defined and managed in CoreRPG)
 	if header.subwindow then
 		header.subwindow.update();
 	end
-	-- if main_trap.subwindow then
-	-- 	main_trap.subwindow.update();
-	-- end
-	-- if main_vehicle.subwindow then
-	-- 	main_vehicle.subwindow.update();
-	-- end
+	-- main tab
 	if main_creature.subwindow then
 		main_creature.subwindow.update();
 	end
-	-- if spells.subwindow then
-	-- 	spells.subwindow.update();
-	-- end
-
-	local bReadOnly = WindowManager.getReadOnlyState(getDatabaseNode());
+	-- combat tab
+	if combat.subwindow then
+		combat.subwindow.update();
+	end
+	-- spell tab
+	if magic.subwindow then
+		magic.subwindow.update();
+	end
+	-- Notes tab
+	if text.subwindow then
+		text.subwindow.update();
+	end
 	
-	--npctype.setReadOnly(bReadOnly);
-	text.setReadOnly(bReadOnly);
 end
 
 function onIDChanged()

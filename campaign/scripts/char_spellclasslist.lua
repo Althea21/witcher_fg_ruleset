@@ -18,6 +18,9 @@ function onChildAdded()
 end
 
 function update()
+	for _,w in ipairs(getWindows()) do
+		w.update();
+	end
 end
 
 function addEntry(bFocus)

@@ -3,10 +3,10 @@
 -- attribution and copyright information.
 --
 function onInit()
-	Update();
+	update();
 end
 
-function Update()
+function update()
 	onIntelligenceChanged();
 	onReflexChanged();
 	onDexterityChanged();
