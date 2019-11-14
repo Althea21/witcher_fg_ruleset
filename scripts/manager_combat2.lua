@@ -116,6 +116,7 @@ aAttackQueueByDefender = {};
 --	* sLocation : strike location
 --	* sIsAimed 	: if attack was aimed or not ("true"/"false")
 function addPendingAttack(sSourceCT, sTargetCT, nAtkValue, sLocation, sIsAimed)
+	Debug.console("Add pending attack of "..sSourceCT.." vs "..sTargetCT.." (attack value="..nAtkValue..")");
 	-- Debug.chat("---- addPendingAttack");
 	-- Debug.chat(sSourceCT);
 	-- Debug.chat(rTarget);
@@ -159,6 +160,7 @@ end
 --	* sTargetCT	: defender 
 --  * aAttack 	: array standing for the updated attack (see above for format)
 function updatePendingAttack(sSourceCT, sTargetCT, aAttack)
+	Debug.console("Update pending attack of "..sSourceCT.." vs "..sTargetCT);
 	-- Debug.chat("---- updatePendingAttack")
 	if aAttackQueueByOffender[sSourceCT] then
 		if aAttackQueueByOffender[sSourceCT][sTargetCT] then
@@ -181,6 +183,7 @@ end
 --	* sSourceCT	: offender 
 --	* sTargetCT	: defender 
 function removePendingAttack (sSourceCT, sTargetCT)
+	Debug.console("Remove pending attack of "..sSourceCT.." vs "..sTargetCT);
 	if aAttackQueueByOffender[sSourceCT] then
 		if aAttackQueueByOffender[sSourceCT][sTargetCT] then
 			table.remove(aAttackQueueByOffender[sSourceCT][sTargetCT],1);
@@ -197,6 +200,7 @@ end
 
 -- Remove all pending attacks from the queues
 function resetPendingAttacks ()
+	Debug.console("Reset all pending attacks.");
 	aAttackQueueByOffender = {};
 	aAttackQueueByDefender = {};
 	-- notify because players don't receive this event
@@ -207,27 +211,30 @@ end
 --	* sTargetCT	: defender 
 --	* nDefValue	: defense roll value 
 function resolvePendingAttack(rTarget, nDefValue)
-	-- Debug.chat("---- resolvePendingAttack");
+	Debug.console("--------------------------------------------");
+	Debug.console("Resolve pending attack");
+	
 	local sTargetCT = "";
 	if rTarget then
 		sTargetCT = ActorManager.getCTNodeName(rTarget);
 	end
 	if sTargetCT == "" then
 		-- Debug.chat("no sTargetCT : resolve aborted");
+		Debug.console("No defender : resolve aborted");
 		return;
 	end
 	-- Debug.chat(sTargetCT);
+	Debug.console("Defender = "..sTargetCT);
 
 	local aAttack = {};
 	if aAttackQueueByDefender[sTargetCT] and aAttackQueueByDefender[sTargetCT][1] then
 		aAttack = aAttackQueueByDefender[sTargetCT][1];
 	else
-		-- Debug.chat("no pending attack : resolve aborted");
+		Debug.console("No pending attack : resolve aborted");
 		return;
 	end
 
-	-- Debug.chat("-- aAttack");
-	-- Debug.chat(aAttack);
+	Debug.console("Attack information = ", aAttack);
 
 	local rMessage = ChatManager.createBaseMessage(rTarget, nil);
 	rMessage.sender = "";
@@ -235,14 +242,14 @@ function resolvePendingAttack(rTarget, nDefValue)
 	-- compare attack roll vs defense roll
 	if aAttack.nAtkValue <= nDefValue then
 		-- defense win : delete pending attack and create message
-		-- Debug.chat("defense win");
+		Debug.console("Defense win");
 		--removePendingAttack(aAttack.sSourceCT, sTargetCT);
 		notifyDefense(aAttack.sSourceCT, sTargetCT, nil, "true");
 		rMessage.text = Interface.getString("defense_succeeded_message");
 		rMessage.icon = "roll_attack_miss";
 	else
 		-- attack win : update pending attack and create message
-		-- Debug.chat("attack win");
+		Debug.console("Attack win");
 		aAttack.nDefValue = nDefValue;
 		--updatePendingAttack(aAttack.sSourceCT, sTargetCT, aAttack);
 		notifyDefense(aAttack.sSourceCT, sTargetCT, aAttack, "false");
@@ -250,6 +257,7 @@ function resolvePendingAttack(rTarget, nDefValue)
 		
 		-- check for critical
 		local successMargin = aAttack.nAtkValue - nDefValue;
+		Debug.console("Success Margin", successMargin);
 		if successMargin >= 15 then
 			-- Deadly crit
 			rMessage.text = rMessage.text .. string.format(Interface.getString("deadly_crit_message"), successMargin);
@@ -276,6 +284,7 @@ function resolvePendingAttack(rTarget, nDefValue)
 
 	-- display message
 	Comm.deliverChatMessage(rMessage);
+	Debug.console("--------------------------------------------");
 end
 
 ------------------------------------------------------------------------------------

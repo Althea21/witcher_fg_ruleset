@@ -26,7 +26,8 @@ function performRoll(draginfo, rActor, sSkillName, nSkillMod, sSkillStat)
 end
 
 function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
-    --Debug.chat("---- getRoll");
+	Debug.console("Rolling for skill '"..sSkillName.."'");
+	--Debug.chat("---- getRoll");
     --Debug.chat(rActor);
     --Debug.chat(sSkillName);
     --Debug.chat(nSkillMod);
@@ -43,9 +44,17 @@ function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
 	end
 
 	-- Check if roll is a potential defense action (dodge/escape or athletics)
-	rRoll.nIsDefense = 0;
-	if (sSkillName=="dodgeEscape" or sSkillName=="athletics") then
-		rRoll.nIsDefense = 1;
+	rRoll.sIsDefense = "false";
+	
+	local s = string.lower(sSkillName);
+	Debug.chat(s);
+	s = string.gsub(s, "%s+", "") -- remove spaces
+	Debug.chat(s);
+	s = string.gsub(s, "/", "") -- remove /
+	Debug.chat(s);
+	if s=="dodgeescape" or s=="athletics" then
+		Debug.console("Rolling "..s.." : set skill roll as defense.");
+		rRoll.sIsDefense = "true";
 	end
 
 	-- Add parameters for exploding dice management
@@ -175,7 +184,6 @@ function onSkillRoll(rSource, rTarget, rRoll)
     	local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
     	
     	-- Create the base message based of the source and the final rRoll record (includes dice results).
-    	print("------------------------------------------------------------------------------------------------------");
     	-- Debug.console(rSource);
     	-- Debug.console(rRoll);
     	local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
@@ -197,12 +205,16 @@ function onSkillRoll(rSource, rTarget, rRoll)
         -- Display the message in chat.
 		Comm.deliverChatMessage(rMessage);
 		
-		if rRoll.nIsDefense == 1 then
+		local nDefValue = ActionsManager.total(rRoll);
+		Debug.console("Skill result = "..nDefValue);
+		Debug.console(rRoll.sIsDefense);
+		if rRoll.sIsDefense == "true" then
+			Debug.console("This was a defensive roll, call for resolution.");
 			---- Resolve Defense
-			local nDefValue = ActionsManager.total(rRoll);
 			if nDefValue < 0 then
 				nDefValue = 0;
 			end
+			
 			CombatManager2.resolvePendingAttack(rSource, nDefValue)
 		end
 		
