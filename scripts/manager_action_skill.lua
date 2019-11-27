@@ -47,11 +47,11 @@ function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
 	rRoll.sIsDefense = "false";
 	
 	local s = string.lower(sSkillName);
-	Debug.chat(s);
+	-- Debug.chat(s);
 	s = string.gsub(s, "%s+", "") -- remove spaces
-	Debug.chat(s);
+	-- Debug.chat(s);
 	s = string.gsub(s, "/", "") -- remove /
-	Debug.chat(s);
+	-- Debug.chat(s);
 	if s=="dodgeescape" or s=="athletics" then
 		Debug.console("Rolling "..s.." : set skill roll as defense.");
 		rRoll.sIsDefense = "true";

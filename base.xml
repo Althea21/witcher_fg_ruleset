@@ -23,6 +23,7 @@
 
 	<!-- Tabletop settings -->
 	<includefile source="gameelements.xml" />
+	<script name="Options35E" file="scripts/data_options_TWTRPG.lua" />
 	
 	<!-- Graphics -->
 	<includefile source="graphics/graphics.xml" />

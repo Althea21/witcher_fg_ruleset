@@ -67,18 +67,19 @@ function getWeaponAttackRollStructures(nodeWeapon)
 	
 	-- effects (weapon + enhancements if any)
 	rAttack.effects = DB.getValue(nodeWeapon, "effects", "");
-	if rAttack.effects ~= "" then
-		rAttack.effects = (rAttack.effects).."\n";
-	end
+	
 	local aEnhancementNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "enhancementlist"));
 	for _,v in ipairs(aEnhancementNodes) do
 		local sEffect = DB.getValue(v, "effect", "");
 		if sEffect ~= "" then
+			if rAttack.effects ~= "" then
+				rAttack.effects = (rAttack.effects)..", ";
+			end
 			local sName = DB.getValue(v, "name", "");
 			if sName ~= "" then
-				rAttack.effects = (rAttack.effects).."["..sName.."] : "..(sEffect).."\n";
+				rAttack.effects = (rAttack.effects).."["..sName.."] : "..(sEffect);
 			else
-				rAttack.effects = (rAttack.effects).."[Enhancement] : "..(sEffect).."\n";
+				rAttack.effects = (rAttack.effects).."[Enhancement] : "..(sEffect);
 			end
 		end
 	end
@@ -87,7 +88,6 @@ function getWeaponAttackRollStructures(nodeWeapon)
 	local nType = DB.getValue(nodeWeapon, "type", 0);
 	if nType == 2 then
 		rAttack.range = "M";
-		rAttack.cm = true;
 	elseif nType == 1 then
 		rAttack.range = "R";
 	else
@@ -146,7 +146,6 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	local nType = DB.getValue(nodeWeapon, "type", 0);
 	if nType == 2 then
 		rAttack.range = "M";
-		rAttack.cm = true;
 	elseif nType == 1 then
 		rAttack.range = "R";
 	else
@@ -338,4 +337,97 @@ function getEncumbranceMalus(nodeActor)
 	end
 	
 	return nEncMalus;
+end
+
+-- get armor value of a character for a given location roll (pc or npc)
+-- params :
+--  * nodeActor : pc or npc node
+--  * sLocation : location roll value or "AIM_xxx" string for aimed attack
+-- returns : 
+--	* value	: armor value for given location
+function getArmorValueForLocationRoll(nodeActor, sLocation)
+	Debug.console("getArmorValueForLocationRoll called for sLocation="..sLocation);
+	local nArmorValue = 0;
+
+	sLocation = string.lower(sLocation);
+	local sArmorLocation = sLocation;
+	
+	if sLocation=="arm" then
+		sArmorLocation = "leftarm";
+	elseif sLocation=="leg" or sLocation=="limb" then
+		sArmorLocation = "leftleg";
+	elseif sLocation=="tail" then
+		sArmorLocation = "tail";
+	end
+	
+	for _,v in ipairs(UtilityManager.getSortedTable(DB.getChildren(nodeActor, "armorlist"))) do
+		if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
+			nArmorValue = nArmorValue + DB.getValue(v, "sp", 0);
+		end
+	end
+	
+	return nArmorValue;
+end
+
+-- get damage multiplier modifier for a given location
+-- params :
+--  * nodeActor : pc or npc node
+--  * sLocation : location roll value or "AIM_xxx" string for aimed attack
+-- returns : 
+--	* value	: damage multiplier modifier
+function getDamageLocationModifierForLocationRoll(nodeActor, sLocation)
+	local nMultiplier = 1;
+
+	sLocation = string.lower(sLocation);
+
+	-- get string location from nLocation
+	if string.find(sLocation, "head") then
+		nMultiplier = 3;
+	elseif string.find(sLocation, "torso") then
+		nMultiplier = 1;
+	elseif string.find(sLocation, "arm") or string.find(sLocation, "leg") or string.find(sLocation, "tail") or string.find(sLocation, "limb")then
+		nMultiplier = 0.5;
+	end
+
+	return nMultiplier;
+end
+
+-- to know if nodeActor is a monster or not (work for PC / NPC)
+-- params :
+--  * nodeActor : pc or npc node
+-- returns : 
+--	* bool : true if node is a monster, else false
+function isMonster(nodeActor)
+	local type = DB.getValue(nodeActor, "npctype", "");
+	if type == "" or string.lower(type) == "humanoid" then
+		return false;
+	end
+	return true;
+end
+
+-- to know if nodeActor is a monster without anatomy (elementa or specter)
+-- params :
+--  * nodeActor : pc or npc node
+-- returns : 
+--	* bool 
+function isWithoutAnatomy(nodeActor)
+	local type = DB.getValue(nodeActor, "npctype", "");
+	if string.lower(type) == "specter" or string.lower(type) == "elementa" then
+		return true;
+	end
+	return false;
+end
+
+function isSilverVulnerable(nodeActor)
+	local bVulnerable = false;
+
+	local sOptionMITN = OptionsManager.getOption("MITN");
+	local type = DB.getValue(nodeActor, "npctype", "");
+	if sOptionMITN=="allmonsters" and string.lower(type) ~= "humanoid" then
+		bVulnerable = true;
+	elseif sOptionMITN=="novels" and (string.lower(type)=="cursed ones" or string.lower(type)=="elementa" or string.lower(type)=="necrophage" or string.lower(type)=="relict" or string.lower(type)=="specter" or string.lower(type)=="vampire") then
+		bVulnerable = true;
+	end
+
+	return bVulnerable;
 end

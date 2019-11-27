@@ -11,6 +11,12 @@
 	<string name="tooltip_collapse">Collapse</string>
 	<string name="tooltip_expand">Expand</string>
 
+	<!--Options-->
+	<string name="option_header_houserule">House Rules (GM)</string>
+	<string name="option_label_MITN">Silver Vulnerability management</string>
+	<string name="option_val_allmonsters">All monsters</string>
+	<string name="option_val_novels">As in the Novels</string>
+
 	<!-- Characters IDENTITY -->
 	<string name="char_label_identity">Identity</string>
 	<string name="char_label_home_country">Home Country</string>
@@ -593,6 +599,7 @@
 	<string name="weapon_label_weaponaccuracy">WA</string>
 	<string name="weapon_tooltip_weaponaccuracy">Weapon Accuracy</string>
 	<string name="weapon_label_dmgtype">Type</string>
+	<string name="weapon_tooltip_damagetype">Enter damage type or effect, use coma (,) to separate each one</string>
 	<string name="weapon_label_dmgbonusstat">Stat. bonus</string>
 	<string name="weapon_label_enhancementmax">Max</string>
 	<string name="weapon_label_enhancementname">Name</string>
@@ -617,6 +624,7 @@
 	<string name="damage_for_label">for</string>
 	<string name="damage_afterarmor_label">after armor</string>
 	<string name="damage_label_strongattack">Strong attack x2 before armor</string>
+	<string name="damage_label_critical_extradamage">Extra damage : </string>
 	<string name="damage_label_critical_simple">Critical - Simple</string>
 	<string name="damage_label_critical_complex">Critical - Complex</string>
 	<string name="damage_label_critical_difficult">Critical - Difficult</string>
@@ -628,6 +636,62 @@
 	<string name="damage_label_location_limb">Location - Monster limb</string>
 	<string name="damage_label_location_tail">Location - Monster wing/tail</string>
 
+	<!--Critical Message-->
+	<string name="critical_label_simple_head_greater">Cracked Jaw</string>
+	<string name="critical_desc_simple_head_greater">The blow cracked your jaw, making it hard to speak clearly. You are at a -2 to Magical Skills &amp; Verbal Combat (Charisma, Persuasion, Seduction, Leadership, Deceit, Social Etiquette, and Intimidation).</string>
+	<string name="critical_label_simple_head_lesser">Disfiguring Scar</string>
+	<string name="critical_desc_simple_head_lesser">The blow mangled your face in some way. You are grotesque and diffcult to look at. You take a -3 to empathic Verbal Combat (Charisma, Persuasion, Seduction, Deceit, Social Etiquette, and Leadership).</string>
+	<string name="critical_label_simple_torso_greater">Cracked Ribs</string>
+	<string name="critical_desc_simple_torso_greater">The blow cracked your ribs, making it painful to breathe and exert strength. You take a -2 to BODY. This does not effect Health Points.</string>
+	<string name="critical_label_simple_torso_lesser">Foreign Object</string>
+	<string name="critical_desc_simple_torso_lesser">The blow lodged a piece of clothing or armor in your wound, causing an infection. Your Recovery and Critical Healing are quartered.</string>
+	<string name="critical_label_simple_arm">Sprained Arm</string>
+	<string name="critical_desc_simple_arm">The blow sprained your arm, making it diffcult to maneuver. You take a -2 to actions that use the arm.</string>
+	<string name="critical_label_simple_leg">Sprained Leg</string>
+	<string name="critical_desc_simple_leg">The blow sprained your leg, making it diffcult to walk and maneuver. You take a -2 to SPD, Dodge/Escape, and Athletics.</string>
+
+	<string name="critical_label_complex_head_greater">Minor Head Wound</string>
+	<string name="critical_desc_complex_head_greater">The blow rattled your brain and caused some internal bleeding. It’s hard to think straight. You take a -1 to INT, WILL, and STUN.</string>
+	<string name="critical_label_complex_head_lesser">Lost Teeth</string>
+	<string name="critical_desc_complex_head_lesser">The blow knocked out some teeth. Roll 1d10 to see how many teeth are lost. You take a -3 to magical skills and Verbal Combat.</string>
+	<string name="critical_label_complex_torso_greater">Ruptured Spleen</string>
+	<string name="critical_desc_complex_torso_greater">A tear in your spleen begins bleeding profusely, making you woozy. Make a Stun save every 5 rounds. This wound induces bleeding.</string>
+	<string name="critical_label_complex_torso_lesser">Broken Ribs</string>
+	<string name="critical_desc_complex_torso_lesser">The blow breaks your ribs, causing immense pain when you bend and strain. Take a -2 to BODY and a -1 to REF and DEX.</string>
+	<string name="critical_label_complex_arm">Fractured Arm</string>
+	<string name="critical_desc_complex_arm">The blow fractures your arm. You take a -3 to actions with that arm.</string>
+	<string name="critical_label_complex_leg">Fractured Leg</string>
+	<string name="critical_desc_complex_leg">The blow fractures your leg. You take a -3 to SPD, Dodge/Escape, and Athletics.</string>
+
+	<string name="critical_label_difficult_head_greater">Skull Fracture</string>
+	<string name="critical_desc_difficult_head_greater">The blow fractures a part of your skull, weakening your head and causing bleeding. You take a -1 to INT and DEX, and take quadruple damage from head wounds.</string>
+	<string name="critical_label_difficult_head_lesser">Concussion</string>
+	<string name="critical_desc_difficult_head_lesser">The blow caused a minor concussion. Make a Stun save every 1d6 rounds and take a -2 to INT, REF, and DEX.</string>
+	<string name="critical_label_difficult_torso_greater">Torn Stomach</string>
+	<string name="critical_desc_difficult_torso_greater">The blow rips your stomach, pouring its contents into your gut. You take a -2 to all actions and take 4 points of acid damage per round.</string>
+	<string name="critical_label_difficult_torso_lesser">Sucking Chest Wound</string>
+	<string name="critical_desc_difficult_torso_lesser">The wound tears your lung, which fills your chest with air, crushing organs. You take a -3 to BODY and SPD. You also start suocating.</string>
+	<string name="critical_label_difficult_arm">Compound Arm Fracture</string>
+	<string name="critical_desc_difficult_arm">The blow crushes your arm. Bone sticks out of the skin. The arm is rendered useless and you start bleeding.</string>
+	<string name="critical_label_difficult_leg">Compound Leg Fracture</string>
+	<string name="critical_desc_difficult_leg">The blow snaps your leg, rendering it useless. Quarter SPD, Dodge/Escape, and Athletics. This induces bleeding.</string>
+
+	<string name="critical_label_deadly_head_greater">Separated Spine/Decapitated</string>
+	<string name="critical_desc_deadly_head_greater">The blow either snaps your neck or separates your head from your shoulders. You die immediately</string>
+	<string name="critical_label_deadly_head_lesser">Damaged Eye</string>
+	<string name="critical_desc_deadly_head_lesser">The blow cuts into or indents your eyeball. You take a -5 to sight-based Awareness and -4 to DEX. This wound begins bleeding.</string>
+	<string name="critical_label_deadly_torso_greater">Heart Damage</string>
+	<string name="critical_desc_deadly_torso_greater">The blow damages your heart. Make an immediate Death save. If you survive, the wound is bleeding and you must quarter your Stamina, SPD, and BODY</string>
+	<string name="critical_label_deadly_torso_lesser">Septic Shock</string>
+	<string name="critical_desc_deadly_torso_lesser">The blow damages your intestines, letting waste enter your blood stream. Quarter your Stamina, take a -3 to INT, WILL, REF, and DEX. You are poisoned.</string>
+	<string name="critical_label_deadly_arm">Dismembered Arm</string>
+	<string name="critical_desc_deadly_arm">The blow rends your arm from your body or damages it beyond repair. The arm cannot be used and you start bleeding.</string>
+	<string name="critical_label_deadly_leg">Dismembered Leg</string>
+	<string name="critical_desc_deadly_leg">The blow tears your leg from your body or damages it beyond repair. Quarter your SPD, Dodge/Escape, and Athletics. This wound begins bleeding.</string>
+
+	<string name="critical_label_without_anatomy">Target without anatomy (elementa or specter)</string>
+	<string name="critical_desc_without_anatomy">Bonus damage = </string>
+	
 	<!--Fumble messages-->
 	<string name="fumble_none">No major fumble.</string>
 	
@@ -654,7 +718,7 @@
 	<string name="fumble_unarmed_over9">You fail horribly and not only fall prone but also take 1d6 lethal damage to the head and must make a Stun save.</string>
 	
 	<!--Location messages-->
-	<string name="modifier_label_location">Location : </string>
+	<string name="modifier_label_location">location : </string>
 	<string name="modifier_label_location_or"> or </string>
 	<string name="modifier_label_location_head">Head</string>
 	<string name="modifier_label_location_torso">Torso</string>

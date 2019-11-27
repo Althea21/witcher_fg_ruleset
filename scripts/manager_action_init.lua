@@ -14,7 +14,7 @@ function onInit()
 	OOBManager.registerOOBMsgHandler(OOB_MSGTYPE_APPLYINIT, handleApplyInit);
 	
 	-- Register the result handler - called after the dice have stopped rolling
-	ActionsManager.registerResultHandler("init", onResolve);
+	ActionsManager.registerResultHandler("init", onInitRoll);
 end
 
 function handleApplyInit(msgOOB)
@@ -68,7 +68,7 @@ function performRoll(draginfo, rActor, bSecretRoll)
 	ActionsManager.performAction(draginfo, rActor, rRoll);
 end
 
-function onResolve(rSource, rTarget, rRoll)
+function onInitRoll(rSource, rTarget, rRoll)
 	local rActor = ActorManager.resolveActor(DB.findNode(rSource.sCreatureNode));
 
 	local rMessage = ActionsManager.createActionMessage(rActor, rRoll);

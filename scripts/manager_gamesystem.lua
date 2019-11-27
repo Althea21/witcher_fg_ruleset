@@ -11,7 +11,8 @@ actions = {
 	-- Register attack actions.  We'll allow use of the modifier stack for those actions.
 	["attack"]	= { sTargeting = "each", bUseModStack = true },
 	-- Register damage actions.  We'll allow use of the modifier stack for those actions.
-	["damage"] = { bUseModStack = true },
+	["damage"] = { bUseModStack = true, sTargeting = "each" },
+	["criticaldamage"] = { bUseModStack = true},
 	-- Register defense actions.  We'll allow use of the modifier stack for those actions.
 	["defense"] = { bUseModStack = true },
 	-- Register the save action.  We'll allow use of the modifier stack for this action type.

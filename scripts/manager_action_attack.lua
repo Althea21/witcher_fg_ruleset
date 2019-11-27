@@ -50,8 +50,9 @@ function getRoll(rActor, rWeapon, sAttackType)
 	rRoll.sWeaponType = "" ; 		-- range, melee, unarmed (used for fumble resolution)
 	
 	-- Add parameters for damage location, may be modified by modifier (see OnAttackModifier) or by rolling location table
+	rRoll.sWeaponEffects = "";
 	rRoll.sDamageLocation = "";
-	--rRoll.sIsLocationRoll = "false";
+	rRoll.sIsStrongAttack = "false";
 	
 	-- Debug.chat(rWeapon);
 	
@@ -74,14 +75,19 @@ function getRoll(rActor, rWeapon, sAttackType)
 		elseif sAttackType == "strong" then
 			sRollDescription = "["..Interface.getString("combat_strongattack_message").." "..rWeapon.label.."][Strong -3]"; -- changing this may affect onAttackModifier function below
 			nRollMod = nRollMod - 3;
+			rRoll.sIsStrongAttack = "true";
 		else
 			sRollDescription = "["..Interface.getString("combat_attack_message").." "..rWeapon.label.."]";
 		end
 		
 		-- weapon effects and enhancements
+		local sWeaponEffects = "";
 		if rWeapon.effects then
-			sRollDescription = sRollDescription .. "\n" .. rWeapon.effects;
+			sWeaponEffects = rWeapon.effects;
 		end
+		rRoll.sWeaponEffects = sWeaponEffects;
+		--enhancement_list
+		sRollDescription = sRollDescription .. "\n" .. sWeaponEffects;
 
 		-- stat modifier
 		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
@@ -193,7 +199,7 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		rRoll.sDesc = string.gsub(rRoll.sDesc, "%%s", "");
 	end
 	
-	if (rRoll.sType ~= "attacklocation") then
+	--if (rRoll.sType ~= "attacklocation") then
 		-- Check for reroll
 		local nDiceResult = tonumber(rRoll.aDice[1].result);
 		if (nDiceResult == 1) then
@@ -238,23 +244,23 @@ function onAttackRoll(rSource, rTarget, rRoll)
 			end
 			bDisplayFinalMessage = true;
 		end
-	else
-		-- this roll was for location, this die is not to be stored as the others for main final result
-		rRoll.sDamageLocation = tostring(rRoll.aDice[1].result);
-		bDisplayFinalMessage = true;
-	end
+	-- else
+	-- 	-- this roll was for location, this die is not to be stored as the others for main final result
+	-- 	rRoll.sDamageLocation = tostring(rRoll.aDice[1].result);
+	-- 	bDisplayFinalMessage = true;
+	-- end
 	
 	-- if no more reroll AND not aiming, roll for location
-	if (bDisplayFinalMessage and rRoll.sDamageLocation == "") then
-		--rRoll.sIsLocationRoll = "true";
-		-- reinit rRoll dice
-		rRoll.aDice = { "d10" };
-		-- change roll type to avoid throwing to much dice if multi-targeting
-		rRoll.sType = "attacklocation";
-		-- roll for location
-		bDisplayFinalMessage = false;
-		ActionsManager.performAction(nil, rActor, rRoll);
-	end
+	-- if (bDisplayFinalMessage and rRoll.sDamageLocation == "") then
+	-- 	--rRoll.sIsLocationRoll = "true";
+	-- 	-- reinit rRoll dice
+	-- 	rRoll.aDice = { "d10" };
+	-- 	-- change roll type to avoid throwing to much dice if multi-targeting
+	-- 	rRoll.sType = "attacklocation";
+	-- 	-- roll for location
+	-- 	bDisplayFinalMessage = false;
+	-- 	ActionsManager.performAction(nil, rActor, rRoll);
+	-- end
 	
 	if bDisplayFinalMessage then
 		local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
@@ -263,35 +269,35 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
 		
 		-- update message for auto location
-		local locMessage = "";
-		if rRoll.sDamageLocation == "1" then
-			-- head
-			locMessage = Interface.getString("modifier_label_aimhead");
-		elseif rRoll.sDamageLocation == "2" or rRoll.sDamageLocation == "3" or rRoll.sDamageLocation == "4" then
-			-- torso
-			locMessage = Interface.getString("modifier_label_aimtorso");
-		elseif rRoll.sDamageLocation == "5" then
-			-- human right arm or monster torso
-			locMessage = Interface.getString("modifier_label_location_rightarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertorso");
-		elseif rRoll.sDamageLocation == "6" then
-			-- human left arm or monster right limb
-			locMessage = Interface.getString("modifier_label_location_leftarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
-		elseif rRoll.sDamageLocation == "7" then
-			-- human right leg or monster right limb
-			locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
-		elseif rRoll.sDamageLocation == "8" then
-			-- human right leg or monster left limb
-			locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
-		elseif rRoll.sDamageLocation == "9" then
-			-- human left leg or monster left limb
-			locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
-		elseif rRoll.sDamageLocation == "10" then
-			-- human left leg or monster tail/wing
-			locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertail");
-		end
-		if locMessage ~= "" then
-			rMessage.text = rMessage.text .. "\n["..Interface.getString("modifier_label_location").." ("..rRoll.sDamageLocation..") "..locMessage.."]";
-		end
+		-- local locMessage = "";
+		-- if rRoll.sDamageLocation == "1" then
+		-- 	-- head
+		-- 	locMessage = Interface.getString("modifier_label_aimhead");
+		-- elseif rRoll.sDamageLocation == "2" or rRoll.sDamageLocation == "3" or rRoll.sDamageLocation == "4" then
+		-- 	-- torso
+		-- 	locMessage = Interface.getString("modifier_label_aimtorso");
+		-- elseif rRoll.sDamageLocation == "5" then
+		-- 	-- human right arm or monster torso
+		-- 	locMessage = Interface.getString("modifier_label_location_rightarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertorso");
+		-- elseif rRoll.sDamageLocation == "6" then
+		-- 	-- human left arm or monster right limb
+		-- 	locMessage = Interface.getString("modifier_label_location_leftarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
+		-- elseif rRoll.sDamageLocation == "7" then
+		-- 	-- human right leg or monster right limb
+		-- 	locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
+		-- elseif rRoll.sDamageLocation == "8" then
+		-- 	-- human right leg or monster left limb
+		-- 	locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
+		-- elseif rRoll.sDamageLocation == "9" then
+		-- 	-- human left leg or monster left limb
+		-- 	locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
+		-- elseif rRoll.sDamageLocation == "10" then
+		-- 	-- human left leg or monster tail/wing
+		-- 	locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertail");
+		-- end
+		-- if locMessage ~= "" then
+		-- 	rMessage.text = rMessage.text .. "\n["..Interface.getString("modifier_label_location").." ("..rRoll.sDamageLocation..") "..locMessage.."]";
+		-- end
 		
 		-- update rMessage in case of fumble
 		if (bFumble) then
@@ -343,19 +349,15 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		-- Debug.chat(rMessage);
 		
 		-- add pending attack to queue
-		-- local nAtkValue = rRoll.nMod;
-		-- for i=1, #rRoll.aDice do
-		-- 	nAtkValue = nAtkValue + rRoll.aDice[i]["result"];
-		-- end
 		local nAtkValue = ActionsManager.total(rRoll);
 		if nAtkValue < 0 then
 			nAtkValue=0;
 		end
 
 		if rRoll.sDamageLocation:match("^AIM_") then
-			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "true");
+			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, rRoll.sDamageLocation, "true", rRoll.sIsStrongAttack, rRoll.sWeaponEffects);
 		else
-			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, sLocation, "false");
+			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, "", "false", rRoll.sIsStrongAttack, rRoll.sWeaponEffects);
 		end
 		
 		-- Display the message in chat.
@@ -365,9 +367,11 @@ end
 
 -- Modifier handler : additional modifiers to apply to the roll
 function onAttackModifier(rSource, rTarget, rRoll)
-	-- Debug.chat("------- onAttackModifier");
-	-- Debug.chat("--rTarget : ");
-	-- Debug.chat(rTarget);
+	Debug.console("--------------------------------------------");
+	Debug.console("onAttackModifier");
+	Debug.console("rTarget :");
+	Debug.console(rTarget);
+
 	local aAddDesc = {};
 	local nAddMod = 0;
 	

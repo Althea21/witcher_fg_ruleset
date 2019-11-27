@@ -5,7 +5,7 @@
 
 
 -- OOB Message types for combat resolution
-OOB_MSGTYPE_APPLYATTACK = "applyattack";
+OOB_MSGTYPE_APPLYATTACK	= "applyattack";
 OOB_MSGTYPE_RESETATTACKS = "resetattacks";
 OOB_MSGTYPE_APPLYDEFENSE = "applydefense";
 
@@ -43,7 +43,6 @@ function rollEntryInit(nodeEntry)
 	
 	local rActor = ActorManager.getActorFromCT(nodeEntry);
 	ActionInit.performRoll(null, rActor);
-	DB.setValue(nodeEntry, "initresult", "number", nInitResult);
 end
 
 -- roll init for ct entries
@@ -95,35 +94,33 @@ end
 
 -- Queues for tracking pending Attacks for defense, then damage resolution (FIFO)
 -- Each item must be formatted like :
---	* sSourceCT : offender (obtained by ActorManager.getCTNodeName(rSource) )
---	* sTargetCT : defender (obtained by ActorManager.getCTNodeName(rTarget) )
---	* nAtkValue : value of attack roll (total with modifier, reroll etc...)
---	* nDefValue : value of defense roll (total with modifier, reroll etc...)
---	* sLocation : strike location
---	* bAimed 	: if attack was aimed
+--	* sSourceCT 		: offender (obtained by ActorManager.getCTNodeName(rSource) )
+--	* sTargetCT 		: defender (obtained by ActorManager.getCTNodeName(rTarget) )
+--	* nAtkValue 		: value of attack roll (total with modifier, reroll etc...)
+--	* nDefValue 		: value of defense roll (total with modifier, reroll etc...)
+--	* sLocation 		: strike location
+--	* sIsAimed 			: if attack was aimed or not ("true"/"false")
+--	* sIsStrongAttack 	: if attack is a strong Attack or not ("true"/"false") for later damage res
+--	* sTgtVulnerabilities : string figuring target vulnerabilities
+--	* sWeaponEffects 	: all effects of offender weapon for later damage res
 -- Item must be cleared after damage resolution or if attack is missed.
 
--- Queue sorted by offender : aAttackQueueByOffender[sSourceCT][sTargetCT] = {}
-aAttackQueueByOffender = {};
--- Queue sorted by defender : aAttackQueueByOffender[sTargetCT] = {}
+-- Queue sorted by defender : aAttackQueueByDefender[sTargetCT] = {}
 aAttackQueueByDefender = {};
 
 -- Add pending attack to the queues
 -- params :
---	* rSource	: offender 
---	* rTarget	: defender 
---	* nAtkValue : value of attack roll (total with modifier, reroll etc...)
---	* sLocation : strike location
---	* sIsAimed 	: if attack was aimed or not ("true"/"false")
-function addPendingAttack(sSourceCT, sTargetCT, nAtkValue, sLocation, sIsAimed)
+--	* rSource			: offender 
+--	* rTarget			: defender 
+--	* nAtkValue 		: value of attack roll (total with modifier, reroll etc...)
+--	* sLocation 		: strike location
+--	* sIsAimed 			: if attack was aimed or not ("true"/"false")
+--	* sIsStrongAttack 	: if attack is a strong Attack or not ("true"/"false") for later damage res
+--	* sWeaponEffects 	: all effects of offender weapon for later damage res
+function addPendingAttack(sSourceCT, sTargetCT, nAtkValue,  sLocation, sIsAimed, sIsStrongAttack, sWeaponEffects)
+	Debug.console("--------------------------------------------");
 	Debug.console("Add pending attack of "..sSourceCT.." vs "..sTargetCT.." (attack value="..nAtkValue..")");
-	-- Debug.chat("---- addPendingAttack");
-	-- Debug.chat(sSourceCT);
-	-- Debug.chat(rTarget);
-	-- Debug.chat(nAtkValue);
-	-- Debug.chat(sLocation);
-	-- Debug.chat(bAimed);
-
+	
 	if sTargetCT == "" then
 		return;
 	end
@@ -135,23 +132,17 @@ function addPendingAttack(sSourceCT, sTargetCT, nAtkValue, sLocation, sIsAimed)
 	aAttack.nDefValue = -1;
 	aAttack.sLocation = sLocation;
 	aAttack.sIsAimed = sIsAimed;
+	aAttack.sIsStrongAttack = sIsStrongAttack;
+	aAttack.sTgtVulnerabilities = "";
+	aAttack.sWeaponEffects = sWeaponEffects;
 	
-	-- Debug.chat(aAttack);
-
-	if not aAttackQueueByOffender[sSourceCT] then
-		aAttackQueueByOffender[sSourceCT] = {};
-	end
-	if not aAttackQueueByOffender[sSourceCT][sTargetCT] then
-		aAttackQueueByOffender[sSourceCT][sTargetCT] = {};
-	end
-	table.insert(aAttackQueueByOffender[sSourceCT][sTargetCT], aAttack);
-
+	Debug.console("aAttack");
+	Debug.console(aAttack);
+	
 	if not aAttackQueueByDefender[sTargetCT] then
 		aAttackQueueByDefender[sTargetCT] = {};
 	end
 	table.insert(aAttackQueueByDefender[sTargetCT], aAttack);
-	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
-	--notifyAttack(sSourceCT, sTargetCT, aAttack);
 end
 
 -- Update pending attack in the queues
@@ -160,22 +151,14 @@ end
 --	* sTargetCT	: defender 
 --  * aAttack 	: array standing for the updated attack (see above for format)
 function updatePendingAttack(sSourceCT, sTargetCT, aAttack)
+	Debug.console("--------------------------------------------");
 	Debug.console("Update pending attack of "..sSourceCT.." vs "..sTargetCT);
-	-- Debug.chat("---- updatePendingAttack")
-	if aAttackQueueByOffender[sSourceCT] then
-		if aAttackQueueByOffender[sSourceCT][sTargetCT] then
-			aAttackQueueByOffender[sSourceCT][sTargetCT] = aAttack;
-		end
-	end
-	-- Debug.chat("--- Before update")
-	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
-	
+	Debug.console("aAttack");
+	Debug.console(aAttack);
+
 	if aAttackQueueByDefender[sTargetCT] then
 		aAttackQueueByDefender[sTargetCT][1] = aAttack;
 	end
-
-	-- Debug.chat("--- After update")
-	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
 end
 
 -- Remove pending attack from the queues
@@ -184,26 +167,15 @@ end
 --	* sTargetCT	: defender 
 function removePendingAttack (sSourceCT, sTargetCT)
 	Debug.console("Remove pending attack of "..sSourceCT.." vs "..sTargetCT);
-	if aAttackQueueByOffender[sSourceCT] then
-		if aAttackQueueByOffender[sSourceCT][sTargetCT] then
-			table.remove(aAttackQueueByOffender[sSourceCT][sTargetCT],1);
-		end
-	end
-	-- Debug.chat("--- Before remove")
-	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
 	if aAttackQueueByDefender[sTargetCT] then
 		table.remove(aAttackQueueByDefender[sTargetCT],1);
 	end
-	-- Debug.chat("--- After remove")
-	-- Debug.chat(aAttackQueueByDefender[sTargetCT]);
 end
 
 -- Remove all pending attacks from the queues
 function resetPendingAttacks ()
 	Debug.console("Reset all pending attacks.");
-	aAttackQueueByOffender = {};
 	aAttackQueueByDefender = {};
-	-- notify because players don't receive this event
 end
 
 -- Resolve attack vs defense
@@ -213,6 +185,8 @@ end
 function resolvePendingAttack(rTarget, nDefValue)
 	Debug.console("--------------------------------------------");
 	Debug.console("Resolve pending attack");
+	Debug.console("Defender :");
+	Debug.console(rTarget);
 	
 	local sTargetCT = "";
 	if rTarget then
@@ -234,24 +208,33 @@ function resolvePendingAttack(rTarget, nDefValue)
 		return;
 	end
 
-	Debug.console("Attack information = ", aAttack);
-
 	local rMessage = ChatManager.createBaseMessage(rTarget, nil);
 	rMessage.sender = "";
 	
 	-- compare attack roll vs defense roll
 	if aAttack.nAtkValue <= nDefValue then
 		-- defense win : delete pending attack and create message
+		aAttack.nDefValue = nDefValue;
+		Debug.console("Attack information = ", aAttack);
 		Debug.console("Defense win");
-		--removePendingAttack(aAttack.sSourceCT, sTargetCT);
+
 		notifyDefense(aAttack.sSourceCT, sTargetCT, nil, "true");
 		rMessage.text = Interface.getString("defense_succeeded_message");
 		rMessage.icon = "roll_attack_miss";
 	else
 		-- attack win : update pending attack and create message
-		Debug.console("Attack win");
 		aAttack.nDefValue = nDefValue;
-		--updatePendingAttack(aAttack.sSourceCT, sTargetCT, aAttack);
+		Debug.console("Attack information = ", aAttack);
+		Debug.console("Attack win");
+
+		local rActor = ActorManager.resolveActor(DB.findNode(rTarget.sCreatureNode));
+		local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+		if sActorType=="pc" then
+			aAttack.sTgtVulnerabilities = "";
+		else
+			aAttack.sTgtVulnerabilities = DB.getValue(nodeActor, "vulnerabilities", "");
+		end
+		
 		notifyDefense(aAttack.sSourceCT, sTargetCT, aAttack, "false");
 		rMessage.text = Interface.getString("defense_failed_message") .. "\n";
 		
@@ -284,15 +267,73 @@ function resolvePendingAttack(rTarget, nDefValue)
 
 	-- display message
 	Comm.deliverChatMessage(rMessage);
-	Debug.console("--------------------------------------------");
 end
 
+-- Retreive some modifier for rolling damage 
+-- params :
+--	* rSource	: offender 
+--	* rTarget	: defender 
+-- returns :
+--  * aDmgModifier : array containing information related to pending attack :
+--		- sIsStrongAttack
+--		- sTgtVulnerabilities
+--		- sLocation
+--		- sWeaponEffects
+--		- sSuccessMargin
+function getPendingAttackDamageModifier(rSource, rTarget)
+	Debug.console("--------------------------------------------");
+	Debug.console("Get pending attack damage modifier");
+	
+	local sSourceCT = ActorManager.getCTNodeName(rSource);
+	if sSourceCT == "" then
+		Debug.console("-- getPendingAttackDamageModifier called without legit CT source, abort");
+		return nil;
+	end
+	
+	local sTargetCT = "";
+	if rTarget then
+		sTargetCT = ActorManager.getCTNodeName(rTarget);
+	end
+	if sTargetCT == "" then
+		Debug.console("-- getPendingAttackDamageModifier called without legit CT target, abort");
+		return nil;
+	end
+
+	local aAttack = {};
+	-- get the corresponding attack
+	if aAttackQueueByDefender[sTargetCT] then
+		for i=1, #aAttackQueueByDefender[sTargetCT] do
+			local a = aAttackQueueByDefender[sTargetCT][i];
+			if a.sSourceCT == sSourceCT then
+				aAttack = a;
+				break;
+			end
+		end
+	end
+
+	if not aAttack.nAtkValue then
+		Debug.console("-- getPendingAttackDamageModifier called without legit pending attack, abort");
+		return nil;
+	end 
+
+	local aDmgModifier = {};
+	aDmgModifier.sIsStrongAttack = aAttack.sIsStrongAttack;
+	aDmgModifier.sTgtVulnerabilities = aAttack.sTgtVulnerabilities;
+	aDmgModifier.sLocation = aAttack.sLocation;
+	aDmgModifier.sIsAimed = aAttack.sIsAimed;
+	aDmgModifier.sWeaponEffects = aAttack.sWeaponEffects;
+	aDmgModifier.sSuccessMargin = aAttack.nAtkValue - aAttack.nDefValue;
+	
+	Debug.console("--------------------------------------------");
+	
+	return aDmgModifier;
+end
 ------------------------------------------------------------------------------------
 -- OOB MESSAGES MANAGEMENT
 ------------------------------------------------------------------------------------
 
 -- Notify attack to keep attack queues up to date between GM and players
-function notifyAttack(rSource, rTarget, nAtkValue, sLocation, sIsAimed)
+function notifyAttack(rSource, rTarget, nAtkValue, sLocation, sIsAimed, sIsStrongAttack, sWeaponEffects)
 	local msgOOB = {};
 	
 	local sSourceCT = ActorManager.getCTNodeName(rSource);
@@ -316,6 +357,8 @@ function notifyAttack(rSource, rTarget, nAtkValue, sLocation, sIsAimed)
 	msgOOB.sAtkValue = nAtkValue;
 	msgOOB.sLocation = sLocation;
 	msgOOB.sIsAimed = sIsAimed;
+	msgOOB.sIsStrongAttack = sIsStrongAttack;
+	msgOOB.sWeaponEffects = sWeaponEffects;
 	
 	-- deliver msgOOB to all connected clients
 	Comm.deliverOOBMessage(msgOOB);
@@ -324,7 +367,7 @@ end
 -- Handle OOB attack notification to keep attack queues up to date between GM and players
 function handleAttack(msgOOB)
 	-- Debug.chat("---- handleAttack")
-	addPendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, tonumber(msgOOB.sAtkValue), msgOOB.sLocation, msgOOB.sIsAimed)
+	addPendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, tonumber(msgOOB.sAtkValue), msgOOB.sLocation, msgOOB.sIsAimed, msgOOB.sIsStrongAttack, msgOOB.sWeaponEffects)
 end
 
 -- Notify defense to keep attack queues up to date between GM and players
@@ -356,8 +399,8 @@ function handleDefense(msgOOB)
 		local aAttack = Json.parse(msgOOB.sAttack)
 		
 		-- temporary delete pending attack until damage resolution is done (TODO)
-		removePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT);
-		--updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
+		-- removePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT);
+		updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
 	end
 end
 
