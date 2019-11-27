@@ -729,7 +729,9 @@
 	<string name="modifier_label_location_leftleg">Left leg</string>
 	<string name="modifier_label_location_monsterrightlimb">Monster right limb</string>
 	<string name="modifier_label_location_monsterleftlimb">Monster left limb</string>
+	<string name="modifier_label_location_limb">Monster limb</string>
 	<string name="modifier_label_location_monstertail">Monster wing/tail</string>
+	<string name="modifier_label_location_tail">Monster wing/tail</string>
 	
 	<!--Modifiers-->
 	<string name="modifier_label_attack">Attack modifiers</string>

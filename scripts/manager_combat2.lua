@@ -316,6 +316,8 @@ function getPendingAttackDamageModifier(rSource, rTarget)
 		return nil;
 	end 
 
+	Debug.console(aAttack);
+
 	local aDmgModifier = {};
 	aDmgModifier.sIsStrongAttack = aAttack.sIsStrongAttack;
 	aDmgModifier.sTgtVulnerabilities = aAttack.sTgtVulnerabilities;

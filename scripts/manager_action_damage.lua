@@ -277,6 +277,8 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	local sFinalLocation = "";
 
 	local aPendingAttackDmgMod = CombatManager2.getPendingAttackDamageModifier(rSource, rTarget);
+	Debug.console("returned aPendingAttackDmgMod : ");
+	Debug.console(aPendingAttackDmgMod);
 
 	-- get rolled damage (= weapon + stat bonus + silver bonus if needed)
 	nFinalDamage = nFinalDamage + tonumber(nTotal);
@@ -291,7 +293,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	if not bIsSilverVulnerable and bIsWeaponSilver then
 		-- don't count silver damage
 		nFinalDamage = nFinalDamage - rDamageOutput.aDamageTypes["silver"];
-		Debug.console("target is NOT silver vulnerable but weapon is silver don't count silver damage : ", nFinalDamage);
+		Debug.console("target is NOT silver vulnerable but weapon is silver = don't count silver damage : ", nFinalDamage);
 	end
 
 	-- STRONG ATTACK ?
@@ -308,8 +310,11 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	local sIsAimed = "false";
 	-- location from pending attack
 	if aPendingAttackDmgMod then
+		sIsAimed = aPendingAttackDmgMod.sIsAimed;
 		sLocation = aPendingAttackDmgMod.sLocation;
-		sIsAimed = "true";
+		if string.find(sLocation, "AIM_") then
+			sLocation = string.lower(string.match(sLocation, "AIM_(%a+)"));
+		end
 	else
 		-- check manual modifier
 		if ModifierStack.getModifierKey("AIM_HEAD") then
@@ -332,6 +337,8 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 			sIsAimed = "true";
 		end
 	end
+
+	Debug.console("location : ", sLocation);
 
 	-- CRITICAL ?
 	-- must be done here because it may affect location
@@ -366,7 +373,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	
 end
 
-function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nFinalDamage)
+function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage, nFinalDamage)
 	Debug.console("--------------------------------------------");
 	Debug.console("Apply Damage 2 : ");
 	Debug.console("sSourceCT "..sSourceCT);
@@ -407,16 +414,16 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nFinalDamage
 	nFinalDamage = math.floor(nFinalDamage*nLocationMultiplier);
 	Debug.console("damage after location : ", nFinalDamage);
 	
-	-- update hit_point 
-	notifyApplyDamage(sTargetCT, false, nFinalDamage);
-
 	-- Output results
-	messageDamage(rSource, rTarget, bSecret, "damage", sDamage, nFinalDamage, "");
+	messageDamage(rSource, rTarget, bSecret, "damage", sDamage, nCritDamage, nFinalDamage, "");
+
+	-- update hit_point 
+	notifyApplyDamage(sTargetCT, nFinalDamage + nCritDamage);
 
 	CombatManager2.removePendingAttack(sSourceCT, sTargetCT);
 end
 
-function messageDamage(rSource, rTarget, bSecret, sDamageType, sDamageDesc, sTotal, sExtraResult)
+function messageDamage(rSource, rTarget, bSecret, sDamageType, sDamageDesc, nExtraDamage, sTotal, sExtraResult)
 	if not (rTarget or sExtraResult ~= "") then
 		return;
 	end
@@ -433,7 +440,12 @@ function messageDamage(rSource, rTarget, bSecret, sDamageType, sDamageDesc, sTot
 	end
 
 	msgShort.text = sDamageType .. " ->";
-	msgLong.text = sDamageType .. " [" .. sTotal .. "] ->";
+	msgLong.text = sDamageType .. " [" .. sTotal 
+	if nExtraDamage > 0 then
+		msgLong.text = msgLong.text .. " + " .. nExtraDamage;	
+	end
+	msgLong.text = msgLong.text .. "] ->";
+	
 	if rTarget then
 		msgShort.text = msgShort.text .. " [to " .. ActorManager.getDisplayName(rTarget) .. "]";
 		msgLong.text = msgLong.text .. " [to " .. ActorManager.getDisplayName(rTarget) .. "]";
@@ -479,8 +491,10 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 				ActionsManager.performAction(nil, rTarget, rRoll);
 			elseif sLocation == "arm" then
 				outputCriticalMessage(sSourceCT, sTargetCT, 4, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage);
-			elseif sLocation == "leg" then
+			elseif sLocation == "leg" or sLocation == "limb" or sLocation == "tail" then
 				outputCriticalMessage(sSourceCT, sTargetCT, 2, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage);
+			else
+				Debug.console("[processCriticalDamageAndLocation error ]Attack aimed with no location specified");
 			end
 		else
 			-- roll 2D6
@@ -619,7 +633,8 @@ function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sL
 	local sTargetType, nodeTarget = ActorManager.getTypeAndNode(rTarget);
 	local bIsMonster = CharManager.isMonster(nodeTarget);
 	local bIsTargetWithoutAnatomy = CharManager.isWithoutAnatomy(nodeTarget);
-	
+	local sBonusDamage = 0;
+
 	local rMessage = ChatManager.createBaseMessage(nil, nil);
 	rMessage.sender = "";
 	
@@ -649,7 +664,6 @@ function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sL
 			sDescId = sDescId .. "_lesser";
 		end
 
-		local sBonusDamage = 0;
 		if bIsTargetWithoutAnatomy == "true" then
 			if sLabelId == "critical_label_simple_torso_lesser" then
 				sLabelId = "critical_label_without_anatomy";
@@ -675,21 +689,21 @@ function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sL
 
 		rMessage.text = rMessage.text .. Interface.getString(sLabelId) .. " : " .. Interface.getString(sDescId);
 	
-		if sBonusDamage > 0 then
-			rMessage.text = rMessage.text .. sBonusDamage;
+		-- if sBonusDamage > 0 then
+		-- 	rMessage.text = rMessage.text .. sBonusDamage;
 			
-			-- apply bonus damage
-			local sType, node = ActorManager.getTypeAndNode(rSource);
-			local nCurrentHP = DB.getValue(node, "attributs.hit_points", 0);
-			DB.setValue(node, "attributs.hit_points", "number", nCurrentHP - sBonusDamage);
-		end
+		-- 	-- apply bonus damage
+		-- 	local sType, node = ActorManager.getTypeAndNode(rSource);
+		-- 	local nCurrentHP = DB.getValue(node, "attributs.hit_points", 0);
+		-- 	DB.setValue(node, "attributs.hit_points", "number", nCurrentHP - sBonusDamage);
+		-- end
 	end
 	
 	-- Send the chat message
 	Comm.deliverChatMessage(rMessage);
 
 	-- Continue damage resolution
-	applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nFinalDamage)
+	applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sBonusDamage, nFinalDamage)
 end
 
 ------------------------------------------------------------------------------------
@@ -864,8 +878,8 @@ end
 -- Notify damage / heal roll
 function notifyApplyDamage(sTargetCT, nTotalDamage)
 	Debug.console("--------------------------------------------");
-	Debug.console("Handle Damage - rRoll : ");
-	Debug.console(rRoll);
+	Debug.console("notifyApplyDamage - nTotalDamage : ");
+	Debug.console(nTotalDamage);
 	
 	if sTargetCT == "" then
 		Debug.console("notifyApplyDamage without legit rTarget : abort");
