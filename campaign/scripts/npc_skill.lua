@@ -181,6 +181,14 @@ function action(draginfo)
 			return;
 		end
 
+		-- Manage "Feral X" ability (For the purposes of Awareness and Wilderness Survival, instinct gives them an INT of X)
+		if string.lower(sDragLabel)==string.lower(Interface.getString("char_skill_awareness_label")) or string.lower(sDragLabel)==string.lower(Interface.getString("char_skill_wildernessSurvival_label")) then
+			local feralValue = string.match(string.lower(DB.getValue(nodeActor, "abilities", "")), "feral%s*(%d)");
+			if feralValue then
+				nStatMod = tonumber(feralValue);
+			end
+		end
+
 		--sDragLabel = sDragLabel .. " ("..sStat..")";
 		nDragMod = nDragMod + nStatMod;
 		ActionSkill.performRoll(draginfo, rActor, sDragLabel, nDragMod, sStat);
