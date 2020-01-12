@@ -392,6 +392,9 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage,
 	local nArmorValue = CharManager.getArmorValueForLocationRoll(nodeTarget, sLocation);
 	Debug.console("armor sp of target for location : ", nArmorValue);
 	nFinalDamage = nFinalDamage - nArmorValue;
+	if nFinalDamage < 0 then
+		nFinalDamage = 0;
+	end
 	Debug.console("damage after armor : ", nFinalDamage);
 	
 	-- resistance (x0.5)
