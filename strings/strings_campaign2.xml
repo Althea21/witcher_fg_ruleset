@@ -911,6 +911,8 @@
 	<string name="npc_label_run">Run</string>
 	<string name="npc_label_leap">Leap</string>
 	<string name="npc_label_hitpoints">HP</string>
+	<string name="npc_label_hitpoints_locked">Auto-compute HP</string>
+	<string name="npc_label_hitpoints_unlocked">Manual input HP</string>
 	<string name="npc_label_stamina">Sta</string>
 	<string name="npc_label_encumbrance">Enc</string>
 	<string name="npc_label_recovery">Rec</string>
@@ -922,7 +924,8 @@
 	<string name="npc_label_intelligence">Intelligence</string>
 	<string name="npc_label_organization">Organization</string>
 	<string name="npc_label_loot">Loot</string>
-
+	<string name="npc_label_bounty">Bounty</string>
+	
 	<string name="npc_header_skills">Skills</string>
 	<string name="npc_header_ecology">Ecology</string>
 	<string name="npc_header_combat">Combat</string>

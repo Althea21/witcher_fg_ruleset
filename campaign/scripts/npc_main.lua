@@ -35,7 +35,7 @@ function update()
 	threat2.setReadOnly(bReadOnly);
 	vulnerabilities.setReadOnly(bReadOnly);
 	abilities.setReadOnly(bReadOnly);
-	hit_points.setReadOnly(bReadOnly);
+	--hit_points.setReadOnly(bReadOnly);
 	stamina.setReadOnly(bReadOnly);
 	intelligence.setReadOnly(bReadOnly);
 	reflex.setReadOnly(bReadOnly);
@@ -54,6 +54,9 @@ function update()
 	intelligencelevel.setReadOnly(bReadOnly);
 	organization.setReadOnly(bReadOnly);
 	loot.setReadOnly(bReadOnly);
+	bounty.setReadOnly(bReadOnly);
+
+	onToggleManualHP(nodeRecord);
 
 	updateStats();
 end
@@ -65,7 +68,23 @@ function updateStats()
 	--onWoundThresholdStateChanged(getDatabaseNode());
 end
 
+function isHPAuto(nodeActor)
+	local state = DB.getValue(nodeActor, "attributs.hp_auto", -1);
+	return (state == 0);
+end
+
 -- derived stat functions
+function onToggleManualHP(nodeActor)
+	-- hp mode
+	local bHpMaxReadOnly = isHPAuto(nodeActor);
+	--record read-only ?
+	local bRecordReadOnly = WindowManager.getReadOnlyState(nodeActor);
+	
+	local bFinalRO = (bHpMaxReadOnly or bRecordReadOnly);
+	hit_pointsmax.setReadOnly(bFinalRO);
+	updateStats();
+end
+
 function onBodyChanged()
 	local bodyValue = body.getValue();
 	encumbrancemax.setValue(bodyValue*10);
@@ -115,10 +134,15 @@ function onBodyChanged()
 	end
 	
 	local physical = math.floor((bodyValue + will.getValue())/2);
-	hit_pointsmax.setValue(physical*5);
+	if hp_auto.getValue()==0 then
+		hit_pointsmax.setValue(physical*5);
+	end
 	woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
 	staminamax.setValue(physical*5);
 	recovery.setValue(physical);
+	if physical > 10 then
+		physical = 10;
+	end
 	stun.setValue(physical);
 end
 
@@ -133,10 +157,15 @@ function onWillChanged()
 	if (woundthreshold_state==0) then
 		-- change derived stat only if not under woundthreshold_state
 		local physical = math.floor((body.getValue() + will.getValue())/2);
-		hit_pointsmax.setValue(physical*5);
+		if hp_auto.getValue()==0 then
+			hit_pointsmax.setValue(physical*5);
+		end
 		woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
 		staminamax.setValue(physical*5);
 		recovery.setValue(physical);
+		if physical > 10 then
+			physical = 10;
+		end
 		stun.setValue(physical);
 	end
 end

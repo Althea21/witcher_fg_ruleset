@@ -113,6 +113,9 @@ function onBodyChanged()
 		woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
 		staminamax.setValue(physical*5);
 		recovery.setValue(physical);
+		if physical > 10 then
+			physical = 10;
+		end
 		stun.setValue(physical);
 		onHPChanged();
 	end
@@ -164,6 +167,9 @@ function onWillChanged()
 		woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
 		staminamax.setValue(physical*5);
 		recovery.setValue(physical);
+		if physical > 10 then
+			physical = 10;
+		end
 		stun.setValue(physical);
 	end
 end
