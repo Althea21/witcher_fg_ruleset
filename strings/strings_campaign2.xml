@@ -942,6 +942,7 @@
 	<string name="ct_menu_initnpc">Roll NPC Initiatives</string>
 	<string name="ct_menu_initpc">Roll PC Initiatives</string>
 	<string name="ct_menu_initclear">Clear All Initiatives</string>
+	<string name="ct_menu_resetpendingattacks">Reset pending attack resolution</string>
 	<string name="ct_menu_itemdelete">Delete From Tracker</string>
 	<string name="ct_menu_itemdeletenonfriendly">Delete All Non-Friendly</string>
 	<string name="ct_menu_itemdeletefoe">Delete Only Foes</string>

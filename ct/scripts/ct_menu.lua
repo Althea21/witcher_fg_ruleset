@@ -16,6 +16,10 @@ function onInit()
 		registerMenuItem(Interface.getString("ct_menu_itemdelete"), "delete", 3);
 		registerMenuItem(Interface.getString("ct_menu_itemdeletenonfriendly"), "delete", 3, 1);
 		registerMenuItem(Interface.getString("ct_menu_itemdeletefoe"), "delete", 3, 3);
+
+		-- Reset pending attacks
+		registerMenuItem(Interface.getString("ct_menu_resetpendingattacks"), "erase", 5);
+		
 	end
 end
 
@@ -48,6 +52,8 @@ function onMenuSelection(selection, subselection, subsubselection)
 			elseif subselection == 3 then
 				clearNPCs(true);
 			end
+		elseif selection == 5 then
+			CombatManager2.resetPendingAttacks();
 		end
 	end
 end
