@@ -58,7 +58,11 @@ function getRoll(rActor, rAction)
 	-- Add the dice and modifiers TODO : DON'T ADD SILVER DAMAGE IF TARGET NOT MONSTER
 	for _,vClause in pairs(rRoll.clauses) do
 		for _,vDie in ipairs(vClause.dice) do
-			table.insert(rRoll.aDice, vDie);
+			if string.lower(vClause.dmgtype)=="silver" and vDie== "d6" then
+				table.insert(rRoll.aDice, "s6");
+			else
+				table.insert(rRoll.aDice, vDie);
+			end
 		end
 		rRoll.nMod = rRoll.nMod + vClause.modifier;
 		if vClause.dmgtype ~= "" then
@@ -275,6 +279,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	
 	local nFinalDamage = 0;
 	local sFinalLocation = "";
+	local sFinalDamageMessage = "";
 
 	local aPendingAttackDmgMod = CombatManager2.getPendingAttackDamageModifier(rSource, rTarget);
 	Debug.console("returned aPendingAttackDmgMod : ");
@@ -296,10 +301,13 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 		Debug.console("target is NOT silver vulnerable but weapon is silver = don't count silver damage : ", nFinalDamage);
 	end
 
+	sFinalDamageMessage = sFinalDamageMessage .. tonumber(nFinalDamage);
+
 	-- STRONG ATTACK ?
 	if (aPendingAttackDmgMod and aPendingAttackDmgMod.sIsStrongAttack == "true") or (ModifierStack.getModifierKey("ATT_STRONG")) then
 		-- check manual modifier
 		nFinalDamage = nFinalDamage*2;
+		sFinalDamageMessage = "(" .. sFinalDamageMessage .. "x2)";
 		Debug.console("after strong attack multiplier : ", nFinalDamage);
 	else
 		Debug.console("no strong attack multiplier : ", nFinalDamage);
@@ -369,11 +377,11 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	
 	local sSourceCT = ActorManager.getCTNodeName(rSource);
 	local sTargetCT = ActorManager.getCTNodeName(rTarget);
-	processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, rRoll.sDesc, nFinalDamage);
+	processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, rRoll.sDesc, nFinalDamage, sFinalDamageMessage);
 	
 end
 
-function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage, nFinalDamage)
+function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage, nFinalDamage, sFinalDamageMessage)
 	Debug.console("--------------------------------------------");
 	Debug.console("Apply Damage 2 : ");
 	Debug.console("sSourceCT "..sSourceCT);
@@ -395,6 +403,9 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage,
 	if nFinalDamage < 0 then
 		nFinalDamage = 0;
 	end
+	if nArmorValue > 0 then
+		sFinalDamageMessage = sFinalDamageMessage .. " - " .. nArmorValue .. "{armor}";
+	end
 	Debug.console("damage after armor : ", nFinalDamage);
 	
 	-- resistance (x0.5)
@@ -405,6 +416,7 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage,
 	if bIsSilverVulnerable and not bIsWeaponSilver then
 		-- target is silver vulnerable but weapon is not silver : half damage 
 		nFinalDamage = math.floor(nFinalDamage/2);
+		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") / 2 {silver}";
 		Debug.console("target is silver vulnerable but weapon is NOT silver : ", nFinalDamage);
 	end
 
@@ -415,10 +427,16 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage,
 	local nLocationMultiplier = CharManager.getDamageLocationModifierForLocationRoll(nodeTarget, sLocation);
 	Debug.console("location multiplier : ", nLocationMultiplier);
 	nFinalDamage = math.floor(nFinalDamage*nLocationMultiplier);
+	if nLocationMultiplier ~= 1 then
+		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") x " .. nLocationMultiplier .. "{location}";
+	end
 	Debug.console("damage after location : ", nFinalDamage);
 	
+	if nCritDamage > 0 then
+		sFinalDamageMessage = sFinalDamageMessage .. " + " .. nCritDamage .. "{crit}"
+	end
 	-- Output results
-	messageDamage(rSource, rTarget, bSecret, "damage", sDamage, nCritDamage, nFinalDamage, "");
+	messageDamage(rSource, rTarget, bSecret, "damage", sDamage, nCritDamage, nFinalDamage, sFinalDamageMessage);
 
 	-- update hit_point 
 	notifyApplyDamage(sTargetCT, nFinalDamage + nCritDamage);
@@ -447,15 +465,16 @@ function messageDamage(rSource, rTarget, bSecret, sDamageType, sDamageDesc, nExt
 	if nExtraDamage > 0 then
 		msgLong.text = msgLong.text .. " + " .. nExtraDamage;	
 	end
-	msgLong.text = msgLong.text .. "] ->";
 	
 	if rTarget then
+		msgLong.text = msgLong.text .. "] ->";
 		msgShort.text = msgShort.text .. " [to " .. ActorManager.getDisplayName(rTarget) .. "]";
 		msgLong.text = msgLong.text .. " [to " .. ActorManager.getDisplayName(rTarget) .. "]";
 	end
 	
 	if sExtraResult and sExtraResult ~= "" then
-		msgLong.text = msgLong.text .. " " .. sExtraResult;
+		msgShort.text = msgShort.text .. "\n" .. sExtraResult;
+		msgLong.text = msgLong.text .. "\n" .. sExtraResult;
 	end
 	
 	ActionsManager.outputResult(bSecret, rSource, rTarget, msgLong, msgShort);
@@ -464,7 +483,7 @@ end
 ------------------------------------------------------------------------------------
 -- CRITICAL MANAGEMENT
 ------------------------------------------------------------------------------------
-function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nFinalDamage)
+function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nFinalDamage, sFinalDamageMessage)
 	local nExtraDamage = 0;
 	if sCriticalLevel == "simple" then
 		nExtraDamage = 3;
@@ -476,13 +495,13 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 		nExtraDamage = 10;
 	end
 
-	local rRoll = getCriticalLocationRoll(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nExtraDamage, nFinalDamage);
+	local rRoll = getCriticalLocationRoll(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nExtraDamage, nFinalDamage, sFinalDamageMessage);
 	local rTarget = ActorManager.getActor("ct", sTargetCT);
 	
 	if sCriticalLevel == "none" then
 		-- no critical, we must roll for simple location
 		if sIsAimed == "true" then
-			outputCriticalMessage(sSourceCT, sTargetCT, 0, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage);
+			outputCriticalMessage(sSourceCT, sTargetCT, 0, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage, sFinalDamageMessage);
 		else
 			ActionsManager.performAction(nil, rTarget, rRoll);
 		end
@@ -508,7 +527,7 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 	return nExtraDamage;
 end
 
-function getCriticalLocationRoll(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nExtraDamage, nFinalDamage)
+function getCriticalLocationRoll(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nExtraDamage, nFinalDamage, sFinalDamageMessage)
 	-- Initialize a blank rRoll record
 	local rRoll = {};
 	
@@ -538,6 +557,7 @@ function getCriticalLocationRoll(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed,
 	rRoll.sDamageText = sDamageText;
 	rRoll.sExtraDamage = tostring(nExtraDamage);
 	rRoll.sFinalDamage = tostring(nFinalDamage);
+	rRoll.sFinalDamageMessage = sFinalDamageMessage;
 	
 	return rRoll;
 end
@@ -625,10 +645,10 @@ function onCriticalLocationRoll(rSource, rTarget, rRoll)
 		end
 	end
 
-	outputCriticalMessage(rRoll.sSourceCT, rRoll.sTargetCT, nResult, rRoll.sCriticalLevel, rRoll.sLocation, rRoll.sDamageText, tonumber(rRoll.sExtraDamage), tonumber(rRoll.sFinalDamage));
+	outputCriticalMessage(rRoll.sSourceCT, rRoll.sTargetCT, nResult, rRoll.sCriticalLevel, rRoll.sLocation, rRoll.sDamageText, tonumber(rRoll.sExtraDamage), tonumber(rRoll.sFinalDamage), rRoll.sFinalDamageMessage);
 end
 
-function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage)
+function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage, sFinalDamageMessage)
 	Debug.console("------- outputCriticalMessage");
 	Debug.console("nResult = "..tostring(nResult));
 	
@@ -706,7 +726,7 @@ function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sL
 	Comm.deliverChatMessage(rMessage);
 
 	-- Continue damage resolution
-	applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sBonusDamage, nFinalDamage)
+	applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sBonusDamage, nFinalDamage, sFinalDamageMessage)
 end
 
 ------------------------------------------------------------------------------------
@@ -868,7 +888,7 @@ function decodeDamageText(nDamage, sDamageDesc)
 	if nDamageRemaining > 0 then
 		rDamageOutput.aDamageTypes[""] = nDamageRemaining;
 	elseif nDamageRemaining < 0 then
-		ChatManager.SystemMessage("Total mismatch in damage type totals");
+		Debug.console("Total mismatch in damage type totals");
 	end
 	
 	return rDamageOutput;

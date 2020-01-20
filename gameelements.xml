@@ -25,6 +25,10 @@
 		<icon>d6icon</icon>
 		<position>320,-68</position>
 	</die>
+	<die name="s6">
+		<model>d6</model>
+		<icon>d6sicon</icon>
+	</die>
 	<die name="d8">
 		<icon>d8icon</icon>
 		<position>270,-68</position>

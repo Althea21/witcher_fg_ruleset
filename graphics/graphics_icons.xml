@@ -66,6 +66,7 @@
 	<icon name="spell_cast" file="graphics/icons/spell_cast.png" />
 
 	<!--colored dice-->
+	<icon name="d6sicon" file="graphics/icons/d6_silver_icon.png" />
 	<icon name="d10gicon" file="graphics/icons/d10_gicon.png" />
 	<icon name="d10ricon" file="graphics/icons/d10_ricon.png" />
 	
