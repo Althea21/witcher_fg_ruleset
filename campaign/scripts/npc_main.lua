@@ -14,10 +14,15 @@ function updateControl(sControl, bReadOnly, bForceHide)
 end
 
 function update()
+	updateReadOnly();
+	updateStats();
+end
+
+-- update locked/unlocked state
+function updateReadOnly()
 	local nodeRecord = getDatabaseNode();
 	local bReadOnly = WindowManager.getReadOnlyState(nodeRecord);
-	local bID = LibraryData.getIDState("npc", nodeRecord);
-
+	
 	local bSection1 = false;
 	if User.isHost() then
 		if updateControl("nonid_name", bReadOnly) then 
@@ -27,16 +32,14 @@ function update()
 		updateControl("nonid_name", bReadOnly, true);
 	end
 	divider.setVisible(bSection1);
-	
-	-- update locked/unlocked state
+
+	-- fields that only depends on lock/unlock state
 	nonid_name.setReadOnly(bReadOnly);
 	npctype.setReadOnly(bReadOnly);
 	threat1.setReadOnly(bReadOnly);
 	threat2.setReadOnly(bReadOnly);
 	vulnerabilities.setReadOnly(bReadOnly);
 	abilities.setReadOnly(bReadOnly);
-	--hit_points.setReadOnly(bReadOnly);
-	stamina.setReadOnly(bReadOnly);
 	intelligence.setReadOnly(bReadOnly);
 	reflex.setReadOnly(bReadOnly);
 	dexterity.setReadOnly(bReadOnly);
@@ -55,37 +58,45 @@ function update()
 	organization.setReadOnly(bReadOnly);
 	loot.setReadOnly(bReadOnly);
 	bounty.setReadOnly(bReadOnly);
-
-	onToggleManualHP(nodeRecord);
-
-	updateStats();
+	--hit_points.setReadOnly(bReadOnly);
+	--stamina.setReadOnly(bReadOnly);
+	
+	-- fields that also depends on auto-calculation status
+	if autocalculation.getValue()==0 then
+		-- ON : derived stats are always readonly
+		woundthreshold.setReadOnly(true);
+		hit_pointsmax.setReadOnly(true);
+		staminamax.setReadOnly(true);
+		stun.setReadOnly(true);
+		run.setReadOnly(true);
+		leap.setReadOnly(true);
+		encumbrancemax.setReadOnly(true);
+		recovery.setReadOnly(true);
+	else
+		-- OFF : derived stats are writable
+		woundthreshold.setReadOnly(bReadOnly);
+		hit_pointsmax.setReadOnly(bReadOnly);
+		staminamax.setReadOnly(bReadOnly);
+		stun.setReadOnly(bReadOnly);
+		run.setReadOnly(bReadOnly);
+		leap.setReadOnly(bReadOnly);
+		encumbrancemax.setReadOnly(bReadOnly);
+		recovery.setReadOnly(bReadOnly);
+	end
 end
 
 function updateStats()
 	onBodyChanged();
 	onSpeedChanged();
 	onWillChanged();
-	--onWoundThresholdStateChanged(getDatabaseNode());
-end
-
-function isHPAuto(nodeActor)
-	local state = DB.getValue(nodeActor, "attributs.hp_auto", -1);
-	return (state == 0);
-end
-
--- derived stat functions
-function onToggleManualHP(nodeActor)
-	-- hp mode
-	local bHpMaxReadOnly = isHPAuto(nodeActor);
-	--record read-only ?
-	local bRecordReadOnly = WindowManager.getReadOnlyState(nodeActor);
-	
-	local bFinalRO = (bHpMaxReadOnly or bRecordReadOnly);
-	hit_pointsmax.setReadOnly(bFinalRO);
-	updateStats();
 end
 
 function onBodyChanged()
+	if autocalculation.getValue()==1 then
+		-- Manual input : no auto calculation
+		return;
+	end
+
 	local bodyValue = body.getValue();
 	encumbrancemax.setValue(bodyValue*10);
 	
@@ -134,9 +145,7 @@ function onBodyChanged()
 	end
 	
 	local physical = math.floor((bodyValue + will.getValue())/2);
-	if hp_auto.getValue()==0 then
-		hit_pointsmax.setValue(physical*5);
-	end
+	hit_pointsmax.setValue(physical*5);
 	woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
 	staminamax.setValue(physical*5);
 	recovery.setValue(physical);
@@ -147,17 +156,27 @@ function onBodyChanged()
 end
 
 function onSpeedChanged()
+	if autocalculation.getValue()==1 then
+		-- Manual input : no auto calculation
+		return;
+	end
+
 	run.setValue(speed.getValue()*3);
 	leap.setValue(math.floor(run.getValue()/5));
 end
 
 function onWillChanged()
+	if autocalculation.getValue()==1 then
+		-- Manual input : no auto calculation
+		return;
+	end
+
 	local woundthreshold_state = woundthreshold_state.getValue();
 	
 	if (woundthreshold_state==0) then
 		-- change derived stat only if not under woundthreshold_state
 		local physical = math.floor((body.getValue() + will.getValue())/2);
-		if hp_auto.getValue()==0 then
+		if autocalculation.getValue()==0 then
 			hit_pointsmax.setValue(physical*5);
 		end
 		woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
@@ -223,7 +242,6 @@ function onHPChanged()
 	elseif hit_points.getValue() < wt then
 		hit_points.setFont("sheetnumber_critical");
 		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
-		--Debug.chat(DB.getValue(node, "attributs.woundthreshold_state", -2));
 	elseif hit_points.getValue() < (hpMax/2) then
 		hit_points.setFont("sheetnumber_warning");
 		DB.setValue(node, "attributs.woundthreshold_state", "number", 0);

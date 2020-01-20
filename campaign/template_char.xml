@@ -43,6 +43,13 @@
 			<readonly /> 
 		</basicnumber>
 	</template>
+	<!--stat rollable-->
+	<template name="number_stat_rollable">
+		<basicnumber>
+			<frame name="fieldlight" offset="7,5,7,5" />
+			<rollable />
+		</basicnumber>
+	</template>
 	<!--stat valeur courante-->
 	<template name="number_statcurrentvalue">
 		<basicnumber/>

@@ -878,6 +878,8 @@
 	<string name="item_grouped_tooltip_health">Health</string>
 
 	<!--NPC-->
+	<string name="npc_label_autocalculation">Auto calculation</string>
+	<string name="npc_tooltip_autocalculation">Whether derived stat are automatically calculated or not</string>
 	<string name="npc_label_type">Type</string>
 	<string name="npc_type_humanoid">Humanoid</string>
 	<string name="npc_type_animal">Animal</string>

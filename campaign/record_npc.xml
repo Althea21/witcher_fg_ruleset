@@ -31,7 +31,7 @@
 			</frame_record_content_tabbed>
 
 			<subwindow_record name="main_creature">
-				<class>npc_combat_creature</class>
+				<class>npc_main</class>
 			</subwindow_record>
 			<subwindow name="combat">
 				<bounds>10,65,-1,-20</bounds>
@@ -80,7 +80,7 @@
 	</windowclass>
 
 	<!--Main tab-->
-	<windowclass name="npc_combat_creature">
+	<windowclass name="npc_main">
 		<margins control="0,0,0,2" />
 		<script file="campaign/scripts/npc_main.lua" />
 		<sheetdata>
@@ -91,6 +91,28 @@
 				<static textres="npc_label_unidentified" />
 			</label_column>
 			<string_columnh name="nonid_name" />
+
+			<label name="autocalculation_label">
+				<anchored to="nonid_name_label" width="100">
+					<top />
+					<right anchor="right" offset="360" />
+				</anchored>
+				<static textres="npc_label_autocalculation" />
+			</label>
+			<buttonfield name="autocalculation" source="attributs.autocalculation">
+				<anchored to="autocalculation_label" width="20" height="20">
+					<top />
+					<right anchor="right" offset="10" />
+				</anchored>
+				<state icon="button_toggle_on" tooltipres="npc_tooltip_autocalculation" />
+				<state icon="button_toggle_off" tooltipres="npc_tooltip_autocalculation" />
+				<script>
+					function onValueChanged()
+						window.updateReadOnly();
+						window.updateStats();
+					end
+				</script>
+			</buttonfield>
 
 			<line_column name="divider" />
 			
@@ -196,9 +218,9 @@
 				</script>
 			</number_derivedstat_rollable>
 	
-			<number_derivedstat name="woundthreshold" source="attributs.woundthreshold">
+			<number_charstatbase name="woundthreshold" source="attributs.woundthreshold">
 				<anchored to="init_combat" position="right" offset="170,0" width="30" height="20" />
-			</number_derivedstat>
+			</number_charstatbase>
 			<label name="woundthreshold_label">
 				<anchored to="woundthreshold" position="right" offset="-130,0" />
 				<static textres="npc_label_woundthreshold" />
@@ -242,19 +264,6 @@
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
 			</number_charstatbase>
-			<buttonfield name="hp_auto" source="attributs.hp_auto">
-				<anchored to="hit_points_divider" width="20" height="20">
-					<top />
-					<right anchor="right" relation="relative" offset="25" />
-				</anchored>
-				<state icon="padlock_closed" tooltipres="npc_label_hitpoints_locked" />
-				<state icon="padlock_open" tooltipres="npc_label_hitpoints_unlocked" />
-				<script>
-					function onValueChanged()
-						window.onToggleManualHP(window.getDatabaseNode());
-					end
-				</script>
-			</buttonfield>
 
 			<number_charstatbase name="stamina" source="attributs.stamina">
 				<anchored to="hit_points_divider" position="right" offset="172,0" width="25" height="20" />
@@ -266,12 +275,12 @@
 				</anchored>
 				<static textres="char_special_divide" />
 			</label>
-			<number_derivedstat name="staminamax" source="attributs.staminamax">
+			<number_charstatbase name="staminamax" source="attributs.staminamax">
 				<anchored to="stamina_divider" width="25" height="20">
 					<top />
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
-			</number_derivedstat>
+			</number_charstatbase>
 			<label name="stamina_label">
 				<anchored to="stamina" position="right" offset="-130,0" />
 				<static textres="char_derivedstatslabel_stamina" />
@@ -427,7 +436,7 @@
 				<static textres="lck" />
 			</label_fieldtop>
 			<!--derived stats-->
-			<number_derivedstat_rollable name="stun" source="attributs.stun">
+			<number_stat_rollable name="stun" source="attributs.stun">
 				<anchored width="25" height="20">
 					<top parent="columnanchor" anchor="bottom" relation="relative" offset="20" />
 					<left offset="5" />
@@ -448,47 +457,47 @@
 						return action();
 					end
 				</script>
-			</number_derivedstat_rollable>
+			</number_stat_rollable>
 			<label_fieldtop name="Stun_label">
 				<anchored to="stun" />
 				<static textres="npc_label_stun" />
 			</label_fieldtop>
-			<number_derivedstat name="run" source="attributs.run">
+			<number_charstatbase name="run" source="attributs.run">
 				<anchored to="stun" width="25" height="20">
 					<top />
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
-			</number_derivedstat>
+			</number_charstatbase>
 			<label_fieldtop name="run_label">
 				<anchored to="run" />
 				<static textres="npc_label_run" />
 			</label_fieldtop>
-			<number_derivedstat name="leap" source="attributs.leap">
+			<number_charstatbase name="leap" source="attributs.leap">
 				<anchored to="run" width="25" height="20">
 					<top />
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
-			</number_derivedstat>
+			</number_charstatbase>
 			<label_fieldtop name="leap_label">
 				<anchored to="leap" />
 				<static textres="npc_label_leap" />
 			</label_fieldtop>
-			<number_derivedstat name="encumbrancemax" source="attributs.encumbrancemax">
+			<number_charstatbase name="encumbrancemax" source="attributs.encumbrancemax">
 				<anchored to="leap" width="25" height="20">
 					<top />
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
-			</number_derivedstat>
+			</number_charstatbase>
 			<label_fieldtop name="encumbrance_label">
 				<anchored to="encumbrancemax" />
 				<static textres="npc_label_encumbrance" />
 			</label_fieldtop>
-			<number_derivedstat name="recovery" source="attributs.recovery">
+			<number_charstatbase name="recovery" source="attributs.recovery">
 				<anchored to="encumbrancemax" width="25" height="20">
 					<top />
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
-			</number_derivedstat>
+			</number_charstatbase>
 			<label_fieldtop name="recovery_label">
 				<anchored to="recovery" />
 				<static textres="npc_label_recovery" />
