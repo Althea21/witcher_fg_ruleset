@@ -760,6 +760,8 @@
 	<string name="modifier_label_damage_complex">Critical - complex</string>
 	<string name="modifier_label_damage_difficult">Critical - difficult</string>
 	<string name="modifier_label_damage_deadly">Critical - deadly</string>
+	<string name="modifier_label_damage_lethal">Lethal</string>
+	<string name="modifier_label_damage_nonlethal">Non lethal</string>
 	
 	<string name="modifier_label_aiming">Aiming modifiers</string>
 	<string name="modifier_label_aimhead">Head</string>
