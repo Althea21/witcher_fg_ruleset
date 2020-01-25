@@ -28,6 +28,9 @@ end
 -- returns : 
 --	* rRoll	: roll object
 function getRoll(rActor, rWeapon, sAttackType)
+	--Debug.chat("------- getRoll");
+	--Debug.chat(rWeapon);
+	
 	-- Initialize a blank rRoll record
 	local rRoll = {};
 	
@@ -54,8 +57,6 @@ function getRoll(rActor, rWeapon, sAttackType)
 	rRoll.sDamageLocation = "";
 	rRoll.sIsStrongAttack = "false";
 	
-	-- Debug.chat(rWeapon);
-	
 	if (rWeapon.range == "R") then
 		rRoll.sWeaponType = "range";
 	elseif (rWeapon.range == "M") then
@@ -80,14 +81,8 @@ function getRoll(rActor, rWeapon, sAttackType)
 			sRollDescription = "["..Interface.getString("combat_attack_message").." "..rWeapon.label.."]";
 		end
 		
-		-- weapon effects and enhancements
-		local sWeaponEffects = "";
-		if rWeapon.effects then
-			sWeaponEffects = rWeapon.effects;
-		end
-		rRoll.sWeaponEffects = sWeaponEffects;
-		--enhancement_list
-		sRollDescription = sRollDescription .. "\n" .. sWeaponEffects;
+		--effects and enhancement_list
+		sRollDescription = sRollDescription .. "\n" .. rWeapon.effects;
 
 		-- stat modifier
 		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
@@ -138,7 +133,8 @@ end
 --	* sAttackType	: attack type (supported : "fast", "strong", "normal", "punchfast", "punchstrong", "punchnormal", "kickfast", "kickstrong", "kicknormal"). 
 --					  Unknown or missing value will be treated like a "normal" attack
 function performRoll(draginfo, rWeapon, sAttackType)
-	-- Debug.chat("------- performRoll");
+	--Debug.chat("------- performRoll");
+	--Debug.chat(rWeapon);
 	-- retreive attack info and actor node 
 	local rActor; 
 	

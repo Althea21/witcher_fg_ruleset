@@ -66,8 +66,12 @@ function getWeaponAttackRollStructures(nodeWeapon)
 	rAttack.label = DB.getValue(nodeWeapon, "name", "");
 	
 	-- effects (weapon + enhancements if any)
-	rAttack.effects = DB.getValue(nodeWeapon, "effects", "");
-	
+	local sWeaponEffects = _getWeaponEffects(nodeWeapon);
+	rAttack.effects = sWeaponEffects;
+	if rAttack.effects ~= "" then
+		rAttack.effects = (rAttack.effects).."\n";
+	end
+
 	local aEnhancementNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "enhancementlist"));
 	for _,v in ipairs(aEnhancementNodes) do
 		local sEffect = DB.getValue(v, "effect", "");
@@ -125,10 +129,13 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	rAttack.label = DB.getValue(nodeWeapon, "name", "");
 	
 	-- effects (weapon + enhancements if any)
-	rAttack.effects = DB.getValue(nodeWeapon, "effects", "");
+	-- weapon effects and enhancements
+	local sWeaponEffects = _getWeaponEffects(nodeWeapon);
+	rAttack.effects = sWeaponEffects;
 	if rAttack.effects ~= "" then
 		rAttack.effects = (rAttack.effects).."\n";
 	end
+	
 	local aEnhancementNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "enhancementlist"));
 	for _,v in ipairs(aEnhancementNodes) do
 		local sEffect = DB.getValue(v, "effect", "");
@@ -168,6 +175,76 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	
 	return rActor, rAttack;
 end
+
+function _getWeaponEffects(nodeWeapon)
+	--Debug.chat("------- _getWeaponEffects");
+	--Debug.chat(nodeWeapon);
+	
+	local sWeaponEffects = "";
+	
+	if DB.getValue(nodeWeapon, "weffect_ablating_use", 0) == 1 then
+		sWeaponEffects = Interface.getString("weapon_property_effect_ablating");
+	end
+	if DB.getValue(nodeWeapon, "weffect_armorpiercing_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_armorpiercing");
+	end
+	if DB.getValue(nodeWeapon, "weffect_balanced_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_balanced");
+	end
+	if DB.getValue(nodeWeapon, "weffect_bleeding_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_bleeding") .. "(" .. DB.getValue(nodeWeapon, "bleeding_amount", 0) .. "%)";
+	end
+	if DB.getValue(nodeWeapon, "weffect_brawling_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_brawling");
+	end
+	if DB.getValue(nodeWeapon, "weffect_concealment_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_concealment");
+	end
+	if DB.getValue(nodeWeapon, "weffect_focus_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_focus") .. "(" .. DB.getValue(nodeWeapon, "focus_amount", 0) .. ")";
+	end
+	if DB.getValue(nodeWeapon, "weffect_grappling_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_grappling");
+	end
+	if DB.getValue(nodeWeapon, "weffect_greaterfocus_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_greaterfocus");
+	end
+	if DB.getValue(nodeWeapon, "weffect_improvedarmorpiercing_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_improvedarmorpiercing");
+	end
+	if DB.getValue(nodeWeapon, "weffect_longreach_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_longreach");
+	end
+	if DB.getValue(nodeWeapon, "weffect_meteorite_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_meteorite");
+	end
+	if DB.getValue(nodeWeapon, "weffect_nonethal_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_nonethal");
+	end
+	if DB.getValue(nodeWeapon, "weffect_slowreload_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_slowreload");
+	end
+	if DB.getValue(nodeWeapon, "weffect_stun_use", 0) == 1 then
+		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_stun") .. "(" .. DB.getValue(nodeWeapon, "stun_amount", 0) .. ")";
+	end
+	--Debug.chat(sWeaponEffects)
+	return sWeaponEffects;
+end
+
 
 -- get character and damage info for damage roll
 -- param :

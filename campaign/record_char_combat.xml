@@ -1056,10 +1056,10 @@
 			</label_column>
 			<string_column name="name" />
 			
-			<label_column>
+			<!-- <label_column>
 				<static textres="weapon_label_effects" />
 			</label_column>
-			<string_column name="effects" />
+			<string_column name="effects" /> -->
 			
 			<!-- PROPERTIES -->
 			<header_weapon name="header_properties">
@@ -1099,7 +1099,270 @@
 				</script>
 				<default></default>
 			</combobox>
+			<!--Effects-->
+			<label_column>
+				<static textres="weapon_property_effects" />
+			</label_column>
 			
+			<button_checkbox name="weffect_ablating_use">
+				<anchored width="12" height="12">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="30" />
+					<left offset="10" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_ablating_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_ablating" />
+			</label>
+			
+			<button_checkbox name="weffect_armorpiercing_use">
+				<anchored  to="weffect_ablating_use" width="12" height="12">
+					<top />
+					<left offset="115" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_armorpiercing_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_armorpiercing" />
+			</label>
+
+			<button_checkbox name="weffect_balanced_use">
+				<anchored  to="weffect_armorpiercing_use" width="12" height="12">
+					<top />
+					<left offset="110" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_balanced_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_balanced" />
+			</label>
+
+			<!--ligne2-->
+			<button_checkbox name="weffect_bleeding_use">
+				<anchored width="12" height="12">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						local visible = (window.weffect_bleeding_use.getValue() == 1)
+						window.bleeding_amount.setVisible(visible);
+						window.label_bleedingpercent.setVisible(visible);
+					end
+					function onClickRelease(button, x, y)
+						local visible = (window.weffect_bleeding_use.getValue() == 0)
+						window.bleeding_amount.setVisible(visible);
+						window.label_bleedingpercent.setVisible(visible);
+					end
+				</script>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_bleeding_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_bleeding" />
+			</label>
+			<basicnumber name="bleeding_amount">
+				<anchored to="weffect_bleeding_use" position="right" offset="55,0" width="25" height="20" />
+			</basicnumber>
+			<label name="label_bleedingpercent">
+				<anchored to="bleeding_amount" position="right" offset="3,0" />
+				<static textres="char_special_percent" />
+			</label>
+
+			<button_checkbox name="weffect_brawling_use">
+				<anchored  to="weffect_bleeding_use" width="12" height="12">
+					<top />
+					<left offset="115" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_brawling_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_brawling" />
+			</label>
+
+			<button_checkbox name="weffect_concealment_use">
+				<anchored  to="weffect_brawling_use" width="12" height="12">
+					<top />
+					<left offset="110" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_concealment_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_concealment" />
+			</label>
+
+			<!--ligne3-->
+			<button_checkbox name="weffect_focus_use">
+				<anchored width="12" height="12">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="10" />
+				</anchored>
+				<script>
+					function onInit()
+						local visible = (window.weffect_focus_use.getValue() == 1)
+						window.focus_amount.setVisible(visible);
+					end
+					function onClickRelease(button, x, y)
+						local visible = (window.weffect_focus_use.getValue() == 0)
+						window.focus_amount.setVisible(visible);
+					end
+				</script>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_focus_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_focus" />
+			</label>
+			<basicnumber name="focus_amount">
+				<anchored to="weffect_focus_use" position="right" offset="55,0" width="25" height="20" />
+			</basicnumber>
+
+			<button_checkbox name="weffect_grappling_use">
+				<anchored  to="weffect_focus_use" width="12" height="12">
+					<top />
+					<left offset="115" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_grappling_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_grappling" />
+			</label>
+
+			<button_checkbox name="weffect_greaterfocus_use">
+				<anchored  to="weffect_grappling_use" width="12" height="12">
+					<top />
+					<left offset="110" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_greaterfocus_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_greaterfocus" />
+			</label>
+
+			<!--ligne4-->
+			<button_checkbox name="weffect_improvedarmorpiercing_use">
+				<anchored width="12" height="12">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="10" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_improvedarmorpiercing_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_improvedarmorpiercing" />
+			</label>
+
+			<button_checkbox name="weffect_longreach_use">
+				<anchored  to="weffect_improvedarmorpiercing_use" width="12" height="12">
+					<top />
+					<left offset="115" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_longreach_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_longreach" />
+			</label>
+
+			<button_checkbox name="weffect_meteorite_use">
+				<anchored  to="weffect_longreach_use" width="12" height="12">
+					<top />
+					<left offset="110" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_meteorite_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_meteorite" />
+			</label>
+
+			<!--ligne5-->
+			<button_checkbox name="weffect_nonethal_use">
+				<anchored width="12" height="12">
+					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
+					<left offset="10" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_nonethal_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_nonethal" />
+			</label>
+
+			<button_checkbox name="weffect_slowreload_use">
+				<anchored  to="weffect_nonethal_use" width="12" height="12">
+					<top />
+					<left offset="115" />
+				</anchored>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_slowreload_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_slowreload" />
+			</label>
+
+			<button_checkbox name="weffect_stun_use">
+				<anchored  to="weffect_slowreload_use" width="12" height="12">
+					<top />
+					<left offset="110" />
+				</anchored>
+				<script>
+					function onInit()
+						local visible = (window.weffect_stun_use.getValue() == 1)
+						window.stun_amount.setVisible(visible);
+					end
+					function onClickRelease(button, x, y)
+						local visible = (window.weffect_stun_use.getValue() == 0)
+						window.stun_amount.setVisible(visible);
+					end
+				</script>
+			</button_checkbox>
+			<label>
+				<anchored to="weffect_stun_use" width="100" height="20">
+					<top offset="-4"/>
+					<left anchor="right" offset="5" />
+				</anchored>
+				<static textres="weapon_property_effect_stun" />
+			</label>
+			<basicnumber name="stun_amount">
+				<anchored to="weffect_stun_use" position="right" offset="40,0" width="25" height="20" />
+			</basicnumber>
+		
 			<!-- ATTACK -->
 			<header_weapon name="header_attack">
 				<static textres="weapon_header_attack" />
