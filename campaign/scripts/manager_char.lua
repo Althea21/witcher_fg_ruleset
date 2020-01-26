@@ -447,6 +447,36 @@ function getArmorValueForLocationRoll(nodeActor, sLocation)
 	return nArmorValue;
 end
 
+-- remove 1 SP to armor after receiving damage for a given location (pc or npc)
+-- params :
+--  * nodeActor : pc or npc node
+--  * sLocation : location roll value or "AIM_xxx" string for aimed attack
+function damageArmorByLocation(nodeActor, sLocation)
+	Debug.console("----- damageArmorByLocation called for sLocation="..sLocation);
+	
+	sLocation = string.lower(sLocation);
+	local sArmorLocation = sLocation;
+	
+	if sLocation=="arm" then
+		sArmorLocation = "leftarm";
+	elseif sLocation=="leg" or sLocation=="limb" then
+		sArmorLocation = "leftleg";
+	elseif sLocation=="tail" then
+		sArmorLocation = "tail";
+	end
+	
+	for _,v in ipairs(UtilityManager.getSortedTable(DB.getChildren(nodeActor, "armorlist"))) do
+		if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
+			local nArmorValue = DB.getValue(v, "sp", 0);
+			if nArmorValue > 0 then
+				DB.setValue(v, "sp", "number", nArmorValue-1);
+				break;
+			end
+		end
+	end
+end
+
+
 -- get damage multiplier modifier for a given location
 -- params :
 --  * nodeActor : pc or npc node

@@ -274,6 +274,12 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		else
 			sFinalDamageMessage = sFinalDamageMessage .. Interface.getString("damage_desc_fullarmor");
 		end
+
+		-- if damages are done, armor is also damaged
+		if nFinalDamage > 0 then
+			Debug.console("remove 1 SP from armor at : ", sLocation);
+			CharManager.damageArmorByLocation(nodeTarget, sLocation);
+		end
 	end
 	Debug.console("damage after armor : ", nFinalDamage);
 	
