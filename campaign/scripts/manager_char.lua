@@ -500,10 +500,24 @@ function isSilverVulnerable(nodeActor)
 	local bVulnerable = false;
 
 	local sOptionMITN = OptionsManager.getOption("MITN");
-	local type = DB.getValue(nodeActor, "npctype", "humanoid");
+	-- get actor type, default set to humanoid for the case of PC
+	local type = string.lower(DB.getValue(nodeActor, "npctype", "humanoid")); 
 	if sOptionMITN=="allmonsters" and string.lower(type) ~= "humanoid" then
 		bVulnerable = true;
-	elseif sOptionMITN=="novels" and (string.lower(type)=="cursed ones" or string.lower(type)=="elementa" or string.lower(type)=="necrophage" or string.lower(type)=="relict" or string.lower(type)=="specter" or string.lower(type)=="vampire") then
+	elseif sOptionMITN=="novels" and (type==string.lower(Interface.getString("npc_type_cursed")) or type==string.lower(Interface.getString("npc_type_elementa")) or type==string.lower(Interface.getString("npc_type_necrophage")) or type==string.lower(Interface.getString("npc_type_relict")) or type==string.lower(Interface.getString("npc_type_specter")) or type==string.lower(Interface.getString("npc_type_vampire"))) then
+		bVulnerable = true;
+	end
+
+	return bVulnerable;
+end
+
+function isMeteoriteVulnerable(nodeActor)
+	local bVulnerable = false;
+
+	local sOptionMITN = OptionsManager.getOption("MITN");
+	-- get actor type, default set to humanoid for the case of PC
+	local type = string.lower(DB.getValue(nodeActor, "npctype", "humanoid"));
+	if sOptionMITN=="novels" and (type==string.lower(Interface.getString("npc_type_beast")) or type==string.lower(Interface.getString("npc_type_hybrid")) or type==string.lower(Interface.getString("npc_type_draconid")) or type==string.lower(Interface.getString("npc_type_insectoid")) or type==string.lower(Interface.getString("npc_type_ogroid"))) then
 		bVulnerable = true;
 	end
 

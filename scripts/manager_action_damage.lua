@@ -290,6 +290,16 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		Debug.console("target is silver vulnerable but weapon is NOT silver : ", nFinalDamage);
 	end
 
+	-- METEORITE resistance
+	local bIsMeteoriteVulnerable = CharManager.isMeteoriteVulnerable(nodeTarget);
+	local bIsWeaponMeteorite = (sWeaponEffects:find(Interface.getString("weapon_property_effect_meteorite"), 1, true) ~= nil);
+	if bIsMeteoriteVulnerable and not bIsWeaponMeteorite then
+		-- target is meteorite vulnerable but weapon is not meteorite : half damage 
+		nFinalDamage = math.floor(nFinalDamage/2);
+		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") / 2 {meteorite}";
+		Debug.console("target is meteorite vulnerable but weapon is NOT meteorite : ", nFinalDamage);
+	end
+
 	-- vulnerability (x2)
 	-- TODO
 
