@@ -66,7 +66,7 @@ function getWeaponAttackRollStructures(nodeWeapon)
 	rAttack.label = DB.getValue(nodeWeapon, "name", "");
 	
 	-- effects (weapon + enhancements if any)
-	local sWeaponEffects = _getWeaponEffects(nodeWeapon);
+	local sWeaponEffects = getWeaponEffects(nodeWeapon);
 	rAttack.effects = sWeaponEffects;
 	if rAttack.effects ~= "" then
 		rAttack.effects = (rAttack.effects).."\n";
@@ -130,7 +130,7 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	
 	-- effects (weapon + enhancements if any)
 	-- weapon effects and enhancements
-	local sWeaponEffects = _getWeaponEffects(nodeWeapon);
+	local sWeaponEffects = getWeaponEffects(nodeWeapon);
 	rAttack.effects = sWeaponEffects;
 	if rAttack.effects ~= "" then
 		rAttack.effects = (rAttack.effects).."\n";
@@ -176,7 +176,7 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	return rActor, rAttack;
 end
 
-function _getWeaponEffects(nodeWeapon)
+function getWeaponEffects(nodeWeapon)
 	--Debug.chat("------- _getWeaponEffects");
 	--Debug.chat(nodeWeapon);
 	
@@ -270,6 +270,7 @@ function getWeaponDamageRollStructures(nodeWeapon)
 
 	rDamage.type = "damage";
 	rDamage.label = DB.getValue(nodeWeapon, "name", "");
+	rDamage.sEffects = getWeaponEffects(nodeWeapon);
 	
 	-- compile all weapon damage entries
 	rDamage.clauses = {};
@@ -499,7 +500,7 @@ function isSilverVulnerable(nodeActor)
 	local bVulnerable = false;
 
 	local sOptionMITN = OptionsManager.getOption("MITN");
-	local type = DB.getValue(nodeActor, "npctype", "");
+	local type = DB.getValue(nodeActor, "npctype", "humanoid");
 	if sOptionMITN=="allmonsters" and string.lower(type) ~= "humanoid" then
 		bVulnerable = true;
 	elseif sOptionMITN=="novels" and (string.lower(type)=="cursed ones" or string.lower(type)=="elementa" or string.lower(type)=="necrophage" or string.lower(type)=="relict" or string.lower(type)=="specter" or string.lower(type)=="vampire") then

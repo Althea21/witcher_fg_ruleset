@@ -652,6 +652,12 @@
 	<string name="damage_label_location_limb">Location - Monster limb</string>
 	<string name="damage_label_location_tail">Location - Monster wing/tail</string>
 
+	<string name="damage_desc_halfarmor">{half armor}</string>
+	<string name="damage_desc_fullarmor">{armor}</string>
+
+	<string name="damage_desc_normaldamage">Damage</string>
+	<string name="damage_desc_nonlethaldamage">Non-lethal damage</string>
+	
 	<!--Critical Message-->
 	<string name="critical_label_simple_head_greater">Cracked Jaw</string>
 	<string name="critical_desc_simple_head_greater">The blow cracked your jaw, making it hard to speak clearly. You are at a -2 to Magical Skills &amp; Verbal Combat (Charisma, Persuasion, Seduction, Leadership, Deceit, Social Etiquette, and Intimidation).</string>

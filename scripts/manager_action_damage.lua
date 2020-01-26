@@ -51,11 +51,14 @@ function getRoll(rActor, rAction)
 	rRoll.sLocation = "";
 	rRoll.sCriticalLevel = "none";
 	rRoll.sDamageType = "";
+	
+	-- Store weapon effects
+	rRoll.sEffects = rAction.sEffects;
 
 	-- Save the damage clauses in the roll structure
 	rRoll.clauses = rAction.clauses;
 	
-	-- Add the dice and modifiers TODO : DON'T ADD SILVER DAMAGE IF TARGET NOT MONSTER
+	-- Add the dice and modifiers
 	for _,vClause in pairs(rRoll.clauses) do
 		for _,vDie in ipairs(vClause.dice) do
 			if string.lower(vClause.dmgtype)=="silver" and vDie== "d6" then
@@ -91,160 +94,6 @@ end
 
 -- HANDLERS --------------------------------------------------------
 
--- DEPRECATED Modifier handler : get the modifier relevant for damage
-function onDamageModifier(rSource, rTarget, rRoll)
-	Debug.console("--------------------------------------------");
-	Debug.console("Compiling damage modifiers");
-	
-	-- Set up
-	local aAddDesc = {};
-	local aAddDice = {};
-	local nAddMod = 0;
-	local nMultBeforeArmor = 1;
-	local nMultAfterArmor = 1;
-
-	local aPendingAttackDmgMod = CombatManager2.getPendingAttackDamageModifier(rSource, rTarget);
-	Debug.console("aPendingAttackDmgMod :");
-	Debug.console(aPendingAttackDmgMod);
-
-	-- STRONG ATTACK -----------------------
-	local bStrongAttack = false;
-	if aPendingAttackDmgMod and aPendingAttackDmgMod.sIsStrongAttack == "true" then
-		-- strong attack from pending attack
-		bStrongAttack = true;
-	else
-		-- check manual modifier
-		if ModifierStack.getModifierKey("ATT_STRONG") then
-			bStrongAttack = true;
-		end
-	end
-	-- resolve strong attack consequences on damage
-	if bStrongAttack then
-		table.insert(aAddDesc, "["..Interface.getString("damage_label_strongattack").."]");
-		rRoll.sIsStrongAttack = "true";
-		rRoll.nMultBeforeArmor = 2;
-	else
-		rRoll.sIsStrongAttack = "false";
-		rRoll.nMultBeforeArmor = 1;
-	end
-	Debug.console("- Strong Attack : "..rRoll.sIsStrongAttack);
-
-	-- LOCATION -----------------------
-	local sLocation = "";
-	local sIsAimed = "false";
-	-- location from pending attack
-	if aPendingAttackDmgMod then
-		sLocation = aPendingAttackDmgMod.sLocation;
-		sIsAimed = aPendingAttackDmgMod.sIsAimed;
-	else
-		-- check manual modifier
-		if ModifierStack.getModifierKey("AIM_HEAD") then
-			sLocation = "AIM_HEAD";
-		elseif ModifierStack.getModifierKey("AIM_TORSO") then
-			sLocation = "AIM_TORSO";
-		elseif ModifierStack.getModifierKey("AIM_TAIL") then
-			sLocation = "AIM_TAIL";
-		elseif ModifierStack.getModifierKey("AIM_ARM") then
-			sLocation = "AIM_ARM";
-		elseif ModifierStack.getModifierKey("AIM_LEG") then
-			sLocation = "AIM_LEG";
-		elseif ModifierStack.getModifierKey("AIM_LIMB") then
-			sLocation = "AIM_LIMB";
-		end
-	end
-	-- resolve location consequences on damage
-	if sLocation ~= "" then
-		local sLocDesc = "["..Interface.getString("damage_label_location_")..sLocation.." x";
-		
-		if sLocation=="head" then
-			nMultAfterArmor = 3;
-			sLocDesc = sLocDesc.."3";
-		elseif sLocation=="torso" then
-			nMultAfterArmor = 1;
-			sLocDesc = sLocDesc.."1";
-		elseif sLocation=="tail" or sLocation=="arm" or sLocation=="leg" or sLocation=="limb" then
-			nMultAfterArmor = 0.5;
-			sLocDesc = sLocDesc.."0.5";
-		end
-		sLocDesc = sLocDesc.." "..Interface.getString("damage_afterarmor_label").."]";
-		table.insert(aAddDesc, sLocDesc);
-	end
-	rRoll.sLocation = sLocation;
-	rRoll.sIsAimed = sIsAimed;
-	Debug.console("- Location : "..rRoll.sLocation.." (aimed="..rRoll.sIsAimed..")");
-
-	-- CRITICAL -----------------------
-	local sCritical = "none";
-	if aPendingAttackDmgMod then
-		local successMargin = tonumber(aPendingAttackDmgMod.sSuccessMargin);
-		if successMargin >= 15 then
-			sCritical = "deadly";
-		elseif successMargin >= 13 then
-			sCritical = "difficult";
-		elseif successMargin >= 10 then
-			sCritical = "complex";
-		elseif successMargin >= 7 then
-			sCritical = "simple";
-		end
-	else
-		-- check manual modifier
-		if ModifierStack.getModifierKey("DMG_CRTSIM") then
-			sCritical = "simple";
-		elseif ModifierStack.getModifierKey("DMG_CRTDIF") then
-			sCritical = "difficult";
-		elseif ModifierStack.getModifierKey("DMG_CRTCOM") then
-			sCritical = "complex";
-		elseif ModifierStack.getModifierKey("DMG_CRTDEA") then
-			sCritical = "deadly";
-		end
-	end
-	-- resolve critical consequences on damage
-	if sCritical ~= "" then
-		local sCritDesc = "["..Interface.getString("damage_label_critical_"..sCritical).." +";
-
-		if sCritical == "simple" then
-			--nAddMod = nAddMod + 3;
-			sCritDesc = sCritDesc.."3";
-		elseif sCritical == "complex" then
-			--nAddMod = nAddMod + 5; 
-			sCritDesc = sCritDesc.."5";
-		elseif sCritical == "difficult" then
-			--nAddMod = nAddMod + 8; 
-			sCritDesc = sCritDesc.."8";
-		elseif sCritical == "deadly" then
-			--nAddMod = nAddMod + 10; 
-			sCritDesc = sCritDesc.."10";
-		end
-
-		sCritDesc = sCritDesc.."]";
-		table.insert(aAddDesc, sCritDesc);
-	end
-	rRoll.sCriticalLevel = sCritical;
-	Debug.console("- Critical level : "..rRoll.sCriticalLevel);
-	
-	-- WEAPON EFFECTS
-	local sWeaponEffects = "";
-	if aPendingAttackDmgMod then
-		sWeaponEffects = aPendingAttackDmgMod.sWeaponEffects;
-	end
-	rRoll.sWeaponEffects = sWeaponEffects
-	Debug.console("- Weapon effects : "..rRoll.sWeaponEffects);
-
-	-- TARGET VULNERABILITIES
-	local sTgtVulnerabilities = "";
-	if aPendingAttackDmgMod then
-		sTgtVulnerabilities = aPendingAttackDmgMod.sTgtVulnerabilities;
-	end
-	rRoll.sTgtVulnerabilities = sTgtVulnerabilities
-	Debug.console("- Target vulnerabilities : "..rRoll.sTgtVulnerabilities);
-
-	-- Add notes to roll description
-	-- if #aAddDesc > 0 then
-	-- 	rRoll.sDesc = rRoll.sDesc .. " " .. table.concat(aAddDesc, " ");
-	-- end
-
-end
-
 -- callback for ActionsManager, called after the dice have stopped rolling : resolve roll status and display chat message
 function onDamageRoll(rSource, rTarget, rRoll)
 	Debug.console("------- onDamageRoll");
@@ -264,7 +113,6 @@ function onDamageRoll(rSource, rTarget, rRoll)
 	Comm.deliverChatMessage(rMessage);
 	
 	-- Apply damage to the PC or CT entry referenced
-	--notifyApplyDamage(rSource, rTarget, rRoll.bTower, nTotal, rRoll);
 	applyDamage(rSource, rTarget, rRoll.bTower, nTotal, rRoll);
 end
 
@@ -377,18 +225,19 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	
 	local sSourceCT = ActorManager.getCTNodeName(rSource);
 	local sTargetCT = ActorManager.getCTNodeName(rTarget);
-	processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, rRoll.sDesc, nFinalDamage, sFinalDamageMessage);
+	processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, rRoll.sDesc, rRoll.sEffects, nFinalDamage, sFinalDamageMessage);
 	
 end
 
-function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage, nFinalDamage, sFinalDamageMessage)
+function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffects, nCritDamage, nFinalDamage, sFinalDamageMessage)
 	Debug.console("--------------------------------------------");
 	Debug.console("Apply Damage 2 : ");
-	Debug.console("sSourceCT "..sSourceCT);
-	Debug.console("sTargetCT "..sTargetCT);
-	Debug.console("sLocation "..sLocation);
-	Debug.console("sDamageText "..sDamageText);
-	Debug.console("nFinalDamage "..nFinalDamage);
+	Debug.console("sSourceCT : "..sSourceCT);
+	Debug.console("sTargetCT : "..sTargetCT);
+	Debug.console("sLocation : "..sLocation);
+	Debug.console("sDamageText : "..sDamageText);
+	Debug.console("nFinalDamage : "..nFinalDamage);
+	Debug.console("sWeaponEffects : "..sWeaponEffects);
 
 	local rTarget = ActorManager.getActor("ct", sTargetCT);
 	local sTargetType, nodeTarget = ActorManager.getTypeAndNode(rTarget);
@@ -399,20 +248,41 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage,
 	-- ARMOR
 	local nArmorValue = CharManager.getArmorValueForLocationRoll(nodeTarget, sLocation);
 	Debug.console("armor sp of target for location : ", nArmorValue);
+	-- check armor piercing (negates the damage resistance of any armor) 
+	-- and imp. armor piercing (negates the damage resistance of any armor also halve the SP value) 
+	local bArmorPiercing = false;
+	local bImprovedArmorPiercing = false;
+	if sWeaponEffects:find(Interface.getString("weapon_property_effect_improvedarmorpiercing"), 1, true) then
+		bImprovedArmorPiercing = true;
+	elseif sWeaponEffects:find(Interface.getString("weapon_property_effect_armorpiercing"), 1, true) then
+		bArmorPiercing = true;
+	end
+
+	if bImprovedArmorPiercing then
+		nArmorValue = math.floor(nArmorValue/2);
+		Debug.console("weapon effect Imp. Armor piercing (half SP) : new SP = ", nArmorValue);
+	end
+
 	nFinalDamage = nFinalDamage - nArmorValue;
 	if nFinalDamage < 0 then
 		nFinalDamage = 0;
 	end
 	if nArmorValue > 0 then
-		sFinalDamageMessage = sFinalDamageMessage .. " - " .. nArmorValue .. "{armor}";
+		sFinalDamageMessage = sFinalDamageMessage .. " - " .. nArmorValue;
+		if bImprovedArmorPiercing then
+			sFinalDamageMessage = sFinalDamageMessage .. Interface.getString("damage_desc_halfarmor");
+		else
+			sFinalDamageMessage = sFinalDamageMessage .. Interface.getString("damage_desc_fullarmor");
+		end
 	end
 	Debug.console("damage after armor : ", nFinalDamage);
 	
 	-- resistance (x0.5)
-	-- TODO
+	-- TODO (+ armor piercing)
+	
+	-- SILVER resistance
 	local bIsSilverVulnerable = CharManager.isSilverVulnerable(nodeTarget);
 	local bIsWeaponSilver = (rDamageOutput.aDamageTypes["silver"] ~= nil);
-	
 	if bIsSilverVulnerable and not bIsWeaponSilver then
 		-- target is silver vulnerable but weapon is not silver : half damage 
 		nFinalDamage = math.floor(nFinalDamage/2);
@@ -435,11 +305,26 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, nCritDamage,
 	if nCritDamage > 0 then
 		sFinalDamageMessage = sFinalDamageMessage .. " + " .. nCritDamage .. "{crit}"
 	end
+
+	-- Lethal / Non-lethal damage
+	local bLethal = true;
+	if ModifierStack.getModifierKey("DMG_NONLETHAL") then
+		bLethal = false;
+		Debug.console("non-lethal modifier activated");
+	elseif sWeaponEffects:find(Interface.getString("weapon_property_effect_nonethal"), 1, true) then
+		bLethal = false;
+		Debug.console("weapon has non-lethal effect");
+	end
+
 	-- Output results
-	messageDamage(rSource, rTarget, bSecret, "damage", sDamage, nCritDamage, nFinalDamage, sFinalDamageMessage);
+	local sDamageType = Interface.getString("damage_desc_normaldamage");
+	if not bLethal then
+		sDamageType = Interface.getString("damage_desc_nonlethaldamage");
+	end
+	messageDamage(rSource, rTarget, bSecret, sDamageType, sDamage, nCritDamage, nFinalDamage, sFinalDamageMessage);
 
 	-- update hit_point 
-	notifyApplyDamage(sTargetCT, nFinalDamage + nCritDamage);
+	notifyApplyDamage(sTargetCT, nFinalDamage + nCritDamage, bLethal);
 
 	CombatManager2.removePendingAttack(sSourceCT, sTargetCT);
 end
@@ -483,7 +368,10 @@ end
 ------------------------------------------------------------------------------------
 -- CRITICAL MANAGEMENT
 ------------------------------------------------------------------------------------
-function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nFinalDamage, sFinalDamageMessage)
+function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, sWeaponEffects, nFinalDamage, sFinalDamageMessage)
+	Debug.console("--------------------------------------------");
+	Debug.console("processCriticalDamageAndLocation : ");
+	Debug.console("sWeaponEffects : "..sWeaponEffects);
 	local nExtraDamage = 0;
 	if sCriticalLevel == "simple" then
 		nExtraDamage = 3;
@@ -496,30 +384,46 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 	end
 
 	local rRoll = getCriticalLocationRoll(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nExtraDamage, nFinalDamage, sFinalDamageMessage);
+	rRoll.sWeaponEffects = sWeaponEffects;
+
 	local rTarget = ActorManager.getActor("ct", sTargetCT);
 	
 	if sCriticalLevel == "none" then
 		-- no critical, we must roll for simple location
 		if sIsAimed == "true" then
-			outputCriticalMessage(sSourceCT, sTargetCT, 0, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage, sFinalDamageMessage);
+			outputCriticalMessage(sSourceCT, sTargetCT, 0, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage, sFinalDamageMessage);
 		else
 			ActionsManager.performAction(nil, rTarget, rRoll);
 		end
 	else
+		-- balanced weapon effect : roll 2d6+2 for the critical. If the attack was aimed, roll 1d6+1 instead of 1d6
+		local bBalanced = false;
+		if string.find(sWeaponEffects, Interface.getString("weapon_property_effect_balanced"), 1, true) then
+			bBalanced = true;
+		end
+
 		-- was the attack aimed ?
 		if sIsAimed == "true" then
 			if sLocation == "head" or sLocation == "torso" then
-				-- head or torso roll 1D6
+				-- head or torso roll 1D6 (if weapon balanced : 1D6+1 instead))
+				if (bBalanced) then
+					rRoll.nMod = 1;
+					Debug.console("weapon balanced : crit roll 1D6+1 instead");
+				end
 				ActionsManager.performAction(nil, rTarget, rRoll);
 			elseif sLocation == "arm" then
-				outputCriticalMessage(sSourceCT, sTargetCT, 4, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage);
+				outputCriticalMessage(sSourceCT, sTargetCT, 4, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage);
 			elseif sLocation == "leg" or sLocation == "limb" or sLocation == "tail" then
-				outputCriticalMessage(sSourceCT, sTargetCT, 2, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage);
+				outputCriticalMessage(sSourceCT, sTargetCT, 2, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage);
 			else
 				Debug.console("[processCriticalDamageAndLocation error ]Attack aimed with no location specified");
 			end
 		else
-			-- roll 2D6
+			-- roll 2D6 (if weapon balanced : 2d6+2)
+			if (bBalanced) then
+				rRoll.nMod = 2;
+				Debug.console("weapon balanced : crit roll 2D6+2 instead");
+			end
 			ActionsManager.performAction(nil, rTarget, rRoll);
 		end
 	end
@@ -558,14 +462,16 @@ function getCriticalLocationRoll(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed,
 	rRoll.sExtraDamage = tostring(nExtraDamage);
 	rRoll.sFinalDamage = tostring(nFinalDamage);
 	rRoll.sFinalDamageMessage = sFinalDamageMessage;
-	
+	rRoll.sWeaponEffects = "";
+
 	return rRoll;
 end
 
 -- callback for ActionsManager, called after the dice have stopped rolling : resolve roll status and display chat message
 -- rSource is the character receiving damage
 function onCriticalLocationRoll(rSource, rTarget, rRoll)
-	Debug.console("------- onCriticalLocationRoll");
+	Debug.console("--------------------------------------------");
+	Debug.console("onCriticalLocationRoll");
 	Debug.console(rRoll);
 
 	local sSourceType, nodeSource = ActorManager.getTypeAndNode(rSource);
@@ -609,7 +515,7 @@ function onCriticalLocationRoll(rSource, rTarget, rRoll)
 			else
 				rRoll.sLocation = "leftleg";
 			end
-		elseif nResult == 10 then
+		elseif nResult >= 10 then
 			-- human left leg or monster tail/wing
 			if bIsMonster then
 				rRoll.sLocation = "monstertail";
@@ -640,16 +546,17 @@ function onCriticalLocationRoll(rSource, rTarget, rRoll)
 			rRoll.sLocation = "arm";
 		elseif nResult <= 10 then
 			rRoll.sLocation = "torso";
-		elseif nResult <= 12 then
+		elseif nResult >= 11 then
 			rRoll.sLocation = "head";
 		end
 	end
 
-	outputCriticalMessage(rRoll.sSourceCT, rRoll.sTargetCT, nResult, rRoll.sCriticalLevel, rRoll.sLocation, rRoll.sDamageText, tonumber(rRoll.sExtraDamage), tonumber(rRoll.sFinalDamage), rRoll.sFinalDamageMessage);
+	outputCriticalMessage(rRoll.sSourceCT, rRoll.sTargetCT, nResult, rRoll.sCriticalLevel, rRoll.sLocation, rRoll.sDamageText, rRoll.sWeaponEffects, tonumber(rRoll.sExtraDamage), tonumber(rRoll.sFinalDamage), rRoll.sFinalDamageMessage);
 end
 
-function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sLocation, sDamageText, nExtraDamage, nFinalDamage, sFinalDamageMessage)
-	Debug.console("------- outputCriticalMessage");
+function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage, sFinalDamageMessage)
+	Debug.console("--------------------------------------------");
+	Debug.console("outputCriticalMessage");
 	Debug.console("nResult = "..tostring(nResult));
 	
 	local rTarget = ActorManager.getActor("ct", sTargetCT);
@@ -673,16 +580,17 @@ function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sL
 	else
 		rMessage.icon = "roll_damage";
 		rMessage.font = "msgfont";
-		rMessage.text = "[".. Interface.getString("damage_label_critical_"..sCriticalLevel) .."]";
+		rMessage.text = "[".. Interface.getString("damage_label_critical_"..sCriticalLevel);
+		rMessage.text = rMessage.text.." ("..nResult..") ]";
 		rMessage.text = rMessage.text .. "[".. Interface.getString("damage_label_location_"..sLocation) .."]\n";
 	
 		local sLabelId = "critical_label_".. sCriticalLevel .. "_" .. sLocation;
 		local sDescId = "critical_desc_".. sCriticalLevel .. "_" .. sLocation;
 		
-		if nResult == 12 or nResult == 10 or nResult == 9 then
+		if nResult >= 12 or nResult == 10 or nResult == 9 then
 			sLabelId = sLabelId .. "_greater";
 			sDescId = sDescId .. "_greater";
-		elseif nResult == 11 or nResult == 8 or nResult == 6 then
+		elseif nResult == 11 or nResult == 8 or nResult == 7 or nResult == 6 then
 			sLabelId = sLabelId .. "_lesser";
 			sDescId = sDescId .. "_lesser";
 		end
@@ -706,6 +614,7 @@ function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sL
 				sBonusDamage = 20;
 			end
 		end
+
 		sBonusDamage = sBonusDamage + nExtraDamage;
 		
 		rMessage.text = rMessage.text .. "[".. Interface.getString("damage_label_critical_extradamage") .. sBonusDamage .."]\n";
@@ -726,7 +635,7 @@ function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sL
 	Comm.deliverChatMessage(rMessage);
 
 	-- Continue damage resolution
-	applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sBonusDamage, nFinalDamage, sFinalDamageMessage)
+	applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffects, sBonusDamage, nFinalDamage, sFinalDamageMessage)
 end
 
 ------------------------------------------------------------------------------------
@@ -899,7 +808,7 @@ end
 ------------------------------------------------------------------------------------
 
 -- Notify damage / heal roll
-function notifyApplyDamage(sTargetCT, nTotalDamage)
+function notifyApplyDamage(sTargetCT, nTotalDamage, bLethal)
 	Debug.console("--------------------------------------------");
 	Debug.console("notifyApplyDamage - nTotalDamage : ");
 	Debug.console(nTotalDamage);
@@ -912,6 +821,10 @@ function notifyApplyDamage(sTargetCT, nTotalDamage)
 	local msgOOB = {};
 	msgOOB.type = OOB_MSGTYPE_APPLYDMG;
 	msgOOB.sTargetCT = sTargetCT;
+	msgOOB.sLethal = "true";
+	if not bLethal then
+		msgOOB.sLethal = "false";
+	end
 	
 	-- total damage rolled
 	msgOOB.nTotal = nTotalDamage;
@@ -927,7 +840,12 @@ function handleDamage(msgOOB)
 	
 	local rTarget = ActorManager.getActor("ct", msgOOB.sTargetCT);
 	local sTargetType, nodeTarget = ActorManager.getTypeAndNode(rTarget);
-	local nCurrentHP = DB.getValue(nodeTarget, "attributs.hit_points", 0);
-	DB.setValue(nodeTarget, "attributs.hit_points", "number", nCurrentHP - msgOOB.nTotal);
+	if msgOOB.sLethal == "true" then
+		local nCurrentHP = DB.getValue(nodeTarget, "attributs.hit_points", 0);
+		DB.setValue(nodeTarget, "attributs.hit_points", "number", nCurrentHP - msgOOB.nTotal);
+	else
+		local nCurrentSTA = DB.getValue(nodeTarget, "attributs.stamina", 0);
+		DB.setValue(nodeTarget, "attributs.stamina", "number", nCurrentSTA - msgOOB.nTotal);
+	end
 end
 
