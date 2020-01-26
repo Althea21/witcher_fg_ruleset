@@ -215,7 +215,7 @@ function onSkillRoll(rSource, rTarget, rRoll)
 				nDefValue = 0;
 			end
 			
-			CombatManager2.resolvePendingAttack(rSource, nDefValue)
+			CombatManager2.resolvePendingAttack(rSource, nDefValue, "");
 		end
 		
     end

@@ -25,6 +25,8 @@ end
 -- returns : 
 --	* rRoll	: roll object
 function getRoll(rActor, rWeapon, sDefenseType)
+	--Debug.chat(rWeapon);
+	
 	-- Initialize a blank rRoll record
 	local rRoll = {};
 	
@@ -43,6 +45,7 @@ function getRoll(rActor, rWeapon, sDefenseType)
 	rRoll.nTotalExplodeValue = 0; 	-- cumulative value of exploding rolls
 	rRoll.sStoredDice = "";			-- store all dice for final display message
 	rRoll.sWeaponType = "" ; 		-- range, melee, unarmed (used for fumble resolution)
+	rRoll.sBlockedWithWeapon = "";	-- used after resolution for damaging weapon reliability
 	
 	-- Debug.chat(rWeapon);
 	
@@ -62,6 +65,9 @@ function getRoll(rActor, rWeapon, sDefenseType)
 		
 		if sDefenseType == "block" then
 			sRollDescription = "[Block with "..rWeapon.label.."]";
+			if rRoll.sWeaponType ~= "unarmed" then
+				rRoll.sBlockedWithWeapon = rWeapon.sWeaponNodeId;
+			end
 		elseif sDefenseType == "parry" then
 			sRollDescription = "[Parry with "..rWeapon.label.." (-3)]";
 			nRollMod = nRollMod - 3;
@@ -264,7 +270,7 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 		if nDefValue < 0 then
 			nDefValue = 0;
 		end
-		CombatManager2.resolvePendingAttack(rSource, nDefValue)
+		CombatManager2.resolvePendingAttack(rSource, nDefValue, rRoll.sBlockedWithWeapon);
 	end
 end
 

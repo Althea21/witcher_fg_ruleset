@@ -182,7 +182,8 @@ end
 -- params :
 --	* sTargetCT	: defender 
 --	* nDefValue	: defense roll value 
-function resolvePendingAttack(rTarget, nDefValue)
+--	* sBlockedWithWeapon : if action is "block" and a weapon is used, then this is the weapon node id
+function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 	Debug.console("--------------------------------------------");
 	Debug.console("Resolve pending attack");
 	Debug.console("Defender :");
@@ -221,6 +222,17 @@ function resolvePendingAttack(rTarget, nDefValue)
 		notifyDefense(aAttack.sSourceCT, sTargetCT, nil, "true");
 		rMessage.text = Interface.getString("defense_succeeded_message");
 		rMessage.icon = "roll_attack_miss";
+
+		-- substract 1 reliability point to the weapon if needed
+		if sBlockedWithWeapon ~= "" then
+			local nWeapon = DB.findNode(sBlockedWithWeapon);
+			if nWeapon then
+				local nRelValue = DB.getValue(nWeapon, "reliability", 0);
+				if nRelValue > 0 then
+					DB.setValue(nWeapon, "reliability", "number", nRelValue-1);
+				end
+			end
+		end
 	else
 		-- attack win : update pending attack and create message
 		aAttack.nDefValue = nDefValue;

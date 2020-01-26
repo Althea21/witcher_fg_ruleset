@@ -116,6 +116,7 @@ function getWeaponAttackRollStructures(nodeWeapon)
 end
 
 function getWeaponDefenseRollStructures(nodeWeapon)
+	--Debug.chat(nodeWeapon)
 	if not nodeWeapon then
 		return;
 	end
@@ -127,6 +128,7 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	local rAttack = {};
 	rAttack.type = "defense";
 	rAttack.label = DB.getValue(nodeWeapon, "name", "");
+	rAttack.sWeaponNodeId = nodeWeapon.getNodeName();
 	
 	-- effects (weapon + enhancements if any)
 	-- weapon effects and enhancements
