@@ -72,22 +72,6 @@ function getWeaponAttackRollStructures(nodeWeapon)
 		rAttack.effects = (rAttack.effects).."\n";
 	end
 
-	local aEnhancementNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "enhancementlist"));
-	for _,v in ipairs(aEnhancementNodes) do
-		local sEffect = DB.getValue(v, "effect", "");
-		if sEffect ~= "" then
-			if rAttack.effects ~= "" then
-				rAttack.effects = (rAttack.effects)..", ";
-			end
-			local sName = DB.getValue(v, "name", "");
-			if sName ~= "" then
-				rAttack.effects = (rAttack.effects).."["..sName.."] : "..(sEffect);
-			else
-				rAttack.effects = (rAttack.effects).."[Enhancement] : "..(sEffect);
-			end
-		end
-	end
-	
 	-- melee (M) / range (R)
 	local nType = DB.getValue(nodeWeapon, "type", 0);
 	if nType == 2 then
@@ -138,19 +122,6 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 		rAttack.effects = (rAttack.effects).."\n";
 	end
 	
-	local aEnhancementNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "enhancementlist"));
-	for _,v in ipairs(aEnhancementNodes) do
-		local sEffect = DB.getValue(v, "effect", "");
-		if sEffect ~= "" then
-			local sName = DB.getValue(v, "name", "");
-			if sName ~= "" then
-				rAttack.effects = (rAttack.effects).."["..sName.."] : "..(sEffect).."\n";
-			else
-				rAttack.effects = (rAttack.effects).."[Enhancement] : "..(sEffect).."\n";
-			end
-		end
-	end
-	
 	-- melee (M) / range (R)
 	local nType = DB.getValue(nodeWeapon, "type", 0);
 	if nType == 2 then
@@ -178,6 +149,11 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	return rActor, rAttack;
 end
 
+-- Get weapon effects (natural + runes of the specified weapon)
+-- param :
+--  * nodeWeapon : the db node of the weapon
+-- returns :
+--  * effects as human readable string
 function getWeaponEffects(nodeWeapon)
 	--Debug.chat("------- _getWeaponEffects");
 	--Debug.chat(nodeWeapon);
@@ -243,7 +219,36 @@ function getWeaponEffects(nodeWeapon)
 		if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
 		sWeaponEffects = sWeaponEffects .. Interface.getString("weapon_property_effect_stun") .. "(" .. DB.getValue(nodeWeapon, "stun_amount", 0) .. ")";
 	end
-	--Debug.chat(sWeaponEffects)
+	
+	local aEnhancementNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "enhancementlist"));
+	for _,v in ipairs(aEnhancementNodes) do
+		local sEffect = DB.getValue(v, "effect", "");
+		if sEffect ~= "" then
+			-- look if effects already exists
+			local sEffectName, sEffectSign, sEffectValue = sEffect:match("(%a+)%s*%((%-*)(%d+)%%*%)");
+			-- keep sign for later
+			if sEffectSign == nil then sEffectSign = ""; end
+			
+			if sEffectValue ~= nil and sEffectValue ~= "" and sWeaponEffects:find(sEffectName) then
+				--look if we already have a similar effect with a specific value => stack values
+				local sSign, sEffectOldValue, sPercent = sWeaponEffects:match(sEffectName.."%s*%((%-*)(%d+)(%%*)%)");
+				if sSign == nil then sSign = ""; end
+				local sEffectNewValue = tonumber(sSign..sEffectOldValue) + tonumber(sEffectSign..sEffectValue);
+				if sPercent ~= nil and sEffectNewValue > 100 then
+					sEffectNewValue = 100;
+				end
+				-- replace existing effect with new value
+				sWeaponEffects = sWeaponEffects:gsub(sEffectName .. "%s*%(%-*%d+%%*%)", sEffectName.." (".. tostring(sEffectNewValue) .. sPercent .. sPercent ..")")
+			elseif sWeaponEffects:find(sEffect) then
+				-- similar effect exists and has no specific value to stack => do nothing
+			else
+				-- new effect => add to the list
+				if sWeaponEffects ~= "" then sWeaponEffects = sWeaponEffects .. ", "; end
+				sWeaponEffects = sWeaponEffects .. sEffect;
+			end
+		end
+	end
+	
 	return sWeaponEffects;
 end
 

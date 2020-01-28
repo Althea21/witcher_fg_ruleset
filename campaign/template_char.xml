@@ -176,4 +176,17 @@
 			<center />
 		</label>
 	</template>
+
+	<template name="header_armor">
+		<label>
+			<font>sheetlabelheader</font>
+			<anchored height="30">
+				<top parent="columnanchor" anchor="bottom" relation="relative" offset="8" />
+				<left offset="10" />
+				<right offset="-10" />
+			</anchored>
+			<frame name="headersimple" offset="10,-3,10,-3" />
+			<center />
+		</label>
+	</template>
 </root>

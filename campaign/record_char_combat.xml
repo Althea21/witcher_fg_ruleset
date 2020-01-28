@@ -597,13 +597,13 @@
 		
 			<!-- ARMOR -->
 			<genericcontrol name="armor_divider">
-				<anchored to="kicklabel" position="below" offset="10,5" height="3" />
+				<anchored to="icon_kick" position="below" offset="10,5" height="3" />
 				<frame name="separatorline" />
 				<invisible />
 			</genericcontrol>
 			<!-- section header (show/hide list on click) -->
 			<genericcontrol name="icon_armor">
-				<anchored to="armor_divider" position="belowleft" offset="-10,14" width="20" height="20" />
+				<anchored to="armor_divider" position="belowleft" offset="10,14" width="20" height="20" />
 				<icon>char_armor</icon>
 			</genericcontrol>
 			<label name="label_armor">
@@ -1478,19 +1478,20 @@
 			
 			<enhancement_list_editor name="enhancement_list">
 				<datasource>.enhancementlist</datasource>
-				<class>char_enhancement_entry</class>
+				<class>weapon_rune_entry</class>
 				<script>
 					function addEntry(bFocus)
 						local n = getWindowCount();
-						
-						local w = createWindow();
-						if w then
-							if bFocus then
-								w.name.setFocus();
+						if n &lt; window.enhancementmax.getValue() then
+							local w = createWindow();
+							if w then
+								if bFocus then
+									w.name.setFocus();
+								end
 							end
+							
+							return w;
 						end
-						
-						return w;
 					end
 				</script>
 			</enhancement_list_editor>
@@ -1702,10 +1703,10 @@
 			<string_column name="effects" />
 			
 			<!-- PROPERTIES -->
-			<header_column name="header_properties">
+			<header_armor name="header_properties">
 				<static textres="armor_header_properties" />
 				<center />
-			</header_column>
+			</header_armor>
 			<!--SP-->
 			<basicnumber name="sp">
 				<anchored width="30" height="20">
@@ -1737,10 +1738,10 @@
 			</label>
 			
 			<!-- LOCATION -->
-			<header_column name="header_location">
+			<header_armor name="header_location">
 				<static textres="armor_header_location" />
 				<center />
-			</header_column>
+			</header_armor>
 			
 			<button_checkbox name="location_head">
 				<anchored width="20" height="20">
@@ -1809,10 +1810,10 @@
 			</label>
 			
 			<!-- ENHANCEMENT -->
-			<header_column name="header_enhancement">
+			<header_armor name="header_enhancement">
 				<static textres="armor_header_enhancement" />
 				<center />
-			</header_column>
+			</header_armor>
 			<button_iedit name="enhancement_list_iedit">
 				<anchored to="header_enhancement" position="insidetopright" offset="-5,0" />
 				<target>enhancement_list</target>
@@ -1861,6 +1862,63 @@
 				<static textres="armor_label_enhancementeffect" />
 			</label_fieldtop>
 			
+		</sheetdata>
+	</windowclass>
+
+	<!-- Enhancement entry class-->
+	<windowclass name="weapon_rune_entry">
+		<margins control="0,0,0,2" />
+		<sheetdata>
+			<!--anchor-->
+			<genericcontrol name="rightanchor">
+				<anchored width="0" height="0">
+					<top offset="5" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+			<button_idelete name="enhancement_list_idelete">
+				<anchored to="rightanchor">
+					<top />
+					<right anchor="left" relation="relative" offset="-5" />
+				</anchored>
+			</button_idelete>
+
+			<!-- <stringu name="name">
+				<anchored position="insidetopleft" offset="5,5" width="100" height="20" />
+			</stringu> -->
+			<combobox name="name">
+				<anchored position="insidetopleft" offset="5,5" width="100" height="20" />
+				<listdirection>down</listdirection>
+				<script>
+					function onInit()
+						super.onInit();
+						add(Interface.getString("weapon_rune_chemobog_label"), Interface.getString("weapon_rune_chemobog_label"));
+						add(Interface.getString("weapon_rune_dazhbog_label"), Interface.getString("weapon_rune_dazhbog_label"));
+						add(Interface.getString("weapon_rune_devanna_label"), Interface.getString("weapon_rune_devanna_label"));
+						add(Interface.getString("weapon_rune_morana_label"), Interface.getString("weapon_rune_morana_label"));
+						add(Interface.getString("weapon_rune_perun_label"), Interface.getString("weapon_rune_perun_label"));
+						add(Interface.getString("weapon_rune_stribog_label"), Interface.getString("weapon_rune_stribog_label"));
+						add(Interface.getString("weapon_rune_svarog_label"), Interface.getString("weapon_rune_svarog_label"));
+						add(Interface.getString("weapon_rune_triglav_label"), Interface.getString("weapon_rune_triglav_label"));
+						add(Interface.getString("weapon_rune_veles_label"), Interface.getString("weapon_rune_veles_label"));
+						add(Interface.getString("weapon_rune_zoria_label"), Interface.getString("weapon_rune_zoria_label"));
+					end
+					function onValueChanged()
+						window.effect.setValue(Interface.getString("weapon_rune_" .. string.lower(getValue()) .. "_desc"));
+					end
+				</script>
+			</combobox>
+			<stringu name="effect">
+				<anchored width="250" >
+					<top parent="name" anchor="righthigh" relation="relative" offset="-20" />
+					<left parent="name" anchor="right" relation="relative" offset="5" />
+					<right parent="rightanchor" anchor="left" relation="relative" offset="-5" />
+				</anchored>
+				<multilinespacing>20</multilinespacing>
+				<disabled/>
+			</stringu>
+
 		</sheetdata>
 	</windowclass>
 
