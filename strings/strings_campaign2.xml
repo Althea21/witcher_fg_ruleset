@@ -646,6 +646,7 @@
 	<string name="armor_title">Armor Part</string>
 	<string name="armor_label_name">Name</string>
 	<string name="armor_label_effects">Effects</string>
+	<string name="armor_label_resistances">Resistances</string>
 	<string name="armor_header_properties">Properties</string>
 	<string name="armor_property_sp">Stopping power</string>
 	<string name="armor_property_ev">Encumbrance value</string>
@@ -960,6 +961,7 @@
 	<string name="npc_threat_difficult">Difficult</string>
 
 	<string name="npc_label_vulnerabilities">Vulnerabilities</string>
+	<string name="npc_label_resistances">Resistances</string>
 	<string name="npc_label_abilities">Abilities</string>
 	<string name="npc_label_initiative">Initiative</string>
 	<string name="npc_label_woundthreshold">Wound Threshold</string>

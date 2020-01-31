@@ -1701,6 +1701,11 @@
 				<static textres="armor_label_effects" />
 			</label_column>
 			<string_column name="effects" />
+
+			<label_column>
+				<static textres="armor_label_resistances" />
+			</label_column>
+			<string_column name="resistances" />
 			
 			<!-- PROPERTIES -->
 			<header_armor name="header_properties">
@@ -1815,7 +1820,7 @@
 				<center />
 			</header_armor>
 			<button_iedit name="enhancement_list_iedit">
-				<anchored to="header_enhancement" position="insidetopright" offset="-5,0" />
+				<anchored to="header_enhancement" position="insidetopright" offset="-5,5" />
 				<target>enhancement_list</target>
 			</button_iedit>
 			<button_iadd name="enhancement_list_iadd">

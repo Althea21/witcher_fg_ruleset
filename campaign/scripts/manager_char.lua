@@ -560,3 +560,82 @@ function isMeteoriteVulnerable(nodeActor)
 
 	return bVulnerable;
 end
+
+function getVulnerabilities(nodeActor, actorType)
+	local sVulnerabilities = "";
+
+	-- TODO hanged man venom vulnerability
+	sVulnerabilities = string.lower(DB.getValue(nodeActor, "vulnerabilities", "")); 
+	
+	return sVulnerabilities;
+end
+
+function getResistances(nodeActor, actorType)
+	local sResistances = "";
+	
+	-- get resistances from armor
+	local armorlist = nodeActor.getChild("armorlist");
+	if armorlist then
+		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
+			local sArmorRes = DB.getValue(v, "resistances", "");
+			Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
+			if sArmorRes ~= "" then
+				if sResistances ~= "" then sResistances = sResistances .. ", " end;
+				sResistances = sResistances .. DB.getValue(v, "ev", 0);
+			end
+		end
+	end
+
+	-- get natural resistance for npc
+	sResistances = sResistances .. string.lower(DB.getValue(nodeActor, "resistances", "")); 
+
+	return sResistances;
+end
+
+function isResistantTo(nodeActor, actorType, sDamageTypes)
+	-- split damage type (exclude silver)
+	local aTypes={};
+	for str in string.gmatch(sDamageTypes, "([^,]+)") do
+		-- trim
+		str = string.lower(str:match("^%s*(.-)%s*$"));
+		if str ~= "silver" then
+			aTypes[str] = 1;
+		end
+	end
+
+	-- check resistances
+	local sResistances = getResistances(nodeActor, actorType);
+	if sResistances ~= "" then
+		for str in string.gmatch(sResistances, "([^,]+)") do
+			-- trim & lower
+			str = string.lower(str:match("^%s*(.-)%s*$"));
+			if str ~= "silver" and aTypes[str]==1 then
+				return true;
+			end
+		end
+	end
+end
+
+function isVulnerableTo(nodeActor, actorType, sDamageTypes)
+	-- split damage type (exclude silver)
+	local aTypes={};
+	for str in string.gmatch(sDamageTypes, "([^,]+)") do
+		-- trim
+		str = string.lower(str:match("^%s*(.-)%s*$"));
+		if str ~= "silver" then
+			aTypes[str] = 1;
+		end
+	end
+
+	-- check vulnerabilities
+	local sVulnerabilities = getVulnerabilities(nodeActor, actorType);
+	if sVulnerabilities ~= "" then
+		for str in string.gmatch(sVulnerabilities, "([^,]+)") do
+			-- trim & lower
+			str = string.lower(str:match("^%s*(.-)%s*$"));
+			if str ~= "silver" and aTypes[str]==1 then
+				return true;
+			end
+		end
+	end
+end

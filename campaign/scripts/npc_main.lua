@@ -38,6 +38,7 @@ function updateReadOnly()
 	npctype.setReadOnly(bReadOnly);
 	threat1.setReadOnly(bReadOnly);
 	threat2.setReadOnly(bReadOnly);
+	resistances.setReadOnly(bReadOnly);
 	vulnerabilities.setReadOnly(bReadOnly);
 	abilities.setReadOnly(bReadOnly);
 	intelligence.setReadOnly(bReadOnly);

@@ -182,6 +182,11 @@
 				<unsorted />
 			</combobox>
 
+			<label_column name="resistance_label">
+				<static textres="npc_label_resistances" />
+			</label_column>
+			<string_columnh name="resistances"/>
+
 			<label_column name="vulnerabilities_label">
 				<static textres="npc_label_vulnerabilities" />
 			</label_column>

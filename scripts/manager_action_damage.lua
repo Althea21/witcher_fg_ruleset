@@ -61,7 +61,7 @@ function getRoll(rActor, rAction)
 	-- Add the dice and modifiers
 	for _,vClause in pairs(rRoll.clauses) do
 		for _,vDie in ipairs(vClause.dice) do
-			if string.lower(vClause.dmgtype)=="silver" and vDie== "d6" then
+			if string.find(string.lower(vClause.dmgtype), "silver") and vDie== "d6" then
 				table.insert(rRoll.aDice, "s6");
 			else
 				table.insert(rRoll.aDice, vDie);
@@ -139,13 +139,17 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 
 	-- Decode damage description
 	local rDamageOutput = decodeDamageText(nFinalDamage, rRoll.sDesc);
-
 	-- SILVER ?
 	local bIsSilverVulnerable = CharManager.isSilverVulnerable(nodeTarget);
-	local bIsWeaponSilver = (rDamageOutput.aDamageTypes["silver"] ~= nil);
-	if not bIsSilverVulnerable and bIsWeaponSilver then
+	local nSilverDamage = 0;
+	for k,v in pairs(rDamageOutput.aDamageTypes) do
+		if string.find(string.lower(k), "silver") then
+			nSilverDamage = nSilverDamage + v;
+		end
+	end
+	if not bIsSilverVulnerable and nSilverDamage > 0 then
 		-- don't count silver damage
-		nFinalDamage = nFinalDamage - rDamageOutput.aDamageTypes["silver"];
+		nFinalDamage = nFinalDamage - nSilverDamage;
 		Debug.console("target is NOT silver vulnerable but weapon is silver = don't count silver damage : ", nFinalDamage);
 	end
 
@@ -262,7 +266,7 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		nArmorValue = math.floor(nArmorValue/2);
 		Debug.console("weapon effect Imp. Armor piercing (half SP) : new SP = ", nArmorValue);
 	end
-
+	-- substract SP
 	nFinalDamage = nFinalDamage - nArmorValue;
 	if nFinalDamage < 0 then
 		nFinalDamage = 0;
@@ -283,20 +287,22 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 	end
 	Debug.console("damage after armor : ", nFinalDamage);
 	
-	-- resistance (x0.5)
-	-- TODO (+ armor piercing)
-	
-	-- SILVER resistance
+	-- SILVER susceptibility
 	local bIsSilverVulnerable = CharManager.isSilverVulnerable(nodeTarget);
-	local bIsWeaponSilver = (rDamageOutput.aDamageTypes["silver"] ~= nil);
-	if bIsSilverVulnerable and not bIsWeaponSilver then
+	local nSilverDamage = 0;
+	for k,v in pairs(rDamageOutput.aDamageTypes) do
+		if string.find(string.lower(k), "silver") then
+			nSilverDamage = nSilverDamage + v;
+		end
+	end
+	if bIsSilverVulnerable and nSilverDamage <= 0 then
 		-- target is silver vulnerable but weapon is not silver : half damage 
 		nFinalDamage = math.floor(nFinalDamage/2);
 		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") / 2 {silver}";
 		Debug.console("target is silver vulnerable but weapon is NOT silver : ", nFinalDamage);
 	end
 
-	-- METEORITE resistance
+	-- METEORITE susceptibility
 	local bIsMeteoriteVulnerable = CharManager.isMeteoriteVulnerable(nodeTarget);
 	local bIsWeaponMeteorite = (sWeaponEffects:find(Interface.getString("weapon_property_effect_meteorite"), 1, true) ~= nil);
 	if bIsMeteoriteVulnerable and not bIsWeaponMeteorite then
@@ -306,8 +312,36 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		Debug.console("target is meteorite vulnerable but weapon is NOT meteorite : ", nFinalDamage);
 	end
 
+	-- resistance (x0.5)
+	-- armor piercing and improved armor piercing negate resistance
+	if not bArmorPiercing and not bImprovedArmorPiercing then
+		local bResistant = false;
+		for k,v in pairs(rDamageOutput.aDamageTypes) do
+			if CharManager.isResistantTo(nodeTarget, sTargetType, k) then
+				bResistant = true;
+				break;
+			end
+		end
+		if bResistant then
+			nFinalDamage = math.floor(nFinalDamage/2);
+			sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") / 2 {resistance}";
+			Debug.console("target is resistant, damage after resistance : ", nFinalDamage);
+		end
+	end
+	
 	-- vulnerability (x2)
-	-- TODO
+	local bVulnerable = false;
+	for k,v in pairs(rDamageOutput.aDamageTypes) do
+		if CharManager.isVulnerableTo(nodeTarget, sTargetType, k) then
+			bVulnerable = true;
+			break;
+		end
+	end
+	if bVulnerable then
+		nFinalDamage = nFinalDamage * 2;
+		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") x 2 {vulnerable}";
+		Debug.console("target is vulnerable, damage after bVulnerability : ", nFinalDamage);
+	end
 
 	-- location multiplier
 	local nLocationMultiplier = CharManager.getDamageLocationModifierForLocationRoll(nodeTarget, sLocation);
