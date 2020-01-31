@@ -250,10 +250,10 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 	local rDamageOutput = decodeDamageText(nFinalDamage, sDamageText);
 	
 	-- ARMOR
-	local nArmorValue = CharManager.getArmorValueForLocationRoll(nodeTarget, sLocation);
-	Debug.console("armor sp of target for location : ", nArmorValue);
+	local nArmorValue = 0;
+	
 	-- check armor piercing (negates the damage resistance of any armor) 
-	-- and imp. armor piercing (negates the damage resistance of any armor also halve the SP value) 
+	-- and imp. armor piercing (negates the damage resistance of any armor and also halve the SP value) 
 	local bArmorPiercing = false;
 	local bImprovedArmorPiercing = false;
 	if sWeaponEffects:find(Interface.getString("weapon_property_effect_improvedarmorpiercing"), 1, true) then
@@ -261,7 +261,28 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 	elseif sWeaponEffects:find(Interface.getString("weapon_property_effect_armorpiercing"), 1, true) then
 		bArmorPiercing = true;
 	end
+	
+	-- check soft spot
+	local bSoftSpot = false;
+	if ModifierStack.getModifierKey("DMG_SOFTSPOT") then
+		bSoftSpot = true;
+	end
+	if bSoftSpot then
+		local sVulnerabilities = CharManager.getVulnerabilities(nodeTarget, sTargetType);
+		if sVulnerabilities:find("soft spot") then
+			nArmorValue = tonumber(sVulnerabilities:match("soft spot%s*(%d)"));
+			Debug.console("soft spot found, new SP is : ", nArmorValue);
+		else
+			bSoftSpot = false;
+		end
+	end
 
+	if not bSoftSpot then
+		nArmorValue = CharManager.getArmorValueForLocationRoll(nodeTarget, sLocation);
+	end
+
+	Debug.console("armor sp of target for location : ", nArmorValue);
+	
 	if bImprovedArmorPiercing then
 		nArmorValue = math.floor(nArmorValue/2);
 		Debug.console("weapon effect Imp. Armor piercing (half SP) : new SP = ", nArmorValue);
@@ -313,8 +334,8 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 	end
 
 	-- resistance (x0.5)
-	-- armor piercing and improved armor piercing negate resistance
-	if not bArmorPiercing and not bImprovedArmorPiercing then
+	-- soft spot, armor piercing and improved armor piercing negate resistance
+	if not bSoftSpot and not bArmorPiercing and not bImprovedArmorPiercing then
 		local bResistant = false;
 		for k,v in pairs(rDamageOutput.aDamageTypes) do
 			if CharManager.isResistantTo(nodeTarget, sTargetType, k) then
@@ -327,6 +348,8 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 			sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") / 2 {resistance}";
 			Debug.console("target is resistant, damage after resistance : ", nFinalDamage);
 		end
+	else
+		Debug.console("by-pass resistance : ", bSoftSpot, bArmorPiercing, bImprovedArmorPiercing);		
 	end
 	
 	-- vulnerability (x2)

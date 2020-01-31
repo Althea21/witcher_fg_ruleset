@@ -342,6 +342,10 @@
 					end
 				</script>
 			</button_modifierkey>
+			<button_modifierkey name="DMG_SOFTSPOT">
+				<bounds>305,305,110,20</bounds>
+				<textres>modifier_label_damage_softspot</textres>
+			</button_modifierkey>
 
 			<button_modifierkey name="DMG_CRTCOM">
 				<bounds>430,200,110,20</bounds>
