@@ -54,6 +54,9 @@ function onMenuSelection(selection, subselection, subsubselection)
 			end
 		elseif selection == 5 then
 			CombatManager2.resetPendingAttacks();
+			local msg = ChatManager.createBaseMessage(rActor, nil);
+			msg.text = Interface.getString("ct_msg_resetpendingattacks");
+			Comm.deliverChatMessage(msg);
 		end
 	end
 end

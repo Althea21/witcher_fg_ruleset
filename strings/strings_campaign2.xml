@@ -1007,5 +1007,6 @@
 	<string name="ct_menu_itemdeletefoe">Delete Only Foes</string>
 	<string name="ct_label_hp">HP</string>
 	<string name="ct_label_stamina">STA</string>
+	<string name="ct_msg_resetpendingattacks">Pending attacks reset</string>
 </root>
 
