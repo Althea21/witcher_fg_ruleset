@@ -74,9 +74,16 @@ function getRoll(rActor, rWeapon, sAttackType)
 		if sAttackType == "fast" then
 			sRollDescription = "["..Interface.getString("combat_fastattack_message").." "..rWeapon.label.."]";
 		elseif sAttackType == "strong" then
-			sRollDescription = "["..Interface.getString("combat_strongattack_message").." "..rWeapon.label.."][Strong -3]"; -- changing this may affect onAttackModifier function below
-			nRollMod = nRollMod - 3;
 			rRoll.sIsStrongAttack = "true";
+			sRollDescription = "["..Interface.getString("combat_strongattack_message").." "..rWeapon.label.."]";
+				
+			-- no penalty if actor is a witcher from the wolf school
+			if DB.getValue(nodeActor, "identite.profession", "") == Interface.getString("list_profession_witcher") and DB.getValue(nodeActor, "identite.witcher_school", "") == Interface.getString("list_witcherschool_wolf") then
+				Debug.console("no penalty for strong attack as a witcher from the wolf school");
+			else
+				nRollMod = nRollMod - 3;
+				sRollDescription = sRollDescription .. "[Strong -3]";
+			end
 		else
 			sRollDescription = "["..Interface.getString("combat_attack_message").." "..rWeapon.label.."]";
 		end
@@ -87,7 +94,6 @@ function getRoll(rActor, rWeapon, sAttackType)
 		end
 
 		-- stat modifier
-		--Debug.chat("stat modifier ("..("attributs."..rWeapon.stat).."): "..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0));
 		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0);
 		-- sRollDescription = sRollDescription.."["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]"
 		Debug.console("["..rWeapon.stat.." +"..DB.getValue(nodeActor, "attributs."..rWeapon.stat, 0).."]")
@@ -97,7 +103,6 @@ function getRoll(rActor, rWeapon, sAttackType)
 			-- PC case
 			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
 				if (DB.getValue(v, "id", "") == rWeapon.skill) then
-					--Debug.chat("skill modifier ("..rWeapon.skill.."): "..DB.getValue(v, "skill_value", 0));
 					nRollMod = nRollMod + DB.getValue(v, "skill_value", 0);
 					-- sRollDescription = sRollDescription.."["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]"
 					Debug.console("["..rWeapon.skill.." +"..DB.getValue(v, "skill_value", 0).."]")
@@ -443,7 +448,7 @@ function onAttackModifier(rSource, rTarget, rRoll)
 		nAddMod = nAddMod - 3;
 	end
 	if bStrongAttack then
-		if not string.match(rRoll.sDesc, "%[Strong attack") then
+		if rRoll.sIsStrongAttack ~= "true" then
 			table.insert(aAddDesc, "["..Interface.getString("modifier_label_atkstrong").." -3]");
 			nAddMod = nAddMod - 3;
 		end

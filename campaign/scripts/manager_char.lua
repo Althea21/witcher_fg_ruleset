@@ -386,6 +386,7 @@ function getNPCSkillValue(nodeActor, skillName)
 end
 
 -- get total equipped EV (work for PC / NPC)
+-- if actor is a witcher from the bear school => -2
 -- params :
 --  * nodeActor : pc or npc node
 -- returns : 
@@ -399,6 +400,17 @@ function getTotalEV(nodeActor)
 			if (DB.getValue(v, "equipped", "") == 1) then
 				nTotalEV = nTotalEV + DB.getValue(v, "ev", 0);
 			end
+		end
+	end
+
+	-- test if bear witcher
+	if DB.getValue(nodeActor, "identite.profession", "") == Interface.getString("list_profession_witcher") then
+		if DB.getValue(nodeActor, "identite.witcher_school", "") == Interface.getString("list_witcherschool_bear") then
+			nTotalEV = nTotalEV - 2 ;
+			if nTotalEV < 0 then
+				nTotalEV = 0
+			end
+			Debug.console("EV -2 because of bear school advantage");
 		end
 	end
 

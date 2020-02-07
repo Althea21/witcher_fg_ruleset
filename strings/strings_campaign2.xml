@@ -109,6 +109,13 @@
 	<string name="list_profession_peasant">Peasant</string>
 	<string name="list_profession_noble">Noble</string>
 	<string name="list_profession_custom">-- Custom --</string>
+
+	<string name="list_witcherschool_wolf">Wolf</string>
+	<string name="list_witcherschool_cat">Cat</string>
+	<string name="list_witcherschool_bear">Bear</string>
+	<string name="list_witcherschool_gryphon">Gryphon</string>
+	<string name="list_witcherschool_viper">Viper</string>
+	<string name="list_witcherschool_custom">-- Custom --</string>
 	
 	<!-- List Skills cycler -->
 	<string name="char_listskillcycler_intelligence">INT</string>
