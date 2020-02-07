@@ -573,7 +573,7 @@
 	<!-- Combat messages-->
 	<string name="combat_attack_message">Attack %s with</string>
 	<string name="combat_fastattack_message">Fast attack %s with</string>
-	<string name="combat_strongattack_message">Fast attack %s with</string>
+	<string name="combat_strongattack_message">Strong attack %s with</string>
 	<string name="defense_errormsg_unknowndefense">[ERROR] Trying to roll unknown defense type.</string>
 	<string name="defense_succeeded_message">Defense succeeded.</string>
 	<string name="defense_failed_message">Defense failed. </string>
@@ -706,7 +706,7 @@
 	<string name="critical_desc_simple_leg">The blow sprained your leg, making it diffcult to walk and maneuver. You take a -2 to SPD, Dodge/Escape, and Athletics.</string>
 
 	<string name="critical_label_complex_head_greater">Minor Head Wound</string>
-	<string name="critical_desc_complex_head_greater">The blow rattled your brain and caused some internal bleeding. It’s hard to think straight. You take a -1 to INT, WILL, and STUN.</string>
+	<string name="critical_desc_complex_head_greater">The blow rattled your brain and caused some internal bleeding. It's hard to think straight. You take a -1 to INT, WILL, and STUN.</string>
 	<string name="critical_label_complex_head_lesser">Lost Teeth</string>
 	<string name="critical_desc_complex_head_lesser">The blow knocked out some teeth. Roll 1d10 to see how many teeth are lost. You take a -3 to magical skills and Verbal Combat.</string>
 	<string name="critical_label_complex_torso_greater">Ruptured Spleen</string>
