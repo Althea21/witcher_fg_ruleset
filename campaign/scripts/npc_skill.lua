@@ -228,3 +228,20 @@ function onClickRelease(button, x, y)
 	
 	return true;
 end
+
+-- sort skills when loosing focus
+function onLoseFocus()
+	local aClauses, aClauseStats = StringManager.split(getValue(), ",;\r", true);
+	
+	-- make first letter uppercase
+	for i = 1, #aClauses do
+		aClauses[i] = aClauses[i]:sub(1,1):upper()..aClauses[i]:sub(2);
+		--Debug.chat(aClauses[i]);
+	end
+
+	table.sort(aClauses);
+
+	setValue(table.concat(aClauses, ", "));
+
+	bParsed = false;
+end

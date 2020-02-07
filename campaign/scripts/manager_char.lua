@@ -609,7 +609,7 @@ function isResistantTo(nodeActor, actorType, sDamageTypes)
 	local aTypes={};
 	for str in string.gmatch(sDamageTypes, "([^,]+)") do
 		-- trim
-		str = string.lower(str:match("^%s*(.-)%s*$"));
+		str = string.lower(StringManager.trim(str));
 		if str ~= "silver" then
 			aTypes[str] = 1;
 		end
@@ -620,7 +620,7 @@ function isResistantTo(nodeActor, actorType, sDamageTypes)
 	if sResistances ~= "" then
 		for str in string.gmatch(sResistances, "([^,]+)") do
 			-- trim & lower
-			str = string.lower(str:match("^%s*(.-)%s*$"));
+			str = string.lower(StringManager.trim(str));
 			if str ~= "silver" and aTypes[str]==1 then
 				return true;
 			end
@@ -633,7 +633,7 @@ function isVulnerableTo(nodeActor, actorType, sDamageTypes)
 	local aTypes={};
 	for str in string.gmatch(sDamageTypes, "([^,]+)") do
 		-- trim
-		str = string.lower(str:match("^%s*(.-)%s*$"));
+		str = string.lower(StringManager.trim(str));
 		if str ~= "silver" then
 			aTypes[str] = 1;
 		end
@@ -644,7 +644,7 @@ function isVulnerableTo(nodeActor, actorType, sDamageTypes)
 	if sVulnerabilities ~= "" then
 		for str in string.gmatch(sVulnerabilities, "([^,]+)") do
 			-- trim & lower
-			str = string.lower(str:match("^%s*(.-)%s*$"));
+			str = string.lower(StringManager.trim(str));
 			if str ~= "silver" and aTypes[str]==1 then
 				return true;
 			end
