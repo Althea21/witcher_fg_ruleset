@@ -8,4 +8,6 @@ The Witcher game is based on the prose of Andrzej Sapkowski.
 
 This ruleset is a fan made project and not an official product from Talsorian Inc. nor CD Projekt Red.
 
+Download last version here : https://github.com/Althea21/witcher_fg_ruleset/releases
+
 Ruleset documentation available : https://github.com/Althea21/witcher_fg_ruleset/wiki
