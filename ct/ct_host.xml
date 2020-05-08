@@ -42,19 +42,19 @@
 				<static textres="ct_label_name" />
 				<center />
 			</label_ct>
-			<label_ct name="label_init">
-				<anchored to="headeranchor" position="insidetopright" offset="193,0" width="40" />
-				<static textres="ct_label_init" />
-				<center />
-			</label_ct>
 			<label_ct name="label_hp">
-				<anchored to="headeranchor" position="insidetopright" offset="153,0" width="40" />
+				<anchored to="headeranchor" position="insidetopright" offset="193,0" width="40" />
 				<static textres="ct_label_hp" />
 				<center />
 			</label_ct>
 			<label_ct name="label_stamina">
-				<anchored to="headeranchor" position="insidetopright" offset="113,0" width="40" />
+				<anchored to="headeranchor" position="insidetopright" offset="153,0" width="40" />
 				<static textres="ct_label_stamina" />
+				<center />
+			</label_ct>
+			<label_ct name="label_init">
+				<anchored to="headeranchor" position="insidetopright" offset="113,0" width="40" />
+				<static textres="ct_label_init" />
 				<center />
 			</label_ct>
 			<frame_ctbox_host_header_toggles />
@@ -137,6 +137,19 @@
 			<button_ctentry_activatetargeting name="activatetargeting" />
 			<button_ctentry_friendfoe name="friendfoe" />
 
+			<number_ct_crosslink name="initresult">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<hideonvalue>0</hideonvalue>
+				<tabtarget prev="nonid_name" />
+				<script>
+					function update()
+						window.windowlist.applySort();
+					end
+				</script>
+			</number_ct_crosslink>
 			<number_ct_crosslink name="stamina">
 				<anchored to="rightanchor" width="30" height="20">
 					<top />
@@ -174,7 +187,7 @@
 					end
 				</script>
 			</number_ct_crosslink>
-			<number_ctentry_initresult name="initresult" />
+			
 			
 			<string_ctname name="name" />
 			<string_ctname_nonid name="nonid_name" />

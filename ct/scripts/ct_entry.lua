@@ -67,12 +67,22 @@ function linkToken()
 end
 
 function onMenuSelection(selection, subselection)
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+
 	if selection == 6 and subselection == 7 then
 		delete();
 	end
 end
 
 function delete()
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+
 	local node = getDatabaseNode();
 	if not node then
 		close();
@@ -99,6 +109,11 @@ function delete()
 end
 
 function onLinkChanged()
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+
 	-- Set up the links to the char sheet
 	local sClass, sRecord = link.getValue();
 	
@@ -115,6 +130,11 @@ function onLinkChanged()
 end
 
 function onIDChanged()
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+	
 	local nodeRecord = getDatabaseNode();
 	local sClass = DB.getValue(nodeRecord, "link", "", "");
 	if sClass == "npc" then
@@ -139,6 +159,8 @@ function onFactionChanged()
 	else
 		tokenvis.setVisible(true);
 	end
+
+	updateHealthDisplay();
 end
 
 function onVisibilityChanged()
@@ -147,6 +169,11 @@ function onVisibilityChanged()
 end
 
 function linkPCFields()
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+
 	local nodeChar = link.getTargetDatabaseNode();
 	if nodeChar then
 		name.setLink(nodeChar.createChild("name", "string"), true);
@@ -156,6 +183,11 @@ function linkPCFields()
 end
 
 function linkNPCFields()
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+
 	local nodeChar = link.getTargetDatabaseNode();
 	if nodeChar then
 		name.setLink(nodeChar.createChild("name", "string"), true);
@@ -194,28 +226,36 @@ end
 --
 
 function setTargetingVisible()
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+
 	local v = false;
+
 	if activatetargeting.getValue() == 1 then
 		v = true;
 	end
 
 	targetingicon.setVisible(v);
-	
 	sub_targeting.setVisible(v);
-	
 	frame_targeting.setVisible(v);
-
 	target_summary.onTargetsChanged();
 end
 
 function setSpacingVisible()
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+
 	local v = false;
+	
 	if activatespacing.getValue() == 1 then
 		v = true;
 	end
 
 	spacingicon.setVisible(v);
-	
 	space.setVisible(v);
 	spacelabel.setVisible(v);
 	reach.setVisible(v);
@@ -225,7 +265,13 @@ function setSpacingVisible()
 end
 
 function setEffectsVisible()
+	-- GM only
+	if not User.isHost() then
+		return;
+	end
+
 	local v = false;
+	
 	if activateeffects.getValue() == 1 then
 		v = true;
 	end
@@ -243,3 +289,22 @@ function setEffectsVisible()
 	effect_summary.onEffectsChanged();
 end
 
+function updateHealthDisplay()
+	-- Players only
+	if not User.isHost() then
+		local sOption;
+		if friendfoe.getStringValue() == "friend" then
+			sOption = OptionsManager.getOption("SHPC");
+		else
+			sOption = OptionsManager.getOption("SHNPC");
+		end
+		
+		if sOption == "on" then
+			hit_points.setVisible(true);
+			stamina.setVisible(true);
+		else
+			hit_points.setVisible(false);
+			stamina.setVisible(false);
+		end
+	end
+end

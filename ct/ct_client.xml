@@ -20,16 +20,37 @@
 		<script>
 			function onInit()
 				OptionsManager.registerCallback("CTSI", updateShowOrder);
+				OptionsManager.registerCallback("SHPC", updateHealthDisplay);
+				OptionsManager.registerCallback("SHNPC", updateHealthDisplay);
 				updateShowOrder();
 			end
 			
 			function onClose()
 				OptionsManager.unregisterCallback("CTSI", updateShowOrder);
+				OptionsManager.unregisterCallback("SHPC", updateHealthDisplay);
+				OptionsManager.unregisterCallback("SHNPC", updateHealthDisplay);
+				
 			end
 			
 			function updateShowOrder()
 				local bShowInit = not OptionsManager.isOption("CTSI", "off");
 				label_init.setVisible(bShowInit);
+			end
+
+			function updateHealthDisplay()
+				local sOptionSHPC = OptionsManager.getOption("SHPC");
+				Debug.chat(sOptionSHPC)
+				local sOptionSHNPC = OptionsManager.getOption("SHNPC");
+				Debug.chat(sOptionSHNPC)
+				local bShowLabels = (sOptionSHPC=="on") or (sOptionSHNPC=="on");
+				Debug.chat(bShowLabels)
+
+				label_hp.setVisible(bShowLabels);
+				label_stamina.setVisible(bShowLabels);
+
+				for _,w in pairs(list.getWindows()) do
+					w.updateHealthDisplay();
+				end
 			end
 		</script>
 		<sheetdata>
@@ -40,9 +61,29 @@
 
 			<anchor_ctbox_client_header />
 			<anchor_ct_label_right />
-			<label_ct_init name="label_init" />
-			<label_ct_name name="label_name" />
-
+			<label_ct name="label_name">
+				<anchored to="headeranchor" position="insidetopleft" offset="33,0">
+					<right offset="-153" />
+				</anchored>
+				<static textres="ct_label_name" />
+				<center />
+			</label_ct>
+			<label_ct name="label_hp">
+				<anchored to="headeranchor" position="insidetopright" offset="133,0" width="40" />
+				<static textres="ct_label_hp" />
+				<center />
+			</label_ct>
+			<label_ct name="label_stamina">
+				<anchored to="headeranchor" position="insidetopright" offset="93,0" width="40" />
+				<static textres="ct_label_stamina" />
+				<center />
+			</label_ct>
+			<label_ct name="label_init">
+				<anchored to="headeranchor" position="insidetopright" offset="53,0" width="40" />
+				<static textres="ct_label_init" />
+				<center />
+			</label_ct>
+			
 			<list_ctbox_client />
 			<scrollbar_list />
 			
@@ -60,7 +101,7 @@
 	<windowclass name="client_ct_entry">
 		<margins control="0,0,0,2" />
 		<frame>ctentrybox</frame>
-		<script file="ct/scripts/clientct_entry.lua" />
+		<script file="ct/scripts/ct_entry.lua" />
 		<sheetdata>
 			<hidden_record_isidentified name="isidentified" />
 			<hlink_clientct name="link" />
@@ -76,7 +117,56 @@
 			<anchor_ctentry_right name="rightanchor" />
 			<button_clientct_activateeffects name="activateeffects" />
 			<button_ctentry_friendfoe name="friendfoe" />
-			<number_clientct_init name="initresult" />
+			
+			<number_ct_static name="initresult">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-15" />
+				</anchored>
+				<script>
+					function onValueChanged()
+						window.windowlist.applySort();
+					end
+				</script>
+			</number_ct_static>
+			<number_ct_crosslink name="stamina">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="hit_points" />
+				<script>
+					function handleDrop(draginfo)
+						local sDragType = draginfo.getType();
+						if (sDragType == "number" or sDragType=="heal") then
+							window.stamina.setValue(window.stamina.getValue() + draginfo.getNumberData());
+						elseif sDragType == "damage" then
+							window.stamina.setValue(window.stamina.getValue() - draginfo.getNumberData());
+						end
+					end
+				</script>
+			</number_ct_crosslink>
+			<number_ct_crosslink name="hit_points">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="initresult" />
+				<script>
+					function update()
+						window.updateHPDisplay();
+					end
+					function handleDrop(draginfo)
+						local sDragType = draginfo.getType();
+						if (sDragType == "number" or sDragType=="heal") then
+							window.hit_points.setValue(window.hit_points.getValue() + draginfo.getNumberData());
+						elseif sDragType == "damage" then
+							window.hit_points.setValue(window.hit_points.getValue() - draginfo.getNumberData());
+						end
+					end
+				</script>
+			</number_ct_crosslink>
+			
 
 			<string_clientct_name name="name" />
 			<string_clientct_name name="nonid_name">
