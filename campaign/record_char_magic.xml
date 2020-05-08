@@ -316,6 +316,7 @@
 					<top />
 					<right anchor="left" relation="relative" offset="-15" />
 				</anchored>
+				<max>100</max>
 			</basicnumber>
 
 			<!--name-->

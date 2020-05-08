@@ -15,11 +15,15 @@
 	
 	<!--stat de base-->
 	<template name="number_charstatbase">
-		<basicnumber/>
+		<basicnumber>
+			<max>100</max>
+		</basicnumber>
 	</template>
 	<!--stat modificateur-->
 	<template name="number_charstatmodifier">
-		<basicnumber/>
+		<basicnumber>
+			<max>100</max>
+		</basicnumber>
 	</template>
 	<!--stat total-->
 	<template name="number_charstattotal">
@@ -88,6 +92,7 @@
 					return sStat,nStat;
 				end
 			</script>
+			<max>100</max>
 		</basicnumber>
 	</template>
 	

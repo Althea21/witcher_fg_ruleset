@@ -1153,6 +1153,7 @@
 						window.onSkillValueChanged();
 					end
 				</script>
+				<max>100</max>
 			</basicnumber>
 
 			<!-- + -->
@@ -1179,6 +1180,7 @@
 						window.onSkillValueChanged();
 					end
 				</script>
+				<max>100</max>
 			</basicnumber>
 
 			<!-- armor widget-->

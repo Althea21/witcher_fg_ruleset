@@ -1073,6 +1073,7 @@
 			<number_column name="reliability"/>
 			<basicnumber name="reliabilitymax">
 				<anchored to="reliability" position="right" offset="30,0" width="30" height="20" />
+				<max>1000</max>
 			</basicnumber>
 			<label>
 				<anchored to="reliabilitymax" position="right" offset="-47,0" />
@@ -1398,6 +1399,7 @@
 			</label>
 			<basicnumber name="weapon_accuracy">
 				<anchored to="label_atkplus2" position="righthigh" offset="5,0" width="30" height="20" />
+				<max>100</max>
 			</basicnumber>
 			<label_fieldtop>
 				<anchored to="weapon_accuracy" />
@@ -1470,6 +1472,7 @@
 					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
 					<left offset="35" />
 				</anchored>
+				<max>100</max>
 			</basicnumber>
 			<label>
 				<anchored to="enhancementmax" position="left" offset="10,0" />
@@ -1536,6 +1539,7 @@
 			<basicnumber name="bonus">
 				<anchored to="label_plus" position="righthigh" offset="2,0" width="30" height="20" />
 				<hideonvalue>0</hideonvalue>
+				<max>100</max>
 			</basicnumber>
 			<label name="label_plus2">
 				<anchored to="bonus" position="righthigh" offset="5,0" width="10" />
