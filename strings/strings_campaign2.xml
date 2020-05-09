@@ -16,6 +16,8 @@
 	<string name="option_label_MITN">Silver Vulnerability management</string>
 	<string name="option_val_allmonsters">All monsters</string>
 	<string name="option_val_novels">As in the Novels</string>
+	<string name="option_label_ADA">Automate armor damaging</string>
+	<string name="option_label_ADW">Automate weapon damaging</string>
 	<string name="option_label_SHPC">CT : Show ally health to players</string>
 	<string name="option_label_SHNPC">CT : Show non-ally health to players</string>
 

@@ -224,12 +224,16 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 		rMessage.icon = "roll_attack_miss";
 
 		-- substract 1 reliability point to the weapon if needed
-		if sBlockedWithWeapon ~= "" then
-			local nWeapon = DB.findNode(sBlockedWithWeapon);
-			if nWeapon then
-				local nRelValue = DB.getValue(nWeapon, "reliability", 0);
-				if nRelValue > 0 then
-					DB.setValue(nWeapon, "reliability", "number", nRelValue-1);
+		-- check automate weapon damaging option, if "off" do nothing
+		local sOptionADW = OptionsManager.getOption("ADW");
+		if sOptionADA == "on" then
+			if sBlockedWithWeapon ~= "" then
+				local nWeapon = DB.findNode(sBlockedWithWeapon);
+				if nWeapon then
+					local nRelValue = DB.getValue(nWeapon, "reliability", 0);
+					if nRelValue > 0 then
+						DB.setValue(nWeapon, "reliability", "number", nRelValue-1);
+					end
 				end
 			end
 		end

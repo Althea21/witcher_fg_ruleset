@@ -473,6 +473,12 @@ end
 function damageArmorByLocation(nodeActor, sLocation)
 	Debug.console("----- damageArmorByLocation called for sLocation="..sLocation);
 	
+	-- check automate armor damaging option, if "off" do nothing
+	local sOptionADA = OptionsManager.getOption("ADA");
+	if sOptionADA == "off" then
+		return;
+	end
+
 	sLocation = string.lower(sLocation);
 	local sArmorLocation = sLocation;
 	
