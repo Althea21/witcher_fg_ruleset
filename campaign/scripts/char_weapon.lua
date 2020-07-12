@@ -80,6 +80,8 @@ function onDataChanged()
 	button_melee_parry.setVisible(not bRanged);
 	--button_melee_block.setVisible(not bRanged);
 	spacer_for_ranged_defense.setVisible(bRanged);
+
+	onWeaponReliabilityChanged();
 end
 
 function onDamageChanged()
@@ -122,4 +124,22 @@ function onDamageAction(draginfo)
 	
 	ActionDamage.performRoll(draginfo, rActor, rDamage);
 	return true;
+end
+
+-- change the color of reliability weapon info if changed
+-- displayed in yellow if current value is 50% or less of the max value
+-- displayed in red if current value is 25% or less of the max value
+function onWeaponReliabilityChanged()
+	local node = getDatabaseNode();
+	local relMax = DB.getValue(node, "reliabilitymax", 0);
+	local relCurrent = DB.getValue(node, "reliability", 0);
+	
+	
+	if relCurrent <= math.ceil(relMax/4) then
+		reliability.setFont("sheetnumber_critical");
+	elseif relCurrent <= math.ceil(relMax/2) then
+		reliability.setFont("sheetnumber_warning");
+	else
+		reliability.setFont("sheetnumber");
+	end
 end

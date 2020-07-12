@@ -38,6 +38,7 @@ local m_sRecord = "";
 
 function onDataChanged()
 	onLocationChanged();
+	onArmorSPChanged();
 end
 
 function onLocationChanged()
@@ -70,3 +71,20 @@ function onLocationChanged()
 	locationview.setValue(table.concat(aLocation, " | "));
 end
 
+-- change the color of armor stopping power info if changed
+-- displayed in yellow if current value is 50% or less of the max value
+-- displayed in red if current value is 25% or less of the max value
+function onArmorSPChanged()
+	local node = getDatabaseNode();
+	local spMax = DB.getValue(node, "spmax", 0);
+	local spCurrent = DB.getValue(node, "sp", 0);
+	
+	
+	if spCurrent <= math.ceil(spMax/4) then
+		sp.setFont("sheetnumber_critical");
+	elseif spCurrent <= math.ceil(spMax/2) then
+		sp.setFont("sheetnumber_warning");
+	else
+		sp.setFont("sheetnumber");
+	end
+end

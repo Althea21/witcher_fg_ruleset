@@ -6,7 +6,7 @@ The Witcher TRPG is edited by Talsorian Games Inc.
 The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved. 
 The Witcher game is based on the prose of Andrzej Sapkowski.
 
-This ruleset is released under the Creative Common Attribution-NonCommercial-NoDerivatives 4.0 International (CC BY-NC-ND 4.0).
+This ruleset is released under the Creative Common Attribution-NonCommercial-NoDerivatives 4.0 International Licence (CC BY-NC-ND 4.0).
 See licence.txt fore more info
 
 This ruleset is a fan made project and not an official product from Talsorian Inc. nor CD Projekt Red.

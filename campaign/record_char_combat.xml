@@ -946,6 +946,11 @@
 					<top />
 					<right anchor="left" relation="relative" offset="-15" />
 				</anchored>
+				<script>
+					function onValueChanged()
+						window.onWeaponReliabilityChanged();
+					end
+				</script>
 			</number_statcurrentvalue>
 			
 			<!--name-->
@@ -1070,11 +1075,30 @@
 			<label_column>
 				<static textres="weapon_property_reliability" />
 			</label_column>
-			<number_column name="reliability"/>
-			<basicnumber name="reliabilitymax">
+			<number_column name="reliability">
+				<script>
+					function onInit()
+						onValueChanged()
+					end
+
+					function onValueChanged()
+						local relMax = window.reliabilitymax.getValue();
+						local relCurrent = window.reliability.getValue();
+						
+						if relCurrent &lt;= math.ceil(relMax/4) then
+							setFont("sheetnumber_critical");
+						elseif relCurrent &lt;= math.ceil(relMax/2) then
+							setFont("sheetnumber_warning");
+						else
+							setFont("sheetnumber");
+						end
+					end
+				</script>
+			</number_column>
+			<number_statcurrentvalue name="reliabilitymax">
 				<anchored to="reliability" position="right" offset="30,0" width="30" height="20" />
-				<max>1000</max>
-			</basicnumber>
+				<max>100</max>
+			</number_statcurrentvalue>
 			<label>
 				<anchored to="reliabilitymax" position="right" offset="-47,0" />
 				<static textres="char_special_divide" />
@@ -1624,6 +1648,11 @@
 					<top />
 					<right anchor="left" relation="relative" offset="-15" />
 				</anchored>
+				<script>
+					function onValueChanged()
+						window.onArmorSPChanged();
+					end
+				</script>
 			</number_statcurrentvalue>
 			
 			<!--name-->
@@ -1722,6 +1751,24 @@
 					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
 					<left offset="100" />
 				</anchored>
+				<script>
+					function onInit()
+						onValueChanged()
+					end
+
+					function onValueChanged()
+						local spMax = window.spmax.getValue();
+						local spCurrent = window.sp.getValue();
+						
+						if spCurrent &lt;= math.ceil(spMax/4) then
+							setFont("sheetnumber_critical");
+						elseif spCurrent &lt;= math.ceil(spMax/2) then
+							setFont("sheetnumber_warning");
+						else
+							setFont("sheetnumber");
+						end
+					end
+				</script>
 			</basicnumber>
 			<label>
 				<anchored to="sp" position="right" offset="-130,0" />
