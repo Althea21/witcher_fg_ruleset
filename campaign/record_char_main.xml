@@ -162,9 +162,11 @@
 					end
 				</script>
 			</combobox>
+			<!-- custom witcher school label -->
 			<stringu name="custom_witcher_school" source="identite.custom_witcher_school">
 				<anchored position="insidetopleft" offset="350,110" width="100" height="20"/>
 			</stringu>
+			<!-- profession combo-->
 			<combobox name="profession" source="identite.profession">
 				<anchored to="identite_frame" position="insidetopleft" offset="100,110" width="100" height="20" />
 				<listdirection>down</listdirection>
@@ -184,21 +186,14 @@
 						add(Interface.getString("list_profession_noble"), Interface.getString("list_profession_noble"));
 						add(Interface.getString("list_profession_custom"), Interface.getString("list_profession_custom"));
 						
-						if getValue()==Interface.getString("list_profession_custom") then
-							window.custom_profession.setVisible(true);
-							window.witcher_school.setComboBoxVisible(false);
-							window.custom_witcher_school.setVisible(false);
-						elseif getValue()==Interface.getString("list_profession_witcher") then
-							window.witcher_school.setComboBoxVisible(true);
-							window.witcher_school.onValueChanged();
-							window.custom_profession.setVisible(false);
-						else
-							window.custom_profession.setVisible(false);
-							window.witcher_school.setComboBoxVisible(false);
-							window.custom_witcher_school.setVisible(false);
-						end
+						onProfessionValueChanged();
 					end
+					
 					function onValueChanged()
+						onProfessionValueChanged();
+					end
+					
+					function onProfessionValueChanged()
 						if getValue()==Interface.getString("list_profession_custom") then
 							window.custom_profession.setVisible(true);
 							window.witcher_school.setComboBoxVisible(false);

@@ -111,6 +111,7 @@ function addSkills()
 	end
 end
 
+-- init marker display 
 function initSkills()
 	for k, v in pairs(getWindows()) do
 		-- double IP
@@ -134,6 +135,7 @@ function initSkills()
 	end
 end
 
+-- sort skill list
 function onSortCompare(w1, w2)
 	local criteria = window.skilllist_sortCriteria.getValue();
 	local s1 = "";

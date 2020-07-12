@@ -1022,5 +1022,6 @@
 
 	<!-- new strings-->
 	<string name="char_tooltip_isclassskill">Class skill</string>
+	<string name="char_tooltip_skilllabeliseditable">This label is editable</string>
 </root>
 

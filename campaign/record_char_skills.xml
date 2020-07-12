@@ -240,7 +240,7 @@
 			<stringu name="definingSkill_name" source="skills.definingSkill_name">
 				<anchored to="definingSkill_label" height="20">
 					<top offset="0" />
-					<left anchor="right" offset="10" />
+					<left anchor="right" offset="20" />
 					<right parent="definingSkill_stat" anchor="left" offset="-10" />
 				</anchored>
 				<default>
@@ -248,12 +248,22 @@
 				</default>
 				<disabled/>
 			</stringu>
+			<!--editable widget-->
+			<genericcontrol name="definingSkill_editablewidget">
+				<anchored to="definingSkill_name" width="15" height="15">
+					<top offset="3" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			
 			<!-- Branche A -->
 			<simplestringc name="branch1_label" source="skills.branch1_label">
 				<anchored height="24">
 					<top parent="leftanchor" offset="38" />
-					<left parent="leftanchor" offset="5" />
+					<left parent="leftanchor" offset="15" />
 					<right parent="rightanchor" offset="5" />
 				</anchored>
 				<frame name="headertitle" />
@@ -262,6 +272,16 @@
 				</default>
 				<disabled/>
 			</simplestringc>	
+			<!--editable widget-->
+			<genericcontrol name="branch1_editablewidget">
+				<anchored to="branch1_label" width="15" height="15">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			<!--A1 hidden description-->
 			<simplestring name="branch1_ability1_desc">
 				<anchored width="0" height="0">
@@ -320,7 +340,7 @@
 			<stringu name="branch1_ability1_name" source="skills.ability.branch1_ability1_name">
 				<anchored to="branch1_label" height="20">
 					<top offset="25" />
-					<left offset="10" />
+					<left offset="20" />
 					<right parent="branch1_ability1_stat" anchor="left" offset="-10" />
 				</anchored>
 				<default>
@@ -328,7 +348,16 @@
 				</default>
 				<disabled/>
 			</stringu>
-			
+			<!--editable widget-->
+			<genericcontrol name="branch1_ability1_editablewidget">
+				<anchored to="branch1_ability1_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			<!--A2 hidden description-->
 			<simplestring name="branch1_ability2_desc">
 				<anchored width="0" height="0">
@@ -393,7 +422,16 @@
 				</default>
 				<disabled/>
 			</stringu>
-			
+			<!--editable widget-->
+			<genericcontrol name="branch1_ability2_editablewidget">
+				<anchored to="branch1_ability2_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			<!--A3 hidden description-->
 			<simplestring name="branch1_ability3_desc">
 				<anchored width="0" height="0">
@@ -458,12 +496,21 @@
 				</default>
 				<disabled/>
 			</stringu>
-			
+			<!--editable widget-->
+			<genericcontrol name="branch1_ability3_editablewidget">
+				<anchored to="branch1_ability3_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			<!-- Branche B -->
 			<simplestringc name="branch2_label" source="skills.branch2_label">
 				<anchored height="24">
 					<top parent="branch1_ability3_name" offset="30" />
-					<left parent="branch1_ability3_name" offset="-10" />
+					<left parent="branch1_ability3_name" offset="-20" />
 					<right parent="rightanchor" offset="5" />
 				</anchored>
 				<frame name="headertitle" />
@@ -472,6 +519,16 @@
 				</default>
 				<disabled/>
 			</simplestringc>	
+			<!--editable widget-->
+			<genericcontrol name="branch2_editablewidget">
+				<anchored to="branch2_label" width="15" height="15">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			<!--B1 hidden description-->
 			<simplestring name="branch2_ability1_desc">
 				<anchored width="0" height="0">
@@ -530,7 +587,7 @@
 			<stringu name="branch2_ability1_name" source="skills.ability.branch2_ability1_name">
 				<anchored to="branch2_label" height="20">
 					<top offset="25" />
-					<left offset="10" />
+					<left offset="20" />
 					<right parent="branch2_ability1_stat" anchor="left" offset="-10" />
 				</anchored>
 				<default>
@@ -538,7 +595,17 @@
 				</default>
 				<disabled/>
 			</stringu>
-			
+			<!--editable widget-->
+			<genericcontrol name="branch2_ability1_editablewidget">
+				<anchored to="branch2_ability1_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
+						
 			<!--B2 hidden description-->
 			<simplestring name="branch2_ability2_desc">
 				<anchored width="0" height="0">
@@ -603,7 +670,17 @@
 				</default>
 				<disabled/>
 			</stringu>
-			
+			<!--editable widget-->
+			<genericcontrol name="branch2_ability2_editablewidget">
+				<anchored to="branch2_ability2_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
+
 			<!--B3 hidden description-->
 			<simplestring name="branch2_ability3_desc">
 				<anchored width="0" height="0">
@@ -668,12 +745,22 @@
 				</default>
 				<disabled/>
 			</stringu>
-			
+			<!--editable widget-->
+			<genericcontrol name="branch2_ability3_editablewidget">
+				<anchored to="branch2_ability3_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
+
 			<!-- Branche C -->
 			<simplestringc name="branch3_label" source="skills.branch3_label">
 				<anchored height="24">
 					<top parent="branch2_ability3_name" offset="30" />
-					<left parent="branch2_ability3_name" offset="-10" />
+					<left parent="branch2_ability3_name" offset="-20" />
 					<right parent="rightanchor" offset="5" />
 				</anchored>
 				<frame name="headertitle" />
@@ -682,6 +769,16 @@
 				</default>
 				<disabled/>
 			</simplestringc>	
+			<!--editable widget-->
+			<genericcontrol name="branch3_editablewidget">
+				<anchored to="branch3_label" width="15" height="15">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			<!--C1 hidden description-->
 			<simplestring name="branch3_ability1_desc">
 				<anchored width="0" height="0">
@@ -740,7 +837,7 @@
 			<stringu name="branch3_ability1_name" source="skills.ability.branch3_ability1_name">
 				<anchored to="branch3_label" height="20">
 					<top offset="25" />
-					<left offset="10" />
+					<left offset="20" />
 					<right parent="branch3_ability1_stat" anchor="left" offset="-10" />
 				</anchored>
 				<default>
@@ -748,6 +845,16 @@
 				</default>
 				<disabled/>
 			</stringu>
+			<!--editable widget-->
+			<genericcontrol name="branch3_ability1_editablewidget">
+				<anchored to="branch3_ability1_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			
 			<!--C2 hidden description-->
 			<simplestring name="branch3_ability2_desc">
@@ -813,6 +920,16 @@
 				</default>
 				<disabled/>
 			</stringu>
+			<!--editable widget-->
+			<genericcontrol name="branch3_ability2_editablewidget">
+				<anchored to="branch3_ability2_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			
 			<!--C3 hidden description-->
 			<simplestring name="branch3_ability3_desc">
@@ -878,6 +995,16 @@
 				</default>
 				<disabled/>
 			</stringu>
+			<!--editable widget-->
+			<genericcontrol name="branch3_ability3_editablewidget">
+				<anchored to="branch3_ability3_name" width="12" height="12">
+					<top offset="5" />
+					<right anchor="left" offset="-3" />
+				</anchored>
+				<icon>icon_edit</icon>
+				<tooltip textres="char_tooltip_skilllabeliseditable"/>
+				<invisible/>
+			</genericcontrol>
 			
 			<!-- profession needs to be here to be init last-->
 			<hs name="profession" source="identite.profession">

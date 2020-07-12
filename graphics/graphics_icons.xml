@@ -70,7 +70,6 @@
 	<icon name="d10gicon" file="graphics/icons/d10_gicon.png" />
 	<icon name="d10ricon" file="graphics/icons/d10_ricon.png" />
 	
-	
 	<!-- Common -->
 	<icon name="window_resize" file="graphics/icons/window_resize.png" />
 	<icon name="window_resize_filled" file="graphics/icons/window_resize_filled.png" />
@@ -108,6 +107,7 @@
 	<icon name="xp" file="graphics/icons/xp.png" />
 	<icon name="blank" file="graphics/icons/blank.png" />
 	<icon name="shopping" file="graphics/icons/shopping.png" />
+	<icon name="icon_edit" file="graphics/icons/edit.png" />
 
 	<icon name="button_add" file="graphics/buttons/button_add.png" />
 	<icon name="button_add_down" file="graphics/buttons/button_add_down.png" />

@@ -91,13 +91,16 @@ function setProfessionEditable(bEditable)
     -- defining skill
     definingSkill_name.setEnabled(bEditable);
     definingSkill_stat.setEnabled(bEditable);
+    definingSkill_editablewidget.setVisible(bEditable);
     
     -- branch
     for i=1, 3 do
         self["branch"..i.."_label"].setEnabled(bEditable);
+        self["branch"..i.."_editablewidget"].setVisible(bEditable);
         for j=1, 3 do
             self["branch"..i.."_ability"..j.."_name"].setEnabled(bEditable);
             self["branch"..i.."_ability"..j.."_stat"].setEnabled(bEditable);
+            self["branch"..i.."_ability"..j.."_editablewidget"].setVisible(bEditable);
         end
     end
 end
