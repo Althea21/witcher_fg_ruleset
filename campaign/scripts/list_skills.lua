@@ -40,6 +40,7 @@ function addSkillsRoot()
 	end
 end
 
+-- init displayed skill list
 function addSkills()
 	local effectiveSkillNumber = 52;
 	local listskill = {};
@@ -47,6 +48,7 @@ function addSkills()
 	local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	local class = DB.getValue(nodeActor, "identite.profession", "");
+	local hasProfessionChanged = DB.getValue(nodeActor, "hasProfessionChanged", 0);
 	
 	-- existing skills in character record
 	local count = 0;
@@ -100,13 +102,14 @@ function addSkills()
 		end
 
 		-- set class skill info only if it's a new record (=keep the existing value if there was one)
-		if bNewSkill then
+		if bNewSkill or hasProfessionChanged == 1  then
 			local classSkillFor = v[4];
 			if string.match(classSkillFor, class) then
 				newwin.isClassSkill.setValue(1);
 			else
 				newwin.isClassSkill.setValue(0);
 			end
+			DB.setValue(nodeActor, "hasProfessionChanged", "number", 0);
 		end
 	end
 end

@@ -118,6 +118,17 @@
 			</combobox>
 	
 			<!-- PROFESSION -->
+			
+			<!--to know when profession has been explicitely change (for init of skill tab)-->
+			<basicnumber name="hasProfessionChanged" source="hasProfessionChanged">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<default>0</default>
+				<readonly />
+				<invisible />
+			</basicnumber>
 			<label>
 				<anchored to="identite_frame" position="insidetopleft" offset="15,110" />
 				<static textres="char_label_profession" />
@@ -190,6 +201,7 @@
 					end
 					
 					function onValueChanged()
+						window.hasProfessionChanged.setValue(1);
 						onProfessionValueChanged();
 					end
 					

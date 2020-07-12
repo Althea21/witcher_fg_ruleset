@@ -1051,6 +1051,21 @@
 				<invisible />
 			</simplestring>
 
+			<basicnumber name="hasProfessionChanged_skilllist" source="hasProfessionChanged">
+				<anchored width="0" height="0">
+					<top offset="0" />
+					<left offset="0" />
+				</anchored>
+				<default>0</default>
+				<readonly />
+				<invisible />
+				<script>
+					function onValueChanged()
+						window.skills.onInit();
+					end
+				</script>
+			</basicnumber>
+
 			<!-- "is class skill" widget-->
 			<genericcontrol to="rightanchor" name="skill_classSkillwidget">
 				<anchored position="insidetopleft" offset="5,10" width="20" height="20"/>
