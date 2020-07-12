@@ -25,3 +25,11 @@ function getAssociatedStat(rActor)
 
 	return sStat,nStat;
 end
+
+function onIsClassSkillChanged()
+	if (isClassSkill.getValue()==1) then
+		name.setFont("sheettext-alt");--sheettextbold
+	else
+		name.setFont("sheettext");
+	end
+end

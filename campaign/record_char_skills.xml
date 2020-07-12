@@ -924,8 +924,15 @@
 				<invisible />
 			</simplestring>
 
+			<!-- "is class skill" widget-->
+			<genericcontrol to="rightanchor" name="skill_classSkillwidget">
+				<anchored position="insidetopleft" offset="5,10" width="20" height="20"/>
+				<icon>spellclass_ritual</icon>
+				<tooltip textres="char_tooltip_isclassskill"/>
+			</genericcontrol>
+
 			<label name="skillname_label">
-				<anchored position="insidetopleft" offset="25,10" />
+				<anchored position="insidetopleft" offset="35,10" />
 				<static textres="char_skillname_label" />
 				<script>
 					function onClickDown(button, x, y)
@@ -1055,21 +1062,28 @@
 				<readonly />
 				<invisible />
 			</basicnumber>
-			<basicnumber name="isClassSkill">
-				<anchored width="0" height="0">
-					<top offset="0" />
-					<left offset="0" />
+			
+			<!-- Is Class Skill checkbox -->
+			<button_checkbox name="isClassSkill">
+				<anchored width="12" height="12">
+					<top offset="5" />
+					<right parent="leftanchor" anchor="left" relation="relative" offset="-5" />
 				</anchored>
-				<readonly />
-				<invisible />
-			</basicnumber>
+				<tooltip textres="char_tooltip_isclassskill"/>
+				<script>
+					function onValueChanged()
+						window.onIsClassSkillChanged();
+					end
+				</script>
+			</button_checkbox>
 
-			<!-- Checkbox -->
+			<!-- Checkbox (unused) -->
 			<button_checkbox name="skill_use">
 				<anchored width="12" height="12">
 					<top offset="5" />
 					<right parent="leftanchor" anchor="left" relation="relative" offset="-5" />
 				</anchored>
+				<invisible />
 			</button_checkbox>
 
 			<!-- See details -->
@@ -1202,6 +1216,7 @@
 				<center/>
 			</label>
 
+			<!-- Skill name-->
 			<simplestring name="name">
 				<anchored height="20">
 					<top offset="0" />

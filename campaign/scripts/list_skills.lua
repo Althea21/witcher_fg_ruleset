@@ -67,6 +67,8 @@ function addSkills()
 	for k, v in pairs(SkillsTable.tbl_flat_skills) do
 		local newwin;
 		local matches = listskill[k];
+		local bNewSkill = true; -- keep track if skill already exists or if it's a new one
+		
 		if not matches then
 			-- add missing skills if needed
 			newwin = createWindow();
@@ -74,6 +76,7 @@ function addSkills()
 			newwin.skill_stat.setStringValue(v[1]);
 		else
 			newwin = matches;
+			bNewSkill = false;
 		end
 
 		local localeId = "char_skill_"..k.."_label";
@@ -82,25 +85,29 @@ function addSkills()
 		localeId = "char_skill_"..k.."_desc";
 		newwin.skill_desc.setValue(Interface.getString(localeId));
 		
+		-- double IP needed
 		if v[2] then
 			newwin.isDoubleIP.setValue(1);
 		else
 			newwin.isDoubleIP.setValue(0);
 		end
 
+		-- skill is armor impacted
 		if v[3] then
 			newwin.isArmorImpacted.setValue(1);
 		else
 			newwin.isArmorImpacted.setValue(0);
 		end
 
-		local classSkillFor = v[4];
-		if string.match(classSkillFor, class) then
-			newwin.isClassSkill.setValue(1);
-		else
-			newwin.isClassSkill.setValue(0);
+		-- set class skill info only if it's a new record (=keep the existing value if there was one)
+		if bNewSkill then
+			local classSkillFor = v[4];
+			if string.match(classSkillFor, class) then
+				newwin.isClassSkill.setValue(1);
+			else
+				newwin.isClassSkill.setValue(0);
+			end
 		end
-
 	end
 end
 

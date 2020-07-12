@@ -1019,5 +1019,8 @@
 	<string name="ct_label_hp">HP</string>
 	<string name="ct_label_stamina">STA</string>
 	<string name="ct_msg_resetpendingattacks">Pending attacks reset</string>
+
+	<!-- new strings-->
+	<string name="char_tooltip_isclassskill">Class skill</string>
 </root>
 
