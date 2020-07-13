@@ -354,13 +354,15 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 	
 	-- rearrange rRoll.aDice if needed (has reroll or location roll) as serialization seems to mess up array
 	-- and color exploding dice
-	-- if rRoll.sExplodeMode ~= "none" or rRoll.sIsLocationRoll=="true" then
-		local aNewDice = {};
-		for i = 1, #(rRoll.aDice) do
-			local aDiceTmp = rRoll.aDice[i];
-			for j=1,#(aDiceTmp) do
-				local aDieTmp = aDiceTmp[j];
-				
+	
+	local aNewDice = {};
+	
+	for i, k in pairs (rRoll.aDice) do -- FGU compatibility : change loops "for i=1, # ..." in "for i,k in pairs ..."
+		local aDiceTmp = rRoll.aDice[i];
+		for j,l in pairs (aDiceTmp) do -- FGU compatibility : change loops "for j=1, # ..." in "for j,l in pairs ..."
+			local aDieTmp = aDiceTmp[j];
+			
+			if j ~= "expr" then -- FGU compatibility : don't propagate "expr" in aDice array
 				-- 10 is always rerolled => set it green
 				if tonumber(aDieTmp.result)==10 then
 					aDieTmp.type="g10";
@@ -374,12 +376,14 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 					-- any result between 1 and 9 => get die as it is
 					aDieTmp.result = 0-tonumber(aDieTmp.result)
 				end
-				
+
 				table.insert(aNewDice, aDieTmp);
 			end
 		end
-		rRoll.aDice = aNewDice;
-	
+	end
+
+	rRoll.aDice = aNewDice;
+
 	-- Debug.chat("after :");
 	-- Debug.chat(rRoll.aDice);
 	

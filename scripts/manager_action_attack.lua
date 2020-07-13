@@ -1,5 +1,5 @@
 -- 
--- Please see the license.html file included with this distribution for 
+-- Please see the license file included with this distribution for 
 -- attribution and copyright information.
 --
 
@@ -206,35 +206,13 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		rRoll.sDesc = string.gsub(rRoll.sDesc, "%%s", "");
 	end
 	
-	--if (rRoll.sType ~= "attacklocation") then
-		-- Check for reroll
-		local nDiceResult = tonumber(rRoll.aDice[1].result);
-		if (nDiceResult == 1) then
-			-- Debug.chat("rolled a 1 => check case");
-			if rRoll.sExplodeMode == "none" then
-				-- roll 1 on first roll => fumble => reroll
-				rRoll.sExplodeMode = "fumble";
-				_storeDieForFinalMessage(rRoll);
-				-- reinit rRoll dice
-				rRoll.aDice = { "d10" };
-				-- change roll type to avoid throwing to much dice if multi-targeting
-				rRoll.sType = "attackreroll";
-				-- reroll
-				bDisplayFinalMessage = false;
-				ActionsManager.performAction(nil, rActor, rRoll);
-			else
-				-- roll 1 on crit or fumble reroll
-				_storeDieForFinalMessage(rRoll);
-				rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + tonumber(nDiceResult);
-				bDisplayFinalMessage = true;
-			end
-		elseif (nDiceResult == 10) then
-			-- Debug.chat("rolled a 10 => reroll");
-			-- rolled a 10, reroll in any case
-			if rRoll.sExplodeMode == "none" then
-				rRoll.sExplodeMode = "crit";
-			end
-			rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + nDiceResult;
+	-- Check for reroll
+	local nDiceResult = tonumber(rRoll.aDice[1].result);
+	if (nDiceResult == 1) then
+		-- Debug.chat("rolled a 1 => check case");
+		if rRoll.sExplodeMode == "none" then
+			-- roll 1 on first roll => fumble => reroll
+			rRoll.sExplodeMode = "fumble";
 			_storeDieForFinalMessage(rRoll);
 			-- reinit rRoll dice
 			rRoll.aDice = { "d10" };
@@ -244,67 +222,40 @@ function onAttackRoll(rSource, rTarget, rRoll)
 			bDisplayFinalMessage = false;
 			ActionsManager.performAction(nil, rActor, rRoll);
 		else
-			-- Debug.chat("rolled between 2 and 9");
+			-- roll 1 on crit or fumble reroll
 			_storeDieForFinalMessage(rRoll);
-			if rRoll.sExplodeMode ~= "none" then
-				rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + tonumber(nDiceResult);
-			end
+			rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + tonumber(nDiceResult);
 			bDisplayFinalMessage = true;
 		end
-	-- else
-	-- 	-- this roll was for location, this die is not to be stored as the others for main final result
-	-- 	rRoll.sDamageLocation = tostring(rRoll.aDice[1].result);
-	-- 	bDisplayFinalMessage = true;
-	-- end
-	
-	-- if no more reroll AND not aiming, roll for location
-	-- if (bDisplayFinalMessage and rRoll.sDamageLocation == "") then
-	-- 	--rRoll.sIsLocationRoll = "true";
-	-- 	-- reinit rRoll dice
-	-- 	rRoll.aDice = { "d10" };
-	-- 	-- change roll type to avoid throwing to much dice if multi-targeting
-	-- 	rRoll.sType = "attacklocation";
-	-- 	-- roll for location
-	-- 	bDisplayFinalMessage = false;
-	-- 	ActionsManager.performAction(nil, rActor, rRoll);
-	-- end
+	elseif (nDiceResult == 10) then
+		-- Debug.chat("rolled a 10 => reroll");
+		-- rolled a 10, reroll in any case
+		if rRoll.sExplodeMode == "none" then
+			rRoll.sExplodeMode = "crit";
+		end
+		rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + nDiceResult;
+		_storeDieForFinalMessage(rRoll);
+		-- reinit rRoll dice
+		rRoll.aDice = { "d10" };
+		-- change roll type to avoid throwing to much dice if multi-targeting
+		rRoll.sType = "attackreroll";
+		-- reroll
+		bDisplayFinalMessage = false;
+		ActionsManager.performAction(nil, rActor, rRoll);
+	else
+		-- Debug.chat("rolled between 2 and 9");
+		_storeDieForFinalMessage(rRoll);
+		if rRoll.sExplodeMode ~= "none" then
+			rRoll.nTotalExplodeValue = tonumber(rRoll.nTotalExplodeValue) + tonumber(nDiceResult);
+		end
+		bDisplayFinalMessage = true;
+	end
 	
 	if bDisplayFinalMessage then
 		local bFumble = _restoreDiceBeforeFinalMessage(rRoll);
 		
 		-- Create the base message based of the source and the final rRoll record (includes dice results).
 		local rMessage = ActionsManager.createActionMessage(rActor, rRoll);
-		
-		-- update message for auto location
-		-- local locMessage = "";
-		-- if rRoll.sDamageLocation == "1" then
-		-- 	-- head
-		-- 	locMessage = Interface.getString("modifier_label_aimhead");
-		-- elseif rRoll.sDamageLocation == "2" or rRoll.sDamageLocation == "3" or rRoll.sDamageLocation == "4" then
-		-- 	-- torso
-		-- 	locMessage = Interface.getString("modifier_label_aimtorso");
-		-- elseif rRoll.sDamageLocation == "5" then
-		-- 	-- human right arm or monster torso
-		-- 	locMessage = Interface.getString("modifier_label_location_rightarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertorso");
-		-- elseif rRoll.sDamageLocation == "6" then
-		-- 	-- human left arm or monster right limb
-		-- 	locMessage = Interface.getString("modifier_label_location_leftarm").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
-		-- elseif rRoll.sDamageLocation == "7" then
-		-- 	-- human right leg or monster right limb
-		-- 	locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterrightlimb");
-		-- elseif rRoll.sDamageLocation == "8" then
-		-- 	-- human right leg or monster left limb
-		-- 	locMessage = Interface.getString("modifier_label_location_rightleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
-		-- elseif rRoll.sDamageLocation == "9" then
-		-- 	-- human left leg or monster left limb
-		-- 	locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monsterleftlimb");
-		-- elseif rRoll.sDamageLocation == "10" then
-		-- 	-- human left leg or monster tail/wing
-		-- 	locMessage = Interface.getString("modifier_label_location_leftleg").." "..Interface.getString("modifier_label_location_or").." "..Interface.getString("modifier_label_location_monstertail");
-		-- end
-		-- if locMessage ~= "" then
-		-- 	rMessage.text = rMessage.text .. "\n["..Interface.getString("modifier_label_location").." ("..rRoll.sDamageLocation..") "..locMessage.."]";
-		-- end
 		
 		-- update rMessage in case of fumble
 		if (bFumble) then
@@ -584,28 +535,32 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 	-- and color exploding dice
 	-- if rRoll.sExplodeMode ~= "none" or rRoll.sIsLocationRoll=="true" then
 	local aNewDice = {};
-	for i = 1, #(rRoll.aDice) do
+	
+	for i, k in pairs (rRoll.aDice) do -- FGU compatibility : change loops "for i=1, # ..." in "for i,k in pairs ..."
 		local aDiceTmp = rRoll.aDice[i];
-		for j=1,#(aDiceTmp) do
+		for j,l in pairs (aDiceTmp) do -- FGU compatibility : change loops "for j=1, # ..." in "for j,l in pairs ..."
 			local aDieTmp = aDiceTmp[j];
 			
-			-- 10 is always rerolled => set it green
-			if tonumber(aDieTmp.result)==10 then
-				aDieTmp.type="g10";
+			if j ~= "expr" then -- -- FGU compatibility : don't propagate "expr" in aDice array
+				-- 10 is always rerolled => set it green
+				if tonumber(aDieTmp.result)==10 then
+					aDieTmp.type="g10";
+				end
+				
+				if i==1 and tonumber(aDieTmp.result)==1 then
+					-- first die was a 1 => fumble, set ir red
+					bFumble = true;
+					aDieTmp.type="r10";
+				elseif bFumble then
+					-- any result between 1 and 9 => get die as it is
+					aDieTmp.result = 0-tonumber(aDieTmp.result)
+				end
+				
+				table.insert(aNewDice, aDieTmp);
 			end
-			
-			if i==1 and tonumber(aDieTmp.result)==1 then
-				-- first die was a 1 => fumble, set ir red
-				bFumble = true;
-				aDieTmp.type="r10";
-			elseif bFumble then
-				-- any result between 1 and 9 => get die as it is
-				aDieTmp.result = 0-tonumber(aDieTmp.result)
-			end
-			
-			table.insert(aNewDice, aDieTmp);
 		end
 	end
+
 	rRoll.aDice = aNewDice;
 	
 	-- Debug.chat("after :");
