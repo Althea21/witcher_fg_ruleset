@@ -45,7 +45,7 @@ function onProfessionValueChanged(sVal)
 end
 
 function performProfessionSkillRoll(branchNumber, skillNumber)
-	local rActor = ActorManager.resolveActor(getDatabaseNode());
+    local rActor = ActorManager.resolveActor(getDatabaseNode());
     local sStat, nStat = getAssociatedStat(rActor, self["branch"..branchNumber.."_ability"..skillNumber.."_stat"].getStringValue());
     local sName = self["branch"..branchNumber.."_ability"..skillNumber.."_name"].getValue();
     local sValue = self["branch"..branchNumber.."_ability"..skillNumber.."_value"].getValue();

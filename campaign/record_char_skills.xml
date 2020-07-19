@@ -462,17 +462,8 @@
 						return action();
 					end
 
-					function onValueChanged()
-						if getValue() &gt; 4 then
-							window.branch1_ability3_value.setReadOnly(false);
-						else
-							window.branch1_ability3_value.setReadOnly(true);
-						end
-					end
-					
 					function onInit()
 						super.onInit();
-						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>
@@ -711,17 +702,8 @@
 						return action();
 					end
 
-					function onValueChanged()
-						if getValue() &gt; 4 then
-							window.branch2_ability3_value.setReadOnly(false);
-						else
-							window.branch2_ability3_value.setReadOnly(true);
-						end
-					end
-					
 					function onInit()
 						super.onInit();
-						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>
@@ -949,7 +931,7 @@
 				<readonly />
 				<script>
 					function action(draginfo)
-						window.performProfessionSkillRoll("3S", "3")
+						window.performProfessionSkillRoll("3", "3")
 						return true;
 					end
 					
@@ -961,17 +943,8 @@
 						return action();
 					end
 
-					function onValueChanged()
-						if getValue() &gt; 4 then
-							window.branch3_ability3_value.setReadOnly(false);
-						else
-							window.branch3_ability3_value.setReadOnly(true);
-						end
-					end
-					
 					function onInit()
 						super.onInit();
-						onValueChanged();
 					end
 				</script>
 			</number_skill_rollable>
