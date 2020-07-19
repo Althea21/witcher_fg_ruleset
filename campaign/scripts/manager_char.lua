@@ -385,6 +385,24 @@ function getNPCSkillValue(nodeActor, skillName)
 	return value;
 end
 
+--------------------------------------------------------------------------
+-- Retreive the value of a specified profession skill if it exists (or 0)
+--------------------------------------------------------------------------
+function getProfessionSkillValue(rActor, sSkillId)
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+	for i=1, 3 do
+		for j=1, 3 do
+			local sName = DB.getValue(nodeActor, "skills.ability.branch"..i.."_ability"..j.."_name", 0);
+			if string.lower(sName)==string.lower(Interface.getString("char_prof_skill_"..sSkillId.."_label")) then
+				return DB.getValue(nodeActor, "skills.ability.branch"..i.."_ability"..j.."_value", 0);
+			end
+		end
+	end	
+
+	return 0;
+end
+
+
 -- get total equipped EV (work for PC / NPC)
 -- if actor is a witcher from the bear school => -2
 -- params :
@@ -596,7 +614,7 @@ function getResistances(nodeActor, actorType)
 	if armorlist then
 		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
 			local sArmorRes = DB.getValue(v, "resistances", "");
-			Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
+			--Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
 			if sArmorRes ~= "" then
 				if sResistances ~= "" then sResistances = sResistances .. ", " end;
 				sResistances = sResistances .. DB.getValue(v, "ev", 0);

@@ -44,6 +44,7 @@
 	<icon name="attack_range_normal" file="graphics/icons/attack_range_normal.png" />
 	<icon name="attack_range_fast" file="graphics/icons/attack_range_fast.png" />
 	<icon name="attack_range_strong" file="graphics/icons/attack_range_strong.png" />
+	<icon name="attack_range_twinshot" file="graphics/buttons/button_action_twinshot.png" />
 	<icon name="melee_parry" file="graphics/icons/melee_parry.png" />
 	<icon name="melee_block" file="graphics/icons/melee_block.png" />
 	<icon name="char_brawling" file="graphics/icons/char_brawling.png" />
@@ -140,7 +141,7 @@
 	<icon name="button_action_modifier_down" file="graphics/buttons/button_action_modifier_down.png" />
 	<icon name="button_action_dodge" file="graphics/buttons/button_action_dodge.png" />
 	<icon name="button_action_reposition" file="graphics/buttons/button_action_reposition.png" />
-
+	
 
 	<icon name="button_clear" file="graphics/buttons/button_clear.png" />
 	<icon name="button_clear_down" file="graphics/buttons/button_clear_down.png" />

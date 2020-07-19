@@ -97,6 +97,7 @@ end
 -- callback for ActionsManager, called after the dice have stopped rolling : resolve roll status and display chat message
 function onDamageRoll(rSource, rTarget, rRoll)
 	Debug.console("------- onDamageRoll");
+	Debug.console(rTarget);
 	Debug.console(rRoll);
 
 	-- Decode damage types
@@ -113,7 +114,9 @@ function onDamageRoll(rSource, rTarget, rRoll)
 	Comm.deliverChatMessage(rMessage);
 	
 	-- Apply damage to the PC or CT entry referenced
-	applyDamage(rSource, rTarget, rRoll.bTower, nTotal, rRoll);
+	if rTarget then
+		applyDamage(rSource, rTarget, rRoll.bTower, nTotal, rRoll);
+	end
 end
 
 ------------------------------------------------------------------------------------
@@ -132,6 +135,10 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	local aPendingAttackDmgMod = CombatManager2.getPendingAttackDamageModifier(rSource, rTarget);
 	Debug.console("returned aPendingAttackDmgMod : ");
 	Debug.console(aPendingAttackDmgMod);
+	if aPendingAttackDmgMod == nil then
+		return;
+	end
+	
 
 	-- get rolled damage (= weapon + stat bonus + silver bonus if needed)
 	nFinalDamage = nFinalDamage + tonumber(nTotal);
@@ -399,7 +406,7 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 	-- update hit_point 
 	notifyApplyDamage(sTargetCT, nFinalDamage + nCritDamage, bLethal);
 
-	CombatManager2.removePendingAttack(sSourceCT, sTargetCT);
+	CombatManager2.removePendingAttack(sSourceCT, sTargetCT, false);
 end
 
 function messageDamage(rSource, rTarget, bSecret, sDamageType, sDamageDesc, nExtraDamage, sTotal, sExtraResult)

@@ -7,8 +7,11 @@ function onInit()
 	registerMenuItem(Interface.getString("menu_deleteweapon"), "delete", 5);
 	registerMenuItem(Interface.getString("list_menu_deleteweaponconfirm"), "delete", 5, 3);
 	
-	local sNode = getDatabaseNode().getNodeName();
+	local nodeWeapon = getDatabaseNode();
+	local sNode = nodeWeapon.getNodeName();
+	local nodeChar = nodeWeapon.getChild("...");
 	DB.addHandler(sNode, "onChildUpdate", onDataChanged);
+	DB.addHandler(DB.getPath(nodeChar, "skills.ability"), "onChildUpdate", onDataChanged);
 	onDataChanged();
 end
 
@@ -51,6 +54,9 @@ local m_sRecord = "";
 -- end
 
 function onDataChanged()
+	local nodeWeapon = getDatabaseNode();
+	local nodeChar = nodeWeapon.getChild("...");
+	local rActor = ActorManager.getActor("pc", nodeChar);
 	--onLinkChanged();
 	onDamageChanged();
 	
@@ -76,8 +82,19 @@ function onDataChanged()
 		button_range_fastattack.setVisible(bRanged);
 	end
 	button_range_attack.setVisible(bRanged);
+	
+	-- special attack : twinShot, only available if the skill exists and have at least a value of 1
+	if button_range_twinshotattack then
+		if bRanged and CharManager.getProfessionSkillValue(rActor, "twinShot") > 0 then
+			button_range_twinshotattack.setVisible(true);
+		else
+			button_range_twinshotattack.setVisible(false);
+		end
+	end
+
 	-- Defense actions
 	button_melee_parry.setVisible(not bRanged);
+	
 	--button_melee_block.setVisible(not bRanged);
 	spacer_for_ranged_defense.setVisible(bRanged);
 

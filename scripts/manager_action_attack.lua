@@ -57,6 +57,9 @@ function getRoll(rActor, rWeapon, sAttackType)
 	rRoll.sDamageLocation = "";
 	rRoll.sIsStrongAttack = "false";
 	
+	-- some special attack info must be stored to be used later
+	rRoll.sSpecialAttack = "";
+
 	if (rWeapon.range == "R") then
 		rRoll.sWeaponType = "range";
 	elseif (rWeapon.range == "M") then
@@ -84,6 +87,9 @@ function getRoll(rActor, rWeapon, sAttackType)
 				nRollMod = nRollMod - 3;
 				sRollDescription = sRollDescription .. "[Strong -3]";
 			end
+		elseif sAttackType == "twinshot" then
+			rRoll.sSpecialAttack = sAttackType;
+			sRollDescription = "["..Interface.getString("combat_"..sAttackType.."_attack_message").." "..rWeapon.label.."]";
 		else
 			sRollDescription = "["..Interface.getString("combat_attack_message").." "..rWeapon.label.."]";
 		end
@@ -313,9 +319,9 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		end
 
 		if rRoll.sDamageLocation:match("^AIM_") then
-			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, rRoll.sDamageLocation, "true", rRoll.sIsStrongAttack, rRoll.sWeaponEffects);
+			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, rRoll.sDamageLocation, "true", rRoll.sIsStrongAttack, rRoll.sSpecialAttack, rRoll.sWeaponEffects);
 		else
-			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, "", "false", rRoll.sIsStrongAttack, rRoll.sWeaponEffects);
+			CombatManager2.notifyAttack(rSource, _getTargetFromRoll(rRoll), nAtkValue, "", "false", rRoll.sIsStrongAttack, rRoll.sSpecialAttack, rRoll.sWeaponEffects);
 		end
 		
 		-- Display the message in chat.

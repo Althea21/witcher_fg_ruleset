@@ -117,11 +117,12 @@ aAttackQueueByDefender = {};
 --	* sIsAimed 			: if attack was aimed or not ("true"/"false")
 --	* sIsStrongAttack 	: if attack is a strong Attack or not ("true"/"false") for later damage res
 --	* sWeaponEffects 	: all effects of offender weapon for later damage res
-function addPendingAttack(sSourceCT, sTargetCT, nAtkValue,  sLocation, sIsAimed, sIsStrongAttack, sWeaponEffects)
+function addPendingAttack(sSourceCT, sTargetCT, nAtkValue,  sLocation, sIsAimed, sIsStrongAttack, sSpecialAttack, sWeaponEffects)
 	Debug.console("--------------------------------------------");
-	Debug.console("Add pending attack of "..sSourceCT.." vs "..sTargetCT.." (attack value="..nAtkValue..")");
+	Debug.console("Add pending attack of "..sSourceCT.." vs "..sTargetCT.." (attack value="..nAtkValue..", specialAttack="..sSpecialAttack..")");
 	
 	if sTargetCT == "" then
+		Debug.console("Target empty => do nothing");
 		return;
 	end
 	
@@ -133,6 +134,7 @@ function addPendingAttack(sSourceCT, sTargetCT, nAtkValue,  sLocation, sIsAimed,
 	aAttack.sLocation = sLocation;
 	aAttack.sIsAimed = sIsAimed;
 	aAttack.sIsStrongAttack = sIsStrongAttack;
+	aAttack.sSpecialAttack = sSpecialAttack;
 	aAttack.sTgtVulnerabilities = "";
 	aAttack.sWeaponEffects = sWeaponEffects;
 	
@@ -165,10 +167,30 @@ end
 -- params :
 --	* sSourceCT	: offender 
 --	* sTargetCT	: defender 
-function removePendingAttack (sSourceCT, sTargetCT)
+--  * bForceRemove : force remove (aka defense success) even if special attack like twin shot
+function removePendingAttack (sSourceCT, sTargetCT, bForceRemove)
 	Debug.console("Remove pending attack of "..sSourceCT.." vs "..sTargetCT);
+	
 	if aAttackQueueByDefender[sTargetCT] then
-		table.remove(aAttackQueueByDefender[sTargetCT],1);
+		-- if attack is twin shot and bForceRemove is false, then we're here after first damage roll :
+		-- we don't remove the pending attack but change it to "normal" pending attack for second damages
+		-- the second projectile is random location and never critical
+		if not bForceRemove and aAttackQueueByDefender[sTargetCT][1].sSpecialAttack == "twinshot" then
+			Debug.console("Pending attack is twin shot and bForceRemove is true, update it instead of remove it");
+			local aAttack = aAttackQueueByDefender[sTargetCT][1];
+			aAttack.sSpecialAttack = "";
+			aAttack.sLocation = "";
+			aAttack.sIsAimed = "";
+			-- remove potential critical:
+			aAttack.nDefValue = aAttack.nAtkValue-1; 
+			
+			Debug.console("New pending attack :");
+			Debug.console(aAttack);
+
+			aAttackQueueByDefender[sTargetCT][1] = aAttack;
+		else
+			table.remove(aAttackQueueByDefender[sTargetCT],1);	
+		end
 	end
 end
 
@@ -316,18 +338,20 @@ function getPendingAttackDamageModifier(rSource, rTarget)
 	end
 
 	local aAttack = {};
+	local bValidAttackExists = false;
 	-- get the corresponding attack
 	if aAttackQueueByDefender[sTargetCT] then
 		for i=1, #aAttackQueueByDefender[sTargetCT] do
 			local a = aAttackQueueByDefender[sTargetCT][i];
 			if a.sSourceCT == sSourceCT then
 				aAttack = a;
+				bValidAttackExists = true;
 				break;
 			end
 		end
 	end
 
-	if not aAttack.nAtkValue then
+	if not bValidAttackExists then
 		Debug.console("-- getPendingAttackDamageModifier called without legit pending attack, abort");
 		return nil;
 	end 
@@ -351,7 +375,7 @@ end
 ------------------------------------------------------------------------------------
 
 -- Notify attack to keep attack queues up to date between GM and players
-function notifyAttack(rSource, rTarget, nAtkValue, sLocation, sIsAimed, sIsStrongAttack, sWeaponEffects)
+function notifyAttack(rSource, rTarget, nAtkValue, sLocation, sIsAimed, sIsStrongAttack, sSpecialAttack, sWeaponEffects)
 	local msgOOB = {};
 	
 	local sSourceCT = ActorManager.getCTNodeName(rSource);
@@ -376,6 +400,7 @@ function notifyAttack(rSource, rTarget, nAtkValue, sLocation, sIsAimed, sIsStron
 	msgOOB.sLocation = sLocation;
 	msgOOB.sIsAimed = sIsAimed;
 	msgOOB.sIsStrongAttack = sIsStrongAttack;
+	msgOOB.sSpecialAttack = sSpecialAttack;
 	msgOOB.sWeaponEffects = sWeaponEffects;
 	
 	-- deliver msgOOB to all connected clients
@@ -385,7 +410,7 @@ end
 -- Handle OOB attack notification to keep attack queues up to date between GM and players
 function handleAttack(msgOOB)
 	-- Debug.chat("---- handleAttack")
-	addPendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, tonumber(msgOOB.sAtkValue), msgOOB.sLocation, msgOOB.sIsAimed, msgOOB.sIsStrongAttack, msgOOB.sWeaponEffects)
+	addPendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, tonumber(msgOOB.sAtkValue), msgOOB.sLocation, msgOOB.sIsAimed, msgOOB.sIsStrongAttack, msgOOB.sSpecialAttack, msgOOB.sWeaponEffects)
 end
 
 -- Notify defense to keep attack queues up to date between GM and players
@@ -411,13 +436,12 @@ function handleDefense(msgOOB)
 	-- Debug.chat("---- handleDefense")
 	if (msgOOB.sRemove == "true") then
 		-- Debug.chat("removePendingAttack")
-		removePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT);
+		removePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, true);
 	else
 		-- Debug.chat("updatePendingAttack")
 		local aAttack = Json.parse(msgOOB.sAttack)
 		
-		-- temporary delete pending attack until damage resolution is done (TODO)
-		-- removePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT);
+		-- update pending attack with defense information until damage resolution is done
 		updatePendingAttack(msgOOB.sSourceCT, msgOOB.sTargetCT, aAttack);
 	end
 end

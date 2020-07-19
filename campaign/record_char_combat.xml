@@ -919,6 +919,29 @@
 					end
 				</script>
 			</buttoncontrol>
+			<buttoncontrol name="button_range_twinshotattack">
+				<anchored to="button_range_attack" width="20" height="20">
+					<top offset="25"/>
+					<left/>
+				</anchored>
+				<icon normal="attack_range_twinshot" pressed="attack_range_twinshot" />
+				<tooltip textres="char_tooltip_twinshotattack" />
+				<cursor hover="hand" />
+				<script>
+					function action(draginfo)
+						ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "twinshot");
+					end
+
+					function onButtonPress()
+						action();
+					end
+					
+					function onDragStart(button, x, y, draginfo)
+						action(draginfo);
+						return true;
+					end
+				</script>
+			</buttoncontrol>
 			
 			<!--damage-->
 			<simplestringc name="damageview">
