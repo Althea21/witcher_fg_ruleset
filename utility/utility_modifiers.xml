@@ -390,6 +390,10 @@
 					end
 				</script>
 			</button_modifierkey>
+			<button_modifierkey name="DMG_PINPOINTAIM">
+				<bounds>430,305,110,20</bounds>
+				<textres>modifier_label_damage_pinpointaim</textres>
+			</button_modifierkey>
 			
 			<!-- MODIFIER LIST 
 			<list_utility name="list">

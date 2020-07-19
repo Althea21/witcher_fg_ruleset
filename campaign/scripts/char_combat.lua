@@ -3,12 +3,17 @@
 -- attribution and copyright information.
 --
 function onInit()
+	local rActor = ActorManager.resolveActor(getDatabaseNode());
+	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+	DB.addHandler(DB.getPath(nodeActor, "skills.ability"), "onChildUpdate", refreshProfessionActionVisibility);
 	update();
 end
 
 function update()
 	onHPChanged();
-	
+
+	refreshProfessionActionVisibility();
+
 	-- update locked/unlocked state (for npc only)
 	local rActor = ActorManager.resolveActor(getDatabaseNode());
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
@@ -22,6 +27,17 @@ function update()
 			combat_details.subwindow.update();
 		end
 	end
+end
+
+function refreshProfessionActionVisibility()
+	-- local rActor = ActorManager.resolveActor(getDatabaseNode());
+	-- if button_pinpointaim then
+	-- 	if CharManager.getProfessionSkillValue(rActor, "pinPointAim") > 0 then
+	-- 		button_pinpointaim.setVisible(true);
+	-- 	else
+	-- 		button_pinpointaim.setVisible(false);
+	-- 	end
+	-- end
 end
 
 function onRecoverAction()
@@ -73,6 +89,13 @@ function onRepositionAction(draginfo)
 		ActionSkill.performRoll(draginfo, rActor, Interface.getString("char_skill_athletics_label"), CharManager.getNPCSkillValue(nodeActor, "athletics") + nStat, sStat);
 	end
 end
+
+-- function onPinPointAimAction(draginfo)
+-- 	local rActor = ActorManager.resolveActor(getDatabaseNode());
+-- 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
+
+-- 	ActionAttack.performRoll(draginfo, window.getDatabaseNode(), "pinpointaim");
+-- end
 
 function onHPChanged()
 	local node = getDatabaseNode();

@@ -9,6 +9,14 @@
 	<windowclass name="charsheet_combat">
 		<script file="campaign/scripts/char_combat.lua" />
 		<sheetdata>
+			<genericcontrol name="combat_frame_rightanchor">
+				<anchored width="0" height="0">
+					<top offset="10" />
+					<right />
+				</anchored>
+				<invisible />
+			</genericcontrol>
+
 			<!--COMBAT STATS REMINDER-->
 			<frame_char name="combat_frame">
 				<bounds>15,0,-29,100</bounds>
@@ -134,14 +142,18 @@
 				</script>
 			</number_derivedstat_rollable>
 
+			<!-- SPECIAL ACTIONS (defense and profession)-->
 			<label name="label_defense">
 				<anchored to="combat_frame" position="insidetopleft" offset="20,65" width="100"/>
-				<static textres="char_label_defenseActions"/>
+				<static textres="char_label_specialActions"/>
 			</label>
 			
 			<!-- Dodge / Escape -->
 			<label name="label_dodgeaction">
-				<anchored to="combat_frame" position="insidetopleft" offset="145,65" width="80"/>
+				<anchored to="label_defense" width="80">
+					<top/>
+					<left anchor="right" offset="20"/>
+				</anchored>
 				<static textres="char_skill_dodgeEscape_label"/>
 			</label>
 			<buttoncontrol name="button_dodge">
@@ -167,7 +179,10 @@
 			
 			<!-- Reposition -->
 			<buttoncontrol name="button_reposition">
-				<anchored to="combat_frame" position="insidetopleft" offset="440,65" width="20" height="20" />
+				<anchored to="button_dodge" width="20" height="20">
+					<top/>
+					<left anchor="right" offset="100"/>
+				</anchored>
 				<icon normal="button_action_reposition" />
 				<cursor hover="hand" />
 				<nodrag />
@@ -192,6 +207,31 @@
 				<static textres="char_label_reposition"/>
 			</label>
 			
+			<!--pin point aim
+			<buttoncontrol name="button_pinpointaim">
+				<anchored to="combat_frame_rightanchor" width="20" height="20">
+					<top parent="button_reposition"/>
+					<right anchor="left" relation="relative" offset="-40" />
+				</anchored>
+				<icon normal="button_action_pinpointaim" />
+				<tooltip textres="char_tooltip_pinpointaim" />
+				<cursor hover="hand" />
+				<nodrag />
+				<script>
+					function action(draginfo)
+						window.onPinPointAimAction(draginfo);
+					end
+
+					function onButtonPress()
+						action();
+					end
+
+					function onDragStart(button, x, y, draginfo)
+						action(draginfo);
+						return true;
+					end
+				</script>
+			</buttoncontrol>-->
 			
 			<!-- Combat Actions frame-->
 			<frame_char name="combat_details_frame">

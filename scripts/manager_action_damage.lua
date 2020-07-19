@@ -482,12 +482,19 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 			bBalanced = true;
 		end
 
+		-- pin point aim ? (add their Pin Point Aim value to their critical roll. These points only affect the location value of the Critical Wound) 
+		if ModifierStack.getModifierKey("DMG_PINPOINTAIM") then
+			local ppaValue =  CharManager.getProfessionSkillValue(ActorManager.getActor("ct", sSourceCT), "pinPointAim")
+			Debug.console("[processCriticalDamageAndLocation]Add pin point roll to crit location : "..ppaValue);
+			rRoll.nMod = ppaValue;
+		end
+
 		-- was the attack aimed ?
 		if sIsAimed == "true" then
 			if sLocation == "head" or sLocation == "torso" then
 				-- head or torso roll 1D6 (if weapon balanced : 1D6+1 instead))
 				if (bBalanced) then
-					rRoll.nMod = 1;
+					rRoll.nMod = rRoll.nMod + 1;
 					Debug.console("weapon balanced : crit roll 1D6+1 instead");
 				end
 				ActionsManager.performAction(nil, rTarget, rRoll);
@@ -501,7 +508,7 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 		else
 			-- roll 2D6 (if weapon balanced : 2d6+2)
 			if (bBalanced) then
-				rRoll.nMod = 2;
+				rRoll.nMod = rRoll.nMod + 2;
 				Debug.console("weapon balanced : crit roll 2D6+2 instead");
 			end
 			ActionsManager.performAction(nil, rTarget, rRoll);

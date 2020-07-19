@@ -1024,6 +1024,9 @@
 	<string name="char_tooltip_isclassskill">Class skill</string>
 	<string name="char_tooltip_skilllabeliseditable">This label is editable</string>
 	<string name="char_tooltip_twinshotattack">Twin shot</string>
+	<string name="modifier_label_damage_pinpointaim">Pin Point Aim</string>
 	<string name="combat_twinshot_attack_message">Twin shot attack %s with</string>
+	<string name="char_label_specialActions">Special Actions</string>
+	
 </root>
 

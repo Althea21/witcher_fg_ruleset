@@ -141,6 +141,7 @@
 	<icon name="button_action_modifier_down" file="graphics/buttons/button_action_modifier_down.png" />
 	<icon name="button_action_dodge" file="graphics/buttons/button_action_dodge.png" />
 	<icon name="button_action_reposition" file="graphics/buttons/button_action_reposition.png" />
+	<icon name="button_action_pinpointaim" file="graphics/buttons/button_action_pinpointaim.png" />
 	
 
 	<icon name="button_clear" file="graphics/buttons/button_clear.png" />
