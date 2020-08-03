@@ -11,7 +11,9 @@
 		<bitmap file="graphics/frames/background.jpg"/>
 		<middle rect="0,0,2048,1080" />
 	</framedef>
-	<framedef name="shortcuts"></framedef>
+	<framedef name="shortcuts">
+		<bitmap file="graphics/frames/blank.png" />
+	</framedef>
 	
 	<!-- Tooltips -->
 	<framedef name="tooltipbox">
@@ -20,9 +22,13 @@
 	</framedef>
 	
 	<!-- Windows -->
-	<framedef name="windowtitle"></framedef>
+	<framedef name="windowtitle">
+		<bitmap file="graphics/frames/blank.png" />
+	</framedef>
 	
-	<framedef name="tabs"></framedef>
+	<framedef name="tabs">
+		<bitmap file="graphics/frames/blank.png" />
+	</framedef>
 
 	<!-- Headers -->
 	<framedef name="headergray">
@@ -487,7 +493,9 @@
 		<offset>21,56,30,29</offset>
 		<insideoffset>0,0,5,5</insideoffset>
 	</framedef>
-	<framedef name="imagebox_header"></framedef>
+	<framedef name="imagebox_header">
+		<bitmap file="graphics/frames/blank.png" />
+	</framedef>
 	<framedef name="imagepanel">
 		<bitmap file="graphics/frames/imagepanel.png" />
 		<offset>16,16,16,16</offset>
