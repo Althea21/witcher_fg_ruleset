@@ -499,9 +499,9 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 				end
 				ActionsManager.performAction(nil, rTarget, rRoll);
 			elseif sLocation == "arm" then
-				outputCriticalMessage(sSourceCT, sTargetCT, 4, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage);
+				outputCriticalMessage(sSourceCT, sTargetCT, 4, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage, sFinalDamageMessage);
 			elseif sLocation == "leg" or sLocation == "limb" or sLocation == "tail" then
-				outputCriticalMessage(sSourceCT, sTargetCT, 2, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage);
+				outputCriticalMessage(sSourceCT, sTargetCT, 2, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage, sFinalDamageMessage);
 			else
 				Debug.console("[processCriticalDamageAndLocation error ]Attack aimed with no location specified");
 			end
