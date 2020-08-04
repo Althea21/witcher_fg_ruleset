@@ -97,7 +97,7 @@
 	<icon name="button_link_empty" file="graphics/buttons/button_link_empty.png" />
 	<icon name="button_link_share" file="graphics/buttons/button_link_share.png" />
 	<icon name="button_link_share_down" file="graphics/buttons/button_link_share_down.png" />
-	<icon name="tabtop" file="" />
+	<icon name="tabtop" file="graphics/frames/blank.png" />
 	<icon name="button_checkon" file="graphics/buttons/button_checkon.png" />
 	<icon name="button_checkoff" file="graphics/buttons/button_checkoff.png" />
 	<icon name="token_empty" file="graphics/icons/token_empty.png" />
@@ -294,8 +294,8 @@
 	<icon name="button_library_down" file="graphics/sidebar/button_library_down.png" />
 	<icon name="button_tokencase" file="graphics/sidebar/button_tokencase.png" />
 	<icon name="button_tokencase_down" file="graphics/sidebar/button_tokencase_down.png" />
-	<icon name="button_assets" file="graphics/sidebar/button_assets.png" />
-	<icon name="button_assets_down" file="graphics/sidebar/button_assets_down.png" />
+	<icon name="button_assets" file="graphics/sidebar/button_tokencase.png" />
+	<icon name="button_assets_down" file="graphics/sidebar/button_tokencase_down.png" />
 
 	<!-- Library / Modules -->
 	<icon name="module_loaded" file="graphics/icons/module_loaded.png" />
@@ -397,7 +397,7 @@
 	<!-- Combat tracker -->
 	<icon name="turn_flag" file="graphics/icons/turn_flag.png" />
 	<icon name="ct_active" file="graphics/icons/ct_active.png" />
-	<icon name="ct_passive" file="" />
+	<icon name="ct_passive" file="graphics/frames/blank.png" />
 	<icon name="ct_faction_empty" file="graphics/icons/ct_faction_empty.png" />
 	<icon name="ct_faction_friend" file="graphics/icons/ct_faction_friend.png" />
 	<icon name="ct_faction_neutral" file="graphics/icons/ct_faction_neutral.png" />

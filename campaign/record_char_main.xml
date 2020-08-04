@@ -282,7 +282,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal name="intelligence" source="attributs.intelligence">
-				<anchored to="intelligence_modifier"width="30" height="20">
+				<anchored to="intelligence_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -331,7 +331,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="reflex" source="attributs.reflex">
-				<anchored to="reflex_modifier"width="30" height="20">
+				<anchored to="reflex_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -385,7 +385,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="dexterity" source="attributs.dexterity">
-				<anchored to="dexterity_modifier"width="30" height="20">
+				<anchored to="dexterity_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -440,7 +440,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="body" source="attributs.body">
-				<anchored to="body_modifier"width="30" height="20">
+				<anchored to="body_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -489,7 +489,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="speed" source="attributs.speed">
-				<anchored to="speed_modifier"width="30" height="20">
+				<anchored to="speed_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -543,7 +543,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="empathy" source="attributs.empathy">
-				<anchored to="empathy_modifier"width="30" height="20">
+				<anchored to="empathy_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -592,7 +592,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="crafting" source="attributs.crafting">
-				<anchored to="crafting_modifier"width="30" height="20">
+				<anchored to="crafting_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -641,7 +641,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="will" source="attributs.will">
-				<anchored to="will_modifier"width="30" height="20">
+				<anchored to="will_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -690,7 +690,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="vigor" source="attributs.vigor">
-				<anchored to="vigor_modifier"width="30" height="20">
+				<anchored to="vigor_modifier" width="30" height="20">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
