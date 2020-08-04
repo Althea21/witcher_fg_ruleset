@@ -160,16 +160,19 @@ function performRoll(draginfo, rWeapon, sAttackType)
 		rActor = rWeapon;
 		rWeapon = {};
 		rWeapon.range = "U";
+		rWeapon.weaponaccuracy = 0;
+		rWeapon.effects = "";
+		rWeapon.type = "attack";	
+		rWeapon.stat = "reflex";
+		rWeapon.skill = "brawling";
+
 		if (string.find(sAttackType, "punch"))then
 			rWeapon.label = Interface.getString("char_label_punchlabel");
+			rWeapon.type = string.gsub(sAttackType, "punch", "");
 		elseif (string.find(sAttackType, "kick"))then
 			rWeapon.label = Interface.getString("char_label_kicklabel");
+			rWeapon.type = string.gsub(sAttackType, "kick", "");
 		end
-		rWeapon.stat = "reflex";
-		rWeapon.skill= "brawling";
-		
-		sAttackType = string.gsub(sAttackType, "punch", "");
-		sAttackType = string.gsub(sAttackType, "kick", "");
 	else
 		-- weapon attack
 		rActor, rWeapon = CharManager.getWeaponAttackRollStructures(rWeapon);

@@ -417,6 +417,7 @@
 				<anchored to="brawlinglist_headers" position="belowright" offset="145,5" width="46" height="20"/>
 				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.punch_modifier</modifierfield>
+				<readonly/>
 				<script>
 					function onDoubleClick(x,y)
 						return window.onUnarmedDamageAction(nil, "punch");
@@ -533,6 +534,7 @@
 				<anchored to="brawlinglist_headers" position="belowright" offset="145,30" width="46" height="20"/>
 				<frame name="fielddark" offset="7,5,7,5" />
 				<modifierfield>attributs.kick_modifier</modifierfield>
+				<readonly/>
 				<script>
 					function onDoubleClick(x,y)
 						return window.onUnarmedDamageAction(nil, "kick");

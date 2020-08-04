@@ -297,7 +297,7 @@ function getWeaponDamageRollStructures(nodeWeapon)
 		table.insert(rDamage.clauses, {	dice = aDmgDice, 
 										modifier = nDmgMod, 
 										stat = sDmgAbility, 
-										dmgtype = sDmgType, });
+										dmgtype = sDmgType});
 	end
 	
 	return rActor, rDamage;
@@ -322,20 +322,21 @@ function getUnarmedDamageRollStructures(nodeChar, sType)
 	
 	rDamage.type = "damage";
 	rDamage.label = sType;
-	
+	rDamage.sEffects = Interface.getString("weapon_property_effect_nonethal");
+
 	-- compile all weapon damage entries
 	rDamage.clauses = {};
 	
 	local unarmedNode = DB.getValue(nodeChar, "attributs."..sType, "");
 	
-	local sDmgType = "";
+	local sDmgType = "B";
 	local aDmgDice = DB.getValue(nodeChar, "attributs."..sType, "");
 	local nDmgMod = DB.getValue(nodeChar, "attributs."..sType.."_modifier", 0);
 	
 	table.insert(rDamage.clauses, {	dice = aDmgDice, 
 									modifier = nDmgMod, 
 									stat = "", 
-									dmgtype = sDmgType, });
+									dmgtype = sDmgType});
 	
 	return rActor, rDamage;
 end
