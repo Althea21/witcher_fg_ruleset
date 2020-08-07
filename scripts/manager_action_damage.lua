@@ -132,10 +132,11 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	local sFinalLocation = "";
 	local sFinalDamageMessage = "";
 
-	local aPendingAttackDmgMod = CombatManager2.getPendingAttackDamageModifier(rSource, rTarget);
+	local aPendingAttackDmgMod, bValidDmgModifier = CombatManager2.getPendingAttackDamageModifier(rSource, rTarget);
 	Debug.console("returned aPendingAttackDmgMod : ");
 	Debug.console(aPendingAttackDmgMod);
-	if aPendingAttackDmgMod == nil then
+	Debug.console(bValidDmgModifier);
+	if aPendingAttackDmgMod == nil and not bValidDmgModifier then
 		return;
 	end
 	
@@ -163,7 +164,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	sFinalDamageMessage = sFinalDamageMessage .. tonumber(nFinalDamage);
 
 	-- STRONG ATTACK ?
-	if (aPendingAttackDmgMod and aPendingAttackDmgMod.sIsStrongAttack == "true") or (ModifierStack.getModifierKey("ATT_STRONG")) then
+	if (bValidDmgModifier and aPendingAttackDmgMod.sIsStrongAttack == "true") or (ModifierStack.getModifierKey("ATT_STRONG")) then
 		-- check manual modifier
 		nFinalDamage = nFinalDamage*2;
 		sFinalDamageMessage = "(" .. sFinalDamageMessage .. "x2)";
@@ -176,7 +177,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	local sLocation = "";
 	local sIsAimed = "false";
 	-- location from pending attack
-	if aPendingAttackDmgMod then
+	if bValidDmgModifier then
 		sIsAimed = aPendingAttackDmgMod.sIsAimed;
 		sLocation = aPendingAttackDmgMod.sLocation;
 		if string.find(sLocation, "AIM_") then
@@ -210,7 +211,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	-- CRITICAL ?
 	-- must be done here because it may affect location
 	local sCriticalLevel = "none";
-	if aPendingAttackDmgMod then
+	if bValidDmgModifier then
 		local successMargin = tonumber(aPendingAttackDmgMod.sSuccessMargin);
 		if successMargin >= 15 then
 			sCriticalLevel = "deadly";

@@ -325,7 +325,7 @@ function getPendingAttackDamageModifier(rSource, rTarget)
 	local sSourceCT = ActorManager.getCTNodeName(rSource);
 	if sSourceCT == "" then
 		Debug.console("-- getPendingAttackDamageModifier called without legit CT source, abort");
-		return nil;
+		return nil, false;
 	end
 	
 	local sTargetCT = "";
@@ -334,7 +334,7 @@ function getPendingAttackDamageModifier(rSource, rTarget)
 	end
 	if sTargetCT == "" then
 		Debug.console("-- getPendingAttackDamageModifier called without legit CT target, abort");
-		return nil;
+		return nil, false;
 	end
 
 	local aAttack = {};
@@ -352,23 +352,28 @@ function getPendingAttackDamageModifier(rSource, rTarget)
 	end
 
 	if not bValidAttackExists then
-		Debug.console("-- getPendingAttackDamageModifier called without legit pending attack, abort");
-		return nil;
+		--Debug.console("-- getPendingAttackDamageModifier called without legit pending attack, abort");
+		--return nil, false;
+		-- damage can be rolled with manual modifiers even if no pending attack is waiting in the queue
 	end 
 
 	Debug.console(aAttack);
 
 	local aDmgModifier = {};
-	aDmgModifier.sIsStrongAttack = aAttack.sIsStrongAttack;
-	aDmgModifier.sTgtVulnerabilities = aAttack.sTgtVulnerabilities;
-	aDmgModifier.sLocation = aAttack.sLocation;
-	aDmgModifier.sIsAimed = aAttack.sIsAimed;
-	aDmgModifier.sWeaponEffects = aAttack.sWeaponEffects;
-	aDmgModifier.sSuccessMargin = aAttack.nAtkValue - aAttack.nDefValue;
+	
+	if bValidAttackExists then
+		aDmgModifier.sValid = "true";
+		aDmgModifier.sIsStrongAttack = aAttack.sIsStrongAttack;
+		aDmgModifier.sTgtVulnerabilities = aAttack.sTgtVulnerabilities;
+		aDmgModifier.sLocation = aAttack.sLocation;
+		aDmgModifier.sIsAimed = aAttack.sIsAimed;
+		aDmgModifier.sWeaponEffects = aAttack.sWeaponEffects;
+		aDmgModifier.sSuccessMargin = aAttack.nAtkValue - aAttack.nDefValue;
+	end
 	
 	Debug.console("--------------------------------------------");
 	
-	return aDmgModifier;
+	return aDmgModifier, bValidAttackExists;
 end
 ------------------------------------------------------------------------------------
 -- OOB MESSAGES MANAGEMENT
