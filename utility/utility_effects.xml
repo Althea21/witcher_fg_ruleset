@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="effectlist">
+		<frame>utilitybox3</frame>
+		<placement>
+			<size width="230" height="300" />
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum width="230" height="300" />
+		</sizelimits>
+		<playercontrol />
+		<nodelete />
+		<tooltip textres="library_recordtype_label_effect" />
+		<script>
+			function onInit()
+				if DataCommon and DataCommon.conditions then
+					createControl("label_effects_conditions", "label_conditions");
+					createControl("anchor_effects_conditions", "buttonanchor");
+					
+					if labelcolor then
+						label_conditions.setColor(labelcolor[1]);
+					end
+					
+					local nHalf = math.ceil(#(DataCommon.conditions) / 2);
+					for i = 1, nHalf do
+						local sEffect1 = StringManager.capitalize(DataCommon.conditions[i]);
+						local c1 = createControl("button_effect", "condition_" .. i);
+						c1.setEffect(sEffect1);
+
+						if (nHalf + i &lt;= #(DataCommon.conditions)) then
+							local sEffect2 = StringManager.capitalize(DataCommon.conditions[nHalf + i]);
+							local c2 = createControl("button_effectright", "condition_" .. (nHalf + i));
+							c2.setEffect(sEffect2);
+						end
+					end
+				end
+			end
+		</script>
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>library_recordtype_label_effect</resource>
+			</windowtitlebar>
+			<anchor_title_utilitybox3 name="contentanchor" />
+			
+			<!-- <list_effects name="list" />
+			<scrollbar_list />
+
+			<anchor_campaign2 />
+			<button_iedit_campaign />
+			<button_iadd_utility />
+			<filter_utility /> -->
+			
+			<resize_utilitybox3 />
+			<helper_effects />
+			<close_utilitybox3 />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="effectsmall">
+		<margins control="0,0,0,2" />
+		<script file="utility/scripts/effect.lua" />
+		<sheetdata>
+			<anchor_effect_left name="leftanchor" />
+			<button_effect_activate name="activate" />
+
+			<anchor_effect_right name="rightanchor" />
+			<button_effect_idelete name="idelete" />
+			<button_effect_isgmonly name="isgmonly" />
+			<number_effect_duration name="duration" />
+
+			<string_effect name="label" />
+		</sheetdata>
+	</windowclass>
+</root>

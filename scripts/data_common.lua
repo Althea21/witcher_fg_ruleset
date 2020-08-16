@@ -201,3 +201,18 @@ skilldata = {
 			stat = "Will",
 		},
 }
+
+-- Conditions supported in effect conditionals and for token widgets
+conditions = {
+	"bleeding", 
+	"blinded", 
+	"fire",
+	"frozen",
+	"hallucination",
+	"intoxicated",
+	"nauseated",
+	"poisonned",
+	"staggered",
+	"suffocating",
+	"stunned"
+};

@@ -48,6 +48,7 @@
 	<!-- Utilities -->
 	<includefile source="utility/utility_modifiers.xml" />
 	<includefile source="utility/utility_calendar.xml" />
+	<includefile source="utility/utility_effects.xml" />
 	
 	<!-- Reference -->
 	<includefile source="ref/ref_spells.xml" />
@@ -76,6 +77,7 @@
 	<script name="ActionDamage" file="scripts/manager_action_damage.lua" />
 	<script name="ActionSpell" file="scripts/manager_action_spell.lua" />
 	<script name="CombatManager2" file="scripts/manager_combat2.lua" />
+	<script name="EffectManager2" file="scripts/manager_effect2.lua" />
 	<script name="Json" file="scripts/json.lua" />
 	
 </root>

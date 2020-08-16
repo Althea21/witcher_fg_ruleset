@@ -120,6 +120,11 @@ function getRoll(rActor, rSpell)
 	-- update caster stats
 	rRoll.sDesc = rRoll.sDesc .. _impactSpellCaster(nodeActor, rSpell);
 
+	-- check effect and condition affecting Stat and skill
+	local nCondMod, nCondDesc = CharManager.getConditionRollModifier(nodeActor, rWeapon.skill, rWeapon.stat, false);
+	rRoll.sDesc = rRoll.sDesc .. nCondDesc;
+	rRoll.nMod = rRoll.nMod + nCondMod;
+
 	return rRoll;
 end
 

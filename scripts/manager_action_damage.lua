@@ -122,6 +122,97 @@ end
 ------------------------------------------------------------------------------------
 -- PROCESSING FUNCTIONS
 ------------------------------------------------------------------------------------
+function applyConditionDamage(rTarget, sCondition)
+	local nDamage = 0;
+	local sMessage = "";
+	local sTargetType, nodeTarget = ActorManager.getTypeAndNode(rTarget);
+	local sDamageType = "";
+
+	-- check condition to compute damage
+	if sCondition == "fire" then
+		-- 5 points of damage to every body location. Armor soaks the damage, but fire does 1 point of damage to armor and weapons every turn.
+		sDamageType = "fire";
+		sMessage = Interface.getString("effect_damagemessage_fire");
+
+		-- check armor
+		local headArmor = CharManager.getArmorValueForLocationRoll(nodeTarget, "head");
+		local leftarmArmor = CharManager.getArmorValueForLocationRoll(nodeTarget, "leftarm");
+		local rightarmArmor = CharManager.getArmorValueForLocationRoll(nodeTarget, "rightarm");
+		local leftlegArmor = CharManager.getArmorValueForLocationRoll(nodeTarget, "leftleg");
+		local rightlegArmor = CharManager.getArmorValueForLocationRoll(nodeTarget, "rightleg");
+		local torsoArmor = CharManager.getArmorValueForLocationRoll(nodeTarget, "torso");
+		
+		if (headArmor < 5) then
+			nDamage = nDamage + 5 - headArmor;
+		end
+		if (leftarmArmor < 5) then
+			nDamage = nDamage + 5 - leftarmArmor;
+		end
+		if (rightarmArmor < 5) then
+			nDamage = nDamage + 5 - rightarmArmor;
+		end
+		if (leftlegArmor < 5) then
+			nDamage = nDamage + 5 - leftlegArmor;
+		end
+		if (rightlegArmor < 5) then
+			nDamage = nDamage + 5 - rightlegArmor;
+		end
+		if (torsoArmor < 5) then
+			nDamage = nDamage + 5 - torsoArmor;
+		end
+
+		-- equipement damage
+		CharManager.damageArmorByLocation(nodeTarget, "head");
+		CharManager.damageArmorByLocation(nodeTarget, "leftarm");
+		CharManager.damageArmorByLocation(nodeTarget, "rightarm");
+		CharManager.damageArmorByLocation(nodeTarget, "leftleg");
+		CharManager.damageArmorByLocation(nodeTarget, "rightleg");
+		CharManager.damageArmorByLocation(nodeTarget, "torso");
+
+	elseif sCondition == "poisonned" then
+		-- 3 points of damage every turn which armor does not negate.
+		sDamageType = "poison";
+		sMessage = Interface.getString("effect_damagemessage_poisonned");
+		nDamage = 3;
+	elseif sCondition == "bleeding" then
+		-- 2 points of damage each turn until the bleeding is stopped.
+		sDamageType = "bleed";
+		sMessage = Interface.getString("effect_damagemessage_bleeding");
+		nDamage = 2;
+	elseif sCondition == "suffocating" then
+		-- 3 damage which armor does not negate.
+		sMessage = Interface.getString("effect_damagemessage_suffocating");
+		nDamage = 3;
+	end
+
+	-- check vulnerabilities, resistances
+	if sDamageType ~= "" and CharManager.isResistantTo(nodeTarget, sTargetType, sDamageType) then
+		sMessage = sMessage .. " (" .. nDamage .. ") / 2 {resistance}";
+		nDamage = math.floor(nDamage/2);
+		Debug.console("target is resistant, damage after resistance : ", nDamage);
+	elseif sDamageType ~= "" and CharManager.isVulnerableTo(nodeTarget, sTargetType, sDamageType) then
+		sMessage = sMessage .. " (" .. nDamage .. ") x 2 {vulnerable}";
+		nDamage = nDamage * 2;
+		Debug.console("target is vulnerable, damage after bVulnerability : ", nDamage);
+	elseif sDamageType == "fire" then
+		sMessage = sMessage .. " (" .. nDamage .. ")";
+	end
+
+	-- effective apply damage 
+	local nCurrentHP = DB.getValue(nodeTarget, "attributs.hit_points", 0);
+	DB.setValue(nodeTarget, "attributs.hit_points", "number", nCurrentHP - nDamage);
+
+	-- construct message
+	local rMessage = ChatManager.createBaseMessage(nil, nil);
+	rMessage.sender = "";
+	rMessage.icon = "roll_damage";
+	rMessage.font = "msgfont";
+	rMessage.text = sMessage;
+
+	-- Send the chat message
+	Comm.deliverChatMessage(rMessage);
+end
+
 function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	Debug.console("--------------------------------------------");
 	Debug.console("Apply Damage ");
