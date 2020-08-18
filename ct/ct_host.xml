@@ -232,8 +232,8 @@
 			
 			<anchor_ct_effect_right name="rightanchor" />
 			<button_ct_effect_idelete name="idelete" />
-			<button_ct_effect_targetadd name="targeting_add_button" />
-			<number_ct_effect_init name="init" />
+			<button_ct_effect_targetadd name="targeting_add_button"/>
+			<!-- <number_ct_effect_init name="init" /> -->
 			<number_ct_effect_duration name="duration" />
 
 			<string_ct_effect name="label" />

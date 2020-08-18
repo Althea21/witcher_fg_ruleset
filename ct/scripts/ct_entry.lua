@@ -163,6 +163,10 @@ function onFactionChanged()
 	updateHealthDisplay();
 end
 
+function onActiveChanged()
+	updateDisplay();
+end
+
 function onVisibilityChanged()
 	TokenManager.updateVisibility(getDatabaseNode());
 	windowlist.onVisibilityToggle();
