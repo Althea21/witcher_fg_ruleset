@@ -23,8 +23,9 @@ end
 -- returns : 
 --	* rRoll	: roll object
 function getRoll(rActor, rSpell)
-	-- Debug.chat(rActor);
-	-- Debug.chat(rSpell);
+	Debug.console("SpellManager getRoll")
+	Debug.console(rActor);
+	Debug.console(rSpell);
 	-- Initialize a blank rRoll record
 	local rRoll = {};
 	
@@ -71,7 +72,10 @@ function getRoll(rActor, rSpell)
 		end
 	end
 
+	Debug.console(rRoll.sSpellType);
+
 	-- Look up actor / spell specific information
+	local sSkill = "";
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	if nodeActor then
 		local sRollDescription = "";
@@ -83,7 +87,6 @@ function getRoll(rActor, rSpell)
 		nRollMod = nRollMod + DB.getValue(nodeActor, "attributs.will", 0);
 		
 		-- skill modifier
-		local sSkill = "";
 		if rRoll.sSpellType == "mage" or rRoll.sSpellType == "priest" or rRoll.sSpellType == "sign" then
 			sSkill = "spellCasting";
 		elseif rRoll.sSpellType == "hex" then
@@ -92,6 +95,8 @@ function getRoll(rActor, rSpell)
 			sSkill = "ritualCrafting";
 		end
 		
+		Debug.console(sSkill);
+
 		if nodeActor.getParent().getName()=="charsheet" then
 			-- PC case
 			for _,v in pairs(nodeActor.getChild("skills.skillslist").getChildren()) do
@@ -121,7 +126,7 @@ function getRoll(rActor, rSpell)
 	rRoll.sDesc = rRoll.sDesc .. _impactSpellCaster(nodeActor, rSpell);
 
 	-- check effect and condition affecting Stat and skill
-	local nCondMod, nCondDesc = CharManager.getConditionRollModifier(nodeActor, rWeapon.skill, rWeapon.stat, false);
+	local nCondMod, nCondDesc = CharManager.getConditionRollModifier(nodeActor, sSkill, "will", true);
 	rRoll.sDesc = rRoll.sDesc .. nCondDesc;
 	rRoll.nMod = rRoll.nMod + nCondMod;
 
