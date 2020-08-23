@@ -1040,6 +1040,7 @@
 	<string name="effect_name_nauseated">Nauseated</string>
 	<string name="effect_name_suffocating">Suffocating</string>
 	<string name="effect_name_blinded">Blinded</string>
+	<string name="effect_name_prone">Prone</string>
 
 	<string name="effect_damagemessage_fire">Fire : 5 points of damage to every body location. Armor soaks the damage, but fire does 1 point of damage to armor and weapons</string>
 	<string name="effect_damagemessage_poisonned">Poisonned : 3 points of damage which armor does not negate</string>

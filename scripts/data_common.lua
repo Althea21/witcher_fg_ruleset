@@ -212,6 +212,7 @@ conditions = {
 	"intoxicated",
 	"nauseated",
 	"poisonned",
+	"prone",
 	"staggered",
 	"suffocating",
 	"stunned"

@@ -744,6 +744,12 @@ function getConditionRollModifier(nodeActor, sSkillName, sStatName, bIsCombat)
 		sDescription = sDescription .. "[" .. Interface.getString("effect_name_blinded") .. " -5]";
 	end
 
+	if bIsCombat and EffectManager2.hasEffect(nodeActor, "prone") then
+		Debug.console("prone and combat : ok")
+		nModifier = nModifier - 2;
+		sDescription = sDescription .. "[" .. Interface.getString("effect_name_prone") .. " -2]";
+	end
+	
 	return nModifier, sDescription;
 end
 
