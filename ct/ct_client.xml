@@ -39,11 +39,11 @@
 
 			function updateHealthDisplay()
 				local sOptionSHPC = OptionsManager.getOption("SHPC");
-				Debug.chat(sOptionSHPC)
+				--Debug.chat(sOptionSHPC)
 				local sOptionSHNPC = OptionsManager.getOption("SHNPC");
-				Debug.chat(sOptionSHNPC)
+				--Debug.chat(sOptionSHNPC)
 				local bShowLabels = (sOptionSHPC=="on") or (sOptionSHNPC=="on");
-				Debug.chat(bShowLabels)
+				--Debug.chat(bShowLabels)
 
 				label_hp.setVisible(bShowLabels);
 				label_stamina.setVisible(bShowLabels);

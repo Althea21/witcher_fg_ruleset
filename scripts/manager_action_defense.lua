@@ -163,7 +163,6 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 	-- Debug.chat("--rTarget : ");
 	-- Debug.chat(rTarget);
 	-- Debug.chat("--rRoll : ");
-	-- Debug.chat(rRoll);
 	
 	-- Debug.chat(rRoll.aDice[1].result);
 	
