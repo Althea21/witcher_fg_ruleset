@@ -645,11 +645,12 @@ function getResistances(nodeActor, actorType, sLocation)
 		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
 			if DB.getValue(v, "equipped", "") == 1 then
 				if sLocation ~= "all" and DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
-				local sArmorRes = DB.getValue(v, "resistances", "");
-				--Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
-				if sArmorRes ~= "" then
-					if sResistances ~= "" then sResistances = sResistances .. ", " end;
-					sResistances = sResistances .. DB.getValue(v, "ev", 0);
+					local sArmorRes = DB.getValue(v, "resistances", "");
+					--Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
+					if sArmorRes ~= "" then
+						if sResistances ~= "" then sResistances = sResistances .. ", " end;
+						sResistances = sResistances .. DB.getValue(v, "ev", 0);
+					end
 				end
 			end
 		end
