@@ -496,8 +496,10 @@ function getArmorValueForLocationRoll(nodeActor, sLocation)
 	end
 	
 	for _,v in ipairs(UtilityManager.getSortedTable(DB.getChildren(nodeActor, "armorlist"))) do
-		if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
-			nArmorValue = nArmorValue + DB.getValue(v, "sp", 0);
+		if DB.getValue(v, "equipped", "") == 1 then
+			if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
+				nArmorValue = nArmorValue + DB.getValue(v, "sp", 0);
+			end
 		end
 	end
 	
@@ -529,11 +531,13 @@ function damageArmorByLocation(nodeActor, sLocation)
 	end
 	
 	for _,v in ipairs(UtilityManager.getSortedTable(DB.getChildren(nodeActor, "armorlist"))) do
-		if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
-			local nArmorValue = DB.getValue(v, "sp", 0);
-			if nArmorValue > 0 then
-				DB.setValue(v, "sp", "number", nArmorValue-1);
-				break;
+		if DB.getValue(v, "equipped", "") == 1 then
+			if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
+				local nArmorValue = DB.getValue(v, "sp", 0);
+				if nArmorValue > 0 then
+					DB.setValue(v, "sp", "number", nArmorValue-1);
+					break;
+				end
 			end
 		end
 	end
@@ -621,18 +625,32 @@ function getVulnerabilities(nodeActor, actorType)
 	return sVulnerabilities;
 end
 
-function getResistances(nodeActor, actorType)
+function getResistances(nodeActor, actorType, sLocation)
 	local sResistances = "";
 	
+	sLocation = string.lower(sLocation);
+	local sArmorLocation = sLocation;
+	
+	if sLocation=="arm" then
+		sArmorLocation = "leftarm";
+	elseif sLocation=="leg" or sLocation=="limb" then
+		sArmorLocation = "leftleg";
+	elseif sLocation=="tail" then
+		sArmorLocation = "tail";
+	end
+
 	-- get resistances from armor
 	local armorlist = nodeActor.getChild("armorlist");
 	if armorlist then
 		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
-			local sArmorRes = DB.getValue(v, "resistances", "");
-			--Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
-			if sArmorRes ~= "" then
-				if sResistances ~= "" then sResistances = sResistances .. ", " end;
-				sResistances = sResistances .. DB.getValue(v, "ev", 0);
+			if DB.getValue(v, "equipped", "") == 1 then
+				if sLocation ~= "all" and DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
+				local sArmorRes = DB.getValue(v, "resistances", "");
+				--Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
+				if sArmorRes ~= "" then
+					if sResistances ~= "" then sResistances = sResistances .. ", " end;
+					sResistances = sResistances .. DB.getValue(v, "ev", 0);
+				end
 			end
 		end
 	end
@@ -643,7 +661,7 @@ function getResistances(nodeActor, actorType)
 	return sResistances;
 end
 
-function isResistantTo(nodeActor, actorType, sDamageTypes)
+function isResistantTo(nodeActor, actorType, sDamageTypes, sLocation)
 	-- split damage type (exclude silver)
 	local aTypes={};
 	for str in string.gmatch(sDamageTypes, "([^,]+)") do
@@ -655,7 +673,7 @@ function isResistantTo(nodeActor, actorType, sDamageTypes)
 	end
 
 	-- check resistances
-	local sResistances = getResistances(nodeActor, actorType);
+	local sResistances = getResistances(nodeActor, actorType, sLocation);
 	if sResistances ~= "" then
 		for str in string.gmatch(sResistances, "([^,]+)") do
 			-- trim & lower

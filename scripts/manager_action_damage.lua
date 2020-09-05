@@ -186,7 +186,7 @@ function applyConditionDamage(rTarget, sCondition)
 	end
 
 	-- check vulnerabilities, resistances
-	if sDamageType ~= "" and CharManager.isResistantTo(nodeTarget, sTargetType, sDamageType) then
+	if sDamageType ~= "" and CharManager.isResistantTo(nodeTarget, sTargetType, sDamageType, "all") then
 		sMessage = sMessage .. " (" .. nDamage .. ") / 2 {resistance}";
 		nDamage = math.floor(nDamage/2);
 		Debug.console("target is resistant, damage after resistance : ", nDamage);
@@ -437,7 +437,7 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 	if not bSoftSpot and not bArmorPiercing and not bImprovedArmorPiercing then
 		local bResistant = false;
 		for k,v in pairs(rDamageOutput.aDamageTypes) do
-			if CharManager.isResistantTo(nodeTarget, sTargetType, k) then
+			if CharManager.isResistantTo(nodeTarget, sTargetType, k, sLocation) then
 				bResistant = true;
 				break;
 			end
