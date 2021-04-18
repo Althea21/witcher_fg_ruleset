@@ -772,36 +772,3 @@ function getConditionRollModifier(nodeActor, sSkillName, sStatName, bIsCombat)
 	return nModifier, sDescription;
 end
 
--- get the damage taken by actor on turn start according to the condition currently applied to it
--- works for PC and NPC
--- params :
---  * nodeActor : pc or npc node
--- returns : 
---	nothing
-function getConditionDamageOnTurnStart(nodeActor)
-	Debug.console("---------------------------------")
-	Debug.console("getConditionDamageOnTurnStart")
-	Debug.console(nodeActor)
-
-	local rTarget = ActorManager.getActorFromCT(nodeActor);
-
-	if EffectManager2.hasEffect(nodeActor, "fire") then
-		-- 5 points of damage to every body location. Armor soaks the damage, but fire does 1 point of damage to armor and weapons every turn.
-		ActionDamage.applyConditionDamage(rTarget, "fire");
-	end
-
-	if EffectManager2.hasEffect(nodeActor, "poisonned") then
-		-- 3 points of damage every turn which armor does not negate.
-		ActionDamage.applyConditionDamage(rTarget, "poisonned");
-	end
-
-	if EffectManager2.hasEffect(nodeActor, "bleeding") then
-		-- 2 points of damage each turn until the bleeding is stopped.
-		ActionDamage.applyConditionDamage(rTarget, "bleeding");
-	end
-
-	if EffectManager2.hasEffect(nodeActor, "suffocating") then
-		-- 3 damage which armor does not negate.
-		ActionDamage.applyConditionDamage(rTarget, "suffocating");
-	end
-end

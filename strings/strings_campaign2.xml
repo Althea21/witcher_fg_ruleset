@@ -1044,7 +1044,7 @@
 
 	<string name="effect_damagemessage_fire">Fire : 5 points of damage to every body location. Armor soaks the damage, but fire does 1 point of damage to armor and weapons</string>
 	<string name="effect_damagemessage_poisonned">Poisonned : 3 points of damage which armor does not negate</string>
-	<string name="effect_damagemessage_bleeding">Bleeding : 2 points of damage until the bleeding is stopped</string>
+	<string name="effect_damagemessage_bleeding">Bleeding : 2 points of damage per round until the bleeding is stopped</string>
 	<string name="effect_damagemessage_suffocating">Suffocating : 3 damage which armor does not negate</string>
 </root>
 

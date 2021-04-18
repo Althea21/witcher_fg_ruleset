@@ -117,10 +117,10 @@ function onEffectTextDecode(sEffect, rEffect)
 end
 
 function onEffectActorStartTurn(nodeActor, nodeEffect)
-    -- Debug.chat("------------------------------------------")
-    -- Debug.chat("onEffectActorStartTurn")
-    -- Debug.chat(nodeActor)
-    -- Debug.chat(nodeEffect)
+    Debug.console("------------------------------------------")
+    Debug.console("onEffectActorStartTurn")
+    Debug.console(nodeActor)
+    Debug.console(nodeEffect)
 
     local sEffName = DB.getValue(nodeEffect, "label", "");
     sEffName = sEffName:lower();
