@@ -66,11 +66,16 @@ function getIdFromLabel (label)
     local id = "";
     
     local aWords = StringManager.parseWords(label);
-    id = aWords[1]:lower();
-    for k = 2, #aWords do
-        id = id .. aWords[k];
-    end
-
+    local i = 1;
+    while aWords[i] do
+		if i==1 then
+			id = aWords[1]:lower();
+        else
+            id = id .. aWords[i];
+		end
+		i = i + 1;
+	end
+    
     return id;
 end
 
