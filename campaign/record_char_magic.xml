@@ -11,7 +11,7 @@
 		<sheetdata>
 			<!--MAGIC STATS REMINDER-->
 			<frame_char name="magic_frame">
-				<bounds>15,0,-29,70</bounds>
+				<bounds>15,0,-29,100</bounds>
 			</frame_char>
 			
 			<!--vigor-->
@@ -126,10 +126,75 @@
 					end
 				</script>
 			</number_derivedstat_rollable>
+
+			<!-- SPECIAL ACTIONS (defense and profession)-->
+			<label name="label_defense">
+				<anchored to="magic_frame" position="insidetopleft" offset="20,65" width="100"/>
+				<static textres="char_label_specialActions"/>
+			</label>
+			
+			<!-- Dodge / Escape -->
+			<label name="label_dodgeaction">
+				<anchored to="label_defense" width="100">
+					<top/>
+					<left anchor="right" offset="20"/>
+				</anchored>
+				<static textres="char_skill_dodgeEscape_label"/>
+			</label>
+			<buttoncontrol name="button_dodge">
+				<anchored to="label_dodgeaction" position="right" offset="0,0" width="20" height="20" />
+				<icon normal="button_action_dodge" />
+				<cursor hover="hand" />
+				<nodrag />
+				<script>
+					function action(draginfo)
+						window.onDodgeAction(draginfo);
+					end
+
+					function onButtonPress()
+						action();
+					end
+
+					function onDragStart(button, x, y, draginfo)
+						action(draginfo);
+						return true;
+					end
+				</script>
+			</buttoncontrol>
+			
+			<!-- Reposition -->
+			<buttoncontrol name="button_reposition">
+				<anchored to="button_dodge" width="20" height="20">
+					<top/>
+					<left anchor="right" offset="120"/>
+				</anchored>
+				<icon normal="button_action_reposition" />
+				<cursor hover="hand" />
+				<nodrag />
+				<script>
+					function action(draginfo)
+						window.onRepositionAction(draginfo);
+					end
+
+					function onButtonPress()
+						action();
+					end
+
+					function onDragStart(button, x, y, draginfo)
+						action(draginfo);
+						return true;
+					end
+				</script>
+			</buttoncontrol>
+			<label name="label_reposition">
+				<anchored to="button_reposition" position="left" offset="0,0" width="80"/>
+				<right/>
+				<static textres="char_label_reposition"/>
+			</label>
 			
 			<!-- Magic Actions frame-->
 			<frame_char name="magic_details_frame">
-				<bounds>15,75,-29,-10</bounds>
+				<bounds>15,105,-29,-10</bounds>
 			</frame_char>
 			
 			<!-- spell class -->
@@ -224,7 +289,7 @@
 				<static textres="char_spellclass_stacost_header" />
 			</label>
 			<label>
-				<anchored to="spellclass_stacost_label" position="right" offset="20,0" width="50" />
+				<anchored to="spellclass_stacost_label" position="right" offset="20,0" width="60" />
 				<center />
 				<static textres="char_spellclass_summary_header" />
 			</label>

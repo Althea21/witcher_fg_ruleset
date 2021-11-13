@@ -150,14 +150,14 @@
 			
 			<!-- Dodge / Escape -->
 			<label name="label_dodgeaction">
-				<anchored to="label_defense" width="80">
+				<anchored to="label_defense" width="100">
 					<top/>
 					<left anchor="right" offset="20"/>
 				</anchored>
 				<static textres="char_skill_dodgeEscape_label"/>
 			</label>
 			<buttoncontrol name="button_dodge">
-				<anchored to="label_dodgeaction" position="right" offset="10,0" width="20" height="20" />
+				<anchored to="label_dodgeaction" position="right" offset="0,0" width="20" height="20" />
 				<icon normal="button_action_dodge" />
 				<cursor hover="hand" />
 				<nodrag />
@@ -181,7 +181,7 @@
 			<buttoncontrol name="button_reposition">
 				<anchored to="button_dodge" width="20" height="20">
 					<top/>
-					<left anchor="right" offset="100"/>
+					<left anchor="right" offset="120"/>
 				</anchored>
 				<icon normal="button_action_reposition" />
 				<cursor hover="hand" />
@@ -202,7 +202,7 @@
 				</script>
 			</buttoncontrol>
 			<label name="label_reposition">
-				<anchored to="button_reposition" position="left" offset="10,0" width="60"/>
+				<anchored to="button_reposition" position="left" offset="0,0" width="80"/>
 				<right/>
 				<static textres="char_label_reposition"/>
 			</label>
