@@ -64,7 +64,7 @@
 	<string name="char_derivedstatslabel_stun">Stun</string>
 	<string name="char_derivedstatslabel_run">Run</string>
 	<string name="char_derivedstatslabel_leap">Leap</string>
-	<string name="char_derivedstatslabel_woundthreshold">Wound Threshold</string>
+	<string name="char_derivedstatslabel_woundthreshold">Wound Thresh.</string>
 	<string name="char_derivedstatslabel_hit_points">Hit Points</string>
 	<string name="char_derivedstatslabel_toxicity">Potion toxicity</string>
 	<string name="char_derivedstatslabel_stamina">Stamina</string>
@@ -976,7 +976,7 @@
 	<string name="npc_label_resistances">Resistances</string>
 	<string name="npc_label_abilities">Abilities</string>
 	<string name="npc_label_initiative">Initiative</string>
-	<string name="npc_label_woundthreshold">Wound Threshold</string>
+	<string name="npc_label_woundthreshold">Wound Thresh.</string>
 
 	<string name="npc_header_stats">Stats</string>
 	<string name="npc_label_stun">Stun</string>

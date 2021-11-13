@@ -1065,7 +1065,7 @@
 			<size width="400" height="450" />
 		</placement>
 		<sizelimits>
-			<minimum width="400" height="350" />
+			<minimum width="460" height="450" />
 			<dynamic />
 		</sizelimits>
 		<nodelete />
@@ -1201,7 +1201,7 @@
 				</anchored>
 			</button_checkbox>
 			<label>
-				<anchored to="weffect_ablating_use" width="100" height="20">
+				<anchored to="weffect_ablating_use" width="130" height="20">
 					<top offset="-4"/>
 					<left anchor="right" offset="5" />
 				</anchored>
@@ -1211,7 +1211,7 @@
 			<button_checkbox name="weffect_armorpiercing_use">
 				<anchored  to="weffect_ablating_use" width="12" height="12">
 					<top />
-					<left offset="115" />
+					<left offset="150" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1225,7 +1225,7 @@
 			<button_checkbox name="weffect_balanced_use">
 				<anchored  to="weffect_armorpiercing_use" width="12" height="12">
 					<top />
-					<left offset="110" />
+					<left offset="120" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1256,7 +1256,7 @@
 				</script>
 			</button_checkbox>
 			<label>
-				<anchored to="weffect_bleeding_use" width="100" height="20">
+				<anchored to="weffect_bleeding_use" width="130" height="20">
 					<top offset="-4"/>
 					<left anchor="right" offset="5" />
 				</anchored>
@@ -1273,7 +1273,7 @@
 			<button_checkbox name="weffect_brawling_use">
 				<anchored  to="weffect_bleeding_use" width="12" height="12">
 					<top />
-					<left offset="115" />
+					<left offset="150" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1287,7 +1287,7 @@
 			<button_checkbox name="weffect_concealment_use">
 				<anchored  to="weffect_brawling_use" width="12" height="12">
 					<top />
-					<left offset="110" />
+					<left offset="120" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1316,7 +1316,7 @@
 				</script>
 			</button_checkbox>
 			<label>
-				<anchored to="weffect_focus_use" width="100" height="20">
+				<anchored to="weffect_focus_use" width="130" height="20">
 					<top offset="-4"/>
 					<left anchor="right" offset="5" />
 				</anchored>
@@ -1329,7 +1329,7 @@
 			<button_checkbox name="weffect_grappling_use">
 				<anchored  to="weffect_focus_use" width="12" height="12">
 					<top />
-					<left offset="115" />
+					<left offset="150" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1343,7 +1343,7 @@
 			<button_checkbox name="weffect_greaterfocus_use">
 				<anchored  to="weffect_grappling_use" width="12" height="12">
 					<top />
-					<left offset="110" />
+					<left offset="120" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1362,7 +1362,7 @@
 				</anchored>
 			</button_checkbox>
 			<label>
-				<anchored to="weffect_improvedarmorpiercing_use" width="100" height="20">
+				<anchored to="weffect_improvedarmorpiercing_use" width="130" height="20">
 					<top offset="-4"/>
 					<left anchor="right" offset="5" />
 				</anchored>
@@ -1372,7 +1372,7 @@
 			<button_checkbox name="weffect_longreach_use">
 				<anchored  to="weffect_improvedarmorpiercing_use" width="12" height="12">
 					<top />
-					<left offset="115" />
+					<left offset="150" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1386,7 +1386,7 @@
 			<button_checkbox name="weffect_meteorite_use">
 				<anchored  to="weffect_longreach_use" width="12" height="12">
 					<top />
-					<left offset="110" />
+					<left offset="120" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1405,7 +1405,7 @@
 				</anchored>
 			</button_checkbox>
 			<label>
-				<anchored to="weffect_nonethal_use" width="100" height="20">
+				<anchored to="weffect_nonethal_use" width="130" height="20">
 					<top offset="-4"/>
 					<left anchor="right" offset="5" />
 				</anchored>
@@ -1415,7 +1415,7 @@
 			<button_checkbox name="weffect_slowreload_use">
 				<anchored  to="weffect_nonethal_use" width="12" height="12">
 					<top />
-					<left offset="115" />
+					<left offset="150" />
 				</anchored>
 			</button_checkbox>
 			<label>
@@ -1429,7 +1429,7 @@
 			<button_checkbox name="weffect_stun_use">
 				<anchored  to="weffect_slowreload_use" width="12" height="12">
 					<top />
-					<left offset="110" />
+					<left offset="120" />
 				</anchored>
 				<script>
 					function onInit()
@@ -1814,7 +1814,7 @@
 			<basicnumber name="sp">
 				<anchored width="30" height="20">
 					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
-					<left offset="100" />
+					<left offset="130" />
 				</anchored>
 				<script>
 					function onInit()
@@ -1836,7 +1836,7 @@
 				</script>
 			</basicnumber>
 			<label>
-				<anchored to="sp" position="right" offset="-130,0" />
+				<anchored to="sp" position="right" offset="-160,0" />
 				<static textres="armor_property_sp" />
 			</label>
 			<basicnumber name="spmax">
@@ -1850,11 +1850,11 @@
 			<basicnumber name="ev">
 				<anchored width="30" height="20">
 					<top parent="columnanchor" anchor="bottom" relation="relative" offset="10" />
-					<left offset="100" />
+					<left offset="130" />
 				</anchored>
 			</basicnumber>
 			<label>
-				<anchored to="ev" position="right" offset="-130,0" />
+				<anchored to="ev" position="right" offset="-160,0" />
 				<static textres="armor_property_ev" />
 			</label>
 			

@@ -172,7 +172,7 @@
 	<template name="header_weapon">
 		<label>
 			<font>sheetlabelheader</font>
-			<anchored height="30">
+			<anchored height="35">
 				<top parent="columnanchor" anchor="bottom" relation="relative" offset="8" />
 				<left offset="10" />
 				<right offset="-10" />

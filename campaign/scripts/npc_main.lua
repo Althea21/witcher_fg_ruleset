@@ -33,6 +33,9 @@ function updateReadOnly()
 	end
 	divider.setVisible(bSection1);
 
+	-- autocalc button
+	autocalculation.setReadOnly(bReadOnly);
+
 	-- fields that only depends on lock/unlock state
 	nonid_name.setReadOnly(bReadOnly);
 	npctype.setReadOnly(bReadOnly);

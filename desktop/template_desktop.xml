@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<template name="desktop_dockitem">	
+		<buttoncontrol>
+			<bounds>5,5,100,93</bounds>
+			<font>button_sidebar_dockitem</font>
+			<script file="desktop/scripts/desktop_dockitem.lua" />
+			<cursor hover="hand" />
+		</buttoncontrol>
+	</template>
+</root>

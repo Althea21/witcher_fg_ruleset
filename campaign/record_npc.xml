@@ -95,14 +95,14 @@
 			<label name="autocalculation_label">
 				<anchored to="nonid_name_label" width="100">
 					<top />
-					<right anchor="right" offset="360" />
+					<right anchor="right" offset="335" />
 				</anchored>
 				<static textres="npc_label_autocalculation" />
 			</label>
 			<buttonfield name="autocalculation" source="attributs.autocalculation">
 				<anchored to="autocalculation_label" width="20" height="20">
 					<top />
-					<right anchor="right" offset="10" />
+					<right anchor="right" offset="20" />
 				</anchored>
 				<state icon="button_toggle_on" tooltipres="npc_tooltip_autocalculation" />
 				<state icon="button_toggle_off" tooltipres="npc_tooltip_autocalculation" />
@@ -542,7 +542,7 @@
 					<top />
 					<left anchor="right" relation="relative" offset="10" />
 				</anchored>
-				<icon>button_help</icon>
+				<icon>button_details</icon>
 				<tooltip textres="npc_tooltip_skills"/>
 			</genericcontrol>
 			
