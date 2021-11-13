@@ -329,7 +329,6 @@ function onAttackRoll(rSource, rTarget, rRoll)
 		
 		-- Display the message in chat.
 		Comm.deliverChatMessage(rMessage);
-		Debug.chat(Interface.getFonts())
 	end
 end
 
