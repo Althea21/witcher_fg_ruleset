@@ -23,6 +23,7 @@
 			<frame_label>
 				<anchored to="identite_frame" />
 				<static textres="char_label_identity" />
+				<frame name="headerref" />
 			</frame_label>
 			
 			<!-- RACE -->
@@ -732,7 +733,7 @@
 			
 			<!-- DERIVED STATS : STUN, RUN, LEAP, HP, STA, ENC, REC, PUNCH, KICK -->
 			<number_derivedstat_rollable name="stun" source="attributs.stun">
-				<anchored to="intelligence_base" position="right" offset="240,0" width="30" height="20" />
+				<anchored to="intelligence_base" position="right" offset="300,0" width="30" height="20" />
 				<script>
 					function action(draginfo)
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());

@@ -26,7 +26,8 @@
 			<label name="label_attack">
 				<bounds>30,45,250,20</bounds>
 				<static textres="modifier_label_attack" />
-				<color>FFFFFF</color>
+				<!-- <color>FFFFFF</color> -->
+				<font>utility_label</font>
 				<center />
 			</label>
 			<button_modifierkey name="ATT_STRONG">
@@ -67,7 +68,7 @@
 			<label name="label_damage">
 				<bounds>30,210,250,20</bounds>
 				<static textres="modifier_label_range" />
-				<color>FFFFFF</color>
+				<font>utility_label</font>
 				<center />
 			</label>
 			<button_modifierkey name="RNG_PB">
@@ -135,7 +136,7 @@
 			<label name="label_damage">
 				<bounds>30,305,250,20</bounds>
 				<static textres="modifier_label_light" />
-				<color>FFFFFF</color>
+				<font>utility_label</font>
 				<center />
 			</label>
 			<button_modifierkey name="LGT_BRI">
@@ -185,7 +186,7 @@
 			<label name="label_attack">
 				<bounds>300,45,250,20</bounds>
 				<static textres="modifier_label_aiming" />
-				<color>FFFFFF</color>
+				<font>utility_label</font>
 				<center />
 			</label>
 			<button_modifierkey name="AIM_HEAD">
@@ -296,7 +297,7 @@
 			<label name="label_damage">
 				<bounds>300,175,250,20</bounds>
 				<static textres="modifier_label_damage" />
-				<color>FFFFFF</color>
+				<font>utility_label</font>
 				<center />
 			</label>
 			<button_modifierkey name="DMG_CRTSIM">

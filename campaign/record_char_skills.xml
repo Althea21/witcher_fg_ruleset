@@ -11,17 +11,19 @@
 		<sheetdata>
 			<frame_char name="skills_frame">
 				<bounds>15,0,-29,-10</bounds>
+				<invisible />
 			</frame_char>
 		
 			<subwindow name="skills_details">
-				<anchored to="skills_frame" position="over" offset="-8,-10">
-					<bottom offset="-50" />
+				<!-- <anchored to="skills_frame" position="over" offset="-8,-10"> -->
+				<anchored to="skills_frame" position="over" offset="15,0">
+					<bottom offset="0" />
 				</anchored>
 				<activate />
 				<class>char_skills_details</class>
 			</subwindow>
 			<scrollbar>
-				<anchored to="skills_details" position="right" offset="-2,-4" width="20">
+				<anchored to="skills_details" position="right" offset="-25,-4" width="20">
 					<bottom offset="20" />
 				</anchored>
 				<target>skills_details</target>
@@ -33,102 +35,78 @@
 	<windowclass name="char_skills_details">
 		<script file="campaign/scripts/char_skills_details.lua" />
 		<sheetdata>
+			<frame_char name="label_profession_frame">
+				<bounds>15,0,-19,380</bounds>
+			</frame_char>
 			<!-- PROFESSION -->
-			<!-- section header (show/hide list on click) -->
-			<genericcontrol name="label_profession_frame">
-				<bounds>6,8,-3,24</bounds>
-				<frame name="groupbox2" offset="6,6,6,6" />
-				<disabled/>
-			</genericcontrol>
-			<label_frametop name="label_profession">
-				<anchored to="label_profession_frame" offset="-7,0" />
+			<!-- section header -->
+			<frame_label name="label_profession">
+				<anchored to="label_profession_frame" />
 				<static textres="char_label_abilities" />
-				<script>
-					function onClickDown(button, x, y)
-						return window.onHeaderClickDown("profession");
-					end
-					function onClickRelease(button, x, y)
-						return window.onHeaderClickRelease("profession");
-					end
-				</script>
-			</label_frametop>
-			<genericcontrol name="profession_collapse_button">
-				<anchored height="10" width="10">
-					<top parent="label_profession" anchor="top" offset="5" />
-					<right parent="label_profession_frame" anchor="right" offset="-10"/>
-				</anchored>
-				<icon>button_collapse_w</icon>
-				<script>
-					function onInit()
-						window.profession_collapse_button.setVisible(window.profession_details.isVisible());
-					end
-					function onClickDown(button, x, y)
-						return window.onHeaderClickDown("profession");
-					end
-					function onClickRelease(button, x, y)
-						return window.onHeaderClickRelease("profession");
-					end
-				</script>
-				<tooltip textres="tooltip_collapse"/>
-			</genericcontrol>
-			<genericcontrol name="profession_expand_button">
-				<anchored height="10" width="10">
-					<top parent="label_profession" anchor="top" offset="5" />
-					<right parent="label_profession_frame" anchor="right" offset="-10"/>
-				</anchored>
-				<icon>button_expand_w</icon>
-				<script>
-					function onInit()
-						window.profession_expand_button.setVisible(not window.profession_details.isVisible());
-					end
-					function onClickDown(button, x, y)
-						return window.onHeaderClickDown("profession");
-					end
-					function onClickRelease(button, x, y)
-						return window.onHeaderClickRelease("profession");
-					end
-				</script>
-				<tooltip textres="tooltip_expand"/>
-			</genericcontrol>
+				<frame name="headerref" />
+			</frame_label>
 			<!--content-->
 			<subwindow name="profession_details">
 				<anchored>
 					<top parent="label_profession" anchor="bottom" offset="0" />
-					<left />
-					<right />
+					<left parent="label_profession_frame" anchor="left" offset="15" />
+					<right parent="label_profession_frame" anchor="right" offset="-15" />
+					<bottom parent="label_profession_frame" anchor="bottom" offset="0" />
 				</anchored>
 				<activate />
 				<class>char_profession_details</class>
 			</subwindow>
 
-			<genericcontrol name="skills_divider">
-				<anchored to="profession_details" position="below" offset="0,15" height="3" />
-				<frame name="separatorline" />
-				<invisible />
-			</genericcontrol>
+			<!-- <genericcontrol name="skills_divider"> -->
+				<!-- <anchored to="profession_details" position="below" offset="0,15" height="3" /> -->
+				<!-- <frame name="separatorline" /> -->
+				<!-- <invisible /> -->
+			<!-- </genericcontrol> -->
 
 			<!-- SKILL LIST -->
-			<!-- section header (show/hide list on click) -->
-			<genericcontrol name="label_skilllist_frame">
+			<!-- section header -->
+			<!-- <genericcontrol name="label_skilllist_frame"> -->
+				<!-- <anchored> -->
+					<!-- <top parent="skills_divider" anchor="bottom" offset="13" /> -->
+					<!-- <bottom parent="skills_divider" anchor="bottom" offset="38" /> -->
+					<!-- <left/> -->
+					<!-- <right/> -->
+				<!-- </anchored> -->
+				<!-- <frame name="groupbox2" offset="6,6,6,6" /> -->
+				<!-- <disabled /> -->
+			<!-- </genericcontrol> -->
+			<!-- <label_frametop name="label_skilllist"> -->
+				<!-- <anchored to="label_skilllist_frame" offset="-7,0" /> -->
+				<!-- <static textres="char_label_skills" /> -->
+			<!-- </label_frametop> -->
+			
+			<frame_char name="label_skilllist_frame">
+				<!-- <bounds>15,0,-19,370</bounds> -->
 				<anchored>
-					<top parent="skills_divider" anchor="bottom" offset="13" />
-					<bottom parent="skills_divider" anchor="bottom" offset="38" />
-					<left/>
-					<right/>
+					<top parent="label_profession_frame" anchor="bottom" offset="20" />
+					<bottom parent="label_profession_frame" anchor="bottom" offset="1250" />
+					<left parent="label_profession_frame" anchor="left" offset="0" />
+					<right parent="label_profession_frame" anchor="right" offset="0" />
 				</anchored>
-				<frame name="groupbox2" offset="6,6,6,6" />
-				<disabled />
-			</genericcontrol>
-			<label_frametop name="label_skilllist">
-				<anchored to="label_skilllist_frame" offset="-7,0" />
+			</frame_char>
+			<frame_label name="label_skilllist">
+				<anchored to="label_skilllist_frame" />
 				<static textres="char_label_skills" />
-			</label_frametop>
+				<frame name="headerref" />
+			</frame_label>
+			
 			<!--content-->
 			<subwindow name="skilllist_details">
+				<!-- <anchored> -->
+					<!-- <top parent="label_skilllist" anchor="bottom" offset="0" /> -->
+					<!-- <left /> -->
+					<!-- <right /> -->
+				<!-- </anchored> -->
 				<anchored>
 					<top parent="label_skilllist" anchor="bottom" offset="0" />
-					<left />
-					<right />
+					<left parent="label_skilllist_frame" anchor="left" offset="15" />
+					<right parent="label_skilllist_frame" anchor="right" offset="-15" />
+					<bottom parent="label_skilllist_frame" anchor="bottom" offset="0" />
 				</anchored>
 				<activate />
 				<class>char_skilllist_details</class>
@@ -1186,6 +1164,9 @@
 				</anchored>
 				<tooltip textres="char_tooltip_isclassskill"/>
 				<script>
+					function onInit()
+						window.onIsClassSkillChanged();
+					end
 					function onValueChanged()
 						window.onIsClassSkillChanged();
 					end

@@ -97,7 +97,7 @@
 	<icon name="button_link_empty" file="graphics/buttons/button_link_empty.png" />
 	<icon name="button_link_share" file="graphics/buttons/button_link_share.png" />
 	<icon name="button_link_share_down" file="graphics/buttons/button_link_share_down.png" />
-	<icon name="tabtop" file="graphics/frames/blank.png" />
+	<icon name="tabtop" file="graphics/tabs/tabtop.png" />
 	<icon name="button_checkon" file="graphics/buttons/button_checkon.png" />
 	<icon name="button_checkoff" file="graphics/buttons/button_checkoff.png" />
 	<icon name="token_empty" file="graphics/icons/token_empty.png" />
@@ -173,6 +173,7 @@
 	<!-- Dragging -->
 	<icon name="action_roll" file="graphics/icons/action_roll.png" />
 	<icon name="action_effect" file="graphics/icons/action_effect.png" />
+	<icon name="action_option" file="graphics/icons/action_option.png" />
 	
 	<!-- Rolls -->
 	<icon name="roll_effect" file="graphics/icons/roll_effect.png" />
@@ -267,33 +268,35 @@
 	<icon name="tokenbagshared" file="graphics/icons/tokenbag_shared.png" />
 	
 	<!-- Sidebar -->
-	<icon name="button_characters" file="graphics/sidebar/button_characters.png" />
-	<icon name="button_characters_down" file="graphics/sidebar/button_characters_down.png" />
+	<icon name="button_charsheet" file="graphics/sidebar/button_characters.png" />
+	<icon name="button_charsheet_down" file="graphics/sidebar/button_characters_down.png" />
 	<icon name="button_book" file="graphics/sidebar/button_book.png" />
 	<icon name="button_book_down" file="graphics/sidebar/button_book_down.png" />
-	<icon name="button_maps" file="graphics/sidebar/button_maps.png" />
-	<icon name="button_maps_down" file="graphics/sidebar/button_maps_down.png" />
-	<icon name="button_people" file="graphics/sidebar/button_people.png" />
-	<icon name="button_people_down" file="graphics/sidebar/button_people_down.png" />
-	<icon name="button_encounters" file="graphics/sidebar/button_encounters.png" />
-	<icon name="button_encounters_down" file="graphics/sidebar/button_encounters_down.png" />
-	<icon name="button_items" file="graphics/sidebar/button_items.png" />
-	<icon name="button_items_down" file="graphics/sidebar/button_items_down.png" />
-	<icon name="button_notes" file="graphics/sidebar/button_notes.png" />
-	<icon name="button_notes_down" file="graphics/sidebar/button_notes_down.png" />
-	<icon name="button_parcels" file="graphics/sidebar/button_parcels.png" />
-	<icon name="button_parcels_down" file="graphics/sidebar/button_parcels_down.png" />
-	<icon name="button_quests" file="graphics/sidebar/button_quests.png" />
-	<icon name="button_quests_down" file="graphics/sidebar/button_quests_down.png" />
-	<icon name="button_tables" file="graphics/sidebar/button_tables.png" />
-	<icon name="button_tables_down" file="graphics/sidebar/button_tables_down.png" />
-	<icon name="button_vehicles" file="graphics/sidebar/button_vehicles.png" />
-	<icon name="button_vehicles_down" file="graphics/sidebar/button_vehicles_down.png" />
+	<icon name="button_image" file="graphics/sidebar/button_maps.png" />
+	<icon name="button_image_down" file="graphics/sidebar/button_maps_down.png" />
+	<icon name="button_npc" file="graphics/sidebar/button_people.png" />
+	<icon name="button_npc_down" file="graphics/sidebar/button_people_down.png" />
+	<icon name="button_battle" file="graphics/sidebar/button_encounters.png" />
+	<icon name="button_battle_down" file="graphics/sidebar/button_encounters_down.png" />
+	<icon name="button_item" file="graphics/sidebar/button_items.png" />
+	<icon name="button_item_down" file="graphics/sidebar/button_items_down.png" />
+	<icon name="button_note" file="graphics/sidebar/button_notes.png" />
+	<icon name="button_note_down" file="graphics/sidebar/button_notes_down.png" />
+	<icon name="button_treasureparcel" file="graphics/sidebar/button_parcels.png" />
+	<icon name="button_treasureparcel_down" file="graphics/sidebar/button_parcels_down.png" />
+	<icon name="button_quest" file="graphics/sidebar/button_quests.png" />
+	<icon name="button_quest_down" file="graphics/sidebar/button_quests_down.png" />
+	<icon name="button_story" file="graphics/sidebar/button_quests.png" />
+	<icon name="button_story_down" file="graphics/sidebar/button_quests_down.png" />
+	<icon name="button_table" file="graphics/sidebar/button_tables.png" />
+	<icon name="button_table_down" file="graphics/sidebar/button_tables_down.png" />
+	<icon name="button_vehicle" file="graphics/sidebar/button_vehicles.png" />
+	<icon name="button_vehicle_down" file="graphics/sidebar/button_vehicles_down.png" />
 
 	<icon name="button_library" file="graphics/sidebar/button_library.png" />
 	<icon name="button_library_down" file="graphics/sidebar/button_library_down.png" />
-	<icon name="button_tokencase" file="graphics/sidebar/button_tokencase.png" />
-	<icon name="button_tokencase_down" file="graphics/sidebar/button_tokencase_down.png" />
+	<icon name="button_tokenbag" file="graphics/sidebar/button_tokencase.png" />
+	<icon name="button_tokenbag_down" file="graphics/sidebar/button_tokencase_down.png" />
 	<icon name="button_assets" file="graphics/sidebar/button_tokencase.png" />
 	<icon name="button_assets_down" file="graphics/sidebar/button_tokencase_down.png" />
 
@@ -448,6 +451,10 @@
 	<!-- Tokens - Health -->
 	<icon name="healthbar" file="graphics/token/token_healthbar.png" />
 	<icon name="healthdot" file="graphics/token/token_healthdot.png" />
+	
+	<!-- Toolbar -->
+	<icon name="toolbar_on" file="graphics/icons/toolbar_on.png" />
+	<icon name="toolbar_off" file="graphics/icons/toolbar_off.png" />
 	
 	<!-- Misc -->
 	<icon name="error" file="graphics/icons/error.png" />

@@ -60,12 +60,13 @@
 
 	<diebox version="&gt;=4">
 		<frame name="diebox" offset="9,4,9,4" />
-		<font expression="diceexpr" total="diemod" dieresult="dieresult"/>
+		<font expression="diceexpr"  modifier="diemod" total="dietotal" dieresult="dieresult"/>
 		<icons secret="gmdieicon" defaultdie="unknowndieicon" />
 	</diebox>
 	<diebox version="&lt;4">
 		<frame name="diebox" />
 		<margin value="16" numbertailmargin="10" />
+		<font expression="diceexpr"  modifier="diemod" total="dietotal" dieresult="dieresult"/>
 		<secreticon name="gmdie" />
 	</diebox>
 	

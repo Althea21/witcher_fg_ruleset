@@ -59,7 +59,7 @@ function onInit()
 		modifierWidget.setPosition("topright", 3, 1);
 		modifierWidget.setVisible(false);
 	else
-		modifierWidget = addTextWidget("sheettext", "0");
+		modifierWidget = addTextWidget("sheettext-light", "0");
 		modifierWidget.setFrame("tempmodbase", 6, 3, 8, 5);
 		modifierWidget.setPosition("topright", 0, 0);
 		modifierWidget.setVisible(false);

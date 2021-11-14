@@ -224,7 +224,7 @@
 	</template>
 	<template name="string_labeled">
 		<stringfield>
-			<font>sheettext</font>
+			<font>sheettext_big</font>
 			<lineoffset default="off"></lineoffset>
 			<frame mergerule="replace" name="separatorline" hidereadonly="true" />
 			<script>
@@ -314,8 +314,35 @@
 			<script file="common/scripts/list_text.lua" />
 		</windowlist>
 	</template>
-	<framedef name="toolbar_back">
-		<bitmap file="graphics/toolbar/toolbar_back.png"/>
-		<middle rect="0,0,128,128" />
-	</framedef>
+	<!--Toolbar-->
+	<template name="toolbar_button_color_base">
+		<buttoncontrol>
+			<iconcolor>765537</iconcolor>
+		</buttoncontrol>
+	</template>
+	<!-- combobox overload-->
+	<template name="combobox">
+		<simplestring>
+			<frame>
+				<name>fielddark</name>
+				<offset>7,5,7,5</offset>
+			</frame>
+			<readonly />
+			<listdirection mergerule="replace">up</listdirection>
+			<buttonoffset mergerule="replace">0,1</buttonoffset>
+			<!-- Possible parameters
+			<listoffset mergerule="replace">0,5</listoffset>
+			<listfonts>
+				<normal mergerule="replace">chatfont</normal>
+				<selected mergerule="replace">narratorfont</selected>
+			</listfonts>
+			<listframes>
+				<normal mergerule="replace"></normal>
+				<selected mergerule="replace">rowshade</selected>
+			</listframes>
+			<listmaxsize mergerule="replace">0</listmaxsize>
+			-->
+			<script file="common/scripts/combobox.lua"/>
+		</simplestring>
+	</template>
 </root>

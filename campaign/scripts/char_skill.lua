@@ -28,7 +28,7 @@ end
 
 function onIsClassSkillChanged()
 	if (isClassSkill.getValue()==1) then
-		name.setFont("sheettext-alt");--sheettextbold
+		name.setFont("sheettextbold");--sheettextbold
 	else
 		name.setFont("sheettext");
 	end

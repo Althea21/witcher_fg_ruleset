@@ -66,6 +66,9 @@
 	<includefile source="campaign/template_tweaks.xml" />
 	<includefile source="campaign/ps_order.xml" />
 	
+	<!-- Desktop -->
+	<includefile source="desktop/template_desktop.xml" />
+	
 	<!-- High-level scripts -->
 	<script name="DataCommon" file="scripts/data_common.lua" />
 	<script name="GameSystem" file="scripts/manager_gamesystem.lua" />

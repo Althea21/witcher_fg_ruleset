@@ -109,6 +109,7 @@ function addSkills()
 			else
 				newwin.isClassSkill.setValue(0);
 			end
+			newwin.onIsClassSkillChanged();
 			DB.setValue(nodeActor, "hasProfessionChanged", "number", 0);
 		end
 	end

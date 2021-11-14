@@ -12,7 +12,7 @@
 			<size width="525" height="568" />
 		</placement>
 		<sizelimits>
-            <minimum width="525" height="568" />
+            <minimum width="600" height="568" />
 			<dynamic />
         </sizelimits>
 		<minimize>minimized_npc</minimize>

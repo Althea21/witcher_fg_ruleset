@@ -27,7 +27,10 @@
 	</framedef>
 	
 	<framedef name="tabs">
-		<bitmap file="graphics/frames/blank.png" />
+		<bitmap file="graphics/tabs/tabs.png" />
+		<topleft rect="0,0,18,73" />
+		<left rect="0,73,18,335" />
+		<bottomleft rect="0,408,18,86" />
 	</framedef>
 
 	<!-- Headers -->
@@ -185,15 +188,24 @@
 	<!-- Chat window -->
 	<framedef name="chatbox">
 		<bitmap file="graphics/frames/chatbox.png" />
-		<topleft rect="0,0,18,15" />
-		<top rect="18,0,487,15" />
-		<topright rect="505,0,18,15" />
-		<left rect="0,15,18,476" />
-		<middle rect="18,15,487,476" />
-		<right rect="505,15,18,476" />
-		<bottomleft rect="0,491,18,12" />
-		<bottom rect="18,491,487,12" />
-		<bottomright rect="505,491,18,12" />
+		<!-- <topleft rect="0,0,18,15" /> -->
+		<!-- <top rect="18,0,487,15" /> -->
+		<!-- <topright rect="505,0,18,15" /> -->
+		<!-- <left rect="0,15,18,476" /> -->
+		<!-- <middle rect="18,15,487,476" /> -->
+		<!-- <right rect="505,15,18,476" /> -->
+		<!-- <bottomleft rect="0,491,18,12" /> -->
+		<!-- <bottom rect="18,491,487,12" /> -->
+		<!-- <bottomright rect="505,491,18,12" /> -->
+		<topleft rect="0,0,25,20" />
+		<top rect="25,0,294,20" />
+		<topright rect="319,0,25,20" />
+		<left rect="0,20,25,470" />
+		<middle rect="25,20,294,470" />
+		<right rect="319,20,25,470" />
+		<bottomleft rect="0,490,25,13" />
+		<bottom rect="25,490,294,13" />
+		<bottomright rect="319,490,25,13" />
 	</framedef>
 	<framedef name="chatentry">
 		<bitmap file="graphics/frames/chatentry.png" />
@@ -264,13 +276,13 @@
 	</framedef>
 	<framedef name="charselectentry">
 		<bitmap file="graphics/frames/charselectentry.png" />
-		<offset>12,12,12,12</offset>
+		<offset>7,7,7,7</offset>
 	</framedef>
 
 	<!-- Modules -->
 	<framedef name="moduleselectentry">
 		<bitmap file="graphics/frames/charselectentry.png" />
-		<offset>12,12,12,12</offset>
+		<offset>7,7,7,7</offset>
 	</framedef>
 
 	<!-- Reference -->
@@ -405,7 +417,7 @@
     </framedef>
 	<framedef name="calendarselectentry">
 		<bitmap file="graphics/frames/charselectentry.png" />
-		<offset>12,12,12,12</offset>
+		<offset>7,7,7,7</offset>
     </framedef>
 	<framedef name="calendarmonthentry">
 		<bitmap file="graphics/frames/fielddark.png" />
@@ -471,7 +483,7 @@
 	</framedef>
 	<framedef name="partysheetentry">
 		<bitmap file="graphics/frames/charselectentry.png" />
-		<offset>12,12,12,12</offset>
+		<offset>7,7,7,7</offset>
 	</framedef>
 
 	<!-- Manual Roll -->
@@ -483,8 +495,9 @@
 	<!-- Characters -->
 	<framedef name="charsheet">
 		<bitmap file="graphics/frames/charsheet.png" />
-		<offset>25,40,25,25</offset>
-		<insideoffset>0,0,7,7</insideoffset>
+		<offset>0,0,0,0</offset>
+		<!-- <offset>25,40,25,25</offset> -->
+		<!-- <insideoffset>0,0,7,7</insideoffset> -->
 	</framedef>
 
 	<!-- Images -->
@@ -532,7 +545,7 @@
 	</framedef>
 	<framedef name="headersimple">
 		<bitmap file="graphics/frames/headersimple.png" />
-		<offset>3,3,3,3</offset>
+		<offset>4,4,4,4</offset>
 	</framedef>
 	<framedef name="headerunderlined">
 		<bitmap file="graphics/frames/headerunderlined.png" />
@@ -541,5 +554,33 @@
 	<framedef name="border">
 		<bitmap file="graphics/frames/border.png" />
 		<offset>1,1,1,1</offset>
+	</framedef>
+	
+	<!-- Sidebar -->
+	<framedef name="button_sidebar_dockitem">
+		<bitmap file="graphics/frames/button_sidebar.png" />
+		<offset>8,8,8,8</offset>
+	</framedef>
+	<framedef name="button_sidebar_dockitem_down">
+		<bitmap file="graphics/frames/button_sidebar_down.png" />
+		<offset>8,8,8,8</offset>
+	</framedef>
+	
+	<!--Toolbar-->
+	<framedef name="toolbar_back">
+		<bitmap file="graphics/toolbar/toolbar_back.png"/>
+		<middle rect="0,0,128,128" />
+	</framedef>
+	<framedef name="toolbar_30">
+		<bitmap file="graphics/toolbar/toolbar_30.png"/>
+		<topleft rect="0,0,4,3" />
+		<top rect="4,0,32,3" />
+		<topright rect="62,0,4,3" />
+		<left rect="0,3,4,28" />
+		<middle rect="4,3,32,28" />
+		<right rect="62,3,4,28" />
+		<bottomleft rect="0,31,4,3" />
+		<bottom rect="4,31,32,3" />
+		<bottomright rect="62,31,4,3" />
 	</framedef>
 </root>

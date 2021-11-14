@@ -187,7 +187,7 @@
 					<right anchor="center" offset="-80" />
 					<top offset="25" />
 				</anchored>
-				<!-- <color>5A1E33</color> -->
+				<!-- <color>FF0000</color> -->
 				<font>calendarbold</font>
 				<nodrag />
 				<nodragselect />

@@ -5,14 +5,14 @@
 
 function setState(bCurrDay, bSelDay, bHoliday, nodeEvent)
 	if bCurrDay then
-		setBackColor("98856C");
-		label_day.setColor("000000");
+		setBackColor("d4c4a3");
+		label_day.setColor("765537");
 	else
 		setBackColor();
 		if bHoliday then
-			label_day.setColor("b88455");
+			label_day.setColor("543c26");
 		else
-			label_day.setColor("98856C");
+			label_day.setColor("765537");
 		end
 	end
 	if bSelDay then
