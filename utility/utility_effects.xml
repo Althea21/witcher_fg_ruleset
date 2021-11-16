@@ -6,7 +6,7 @@
 -->
 
 <root>
-	<windowclass name="effectlist">
+	<!-- <windowclass name="effectlist">
 		<frame>utilitybox3</frame>
 		<placement>
 			<size width="230" height="300" />
@@ -49,17 +49,77 @@
 			</windowtitlebar>
 			<anchor_title_utilitybox3 name="contentanchor" />
 			
-			<!-- <list_effects name="list" />
-			<scrollbar_list />
+					
+			<resize_utilitybox3 />
+			<helper_effects />
+			<close_utilitybox3 />
+		</sheetdata>
+	</windowclass> -->
+
+	<windowclass name="effectlist">
+		<frame>utilitybox3</frame>
+		<placement>
+			<size width="650" height="400" />
+		</placement>
+		<sizelimits>
+			<dynamic />
+			<minimum width="650" height="400" />
+		</sizelimits>
+		<playercontrol />
+		<nodelete />
+		<tooltip textres="library_recordtype_label_effect" />
+		<sheetdata>
+			<windowtitlebar name="title">
+				<resource>library_recordtype_label_effect</resource>
+			</windowtitlebar>
+			<anchor_title_utilitybox3 name="contentanchor" />
+			
+			<sub_effect_preset name="preset" />
+			<scrollbar name="scroll_preset">
+				<anchored to="preset" />
+				<target>preset</target>
+			</scrollbar>
+			<label_effect_preset name="label_preset" />
+
+			<list_effect_custom name="list" />
+			<scrollbar_list name="scroll_list" />
+			<label_effect_custom name="label_custom" />
 
 			<anchor_campaign2 />
 			<button_iedit_campaign />
 			<button_iadd_utility />
-			<filter_utility /> -->
+			<filter_utility />
 			
 			<resize_utilitybox3 />
 			<helper_effects />
 			<close_utilitybox3 />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="effectlist_presets">
+		<script file="utility/scripts/effectlist_presets.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<header_column name="lights_label">
+				<static textres="effect_header_lights" />
+				<center />
+			</header_column>
+			<list_effect_preset name="lights_list" />
+
+			<header_column name="conditions_label">
+				<static textres="effect_header_conditions" />
+				<center />
+			</header_column>
+			<list_effect_preset name="conditions_list" />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="effect_preset_item">
+		<margins control="0,0,0,7" />
+		<script file="utility/scripts/effect_preset.lua" />
+		<sheetdata>
+			<button_effect_preset name="button" />
 		</sheetdata>
 	</windowclass>
 
