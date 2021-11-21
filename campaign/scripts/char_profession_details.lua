@@ -8,7 +8,7 @@ function onProfessionValueChanged(sVal)
         return;
     end
 
-    local id = getIdFromLabel(sVal);
+    local id = getProfessionIdFromLabel(sVal);
 
     local sSkill;
     local sAbility = "";
@@ -56,29 +56,42 @@ function performProfessionSkillRoll(branchNumber, skillNumber)
 end
 
 --------------------------------------------------------------------------
--- Transform a string (label) into a valid id
+-- Transform a localized string (label) into a valid profession id
 -- An id :
 --  * start by a lower case letter
 --  * has no whitespace
 --  * don't change the string internal case 
 --------------------------------------------------------------------------
-function getIdFromLabel (label)
-    local id = "";
-    
-    local aWords = StringManager.parseWords(label);
-    local i = 1;
-    while aWords[i] do
-		if i==1 then
-			id = aWords[1]:lower();
-        else
-            id = id .. aWords[i];
-		end
-		i = i + 1;
-	end
-    
-    return id;
-end
+function getProfessionIdFromLabel(sLabel)
+    local sId = "";
+    if sLabel==Interface.getString("list_profession_bard") then
+        sId="bard";
+    elseif sLabel==Interface.getString("list_profession_craftsman") then
+        sId="craftsman";
+    elseif sLabel==Interface.getString("list_profession_criminal") then
+        sId="criminal";
+    elseif sLabel==Interface.getString("list_profession_doctor") then
+        sId="doctor";
+    elseif sLabel==Interface.getString("list_profession_mage") then
+        sId="mage";
+    elseif sLabel==Interface.getString("list_profession_manAtArms") then
+        sId="manAtArms";
+    elseif sLabel==Interface.getString("list_profession_merchant") then
+        sId="merchant";
+    elseif sLabel==Interface.getString("list_profession_priest") then
+        sId="priest";
+    elseif sLabel==Interface.getString("list_profession_witcher") then
+        sId="witcher";
+    elseif sLabel==Interface.getString("list_profession_peasant") then
+        sId="peasant";
+    elseif sLabel==Interface.getString("list_profession_noble") then
+        sId="noble";
+    elseif sLabel==Interface.getString("list_profession_custom") then
+        sId="custom";
+    end
 
+    return sId;
+end
 --------------------------------------------------------------------------
 -- Retreive the value of a specified stat
 --------------------------------------------------------------------------
