@@ -27,6 +27,25 @@ function updateEncumbrance(nodeChar)
 	DB.setValue(nodeChar, "attributs.encumbrance", "number", nEncTotal);
 end
 
+-- get encumbrance malus if any (work for PC / NPC)
+-- params :
+--  * nodeActor : pc or npc node
+-- returns : 
+--	* value	: encumbrance malus if any, else 0
+function getEncumbranceMalus(nodeActor)
+	local nEncMalus = 0;
+
+	local encumbranceMax = DB.getValue(nodeActor, "attributs.encumbranceMax", 0);
+	local encumbrance = DB.getValue(nodeActor, "attributs.encumbrance", 0);
+
+	if (encumbrance > encumbranceMax) then
+		local supp = encumbrance - encumbranceMax;
+		nEncMalus = supp % 5;
+	end
+	
+	return nEncMalus;
+end
+
 function onCharItemAdd(nodeItem)
 	-- DB.setValue(nodeItem, "carried", "number", 1);
 end
@@ -49,8 +68,22 @@ function onActionDrop(draginfo, nodeChar)
 	-- 	end
 	-- end
 end
+
+-- to know if nodeActor is a monster or not (work for PC / NPC)
+-- params :
+--  * nodeActor : pc or npc node
+-- returns : 
+--	* bool : true if node is a monster, else false
+function isMonster(nodeActor)
+	local type = DB.getValue(nodeActor, "npctype", "");
+	if type == "" or string.lower(type) == "humanoid" then
+		return false;
+	end
+	return true;
+end
+
 --
--- weapon management
+-- WEAPON MANAGEMENT
 --
 function getWeaponAttackRollStructures(nodeWeapon)
 	if not nodeWeapon then
@@ -341,6 +374,10 @@ function getUnarmedDamageRollStructures(nodeChar, sType)
 	return rActor, rDamage;
 end
 
+--
+-- SKILL MANAGEMENT
+--
+
 -- get NPC skill value
 -- params :
 --  * nodeActor : npc node
@@ -386,9 +423,7 @@ function getNPCSkillValue(nodeActor, skillName)
 	return value;
 end
 
---------------------------------------------------------------------------
 -- Retreive the value of a specified profession skill if it exists (or 0)
---------------------------------------------------------------------------
 function getProfessionSkillValue(rActor, sSkillId)
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	for i=1, 3 do
@@ -403,6 +438,9 @@ function getProfessionSkillValue(rActor, sSkillId)
 	return 0;
 end
 
+--
+-- ARMOR MANAGEMENT
+--
 
 -- get total equipped EV (work for PC / NPC)
 -- if actor is a witcher from the bear school => -2
@@ -436,25 +474,6 @@ function getTotalEV(nodeActor)
 	return nTotalEV;
 end
 
--- get encumbrance malus if any (work for PC / NPC)
--- params :
---  * nodeActor : pc or npc node
--- returns : 
---	* value	: encumbrance malus if any, else 0
-function getEncumbranceMalus(nodeActor)
-	local nEncMalus = 0;
-
-	local encumbranceMax = DB.getValue(nodeActor, "attributs.encumbranceMax", 0);
-	local encumbrance = DB.getValue(nodeActor, "attributs.encumbrance", 0);
-
-	if (encumbrance > encumbranceMax) then
-		local supp = encumbrance - encumbranceMax;
-		nEncMalus = supp % 5;
-	end
-	
-	return nEncMalus;
-end
-
 -- get armor value of a character for a given location roll (pc or npc)
 -- params :
 --  * nodeActor : pc or npc node
@@ -477,8 +496,10 @@ function getArmorValueForLocationRoll(nodeActor, sLocation)
 	end
 	
 	for _,v in ipairs(UtilityManager.getSortedTable(DB.getChildren(nodeActor, "armorlist"))) do
-		if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
-			nArmorValue = nArmorValue + DB.getValue(v, "sp", 0);
+		if DB.getValue(v, "equipped", "") == 1 then
+			if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
+				nArmorValue = nArmorValue + DB.getValue(v, "sp", 0);
+			end
 		end
 	end
 	
@@ -510,16 +531,21 @@ function damageArmorByLocation(nodeActor, sLocation)
 	end
 	
 	for _,v in ipairs(UtilityManager.getSortedTable(DB.getChildren(nodeActor, "armorlist"))) do
-		if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
-			local nArmorValue = DB.getValue(v, "sp", 0);
-			if nArmorValue > 0 then
-				DB.setValue(v, "sp", "number", nArmorValue-1);
-				break;
+		if DB.getValue(v, "equipped", "") == 1 then
+			if DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
+				local nArmorValue = DB.getValue(v, "sp", 0);
+				if nArmorValue > 0 then
+					DB.setValue(v, "sp", "number", nArmorValue-1);
+					break;
+				end
 			end
 		end
 	end
 end
 
+--
+-- DAMAGE MANAGEMENT
+--
 
 -- get damage multiplier modifier for a given location
 -- params :
@@ -544,18 +570,6 @@ function getDamageLocationModifierForLocationRoll(nodeActor, sLocation)
 	return nMultiplier;
 end
 
--- to know if nodeActor is a monster or not (work for PC / NPC)
--- params :
---  * nodeActor : pc or npc node
--- returns : 
---	* bool : true if node is a monster, else false
-function isMonster(nodeActor)
-	local type = DB.getValue(nodeActor, "npctype", "");
-	if type == "" or string.lower(type) == "humanoid" then
-		return false;
-	end
-	return true;
-end
 
 -- to know if nodeActor is a monster without anatomy (elementa or specter)
 -- params :
@@ -569,6 +583,10 @@ function isWithoutAnatomy(nodeActor)
 	end
 	return false;
 end
+
+--
+-- RESISTANCES AND VULNERABILITIES MANAGEMENT
+--
 
 function isSilverVulnerable(nodeActor)
 	local bVulnerable = false;
@@ -607,18 +625,33 @@ function getVulnerabilities(nodeActor, actorType)
 	return sVulnerabilities;
 end
 
-function getResistances(nodeActor, actorType)
+function getResistances(nodeActor, actorType, sLocation)
 	local sResistances = "";
 	
+	sLocation = string.lower(sLocation);
+	local sArmorLocation = sLocation;
+	
+	if sLocation=="arm" then
+		sArmorLocation = "leftarm";
+	elseif sLocation=="leg" or sLocation=="limb" then
+		sArmorLocation = "leftleg";
+	elseif sLocation=="tail" then
+		sArmorLocation = "tail";
+	end
+
 	-- get resistances from armor
 	local armorlist = nodeActor.getChild("armorlist");
 	if armorlist then
 		for _,v in pairs(nodeActor.getChild("armorlist").getChildren()) do
-			local sArmorRes = DB.getValue(v, "resistances", "");
-			--Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
-			if sArmorRes ~= "" then
-				if sResistances ~= "" then sResistances = sResistances .. ", " end;
-				sResistances = sResistances .. DB.getValue(v, "ev", 0);
+			if DB.getValue(v, "equipped", "") == 1 then
+				if sLocation ~= "all" and DB.getValue(v, "location_"..sArmorLocation, 0) == 1 then
+					local sArmorRes = DB.getValue(v, "resistances", "");
+					--Debug.chat("armor ''"..DB.getValue(v, "name", "").."'' : Res="..sArmorRes);
+					if sArmorRes ~= "" then
+						if sResistances ~= "" then sResistances = sResistances .. ", " end;
+						sResistances = sResistances .. DB.getValue(v, "ev", 0);
+					end
+				end
 			end
 		end
 	end
@@ -629,7 +662,7 @@ function getResistances(nodeActor, actorType)
 	return sResistances;
 end
 
-function isResistantTo(nodeActor, actorType, sDamageTypes)
+function isResistantTo(nodeActor, actorType, sDamageTypes, sLocation)
 	-- split damage type (exclude silver)
 	local aTypes={};
 	for str in string.gmatch(sDamageTypes, "([^,]+)") do
@@ -641,7 +674,7 @@ function isResistantTo(nodeActor, actorType, sDamageTypes)
 	end
 
 	-- check resistances
-	local sResistances = getResistances(nodeActor, actorType);
+	local sResistances = getResistances(nodeActor, actorType, sLocation);
 	if sResistances ~= "" then
 		for str in string.gmatch(sResistances, "([^,]+)") do
 			-- trim & lower
@@ -676,3 +709,66 @@ function isVulnerableTo(nodeActor, actorType, sDamageTypes)
 		end
 	end
 end
+
+--
+-- EFFECTS AND CONDITIONS MANAGEMENT
+--
+
+-- get the roll modifier according to the condition currently applied to the actor
+-- works for PC and NPC
+-- params :
+--  * nodeActor : pc or npc node
+--  * sSkillName : skill being rolled
+--  * sStatName : stat used for roll
+--  * bIsCombat : roll is for attack or defense
+-- returns : 
+--	* nModifier (int) : actual modifier
+--	* sDescription (string) : description 
+function getConditionRollModifier(nodeActor, sSkillName, sStatName, bIsCombat)
+	Debug.console("---------------------------------")
+	Debug.console("getConditionRollModifier")
+	Debug.console(nodeActor)
+	Debug.console(sSkillName)
+	Debug.console(sStatName)
+	Debug.console(bIsCombat)
+
+	local nModifier = 0;
+	local sDescription = "";
+
+	if EffectManager2.hasEffect(nodeActor, "freezing") and sStatName:lower()=="reflex" then
+		Debug.console("Freezing and reflex : ok")
+		nModifier = nModifier - 1;
+		sDescription = sDescription .. "[" .. Interface.getString("effect_name_freezing") .. " " .. Interface.getString("ref") .. " -1]";
+	elseif EffectManager2.hasEffect(nodeActor, "freezing") and sStatName:lower()=="speed" then
+		Debug.console("Freezing and speed : ok")
+		nModifier = nModifier - 3;
+		sDescription = sDescription .. "[" .. Interface.getString("effect_name_freezing") .. " " .. Interface.getString("spd") .. " -3]";
+	end
+
+	if bIsCombat and EffectManager2.hasEffect(nodeActor, "staggered") then
+		Debug.console("staggered and combat : ok")
+		nModifier = nModifier - 2;
+		sDescription = sDescription .. "[" .. Interface.getString("effect_name_staggered") .. " -2]";
+	end
+
+	if EffectManager2.hasEffect(nodeActor, "intoxicated") and (sStatName:lower()=="reflex" or sStatName:lower()=="dexterity" or sStatName:lower()=="intelligence") then
+		Debug.console("intoxicated and ref or dex or int : ok")
+		nModifier = nModifier - 2;
+		sDescription = sDescription .. "[" .. Interface.getString("effect_name_intoxicated") .. " " .. Interface.getString(sStatName:sub(1,3)) .. " -2]";
+	end
+
+	if (bIsCombat or sSkillName:lower()==Interface.getString("char_skill_awareness_label"):lower()) and EffectManager2.hasEffect(nodeActor, "blinded") then
+		Debug.console("blinded and combat or awareness : ok")
+		nModifier = nModifier - 5;
+		sDescription = sDescription .. "[" .. Interface.getString("effect_name_blinded") .. " -5]";
+	end
+
+	if bIsCombat and EffectManager2.hasEffect(nodeActor, "prone") then
+		Debug.console("prone and combat : ok")
+		nModifier = nModifier - 2;
+		sDescription = sDescription .. "[" .. Interface.getString("effect_name_prone") .. " -2]";
+	end
+	
+	return nModifier, sDescription;
+end
+

@@ -210,7 +210,7 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 	Debug.console("Resolve pending attack");
 	Debug.console("Defender :");
 	Debug.console(rTarget);
-	
+
 	local sTargetCT = "";
 	if rTarget then
 		sTargetCT = ActorManager.getCTNodeName(rTarget);
@@ -223,13 +223,23 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 	-- Debug.chat(sTargetCT);
 	Debug.console("Defender = "..sTargetCT);
 
+	-- retreive pending attack :
+	-- attacker vs defender must match
+	-- if a defense value already exists, take next in the queue
 	local aAttack = {};
-	if aAttackQueueByDefender[sTargetCT] and aAttackQueueByDefender[sTargetCT][1] then
-		aAttack = aAttackQueueByDefender[sTargetCT][1];
-	else
-		Debug.console("No pending attack : resolve aborted");
-		return;
-	end
+	local nAttackIndex = 1;
+	repeat
+		if aAttackQueueByDefender[sTargetCT] and aAttackQueueByDefender[sTargetCT][nAttackIndex] then
+			Debug.console("nAttackIndex="..nAttackIndex);
+			Debug.console("aAttack found");
+			aAttack = aAttackQueueByDefender[sTargetCT][nAttackIndex];
+			Debug.console("nDefValue"..aAttack.nDefValue);
+		else
+			Debug.console("No pending attack : resolve aborted");
+			return;
+		end
+		nAttackIndex = nAttackIndex + 1;
+	until aAttack.nDefValue < 0;
 
 	local rMessage = ChatManager.createBaseMessage(rTarget, nil);
 	rMessage.sender = "";
@@ -248,7 +258,7 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 		-- substract 1 reliability point to the weapon if needed
 		-- check automate weapon damaging option, if "off" do nothing
 		local sOptionADW = OptionsManager.getOption("ADW");
-		if sOptionADA == "on" then
+		if sOptionADW == "on" then
 			if sBlockedWithWeapon ~= "" then
 				local nWeapon = DB.findNode(sBlockedWithWeapon);
 				if nWeapon then

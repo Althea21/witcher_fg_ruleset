@@ -136,8 +136,11 @@ function getRoll(rActor, rWeapon, sAttackType)
 			Debug.console("["..Interface.getString("rolldescription_totalev").." -"..nTotalEV.."]")
 		end
 
-		rRoll.sDesc = sRollDescription;
-		rRoll.nMod = nRollMod;
+		-- check effect and condition affecting Stat and skill
+		local nCondMod, nCondDesc = CharManager.getConditionRollModifier(nodeActor, rWeapon.skill, rWeapon.stat, true);
+
+		rRoll.sDesc = sRollDescription .. nCondDesc;
+		rRoll.nMod = nRollMod + nCondMod;
 	end
 	
 	return rRoll;
@@ -456,10 +459,6 @@ function onAttackModifier(rSource, rTarget, rRoll)
 	elseif sRangeModifier == "extreme" then
 		table.insert(aAddDesc, "["..Interface.getString("modifier_label_range_extreme").." -6]");
 		nAddMod = nAddMod - 6;
-	end
-	
-	if rSource then
-		-- TODO : Get condition modifiers
 	end
 	
 	if #aAddDesc > 0 then

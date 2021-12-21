@@ -105,9 +105,12 @@ function getRoll(rActor, rWeapon, sDefenseType)
 			nRollMod = nRollMod - nTotalEV;
 			--sRollDescription = sRollDescription.."["..Interface.getString("rolldescription_totalev").." -"..nTotalEV.."]"
 		end
+
+		-- check effect and condition affecting Stat and skill
+		local nCondMod, nCondDesc = CharManager.getConditionRollModifier(nodeActor, rWeapon.skill, rWeapon.stat, true);
 		
-		rRoll.sDesc = sRollDescription;
-		rRoll.nMod = nRollMod;
+		rRoll.sDesc = sRollDescription .. nCondDesc;
+		rRoll.nMod = nRollMod + nCondMod;
 	end
 	
 	return rRoll;
@@ -160,7 +163,6 @@ function onDefenseRoll(rSource, rTarget, rRoll)
 	-- Debug.chat("--rTarget : ");
 	-- Debug.chat(rTarget);
 	-- Debug.chat("--rRoll : ");
-	-- Debug.chat(rRoll);
 	
 	-- Debug.chat(rRoll.aDice[1].result);
 	

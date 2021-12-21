@@ -39,11 +39,11 @@
 
 			function updateHealthDisplay()
 				local sOptionSHPC = OptionsManager.getOption("SHPC");
-				Debug.chat(sOptionSHPC)
+				--Debug.chat(sOptionSHPC)
 				local sOptionSHNPC = OptionsManager.getOption("SHNPC");
-				Debug.chat(sOptionSHNPC)
+				--Debug.chat(sOptionSHNPC)
 				local bShowLabels = (sOptionSHPC=="on") or (sOptionSHNPC=="on");
-				Debug.chat(bShowLabels)
+				--Debug.chat(bShowLabels)
 
 				label_hp.setVisible(bShowLabels);
 				label_stamina.setVisible(bShowLabels);
@@ -187,7 +187,6 @@
 	</windowclass>
 
 	<windowclass name="clientct_effect">
-		<frame>cteffect</frame>
 		<margins control="0,0,0,3" />
 		<script file="ct/scripts/ct_effect.lua" />
 		<sheetdata>
@@ -196,7 +195,8 @@
 
 			<anchor_clientct_effect_right name="rightanchor" />
 			<button_clientct_effect_idelete name="idelete" />
-			<button_ct_effect_targetadd name="targeting_add_button" />
+			<button_ct_effect_targetadd name="targeting_add_button"/>
+			<number_ct_effect_duration name="duration" />
 
 			<string_clientct_effect name="label" />
 

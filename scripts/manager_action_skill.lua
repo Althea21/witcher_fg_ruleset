@@ -78,7 +78,12 @@ function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
 			rRoll.sDesc = rRoll.sDesc .. " [MOD:" .. sAbilityEffect .. "]";
 		end
 	end
-		
+	
+	-- check effect and condition affecting Stat and skill
+	local nCondMod, nCondDesc = CharManager.getConditionRollModifier(nodeActor, sSkillName, sSkillStat, rRoll.sIsDefense=="true");
+	rRoll.sDesc = rRoll.sDesc .. nCondDesc;
+	rRoll.nMod = rRoll.nMod + nCondMod;
+
 	return rRoll;
 end
 
