@@ -61,17 +61,20 @@ function update()
 	if updateControl("reliability", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("hands", bReadOnly, bID and bWeapon) then bSection3 = true; end
 	if updateControl("range", bReadOnly, bID and bWeapon) then bSection3 = true; end
+	if updateControl("stoppingpower", bReadOnly, bID and bArmor) then bSection3 = true; end
+
 
 	local bSection4 = false;
 	if updateControl("effect", bReadOnly, bID and (bWeapon or bArmor or bAmmunition)) then bSection4 = true; end
-	if updateControl("concealment", bReadOnly, bID and (bWeapon or bArmor or bAmmunition)) then bSection4 = true; end
-	if updateControl("enhancements", bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
+	if updateControl("concealment", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection4 = true; end
+	if updateControl("enhancements", bReadOnly, bID and (bWeapon)) then bSection4 = true; end
 
 	if updateControl("ac", bReadOnly, bID and bArmor) then bSection4 = true; end
 	if updateControl("dexbonus", bReadOnly, bID and bArmor) then bSection4 = true; end
 	if updateControl("strength", bReadOnly, bID and bArmor) then bSection4 = true; end
 	if updateControl("stealth", bReadOnly, bID and bArmor) then bSection4 = true; end
 
+	if updateControl("encumbrancevalue", bReadOnly, bID and bArmor) then bSection5 = true; end
 	if updateControl("weight", bReadOnly, bID) then bSection5 = true; end
 	if updateControl("cost", bReadOnly, bID) then bSection5 = true; end
 

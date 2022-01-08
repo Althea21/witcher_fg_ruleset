@@ -103,6 +103,10 @@
 				<delaykeyupdate />
 				<displaysign />
 			</number_columnh>
+			<label_column name="stoppingpower_label">
+				<static textres="item_label_stoppingpower" />
+			</label_column>
+			<number_columnh name="stoppingpower" />
 			<label_column name="availability_label">
 				<static textres="item_label_availability" />
 			</label_column>
@@ -146,6 +150,10 @@
 
 			<line_column name="divider4" />
 
+			<label_column name="encumbrancevalue_label">
+				<static textres="item_label_encumbrancevalue" />
+			</label_column>
+			<number_columnh name="encumbrancevalue" />
 			<label_column name="weight_label">
 				<static textres="item_label_weight" />
 			</label_column>
@@ -155,33 +163,6 @@
 				<static textres="item_label_cost" />
 			</label_column>
 			<string_columnh name="cost" />
-
-			<label_column name="ac_label">
-				<static textres="item_label_ac" />
-			</label_column>
-			<number_columnh name="ac">
-				<delaykeyupdate />
-			</number_columnh>
-
-			<label_column name="dexbonus_label">
-				<static textres="item_label_dexbonus" />
-			</label_column>
-			<string_columnh name="dexbonus">
-				<delaykeyupdate />
-			</string_columnh>
-
-			<label_column name="strength_label">
-				<static textres="item_label_strength" />
-			</label_column>
-			<string_columnh name="strength" />
-
-			<label_column name="stealth_label">
-				<static textres="item_label_stealth" />
-			</label_column>
-			<string_columnh name="stealth">
-				<delaykeyupdate />
-			</string_columnh>
-
 
 			<line_column name="divider5" />
 

@@ -19,7 +19,7 @@ function isArmor(vRecord)
 	local sTypeLower = StringManager.trim(DB.getValue(nodeItem, "type", "")):lower();
 	local sSubtypeLower = StringManager.trim(DB.getValue(nodeItem, "subtype", "")):lower();
 
-	if (sTypeLower == "armor") then
+	if (sTypeLower:find("armor")) then
 		bIsArmor = true;
 	end
 

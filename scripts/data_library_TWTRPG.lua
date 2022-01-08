@@ -3,6 +3,8 @@
 -- attribution and copyright information.
 --
 function getItemIsIdentified(vRecord, vDefault)
+	local sFred = LibraryData.getIDState("item", vRecord, true);
+	Debug.console('sFred', sFred);
 	return LibraryData.getIDState("item", vRecord, true);
 end
 
@@ -15,7 +17,7 @@ function getItemRecordDisplayClass(vNode)
 				local sTypeLower = StringManager.trim(DB.getValue(DB.getPath(vNode, "type"), ""):lower());
 				if sTypeLower == "weapons" then
 					sRecordDisplayClass = "reference_weapon";
-				elseif sTypeLower == "armor" then
+				elseif sTypeLower:find("armor") then
 					sRecordDisplayClass = "reference_armor";
 				else
 					sRecordDisplayClass = "reference_equipment";
@@ -52,7 +54,7 @@ aListViews = {
 		["armor"] = {
 			aColumns = {
 				{ sName = "name", sType = "string", sHeadingRes = "item_grouped_label_name", nWidth=150 },
-				{ sName = "stoppingpower", sType = "number", sHeadingRes = "item_grouped_label_stoppingpower", sTooltipRes = "item_grouped_tooltip_stoppingpower", nWidth=40, bCentered=true, nSortOrder=1 },
+				{ sName = "stoppingpower", sType = "number", sHeadingRes = "item_grouped_label_sp", sTooltipRes = "item_grouped_tooltip_sp", nWidth=40, bCentered=true, nSortOrder=1 },
 				{ sName = "availability", sType = "string", sHeadingRes = "item_grouped_label_availability", sTooltipRes = "item_grouped_tooltip_availability", nWidth=70, bCentered=true },
 				{ sName = "armorenhancement", sType = "number", sHeadingRes = "item_grouped_label_armorenhancement", sTooltipRes = "item_grouped_tooltip_armorenhancement", bCentered=true },
 				{ sName = "effect", sType = "string", sHeadingRes = "item_grouped_label_effect", nWidth=150, bWrapped=true },
@@ -65,7 +67,7 @@ aListViews = {
 				{ sCustom = "item_isidentified" }
 			},
 			aGroups = { { sDBField = "subtype" } },
-			aGroupValueOrder = { "Light Armor", "Medium Armor", "Heavy Armor", "Shield" },
+			aGroupValueOrder = { "Head Armor", "Torso Armor", "Leg Armor", "Light Armor", "Medium Armor", "Heavy Armor", "Shields" },
 		},
 		["weapon"] = {
 			aColumns = {
