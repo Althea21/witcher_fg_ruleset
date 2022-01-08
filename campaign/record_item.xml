@@ -89,39 +89,72 @@
 				</script>
 			</string_columnh>
 
-			<label_column name="rarity_label">
-				<static textres="item_label_rarity" />
+			<line_column name="divider2" />
+			<label_column name="damagetype_label">
+				<static textres="item_label_damagetype" />
 			</label_column>
-			<string_columnh name="rarity">
+			<string_columnh name="damagetype">
+				<delaykeyupdate />
+			</string_columnh>
+			<label_column name="weaponaccuracy_label">
+				<static textres="item_label_weaponaccuracy" />
+			</label_column>
+			<number_columnh name="weaponaccuracy">
+				<delaykeyupdate />
+				<displaysign />
+			</number_columnh>
+			<label_column name="availability_label">
+				<static textres="item_label_availability" />
+			</label_column>
+			<string_columnh name="availability">
 				<delaykeyupdate />
 			</string_columnh>
 
-			<line_column name="divider2" />
-
-			<label_column name="cost_label">
-				<static textres="item_label_cost" />
+			<label_column name="damage_label">
+				<static textres="item_label_damage" />
 			</label_column>
-			<string_columnh name="cost" />
+			<string_columnh name="damage" />
+
+			<label_column name="reliability_label">
+				<static textres="item_label_reliability" />
+			</label_column>
+			<number_columnh name="reliability" />
+			<label_column name="hands_label">
+				<static textres="item_label_hands" />
+			</label_column>
+			<number_columnh name="hands" />
+			<label_column name="range_label">
+				<static textres="item_label_range" />
+			</label_column>
+			<string_columnh name="range" />
+
+			<line_column name="divider3" />
+			<label_column name="effects_label">
+				<static textres="item_label_effects" />
+			</label_column>
+			<string_columnh name="effects" />
+
+			<label_column name="concealment_label">
+				<static textres="item_label_concealment" />
+			</label_column>
+			<string_columnh name="concealment" />
+
+			<label_column name="enhancements_label">
+				<static textres="item_label_enhancements" />
+			</label_column>
+			<number_columnh name="enhancements" />
+
+			<line_column name="divider4" />
 
 			<label_column name="weight_label">
 				<static textres="item_label_weight" />
 			</label_column>
 			<number_columnh name="weight" />
 
-			<line_column name="divider3" />
-
-			<label_column name="bonus_label">
-				<static textres="item_label_bonus" />
+			<label_column name="cost_label">
+				<static textres="item_label_cost" />
 			</label_column>
-			<number_columnh name="bonus">
-				<delaykeyupdate />
-				<displaysign />
-			</number_columnh>
-
-			<label_column name="damage_label">
-				<static textres="item_label_damage" />
-			</label_column>
-			<string_columnh name="damage" />
+			<string_columnh name="cost" />
 
 			<label_column name="ac_label">
 				<static textres="item_label_ac" />
@@ -149,14 +182,10 @@
 				<delaykeyupdate />
 			</string_columnh>
 
-			<label_column name="properties_label">
-				<static textres="item_label_properties" />
-			</label_column>
-			<string_columnh name="properties" />
 
-			<line_column name="divider4" />
+			<line_column name="divider5" />
 
-			<ft_columnh name="notes" />
+			<ft_columnh name="description" />
 		</sheetdata>
 	</windowclass>
 </root>

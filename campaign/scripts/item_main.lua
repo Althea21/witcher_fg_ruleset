@@ -51,29 +51,35 @@ function update()
 	local bSection2 = false;
 	if updateControl("type", bReadOnly, bID) then bSection2 = true; end
 	if updateControl("subtype", bReadOnly, bID) then bSection2 = true; end
-	if updateControl("rarity", bReadOnly, bID) then bSection2 = true; end
 
 	local bSection3 = false;
-	if updateControl("cost", bReadOnly, bID) then bSection3 = true; end
-	if updateControl("weight", bReadOnly, bID) then bSection3 = true; end
+	if updateControl("damagetype", bReadOnly, bID) then bSection3 = true; end
+	if updateControl("weaponaccuracy", bReadOnly, bID) then bSection3 = true; end
+	if updateControl("availability", bReadOnly, bID) then bSection3 = true; end
+	if updateControl("damage", bReadOnly, bID and bWeapon) then bSection3 = true; end
+	if updateControl("reliability", bReadOnly, bID and bWeapon) then bSection3 = true; end
+	if updateControl("hands", bReadOnly, bID and bWeapon) then bSection3 = true; end
+	if updateControl("range", bReadOnly, bID and bWeapon) then bSection3 = true; end
 
 	local bSection4 = false;
-	if updateControl("bonus", bReadOnly, bID and (bWeapon or bArmor or bArcaneFocus)) then bSection4 = true; end
-	if updateControl("damage", bReadOnly, bID and bWeapon) then bSection4 = true; end
+	if updateControl("effects", bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
+	if updateControl("concealment", bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
+	if updateControl("enhancements", bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
 
 	if updateControl("ac", bReadOnly, bID and bArmor) then bSection4 = true; end
 	if updateControl("dexbonus", bReadOnly, bID and bArmor) then bSection4 = true; end
 	if updateControl("strength", bReadOnly, bID and bArmor) then bSection4 = true; end
 	if updateControl("stealth", bReadOnly, bID and bArmor) then bSection4 = true; end
 
-	if updateControl("properties", bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
+	if updateControl("weight", bReadOnly, bID) then bSection5 = true; end
+	if updateControl("cost", bReadOnly, bID) then bSection5 = true; end
 
-	local bSection5 = bID;
-	notes.setVisible(bID);
-	notes.setReadOnly(bReadOnly);
+	local bSection6 = bID;
+	description.setVisible(bID);
+	description.setReadOnly(bReadOnly);
 
 	divider.setVisible(bSection1 and bSection2);
 	divider2.setVisible((bSection1 or bSection2) and bSection3);
 	divider3.setVisible((bSection1 or bSection2 or bSection3) and bSection4);
-	divider4.setVisible((bSection1 or bSection2 or bSection3 or bSection4) and bSection5);
+	divider4.setVisible((bSection1 or bSection2 or bSection3 or bSection4 or bSection5) and bSection6);
 end
