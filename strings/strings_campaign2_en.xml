@@ -1027,12 +1027,5 @@
 	<string name="modifier_label_damage_pinpointaim">Pin Point Aim</string>
 	<string name="combat_twinshot_attack_message">Twin shot attack %s with</string>
 	<string name="char_label_specialActions">Special Actions</string>
-
-	<!-- Item Buttons -->
-	<string name="item_button_weapons">Weapons</string>
-	<string name="item_button_armor">Armor</string>
-	<string name="item_button_weaponstable">Weapons Table</string>
-	<string name="item_button_armortable">Armor Table</string>
-
 </root>
 

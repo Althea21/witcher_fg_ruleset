@@ -1046,10 +1046,4 @@
 	<string name="effect_damagemessage_poisonned">Poisonned : 3 points of damage which armor does not negate</string>
 	<string name="effect_damagemessage_bleeding">Bleeding : 2 points of damage per round until the bleeding is stopped</string>
 	<string name="effect_damagemessage_suffocating">Suffocating : 3 damage which armor does not negate</string>
-
-	<!-- Item Buttons -->
-	<string name="item_button_weapons">Weapons</string>
-	<string name="item_button_armor">Armor</string>
-	<string name="item_button_weaponstable">Weapons Table</string>
-	<string name="item_button_armortable">Armor Table</string>
 </root>
