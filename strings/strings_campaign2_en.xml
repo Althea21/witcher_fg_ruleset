@@ -933,8 +933,8 @@
 	<string name="item_grouped_tooltip_concealment">Concealment</string>
 	<string name="item_grouped_label_concealment">Conc</string>
 	<string name="item_grouped_tooltip_concealment">Concealment</string>
-	<string name="item_grouped_label_enhancement">EN</string>
-	<string name="item_grouped_tooltip_enhancement">Enhancement</string>
+	<string name="item_grouped_label_enhancements">EN</string>
+	<string name="item_grouped_tooltip_enhancements">Enhancements</string>
 	<string name="item_grouped_label_resistance">Res.</string>
 	<string name="item_grouped_tooltip_resistance">Resistance</string>
 	<string name="item_grouped_label_athletics">Ath.</string>

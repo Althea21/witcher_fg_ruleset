@@ -35,6 +35,7 @@ function update()
 	local bWeapon, sTypeLower, sSubtypeLower = ItemManager2.isWeapon(nodeRecord);
 	local bArmor = ItemManager2.isArmor(nodeRecord);
 	local bArcaneFocus = (sTypeLower == "rod") or (sTypeLower == "staff") or (sTypeLower == "wand");
+	local bAmmunition = sSubtypeLower == "ammunition";
 
 	local bSection1 = false;
 	if Session.IsHost then
@@ -53,17 +54,17 @@ function update()
 	if updateControl("subtype", bReadOnly, bID) then bSection2 = true; end
 
 	local bSection3 = false;
-	if updateControl("damagetype", bReadOnly, bID) then bSection3 = true; end
-	if updateControl("weaponaccuracy", bReadOnly, bID) then bSection3 = true; end
+	if updateControl("damagetype", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
+	if updateControl("weaponaccuracy", bReadOnly, bID and (bWeapon)) then bSection3 = true; end
 	if updateControl("availability", bReadOnly, bID) then bSection3 = true; end
 	if updateControl("damage", bReadOnly, bID and bWeapon) then bSection3 = true; end
-	if updateControl("reliability", bReadOnly, bID and bWeapon) then bSection3 = true; end
+	if updateControl("reliability", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("hands", bReadOnly, bID and bWeapon) then bSection3 = true; end
 	if updateControl("range", bReadOnly, bID and bWeapon) then bSection3 = true; end
 
 	local bSection4 = false;
-	if updateControl("effects", bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
-	if updateControl("concealment", bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
+	if updateControl("effect", bReadOnly, bID and (bWeapon or bArmor or bAmmunition)) then bSection4 = true; end
+	if updateControl("concealment", bReadOnly, bID and (bWeapon or bArmor or bAmmunition)) then bSection4 = true; end
 	if updateControl("enhancements", bReadOnly, bID and (bWeapon or bArmor)) then bSection4 = true; end
 
 	if updateControl("ac", bReadOnly, bID and bArmor) then bSection4 = true; end

@@ -129,10 +129,10 @@
 			<string_columnh name="range" />
 
 			<line_column name="divider3" />
-			<label_column name="effects_label">
-				<static textres="item_label_effects" />
+			<label_column name="effect_label">
+				<static textres="item_label_effect" />
 			</label_column>
-			<string_columnh name="effects" />
+			<string_columnh name="effect" />
 
 			<label_column name="concealment_label">
 				<static textres="item_label_concealment" />

@@ -52,12 +52,13 @@ aListViews = {
 		["armor"] = {
 			aColumns = {
 				{ sName = "name", sType = "string", sHeadingRes = "item_grouped_label_name", nWidth=150 },
+				{ sName = "stoppingpower", sType = "number", sHeadingRes = "item_grouped_label_stoppingpower", sTooltipRes = "item_grouped_tooltip_stoppingpower", nWidth=40, bCentered=true, nSortOrder=1 },
+				{ sName = "availability", sType = "string", sHeadingRes = "item_grouped_label_availability", sTooltipRes = "item_grouped_tooltip_availability", nWidth=70, bCentered=true },
+				{ sName = "armorenhancement", sType = "number", sHeadingRes = "item_grouped_label_armorenhancement", sTooltipRes = "item_grouped_tooltip_armorenhancement", bCentered=true },
+				{ sName = "effect", sType = "string", sHeadingRes = "item_grouped_label_effect", nWidth=150, bWrapped=true },
+				{ sName = "encumbrancevalue", sType = "number", sHeadingRes = "item_grouped_label_encumbrancevalue", sTooltipRes = "item_grouped_tooltip_encumbrancevalue", nWidth=100, bCentered=true },
+				{ sName = "weight", sType = "number", sHeadingRes = "item_grouped_label_weight", sTooltipRes = "item_grouped_tooltip_weight", nWidth=30, bCentered=true },
 				{ sName = "cost", sType = "string", sHeadingRes = "item_grouped_label_cost", bCentered=true },
-				{ sName = "ac", sType = "number", sHeadingRes = "item_grouped_label_ac", sTooltipRes = "item_grouped_tooltip_ac", nWidth=40, bCentered=true, nSortOrder=1 },
-				{ sName = "dexbonus", sType = "string", sHeadingRes = "item_grouped_label_dexbonus", sTooltipRes = "item_grouped_tooltip_dexbonus", nWidth=70, bCentered=true },
-				{ sName = "strength", sType = "string", sHeadingRes = "item_grouped_label_strength", sTooltipRes = "item_grouped_tooltip_strength", bCentered=true },
-				{ sName = "stealth", sType = "string", sHeadingRes = "item_grouped_label_stealth", sTooltipRes = "item_grouped_tooltip_stealth", nWidth=100, bCentered=true },
-				{ sName = "weight", sType = "number", sHeadingRes = "item_grouped_label_weight", sTooltipRes = "item_grouped_tooltip_weight", nWidth=30, bCentered=true }
 			},
 			aFilters = {
 				{ sDBField = "type", vFilterValue = "Armor" },
@@ -69,12 +70,17 @@ aListViews = {
 		["weapon"] = {
 			aColumns = {
 				{ sName = "name", sType = "string", sHeadingRes = "item_grouped_label_name", nWidth=150 },
-				{ sName = "damagetype", sType = "string", sHeadingRes = "item_grouped_label_damagetype", nWidth=80, bCentered=true },
-				{ sName = "availability", sType = "string", sHeadingRes = "item_grouped_label_availability", nWidth=100, bCentered=true },
-				{ sName = "weaponaccuracy", sType = "number", sHeadingRes = "item_grouped_label_weaponaccuracy", nWidth=100, bCentered=true },
-				{ sName = "damage", sType = "string", sHeadingRes = "item_grouped_label_damage", nWidth=100, bCentered=true },
+				{ sName = "damagetype", sType = "string", sHeadingRes = "item_grouped_label_damagetype", nWidth=50, bCentered=true },
+				{ sName = "weaponaccuracy", sType = "number", sHeadingRes = "item_grouped_label_wa", nWidth=40, bCentered=true },
+				{ sName = "availability", sType = "string", sHeadingRes = "item_grouped_label_availability", nWidth=60, bCentered=true },
+				{ sName = "damage", sType = "string", sHeadingRes = "item_grouped_label_damage", nWidth=60, bCentered=true },
+				{ sName = "reliability", sType = "number", sHeadingRes = "item_grouped_label_reliability", nWidth=60, bCentered=true },
+				{ sName = "hands", sType = "number", sHeadingRes = "item_grouped_label_hands", nWidth=50, bCentered=true },
+				{ sName = "range", sType = "string", sHeadingRes = "item_grouped_label_range", nWidth=60, bCentered=true },
+				{ sName = "effect", sType = "string", sHeadingRes = "item_grouped_label_effect", nWidth=150, bWrapped=true },
+				{ sName = "concealment", sType = "string", sHeadingRes = "item_grouped_label_concealment", nWidth=50, bCentered=true },
+				{ sName = "enhancements", sType = "number", sHeadingRes = "item_grouped_label_enhancements", nWidth=40, bCentered=true },
 				{ sName = "weight", sType = "number", sHeadingRes = "item_grouped_label_weight", sTooltipRes = "item_grouped_tooltip_weight", nWidth=30, bCentered=true },
-				{ sName = "effects", sType = "string", sHeadingRes = "item_grouped_label_effects", nWidth=300, bWrapped=true },
 				{ sName = "cost", sType = "string", sHeadingRes = "item_grouped_label_cost", bCentered=true },
 			},
 			aFilters = {

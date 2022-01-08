@@ -922,19 +922,17 @@
 	<string name="item_grouped_tooltip_damagetype">Damage Type</string>
 	<string name="item_grouped_label_wa">WA</string>
 	<string name="item_grouped_tooltip_wa">Weapon Accuracy</string>
-	<string name="item_grouped_label_damage">Dmg</string>
-	<string name="item_grouped_label_reliability">Rel</string>
+	<string name="item_grouped_label_damage">DMG</string>
+	<string name="item_grouped_label_reliability">Rel.</string>
 	<string name="item_grouped_tooltip_reliability">Reliability</string>
 	<string name="item_grouped_label_hands">Hands</string>
 	<string name="item_grouped_tooltip_reliability">Hands</string>
-	<string name="item_grouped_label_range">Rng</string>
+	<string name="item_grouped_label_range">RNG</string>
 	<string name="item_grouped_tooltip_range">Range</string>
-	<string name="item_grouped_label_concealment">Conc</string>
+	<string name="item_grouped_label_concealment">Conc.</string>
 	<string name="item_grouped_tooltip_concealment">Concealment</string>
-	<string name="item_grouped_label_concealment">Conc</string>
-	<string name="item_grouped_tooltip_concealment">Concealment</string>
-	<string name="item_grouped_label_enhancement">EN</string>
-	<string name="item_grouped_tooltip_enhancement">Enhancement</string>
+	<string name="item_grouped_label_enhancements">EN</string>
+	<string name="item_grouped_tooltip_enhancements">Enhancements</string>
 	<string name="item_grouped_label_resistance">Res.</string>
 	<string name="item_grouped_tooltip_resistance">Resistance</string>
 	<string name="item_grouped_label_athletics">Ath.</string>
@@ -945,6 +943,7 @@
 	<string name="item_grouped_tooltip_speed">speed</string>
 	<string name="item_grouped_label_health">Health</string>
 	<string name="item_grouped_tooltip_health">Health</string>
+	<string name="item_grouped_label_cost">Cost</string>
 
 	<!--NPC-->
 	<string name="npc_label_autocalculation">Auto calculation</string>
@@ -1060,7 +1059,7 @@
 	<string name="item_label_hands">Hands</string>
 	<string name="item_label_range">Range</string>
 	<string name="item_label_speed">Speed</string>
-	<string name="item_label_effects">Effects</string>
+	<string name="item_label_effect">Effects</string>
 	<string name="item_label_concealment">Concealment</string>
 	<string name="item_label_enhancements">Enhancements</string>
 
@@ -1068,25 +1067,4 @@
 	<string name="item_label_strength">Strength</string>
 	<string name="item_label_stealth">Stealth</string>
 
-	<string name="item_grouped_label_name">Name</string>
-	<string name="item_grouped_label_cost">Cost</string>
-	<string name="item_grouped_label_weight">Wt</string>
-	<string name="item_grouped_tooltip_weight">Weight</string>
-	<string name="item_grouped_label_effects">Effects</string>
-	<string name="item_grouped_label_availability">Availability</string>
-	<string name="item_grouped_label_weaponaccuracy">Weapon Accuracy</string>
-	<string name="item_grouped_label_damagetype">Type</string>
-	<string name="item_grouped_label_ac">AC</string>
-	<string name="item_grouped_tooltip_ac">Armor Class</string>
-	<string name="item_grouped_label_dexbonus">Dex</string>
-	<string name="item_grouped_tooltip_dexbonus">Dexterity Adjustment</string>
-	<string name="item_grouped_label_strength">Str</string>
-	<string name="item_grouped_tooltip_strength">Strength Required</string>
-	<string name="item_grouped_label_stealth">Stealth</string>
-	<string name="item_grouped_tooltip_stealth">Stealth Adjustment</string>
-	<string name="item_grouped_label_damage">Damage</string>
-	<string name="item_grouped_label_properties">Properties</string>
-	<string name="item_grouped_label_speed">Speed</string>
-	<string name="item_grouped_label_carryingcapacity">Carry</string>
-	<string name="item_grouped_tooltip_carryingcapacity">Carrying Capacity</string>
 </root>
