@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
@@ -11,31 +11,19 @@
 	<tokenroot source="tokens" />
 
 	<characterdbroot>charsheet</characterdbroot>
-	
+
 	<die name="gmdie" version="&lt;4">
 		<icon>gmdieicon</icon>
 	</die>
-	
-	<die name="dF" merge="delete" />
-	<die name="d4">
-		<icon>d4icon</icon>
-		<position>370,-68</position>
-	</die>
+
 	<die name="d6">
 		<icon>d6icon</icon>
-		<position>320,-68</position>
+		<position>180,-68</position>
 	</die>
-	<die name="s6">
-		<model>d6</model>
-		<icon>d6sicon</icon>
-	</die>
-	<die name="d8">
-		<icon>d8icon</icon>
-		<position>270,-68</position>
-	</die>
+
 	<die name="d10">
 		<icon>d10icon</icon>
-		<position>220,-68</position>
+		<position>120,-68</position>
 	</die>
 	<die name="g10">
 		<model>d10</model>
@@ -45,18 +33,42 @@
 		<model>d10</model>
 		<icon>d10ricon</icon>
 	</die>
-	<die name="d12">
-		<icon>d12icon</icon>
-		<position>170,-68</position>
-	</die>
-	<die name="d20">
-		<icon>d20icon</icon>
-		<position>120,-68</position>
-	</die>
-	<die name="d100">
-		<icon>d10icon</icon>
-		<menuicon>percent</menuicon>
-	</die>
+
+	<die name="dF" merge="delete" />
+	<die name="rF" merge="delete" />
+	<die name="gF" merge="delete" />
+	<die name="bF" merge="delete" />
+	<die name="pF" merge="delete" />
+
+	<die name="d4" merge="delete" />
+	<die name="r4" merge="delete" />
+	<die name="g4" merge="delete" />
+	<die name="b4" merge="delete" />
+	<die name="p4" merge="delete" />
+
+	<die name="d8" merge="delete" />
+	<die name="r8" merge="delete" />
+	<die name="g8" merge="delete" />
+	<die name="b8" merge="delete" />
+	<die name="p8" merge="delete" />
+
+	<die name="d12" merge="delete" />
+	<die name="r12" merge="delete" />
+	<die name="g12" merge="delete" />
+	<die name="b12" merge="delete" />
+	<die name="p12" merge="delete" />
+
+	<die name="d20" merge="delete" />
+	<die name="r20" merge="delete" />
+	<die name="g20" merge="delete" />
+	<die name="b20" merge="delete" />
+	<die name="p20" merge="delete" />
+
+	<die name="d100" merge="delete" />
+	<die name="r100" merge="delete" />
+	<die name="g100" merge="delete" />
+	<die name="b100" merge="delete" />
+	<die name="p100" merge="delete" />
 
 	<diebox version="&gt;=4">
 		<frame name="diebox" offset="9,4,9,4" />
@@ -69,7 +81,7 @@
 		<font expression="diceexpr"  modifier="diemod" total="dietotal" dieresult="dieresult"/>
 		<secreticon name="gmdie" />
 	</diebox>
-	
+
 	<pollbox version="&gt;=4">
 		<frame name="diebox" offset="4,4,4,4" />
 		<icons empty="poll_empty" positive="poll_check" negative="poll_negative" />
@@ -79,7 +91,7 @@
 		<margin value="21" numbertailmargin="10" />
 		<icons empty="poll_empty" positive="poll_check" negative="poll_negative" />
 	</pollbox>
-	
+
 	<viewerlistsettings>
 		<portrait file="data\icons\mini_portrait.png" mask="data\icons\mini_portrait_mask.png" />
 		<spacing value="0" />
@@ -129,7 +141,7 @@
 		<radial name="mini_name" margins="7,2,7,2" />
 		<font name="mini_name" />
 	</tooltip>
-	
+
 	<distance>
 		<font>distancelabel</font>
 	</distance>
@@ -137,7 +149,7 @@
 	<imagesettings>
 		<shortcut icon="image_pin" iconpublic="image_pin_public" hotspot="2,21" />
 	</imagesettings>
-	
+
 	<textsettings>
 		<selectioncolor>BCD2E9</selectioncolor>
 		<icon link="button_link" linkshare="button_link_share" emptylink="button_link_empty" chat="button_speak" />
