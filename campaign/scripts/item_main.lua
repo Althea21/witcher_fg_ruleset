@@ -80,11 +80,6 @@ function update()
 	if updateControl("concealment", bReadOnly, bID and (bWeapon or bAmmunition or bToolKits)) then bSection4 = true; end
 	if updateControl("enhancements", bReadOnly, bID and (bWeapon)) then bSection4 = true; end
 
-	if updateControl("ac", bReadOnly, bID and bArmor) then bSection4 = true; end
-	if updateControl("dexbonus", bReadOnly, bID and bArmor) then bSection4 = true; end
-	if updateControl("strength", bReadOnly, bID and bArmor) then bSection4 = true; end
-	if updateControl("stealth", bReadOnly, bID and bArmor) then bSection4 = true; end
-
 	if updateControl("encumbrancevalue", bReadOnly, bID and bArmor) then bSection5 = true; end
 	if updateControl("weight", bReadOnly, bID and not bServicesOrLodging) then bSection5 = true; end
 	if updateControl("cost", bReadOnly, bID) then bSection5 = true; end

@@ -139,7 +139,7 @@
 	<string name="Melee">Melee</string>
 	<string name="Small Blades">Small Blades</string>
 	<string name="Staff/Spear">Staff/Spear</string>
-	<string name="Swordmanship">Swordmanship</string>
+	<string name="Swordsmanship">Swordsmanship</string>
 
 	<!--Combat stat bonus damage cycler-->
 	<string name="dmgbonusstat_none">-</string>
@@ -467,7 +467,7 @@
 	<string name="char_skill_sailing_label">Sailing</string>
 	<string name="char_skill_smallBlades_label">SmallBlades</string>
 	<string name="char_skill_staffSpear_label">Staff / Spear</string>
-	<string name="char_skill_swordmanship_label">Swordmanship</string>
+	<string name="char_skill_swordsmanship_label">Swordsmanship</string>
 	<string name="char_skill_courage_label">Courage</string>
 	<string name="char_skill_hexWeaving_label">Hex Weaving</string>
 	<string name="char_skill_intimidation_label">Intimidation</string>
@@ -521,7 +521,7 @@
 	<string name="char_skill_sailing_desc">Sailing ships and controlling maritime vessels. At a base 10 you can sail in calm weather. At a base 13 you can handle rough weather and avoid obstacles with ease. At a base 16 you can maneuver in the open ocean and escape sirens and drowners. At a base 20 you can sail a ship through the most dangerous storms with minimal damage.</string>
 	<string name="char_skill_smallBlades_desc">Using light weapons such as daggers and cleavers. At a base 10 you can reliably wield small blades. At a base 13 you are a professional and can wield small blades with enough skill to match an assassin. At a base 16 you can rival hardened veterans in knife fights. At a base 20 you are a hardened veteran who can take on multiple assailants at once.</string>
 	<string name="char_skill_staffSpear_desc">Using long weapons such as staves, pole axes, and spears. At a base 10 you can reliably wield pole arms. At a base 13 you are a professional and can wield a pike with enough skill to match professional soldiers. At a base 16 you can face cavalry charges without flinching. At a base 20 you are a one-person wall of wood and steel.</string>
-	<string name="char_skill_swordmanship_desc">Using swords. At a base 10 you can reliably wield swords. At a base 13 you are a professional and can take the field. At a base 16 you win most duels you fight. At a base 20 you are a hardened veteran who cuts a swath through the field.</string>
+	<string name="char_skill_swordsmanship_desc">Using swords. At a base 10 you can reliably wield swords. At a base 13 you are a professional and can take the field. At a base 16 you win most duels you fight. At a base 20 you are a hardened veteran who cuts a swath through the field.</string>
 	<string name="char_skill_courage_desc">The skill of resisting fear. At a base 10 you are a calm person and can stand up to a tough customer in a bar. At a base 13 you can stare down a vicious mass murderer and not flee when you see monsters. At a base 16 you are usually the bravest person in the room and can face down enemies you know you can't beat. At a base 20 nothing scares you and you remain glacially cool even in the face of enormous monsters.</string>
 	<string name="char_skill_hexWeaving_desc">Hexing people or places. At a base 10 you can focus pure hatred into simple hexes. At a base 13 you know certain bits of black magic that allow your hexes to take hold better. At a base 16 you are wellversed in hexes and can focus your pain into deadly ones. At a base 20 you weave hexes that make seasoned witchers scowl.</string>
 	<string name="char_skill_intimidation_desc">Scaring people, either to run them off or make them do something for you. At a base 10 you are a pretty frightening person, and rarely do people mess with you in a bar. At a base 13 you have gotten used to intimidating the people around you and can scare most average people, even some soldiers. At a base 16 you radiate malice, and even seasoned soldiers know to give you a wide berth when you pass by. At a base 20 all you need to do is give a person a single look to make them cave.</string>

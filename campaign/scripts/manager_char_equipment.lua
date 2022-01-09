@@ -32,7 +32,6 @@ function onItemCarriedChanged(nodeItemID)
 	elseif ItemManager2.isWeapon(nodeItem) then
 		addToWeaponDB(nodeItem, nCarried);
 	end
-
 end
 
 --
@@ -62,7 +61,6 @@ function addToArmorDB(nodeItem, nCarried)
 	for _,vArmor in pairs(DB.getChildren(nodeChar, "armorlist")) do
 		local _,sRecord = DB.getValue(vArmor, "shortcut", "", "");
 		if sRecord == sPath then
-			Debug.console('Already exists');
 			DB.setValue(vArmor, "equipped", "number", nEquipped);
 			return;
 		end
@@ -101,6 +99,8 @@ function addToArmorDB(nodeItem, nCarried)
 		DB.setValue(nodeArmor, "isidentified", "number", nItemID);
 		DB.setValue(nodeArmor, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
 
+		Debug.console(aLocations[i]);
+
 		for i = 1, #aLocations do
 			if aLocations[i] == "head" then
 				nHead = 1;
@@ -130,9 +130,6 @@ function addToArmorDB(nodeItem, nCarried)
 			end
 		end
 
-		local sAttackAbility = "";
-		local sDamageAbility = "base";
-
 		DB.setValue(nodeArmor, "name", "string", sName);
 		DB.setValue(nodeArmor, "equipped", "number", nEquipped);
 		DB.setValue(nodeArmor, "ev", "number", DB.getValue(nodeItem, "encumbrancevalue"));
@@ -146,7 +143,6 @@ function addToArmorDB(nodeItem, nCarried)
 		DB.setValue(nodeArmor, "location_leftleg", "number", nLeftLeg);
 		DB.setValue(nodeArmor, "location_rightleg", "number", nRightLeg);
 		DB.setValue(nodeArmor, "location_torso", "number", nTorso);
-
 	end
 end
 
@@ -168,8 +164,7 @@ function addToWeaponDB(nodeItem)
 		return;
 	end
 
-	-- Set new weapons as equipped
-	DB.setValue(nodeItem, "carried", "number", 2);
+
 
 	-- Determine identification
 	local nItemID = 0;
@@ -188,166 +183,289 @@ function addToWeaponDB(nodeItem)
 		end
 		sName = "** " .. sName .. " **";
 	end
-	local nBonus = 0;
-	if nItemID == 1 then
-		nBonus = DB.getValue(nodeItem, "bonus", 0);
-	end
 
-	-- Handle special weapon properties
-	local sProps = DB.getValue(nodeItem, "properties", "");
+	-- Lastly depending on the type of weapon, we have to set the attackskill and attackstat
+	local sAttackSkill, sAttackStat = "";
 
-	local bThrown = checkProperty(sProps, WEAPON_PROP_THROWN);
-	local bMagic = checkProperty(sProps, WEAPON_PROP_MAGIC);
+	sWeaponType = DB.getValue(nodeItem, "type", ""):lower();
+	sWeaponSubType = DB.getValue(nodeItem, "subtype", ""):lower();
 
-	local sType = DB.getValue(nodeItem, "subtype", ""):lower();
-	local bMelee = true;
-	local bRanged = false;
-	if sType:find(WEAPON_TYPE_RANGED) then
-		bMelee = false;
-		bRanged = true;
-	end
+	local sAttackSkill = DataCommon.aWeaponSkillsBySubType[sWeaponSubType]:lower();
+	local sAttackStat = DataCommon.aWeaponStatsBySubType[sWeaponSubType]:lower();
 
-	-- Parse damage field
-	local sDamage = DB.getValue(nodeItem, "damage", "");
-
-	local aDmgClauses = {};
-	local aWords = StringManager.parseWords(sDamage);
-	local i = 1;
-	while aWords[i] do
-		local aDiceString = {};
-
-		while StringManager.isDiceString(aWords[i]) do
-			table.insert(aDiceString, aWords[i]);
-			i = i + 1;
-		end
-		if #aDiceString == 0 then
-			break;
-		end
-
-		local aDamageTypes = {};
-		while StringManager.contains(DataCommon.dmgtypes, aWords[i]) do
-			table.insert(aDamageTypes, aWords[i]);
-			i = i + 1;
-		end
-		if bMagic then
-			table.insert(aDamageTypes, "magic");
-		end
-
-		local rDmgClause = {};
-		rDmgClause.aDice, rDmgClause.nMod = StringManager.convertStringToDice(table.concat(aDiceString, " "));
-		rDmgClause.dmgtype = table.concat(aDamageTypes, ",");
-		table.insert(aDmgClauses, rDmgClause);
-
-		if StringManager.contains({ "+", "plus" }, aWords[i]) then
-			i = i + 1;
+	-- Check we don't have this armor item already listed
+	local sPath = nodeItem.getPath();
+	for _,vArmor in pairs(DB.getChildren(nodeChar, "weaponlist")) do
+		local _,sRecord = DB.getValue(vArmor, "shortcut", "", "");
+		if sRecord == sPath then
+			DB.setValue(vArmor, "equipped", "number", nEquipped);
+			return;
 		end
 	end
 
-	-- Create weapon entries
-	if bMelee then
-		local nodeWeapon = nodeWeapons.createChild();
-		if nodeWeapon then
-			DB.setValue(nodeWeapon, "isidentified", "number", nItemID);
-			DB.setValue(nodeWeapon, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
+	local nodeWeapon = nodeWeapons.createChild();
+	if nodeWeapon then
+		DB.setValue(nodeWeapon, "isidentified", "number", nItemID);
+		DB.setValue(nodeWeapon, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
 
-			local sAttackAbility = "";
-			local sDamageAbility = "base";
+		DB.setValue(nodeWeapon, "name", "string", sName);
+		DB.setValue(nodeWeapon, "attackskill", "string", sAttackSkill);
+		DB.setValue(nodeWeapon, "attackstat", "string", sAttackStat);
+		DB.setValue(nodeWeapon, "bleeding_amount", "number", 0);
+		DB.setValue(nodeWeapon, "concealment", "string", DB.getValue(nodeItem, "concealment"));
 
-			DB.setValue(nodeWeapon, "name", "string", sName);
-			DB.setValue(nodeWeapon, "type", "number", 0);
-			DB.setValue(nodeWeapon, "properties", "string", sProps);
+		nodeWeapon.createChild("enhancementlist");
+		DB.setValue(nodeWeapon, "enhancementmax", "number", DB.getValue(nodeItem, "enhancements"));
+		DB.setValue(nodeWeapon, "focus_amount", "number", 0);
+		DB.setValue(nodeWeapon, "maxammo", "number", 0);
+		DB.setValue(nodeWeapon, "rangeincrement", "number", 0);
+		DB.setValue(nodeWeapon, "reliability", "number", DB.getValue(nodeItem, "reliability"));
+		DB.setValue(nodeWeapon, "reliabilitymax", "number", DB.getValue(nodeItem, "reliability"));
+		DB.setValue(nodeWeapon, "stun_amount", "number", 0);
+		DB.setValue(nodeWeapon, "weapon_accuracy", "number", DB.getValue(nodeItem, "weaponaccuracy"));
+		DB.setValue(nodeWeapon, "type", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_ablating_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_armorpiercing_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_balanced_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_bleeding_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_brawling_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_concealment_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_focus_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_grappling_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_greaterfocus_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_improvedarmorpiercing_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_longreach_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_meteorite_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_nonethal_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_slowreload_use", "number", 0);
+		DB.setValue(nodeWeapon, "weffect_stun_use", "number", 0);
 
-			DB.setValue(nodeWeapon, "attackstat", "string", sAttackAbility);
-			DB.setValue(nodeWeapon, "attackbonus", "number", nBonus);
+		nodeWeaponDamageList = nodeWeapon.createChild("damagelist");
+		nodeWeaponDamage = nodeWeaponDamageList.createChild();
 
-			local nodeDmgList = DB.createChild(nodeWeapon, "damagelist");
-			if nodeDmgList then
-				for kClause,rClause in ipairs(aDmgClauses) do
-					local nodeDmg = DB.createChild(nodeDmgList);
-					if nodeDmg then
-						DB.setValue(nodeDmg, "dice", "dice", rClause.aDice);
-						if kClause == 1 then
-							DB.setValue(nodeDmg, "stat", "string", sDamageAbility);
-							DB.setValue(nodeDmg, "bonus", "number", nBonus + rClause.nMod);
-						else
-							DB.setValue(nodeDmg, "bonus", "number", rClause.nMod);
-						end
-						DB.setValue(nodeDmg, "type", "string", rClause.dmgtype);
-					end
-				end
-			end
-		end
+		local aDamageDice, nDamageBonus = StringManager.convertStringToDice(DB.getValue(nodeItem, "damage"));
+
+		DB.setValue(nodeWeaponDamage, "bonus", "number", nDamageBonus);
+		DB.setValue(nodeWeaponDamage, "dice", "dice", aDamageDice);
+		DB.setValue(nodeWeaponDamage, "type", "string", DB.getValue(nodeItem, "damagetype"));
 	end
 
-	if bRanged and not bThrown then
-		local nodeWeapon = nodeWeapons.createChild();
-		if nodeWeapon then
-			DB.setValue(nodeWeapon, "isidentified", "number", nItemID);
-			DB.setValue(nodeWeapon, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
 
-			local sAttackAbility = "";
-			local sDamageAbility = "base";
+	-- <attackstat type="string">dexterity</attackstat>
+	-- <bleeding_amount type="number">0</bleeding_amount>
+	-- <concealment type="string">Large</concealment>
+	-- <damagelist>
+	-- 	<id-00001>
+	-- 		<bonus type="number">2</bonus>
+	-- 		<dice type="dice">2d6</dice>
+	-- 		<type type="string">S/P</type>
+	-- 	</id-00001>
+	-- </damagelist>
+	-- <enhancementlist />
+	-- <enhancementmax type="number">0</enhancementmax>
+	-- <focus_amount type="number">0</focus_amount>
+	-- <maxammo type="number">0</maxammo>
+	-- <name type="string">Arming Sword</name>
+	-- <rangeincrement type="number">0</rangeincrement>
+	-- <reliability type="number">15</reliability>
+	-- <reliabilitymax type="number">0</reliabilitymax>
+	-- <stun_amount type="number">0</stun_amount>
+	-- <type type="number">0</type>
+	-- <weapon_accuracy type="number">0</weapon_accuracy>
+	-- <weffect_ablating_use type="number">0</weffect_ablating_use>
+	-- <weffect_armorpiercing_use type="number">0</weffect_armorpiercing_use>
+	-- <weffect_balanced_use type="number">0</weffect_balanced_use>
+	-- <weffect_bleeding_use type="number">0</weffect_bleeding_use>
+	-- <weffect_brawling_use type="number">0</weffect_brawling_use>
+	-- <weffect_concealment_use type="number">0</weffect_concealment_use>
+	-- <weffect_focus_use type="number">0</weffect_focus_use>
+	-- <weffect_grappling_use type="number">0</weffect_grappling_use>
+	-- <weffect_greaterfocus_use type="number">0</weffect_greaterfocus_use>
+	-- <weffect_improvedarmorpiercing_use type="number">0</weffect_improvedarmorpiercing_use>
+	-- <weffect_longreach_use type="number">0</weffect_longreach_use>
+	-- <weffect_meteorite_use type="number">0</weffect_meteorite_use>
+	-- <weffect_nonethal_use type="number">0</weffect_nonethal_use>
+	-- <weffect_slowreload_use type="number">0</weffect_slowreload_use>
+	-- <weffect_stun_use type="number">0</weffect_stun_use>
 
-			DB.setValue(nodeWeapon, "name", "string", sName);
-			DB.setValue(nodeWeapon, "type", "number", 1);
-			DB.setValue(nodeWeapon, "properties", "string", sProps);
 
-			DB.setValue(nodeWeapon, "attackstat", "string", sAttackAbility);
-			DB.setValue(nodeWeapon, "attackbonus", "number", nBonus);
 
-			local nodeDmgList = DB.createChild(nodeWeapon, "damagelist");
-			if nodeDmgList then
-				for kClause,rClause in ipairs(aDmgClauses) do
-					local nodeDmg = DB.createChild(nodeDmgList);
-					if nodeDmg then
-						DB.setValue(nodeDmg, "dice", "dice", rClause.aDice);
-						if kClause == 1 then
-							DB.setValue(nodeDmg, "stat", "string", sDamageAbility);
-							DB.setValue(nodeDmg, "bonus", "number", nBonus + rClause.nMod);
-						else
-							DB.setValue(nodeDmg, "bonus", "number", rClause.nMod);
-						end
-						DB.setValue(nodeDmg, "type", "string", rClause.dmgtype);
-					end
-				end
-			end
-		end
-	end
+	-- -- Set new weapons as equipped
+	-- DB.setValue(nodeItem, "carried", "number", 2);
 
-	if bThrown then
-		local nodeWeapon = nodeWeapons.createChild();
-		if nodeWeapon then
-			DB.setValue(nodeWeapon, "isidentified", "number", nItemID);
-			DB.setValue(nodeWeapon, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
 
-			local sAttackAbility = "";
-			local sDamageAbility = "base";
 
-			DB.setValue(nodeWeapon, "name", "string", sName);
-			DB.setValue(nodeWeapon, "type", "number", 2);
-			DB.setValue(nodeWeapon, "properties", "string", sProps);
+	-- -- Grab some information from the source node to populate the new weapon entries
+	-- local sName;
+	-- if nItemID == 1 then
+	-- 	sName = DB.getValue(nodeItem, "name", "");
+	-- else
+	-- 	sName = DB.getValue(nodeItem, "nonid_name", "");
+	-- 	if sName == "" then
+	-- 		sName = Interface.getString("item_unidentified");
+	-- 	end
+	-- 	sName = "** " .. sName .. " **";
+	-- end
+	-- local nBonus = 0;
+	-- if nItemID == 1 then
+	-- 	nBonus = DB.getValue(nodeItem, "bonus", 0);
+	-- end
 
-			DB.setValue(nodeWeapon, "attackstat", "string", sAttackAbility);
-			DB.setValue(nodeWeapon, "attackbonus", "number", nBonus);
+	-- -- Handle special weapon properties
+	-- local sProps = DB.getValue(nodeItem, "properties", "");
 
-			local nodeDmgList = DB.createChild(nodeWeapon, "damagelist");
-			if nodeDmgList then
-				for kClause,rClause in ipairs(aDmgClauses) do
-					local nodeDmg = DB.createChild(nodeDmgList);
-					if nodeDmg then
-						DB.setValue(nodeDmg, "dice", "dice", rClause.aDice);
-						if kClause == 1 then
-							DB.setValue(nodeDmg, "stat", "string", sDamageAbility);
-							DB.setValue(nodeDmg, "bonus", "number", nBonus + rClause.nMod);
-						else
-							DB.setValue(nodeDmg, "bonus", "number", rClause.nMod);
-						end
-						DB.setValue(nodeDmg, "type", "string", rClause.dmgtype);
-					end
-				end
-			end
-		end
-	end
+	-- local bThrown = checkProperty(sProps, WEAPON_PROP_THROWN);
+	-- local bMagic = checkProperty(sProps, WEAPON_PROP_MAGIC);
+
+	-- local sType = DB.getValue(nodeItem, "subtype", ""):lower();
+	-- local bMelee = true;
+	-- local bRanged = false;
+	-- if sType:find(WEAPON_TYPE_RANGED) then
+	-- 	bMelee = false;
+	-- 	bRanged = true;
+	-- end
+
+	-- -- Parse damage field
+	-- local sDamage = DB.getValue(nodeItem, "damage", "");
+
+	-- local aDmgClauses = {};
+	-- local aWords = StringManager.parseWords(sDamage);
+	-- local i = 1;
+	-- while aWords[i] do
+	-- 	local aDiceString = {};
+
+	-- 	while StringManager.isDiceString(aWords[i]) do
+	-- 		table.insert(aDiceString, aWords[i]);
+	-- 		i = i + 1;
+	-- 	end
+	-- 	if #aDiceString == 0 then
+	-- 		break;
+	-- 	end
+
+	-- 	local aDamageTypes = {};
+	-- 	while StringManager.contains(DataCommon.dmgtypes, aWords[i]) do
+	-- 		table.insert(aDamageTypes, aWords[i]);
+	-- 		i = i + 1;
+	-- 	end
+	-- 	if bMagic then
+	-- 		table.insert(aDamageTypes, "magic");
+	-- 	end
+
+	-- 	local rDmgClause = {};
+	-- 	rDmgClause.aDice, rDmgClause.nMod = StringManager.convertStringToDice(table.concat(aDiceString, " "));
+	-- 	rDmgClause.dmgtype = table.concat(aDamageTypes, ",");
+	-- 	table.insert(aDmgClauses, rDmgClause);
+
+	-- 	if StringManager.contains({ "+", "plus" }, aWords[i]) then
+	-- 		i = i + 1;
+	-- 	end
+	-- end
+
+	-- -- Create weapon entries
+	-- if bMelee then
+	-- 	local nodeWeapon = nodeWeapons.createChild();
+	-- 	if nodeWeapon then
+	-- 		DB.setValue(nodeWeapon, "isidentified", "number", nItemID);
+	-- 		DB.setValue(nodeWeapon, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
+
+	-- 		local sAttackAbility = "";
+	-- 		local sDamageAbility = "base";
+
+	-- 		DB.setValue(nodeWeapon, "name", "string", sName);
+	-- 		DB.setValue(nodeWeapon, "type", "number", 0);
+	-- 		DB.setValue(nodeWeapon, "properties", "string", sProps);
+
+	-- 		DB.setValue(nodeWeapon, "attackstat", "string", sAttackAbility);
+	-- 		DB.setValue(nodeWeapon, "attackbonus", "number", nBonus);
+
+	-- 		local nodeDmgList = DB.createChild(nodeWeapon, "damagelist");
+	-- 		if nodeDmgList then
+	-- 			for kClause,rClause in ipairs(aDmgClauses) do
+	-- 				local nodeDmg = DB.createChild(nodeDmgList);
+	-- 				if nodeDmg then
+	-- 					DB.setValue(nodeDmg, "dice", "dice", rClause.aDice);
+	-- 					if kClause == 1 then
+	-- 						DB.setValue(nodeDmg, "stat", "string", sDamageAbility);
+	-- 						DB.setValue(nodeDmg, "bonus", "number", nBonus + rClause.nMod);
+	-- 					else
+	-- 						DB.setValue(nodeDmg, "bonus", "number", rClause.nMod);
+	-- 					end
+	-- 					DB.setValue(nodeDmg, "type", "string", rClause.dmgtype);
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
+
+	-- if bRanged and not bThrown then
+	-- 	local nodeWeapon = nodeWeapons.createChild();
+	-- 	if nodeWeapon then
+	-- 		DB.setValue(nodeWeapon, "isidentified", "number", nItemID);
+	-- 		DB.setValue(nodeWeapon, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
+
+	-- 		local sAttackAbility = "";
+	-- 		local sDamageAbility = "base";
+
+	-- 		DB.setValue(nodeWeapon, "name", "string", sName);
+	-- 		DB.setValue(nodeWeapon, "type", "number", 1);
+	-- 		DB.setValue(nodeWeapon, "properties", "string", sProps);
+
+	-- 		DB.setValue(nodeWeapon, "attackstat", "string", sAttackAbility);
+	-- 		DB.setValue(nodeWeapon, "attackbonus", "number", nBonus);
+
+	-- 		local nodeDmgList = DB.createChild(nodeWeapon, "damagelist");
+	-- 		if nodeDmgList then
+	-- 			for kClause,rClause in ipairs(aDmgClauses) do
+	-- 				local nodeDmg = DB.createChild(nodeDmgList);
+	-- 				if nodeDmg then
+	-- 					DB.setValue(nodeDmg, "dice", "dice", rClause.aDice);
+	-- 					if kClause == 1 then
+	-- 						DB.setValue(nodeDmg, "stat", "string", sDamageAbility);
+	-- 						DB.setValue(nodeDmg, "bonus", "number", nBonus + rClause.nMod);
+	-- 					else
+	-- 						DB.setValue(nodeDmg, "bonus", "number", rClause.nMod);
+	-- 					end
+	-- 					DB.setValue(nodeDmg, "type", "string", rClause.dmgtype);
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
+
+	-- if bThrown then
+	-- 	local nodeWeapon = nodeWeapons.createChild();
+	-- 	if nodeWeapon then
+	-- 		DB.setValue(nodeWeapon, "isidentified", "number", nItemID);
+	-- 		DB.setValue(nodeWeapon, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
+
+	-- 		local sAttackAbility = "";
+	-- 		local sDamageAbility = "base";
+
+	-- 		DB.setValue(nodeWeapon, "name", "string", sName);
+	-- 		DB.setValue(nodeWeapon, "type", "number", 2);
+	-- 		DB.setValue(nodeWeapon, "properties", "string", sProps);
+
+	-- 		DB.setValue(nodeWeapon, "attackstat", "string", sAttackAbility);
+	-- 		DB.setValue(nodeWeapon, "attackbonus", "number", nBonus);
+
+	-- 		local nodeDmgList = DB.createChild(nodeWeapon, "damagelist");
+	-- 		if nodeDmgList then
+	-- 			for kClause,rClause in ipairs(aDmgClauses) do
+	-- 				local nodeDmg = DB.createChild(nodeDmgList);
+	-- 				if nodeDmg then
+	-- 					DB.setValue(nodeDmg, "dice", "dice", rClause.aDice);
+	-- 					if kClause == 1 then
+	-- 						DB.setValue(nodeDmg, "stat", "string", sDamageAbility);
+	-- 						DB.setValue(nodeDmg, "bonus", "number", nBonus + rClause.nMod);
+	-- 					else
+	-- 						DB.setValue(nodeDmg, "bonus", "number", rClause.nMod);
+	-- 					end
+	-- 					DB.setValue(nodeDmg, "type", "string", rClause.dmgtype);
+	-- 				end
+	-- 			end
+	-- 		end
+	-- 	end
+	-- end
 end
 
 function removeFromWeaponDB(nodeItem)
