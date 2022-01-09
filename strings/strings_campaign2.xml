@@ -1064,5 +1064,7 @@
 	<string name="item_label_enhancements">Enhancements</string>
 	<string name="item_label_stoppingpower">Stopping Power</string>
 	<string name="item_label_encumbrancevalue">Encumbrance Value</string>
+	<string name="item_label_armorenhancement">Armor Enhancement</string>
+	<string name="item_label_cover">Cover</string>
 
 </root>

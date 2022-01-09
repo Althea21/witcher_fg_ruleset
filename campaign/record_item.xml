@@ -113,6 +113,10 @@
 			<string_columnh name="availability">
 				<delaykeyupdate />
 			</string_columnh>
+			<label_column name="armorenhancement_label">
+				<static textres="item_label_armorenhancement" />
+			</label_column>
+			<number_columnh name="armorenhancement" />
 
 			<label_column name="damage_label">
 				<static textres="item_label_damage" />
@@ -137,6 +141,10 @@
 				<static textres="item_label_effect" />
 			</label_column>
 			<string_columnh name="effect" />
+			<label_column name="cover_label">
+				<static textres="item_label_cover" />
+			</label_column>
+			<string_columnh name="cover" />
 
 			<label_column name="concealment_label">
 				<static textres="item_label_concealment" />

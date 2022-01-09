@@ -36,6 +36,16 @@ function update()
 	local bArmor = ItemManager2.isArmor(nodeRecord);
 	local bArcaneFocus = (sTypeLower == "rod") or (sTypeLower == "staff") or (sTypeLower == "wand");
 	local bAmmunition = sSubtypeLower == "ammunition";
+	local bAlchemical = sTypeLower == "alchemical items";
+	local bToolKits = sTypeLower == "tool kits";
+	local bGeneral = sTypeLower == "general gear";
+	local bServicesOrLodging = false;
+
+	if bGeneral then
+		if sSubtypeLower == "services" or sSubtypeLower == "lodging" then
+			bServicesOrLodging = true;
+		end
+	end
 
 	local bSection1 = false;
 	if Session.IsHost then
@@ -56,17 +66,18 @@ function update()
 	local bSection3 = false;
 	if updateControl("damagetype", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("weaponaccuracy", bReadOnly, bID and (bWeapon)) then bSection3 = true; end
-	if updateControl("availability", bReadOnly, bID) then bSection3 = true; end
+	if updateControl("availability", bReadOnly, bID and not (bGeneral or bToolKits)) then bSection3 = true; end
 	if updateControl("damage", bReadOnly, bID and bWeapon) then bSection3 = true; end
 	if updateControl("reliability", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("hands", bReadOnly, bID and bWeapon) then bSection3 = true; end
 	if updateControl("range", bReadOnly, bID and bWeapon) then bSection3 = true; end
 	if updateControl("stoppingpower", bReadOnly, bID and bArmor) then bSection3 = true; end
-
+	if updateControl("armorenhancement", bReadOnly, bID and (bArmor)) then bSection3 = true; end
 
 	local bSection4 = false;
-	if updateControl("effect", bReadOnly, bID and (bWeapon or bArmor or bAmmunition)) then bSection4 = true; end
-	if updateControl("concealment", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection4 = true; end
+	if updateControl("effect", bReadOnly, bID and (bWeapon or bArmor or bAmmunition or bAlchemical or bToolKits)) then bSection4 = true; end
+	if updateControl("cover", bReadOnly, bID and bArmor) then bSection4 = true; end
+	if updateControl("concealment", bReadOnly, bID and (bWeapon or bAmmunition or bToolKits)) then bSection4 = true; end
 	if updateControl("enhancements", bReadOnly, bID and (bWeapon)) then bSection4 = true; end
 
 	if updateControl("ac", bReadOnly, bID and bArmor) then bSection4 = true; end
@@ -75,7 +86,7 @@ function update()
 	if updateControl("stealth", bReadOnly, bID and bArmor) then bSection4 = true; end
 
 	if updateControl("encumbrancevalue", bReadOnly, bID and bArmor) then bSection5 = true; end
-	if updateControl("weight", bReadOnly, bID) then bSection5 = true; end
+	if updateControl("weight", bReadOnly, bID and not bServicesOrLodging) then bSection5 = true; end
 	if updateControl("cost", bReadOnly, bID) then bSection5 = true; end
 
 	local bSection6 = bID;

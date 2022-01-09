@@ -45,6 +45,7 @@ aRecordOverrides = {
 		aPlayerListButtons = { "button_item_armor", "button_item_weapons" };
 		aCustomFilters = {
 			["Type"] = { sField = "type" },
+			["SubType"] = { sField = "subtype" },
 		},
 	},
 };
@@ -54,11 +55,12 @@ aListViews = {
 		["armor"] = {
 			aColumns = {
 				{ sName = "name", sType = "string", sHeadingRes = "item_grouped_label_name", nWidth=150 },
-				{ sName = "stoppingpower", sType = "number", sHeadingRes = "item_grouped_label_sp", sTooltipRes = "item_grouped_tooltip_sp", nWidth=40, bCentered=true, nSortOrder=1 },
+				{ sName = "stoppingpower", sType = "number", sHeadingRes = "item_grouped_label_sp", sTooltipRes = "item_grouped_tooltip_sp", nWidth=30, bCentered=true, nSortOrder=1 },
 				{ sName = "availability", sType = "string", sHeadingRes = "item_grouped_label_availability", sTooltipRes = "item_grouped_tooltip_availability", nWidth=70, bCentered=true },
-				{ sName = "armorenhancement", sType = "number", sHeadingRes = "item_grouped_label_armorenhancement", sTooltipRes = "item_grouped_tooltip_armorenhancement", bCentered=true },
+				{ sName = "armorenhancement", sType = "number", sHeadingRes = "item_grouped_label_ae", sTooltipRes = "item_grouped_tooltip_ae", nWidth=30, bCentered=true },
 				{ sName = "effect", sType = "string", sHeadingRes = "item_grouped_label_effect", nWidth=150, bWrapped=true },
-				{ sName = "encumbrancevalue", sType = "number", sHeadingRes = "item_grouped_label_encumbrancevalue", sTooltipRes = "item_grouped_tooltip_encumbrancevalue", nWidth=100, bCentered=true },
+				{ sName = "cover", sType = "string", sHeadingRes = "item_grouped_label_cover", nWidth=125, bWrapped=true },
+				{ sName = "encumbrancevalue", sType = "number", sHeadingRes = "item_grouped_label_ev", sTooltipRes = "item_grouped_tooltip_ev", nWidth=30, bCentered=true },
 				{ sName = "weight", sType = "number", sHeadingRes = "item_grouped_label_weight", sTooltipRes = "item_grouped_tooltip_weight", nWidth=30, bCentered=true },
 				{ sName = "cost", sType = "string", sHeadingRes = "item_grouped_label_cost", bCentered=true },
 			},
@@ -67,7 +69,7 @@ aListViews = {
 				{ sCustom = "item_isidentified" }
 			},
 			aGroups = { { sDBField = "subtype" } },
-			aGroupValueOrder = { "Head Armor", "Torso Armor", "Leg Armor", "Light Armor", "Medium Armor", "Heavy Armor", "Shields" },
+			aGroupValueOrder = { "Light Armor", "Medium Armor", "Heavy Armor", "Light Shields", "Medium Shields", "Heavy Shields" },
 		},
 		["weapon"] = {
 			aColumns = {
