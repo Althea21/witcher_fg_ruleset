@@ -6,6 +6,16 @@
 function onInit()
 	DB.addHandler("charsheet.*.inventorylist.*.isidentified", "onUpdate", onItemIDChanged);
 	DB.addHandler("charsheet.*.inventorylist.*.carried", "onUpdate", onItemCarriedChanged);
+	DB.addHandler("charsheet.*.inventorylist.*.type", "onUpdate", onItemCarriedChanged);
+	DB.addHandler("charsheet.*.inventorylist.*", "onDelete", onItemDeleted);
+end
+
+function onItemDeleted(nodeItem)
+	if ItemManager2.isArmor(nodeItem) then
+		removeFromArmorDB(nodeItem);
+	elseif ItemManager2.isWeapon(nodeItem) then
+		removeFromWeaponDB(nodeItem);
+	end
 end
 
 function onItemCarriedChanged(nodeItemID)
@@ -16,7 +26,11 @@ function onItemCarriedChanged(nodeItemID)
 	if ItemManager2.isArmor(nodeItem) then
 		addToArmorDB(nodeItem, nCarried);
 	elseif ItemManager2.isWeapon(nodeItem) then
-		addToWeaponDB(nodeItem, nCarried);
+		if nCarried == 0 then
+			removeFromWeaponDB(nodeItem);
+		else
+			addToWeaponDB(nodeItem, nCarried);
+		end
 	end
 end
 
@@ -132,6 +146,25 @@ function addToArmorDB(nodeItem, nCarried)
 	end
 end
 
+function removeFromArmorDB(nodeItem)
+	if not nodeItem then
+		return false;
+	end
+
+	-- Check to see if any of the weapon nodes linked to this item node should be deleted
+	local sItemNode = nodeItem.getPath();
+	local sItemNode2 = "....inventorylist." .. nodeItem.getName();
+	local bFound = false;
+	for _,v in pairs(DB.getChildren(nodeItem, "...armorlist")) do
+		local sClass, sRecord = DB.getValue(v, "shortcut", "", "");
+		if sRecord == sItemNode or sRecord == sItemNode2 then
+			bFound = true;
+			v.delete();
+		end
+	end
+
+	return bFound;
+end
 
 --
 --	Weapon inventory management
@@ -236,55 +269,7 @@ function addToWeaponDB(nodeItem)
 		DB.setValue(nodeWeaponDamage, "bonus", "number", nDamageBonus);
 		DB.setValue(nodeWeaponDamage, "dice", "dice", aDamageDice);
 		DB.setValue(nodeWeaponDamage, "type", "string", DB.getValue(nodeItem, "damagetype"));
-
-		local aEffects = getEffects(nodeItem);
-
 	end
-
-
-	-- <bleeding_amount type="number">25</bleeding_amount>
-	-- <focus_amount type="number">3</focus_amount>
-	-- <stun_amount type="number">2</stun_amount>
-	-- <attackstat type="string">dexterity</attackstat>
-	-- <bleeding_amount type="number">0</bleeding_amount>
-	-- <concealment type="string">Large</concealment>
-	-- <damagelist>
-	-- 	<id-00001>
-	-- 		<bonus type="number">2</bonus>
-	-- 		<dice type="dice">2d6</dice>
-	-- 		<type type="string">S/P</type>
-	-- 	</id-00001>
-	-- </damagelist>
-	-- <enhancementlist />
-	-- <enhancementmax type="number">0</enhancementmax>
-	-- <focus_amount type="number">0</focus_amount>
-	-- <maxammo type="number">0</maxammo>
-	-- <name type="string">Arming Sword</name>
-	-- <rangeincrement type="number">0</rangeincrement>
-	-- <reliability type="number">15</reliability>
-	-- <reliabilitymax type="number">0</reliabilitymax>
-	-- <stun_amount type="number">0</stun_amount>
-	-- <type type="number">0</type>
-	-- <weapon_accuracy type="number">0</weapon_accuracy>
-	-- <weffect_ablating_use type="number">0</weffect_ablating_use>
-	-- <weffect_armorpiercing_use type="number">0</weffect_armorpiercing_use>
-	-- <weffect_balanced_use type="number">0</weffect_balanced_use>
-	-- <weffect_bleeding_use type="number">0</weffect_bleeding_use>
-	-- <weffect_brawling_use type="number">0</weffect_brawling_use>
-	-- <weffect_concealment_use type="number">0</weffect_concealment_use>
-	-- <weffect_focus_use type="number">0</weffect_focus_use>
-	-- <weffect_grappling_use type="number">0</weffect_grappling_use>
-	-- <weffect_greaterfocus_use type="number">0</weffect_greaterfocus_use>
-	-- <weffect_improvedarmorpiercing_use type="number">0</weffect_improvedarmorpiercing_use>
-	-- <weffect_longreach_use type="number">0</weffect_longreach_use>
-	-- <weffect_meteorite_use type="number">0</weffect_meteorite_use>
-	-- <weffect_nonethal_use type="number">0</weffect_nonethal_use>
-	-- <weffect_slowreload_use type="number">0</weffect_slowreload_use>
-	-- <weffect_stun_use type="number">0</weffect_stun_use>
-
-
-
-
 end
 
 function removeFromWeaponDB(nodeItem)
