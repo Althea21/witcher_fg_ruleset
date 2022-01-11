@@ -243,3 +243,22 @@ aWeaponStatsBySubType = {
 	["bows"] = "Dexterity",
 	["crossbows"] = "Dexterity",
 }
+
+-- List of weapon effects
+aWeaponEffects = {
+	"ablating",
+	"bleeding",
+	"focus",
+	"improved armor piercing",
+	"non-lethal",
+	"armor piercing",
+	"brawling",
+	"grappling",
+	"long reach",
+	"slow reload",
+	"balanced",
+	"concealment",
+	"greater focus",
+	"meteorite",
+	"stun"
+}
