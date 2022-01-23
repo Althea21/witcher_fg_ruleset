@@ -16,18 +16,21 @@
 	<!--stat de base-->
 	<template name="number_charstatbase">
 		<basicnumber>
+			<anchored width="30" height="20" />
 			<max>100</max>
 		</basicnumber>
 	</template>
 	<!--stat modificateur-->
 	<template name="number_charstatmodifier">
 		<basicnumber>
+			<anchored width="30" height="20" />
 			<max>100</max>
 		</basicnumber>
 	</template>
 	<!--stat total-->
 	<template name="number_charstattotal">
 		<basicnumber>
+			<anchored width="30" height="20" />
 			<frame name="fieldlight" offset="7,5,7,5" />
 			<disabled/>
 		</basicnumber>
@@ -35,6 +38,7 @@
 	<!--stat calculee-->
 	<template name="number_derivedstat">
 		<basicnumber>
+			<anchored width="30" height="20" />
 			<frame name="fieldlight" offset="7,5,7,5" />
 			<disabled/>
 		</basicnumber>
@@ -56,7 +60,9 @@
 	</template>
 	<!--stat valeur courante-->
 	<template name="number_statcurrentvalue">
-		<basicnumber/>
+		<basicnumber>
+			<anchored width="30" height="20" />
+		</basicnumber>
 	</template>
 
 	<!-- List Skills -->

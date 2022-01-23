@@ -5,8 +5,8 @@
   attribution and copyright information.
 -->
 
-<root version="3.1" release="0.6.0" logo="logo.png">
-	<announcement text="The Witcher TRPG ruleset v0.6.2 (MBM Updates) for Fantasy Grounds\r
+<root version="3.1" release="0.6.2" logo="logo.png">
+	<announcement text="The Witcher TRPG ruleset v0.6.2 (MBM Equipment) for Fantasy Grounds\r
 	The Witcher TRPG is edited by Talsorian Games Inc.
 	The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved.
 	The Witcher game is based on the prose of Andrzej Sapkowski.\r\r
@@ -14,7 +14,7 @@
 	<!-- Attributes -->
 	<description>
 		<text>The Witcher</text>
-		<author>Althea, U~man, Laurent 'Heedio' WITZ</author>
+		<author>Althea (Contributors : U~man, MadBeardMan)</author>
 		<website></website>
 	</description>
 
@@ -25,7 +25,10 @@
 	<includefile source="gameelements.xml" />
 	<script name="Options35E" file="scripts/data_options_TWTRPG.lua" />
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 	<!-- Graphics -->
 	<includefile source="graphics/graphics.xml" />
 
@@ -86,9 +89,12 @@
 	<script name="CombatManager2" file="scripts/manager_combat2.lua" />
 	<script name="EffectManager2" file="scripts/manager_effect2.lua" />
 	<script name="Json" file="scripts/json.lua" />
+<<<<<<< HEAD
 	<script name="ItemManager2" file="scripts/manager_item2.lua" />
 
 	<!-- Data -->
 	<script name="LibraryDataTWTRPG" file="scripts/data_library_TWTRPG.lua" />
+=======
+>>>>>>> master
 
 </root>

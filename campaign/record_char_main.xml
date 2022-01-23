@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
@@ -15,7 +15,7 @@
 			<!--
 				Branche de la DB : charsheet.ID-XXXXX.identite.
 			-->
-			
+
 			<!-- Frame de placement -->
 			<frame_char name="identite_frame">
 				<bounds>15,0,-29,150</bounds>
@@ -25,9 +25,9 @@
 				<static textres="char_label_identity" />
 				<frame name="headerref" />
 			</frame_label>
-			
+
 			<!-- RACE -->
-			<label>
+			<label name="label_race">
 				<anchored to="identite_frame" position="insidetopleft" offset="15,35" />
 				<static textres="char_main_label_race" />
 			</label>
@@ -46,10 +46,14 @@
 				</script>
 				<default>Human</default>
 			</combobox>
-		
+
 			<!-- HOME COUNTRY -->
 			<label>
-				<anchored to="race" position="right" offset="15,0" />
+				<!-- <anchored to="race" position="right" offset="15,0" /> -->
+				<anchored to="race">
+					<top />
+					<left anchor="right" offset="15" />
+				</anchored>
 				<static textres="char_label_home_country" />
 			</label>
 			<stringu name="home_country" source="identite.home_country">
@@ -62,8 +66,12 @@
 			</stringu>
 
 			<!-- GENDER -->
-			<label>
-				<anchored to="identite_frame" position="insidetopleft" offset="15,60" />
+			<label name="label_gender">
+				<!-- <anchored to="identite_frame" position="insidetopleft" offset="15,60" /> -->
+				<anchored to="label_race" anchor="bottom" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_main_label_gender" />
 			</label>
 			<combobox name="gender" source="identite.gender">
@@ -78,19 +86,27 @@
 				</script>
 				<default>Male</default>
 			</combobox>
-				
+
 			<!-- AGE -->
-			<label>
-				<anchored to="gender" position="right" offset="15,0" />
+			<label name="label_age">
+				<!-- <anchored to="gender" position="right" offset="15,0" /> -->
+				<anchored to="gender">
+					<top />
+					<left anchor="right" offset="15" />
+				</anchored>
 				<static textres="char_main_label_age" />
 			</label>
 			<basicnumber name="age" source="identite.age">
-				<anchored to="identite_frame" position="insidetopleft" offset="285,60" width="30" height="20" />			
+				<anchored to="identite_frame" position="insidetopleft" offset="285,60" width="30" height="20" />
 			</basicnumber>
-	
+
 			<!-- REPUTATION -->
-			<label>
-				<anchored to="age" position="right" offset="15,0" />
+			<label name="label_reputation">
+				<!-- <anchored to="age" position="right" offset="15,0" /> -->
+				<anchored to="age">
+					<top />
+					<left anchor="right" offset="15"/>
+				</anchored>
 				<static textres="char_label_reputation" />
 			</label>
 			<basicnumber name="reputation" source="identite.reputation">
@@ -98,8 +114,12 @@
 			</basicnumber>
 
 			<!-- SOCIAL STANDING -->
-			<label>
-				<anchored to="identite_frame" position="insidetopleft" offset="15,85" />
+			<label name="label_social_standing">
+				<!-- <anchored to="identite_frame" position="insidetopleft" offset="15,85" /> -->
+				<anchored to="label_gender" anchor="bottom" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_label_social_standing" />
 			</label>
 			<combobox name="social_standing" source="identite.social_standing">
@@ -117,9 +137,9 @@
 				</script>
 				<default>Equal</default>
 			</combobox>
-	
+
 			<!-- PROFESSION -->
-			
+
 			<!--to know when profession has been explicitely change (for init of skill tab)-->
 			<basicnumber name="hasProfessionChanged" source="hasProfessionChanged">
 				<anchored width="0" height="0">
@@ -130,8 +150,12 @@
 				<readonly />
 				<invisible />
 			</basicnumber>
-			<label>
-				<anchored to="identite_frame" position="insidetopleft" offset="15,110" />
+			<label name="label_custom_profession">
+				<!-- <anchored to="identite_frame" position="insidetopleft" offset="15,110" /> -->
+				<anchored to="label_social_standing" anchor="bottom" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_label_profession" />
 			</label>
 			<!--custom profession label-->
@@ -143,7 +167,7 @@
 				</anchored>
 				<default>
 					<textres>char_label_profession</textres>
-				</default> 
+				</default>
 			</stringu>
 			<!--witcher school-->
 			<combobox name="witcher_school" source="identite.witcher_school">
@@ -197,15 +221,15 @@
 						add(Interface.getString("list_profession_peasant"), Interface.getString("list_profession_peasant"));
 						add(Interface.getString("list_profession_noble"), Interface.getString("list_profession_noble"));
 						add(Interface.getString("list_profession_custom"), Interface.getString("list_profession_custom"));
-						
+
 						onProfessionValueChanged();
 					end
-					
+
 					function onValueChanged()
 						window.hasProfessionChanged.setValue(1);
 						onProfessionValueChanged();
 					end
-					
+
 					function onProfessionValueChanged()
 						if getValue()==Interface.getString("list_profession_custom") then
 							window.custom_profession.setVisible(true);
@@ -223,21 +247,25 @@
 					end
 				</script>
 			</combobox>
-			
+
 			<!-- IMPROVEMENT POINTS -->
-			<label>
-				<anchored to="social_standing" position="right" offset="130,0" />
+			<label name="label_improvement_point">
+				<!-- <anchored to="social_standing" position="right" offset="130,0" /> -->
+				<anchored to="age">
+					<top offset="25"/>
+					<left anchor="right" offset="15"/>
+				</anchored>
 				<static textres="char_label_improvement_point" />
 			</label>
 			<basicnumber name="improvement_point" source="identite.improvement_point">
-				<anchored to="identite_frame" position="insidetopleft" offset="425,85" width="30" height="20" />				
+				<anchored to="identite_frame" position="insidetopleft" offset="425,85" width="30" height="20" />
 			</basicnumber>
 
 			<!-- ATTRIBUTS -->
 			<!--
 				Branche de la DB : charsheet.ID-XXXXX.attributs.
 			-->
-			
+
 			<!-- Frame de placement -->
 			<frame_char name="attributs_frame">
 				<bounds>15,155,-29,-10</bounds>
@@ -246,26 +274,42 @@
 				<anchored to="attributs_frame" />
 				<static textres="char_label_stats" />
 				<frame name="headerref" />
-			</frame_label>	
-			
+			</frame_label>
+			<genericcontrol name="leftanchor">
+				<anchored to="attributs_frame" height="0" width="0">
+					<top offset="20" />
+					<left offset="10" />
+				</anchored>
+			</genericcontrol>
+
 			<!-- STATS : INT, REF, DEX, BODY, SPD, EMP, CRA, WILL, LUCK -->
-			<number_charstatbase name="intelligence_base" source="attributs.intelligence_base">
-				<anchored to="attributs_frame" position="insidetopleft" offset="90,55" width="30" height="20"/>
+			<label name="label_intelligence">
+				<anchored to="leftanchor" width="80" >
+					<left offset="5" />
+					<top offset="30" />
+				</anchored>
+				<static textres="char_statslabel_intelligence" />
+			</label>
+			<number_charstatbase name="intelligence_base" source="attributs.intelligence_base" width="30">
+				<anchored to="label_intelligence">
+					<left anchor="right" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onIntelligenceChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
+			<label name="label_intelligence_plus">
 				<anchored to="intelligence_base">
-					<left anchor="right" relation="relative" offset="10" />
+					<left anchor="right" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="intelligence_modifier" source="attributs.intelligence_modifier">
-				<anchored to="intelligence_base" width="30" height="20">
+				<anchored to="label_intelligence_plus">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -275,7 +319,7 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
+			<label name="label_intelligence_equal">
 				<anchored to="intelligence_modifier">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
@@ -283,7 +327,7 @@
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal name="intelligence" source="attributs.intelligence">
-				<anchored to="intelligence_modifier" width="30" height="20">
+				<anchored to="label_intelligence_equal">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -293,28 +337,35 @@
 				end
 				</script>
 			</number_charstattotal>
-			<label>
-				<anchored to="intelligence_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_intelligence" />
+
+			<!-- Reflex -->
+			<label name="label_reflex">
+				<anchored to="label_intelligence" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_statslabel_reflex" />
 			</label>
-			
 			<number_charstatbase name="reflex_base" source="attributs.reflex_base">
-				<anchored to="intelligence_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_reflex">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onReflexChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
-				<anchored to="reflex_base">
+			<label name="label_reflex_modifier">
+				<anchored to="label_reflex">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="reflex_modifier" source="attributs.reflex_modifier">
-				<anchored to="reflex_base" width="30" height="20">
+				<anchored to="label_reflex">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -324,15 +375,15 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
-				<anchored to="reflex_modifier">
+			<label name="label_reflex_equal">
+				<anchored to="label_reflex">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_equal" />
 			</label>
-			<number_charstattotal  name="reflex" source="attributs.reflex">
-				<anchored to="reflex_modifier" width="30" height="20">
+			<number_charstattotal name="reflex" source="attributs.reflex">
+				<anchored to="label_reflex">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -343,32 +394,40 @@
 				</script>
 			</number_charstattotal>
 			<genericcontrol name="ref_overburdened">
-				<anchored to="reflex" position="right" offset="10,0" width="10" height="10"/>
+				<anchored to="reflex" position="right" offset="10,0" width="10" />
 				<icon>char_overburdened</icon>
 				<invisible/>
 			</genericcontrol>
-			<label>
-				<anchored to="reflex_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_reflex" />
+
+
+			<!-- Dexterity -->
+			<label name="label_dexterity">
+				<anchored to="label_reflex" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_statslabel_dexterity" />
 			</label>
-			
 			<number_charstatbase name="dexterity_base" source="attributs.dexterity_base">
-				<anchored to="reflex_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_dexterity">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onDexterityChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
-				<anchored to="dexterity_base">
+			<label name="label_dexterity_plus">
+				<anchored to="label_dexterity">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="dexterity_modifier" source="attributs.dexterity_modifier">
-				<anchored to="dexterity_base" width="30" height="20">
+				<anchored to="label_dexterity">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -378,15 +437,15 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
-				<anchored to="dexterity_modifier">
+			<label name="label_dexterity_equal">
+				<anchored to="label_dexterity">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_equal" />
 			</label>
-			<number_charstattotal  name="dexterity" source="attributs.dexterity">
-				<anchored to="dexterity_modifier" width="30" height="20">
+			<number_charstattotal name="dexterity" source="attributs.dexterity">
+				<anchored to="label_dexterity">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -397,33 +456,40 @@
 				</script>
 			</number_charstattotal>
 			<genericcontrol name="dex_overburdened">
-				<anchored to="dexterity" position="right" offset="10,0" width="10" height="10"/>
+				<anchored to="dexterity" position="right" offset="10,0" width="10"/>
 				<icon>char_overburdened</icon>
 				<invisible/>
 			</genericcontrol>
-			
-			<label>
-				<anchored to="dexterity_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_dexterity" />
+
+
+			<!-- Body -->
+			<label name="label_body">
+				<anchored to="label_dexterity" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_statslabel_body" />
 			</label>
-			
 			<number_charstatbase name="body_base" source="attributs.body_base">
-				<anchored to="dexterity_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_body">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onBodyChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
-				<anchored to="body_base">
+			<label name="label_body_plus">
+				<anchored to="label_body">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="body_modifier" source="attributs.body_modifier">
-				<anchored to="body_base" width="30" height="20">
+				<anchored to="label_body">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -433,15 +499,15 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
-				<anchored to="body_modifier">
+			<label name="label_body_equal">
+				<anchored to="label_body">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_equal" />
 			</label>
-			<number_charstattotal  name="body" source="attributs.body">
-				<anchored to="body_modifier" width="30" height="20">
+			<number_charstattotal name="body" source="attributs.body">
+				<anchored to="label_body">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -451,28 +517,35 @@
 				end
 				</script>
 			</number_charstattotal>
-			<label>
-				<anchored to="body_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_body" />
+
+			<!-- Speed -->
+			<label name="label_speed">
+				<anchored to="label_body" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_statslabel_speed" />
 			</label>
-			
 			<number_charstatbase name="speed_base" source="attributs.speed_base">
-				<anchored to="body_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_speed">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onSpeedChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
-				<anchored to="speed_base">
+			<label name="label_speed_plus">
+				<anchored to="label_speed">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="speed_modifier" source="attributs.speed_modifier">
-				<anchored to="speed_base" width="30" height="20">
+				<anchored to="label_speed">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -482,15 +555,15 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
-				<anchored to="speed_modifier">
+			<label name="label_speed_equal">
+				<anchored to="label_speed">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_equal" />
 			</label>
-			<number_charstattotal  name="speed" source="attributs.speed">
-				<anchored to="speed_modifier" width="30" height="20">
+			<number_charstattotal name="speed" source="attributs.speed">
+				<anchored to="label_speed">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -501,32 +574,39 @@
 				</script>
 			</number_charstattotal>
 			<genericcontrol name="spd_overburdened">
-				<anchored to="speed" position="right" offset="10,0" width="10" height="10"/>
+				<anchored to="speed" position="right" offset="10,0" width="10" />
 				<icon>char_overburdened</icon>
 				<invisible/>
 			</genericcontrol>
-			<label>
-				<anchored to="speed_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_speed" />
+
+			<!-- Empathy -->
+			<label name="label_empathy">
+				<anchored to="label_speed" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_statslabel_empathy" />
 			</label>
-			
 			<number_charstatbase name="empathy_base" source="attributs.empathy_base">
-				<anchored to="speed_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_empathy">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onEmpathyChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
-				<anchored to="empathy_base">
+			<label name="label_empathy_plus">
+				<anchored to="label_empathy">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="empathy_modifier" source="attributs.empathy_modifier">
-				<anchored to="empathy_base" width="30" height="20">
+				<anchored to="label_empathy">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -536,15 +616,15 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
-				<anchored to="empathy_modifier">
+			<label name="label_empathy_equal">
+				<anchored to="label_empathy">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_equal" />
 			</label>
-			<number_charstattotal  name="empathy" source="attributs.empathy">
-				<anchored to="empathy_modifier" width="30" height="20">
+			<number_charstattotal name="empathy" source="attributs.empathy">
+				<anchored to="label_empathy">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -554,28 +634,35 @@
 				end
 				</script>
 			</number_charstattotal>
-			<label>
-				<anchored to="empathy_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_empathy" />
+
+			<!-- Crafting -->
+			<label name="label_crafting">
+				<anchored to="label_empathy" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_statslabel_crafting" />
 			</label>
-			
 			<number_charstatbase name="crafting_base" source="attributs.crafting_base">
-				<anchored to="empathy_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_crafting">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onCraftingChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
-				<anchored to="crafting_base">
+			<label name="label_crafting_plus">
+				<anchored to="label_crafting">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="crafting_modifier" source="attributs.crafting_modifier">
-				<anchored to="crafting_base" width="30" height="20">
+				<anchored to="label_crafting">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -585,15 +672,15 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
-				<anchored to="crafting_modifier">
+			<label name="label_crafting_equal">
+				<anchored to="label_crafting">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_equal" />
 			</label>
-			<number_charstattotal  name="crafting" source="attributs.crafting">
-				<anchored to="crafting_modifier" width="30" height="20">
+			<number_charstattotal name="crafting" source="attributs.crafting">
+				<anchored to="label_crafting">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -603,28 +690,35 @@
 				end
 				</script>
 			</number_charstattotal>
-			<label>
-				<anchored to="crafting_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_crafting" />
+
+			<!-- Will -->
+			<label name="label_will">
+				<anchored to="label_crafting" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_statslabel_will" />
 			</label>
-			
 			<number_charstatbase name="will_base" source="attributs.will_base">
-				<anchored to="crafting_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_will">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onWillChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
-				<anchored to="will_base">
+			<label name="label_will_plus">
+				<anchored to="label_will">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="will_modifier" source="attributs.will_modifier">
-				<anchored to="will_base" width="30" height="20">
+				<anchored to="label_will">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -634,15 +728,15 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
-				<anchored to="will_modifier">
+			<label name="label_will_equal">
+				<anchored to="label_will">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_equal" />
 			</label>
 			<number_charstattotal  name="will" source="attributs.will">
-				<anchored to="will_modifier" width="30" height="20">
+				<anchored to="label_will">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -652,28 +746,35 @@
 				end
 				</script>
 			</number_charstattotal>
-			<label>
-				<anchored to="will_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_will" />
-			</label>
 
+			<!-- Vigor -->
+			<label name="label_vigor">
+				<anchored to="label_will" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_statslabel_vigor" />
+			</label>
 			<number_charstatbase name="vigor_base" source="attributs.vigor_base">
-				<anchored to="will_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_vigor">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 				function onValueChanged()
 					window.onVigorChanged();
 				end
 				</script>
 			</number_charstatbase>
-			<label>
-				<anchored to="vigor_base">
+			<label name="label_vigor_plus">
+				<anchored to="label_vigor">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_plus" />
 			</label>
 			<number_charstatmodifier name="vigor_modifier" source="attributs.vigor_modifier">
-				<anchored to="vigor_base" width="30" height="20">
+				<anchored to="label_vigor">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
@@ -683,40 +784,48 @@
 				end
 				</script>
 			</number_charstatmodifier>
-			<label>
-				<anchored to="vigor_modifier">
+			<label name="label_vigor_equal">
+				<anchored to="label_vigor">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 				<static textres="char_special_equal" />
 			</label>
-			<number_charstattotal  name="vigor" source="attributs.vigor">
-				<anchored to="vigor_modifier" width="30" height="20">
+			<number_charstattotal name="vigor" source="attributs.vigor">
+				<anchored to="label_vigor">
 					<left anchor="right" relation="relative" offset="10" />
 					<top />
 				</anchored>
 			</number_charstattotal>
-			<label>
-				<anchored to="vigor_base" position="right" offset="-110,0" />
-				<static textres="char_statslabel_vigor" />
-			</label>
-			
-			<basicnumber name="luck" source="attributs.luck">
-				<anchored to="vigor_base" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</basicnumber>
-			<label>
-				<anchored to="luck" position="right" offset="-110,0" />
+
+			<!-- Luck -->
+			<label name="label_luck">
+				<anchored to="label_vigor" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_statslabel_luck" />
 			</label>
-			
-			<basicnumber name="luckmax" source="attributs.luckmax">
-				<anchored to="luck" position="right" offset="30,0" width="30" height="20" />
+			<basicnumber name="luck" source="attributs.luck">
+				<anchored to="label_luck" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 			</basicnumber>
-			<label>
-				<anchored to="luckmax" position="right" offset="-47,0" />
+			<label name="label_luck_divide">
+				<anchored to="label_luck">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<static textres="char_special_divide" />
 			</label>
-			
+			<basicnumber name="luckmax" source="attributs.luckmax">
+				<anchored to="label_luck" width="30" height="20">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+			</basicnumber>
+
 			<!--stats top labels (base + modifier = total) -->
 			<label_fieldtop name="basestat_label">
 				<anchored to="intelligence_base" />
@@ -730,18 +839,32 @@
 				<anchored to="intelligence" />
 				<static textres="char_label_totalstat" />
 			</label_fieldtop>
-			
+
 			<!-- DERIVED STATS : STUN, RUN, LEAP, HP, STA, ENC, REC, PUNCH, KICK -->
+			<genericcontrol name="rightanchor">
+				<anchored to="attributs_frame" height="0" width="0">
+					<top offset="20" />
+					<right offset="-250" />
+				</anchored>
+			</genericcontrol>
+
+			<label name="label_stun">
+				<anchored to="rightanchor" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_derivedstatslabel_stun" />
+			</label>
 			<number_derivedstat_rollable name="stun" source="attributs.stun">
-				<anchored to="intelligence_base" position="right" offset="300,0" width="30" height="20" />
+				<anchored to="label_stun" position="right" offset="10" width="30" />
 				<script>
 					function action(draginfo)
 						local rActor = ActorManager.resolveActor(window.getDatabaseNode());
-						
+
 						ActionSave.performRoll(draginfo, rActor, "stun");
 						return true;
 					end
-					
+
 					function onDragStart(button, x, y, draginfo)
 						return action(draginfo);
 					end
@@ -751,36 +874,54 @@
 					end
 				</script>
 			</number_derivedstat_rollable>
-			<label>
-				<anchored to="stun" position="right" offset="-130,0" />
-				<static textres="char_derivedstatslabel_stun" />
-			</label>
-			
-			<number_derivedstat name="run" source="attributs.run">
-				<anchored to="stun" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</number_derivedstat>
-			<label>
-				<anchored to="run" position="right" offset="-130,0" />
+
+			<!-- Run -->
+			<label name="label_run">
+				<anchored to="label_stun" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_derivedstatslabel_run" />
 			</label>
-			
-			<number_derivedstat name="leap" source="attributs.leap">
-				<anchored to="run" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			<number_derivedstat name="run" source="attributs.run">
+				<anchored to="label_run">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 			</number_derivedstat>
-			<label>
-				<anchored to="leap" position="right" offset="-130,0" />
+
+			<!-- Leap -->
+			<label name="label_leap">
+				<anchored to="label_run" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_derivedstatslabel_leap" />
 			</label>
-			
-			<number_derivedstat name="woundthreshold" source="attributs.woundthreshold">
-				<anchored to="leap" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			<number_derivedstat name="leap" source="attributs.leap">
+				<anchored to="label_leap">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 			</number_derivedstat>
-			<label>
-				<anchored to="woundthreshold" position="right" offset="-130,0" />
+
+			<!-- Wound Threshold -->
+			<label name="label_woundthreshold">
+				<anchored to="label_leap" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_derivedstatslabel_woundthreshold" />
 			</label>
+			<number_derivedstat name="woundthreshold" source="attributs.woundthreshold">
+				<anchored to="label_woundthreshold">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+			</number_derivedstat>
+
 			<buttonfield name="woundthreshold_state" source="attributs.woundthreshold_state">
-				<anchored to="woundthreshold" position="right" offset="5,0" width="10" height="10" />
+				<anchored to="woundthreshold" position="right" offset="5,0" width="10" />
 				<state icon="button_woundthreshold_off" tooltipres="button_woundthreshold_off" />
 				<state icon="button_woundthreshold_on" tooltipres="button_woundthreshold_on" />
 				<default>0</default>
@@ -794,50 +935,83 @@
 				</script>
 			</buttonfield>
 
+			<!-- Hit Points -->
+			<label name="label_hit_points">
+				<anchored to="label_woundthreshold" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_derivedstatslabel_hit_points" />
+			</label>
 			<number_statcurrentvalue name="hit_points" source="attributs.hit_points">
-				<anchored to="woundthreshold" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_hit_points">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 					function onValueChanged()
 						window.onHPChanged();
 					end
 				</script>
 			</number_statcurrentvalue>
-			<label>
-				<anchored to="hit_points" position="right" offset="-130,0" />
-				<static textres="char_derivedstatslabel_hit_points" />
+			<label name="label_hit_points_divider">
+				<anchored to="label_hit_points">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+				<static textres="char_special_divide" />
 			</label>
 			<number_derivedstat name="hit_pointsmax" source="attributs.hit_pointsmax">
-				<anchored to="hit_points" position="right" offset="30,0" width="30" height="20" />
+				<anchored to="label_hit_points">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 			</number_derivedstat>
-			<label>
-				<anchored to="hit_pointsmax" position="right" offset="-47,0" />
-				<static textres="char_special_divide" />
-			</label>
-			
-			<number_statcurrentvalue name="stamina" source="attributs.stamina">
-				<anchored to="hit_points" position="insidebottomleft" offset="0,-25" width="30" height="20" />
-			</number_statcurrentvalue>
-			<label>
-				<anchored to="stamina" position="right" offset="-130,0" />
+
+			<!-- Stamina -->
+			<label name="label_stamina">
+				<anchored to="label_hit_points" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_derivedstatslabel_stamina" />
 			</label>
-			<number_derivedstat name="staminamax" source="attributs.staminamax">
-				<anchored to="stamina" position="right" offset="30,0" width="30" height="20" />
-			</number_derivedstat>
-			<label>
-				<anchored to="staminamax" position="right" offset="-47,0" />
+			<number_statcurrentvalue name="stamina" source="attributs.stamina">
+				<anchored to="label_stamina">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+			</number_statcurrentvalue>
+			<label name="label_stamina_divider">
+				<anchored to="label_stamina">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<static textres="char_special_divide" />
 			</label>
-
-			<number_derivedstat name="recovery" source="attributs.recovery">
-				<anchored to="stamina" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			<number_derivedstat name="staminamax" source="attributs.staminamax">
+				<anchored to="label_stamina">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 			</number_derivedstat>
-			<label>
-				<anchored to="recovery" position="right" offset="-130,0" />
+
+			<!-- Recovery -->
+			<label name="label_recovery">
+				<anchored to="label_stamina" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_derivedstatslabel_recovery" />
 			</label>
+			<number_derivedstat name="recovery" source="attributs.recovery">
+				<anchored to="label_recovery">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+			</number_derivedstat>
 			<buttoncontrol name="button_recovery">
-				<anchored to="recovery" position="right" offset="5,0" width="20" height="20" />
+				<anchored to="recovery" position="right" offset="5,0" width="20" />
 				<icon normal="button_action_heal" pressed="button_action_heal_down" />
 				<cursor hover="hand" />
 				<nodrag />
@@ -857,25 +1031,46 @@
 				</script>
 			</buttoncontrol>
 
+			<!-- Toxicity -->
+			<label name="label_toxicity">
+				<anchored to="label_recovery" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_derivedstatslabel_toxicity" />
+			</label>
 			<number_statcurrentvalue name="toxicity" source="attributs.toxicity">
-				<anchored to="recovery" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_toxicity">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 					function onValueChanged()
 						window.onToxicityChanged();
 					end
 				</script>
 			</number_statcurrentvalue>
-			<label>
-				<anchored to="toxicity" position="right" offset="-130,0" />
-				<static textres="char_derivedstatslabel_toxicity" />
-			</label>
-			<label>
-				<anchored to="toxicity" position="right" offset="10,0" />
+			<label name="label_toxicity_special_percent">
+				<anchored to="label_toxicity">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<static textres="char_special_percent" />
 			</label>
 
+			<!-- Encumbrance -->
+			<label name="label_encumbrance">
+				<anchored to="label_toxicity" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<static textres="char_derivedstatslabel_encumbrance" />
+			</label>
 			<number_derivedstat name="encumbrance" source="attributs.encumbrance">
-				<anchored to="toxicity" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+				<anchored to="label_encumbrance">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<script>
 					function onValueChanged()
 						window.onEncumbranceChanged();
@@ -885,56 +1080,73 @@
 					end
 				</script>
 			</number_derivedstat>
-			<label>
-				<anchored to="encumbrance" position="right" offset="-130,0" />
-				<static textres="char_derivedstatslabel_encumbrance" />
-			</label>
-			<number_derivedstat name="encumbrancemax" source="attributs.encumbrancemax">
-				<anchored to="encumbrance" position="right" offset="30,0" width="30" height="20" />
-			</number_derivedstat>
-			<label>
-				<anchored to="encumbrancemax" position="right" offset="-47,0" />
+			<label name="label_encumbrance_divider">
+				<anchored to="label_encumbrance">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 				<static textres="char_special_divide" />
 			</label>
-
-			<number_derivedstat name="meleebonusdamage" source="attributs.meleebonusdamage">
-				<anchored to="encumbrance" position="insidebottomleft" offset="0,-25" width="30" height="20" />
+			<number_derivedstat name="encumbrancemax" source="attributs.encumbrancemax">
+				<anchored to="label_encumbrance">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
 			</number_derivedstat>
-			<label>
-				<anchored to="meleebonusdamage" position="right" offset="-130,0" />
+
+			<!-- Melee Damage Bonux -->
+			<label name="label_meleebonusdamage">
+				<anchored to="label_encumbrance" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
 				<static textres="char_derivedstatslabel_meleebonusdamage" />
 			</label>
-			
-			
+			<number_derivedstat name="meleebonusdamage" source="attributs.meleebonusdamage">
+				<anchored to="label_meleebonusdamage">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
+				</anchored>
+			</number_derivedstat>
+
+
+
 			<!-- punch and kick damage bonus are set to invisible (useless here as we don't have enough space)-->
+			<label name="label_punch">
+				<anchored to="label_meleebonusdamage" anchor="bottom" width="80" >
+					<top offset="25"/>
+					<left />
+				</anchored>
+				<invisible/>
+				<static textres="char_derivedstatslabel_punch" />
+			</label>
 			<dice_modifier name="punch" source="attributs.punch">
-				<anchored to="meleebonusdamage" width="47" height="20">
-					<top anchor="bottom" relation="relative" offset="7" />
-					<left anchor="left" offset="0"/>
+				<anchored to="label_punch">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
 				</anchored>
 				<invisible/>
 				<modifierfield>attributs.punch_modifier</modifierfield>
 			</dice_modifier>
-			<label>
-				<anchored to="punch" position="right" offset="-147,0" />
-				<static textres="char_derivedstatslabel_punch" />
-				<invisible/>
-			</label>
-			<dice_modifier name="kick" source="attributs.kick">
-				<anchored to="punch" width="47" height="20">
-					<top anchor="bottom" relation="relative" offset="7" />
+
+			<label name="label_kick">
+				<anchored to="label_punch" anchor="bottom" width="80" >
+					<top offset="25"/>
 					<left />
+				</anchored>
+				<invisible/>
+				<static textres="char_derivedstatslabel_kick" />
+			</label>
+
+			<dice_modifier name="kick" source="attributs.kick">
+				<anchored to="label_kick">
+					<left anchor="right" relation="relative" offset="10" />
+					<top />
 				</anchored>
 				<modifierfield>attributs.kick_modifier</modifierfield>
 				<invisible/>
 			</dice_modifier>
-			<label>
-				<anchored to="kick" position="right" offset="-147,0" />
-				<static textres="char_derivedstatslabel_kick" />
-				<invisible/>
-			</label>
-			
-			
+
 		</sheetdata>
 	</windowclass>
 
