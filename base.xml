@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
 <root version="3.1" release="0.6.0" logo="logo.png">
-	<announcement text="The Witcher TRPG ruleset v0.6.0 for Fantasy Grounds\r
+	<announcement text="The Witcher TRPG ruleset v0.6.1 for Fantasy Grounds\r
 	The Witcher TRPG is edited by Talsorian Games Inc.
-	The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved. 
+	The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved.
 	The Witcher game is based on the prose of Andrzej Sapkowski.\r\r
 	This ruleset is a fan made project and not an official product from Talsorian Inc. nor CD Projekt Red.\r\r" font="emotefont" icon="rulesetlogo" />
 	<!-- Attributes -->
@@ -24,10 +24,10 @@
 	<!-- Tabletop settings -->
 	<includefile source="gameelements.xml" />
 	<script name="Options35E" file="scripts/data_options_TWTRPG.lua" />
-	
+
 	<!-- Graphics -->
 	<includefile source="graphics/graphics.xml" />
-	
+
 	<!-- Strings -->
 	<includefile source="strings/strings_campaign2.xml" />
 
@@ -44,12 +44,12 @@
 
 	<includefile source="campaign/record_npc.xml" />
 	<includefile source="campaign/record_npc_combat.xml" />
-	
+
 	<!-- Utilities -->
 	<includefile source="utility/utility_modifiers.xml" />
 	<includefile source="utility/utility_calendar.xml" />
 	<includefile source="utility/utility_effects.xml" />
-	
+
 	<!-- Reference -->
 	<includefile source="ref/ref_spells.xml" />
 
@@ -57,7 +57,7 @@
 	<includefile source="ct/ct_host.xml" />
 	<includefile source="ct/ct_client.xml" />
 	<includefile source="ct/template_ct2.xml" />
-	
+
 	<!-- PC Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
 	<script name="SkillsTable" file="campaign/scripts/skills_table.lua" />
@@ -65,10 +65,10 @@
 	<!-- Graphics tweaks -->
 	<includefile source="campaign/template_tweaks.xml" />
 	<includefile source="campaign/ps_order.xml" />
-	
+
 	<!-- Desktop -->
 	<includefile source="desktop/template_desktop.xml" />
-	
+
 	<!-- High-level scripts -->
 	<script name="DataCommon" file="scripts/data_common.lua" />
 	<script name="GameSystem" file="scripts/manager_gamesystem.lua" />
@@ -82,5 +82,5 @@
 	<script name="CombatManager2" file="scripts/manager_combat2.lua" />
 	<script name="EffectManager2" file="scripts/manager_effect2.lua" />
 	<script name="Json" file="scripts/json.lua" />
-	
+
 </root>

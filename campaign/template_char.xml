@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
@@ -9,34 +9,38 @@
 	<!--label de frame-->
 	<template name="frame_label">
 		<label_frametop>
-			
-		</label_frametop>	
+
+		</label_frametop>
 	</template>
-	
+
 	<!--stat de base-->
 	<template name="number_charstatbase">
 		<basicnumber>
+			<anchored width="30" height="20" />
 			<max>100</max>
 		</basicnumber>
 	</template>
 	<!--stat modificateur-->
 	<template name="number_charstatmodifier">
 		<basicnumber>
+			<anchored width="30" height="20" />
 			<max>100</max>
 		</basicnumber>
 	</template>
 	<!--stat total-->
 	<template name="number_charstattotal">
 		<basicnumber>
+			<anchored width="30" height="20" />
 			<frame name="fieldlight" offset="7,5,7,5" />
-			<disabled/> 
+			<disabled/>
 		</basicnumber>
 	</template>
 	<!--stat calculee-->
 	<template name="number_derivedstat">
 		<basicnumber>
+			<anchored width="30" height="20" />
 			<frame name="fieldlight" offset="7,5,7,5" />
-			<disabled/> 
+			<disabled/>
 		</basicnumber>
 	</template>
 	<!--stat calculee rollable-->
@@ -44,7 +48,7 @@
 		<basicnumber>
 			<frame name="fieldlight" offset="7,5,7,5" />
 			<rollable />
-			<readonly /> 
+			<readonly />
 		</basicnumber>
 	</template>
 	<!--stat rollable-->
@@ -56,7 +60,9 @@
 	</template>
 	<!--stat valeur courante-->
 	<template name="number_statcurrentvalue">
-		<basicnumber/>
+		<basicnumber>
+			<anchored width="30" height="20" />
+		</basicnumber>
 	</template>
 
 	<!-- List Skills -->
@@ -79,30 +85,30 @@
 				function getStat(rActor, sFindStat)
 					local sStat = "";
 					local nStat = 0;
-					
+
 					local rActor = DB.findNode(rActor.sCreatureNode);
 					sStat = DataCommon.ability_stol [sFindStat];
-					
+
 					nStat = rActor.getChild("attributs." .. sStat).getValue();
-					
+
 					local sFirstChar = string.sub(sStat, 1, 1);
 					local sEndChar = string.sub(sStat, 2, string.len(sStat));
 					sStat = string.upper(sFirstChar) .. sEndChar;
-					
+
 					return sStat,nStat;
 				end
 			</script>
 			<max>100</max>
 		</basicnumber>
 	</template>
-	
+
 	<!-- Dice -->
 	<template name="dice_modifier">
 		<basicdice>
 			<script file="campaign/scripts/dice_modifier.lua" />
 		</basicdice>
 	</template>
-	
+
 	<!--Ammo counter-->
 	<template name="state_charammocounter">
 		<buttongroup_counter>
@@ -112,7 +118,7 @@
 			</sourcefields>
 		</buttongroup_counter>
 	</template>
-	
+
 	<!--cycler stat-->
 	<template name="cycler_ability">
 		<button_stringcycler>
@@ -127,7 +133,7 @@
 			</parameters>
 		</button_stringcycler>
 	</template>
-	
+
 	<!--cycler combat skill-->
 	<template name="cycler_combatskill">
 		<button_stringcycler>
@@ -141,7 +147,7 @@
 			</parameters>
 		</button_stringcycler>
 	</template>
-	
+
 	<!--cycler combat bonus damage -->
 	<template name="cycler_dmgbonusstat">
 		<button_stringcycler>

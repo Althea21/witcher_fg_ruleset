@@ -8,11 +8,10 @@
 	<includefile source="graphics/graphics_radial.xml" />
 	<script name="DesktopManagerWitcher" file="graphics/scripts/data_library_com.lua" />
 
-	<string name="option_val_DDCL_witcher">Witcher</string>
-	<icon name="desktopdecal_witcher" file="graphics/decals/decal_witcher.png" />
+
 	<script name="DecalWitcher">
 		function onInit()
-			OptionsManager.addOptionValue("DDCL", "option_val_DDCL_witcher", "desktopdecal_witcher", true);	
+			DecalManager.setDefault("images/decals/witchertrpg_decal.png@WitcherTRPG Assets");
 		end
 	</script>
 </root>
