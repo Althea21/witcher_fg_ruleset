@@ -125,21 +125,41 @@
 			</script>
 		</button_text_sm>
 	</template>
-	<template name="button_item_crafting">
+	<template name="button_item_crafting_components">
 		<button_text_sm>
 			<anchored to="buttonanchor" width="80">
 				<top />
 				<left anchor="right" relation="relative" offset="5" />
 			</anchored>
-			<state textres="library_recordview_label_item_crafting" />
+			<state textres="library_recordview_label_item_crafting_components" />
 			<script>
 				function onButtonPress()
-					local w = Interface.findWindow("reference_groupedlist", "reference.crafting");
+					local w = Interface.findWindow("reference_groupedlist", "reference.craftingcomponents");
 					if w then
-						Interface.toggleWindow("reference_groupedlist", "reference.crafting");
+						Interface.toggleWindow("reference_groupedlist", "reference.craftingcomponents");
 					else
-						w = Interface.openWindow("reference_groupedlist", "reference.crafting");
-						w.init({ sRecordType = "item", sListView = "crafting" });
+						w = Interface.openWindow("reference_groupedlist", "reference.craftingcomponents");
+						w.init({ sRecordType = "item", sListView = "craftingcomponents" });
+					end
+				end
+			</script>
+		</button_text_sm>
+	</template>
+	<template name="button_item_crafting_diagrams">
+		<button_text_sm>
+			<anchored to="buttonanchor" width="80">
+				<top />
+				<left anchor="right" relation="relative" offset="5" />
+			</anchored>
+			<state textres="library_recordview_label_item_crafting_diagrams" />
+			<script>
+				function onButtonPress()
+					local w = Interface.findWindow("reference_groupedlist", "reference.craftingdiagrams");
+					if w then
+						Interface.toggleWindow("reference_groupedlist", "reference.craftingdiagrams");
+					else
+						w = Interface.openWindow("reference_groupedlist", "reference.craftingdiagrams");
+						w.init({ sRecordType = "item", sListView = "craftingdiagrams" });
 					end
 				end
 			</script>

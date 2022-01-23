@@ -39,9 +39,8 @@ function update()
 	local bAlchemical = sTypeLower == "alchemical items";
 	local bToolKits = sTypeLower == "tool kits";
 	local bGeneral = sTypeLower == "general gear";
-	local bCrafting = sTypeLower == "crafting";
-	local bCraftingDiagrams = false;
-	local bCrafting = sTypeLower:match("crafting");
+	local bCrafting = sTypeLower == "crafting components";
+	local bCraftingDiagrams = sTypeLower == "crafting diagrams";
 	local bSubstances = sTypeLower == "substances";
 	local bFormulae = sTypeLower == "formulae";
 	local bServicesOrLodging = false;
@@ -58,12 +57,12 @@ function update()
 		bMount = true;
 	end
 
-	if bCrafting then
-		if sSubtypeLower:find("diagrams") then
-			bCrafting = false;
-			bCraftingDiagrams = true;
-		end
-	end
+	-- if bCrafting then
+	-- 	if sSubtypeLower:find("diagrams") then
+	-- 		bCrafting = false;
+	-- 		bCraftingDiagrams = true;
+	-- 	end
+	-- end
 
 	if bArmorEnhancements then
 		bArmor = false;
@@ -88,7 +87,7 @@ function update()
 	local bSection3 = false;
 	if updateControl("damagetype", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("weaponaccuracy", bReadOnly, bID and (bWeapon)) then bSection3 = true; end
-	if updateControl("availability", bReadOnly, bID and not (bGeneral or bToolKits)) then bSection3 = true; end
+	if updateControl("availability", bReadOnly, bID and not (bGeneral or bToolKits or bCrafting or bCraftingDiagrams)) then bSection3 = true; end
 	if updateControl("damage", bReadOnly, bID and bWeapon) then bSection3 = true; end
 	if updateControl("reliability", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("hands", bReadOnly, bID and bWeapon) then bSection3 = true; end
@@ -97,7 +96,7 @@ function update()
 	if updateControl("armorenhancement", bReadOnly, bID and (bArmor)) then bSection3 = true; end
 
 	if updateControl("rarity", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
-	if updateControl("location", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
+	if updateControl("componentlocation", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
 	if updateControl("quantity", bReadOnly, bID and bCrafting) then bSection3 = true; end
 	if updateControl("foragedc", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
 

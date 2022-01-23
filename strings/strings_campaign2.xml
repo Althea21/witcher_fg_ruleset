@@ -944,7 +944,23 @@
 	<string name="item_grouped_label_health">Health</string>
 	<string name="item_grouped_tooltip_health">Health</string>
 	<string name="item_grouped_label_cost">Cost</string>
+	<string name="item_grouped_tooltip_cost">Cost</string>
 	<string name="item_grouped_label_craftingdc">Crafting DC</string>
+	<string name="item_grouped_tooltip_craftingdc">Crafting DC</string>
+	<string name="item_grouped_label_rarity">Rarity</string>
+	<string name="item_grouped_tooltip_rarity">Rarity of this Crafting Component</string>
+	<string name="item_grouped_label_location">Location</string>
+	<string name="item_grouped_tooltip_location">Location where this Crafting Component can be found</string>
+	<string name="item_grouped_label_quantity">Quantity</string>
+	<string name="item_grouped_tooltip_quantity">Quantity of this Crafting Component</string>
+	<string name="item_grouped_label_time">Time</string>
+	<string name="item_grouped_tooltip_time">Time required to craft this item</string>
+	<string name="item_grouped_label_foragedc">Forage DC</string>
+	<string name="item_grouped_tooltip_foragedc">Forage DC to find some of this Crafting Component</string>
+	<string name="item_grouped_label_components">Components</string>
+	<string name="item_grouped_tooltip_components">The Components required to craft this item</string>
+	<string name="item_grouped_label_investment">Investment</string>
+	<string name="item_grouped_tooltip_investment">Spending these crowns gives you the materials required (if the GM allows)</string>
 
 	<!--NPC-->
 	<string name="npc_label_autocalculation">Auto calculation</string>
@@ -1077,6 +1093,7 @@
 	<string name="item_label_time">Time</string>
 	<string name="item_label_craftingdc">Crafting DC</string>
 
-	<string name="library_recordview_label_item_crafting">Crating</string>
+	<string name="library_recordview_label_item_crafting_components">Craft Components</string>
+	<string name="library_recordview_label_item_crafting_diagrams">Craft Diagrams</string>
 
 </root>

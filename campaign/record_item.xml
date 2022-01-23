@@ -169,10 +169,14 @@
 			</label_column>
 			<string_columnh name="rarity" />
 
-			<label_column name="location_label">
+			<!--
+				Had to call this 'componentlocation' rather than 'location' as it wouldn't
+			    store the value first time around (maybe reserved name?)
+			-->
+			<label_column name="componentlocation_label">
 				<static textres="item_label_location" />
 			</label_column>
-			<string_columnh name="location" />
+			<string_columnh name="componentlocation" />
 
 			<label_column name="quantity_label">
 				<static textres="item_label_quantity" />
