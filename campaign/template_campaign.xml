@@ -125,4 +125,24 @@
 			</script>
 		</button_text_sm>
 	</template>
+	<template name="button_item_crafting">
+		<button_text_sm>
+			<anchored to="buttonanchor" width="80">
+				<top />
+				<left anchor="right" relation="relative" offset="5" />
+			</anchored>
+			<state textres="library_recordview_label_item_crafting" />
+			<script>
+				function onButtonPress()
+					local w = Interface.findWindow("reference_groupedlist", "reference.crafting");
+					if w then
+						Interface.toggleWindow("reference_groupedlist", "reference.crafting");
+					else
+						w = Interface.openWindow("reference_groupedlist", "reference.crafting");
+						w.init({ sRecordType = "item", sListView = "crafting" });
+					end
+				end
+			</script>
+		</button_text_sm>
+	</template>
 </root>

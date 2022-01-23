@@ -337,21 +337,6 @@ function checkWeaponIDChange(nodeWeapon)
 	end
 	DB.setValue(nodeWeapon, "name", "string", sName);
 
-	-- local nBonus = 0;
-	-- if bItemID then
-	-- 	DB.setValue(nodeWeapon, "attackbonus", "number", DB.getValue(nodeWeapon, "attackbonus", 0) + DB.getValue(nodeItem, "bonus", 0));
-	-- 	local aDamageNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "damagelist"));
-	-- 	if #aDamageNodes > 0 then
-	-- 		DB.setValue(aDamageNodes[1], "bonus", "number", DB.getValue(aDamageNodes[1], "bonus", 0) + DB.getValue(nodeItem, "bonus", 0));
-	-- 	end
-	-- else
-	-- 	DB.setValue(nodeWeapon, "attackbonus", "number", DB.getValue(nodeWeapon, "attackbonus", 0) - DB.getValue(nodeItem, "bonus", 0));
-	-- 	local aDamageNodes = UtilityManager.getSortedTable(DB.getChildren(nodeWeapon, "damagelist"));
-	-- 	if #aDamageNodes > 0 then
-	-- 		DB.setValue(aDamageNodes[1], "bonus", "number", DB.getValue(aDamageNodes[1], "bonus", 0) - DB.getValue(nodeItem, "bonus", 0));
-	-- 	end
-	-- end
-
 	if bItemID then
 		DB.setValue(nodeWeapon, "isidentified", "number", 1);
 	else
@@ -397,52 +382,5 @@ function getEffects(v)
 	return aEffectsToUpdate
 end
 
-function checkEffect(v, sTargetEffect)
-	local sEffects;
-	local sVarType = type(v);
-	if sVarType == "databasenode" then
-		sEffects = DB.getValue(v, "properties", "");
-	elseif sVarType == "string" then
-		sEffects = v;
-	else
-		return nil;
-	end
 
-	local tProps = StringManager.split(sEffects:lower(), ",", true);
-	for _,s in ipairs(tProps) do
-		if s:match("^" .. sTargetEffect) then
-			return true;
-		end
-	end
-	return false;
-end
-
-function getEffect(v, sTargetPattern)
-	local sEffects;
-	local sVarType = type(v);
-	if sVarType == "databasenode" then
-		sEffects = DB.getValue(v, "effect", "");
-	elseif sVarType == "string" then
-		sEffects = v;
-	else
-		return nil;
-	end
-
-	local tProps = StringManager.split(sEffects:lower(), ",", true);
-	for _,s in ipairs(tProps) do
-		local result = s:match("^" .. sTargetPattern);
-		if result then
-			return result;
-		end
-	end
-	return nil;
-end
-
-function getEffectNumber(v, sTargetPattern)
-	local sProp = getEffect(v, sTargetPattern);
-	if sProp then
-		return tonumber(sProp) or 0;
-	end
-	return nil;
-end
 

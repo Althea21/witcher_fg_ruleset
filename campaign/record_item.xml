@@ -127,10 +127,12 @@
 				<static textres="item_label_reliability" />
 			</label_column>
 			<number_columnh name="reliability" />
+
 			<label_column name="hands_label">
 				<static textres="item_label_hands" />
 			</label_column>
 			<number_columnh name="hands" />
+
 			<label_column name="range_label">
 				<static textres="item_label_range" />
 			</label_column>
@@ -141,6 +143,12 @@
 				<static textres="item_label_effect" />
 			</label_column>
 			<string_columnh name="effect" />
+
+			<label_column name="resistances_label">
+				<static textres="item_label_resistances" />
+			</label_column>
+			<string_columnh name="resistances" />
+
 			<label_column name="cover_label">
 				<static textres="item_label_cover" />
 			</label_column>
@@ -155,6 +163,46 @@
 				<static textres="item_label_enhancements" />
 			</label_column>
 			<number_columnh name="enhancements" />
+
+			<label_column name="rarity_label">
+				<static textres="item_label_rarity" />
+			</label_column>
+			<string_columnh name="rarity" />
+
+			<label_column name="location_label">
+				<static textres="item_label_location" />
+			</label_column>
+			<string_columnh name="location" />
+
+			<label_column name="quantity_label">
+				<static textres="item_label_quantity" />
+			</label_column>
+			<string_columnh name="quantity" />
+
+			<label_column name="foragedc_label">
+				<static textres="item_label_foragedc" />
+			</label_column>
+			<string_columnh name="foragedc" />
+
+			<label_column name="craftingdc_label">
+				<static textres="item_label_craftingdc" />
+			</label_column>
+			<number_columnh name="craftingdc" />
+
+			<label_column name="time_label">
+				<static textres="item_label_time" />
+			</label_column>
+			<string_columnh name="time" />
+
+			<label_column name="components_label">
+				<static textres="item_label_components" />
+			</label_column>
+			<string_columnh name="components" />
+
+			<label_column name="investment_label">
+				<static textres="item_label_investment" />
+			</label_column>
+			<number_columnh name="investment" />
 
 			<line_column name="divider4" />
 

@@ -39,12 +39,34 @@ function update()
 	local bAlchemical = sTypeLower == "alchemical items";
 	local bToolKits = sTypeLower == "tool kits";
 	local bGeneral = sTypeLower == "general gear";
+	local bCrafting = sTypeLower == "crafting";
+	local bCraftingDiagrams = false;
+	local bCrafting = sTypeLower:match("crafting");
+	local bSubstances = sTypeLower == "substances";
+	local bFormulae = sTypeLower == "formulae";
 	local bServicesOrLodging = false;
+	local bArmorEnhancements = sTypeLower == "armor enhancements";
+	local bMount = false;
 
 	if bGeneral then
 		if sSubtypeLower == "services" or sSubtypeLower == "lodging" then
 			bServicesOrLodging = true;
 		end
+	end
+
+	if sSubtypeLower == "saddles" or sSubtypeLower == "blinders" or sSubtypeLower == "saddlebags" or sSubtypeLower == "barding" then
+		bMount = true;
+	end
+
+	if bCrafting then
+		if sSubtypeLower:find("diagrams") then
+			bCrafting = false;
+			bCraftingDiagrams = true;
+		end
+	end
+
+	if bArmorEnhancements then
+		bArmor = false;
 	end
 
 	local bSection1 = false;
@@ -71,17 +93,28 @@ function update()
 	if updateControl("reliability", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("hands", bReadOnly, bID and bWeapon) then bSection3 = true; end
 	if updateControl("range", bReadOnly, bID and bWeapon) then bSection3 = true; end
-	if updateControl("stoppingpower", bReadOnly, bID and bArmor) then bSection3 = true; end
+	if updateControl("stoppingpower", bReadOnly, bID and (bArmor or bArmorEnhancements)) then bSection3 = true; end
 	if updateControl("armorenhancement", bReadOnly, bID and (bArmor)) then bSection3 = true; end
 
+	if updateControl("rarity", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
+	if updateControl("location", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
+	if updateControl("quantity", bReadOnly, bID and bCrafting) then bSection3 = true; end
+	if updateControl("foragedc", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
+
+	if updateControl("craftingdc", bReadOnly, bID and bCraftingDiagrams or bFormulae) then bSection3 = true; end
+	if updateControl("time", bReadOnly, bID and (bCraftingDiagrams or bFormulae)) then bSection3 = true; end
+	if updateControl("components", bReadOnly, bID and bCraftingDiagrams or bFormulae) then bSection3 = true; end
+	if updateControl("investment", bReadOnly, bID and bCraftingDiagrams) then bSection3 = true; end
+
 	local bSection4 = false;
-	if updateControl("effect", bReadOnly, bID and (bWeapon or bArmor or bAmmunition or bAlchemical or bToolKits)) then bSection4 = true; end
+	if updateControl("effect", bReadOnly, bID and (bWeapon or bArmor or bAmmunition or bAlchemical or bToolKits or bArmorEnhancements or bMount)) then bSection4 = true; end
+	if updateControl("resistances", bReadOnly, bID and (bArmorEnhancements)) then bSection4 = true; end
 	if updateControl("cover", bReadOnly, bID and bArmor) then bSection4 = true; end
 	if updateControl("concealment", bReadOnly, bID and (bWeapon or bAmmunition or bToolKits)) then bSection4 = true; end
 	if updateControl("enhancements", bReadOnly, bID and (bWeapon)) then bSection4 = true; end
 
 	if updateControl("encumbrancevalue", bReadOnly, bID and bArmor) then bSection5 = true; end
-	if updateControl("weight", bReadOnly, bID and not bServicesOrLodging) then bSection5 = true; end
+	if updateControl("weight", bReadOnly, bID and not (bServicesOrLodging or bCraftingDiagrams or bFormulae)) then bSection5 = true; end
 	if updateControl("cost", bReadOnly, bID) then bSection5 = true; end
 
 	local bSection6 = bID;

@@ -41,8 +41,10 @@ aRecordOverrides = {
 		aDataMap = { "item", "reference.equipment", "reference.magicitemdata" },
 		fRecordDisplayClass = getItemRecordDisplayClass,
 		aRecordDisplayClasses = { "item", "reference_magicitem", "reference_armor", "reference_misc", "reference_cybernetics", "reference_weapon" },
-		aGMListButtons = { "button_item_armor", "button_item_weapons" };
-		aPlayerListButtons = { "button_item_armor", "button_item_weapons" };
+		-- aGMListButtons = { "button_item_armor", "button_item_weapons" };
+		-- aPlayerListButtons = { "button_item_armor", "button_item_weapons" };
+		aGMListButtons = { "button_item_armor", "button_item_weapons", "button_item_crafting" };
+		aPlayerListButtons = { "button_item_armor", "button_item_weapons", "button_item_crafting" };
 		aCustomFilters = {
 			["Type"] = { sField = "type" },
 			["SubType"] = { sField = "subtype" },
@@ -69,7 +71,7 @@ aListViews = {
 				{ sCustom = "item_isidentified" }
 			},
 			aGroups = { { sDBField = "subtype" } },
-			aGroupValueOrder = { "Light Armor", "Medium Armor", "Heavy Armor", "Light Shields", "Medium Shields", "Heavy Shields" },
+			aGroupValueOrder = { "Light Armor", "Elderfolk Light Armor", "Medium Armor", "Elderfolk Medium Armor", "Heavy Armor", "Elderfolk Heavy Armor", "Light Shields", "Elderfolk Light Shields", "Medium Shields", "Elderfolk Medium Shields", "Heavy Shields", "Elderfolk Heavy Shields" },
 		},
 		["weapon"] = {
 			aColumns = {
@@ -92,7 +94,23 @@ aListViews = {
 				{ sCustom = "item_isidentified" }
 			},
 			aGroups = { { sDBField = "subtype" } },
-			aGroupValueOrder = { "Swords", "Small Blades", "Axes", "Bludgeons", "Pole Arms", "Staves", "Thrown Weapons", "Bows", "Crossbows" },
+			aGroupValueOrder = { "Swords", "Elderfolk Swords", "Witcher's Swords", "Small Blades", "Elderfolk Small Blades", "Axes", "Elderfolk Axes", "Bludgeons", "Elderfolk Bludgeons", "Pole Arms", "Elderfolk Pole Arms", "Staves", "Elderfolk Staves", "Thrown Weapons", "Elderfolk Thrown Weapons", "Bows", "Elderfolk Bows", "Crossbows", "Elderfolk Crossbows" },
+		},
+		["crafting"] = {
+			aColumns = {
+				{ sName = "name", sType = "string", sHeadingRes = "item_grouped_label_name", nWidth=150 },
+				-- { sName = "craftingdc", sType = "number", sHeadingRes = "item_grouped_label_craftingdc", nWidth=50, bCentered=true },
+				-- { sName = "time", sType = "string", sHeadingRes = "item_grouped_label_wa", nWidth=40, bCentered=true },
+				-- { sName = "components", sType = "string", sHeadingRes = "item_grouped_label_availability", nWidth=60, bCentered=true },
+				-- { sName = "investment", sType = "number", sHeadingRes = "item_grouped_label_damage", nWidth=60, bCentered=true },
+				{ sName = "cost", sType = "string", sHeadingRes = "item_grouped_label_cost", bCentered=true },
+			},
+			aFilters = {
+				{ sDBField = "type", vFilterValue = "Crafting" },
+				{ sCustom = "item_isidentified" }
+			},
+			aGroups = { { sDBField = "subtype" } },
+			aGroupValueOrder = { "Components - Alchemical Treatments", "Components - Crafting Materials", "Components - Hides & Animal Parts", "Components - Ingots & Minerals", "Ingredient Diagrams - Novice Diagrams", "Ingredient Diagrams - Journeyman Diagrams", "Ingredient Diagrams - Master Diagrams", "Weapon Diagrams - Novice Diagrams", "Weapon Diagrams - Journeyman Diagrams", "Weapon Diagrams - Master Diagrams", "Armor Diagrams - Novice Diagrams", "Armor Diagrams - Journeyman Diagrams", "Armor Diagrams - Master Diagrams" },
 		},
 	},
 };

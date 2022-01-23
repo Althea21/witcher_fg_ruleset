@@ -944,6 +944,7 @@
 	<string name="item_grouped_label_health">Health</string>
 	<string name="item_grouped_tooltip_health">Health</string>
 	<string name="item_grouped_label_cost">Cost</string>
+	<string name="item_grouped_label_craftingdc">Crafting DC</string>
 
 	<!--NPC-->
 	<string name="npc_label_autocalculation">Auto calculation</string>
@@ -1060,11 +1061,22 @@
 	<string name="item_label_range">Range</string>
 	<string name="item_label_speed">Speed</string>
 	<string name="item_label_effect">Effects</string>
+	<string name="item_label_resistances">Resistances</string>
 	<string name="item_label_concealment">Concealment</string>
 	<string name="item_label_enhancements">Enhancements</string>
 	<string name="item_label_stoppingpower">Stopping Power</string>
 	<string name="item_label_encumbrancevalue">Encumbrance Value</string>
 	<string name="item_label_armorenhancement">Armor Enhancement</string>
 	<string name="item_label_cover">Cover</string>
+	<string name="item_label_rarity">Rarity</string>
+	<string name="item_label_location">Location</string>
+	<string name="item_label_quantity">Quantity</string>
+	<string name="item_label_foragedc">Forage DC</string>
+	<string name="item_label_investment">Investment</string>
+	<string name="item_label_components">Components</string>
+	<string name="item_label_time">Time</string>
+	<string name="item_label_craftingdc">Crafting DC</string>
+
+	<string name="library_recordview_label_item_crafting">Crating</string>
 
 </root>
