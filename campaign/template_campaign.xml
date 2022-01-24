@@ -139,7 +139,7 @@
 						Interface.toggleWindow("reference_groupedlist", "reference.craftingcomponents");
 					else
 						w = Interface.openWindow("reference_groupedlist", "reference.craftingcomponents");
-						w.init({ sRecordType = "item", sListView = "craftingcomponents" });
+						w.init({ sRecordType = "item", sListView = "crafting_components" });
 					end
 				end
 			</script>
@@ -159,7 +159,7 @@
 						Interface.toggleWindow("reference_groupedlist", "reference.craftingdiagrams");
 					else
 						w = Interface.openWindow("reference_groupedlist", "reference.craftingdiagrams");
-						w.init({ sRecordType = "item", sListView = "craftingdiagrams" });
+						w.init({ sRecordType = "item", sListView = "crafting_diagrams" });
 					end
 				end
 			</script>

@@ -95,7 +95,7 @@ aListViews = {
 			aGroups = { { sDBField = "subtype" } },
 			aGroupValueOrder = { "Swords", "Elderfolk Swords", "Witcher's Swords", "Small Blades", "Elderfolk Small Blades", "Axes", "Elderfolk Axes", "Bludgeons", "Elderfolk Bludgeons", "Pole Arms", "Elderfolk Pole Arms", "Staves", "Elderfolk Staves", "Thrown Weapons", "Elderfolk Thrown Weapons", "Bows", "Elderfolk Bows", "Crossbows", "Elderfolk Crossbows" },
 		},
-		["craftingcomponents"] = {
+		["crafting_components"] = {
 			aColumns = {
 				{ sName = "name", sType = "string", sHeadingRes = "item_grouped_label_name", nWidth=150 },
 				{ sName = "rarity", sType = "string", sHeadingRes = "item_grouped_label_rarity", sTooltipRes = "item_grouped_tooltip_rarity", nWidth=60, bCentered=true },
@@ -112,7 +112,7 @@ aListViews = {
 			aGroups = { { sDBField = "subtype" } },
 			aGroupValueOrder = { "Crafting Materials", "Hides & Animal Parts", "Alchemical Treatments", "Ingots & Minerals" },
 		},
-		["craftingdiagrams"] = {
+		["crafting_diagrams"] = {
 			aColumns = {
 				{ sName = "name", sType = "string", sHeadingRes = "item_grouped_label_name", nWidth=150 },
 				{ sName = "craftingdc", sType = "number", sHeadingRes = "item_grouped_label_craftingdc", sTooltipRes = "item_grouped_tooltip_craftingdc", nWidth=65, bCentered=true },
