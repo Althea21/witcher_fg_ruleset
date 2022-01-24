@@ -87,7 +87,7 @@ function update()
 	local bSection3 = false;
 	if updateControl("damagetype", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("weaponaccuracy", bReadOnly, bID and (bWeapon)) then bSection3 = true; end
-	if updateControl("availability", bReadOnly, bID and not (bGeneral or bToolKits or bCrafting or bCraftingDiagrams)) then bSection3 = true; end
+	if updateControl("availability", bReadOnly, bID and not (bGeneral or bToolKits or bCrafting or bCraftingDiagrams or bSubstances or bFormulae)) then bSection3 = true; end
 	if updateControl("damage", bReadOnly, bID and bWeapon) then bSection3 = true; end
 	if updateControl("reliability", bReadOnly, bID and (bWeapon or bAmmunition)) then bSection3 = true; end
 	if updateControl("hands", bReadOnly, bID and bWeapon) then bSection3 = true; end
@@ -95,10 +95,10 @@ function update()
 	if updateControl("stoppingpower", bReadOnly, bID and (bArmor or bArmorEnhancements)) then bSection3 = true; end
 	if updateControl("armorenhancement", bReadOnly, bID and (bArmor)) then bSection3 = true; end
 
-	if updateControl("rarity", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
-	if updateControl("componentlocation", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
-	if updateControl("quantity", bReadOnly, bID and bCrafting) then bSection3 = true; end
-	if updateControl("foragedc", bReadOnly, bID and bCrafting or bSubstances) then bSection3 = true; end
+	if updateControl("rarity", bReadOnly, bID and (bCrafting or bSubstances)) then bSection3 = true; end
+	if updateControl("componentlocation", bReadOnly, bID and (bCrafting or bSubstances)) then bSection3 = true; end
+	if updateControl("quantity", bReadOnly, bID and (bCrafting or bSubstances)) then bSection3 = true; end
+	if updateControl("foragedc", bReadOnly, bID and (bCrafting or bSubstances)) then bSection3 = true; end
 
 	if updateControl("craftingdc", bReadOnly, bID and bCraftingDiagrams or bFormulae) then bSection3 = true; end
 	if updateControl("time", bReadOnly, bID and (bCraftingDiagrams or bFormulae)) then bSection3 = true; end

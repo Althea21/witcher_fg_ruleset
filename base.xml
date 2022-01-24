@@ -25,10 +25,6 @@
 	<includefile source="gameelements.xml" />
 	<script name="Options35E" file="scripts/data_options_TWTRPG.lua" />
 
-<<<<<<< HEAD
-
-=======
->>>>>>> master
 	<!-- Graphics -->
 	<includefile source="graphics/graphics.xml" />
 
@@ -89,12 +85,9 @@
 	<script name="CombatManager2" file="scripts/manager_combat2.lua" />
 	<script name="EffectManager2" file="scripts/manager_effect2.lua" />
 	<script name="Json" file="scripts/json.lua" />
-<<<<<<< HEAD
 	<script name="ItemManager2" file="scripts/manager_item2.lua" />
 
 	<!-- Data -->
 	<script name="LibraryDataTWTRPG" file="scripts/data_library_TWTRPG.lua" />
-=======
->>>>>>> master
 
 </root>

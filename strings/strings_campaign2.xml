@@ -1095,5 +1095,6 @@
 
 	<string name="library_recordview_label_item_crafting_components">Craft Components</string>
 	<string name="library_recordview_label_item_crafting_diagrams">Craft Diagrams</string>
+	<string name="library_recordview_label_item_substances">Substances</string>
 
 </root>

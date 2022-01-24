@@ -87,7 +87,7 @@
 	</template>
 	<template name="button_item_armor">
 		<button_text_sm>
-			<anchored to="buttonanchor" width="80">
+			<anchored to="buttonanchor" width="60">
 				<top />
 				<left anchor="right" relation="relative" offset="5" />
 			</anchored>
@@ -107,7 +107,7 @@
 	</template>
 	<template name="button_item_weapons">
 		<button_text_sm>
-			<anchored to="buttonanchor" width="80">
+			<anchored to="buttonanchor" width="60">
 				<top />
 				<left anchor="right" relation="relative" offset="5" />
 			</anchored>
@@ -127,7 +127,7 @@
 	</template>
 	<template name="button_item_crafting_components">
 		<button_text_sm>
-			<anchored to="buttonanchor" width="80">
+			<anchored to="buttonanchor" width="90">
 				<top />
 				<left anchor="right" relation="relative" offset="5" />
 			</anchored>
@@ -160,6 +160,26 @@
 					else
 						w = Interface.openWindow("reference_groupedlist", "reference.craftingdiagrams");
 						w.init({ sRecordType = "item", sListView = "craftingdiagrams" });
+					end
+				end
+			</script>
+		</button_text_sm>
+	</template>
+	<template name="button_item_substances">
+		<button_text_sm>
+			<anchored to="buttonanchor" width="70">
+				<top />
+				<left anchor="right" relation="relative" offset="5" />
+			</anchored>
+			<state textres="library_recordview_label_item_substances" />
+			<script>
+				function onButtonPress()
+					local w = Interface.findWindow("reference_groupedlist", "reference.substances");
+					if w then
+						Interface.toggleWindow("reference_groupedlist", "reference.substances");
+					else
+						w = Interface.openWindow("reference_groupedlist", "reference.substances");
+						w.init({ sRecordType = "item", sListView = "substances" });
 					end
 				end
 			</script>

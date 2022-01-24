@@ -4,7 +4,6 @@
 --
 function getItemIsIdentified(vRecord, vDefault)
 	local sFred = LibraryData.getIDState("item", vRecord, true);
-	Debug.console('sFred', sFred);
 	return LibraryData.getIDState("item", vRecord, true);
 end
 
@@ -43,8 +42,8 @@ aRecordOverrides = {
 		aRecordDisplayClasses = { "item", "reference_magicitem", "reference_armor", "reference_misc", "reference_cybernetics", "reference_weapon" },
 		-- aGMListButtons = { "button_item_armor", "button_item_weapons" };
 		-- aPlayerListButtons = { "button_item_armor", "button_item_weapons" };
-		aGMListButtons = { "button_item_armor", "button_item_weapons", "button_item_crafting_components", "button_item_crafting_diagrams" };
-		aPlayerListButtons = { "button_item_armor", "button_item_weapons", "button_item_crafting_components", "button_item_crafting_diagrams" };
+		aGMListButtons = { "button_item_armor", "button_item_weapons", "button_item_crafting_components", "button_item_crafting_diagrams", "button_item_substances" };
+		aPlayerListButtons = { "button_item_armor", "button_item_weapons", "button_item_crafting_components", "button_item_crafting_diagrams", "button_item_substances" };
 		aCustomFilters = {
 			["Type"] = { sField = "type" },
 			["SubType"] = { sField = "subtype" },
@@ -127,8 +126,26 @@ aListViews = {
 				{ sCustom = "item_isidentified" }
 			},
 			aGroups = { { sDBField = "subtype" } },
-			aGroupValueOrder = { "Ingredient Diagrams - Novice Diagrams", "Ingredient Diagrams - Journeyman Diagrams", "Ingredient Diagrams - Master Diagrams", "Weapon Diagrams - Novice Diagrams", "Weapon Diagrams - Journeyman Diagrams", "Weapon Diagrams - Master Diagrams" },
+			aGroupValueOrder = { "Ingredient Diagrams - Novice Diagrams", "Ingredient Diagrams - Journeyman Diagrams", "Ingredient Diagrams - Master Diagrams", "Weapon Diagrams - Novice Diagrams", "Weapon Diagrams - Journeyman Diagrams", "Weapon Diagrams - Master Diagrams", "Armor Diagrams - Novice Diagrams", "Armor Diagrams - Journeyman Diagrams", "Armor Diagrams - Master Diagrams", "Elderfolk Weapon Diagrams - Master Diagrams", "Elderfolk Weapon Diagrams - Grand Master Diagrams", "Elderfolk Ammunition Diagrams - Master Diagrams", "Elderfolk Armor Diagrams - Master Diagrams", "Elderfolk Armor Diagrams - Grand Master Diagrams", "Elderfolk Armor Enhancement Diagrams - Novice Diagrams", "Elderfolk Armor Enhancement Diagrams - Journeyman Diagrams", "Elderfolk Armor Enhancement Diagrams - Master Diagrams" },
 		},
+		["substances"] = {
+			aColumns = {
+				{ sName = "name", sType = "string", sHeadingRes = "item_grouped_label_name", nWidth=150 },
+				{ sName = "rarity", sType = "string", sHeadingRes = "item_grouped_label_rarity", sTooltipRes = "item_grouped_tooltip_rarity", nWidth=60, bCentered=true },
+				{ sName = "componentlocation", sType = "string", sHeadingRes = "item_grouped_label_location", sTooltipRes = "item_grouped_tooltip_location", nWidth=140, bCentered=true },
+				{ sName = "quantity", sType = "string", sHeadingRes = "item_grouped_label_quantity", sTooltipRes = "item_grouped_tooltip_quantity", nWidth=80, bCentered=true },
+				{ sName = "foragedc", sType = "string", sHeadingRes = "item_grouped_label_foragedc", sTooltipRes = "item_grouped_tooltip_foragedc", nWidth=60, bCentered=true },
+				{ sName = "weight", sType = "number", sHeadingRes = "item_grouped_label_weight", sTooltipRes = "item_grouped_tooltip_weight", nWidth=30, bCentered=true },
+				{ sName = "cost", sType = "string", sHeadingRes = "item_grouped_label_cost", bCentered=true },
+			},
+			aFilters = {
+				{ sDBField = "type", vFilterValue = "Substances" },
+				{ sCustom = "item_isidentified" }
+			},
+			aGroups = { { sDBField = "subtype" } },
+			aGroupValueOrder = { "Vitriol", "Rebis", "Aether", "Quebrith", "Hydragenum", "Vermilion", "Sol", "Caelum", "Fulgur" },
+		},
+
 	},
 };
 
