@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
@@ -38,7 +38,7 @@
 	<string name="char_label_basestat">Base</string>
 	<string name="char_label_modifierstat">Mod.</string>
 	<string name="char_label_totalstat">Total</string>
-	
+
 	<string name="char_statslabel_intelligence">Intelligence</string>
 	<string name="char_statslabel_reflex">Reflex</string>
 	<string name="char_statslabel_dexterity">Dexterity</string>
@@ -60,7 +60,7 @@
 	<string name="wil">WIL</string>
 	<string name="vig">VIG</string>
 	<string name="lck">Luck</string>
-	
+
 	<string name="char_derivedstatslabel_stun">Stun</string>
 	<string name="char_derivedstatslabel_run">Run</string>
 	<string name="char_derivedstatslabel_leap">Leap</string>
@@ -74,32 +74,32 @@
 	<string name="char_derivedstatslabel_meleebonusdamage">Melee Bonus</string>
 	<string name="char_derivedstatslabel_punch">Punch</string>
 	<string name="char_derivedstatslabel_kick">Kick</string>
-	
+
 	<string name="char_special_divide">/</string>
 	<string name="char_special_percent">%</string>
 	<string name="char_special_plus">+</string>
 	<string name="char_special_equal">=</string>
 
 	<string name="char_recoveryaction">take a round to recover %i Stamina</string>
-	
+
 	<!-- List RACE -->
 	<string name="list_race_human">Human</string>
 	<string name="list_race_elf">Aen Seidhe</string>
 	<string name="list_race_dwarf">Dwarf</string>
 	<string name="list_race_halfling">Halfling</string>
 	<string name="list_race_witcher">Witcher</string>
-	
+
 	<!-- List GENDER -->
 	<string name="list_race_female">Female</string>
 	<string name="list_race_male">Male</string>
-	
+
 	<!-- List SOCIAL STANDING -->
 	<string name="list_socialstanding_equal">Equal</string>
 	<string name="list_socialstanding_tolerated">Tolerated</string>
 	<string name="list_socialstanding_hated">Hated</string>
 	<string name="list_socialstanding_feared">Feared</string>
 	<string name="list_socialstanding_hatedfeared">Hated and feared</string>
-	
+
 	<!-- List PROFESSION -->
 	<string name="list_profession_bard">Bard</string>
 	<string name="list_profession_craftsman">Craftsman</string>
@@ -120,7 +120,7 @@
 	<string name="list_witcherschool_gryphon">Gryphon</string>
 	<string name="list_witcherschool_viper">Viper</string>
 	<string name="list_witcherschool_custom">-- Custom --</string>
-	
+
 	<!-- List Skills cycler -->
 	<string name="char_listskillcycler_intelligence">INT</string>
 	<string name="char_listskillcycler_reflex">REF</string>
@@ -130,7 +130,7 @@
 	<string name="char_listskillcycler_crafting">CRA</string>
 	<string name="char_listskillcycler_will">WIL</string>
 	<string name="char_listskillcycler_">-</string>
-	
+
 	<!--Combat skill cycler-->
 	<string name="Archery">Archery</string>
 	<string name="Athletics">Athletics</string>
@@ -139,20 +139,20 @@
 	<string name="Melee">Melee</string>
 	<string name="Small Blades">Small Blades</string>
 	<string name="Staff/Spear">Staff/Spear</string>
-	<string name="Swordmanship">Swordmanship</string>
-	
+	<string name="Swordsmanship">Swordsmanship</string>
+
 	<!--Combat stat bonus damage cycler-->
 	<string name="dmgbonusstat_none">-</string>
 	<string name="dmgbonusstat_meleebonus">Melee</string>
 	<string name="dmgbonusstat_punch">Punch</string>
 	<string name="dmgbonusstat_kick">Kick</string>
-	
+
 	<!-- List weapon concealment -->
 	<string name="list_weaponconcealment_tiny">Tiny</string>
 	<string name="list_weaponconcealment_small">Small</string>
 	<string name="list_weaponconcealment_Large">Large</string>
 	<string name="list_weaponconcealment_canthide">Can't Hide</string>
-	
+
 	<!-- PROFESSION-->
 	<string name="char_label_abilities">Profession</string>
 	<string name="char_label_definingSkill">Defining Skill : </string>
@@ -310,7 +310,7 @@
 	<string name="char_prof_skill_resolute_label">Resolute</string>
 	<string name="char_prof_skill_chevalier_label">Chevalier</string>
 	<string name="char_prof_skill_armoredBuffer_label">Armored Buffer</string>
-	
+
 	<string name="char_prof_skill_busking_desc">A Bard is a wonderful thing to have around, especially when the party's low on money. A Bard can take an hour and make a Busking roll in the nearest town center. The total of this roll is the amount of money raked in by the Bard while they perform on the street. A fumble can lower the roll, and a negative value means that not only do you fail to make any coin but you are also harrassed by the locals for your poor performance, resulting in a -2 to Charisma with anyone in the town for the rest of the day.</string>
 	<string name="char_prof_skill_returnAct_desc">Before attempting a Busking roll a Bard can roll Return Act at a DC set by the GM to see whether they have played in this town before. If the roll is successful the Bard has made a name for themselves in this town already. Not only is their Busking income doubled but they gain a +2 Charisma with everyone in at that venue.</string>
 	<string name="char_prof_skill_raiseACrowd_desc">By taking a full round to perform, you can roll Raise A Crowd to captivate anyone within 20m. Anyone who doesn't make a Resist Coercion roll higher than your initial roll can do nothing but watch you perform until they succeed at rolling above your initial roll. If attacked a target will snap out of it.</string>
@@ -467,7 +467,7 @@
 	<string name="char_skill_sailing_label">Sailing</string>
 	<string name="char_skill_smallBlades_label">SmallBlades</string>
 	<string name="char_skill_staffSpear_label">Staff / Spear</string>
-	<string name="char_skill_swordmanship_label">Swordmanship</string>
+	<string name="char_skill_swordsmanship_label">Swordsmanship</string>
 	<string name="char_skill_courage_label">Courage</string>
 	<string name="char_skill_hexWeaving_label">Hex Weaving</string>
 	<string name="char_skill_intimidation_label">Intimidation</string>
@@ -509,7 +509,7 @@
 	<string name="char_skill_elderSpeech_desc">Skill in speaking a specific language. The languages that can be learned via Language are Common Speech (the language of the Northerners), Elder Speech (the language of the Nilfgaardians, Skelligers, and non-humans besides dwarves), and Dwarven (the language of the dwarves). At a base 10 you know the basics of a language and can read it slowly; when you speak your accent is atrocious and you are slow and ponderous. At a base 13 you know the language well enough to read, write, and speak it but some technical words and slang elude you. At a base 16 you are totally fluent in the language and can even work out some dialects. At a base 20 you are not only fluent in the language but you know all dialects and ancient forms of the language.</string>
 	<string name="char_skill_dwarven_desc">Skill in speaking a specific language. The languages that can be learned via Language are Common Speech (the language of the Northerners), Elder Speech (the language of the Nilfgaardians, Skelligers, and non-humans besides dwarves), and Dwarven (the language of the dwarves). At a base 10 you know the basics of a language and can read it slowly; when you speak your accent is atrocious and you are slow and ponderous. At a base 13 you know the language well enough to read, write, and speak it but some technical words and slang elude you. At a base 16 you are totally fluent in the language and can even work out some dialects. At a base 20 you are not only fluent in the language but you know all dialects and ancient forms of the language.</string>
 	<string name="char_skill_monsterLore_desc">Skill in discerning information about monsters. At a base 10 you can tell a nekker from a ghoul. At a base 13 you know generally which monsters fit into what classifications. At a base 16 you are well-versed in the various weaknesses and strengths of all common monsters. At a base 20 you rarely encounter a beast you can't analyze in a matter of seconds and even a witcher would be proud.</string>
-	<string name="char_skill_socialEtiquette_desc">Blending in at social functions and not making a fool of yourself in polite company. At a base 10 you know how to address nobility and can act properly when in a fancy neighborhood. At a base 13 you can attend social gatherings and not stick out like a sore thumb. At a base 16 you appear dashing —a cavalier, knowledgeable in all laws of society, fitting in with ease. At a base 20 you know even the unspoken rules of the highest courts and could probably impress the Emperor of Nilfgaard himself.</string>
+	<string name="char_skill_socialEtiquette_desc">Blending in at social functions and not making a fool of yourself in polite company. At a base 10 you know how to address nobility and can act properly when in a fancy neighborhood. At a base 13 you can attend social gatherings and not stick out like a sore thumb. At a base 16 you appear dashing ï¿½a cavalier, knowledgeable in all laws of society, fitting in with ease. At a base 20 you know even the unspoken rules of the highest courts and could probably impress the Emperor of Nilfgaard himself.</string>
 	<string name="char_skill_streetwise_desc">Knowing the streets. This skill is less about knowing a geography and more about knowing how certain areas operate. At a base 10 you have enough knowledge to avoid muggers and know where the nice parts of a city are. At a base 13 you can generally pick up what factions hold sway in an area and why. At a base 16 you can glean a phenomenal amount about an area from studying it, identifying the important people in the city and their relationships with ease. At a base 20 you are able to assess a whole town easily, picking up enough to make you effectively a local.</string>
 	<string name="char_skill_tactics_desc">Anticipating enemy movements and planning accordingly. At a base 10 you can figure out the basics of an untrained mob's combat plan. At a base 13 you could probably lead a small battalion of men successfully and could rout an enemy force of equal size. At a base 16 you could be placed in charge of a mercenary band and be a major military force, adapting to all kinds of situations with knowledgeable leadership. At a base 20 you could be a full-on military general, leading whole armies with the tactical and strategic knowledge to win the day against even unspeakable odds.</string>
 	<string name="char_skill_teaching_desc">The skill of explaining skills to others. This skill is not required to teach other skills, but it makes it a lot easier. At a base 10 you can walk a person through a basic demonstration, though they may not always understand. At a base 13 you can teach the basics of a skill to a diligent pupil with no issues. At a base 16 you could teach even uninterested students the higher levels of a skill with time. At a base 20 you are master of teaching and can connect with anyone. Your lessons immediately make sense and rarely ever have to be repeated.</string>
@@ -521,7 +521,7 @@
 	<string name="char_skill_sailing_desc">Sailing ships and controlling maritime vessels. At a base 10 you can sail in calm weather. At a base 13 you can handle rough weather and avoid obstacles with ease. At a base 16 you can maneuver in the open ocean and escape sirens and drowners. At a base 20 you can sail a ship through the most dangerous storms with minimal damage.</string>
 	<string name="char_skill_smallBlades_desc">Using light weapons such as daggers and cleavers. At a base 10 you can reliably wield small blades. At a base 13 you are a professional and can wield small blades with enough skill to match an assassin. At a base 16 you can rival hardened veterans in knife fights. At a base 20 you are a hardened veteran who can take on multiple assailants at once.</string>
 	<string name="char_skill_staffSpear_desc">Using long weapons such as staves, pole axes, and spears. At a base 10 you can reliably wield pole arms. At a base 13 you are a professional and can wield a pike with enough skill to match professional soldiers. At a base 16 you can face cavalry charges without flinching. At a base 20 you are a one-person wall of wood and steel.</string>
-	<string name="char_skill_swordmanship_desc">Using swords. At a base 10 you can reliably wield swords. At a base 13 you are a professional and can take the field. At a base 16 you win most duels you fight. At a base 20 you are a hardened veteran who cuts a swath through the field.</string>
+	<string name="char_skill_swordsmanship_desc">Using swords. At a base 10 you can reliably wield swords. At a base 13 you are a professional and can take the field. At a base 16 you win most duels you fight. At a base 20 you are a hardened veteran who cuts a swath through the field.</string>
 	<string name="char_skill_courage_desc">The skill of resisting fear. At a base 10 you are a calm person and can stand up to a tough customer in a bar. At a base 13 you can stare down a vicious mass murderer and not flee when you see monsters. At a base 16 you are usually the bravest person in the room and can face down enemies you know you can't beat. At a base 20 nothing scares you and you remain glacially cool even in the face of enormous monsters.</string>
 	<string name="char_skill_hexWeaving_desc">Hexing people or places. At a base 10 you can focus pure hatred into simple hexes. At a base 13 you know certain bits of black magic that allow your hexes to take hold better. At a base 16 you are wellversed in hexes and can focus your pain into deadly ones. At a base 20 you weave hexes that make seasoned witchers scowl.</string>
 	<string name="char_skill_intimidation_desc">Scaring people, either to run them off or make them do something for you. At a base 10 you are a pretty frightening person, and rarely do people mess with you in a bar. At a base 13 you have gotten used to intimidating the people around you and can scare most average people, even some soldiers. At a base 16 you radiate malice, and even seasoned soldiers know to give you a wide berth when you pass by. At a base 20 all you need to do is give a person a single look to make them cave.</string>
@@ -529,7 +529,7 @@
 	<string name="char_skill_resistMagic_desc">Resisting magical influence. At a base 10 you are often aware when magic is affecting you and can sometimes shake it off. At a base 13 you have actively hardened your mind against magic and can safeguard yourself against lesser mages. At a base 16 you know small tricks to help safeguard your mind and body from magic, allowing you to block the magic of graduate mages. At a base 20 you are stalwart in the face of magic and are rarely controlled by mages of any caliber.</string>
 	<string name="char_skill_resistCoercion_desc">Resisting persuasion, seduction, and the like. At a base 10 you can keep your head when being pressured into something you really don't want to do. At a base 13 you can shut out the seductions of relatively attractive people and avoid caving to strong arguments. At a base 16 you are resilient enough to earn the title "stubborn" and aren't often moved by those with good reasons or impressive assets. At a base 20 when you make a decision, rarely will anything change your mind.</string>
 	<string name="char_skill_ritualCrafting_desc">Ritualistic magic. At a base 10 you know how to perform some rituals and are fairly talented at them. At a base 13 you routinely perform rituals. At a base 16 you can undertake rituals under pressure and attain the outcome you are looking for. At a base 20 you are a skilled ritualist and can perform any ritual you lay your hands on.</string>
-		
+
 	<!-- Combat tab -->
 	<string name="char_label_defenseActions">Defense Actions</string>
 	<string name="char_label_reposition">Reposition</string>
@@ -594,7 +594,7 @@
 	<string name="simple_crit_message">[SIMPLE CRIT. (%i)]</string>
 	<string name="no_crit_message">[HIT (%i)]</string>
 	<string name="rollfordamage_message">%s must roll for damage.</string>
-	
+
 	<!-- Weapon editor -->
 	<string name="weapon_title">Weapon</string>
 	<string name="weapon_label_name">Name</string>
@@ -667,7 +667,7 @@
 	<string name="armor_label_enhancementmax">Max</string>
 	<string name="armor_label_enhancementname">Name</string>
 	<string name="armor_label_enhancementeffect">Effect</string>
-	
+
 	<string name="armor_glyph_magic_label">Glyph of Magic</string>
 	<string name="armor_glyph_magic_desc">When wearing this armor, either your spell DCs rise by 3 or your spell damage increases by 1d6. This applies only to mixed element spells.</string>
 	<string name="armor_glyph_air_label">Glyph of Air</string>
@@ -701,7 +701,7 @@
 
 	<string name="damage_desc_normaldamage">Damage</string>
 	<string name="damage_desc_nonlethaldamage">Non-lethal damage</string>
-	
+
 	<!--Critical Message-->
 	<string name="critical_label_simple_head_greater">Cracked Jaw</string>
 	<string name="critical_desc_simple_head_greater">The blow cracked your jaw, making it hard to speak clearly. You are at a -2 to Magical Skills &amp; Verbal Combat (Charisma, Persuasion, Seduction, Leadership, Deceit, Social Etiquette, and Intimidation).</string>
@@ -757,32 +757,32 @@
 
 	<string name="critical_label_without_anatomy">Target without anatomy (elementa or specter)</string>
 	<string name="critical_desc_without_anatomy">Bonus damage = </string>
-	
+
 	<!--Fumble messages-->
 	<string name="fumble_none">No major fumble.</string>
-	
+
 	<string name="fumble_melee_6">Your weapon glances off and you are staggered.</string>
 	<string name="fumble_melee_7">Your weapon lodges in a nearby object and it takes 1 round to free.</string>
 	<string name="fumble_melee_8">You damage your weapon severely. Your weapon takes 1d10 points of reliability damage.</string>
 	<string name="fumble_melee_9">You manage to wound yourself. Roll for location.</string>
 	<string name="fumble_melee_over9">You wound a nearby ally. Roll location on a random ally within range.</string>
-	
+
 	<string name="fumble_range_6to7">The ammunition you fired,or weapon you threw, hits something hard, breaking.</string>
 	<string name="fumble_range_8to9">Your bowstring comes partially undone, your crossbow jams, or you drop your thrown weapon. It takes 1 round to undo this.</string>
 	<string name="fumble_range_over9">You strike one of your allies with a ricochet. Roll location on a random ally within range.</string>
-	
+
 	<string name="fumble_armeddefense_6">Your weapon takes 1d6 extra points of reliability damage.</string>
 	<string name="fumble_armeddefense_7">Your weapon is knocked from your hand and flies 1d6 meters away in a random direction</string>
 	<string name="fumble_armeddefense_8">You are knocked to the ground. You are now prone and must make a Stun save.</string>
 	<string name="fumble_armeddefense_9">Your weapon takes 2d6 extra points of reliability damage.</string>
 	<string name="fumble_armeddefense_over9">Your weapon ricochets back and hits you. Roll for location.</string>
-	
+
 	<string name="fumble_unarmed_6">You are knocked off balance and are staggered.</string>
 	<string name="fumble_unarmed_7">You trip on something and fall prone.</string>
 	<string name="fumble_unarmed_8">You trip and fall prone. You must make a Stun save.</string>
 	<string name="fumble_unarmed_9">You trip and hit your head. You are knocked prone, take 1d6 points of non-lethal damage to the head, and must make a Stun save.</string>
 	<string name="fumble_unarmed_over9">You fail horribly and not only fall prone but also take 1d6 lethal damage to the head and must make a Stun save.</string>
-	
+
 	<!--Location messages-->
 	<string name="modifier_label_location">location : </string>
 	<string name="modifier_label_location_or"> or </string>
@@ -798,7 +798,7 @@
 	<string name="modifier_label_location_limb">Monster limb</string>
 	<string name="modifier_label_location_monstertail">Monster wing/tail</string>
 	<string name="modifier_label_location_tail">Monster wing/tail</string>
-	
+
 	<!--Modifiers-->
 	<string name="modifier_label_attack">Attack modifiers</string>
 	<string name="modifier_label_atkstrong">Strong attack</string>
@@ -809,18 +809,18 @@
 	<string name="modifier_label_ambush">Ambush</string>
 	<string name="modifier_label_ricshot">Ricochet shot</string>
 	<string name="modifier_label_silhouettedtarget">Target silhouetted</string>
-	
+
 	<string name="modifier_label_range">Range modifiers</string>
 	<string name="modifier_label_range_pointblank">Point blank</string>
 	<string name="modifier_label_range_medium">Medium</string>
 	<string name="modifier_label_range_long">Long</string>
 	<string name="modifier_label_range_extreme">Extreme</string>
-	
+
 	<string name="modifier_label_light">Light levels modifiers</string>
 	<string name="modifier_label_light_bright">Bright light</string>
 	<string name="modifier_label_light_dim">Dim light</string>
 	<string name="modifier_label_light_dark">Darkness</string>
-	
+
 	<string name="modifier_label_damage">Damage modifiers</string>
 	<string name="modifier_label_damage_simple">Critical - simple</string>
 	<string name="modifier_label_damage_complex">Critical - complex</string>
@@ -829,7 +829,7 @@
 	<string name="modifier_label_damage_lethal">Lethal</string>
 	<string name="modifier_label_damage_nonlethal">Non lethal</string>
 	<string name="modifier_label_damage_softspot">Soft Spot</string>
-	
+
 	<string name="modifier_label_aiming">Aiming modifiers</string>
 	<string name="modifier_label_aimhead">Head</string>
 	<string name="modifier_label_aimtorso">Torso</string>
@@ -879,7 +879,7 @@
 	<string name="spell_components_label">Components</string>
 	<string name="spell_danger_label">Danger</string>
 	<string name="spell_reqlift_label">Requirement to lift</string>
-	
+
 	<string name="spellcasting_notenoughSTA">Not enough Stamina to cast this spell</string>
 	<string name="spellcasting_signSTAmax">Stamina Max for casting a witcher sign is 7.</string>
 	<string name="spellcasting_overexertion">[OVEREXERTION : - %i HP]</string>
@@ -902,7 +902,7 @@
 	<string name="item_grouped_title_transportationmountequipment">Transportation - Mount Equipement</string>
 	<string name="item_grouped_title_toolkits">Tool Kits</string>
 	<string name="item_grouped_title_generalgear">General Gear</string>
-	
+
 
 	<string name="item_grouped_label_name">Name</string>
 	<string name="item_grouped_label_sp">SP</string>
@@ -922,19 +922,17 @@
 	<string name="item_grouped_tooltip_damagetype">Damage Type</string>
 	<string name="item_grouped_label_wa">WA</string>
 	<string name="item_grouped_tooltip_wa">Weapon Accuracy</string>
-	<string name="item_grouped_label_damage">Dmg</string>
-	<string name="item_grouped_label_reliability">Rel</string>
+	<string name="item_grouped_label_damage">DMG</string>
+	<string name="item_grouped_label_reliability">Rel.</string>
 	<string name="item_grouped_tooltip_reliability">Reliability</string>
 	<string name="item_grouped_label_hands">Hands</string>
 	<string name="item_grouped_tooltip_reliability">Hands</string>
-	<string name="item_grouped_label_range">Rng</string>
+	<string name="item_grouped_label_range">RNG</string>
 	<string name="item_grouped_tooltip_range">Range</string>
-	<string name="item_grouped_label_concealment">Conc</string>
+	<string name="item_grouped_label_concealment">Conc.</string>
 	<string name="item_grouped_tooltip_concealment">Concealment</string>
-	<string name="item_grouped_label_concealment">Conc</string>
-	<string name="item_grouped_tooltip_concealment">Concealment</string>
-	<string name="item_grouped_label_enhancement">EN</string>
-	<string name="item_grouped_tooltip_enhancement">Enhancement</string>
+	<string name="item_grouped_label_enhancements">EN</string>
+	<string name="item_grouped_tooltip_enhancements">Enhancements</string>
 	<string name="item_grouped_label_resistance">Res.</string>
 	<string name="item_grouped_tooltip_resistance">Resistance</string>
 	<string name="item_grouped_label_athletics">Ath.</string>
@@ -945,6 +943,24 @@
 	<string name="item_grouped_tooltip_speed">speed</string>
 	<string name="item_grouped_label_health">Health</string>
 	<string name="item_grouped_tooltip_health">Health</string>
+	<string name="item_grouped_label_cost">Cost</string>
+	<string name="item_grouped_tooltip_cost">Cost</string>
+	<string name="item_grouped_label_craftingdc">Crafting DC</string>
+	<string name="item_grouped_tooltip_craftingdc">Crafting DC</string>
+	<string name="item_grouped_label_rarity">Rarity</string>
+	<string name="item_grouped_tooltip_rarity">Rarity of this Crafting Component</string>
+	<string name="item_grouped_label_location">Location</string>
+	<string name="item_grouped_tooltip_location">Location where this Crafting Component can be found</string>
+	<string name="item_grouped_label_quantity">Quantity</string>
+	<string name="item_grouped_tooltip_quantity">Quantity of this Crafting Component</string>
+	<string name="item_grouped_label_time">Time</string>
+	<string name="item_grouped_tooltip_time">Time required to craft this item</string>
+	<string name="item_grouped_label_foragedc">Forage DC</string>
+	<string name="item_grouped_tooltip_foragedc">Forage DC to find some of this Crafting Component</string>
+	<string name="item_grouped_label_components">Components</string>
+	<string name="item_grouped_tooltip_components">The Components required to craft this item</string>
+	<string name="item_grouped_label_investment">Investment</string>
+	<string name="item_grouped_tooltip_investment">Spending these crowns gives you the materials required (if the GM allows)</string>
 
 	<!--NPC-->
 	<string name="npc_label_autocalculation">Auto calculation</string>
@@ -963,7 +979,7 @@
 	<string name="npc_type_relict">Relict</string>
 	<string name="npc_type_specter">Specter</string>
 	<string name="npc_type_vampire">Vampire</string>
-	
+
 	<string name="npc_label_threat">Threat</string>
 	<string name="npc_threat_easy">Easy</string>
 	<string name="npc_threat_medium">Medium</string>
@@ -989,7 +1005,7 @@
 	<string name="npc_label_encumbrance">Enc</string>
 	<string name="npc_label_recovery">Rec</string>
 
-	
+
 	<string name="npc_label_height">Height</string>
 	<string name="npc_label_weight">Weight</string>
 	<string name="npc_label_environment">Environment</string>
@@ -997,12 +1013,12 @@
 	<string name="npc_label_organization">Organization</string>
 	<string name="npc_label_loot">Loot</string>
 	<string name="npc_label_bounty">Bounty</string>
-	
+
 	<string name="npc_header_skills">Skills</string>
 	<string name="npc_header_ecology">Ecology</string>
 	<string name="npc_header_combat">Combat</string>
 	<string name="npc_label_weaponattacks">Att. (ROF)</string>
-	
+
 	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
 	<string name="npc_unknownskill_errormessage">Try to roll unknown skill "%s"</string>
 
@@ -1027,7 +1043,7 @@
 	<string name="modifier_label_damage_pinpointaim">Pin Point Aim</string>
 	<string name="combat_twinshot_attack_message">Twin shot attack %s with</string>
 	<string name="char_label_specialActions">Special Actions</string>
-	
+
 	<!-- Effects and condition-->
 	<string name="effect_name_fire">Fire</string>
 	<string name="effect_name_stunned">Stunned</string>
@@ -1046,4 +1062,39 @@
 	<string name="effect_damagemessage_poisonned">Poisonned : 3 points of damage which armor does not negate</string>
 	<string name="effect_damagemessage_bleeding">Bleeding : 2 points of damage per round until the bleeding is stopped</string>
 	<string name="effect_damagemessage_suffocating">Suffocating : 3 damage which armor does not negate</string>
+
+	<!-- Items -->
+	<string name="item_button_forge">Forge</string>
+	<string name="item_label_type">Type</string>
+	<string name="item_label_subtype">Subtype</string>
+	<string name="item_label_damagetype">Damage Type</string>
+	<string name="item_label_weaponaccuracy">Weapon Accuracy</string>
+	<string name="item_label_availability">Availability</string>
+
+	<string name="item_label_damage">Damage</string>
+	<string name="item_label_reliability">Reliability</string>
+	<string name="item_label_hands">Hands</string>
+	<string name="item_label_range">Range</string>
+	<string name="item_label_speed">Speed</string>
+	<string name="item_label_effect">Effects</string>
+	<string name="item_label_resistances">Resistances</string>
+	<string name="item_label_concealment">Concealment</string>
+	<string name="item_label_enhancements">Enhancements</string>
+	<string name="item_label_stoppingpower">Stopping Power</string>
+	<string name="item_label_encumbrancevalue">Encumbrance Value</string>
+	<string name="item_label_armorenhancement">Armor Enhancement</string>
+	<string name="item_label_cover">Cover</string>
+	<string name="item_label_rarity">Rarity</string>
+	<string name="item_label_location">Location</string>
+	<string name="item_label_quantity">Quantity</string>
+	<string name="item_label_foragedc">Forage DC</string>
+	<string name="item_label_investment">Investment</string>
+	<string name="item_label_components">Components</string>
+	<string name="item_label_time">Time</string>
+	<string name="item_label_craftingdc">Crafting DC</string>
+
+	<string name="library_recordview_label_item_crafting_components">Craft Components</string>
+	<string name="library_recordview_label_item_crafting_diagrams">Craft Diagrams</string>
+	<string name="library_recordview_label_item_substances">Substances</string>
+
 </root>

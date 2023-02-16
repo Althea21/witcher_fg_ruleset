@@ -1,30 +1,30 @@
 <?xml version="1.0" encoding="iso-8859-1"?>
 
-<!-- 
-  Please see the license.html file included with this distribution for 
+<!--
+  Please see the license.html file included with this distribution for
   attribution and copyright information.
 -->
 
 <root>
 	<!--Generic-->
 	<string name="list_menu_createitem">Ajouter</string>
-	<string name="tooltip_collapse">Réduire</string>
-	<string name="tooltip_expand">Étendre</string>
+	<string name="tooltip_collapse">Rï¿½duire</string>
+	<string name="tooltip_expand">ï¿½tendre</string>
 
 	<!--Options-->
 	<string name="option_header_houserule">House rules  (MJ)</string>
-	<string name="option_label_MITN">Gestion de la vulnérabilité à l'argent</string>
+	<string name="option_label_MITN">Gestion de la vulnï¿½rabilitï¿½ ï¿½ l'argent</string>
 	<string name="option_val_allmonsters">Tous les monstres</string>
 	<string name="option_val_novels">Comme dans les romans</string>
-	<string name="option_label_ADA">Automatiser la détérioration d'armure</string>
-	<string name="option_label_ADW">Automatiser la détérioration d'arme</string>
-	<string name="option_label_SHPC">CT : Afficher la vie des alliés</string>
-	<string name="option_label_SHNPC">CT : Afficher la vie des non-alliés</string>
+	<string name="option_label_ADA">Automatiser la dï¿½tï¿½rioration d'armure</string>
+	<string name="option_label_ADW">Automatiser la dï¿½tï¿½rioration d'arme</string>
+	<string name="option_label_SHPC">CT : Afficher la vie des alliï¿½s</string>
+	<string name="option_label_SHNPC">CT : Afficher la vie des non-alliï¿½s</string>
 
 	<!-- Characters IDENTITY -->
 	<string name="char_label_identity">Identite</string>
 	<string name="char_label_home_country">Pays d'origine</string>
-	<string name="char_label_reputation">Réputation</string>
+	<string name="char_label_reputation">Rï¿½putation</string>
 	<string name="char_main_label_race">Race</string>
 	<string name="char_main_label_gender">Genre</string>
 	<string name="char_main_label_age">Age</string>
@@ -38,15 +38,15 @@
 	<string name="char_label_basestat">Base</string>
 	<string name="char_label_modifierstat">Mod.</string>
 	<string name="char_label_totalstat">Total</string>
-	
+
 	<string name="char_statslabel_intelligence">Intelligence</string>
-	<string name="char_statslabel_reflex">Réflexes</string>
-	<string name="char_statslabel_dexterity">Dextérité</string>
+	<string name="char_statslabel_reflex">Rï¿½flexes</string>
+	<string name="char_statslabel_dexterity">Dextï¿½ritï¿½</string>
 	<string name="char_statslabel_body">Corps</string>
 	<string name="char_statslabel_speed">Vitesse</string>
 	<string name="char_statslabel_empathy">Empathie</string>
 	<string name="char_statslabel_crafting">Technique</string>
-	<string name="char_statslabel_will">Volonté</string>
+	<string name="char_statslabel_will">Volontï¿½</string>
 	<string name="char_statslabel_luck">Chance</string>
 	<string name="char_statslabel_vigor">Vigueur</string>
 
@@ -60,46 +60,46 @@
 	<string name="wil">VOL</string>
 	<string name="vig">VIG</string>
 	<string name="lck">CHA</string>
-	
-	<string name="char_derivedstatslabel_stun">Étourdissement</string>
+
+	<string name="char_derivedstatslabel_stun">ï¿½tourdissement</string>
 	<string name="char_derivedstatslabel_run">Course</string>
 	<string name="char_derivedstatslabel_leap">Saut</string>
 	<string name="char_derivedstatslabel_woundthreshold">Seuil de blessure</string>
-	<string name="char_derivedstatslabel_hit_points">Points de Santé</string>
+	<string name="char_derivedstatslabel_hit_points">Points de Santï¿½</string>
 	<string name="char_derivedstatslabel_toxicity">Potion toxicity</string>
 	<string name="char_derivedstatslabel_stamina">Endurance</string>
 	<string name="char_derivedstatslabel_encumbrance">Encombrement</string>
-	<string name="char_derivedstatslabel_recovery">Récupération</string>
+	<string name="char_derivedstatslabel_recovery">Rï¿½cupï¿½ration</string>
 	<string name="char_derivedstatslabel_recoveryshort">REC</string>
-	<string name="char_derivedstatslabel_meleebonusdamage">Bonus de mêlée</string>
+	<string name="char_derivedstatslabel_meleebonusdamage">Bonus de mï¿½lï¿½e</string>
 	<string name="char_derivedstatslabel_punch">Poings</string>
 	<string name="char_derivedstatslabel_kick">Pieds</string>
-	
+
 	<string name="char_special_divide">/</string>
 	<string name="char_special_percent">%</string>
 	<string name="char_special_plus">+</string>
 	<string name="char_special_equal">=</string>
 
-	<string name="char_recoveryaction">prendre un tour pour récupérer %i END</string>
-	
+	<string name="char_recoveryaction">prendre un tour pour rï¿½cupï¿½rer %i END</string>
+
 	<!-- List RACE -->
 	<string name="list_race_human">Humain</string>
 	<string name="list_race_elf">Elfe (Aen Seidhe)</string>
 	<string name="list_race_dwarf">Nain</string>
 	<string name="list_race_halfling">Halfelin</string>
 	<string name="list_race_witcher">Sorceleur</string>
-	
+
 	<!-- List GENDER -->
 	<string name="list_race_female">Femme</string>
 	<string name="list_race_male">Homme</string>
-	
+
 	<!-- List SOCIAL STANDING -->
 	<string name="list_socialstanding_equal">Neutre</string>
-	<string name="list_socialstanding_tolerated">Toléré</string>
-	<string name="list_socialstanding_hated">Haï</string>
+	<string name="list_socialstanding_tolerated">Tolï¿½rï¿½</string>
+	<string name="list_socialstanding_hated">Haï¿½</string>
 	<string name="list_socialstanding_feared">Craint</string>
-	<string name="list_socialstanding_hatedfeared">Craint et haï</string>
-	
+	<string name="list_socialstanding_hatedfeared">Craint et haï¿½</string>
+
 	<!-- List PROFESSION -->
 	<string name="list_profession_bard">Barde</string>
 	<string name="list_profession_craftsman">Artisan</string>
@@ -108,7 +108,7 @@
 	<string name="list_profession_mage">Mage</string>
 	<string name="list_profession_manAtArms">Homme d'armes</string>
 	<string name="list_profession_merchant">Marchant</string>
-	<string name="list_profession_priest">Prêtre</string>
+	<string name="list_profession_priest">Prï¿½tre</string>
 	<string name="list_profession_witcher">Sorceleur</string>
 	<string name="list_profession_peasant">Paysan</string>
 	<string name="list_profession_noble">Noble</string>
@@ -118,9 +118,9 @@
 	<string name="list_witcherschool_cat">Chat</string>
 	<string name="list_witcherschool_bear">Ours</string>
 	<string name="list_witcherschool_gryphon">Griphon</string>
-	<string name="list_witcherschool_viper">Vipère</string>
+	<string name="list_witcherschool_viper">Vipï¿½re</string>
 	<string name="list_witcherschool_custom">-- Perso --</string>
-	
+
 	<!-- List Skills cycler -->
 	<string name="char_listskillcycler_intelligence">INT</string>
 	<string name="char_listskillcycler_reflex">REF</string>
@@ -130,47 +130,47 @@
 	<string name="char_listskillcycler_crafting">TECH</string>
 	<string name="char_listskillcycler_will">VOL</string>
 	<string name="char_listskillcycler_">-</string>
-	
+
 	<!--Combat skill cycler-->
 	<string name="Archery">Archerie</string>
-	<string name="Athletics">Athlétisme</string>
+	<string name="Athletics">Athlï¿½tisme</string>
 	<string name="Brawling">Bagarre</string>
-	<string name="Crossbow">Arbalète</string>
-	<string name="Melee">Mêlée</string>
+	<string name="Crossbow">Arbalï¿½te</string>
+	<string name="Melee">Mï¿½lï¿½e</string>
 	<string name="Small Blades">Lames courtes</string>
-	<string name="Staff/Spear">Bâton / Lance</string>
-	<string name="Swordmanship">Escrime</string>
-	
+	<string name="Staff/Spear">Bï¿½ton / Lance</string>
+	<string name="Swordsmanship">Escrime</string>
+
 	<!--Combat stat bonus damage cycler-->
 	<string name="dmgbonusstat_none">-</string>
 	<string name="dmgbonusstat_meleebonus">Melee</string>
 	<string name="dmgbonusstat_punch">Poings</string>
 	<string name="dmgbonusstat_kick">Pieds</string>
-	
+
 	<!-- List weapon concealment -->
 	<string name="list_weaponconcealment_tiny">Minuscule</string>
 	<string name="list_weaponconcealment_small">Petite</string>
 	<string name="list_weaponconcealment_Large">Grande</string>
-	<string name="list_weaponconcealment_canthide">Imposs. à cacher</string>
-	
+	<string name="list_weaponconcealment_canthide">Imposs. ï¿½ cacher</string>
+
 	<!-- PROFESSION-->
 	<string name="char_label_abilities">Profession</string>
-	<string name="char_label_definingSkill">Compétence Exclusive : </string>
+	<string name="char_label_definingSkill">Compï¿½tence Exclusive : </string>
 	<string name="char_label_defaultBranchName">Branche</string>
-	<string name="char_label_defaultSkillName">Compétence</string>
+	<string name="char_label_defaultSkillName">Compï¿½tence</string>
 
 	<!-- Profession defining skills -->
 	<string name="char_label_definingSkill_busking">Prestation</string>
 	<string name="char_label_definingSkill_patchJob">Rafistolage</string>
-	<string name="char_label_definingSkill_practicedParanoia">Paranoïa exercée</string>
-	<string name="char_label_definingSkill_healingHands">Mains thérapeutiques</string>
+	<string name="char_label_definingSkill_practicedParanoia">Paranoï¿½a exercï¿½e</string>
+	<string name="char_label_definingSkill_healingHands">Mains thï¿½rapeutiques</string>
 	<string name="char_label_definingSkill_magicalTraining">Exercice de la magie</string>
-	<string name="char_label_definingSkill_toughAsNails">Dur à cuire</string>
+	<string name="char_label_definingSkill_toughAsNails">Dur ï¿½ cuire</string>
 	<string name="char_label_definingSkill_wellTraveled">Grand voyageur</string>
-	<string name="char_label_definingSkill_initiateOfTheGods">Initié des dieux</string>
+	<string name="char_label_definingSkill_initiateOfTheGods">Initiï¿½ des dieux</string>
 	<string name="char_label_definingSkill_witcherTraining">Formation de sorceleur</string>
-	<string name="char_label_definingSkill_intolerance">Intolérance</string>
-	<string name="char_label_definingSkill_notoriety">Notoriété</string>
+	<string name="char_label_definingSkill_intolerance">Intolï¿½rance</string>
+	<string name="char_label_definingSkill_notoriety">Notoriï¿½tï¿½</string>
 
 	<!-- Profession branch name -->
 	<string name="char_label_branch_charmer">Charmeur</string>
@@ -188,13 +188,13 @@
 	<string name="char_label_branch_politician">Politicien</string>
 	<string name="char_label_branch_scientist">Scientifique</string>
 	<string name="char_label_branch_archMage">Archimage</string>
-	<string name="char_label_branch_marksman">Tireur d'élite</string>
+	<string name="char_label_branch_marksman">Tireur d'ï¿½lite</string>
 	<string name="char_label_branch_bountyHunter">Chasseur de prime</string>
 	<string name="char_label_branch_reaver">Ravageur</string>
 	<string name="char_label_branch_broker">Courtier</string>
 	<string name="char_label_branch_contact">Contact</string>
 	<string name="char_label_branch_havekar">Havekar</string>
-	<string name="char_label_branch_preacher">Prêcheur</string>
+	<string name="char_label_branch_preacher">Prï¿½cheur</string>
 	<string name="char_label_branch_druid">Druide</string>
 	<string name="char_label_branch_fanatic">Fanatique</string>
 	<string name="char_label_branch_spellsword">Sorcelame</string>
@@ -209,7 +209,7 @@
 	<string name="char_label_branch_knight">The Knight</string>
 
 	<!-- Profession skills -->
-	<string name="char_prof_skill_returnAct_label">Notoriété</string>
+	<string name="char_prof_skill_returnAct_label">Notoriï¿½tï¿½</string>
 	<string name="char_prof_skill_raiseACrowd_label">Captiver la foule</string>
 	<string name="char_prof_skill_goodFriend_label">Bon ami</string>
 	<string name="char_prof_skill_fade_label">Disparition</string>
@@ -218,22 +218,22 @@
 	<string name="char_prof_skill_poisonTheWell_label">Empoisonner le puits</string>
 	<string name="char_prof_skill_needling_label">Pique</string>
 	<string name="char_prof_skill_etTuBrute_label">Suspicion</string>
-	<string name="char_prof_skill_extensiveCatalogue_label">Catalogue étendu</string>
+	<string name="char_prof_skill_extensiveCatalogue_label">Catalogue ï¿½tendu</string>
 	<string name="char_prof_skill_journeyman_label">Compagnon</string>
-	<string name="char_prof_skill_masterCrafting_label">Maître compagnon</string>
+	<string name="char_prof_skill_masterCrafting_label">Maï¿½tre compagnon</string>
 	<string name="char_prof_skill_mentalPharmacy_label">Pharmacie mentale</string>
 	<string name="char_prof_skill_doubleDose_label">Double Dose</string>
 	<string name="char_prof_skill_adaptation_label">Adaptation</string>
-	<string name="char_prof_skill_augmentation_label">Amélioration</string>
-	<string name="char_prof_skill_silverCoating_label">Plaqué argent</string>
-	<string name="char_prof_skill_pinpoint_label">Déceler</string>
+	<string name="char_prof_skill_augmentation_label">Amï¿½lioration</string>
+	<string name="char_prof_skill_silverCoating_label">Plaquï¿½ argent</string>
+	<string name="char_prof_skill_pinpoint_label">Dï¿½celer</string>
 	<string name="char_prof_skill_caseTheArea_label">Plan mental</string>
 	<string name="char_prof_skill_mentalKey_label">Clef mentale</string>
 	<string name="char_prof_skill_goToGround_label">Planque</string>
 	<string name="char_prof_skill_weakSpot_label">Point faible</string>
 	<string name="char_prof_skill_markedMan_label">Marquage</string>
 	<string name="char_prof_skill_rally_label">Recrutement</string>
-	<string name="char_prof_skill_carefulAim_label">Visée précise</string>
+	<string name="char_prof_skill_carefulAim_label">Visï¿½e prï¿½cise</string>
 	<string name="char_prof_skill_eyeGouge_label">Pique aux yeux</string>
 	<string name="char_prof_skill_assassinsStrike_label">Frappe assassine</string>
 	<string name="char_prof_skill_diagnose_label">Diagnostic</string>
@@ -241,53 +241,53 @@
 	<string name="char_prof_skill_effectiveSurgery_label">Chirurgie miraculeuse</string>
 	<string name="char_prof_skill_healingTent_label">Espace de soin</string>
 	<string name="char_prof_skill_improvisation_label">Improvisation</string>
-	<string name="char_prof_skill_herbalRemedy_label">Remède naturel</string>
+	<string name="char_prof_skill_herbalRemedy_label">Remï¿½de naturel</string>
 	<string name="char_prof_skill_bleedingWound_label">Plaie ouverte</string>
 	<string name="char_prof_skill_practicalCarnage_label">Carnage</string>
 	<string name="char_prof_skill_cripplingWound_label">Blessure incapacitante</string>
 	<string name="char_prof_skill_scheming_label">Intrigue</string>
-	<string name="char_prof_skill_grapeVine_label">Commérage</string>
+	<string name="char_prof_skill_grapeVine_label">Commï¿½rage</string>
 	<string name="char_prof_skill_assets_label">Atout</string>
-	<string name="char_prof_skill_reverseEngineer_label">Rétro-ingénierie</string>
+	<string name="char_prof_skill_reverseEngineer_label">Rï¿½tro-ingï¿½nierie</string>
 	<string name="char_prof_skill_distillation_label">Distillation</string>
 	<string name="char_prof_skill_mutate_label">Mutation</string>
 	<string name="char_prof_skill_inTouch_label">Contact magique</string>
 	<string name="char_prof_skill_immutable_label">Immuable</string>
-	<string name="char_prof_skill_expandedMagic_label">Magie étendue</string>
-	<string name="char_prof_skill_extremeRange_label">Portée extrême</string>
+	<string name="char_prof_skill_expandedMagic_label">Magie ï¿½tendue</string>
+	<string name="char_prof_skill_extremeRange_label">Portï¿½e extrï¿½me</string>
 	<string name="char_prof_skill_twinShot_label">Double tir</string>
-	<string name="char_prof_skill_pinPointAim_label">Trait précis</string>
+	<string name="char_prof_skill_pinPointAim_label">Trait prï¿½cis</string>
 	<string name="char_prof_skill_bloodhound_label">Limier</string>
 	<string name="char_prof_skill_boobyTrap_label">Chausse-trappe</string>
 	<string name="char_prof_skill_tacticalAwareness_label">Sens du combat</string>
 	<string name="char_prof_skill_fury_label">Fureur</string>
 	<string name="char_prof_skill_zweihand_label">Zweihand</string>
-	<string name="char_prof_skill_shrugItOff_label">Même pas mal !</string>
+	<string name="char_prof_skill_shrugItOff_label">Mï¿½me pas mal !</string>
 	<string name="char_prof_skill_options_label">Choix</string>
 	<string name="char_prof_skill_hardBargain_label">Dur en affaire</string>
 	<string name="char_prof_skill_promise_label">Promesse</string>
 	<string name="char_prof_skill_rookery_label">Gueusaille</string>
 	<string name="char_prof_skill_insider_label">Espion</string>
-	<string name="char_prof_skill_treasureMap_label">Carte aux trésors</string>
-	<string name="char_prof_skill_wellConnected_label">Bonne réputation</string>
+	<string name="char_prof_skill_treasureMap_label">Carte aux trï¿½sors</string>
+	<string name="char_prof_skill_wellConnected_label">Bonne rï¿½putation</string>
 	<string name="char_prof_skill_fence_label">Receleur</string>
-	<string name="char_prof_skill_warriorsDebt_label">Débiteur martial</string>
+	<string name="char_prof_skill_warriorsDebt_label">Dï¿½biteur martial</string>
 	<string name="char_prof_skill_divinePower_label">Puissance divine</string>
-	<string name="char_prof_skill_divineAuthority_label">Autorité divine</string>
-	<string name="char_prof_skill_precognition_label">Précognition</string>
+	<string name="char_prof_skill_divineAuthority_label">Autoritï¿½ divine</string>
+	<string name="char_prof_skill_precognition_label">Prï¿½cognition</string>
 	<string name="char_prof_skill_natureAttunement_label">Harmonisation naturelle</string>
-	<string name="char_prof_skill_readNature_label">Déchiffrer la nature</string>
+	<string name="char_prof_skill_readNature_label">Dï¿½chiffrer la nature</string>
 	<string name="char_prof_skill_animalCompact_label">Pacte animal</string>
 	<string name="char_prof_skill_bloodRituals_label">Rituels sanglants</string>
 	<string name="char_prof_skill_fervor_label">Ferveur</string>
 	<string name="char_prof_skill_wordOfGod_label">Emissaire des dieux</string>
-	<string name="char_prof_skill_meditation_label">Méditation</string>
+	<string name="char_prof_skill_meditation_label">Mï¿½ditation</string>
 	<string name="char_prof_skill_magicalSource_label">Source magique</string>
-	<string name="char_prof_skill_heliotrope_label">Héliotrope</string>
+	<string name="char_prof_skill_heliotrope_label">Hï¿½liotrope</string>
 	<string name="char_prof_skill_ironStomach_label">Estomac de fer</string>
-	<string name="char_prof_skill_frenzy_label">Frénésie</string>
+	<string name="char_prof_skill_frenzy_label">Frï¿½nï¿½sie</string>
 	<string name="char_prof_skill_transmutation_label">Transmutation</string>
-	<string name="char_prof_skill_parryArrows_label">Déviation de flèches</string>
+	<string name="char_prof_skill_parryArrows_label">Dï¿½viation de flï¿½ches</string>
 	<string name="char_prof_skill_quickStrike_label">Frappe rapide</string>
 	<string name="char_prof_skill_whirl_label">Tourbillon</string>
 	<string name="char_prof_skill_harvestTime_label">Harvest Time</string>
@@ -310,7 +310,7 @@
 	<string name="char_prof_skill_resolute_label">Resolute</string>
 	<string name="char_prof_skill_chevalier_label">Chevalier</string>
 	<string name="char_prof_skill_armoredBuffer_label">Armored Buffer</string>
-	
+
 	<string name="char_prof_skill_busking_desc">A Bard is a wonderful thing to have around, especially when the party's low on money. A Bard can take an hour and make a Busking roll in the nearest town center. The total of this roll is the amount of money raked in by the Bard while they perform on the street. A fumble can lower the roll, and a negative value means that not only do you fail to make any coin but you are also harrassed by the locals for your poor performance, resulting in a -2 to Charisma with anyone in the town for the rest of the day.</string>
 	<string name="char_prof_skill_returnAct_desc">Before attempting a Busking roll a Bard can roll Return Act at a DC set by the GM to see whether they have played in this town before. If the roll is successful the Bard has made a name for themselves in this town already. Not only is their Busking income doubled but they gain a +2 Charisma with everyone in at that venue.</string>
 	<string name="char_prof_skill_raiseACrowd_desc">By taking a full round to perform, you can roll Raise A Crowd to captivate anyone within 20m. Anyone who doesn't make a Resist Coercion roll higher than your initial roll can do nothing but watch you perform until they succeed at rolling above your initial roll. If attacked a target will snap out of it.</string>
@@ -413,30 +413,30 @@
 	<string name="char_prof_skill_biteTheEar_desc">When grappled or pinned by a creature or person, the Peasant can take an action to make a Bite the Ear roll against the target's DEXx3. If the peasant succeeds they bite off part of the ear (or other superficial body part) of the target, breaking the grapple/pin immediately, dealing 1d6 unmodified damage, and giving the target a permanent -1 to Charisma and Seduction checks.</string>
 
 	<!-- SKILLS -->
-	<string name="char_label_skills">Compétences</string>
+	<string name="char_label_skills">Compï¿½tences</string>
 	<string name="char_skillname_label">Nom</string>
 	<string name="char_label_skillranks">Rang</string>
 	<string name="char_label_skillstat">Carac.</string>
 	<string name="char_label_skillmisc">Misc</string>
 	<string name="char_label_skilltotal">Total</string>
-	<string name="char_tooltip_skillarmorimpacted">Impacté par la VE</string>
+	<string name="char_tooltip_skillarmorimpacted">Impactï¿½ par la VE</string>
 	<string name="char_label_skilldoubleIP">(x2)</string>
 
 	<!-- skill labels (char_skill_skillID_label)-->
 	<string name="char_skill_physique_label">Physique</string>
-	<string name="char_skill_endurance_label">Résilience</string>
+	<string name="char_skill_endurance_label">Rï¿½silience</string>
 	<string name="char_skill_alchemy_label">Alchimie</string>
 	<string name="char_skill_crafting_label">Artisanat</string>
-	<string name="char_skill_disguise_label">Déguisement</string>
+	<string name="char_skill_disguise_label">Dï¿½guisement</string>
 	<string name="char_skill_firstAid_label">Premiers soins</string>
-	<string name="char_skill_forgery_label">Contrefaçon</string>
+	<string name="char_skill_forgery_label">Contrefaï¿½on</string>
 	<string name="char_skill_pickLock_label">Crochetage</string>
-	<string name="char_skill_trapCrafting_label">Fabrication de pièges</string>
+	<string name="char_skill_trapCrafting_label">Fabrication de piï¿½ges</string>
 	<string name="char_skill_archery_label">Archerie</string>
-	<string name="char_skill_athletics_label">Athlétisme</string>
-	<string name="char_skill_crossbow_label">Arbalète</string>
+	<string name="char_skill_athletics_label">Athlï¿½tisme</string>
+	<string name="char_skill_crossbow_label">Arbalï¿½te</string>
 	<string name="char_skill_sleighOfHand_label">Adresse</string>
-	<string name="char_skill_stealth_label">Furtivité</string>
+	<string name="char_skill_stealth_label">Furtivitï¿½</string>
 	<string name="char_skill_charisma_label">Charisme</string>
 	<string name="char_skill_deceit_label">Duperie</string>
 	<string name="char_skill_fineArts_label">Beaux Arts</string>
@@ -445,35 +445,35 @@
 	<string name="char_skill_humanPerception_label">Psychologie</string>
 	<string name="char_skill_leadership_label">Commandement</string>
 	<string name="char_skill_persuasion_label">Persuasion</string>
-	<string name="char_skill_performance_label">Représentation</string>
-	<string name="char_skill_seduction_label">Séduction</string>
+	<string name="char_skill_performance_label">Reprï¿½sentation</string>
+	<string name="char_skill_seduction_label">Sï¿½duction</string>
 	<string name="char_skill_awareness_label">Vigilance</string>
-	<string name="char_skill_business_label">Négoce</string>
-	<string name="char_skill_deduction_label">Déduction</string>
-	<string name="char_skill_education_label">Éducation</string>
+	<string name="char_skill_business_label">Nï¿½goce</string>
+	<string name="char_skill_deduction_label">Dï¿½duction</string>
+	<string name="char_skill_education_label">ï¿½ducation</string>
 	<string name="char_skill_commonSpeech_label">Langue (Commun)</string>
 	<string name="char_skill_elderSpeech_label">Langue (Efle)</string>
 	<string name="char_skill_dwarven_label">Langue (Nain)</string>
 	<string name="char_skill_monsterLore_label">Connaissance des monstres</string>
-	<string name="char_skill_socialEtiquette_label">Étiquette</string>
+	<string name="char_skill_socialEtiquette_label">ï¿½tiquette</string>
 	<string name="char_skill_streetwise_label">Connaissance de la rue</string>
 	<string name="char_skill_tactics_label">Tactique</string>
 	<string name="char_skill_teaching_label">Enseignement</string>
 	<string name="char_skill_wildernessSurvival_label">Survie</string>
 	<string name="char_skill_brawling_label">Bagarre</string>
-	<string name="char_skill_dodgeEscape_label">Esquive / évasion</string>
-	<string name="char_skill_melee_label">Mêlée</string>
-	<string name="char_skill_riding_label">Équitation</string>
+	<string name="char_skill_dodgeEscape_label">Esquive / ï¿½vasion</string>
+	<string name="char_skill_melee_label">Mï¿½lï¿½e</string>
+	<string name="char_skill_riding_label">ï¿½quitation</string>
 	<string name="char_skill_sailing_label">Navigation</string>
 	<string name="char_skill_smallBlades_label">Lames courtes</string>
-	<string name="char_skill_staffSpear_label">Bâton / Lance</string>
-	<string name="char_skill_swordmanship_label">Escrime</string>
+	<string name="char_skill_staffSpear_label">Bï¿½ton / Lance</string>
+	<string name="char_skill_swordsmanship_label">Escrime</string>
 	<string name="char_skill_courage_label">Courage</string>
-	<string name="char_skill_hexWeaving_label">Envoûtement</string>
+	<string name="char_skill_hexWeaving_label">Envoï¿½tement</string>
 	<string name="char_skill_intimidation_label">Intimidation</string>
 	<string name="char_skill_spellCasting_label">Incantation</string>
-	<string name="char_skill_resistMagic_label">Résistance à la magie</string>
-	<string name="char_skill_resistCoercion_label">Résistance à la contrainte</string>
+	<string name="char_skill_resistMagic_label">Rï¿½sistance ï¿½ la magie</string>
+	<string name="char_skill_resistCoercion_label">Rï¿½sistance ï¿½ la contrainte</string>
 	<string name="char_skill_ritualCrafting_label">Rituels</string>
 
 	<!-- skill desciptions (char_skill_skillID_desc)-->
@@ -521,7 +521,7 @@
 	<string name="char_skill_sailing_desc">Sailing ships and controlling maritime vessels. At a base 10 you can sail in calm weather. At a base 13 you can handle rough weather and avoid obstacles with ease. At a base 16 you can maneuver in the open ocean and escape sirens and drowners. At a base 20 you can sail a ship through the most dangerous storms with minimal damage.</string>
 	<string name="char_skill_smallBlades_desc">Using light weapons such as daggers and cleavers. At a base 10 you can reliably wield small blades. At a base 13 you are a professional and can wield small blades with enough skill to match an assassin. At a base 16 you can rival hardened veterans in knife fights. At a base 20 you are a hardened veteran who can take on multiple assailants at once.</string>
 	<string name="char_skill_staffSpear_desc">Using long weapons such as staves, pole axes, and spears. At a base 10 you can reliably wield pole arms. At a base 13 you are a professional and can wield a pike with enough skill to match professional soldiers. At a base 16 you can face cavalry charges without flinching. At a base 20 you are a one-person wall of wood and steel.</string>
-	<string name="char_skill_swordmanship_desc">Using swords. At a base 10 you can reliably wield swords. At a base 13 you are a professional and can take the field. At a base 16 you win most duels you fight. At a base 20 you are a hardened veteran who cuts a swath through the field.</string>
+	<string name="char_skill_swordsmanship_desc">Using swords. At a base 10 you can reliably wield swords. At a base 13 you are a professional and can take the field. At a base 16 you win most duels you fight. At a base 20 you are a hardened veteran who cuts a swath through the field.</string>
 	<string name="char_skill_courage_desc">The skill of resisting fear. At a base 10 you are a calm person and can stand up to a tough customer in a bar. At a base 13 you can stare down a vicious mass murderer and not flee when you see monsters. At a base 16 you are usually the bravest person in the room and can face down enemies you know you can't beat. At a base 20 nothing scares you and you remain glacially cool even in the face of enormous monsters.</string>
 	<string name="char_skill_hexWeaving_desc">Hexing people or places. At a base 10 you can focus pure hatred into simple hexes. At a base 13 you know certain bits of black magic that allow your hexes to take hold better. At a base 16 you are wellversed in hexes and can focus your pain into deadly ones. At a base 20 you weave hexes that make seasoned witchers scowl.</string>
 	<string name="char_skill_intimidation_desc">Scaring people, either to run them off or make them do something for you. At a base 10 you are a pretty frightening person, and rarely do people mess with you in a bar. At a base 13 you have gotten used to intimidating the people around you and can scare most average people, even some soldiers. At a base 16 you radiate malice, and even seasoned soldiers know to give you a wide berth when you pass by. At a base 20 all you need to do is give a person a single look to make them cave.</string>
@@ -529,7 +529,7 @@
 	<string name="char_skill_resistMagic_desc">Resisting magical influence. At a base 10 you are often aware when magic is affecting you and can sometimes shake it off. At a base 13 you have actively hardened your mind against magic and can safeguard yourself against lesser mages. At a base 16 you know small tricks to help safeguard your mind and body from magic, allowing you to block the magic of graduate mages. At a base 20 you are stalwart in the face of magic and are rarely controlled by mages of any caliber.</string>
 	<string name="char_skill_resistCoercion_desc">Resisting persuasion, seduction, and the like. At a base 10 you can keep your head when being pressured into something you really don't want to do. At a base 13 you can shut out the seductions of relatively attractive people and avoid caving to strong arguments. At a base 16 you are resilient enough to earn the title "stubborn" and aren't often moved by those with good reasons or impressive assets. At a base 20 when you make a decision, rarely will anything change your mind.</string>
 	<string name="char_skill_ritualCrafting_desc">Ritualistic magic. At a base 10 you know how to perform some rituals and are fairly talented at them. At a base 13 you routinely perform rituals. At a base 16 you can undertake rituals under pressure and attain the outcome you are looking for. At a base 20 you are a skilled ritualist and can perform any ritual you lay your hands on.</string>
-		
+
 	<!-- Combat tab -->
 	<string name="char_label_defenseActions">Actions Def.</string>
 	<string name="char_label_reposition">Repositionnement</string>
@@ -544,19 +544,19 @@
 	<string name="char_tooltip_normalattack">Attaque Normale</string>
 	<string name="char_tooltip_block">Bloquer</string>
 	<string name="char_tooltip_parry">Parer</string>
-	<string name="char_label_weapondamage">Dégâts</string>
-	<string name="char_label_weapondefense">Déf.</string>
+	<string name="char_label_weapondamage">Dï¿½gï¿½ts</string>
+	<string name="char_label_weapondefense">Dï¿½f.</string>
 	<string name="char_label_weaponeffects">Effets</string>
-	<string name="char_label_weaponrange">Portée</string>
+	<string name="char_label_weaponrange">Portï¿½e</string>
 	<string name="char_label_weaponammo">Mun.</string>
 	<string name="menu_addweapon">Ajouter Arme</string>
 	<string name="menu_deleteweapon">Supprimer Arme</string>
 	<string name="list_menu_deleteweaponconfirm">Supprimer Arme</string>
 	<string name="char_label_brawling">Bagarre</string>
 	<string name="char_label_brawlingname">Nom</string>
-	<string name="char_label_brawlingdamage">Dégâts</string>
+	<string name="char_label_brawlingdamage">Dï¿½gï¿½ts</string>
 	<string name="char_label_brawlingattacks">Attaques</string>
-	<string name="char_label_brawlingdefense">Déf.</string>
+	<string name="char_label_brawlingdefense">Dï¿½f.</string>
 	<string name="char_label_punchlabel">Poings</string>
 	<string name="char_label_kicklabel">Pieds</string>
 	<string name="char_label_armor">Armure</string>
@@ -568,13 +568,13 @@
 	<string name="menu_addarmor">Ajouter Armure</string>
 	<string name="menu_deletearmor">Suprimer Armure</string>
 	<string name="list_menu_deletearmorconfirm">Supprimer Armure</string>
-	<string name="char_armor_label_location_head">Tête</string>
+	<string name="char_armor_label_location_head">Tï¿½te</string>
 	<string name="char_armor_label_location_torso">Torse</string>
 	<string name="char_armor_label_location_rightarm">Bras droit</string>
 	<string name="char_armor_label_location_leftarm">Bras gauche</string>
 	<string name="char_armor_label_location_rightleg">Jambe droite</string>
 	<string name="char_armor_label_location_leftleg">Jambe gauche</string>
-	<string name="char_armor_label_location_head_short">Tête</string>
+	<string name="char_armor_label_location_head_short">Tï¿½te</string>
 	<string name="char_armor_label_location_torso_short">Torse</string>
 	<string name="char_armor_label_location_rightarm_short">Bras D.</string>
 	<string name="char_armor_label_location_leftarm_short">Bras G.</string>
@@ -585,16 +585,16 @@
 	<string name="combat_attack_message">Attaque %s avec</string>
 	<string name="combat_fastattack_message">Frappe rapide sur %s with</string>
 	<string name="combat_strongattack_message">Frappe puisssante sur %s with</string>
-	<string name="defense_errormsg_unknowndefense">[ERREUR] Tentative de jet de défense inconnue.</string>
-	<string name="defense_succeeded_message">Défense réussie.</string>
-	<string name="defense_failed_message">Défense echouée. </string>
+	<string name="defense_errormsg_unknowndefense">[ERREUR] Tentative de jet de dï¿½fense inconnue.</string>
+	<string name="defense_succeeded_message">Dï¿½fense rï¿½ussie.</string>
+	<string name="defense_failed_message">Dï¿½fense echouï¿½e. </string>
 	<string name="deadly_crit_message">[CRIT. MORTEL (%i)]</string>
 	<string name="difficult_crit_message">[CRIT. DIFF. (%i)]</string>
 	<string name="complex_crit_message">[CRIT. COMPLEXE (%i)]</string>
 	<string name="simple_crit_message">[CRIT. SIMPLE (%i)]</string>
 	<string name="no_crit_message">[TOUCHE (%i)]</string>
-	<string name="rollfordamage_message">%s doit tirer les dégâts.</string>
-	
+	<string name="rollfordamage_message">%s doit tirer les dï¿½gï¿½ts.</string>
+
 	<!-- Weapon editor -->
 	<string name="weapon_title">Arme</string>
 	<string name="weapon_label_name">Nom</string>
@@ -603,37 +603,37 @@
 	<string name="weapon_header_attack">Attaque</string>
 	<string name="weapon_header_damage">Degats</string>
 	<string name="weapon_header_enhancement">Runes</string>
-	<string name="weapon_property_reliability">Fiabilité</string>
+	<string name="weapon_property_reliability">Fiabilitï¿½</string>
 	<string name="weapon_property_concealment">Dissimulation</string>
 	<string name="weapon_property_effects">Effets :</string>
 	<string name="weapon_property_effect_ablating">Ablation</string>
 	<string name="weapon_property_effect_armorpiercing">Perforation</string>
-	<string name="weapon_property_effect_balanced">Équilibré(e)</string>
+	<string name="weapon_property_effect_balanced">ï¿½quilibrï¿½(e)</string>
 	<string name="weapon_property_effect_bleeding">Saignement</string>
 	<string name="weapon_property_effect_brawling">Bagarre</string>
 	<string name="weapon_property_effect_concealment">Dissimulation</string>
 	<string name="weapon_property_effect_focus">Focus</string>
 	<string name="weapon_property_effect_grappling">Saisie</string>
-	<string name="weapon_property_effect_greaterfocus">Focus Supérieur</string>
-	<string name="weapon_property_effect_improvedarmorpiercing">Perforation Amél.</string>
-	<string name="weapon_property_effect_longreach">Longue Portée</string>
-	<string name="weapon_property_effect_meteorite">Météorite</string>
-	<string name="weapon_property_effect_nonethal">Non Létale</string>
+	<string name="weapon_property_effect_greaterfocus">Focus Supï¿½rieur</string>
+	<string name="weapon_property_effect_improvedarmorpiercing">Perforation Amï¿½l.</string>
+	<string name="weapon_property_effect_longreach">Longue Portï¿½e</string>
+	<string name="weapon_property_effect_meteorite">Mï¿½tï¿½orite</string>
+	<string name="weapon_property_effect_nonethal">Non Lï¿½tale</string>
 	<string name="weapon_property_effect_slowreload">Rechargement lent</string>
-	<string name="weapon_property_effect_stun">Étourdissement</string>
+	<string name="weapon_property_effect_stun">ï¿½tourdissement</string>
 	<string name="weapon_label_attackstat">Carac.</string>
 	<string name="weapon_label_attackskill">Comp.</string>
-	<string name="weapon_label_weaponaccuracy">PRÉ</string>
-	<string name="weapon_tooltip_weaponaccuracy">Précision</string>
+	<string name="weapon_label_weaponaccuracy">PRï¿½</string>
+	<string name="weapon_tooltip_weaponaccuracy">Prï¿½cision</string>
 	<string name="weapon_label_dmgtype">Type</string>
-	<string name="weapon_tooltip_damagetype">Saisissez les types de dégâts ou effets ; utilisez des virgules (,) pour les séparer.</string>
+	<string name="weapon_tooltip_damagetype">Saisissez les types de dï¿½gï¿½ts ou effets ; utilisez des virgules (,) pour les sï¿½parer.</string>
 	<string name="weapon_label_dmgbonusstat">Bonus carac.</string>
 	<string name="weapon_label_enhancementmax">Max</string>
 	<string name="weapon_label_enhancementname">Nom</string>
 	<string name="weapon_label_enhancementeffect">Effet</string>
 
 	<string name="weapon_rune_chemobog_label">Chemobog</string>
-	<string name="weapon_rune_chemobog_desc">Lancer 1d6 lorsque votre arme devrait subir des dégâts. Sur un 4, 5, ou 6, l'arme ne subit aucun dégât.</string>
+	<string name="weapon_rune_chemobog_desc">Lancer 1d6 lorsque votre arme devrait subir des dï¿½gï¿½ts. Sur un 4, 5, ou 6, l'arme ne subit aucun dï¿½gï¿½t.</string>
 	<string name="weapon_rune_dazhbog_label">Dazhbog</string>
 	<string name="weapon_rune_dazhbog_desc">Feu (30%)</string>
 	<string name="weapon_rune_devanna_label">Devanna</string>
@@ -641,15 +641,15 @@
 	<string name="weapon_rune_morana_label">Morana</string>
 	<string name="weapon_rune_morana_desc">Poison (30%)</string>
 	<string name="weapon_rune_perun_label">Perun</string>
-	<string name="weapon_rune_perun_desc">Gagnez un second dé d'adrénaline à chaque fois que vous en gagnez un.</string>
+	<string name="weapon_rune_perun_desc">Gagnez un second dï¿½ d'adrï¿½naline ï¿½ chaque fois que vous en gagnez un.</string>
 	<string name="weapon_rune_stribog_label">Stribog</string>
-	<string name="weapon_rune_stribog_desc">Stupéfaction (30%)</string>
+	<string name="weapon_rune_stribog_desc">Stupï¿½faction (30%)</string>
 	<string name="weapon_rune_svarog_label">Svarog</string>
 	<string name="weapon_rune_svarog_desc">Perforation</string>
 	<string name="weapon_rune_triglav_label">Triglav</string>
 	<string name="weapon_rune_triglav_desc">Etourdissement (-1)</string>
 	<string name="weapon_rune_veles_label">Veles</string>
-	<string name="weapon_rune_veles_desc">Focus supérieur</string>
+	<string name="weapon_rune_veles_desc">Focus supï¿½rieur</string>
 	<string name="weapon_rune_zoria_label">Zoria</string>
 	<string name="weapon_rune_zoria_desc">Gel (30%)</string>
 
@@ -657,9 +657,9 @@
 	<string name="armor_title">Armure</string>
 	<string name="armor_label_name">Nom</string>
 	<string name="armor_label_effects">Effets</string>
-	<string name="armor_label_resistances">Résistances</string>
+	<string name="armor_label_resistances">Rï¿½sistances</string>
 	<string name="armor_header_properties">Proprietes</string>
-	<string name="armor_property_sp">Pouvoir d'Arrêt</string>
+	<string name="armor_property_sp">Pouvoir d'Arrï¿½t</string>
 	<string name="armor_property_ev">Valeur d'Emcombrement</string>
 	<string name="rolldescription_totalev">VE Totale</string>
 	<string name="armor_header_location">Emplacement</string>
@@ -667,41 +667,41 @@
 	<string name="armor_label_enhancementmax">Max</string>
 	<string name="armor_label_enhancementname">Nom</string>
 	<string name="armor_label_enhancementeffect">Effet</string>
-	
+
 	<string name="armor_glyph_magic_label">Glyph of Magic</string>
-	<string name="armor_glyph_magic_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dégâts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts d'éléments mixtes.</string>
+	<string name="armor_glyph_magic_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dï¿½gï¿½ts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts d'ï¿½lï¿½ments mixtes.</string>
 	<string name="armor_glyph_air_label">Glyph of Air</string>
-	<string name="armor_glyph_air_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dégâts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts d'air.</string>
+	<string name="armor_glyph_air_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dï¿½gï¿½ts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts d'air.</string>
 	<string name="armor_glyph_earth_label">Glyph of Earth</string>
-	<string name="armor_glyph_earth_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dégâts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts de terre.</string>
+	<string name="armor_glyph_earth_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dï¿½gï¿½ts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts de terre.</string>
 	<string name="armor_glyph_fire_label">Glyph of Fire</string>
-	<string name="armor_glyph_fire_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dégâts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts de feu.</string>
+	<string name="armor_glyph_fire_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dï¿½gï¿½ts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts de feu.</string>
 	<string name="armor_glyph_water_label">Glyph of Water</string>
-	<string name="armor_glyph_water_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dégâts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts d'eau.</string>
+	<string name="armor_glyph_water_desc">Lorsque vous portez cette armure, soit votre SD de sort augmente de +3, soit les dï¿½gï¿½ts de vos sorts augmentent de + 1d6. Ceci ne s'applique qu'aux sorts d'eau.</string>
 
 	<!--Damage-->
-	<string name="damage_roll_title">Dégât</string>
+	<string name="damage_roll_title">Dï¿½gï¿½t</string>
 	<string name="damage_for_label">pour</string>
-	<string name="damage_afterarmor_label">après l'armure</string>
+	<string name="damage_afterarmor_label">aprï¿½s l'armure</string>
 	<string name="damage_label_strongattack">Frappe puissante x2 avant l'armure</string>
-	<string name="damage_label_critical_extradamage">Dégâts suppl. : </string>
+	<string name="damage_label_critical_extradamage">Dï¿½gï¿½ts suppl. : </string>
 	<string name="damage_label_critical_simple">Critique - Simple</string>
 	<string name="damage_label_critical_complex">Critique - Complexe</string>
 	<string name="damage_label_critical_difficult">Critique - Difficile</string>
 	<string name="damage_label_critical_deadly">Critique - Mortel</string>
-	<string name="damage_label_location_head">Emplacement - Tête</string>
+	<string name="damage_label_location_head">Emplacement - Tï¿½te</string>
 	<string name="damage_label_location_torso">Emplacement - Torse</string>
 	<string name="damage_label_location_arm">Emplacement - Bras</string>
 	<string name="damage_label_location_leg">Emplacement - Jambe</string>
 	<string name="damage_label_location_limb">Emplacement - Monstre, membre</string>
 	<string name="damage_label_location_tail">Emplacement - Monstre, queue/aile</string>
 
-	<string name="damage_desc_halfarmor">{moitié armure}</string>
+	<string name="damage_desc_halfarmor">{moitiï¿½ armure}</string>
 	<string name="damage_desc_fullarmor">{armure}</string>
 
-	<string name="damage_desc_normaldamage">Dégâts</string>
-	<string name="damage_desc_nonlethaldamage">Dégâts non létaux</string>
-	
+	<string name="damage_desc_normaldamage">Dï¿½gï¿½ts</string>
+	<string name="damage_desc_nonlethaldamage">Dï¿½gï¿½ts non lï¿½taux</string>
+
 	<!--Critical Message-->
 	<string name="critical_label_simple_head_greater">Cracked Jaw</string>
 	<string name="critical_desc_simple_head_greater">The blow cracked your jaw, making it hard to speak clearly. You are at a -2 to Magical Skills &amp; Verbal Combat (Charisma, Persuasion, Seduction, Leadership, Deceit, Social Etiquette, and Intimidation).</string>
@@ -757,36 +757,36 @@
 
 	<string name="critical_label_without_anatomy">Target without anatomy (elementa or specter)</string>
 	<string name="critical_desc_without_anatomy">Bonus damage = </string>
-	
+
 	<!--Fumble messages-->
 	<string name="fumble_none">No major fumble.</string>
-	
+
 	<string name="fumble_melee_6">Your weapon glances off and you are staggered.</string>
 	<string name="fumble_melee_7">Your weapon lodges in a nearby object and it takes 1 round to free.</string>
 	<string name="fumble_melee_8">You damage your weapon severely. Your weapon takes 1d10 points of reliability damage.</string>
 	<string name="fumble_melee_9">You manage to wound yourself. Roll for location.</string>
 	<string name="fumble_melee_over9">You wound a nearby ally. Roll location on a random ally within range.</string>
-	
+
 	<string name="fumble_range_6to7">The ammunition you fired,or weapon you threw, hits something hard, breaking.</string>
 	<string name="fumble_range_8to9">Your bowstring comes partially undone, your crossbow jams, or you drop your thrown weapon. It takes 1 round to undo this.</string>
 	<string name="fumble_range_over9">You strike one of your allies with a ricochet. Roll location on a random ally within range.</string>
-	
+
 	<string name="fumble_armeddefense_6">Your weapon takes 1d6 extra points of reliability damage.</string>
 	<string name="fumble_armeddefense_7">Your weapon is knocked from your hand and flies 1d6 meters away in a random direction</string>
 	<string name="fumble_armeddefense_8">You are knocked to the ground. You are now prone and must make a Stun save.</string>
 	<string name="fumble_armeddefense_9">Your weapon takes 2d6 extra points of reliability damage.</string>
 	<string name="fumble_armeddefense_over9">Your weapon ricochets back and hits you. Roll for location.</string>
-	
+
 	<string name="fumble_unarmed_6">You are knocked off balance and are staggered.</string>
 	<string name="fumble_unarmed_7">You trip on something and fall prone.</string>
 	<string name="fumble_unarmed_8">You trip and fall prone. You must make a Stun save.</string>
 	<string name="fumble_unarmed_9">You trip and hit your head. You are knocked prone, take 1d6 points of non-lethal damage to the head, and must make a Stun save.</string>
 	<string name="fumble_unarmed_over9">You fail horribly and not only fall prone but also take 1d6 lethal damage to the head and must make a Stun save.</string>
-	
+
 	<!--Location messages-->
 	<string name="modifier_label_location">emplacement : </string>
 	<string name="modifier_label_location_or"> ou </string>
-	<string name="modifier_label_location_head">Tête</string>
+	<string name="modifier_label_location_head">Tï¿½te</string>
 	<string name="modifier_label_location_torso">Torse</string>
 	<string name="modifier_label_location_monstertorso">Monstre, torse</string>
 	<string name="modifier_label_location_rightarm">Bras droit</string>
@@ -798,29 +798,29 @@
 	<string name="modifier_label_location_limb">Monstre, membre</string>
 	<string name="modifier_label_location_monstertail">Monstre, aile/queue</string>
 	<string name="modifier_label_location_tail">Monstre, aile/queue</string>
-	
+
 	<!--Modifiers-->
 	<string name="modifier_label_attack">Modificateurs d'attaque</string>
 	<string name="modifier_label_atkstrong">Frappe puissante</string>
-	<string name="modifier_label_fstdraw">Dégainnage rapide</string>
+	<string name="modifier_label_fstdraw">Dï¿½gainnage rapide</string>
 	<string name="modifier_label_targetpinned">Target pinned</string>
 	<string name="modifier_label_targetactdodge">Target act. dodging</string>
 	<string name="modifier_label_movtarget">Mov. target REF >10</string>
 	<string name="modifier_label_ambush">Ambush</string>
 	<string name="modifier_label_ricshot">Ricochet shot</string>
 	<string name="modifier_label_silhouettedtarget">Target silhouetted</string>
-	
+
 	<string name="modifier_label_range">Range modifiers</string>
 	<string name="modifier_label_range_pointblank">Point blank</string>
 	<string name="modifier_label_range_medium">Medium</string>
 	<string name="modifier_label_range_long">Long</string>
 	<string name="modifier_label_range_extreme">Extreme</string>
-	
+
 	<string name="modifier_label_light">Light levels modifiers</string>
 	<string name="modifier_label_light_bright">Bright light</string>
 	<string name="modifier_label_light_dim">Dim light</string>
 	<string name="modifier_label_light_dark">Darkness</string>
-	
+
 	<string name="modifier_label_damage">Damage modifiers</string>
 	<string name="modifier_label_damage_simple">Critical - simple</string>
 	<string name="modifier_label_damage_complex">Critical - complex</string>
@@ -829,7 +829,7 @@
 	<string name="modifier_label_damage_lethal">Lethal</string>
 	<string name="modifier_label_damage_nonlethal">Non lethal</string>
 	<string name="modifier_label_damage_softspot">Soft Spot</string>
-	
+
 	<string name="modifier_label_aiming">Aiming modifiers</string>
 	<string name="modifier_label_aimhead">Head</string>
 	<string name="modifier_label_aimtorso">Torso</string>
@@ -879,7 +879,7 @@
 	<string name="spell_components_label">Components</string>
 	<string name="spell_danger_label">Danger</string>
 	<string name="spell_reqlift_label">Requirement to lift</string>
-	
+
 	<string name="spellcasting_notenoughSTA">Not enough Stamina to cast this spell</string>
 	<string name="spellcasting_signSTAmax">Stamina Max for casting a witcher sign is 7.</string>
 	<string name="spellcasting_overexertion">[OVEREXERTION : - %i HP]</string>
@@ -897,12 +897,12 @@
 	<string name="item_grouped_title_armor">Armure</string>
 	<string name="item_grouped_title_weapons">Armes</string>
 	<string name="item_grouped_title_alchemicalitems">Objets d'alchimie</string>
-	<string name="item_grouped_title_armorenhancements">Améliorations d'armure</string>
+	<string name="item_grouped_title_armorenhancements">Amï¿½liorations d'armure</string>
 	<string name="item_grouped_title_transportationmounts">Monture - Locomotion</string>
-	<string name="item_grouped_title_transportationmountequipment">Monture - Locomotion, équipement</string>
+	<string name="item_grouped_title_transportationmountequipment">Monture - Locomotion, ï¿½quipement</string>
 	<string name="item_grouped_title_toolkits">Outils</string>
-	<string name="item_grouped_title_generalgear">Équipements généraux</string>
-	
+	<string name="item_grouped_title_generalgear">ï¿½quipements gï¿½nï¿½raux</string>
+
 
 	<string name="item_grouped_label_name">Name</string>
 	<string name="item_grouped_label_sp">SP</string>
@@ -933,8 +933,8 @@
 	<string name="item_grouped_tooltip_concealment">Concealment</string>
 	<string name="item_grouped_label_concealment">Conc</string>
 	<string name="item_grouped_tooltip_concealment">Concealment</string>
-	<string name="item_grouped_label_enhancement">EN</string>
-	<string name="item_grouped_tooltip_enhancement">Enhancement</string>
+	<string name="item_grouped_label_enhancements">EN</string>
+	<string name="item_grouped_tooltip_enhancements">Enhancements</string>
 	<string name="item_grouped_label_resistance">Res.</string>
 	<string name="item_grouped_tooltip_resistance">Resistance</string>
 	<string name="item_grouped_label_athletics">Ath.</string>
@@ -963,7 +963,7 @@
 	<string name="npc_type_relict">Relict</string>
 	<string name="npc_type_specter">Specter</string>
 	<string name="npc_type_vampire">Vampire</string>
-	
+
 	<string name="npc_label_threat">Threat</string>
 	<string name="npc_threat_easy">Easy</string>
 	<string name="npc_threat_medium">Medium</string>
@@ -989,7 +989,7 @@
 	<string name="npc_label_encumbrance">Enc</string>
 	<string name="npc_label_recovery">Rec</string>
 
-	
+
 	<string name="npc_label_height">Height</string>
 	<string name="npc_label_weight">Weight</string>
 	<string name="npc_label_environment">Environment</string>
@@ -997,12 +997,12 @@
 	<string name="npc_label_organization">Organization</string>
 	<string name="npc_label_loot">Loot</string>
 	<string name="npc_label_bounty">Bounty</string>
-	
+
 	<string name="npc_header_skills">Skills</string>
 	<string name="npc_header_ecology">Ecology</string>
 	<string name="npc_header_combat">Combat</string>
 	<string name="npc_label_weaponattacks">Att. (ROF)</string>
-	
+
 	<string name="npc_tooltip_skills">Enter skills as : skillname +mod and use coma to separate each skill</string>
 	<string name="npc_unknownskill_errormessage">Try to roll unknown skill "%s"</string>
 
@@ -1027,6 +1027,6 @@
 	<string name="modifier_label_damage_pinpointaim">Pin Point Aim</string>
 	<string name="combat_twinshot_attack_message">Twin shot attack %s with</string>
 	<string name="char_label_specialActions">Special Actions</string>
-	
+
 </root>
 

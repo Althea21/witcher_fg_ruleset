@@ -1,5 +1,5 @@
--- 
--- Please see the license.html file included with this distribution for 
+--
+-- Please see the license.html file included with this distribution for
 -- attribution and copyright information.
 --
 
@@ -61,7 +61,7 @@ skilldata = {
 		},
 	["First Aid"] = {
 			stat = "Craft"
-		},		
+		},
 	["Forgery"] = {
 			stat = "Craft"
 		},
@@ -79,7 +79,7 @@ skilldata = {
 		},
 	["Crossbow"] = {
 			stat = "Dexterity"
-		},	
+		},
 	["Sleigh of Hand"] = {
 			stat = "Dexterity"
 		},
@@ -88,7 +88,7 @@ skilldata = {
 		},
 	["Charisma"] = {
 			stat = "Empathy"
-		},		
+		},
 	["Deceit"] = {
 			stat = "Empathy",
 		},
@@ -176,7 +176,7 @@ skilldata = {
     ["Staff/Spear"] = {
 			stat = "Reflex"
 		},
-    ["Swordmanship"] = {
+    ["Swordsmanship"] = {
 			stat = "Reflex"
 		},
     ["Courage"] = {
@@ -204,8 +204,8 @@ skilldata = {
 
 -- Conditions supported in effect conditionals and for token widgets
 conditions = {
-	"bleeding", 
-	"blinded", 
+	"bleeding",
+	"blinded",
 	"fire",
 	"frozen",
 	"hallucination",
@@ -217,3 +217,48 @@ conditions = {
 	"suffocating",
 	"stunned"
 };
+
+-- List of skills for each type of weapon
+aWeaponSkillsBySubType = {
+	["swords"] = "Swordsmanship",
+	["small blades"] = "Small Blades",
+	["axes"] = "Melee",
+	["bludgeons"] = "Melee",
+	["pole arms"] = "Staff/Spear",
+	["staves"] = "Staff/Spear",
+	["thrown weapons"] = "Athletics",
+	["bows"] = "Archery",
+	["crossbows"] = "Crossbow",
+}
+
+-- List of stats for each type of weapon
+aWeaponStatsBySubType = {
+	["swords"] = "Reflex",
+	["small blades"] = "Reflex",
+	["axes"] = "Reflex",
+	["bludgeons"] = "Reflex",
+	["pole arms"] = "Reflex",
+	["staves"] = "Reflex",
+	["thrown weapons"] = "Dexterity",
+	["bows"] = "Dexterity",
+	["crossbows"] = "Dexterity",
+}
+
+-- List of weapon effects
+aWeaponEffects = {
+	"ablating",
+	"bleeding",
+	"focus",
+	"improved armor piercing",
+	"non-lethal",
+	"armor piercing",
+	"brawling",
+	"grappling",
+	"long reach",
+	"slow reload",
+	"balanced",
+	"concealment",
+	"greater focus",
+	"meteorite",
+	"stun"
+}

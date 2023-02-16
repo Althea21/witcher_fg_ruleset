@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!--
+  Please see the license.html file included with this distribution for
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="item">
+		<frame>recordsheet</frame>
+		<placement>
+			<size width="350" height="350" />
+		</placement>
+		<sizelimits>
+			<minimum width="300" height="300" />
+			<dynamic />
+		</sizelimits>
+		<nodelete />
+		<playercontrol />
+		<sharable />
+		<tooltip field="name" />
+		<minimize>minimized_item</minimize>
+		<script file="campaign/scripts/item.lua" />
+		<sheetdata>
+			<sub_record_header name="header">
+				<class>item_header</class>
+			</sub_record_header>
+
+			<frame_record_content name="contentframe" />
+
+			<subwindow_record name="main">
+				<class>item_main</class>
+				<activate />
+			</subwindow_record>
+
+			<scrollbar_record>
+				<target>main</target>
+			</scrollbar_record>
+
+			<resize_recordsheet />
+			<close_recordsheet />
+		</sheetdata>
+	</windowclass>
+
+	<windowclass name="item_header" merge="join">
+		<margins control="0,0,0,2" />
+	</windowclass>
+
+	<windowclass name="item_main">
+		<margins control="0,0,0,2" />
+		<script file="campaign/scripts/item_main.lua" />
+		<sheetdata>
+			<anchor_column name="columnanchor" />
+
+			<label_column name="nonid_name_label">
+				<static textres="item_label_unidentified" />
+			</label_column>
+			<string_columnh name="nonid_name" />
+
+			<label_column name="nonidentified_label">
+				<static textres="item_label_unidentifiednotes" />
+			</label_column>
+			<string_columnh name="nonidentified" />
+
+			<line_column name="divider" />
+
+			<label_column name="type_label">
+				<static textres="item_label_type" />
+			</label_column>
+			<string_columnh name="type">
+				<nohide />
+				<delaykeyupdate />
+				<script>
+					function onValueChanged()
+						window.update();
+					end
+				</script>
+			</string_columnh>
+
+			<label_column name="subtype_label">
+				<static textres="item_label_subtype" />
+			</label_column>
+			<string_columnh name="subtype">
+				<delaykeyupdate />
+				<script>
+					function onValueChanged()
+						window.update();
+					end
+				</script>
+			</string_columnh>
+
+			<line_column name="divider2" />
+			<label_column name="damagetype_label">
+				<static textres="item_label_damagetype" />
+			</label_column>
+			<string_columnh name="damagetype">
+				<delaykeyupdate />
+			</string_columnh>
+			<label_column name="weaponaccuracy_label">
+				<static textres="item_label_weaponaccuracy" />
+			</label_column>
+			<number_columnh name="weaponaccuracy">
+				<delaykeyupdate />
+				<displaysign />
+			</number_columnh>
+			<label_column name="stoppingpower_label">
+				<static textres="item_label_stoppingpower" />
+			</label_column>
+			<number_columnh name="stoppingpower" />
+			<label_column name="availability_label">
+				<static textres="item_label_availability" />
+			</label_column>
+			<string_columnh name="availability">
+				<delaykeyupdate />
+			</string_columnh>
+			<label_column name="armorenhancement_label">
+				<static textres="item_label_armorenhancement" />
+			</label_column>
+			<number_columnh name="armorenhancement" />
+
+			<label_column name="damage_label">
+				<static textres="item_label_damage" />
+			</label_column>
+			<string_columnh name="damage" />
+
+			<label_column name="reliability_label">
+				<static textres="item_label_reliability" />
+			</label_column>
+			<number_columnh name="reliability" />
+
+			<label_column name="hands_label">
+				<static textres="item_label_hands" />
+			</label_column>
+			<number_columnh name="hands" />
+
+			<label_column name="range_label">
+				<static textres="item_label_range" />
+			</label_column>
+			<string_columnh name="range" />
+
+			<line_column name="divider3" />
+			<label_column name="effect_label">
+				<static textres="item_label_effect" />
+			</label_column>
+			<string_columnh name="effect" />
+
+			<label_column name="resistances_label">
+				<static textres="item_label_resistances" />
+			</label_column>
+			<string_columnh name="resistances" />
+
+			<label_column name="cover_label">
+				<static textres="item_label_cover" />
+			</label_column>
+			<string_columnh name="cover" />
+
+			<label_column name="concealment_label">
+				<static textres="item_label_concealment" />
+			</label_column>
+			<string_columnh name="concealment" />
+
+			<label_column name="enhancements_label">
+				<static textres="item_label_enhancements" />
+			</label_column>
+			<number_columnh name="enhancements" />
+
+			<label_column name="rarity_label">
+				<static textres="item_label_rarity" />
+			</label_column>
+			<string_columnh name="rarity" />
+
+			<!--
+				Had to call this 'componentlocation' rather than 'location' as it wouldn't
+			    store the value first time around (maybe reserved name?)
+			-->
+			<label_column name="componentlocation_label">
+				<static textres="item_label_location" />
+			</label_column>
+			<string_columnh name="componentlocation" />
+
+			<label_column name="quantity_label">
+				<static textres="item_label_quantity" />
+			</label_column>
+			<string_columnh name="quantity" />
+
+			<label_column name="foragedc_label">
+				<static textres="item_label_foragedc" />
+			</label_column>
+			<string_columnh name="foragedc" />
+
+			<label_column name="craftingdc_label">
+				<static textres="item_label_craftingdc" />
+			</label_column>
+			<number_columnh name="craftingdc" />
+
+			<label_column name="time_label">
+				<static textres="item_label_time" />
+			</label_column>
+			<string_columnh name="time" />
+
+			<label_column name="components_label">
+				<static textres="item_label_components" />
+			</label_column>
+			<string_columnh name="components" />
+
+			<label_column name="investment_label">
+				<static textres="item_label_investment" />
+			</label_column>
+			<number_columnh name="investment" />
+
+			<line_column name="divider4" />
+
+			<label_column name="encumbrancevalue_label">
+				<static textres="item_label_encumbrancevalue" />
+			</label_column>
+			<number_columnh name="encumbrancevalue" />
+			<label_column name="weight_label">
+				<static textres="item_label_weight" />
+			</label_column>
+			<number_columnh name="weight" />
+
+			<label_column name="cost_label">
+				<static textres="item_label_cost" />
+			</label_column>
+			<string_columnh name="cost" />
+
+			<line_column name="divider5" />
+
+			<ft_columnh name="description" />
+		</sheetdata>
+	</windowclass>
+</root>
