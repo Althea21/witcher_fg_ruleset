@@ -56,7 +56,7 @@ local m_sRecord = "";
 function onDataChanged()
 	local nodeWeapon = getDatabaseNode();
 	local nodeChar = nodeWeapon.getChild("...");
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.resolveActor(nodeChar);
 	--onLinkChanged();
 	onDamageChanged();
 	
@@ -104,7 +104,7 @@ end
 function onDamageChanged()
 	local nodeWeapon = getDatabaseNode();
 	local nodeChar = nodeWeapon.getChild("...")
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.resolveActor(nodeChar);
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	
 	

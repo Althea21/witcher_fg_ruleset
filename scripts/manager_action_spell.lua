@@ -23,9 +23,9 @@ end
 -- returns : 
 --	* rRoll	: roll object
 function getRoll(rActor, rSpell)
-	Debug.console("SpellManager getRoll")
-	Debug.console(rActor);
-	Debug.console(rSpell);
+	-- Debug.console("SpellManager getRoll")
+	-- Debug.console(rActor);
+	-- Debug.console(rSpell);
 	-- Initialize a blank rRoll record
 	local rRoll = {};
 	
@@ -72,7 +72,7 @@ function getRoll(rActor, rSpell)
 		end
 	end
 
-	Debug.console(rRoll.sSpellType);
+	-- Debug.console(rRoll.sSpellType);
 
 	-- Look up actor / spell specific information
 	local sSkill = "";
@@ -95,7 +95,7 @@ function getRoll(rActor, rSpell)
 			sSkill = "ritualCrafting";
 		end
 		
-		Debug.console(sSkill);
+		-- Debug.console(sSkill);
 
 		if nodeActor.getParent().getName()=="charsheet" then
 			-- PC case
@@ -140,7 +140,7 @@ end
 function performRoll(draginfo, rSpell)
 	-- retreive actor node 
 	local nodeChar = rSpell.getChild(".....");
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.resolveActor(nodeChar);
 	
 	-- first check if caster has enough Stamina
 	local nCurrentSTA = tonumber(DB.getValue(nodeChar, "attributs.stamina", 0));

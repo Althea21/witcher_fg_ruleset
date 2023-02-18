@@ -145,7 +145,7 @@ end
 
 function action(draginfo)
 	if sDragLabel then
-		local rActor = ActorManager.getActor("npc", window.getDatabaseNode());
+		local rActor = ActorManager.resolveActor(window.getDatabaseNode());
 		local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 		
 		local sStat = "";

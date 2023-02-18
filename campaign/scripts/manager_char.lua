@@ -91,7 +91,7 @@ function getWeaponAttackRollStructures(nodeWeapon)
 	end
 	
 	local nodeChar = nodeWeapon.getChild("...");
-	local rActor = ActorManager.getActor("", nodeChar);
+	local rActor = ActorManager.resolveActor(nodeChar);
 
 	--create attack object
 	local rAttack = {};
@@ -139,7 +139,7 @@ function getWeaponDefenseRollStructures(nodeWeapon)
 	end
 	
 	local nodeChar = nodeWeapon.getChild("...");
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.resolveActor(nodeChar);
 
 	--create attack object
 	local rAttack = {};
@@ -295,7 +295,7 @@ end
 function getWeaponDamageRollStructures(nodeWeapon)
 	-- Retreive rActor
 	local nodeChar = nodeWeapon.getChild("...");
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.resolveActor(nodeChar);
 	
 	-- construct rDamage
 	local rDamage = {};
@@ -345,7 +345,7 @@ end
 --	* rDamage	: object containing all needed info to resolve damage (range, type, label, clauses)
 function getUnarmedDamageRollStructures(nodeChar, sType)
 	-- Retreive rActor
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.resolveActor(nodeChar);
 	
 	-- construct rDamage
 	local rDamage = {};
@@ -467,7 +467,7 @@ function getTotalEV(nodeActor)
 			if nTotalEV < 0 then
 				nTotalEV = 0
 			end
-			Debug.console("EV -2 because of bear school advantage");
+			-- Debug.console("EV -2 because of bear school advantage");
 		end
 	end
 
@@ -481,7 +481,7 @@ end
 -- returns : 
 --	* value	: armor value for given location
 function getArmorValueForLocationRoll(nodeActor, sLocation)
-	Debug.console("getArmorValueForLocationRoll called for sLocation="..sLocation);
+	-- Debug.console("getArmorValueForLocationRoll called for sLocation="..sLocation);
 	local nArmorValue = 0;
 
 	sLocation = string.lower(sLocation);
@@ -511,7 +511,7 @@ end
 --  * nodeActor : pc or npc node
 --  * sLocation : location roll value or "AIM_xxx" string for aimed attack
 function damageArmorByLocation(nodeActor, sLocation)
-	Debug.console("----- damageArmorByLocation called for sLocation="..sLocation);
+	-- Debug.console("----- damageArmorByLocation called for sLocation="..sLocation);
 	
 	-- check automate armor damaging option, if "off" do nothing
 	local sOptionADA = OptionsManager.getOption("ADA");
@@ -725,46 +725,46 @@ end
 --	* nModifier (int) : actual modifier
 --	* sDescription (string) : description 
 function getConditionRollModifier(nodeActor, sSkillName, sStatName, bIsCombat)
-	Debug.console("---------------------------------")
-	Debug.console("getConditionRollModifier")
-	Debug.console(nodeActor)
-	Debug.console(sSkillName)
-	Debug.console(sStatName)
-	Debug.console(bIsCombat)
+	-- Debug.console("---------------------------------")
+	-- Debug.console("getConditionRollModifier")
+	-- Debug.console(nodeActor)
+	-- Debug.console(sSkillName)
+	-- Debug.console(sStatName)
+	-- Debug.console(bIsCombat)
 
 	local nModifier = 0;
 	local sDescription = "";
 
 	if EffectManager2.hasEffect(nodeActor, "freezing") and sStatName:lower()=="reflex" then
-		Debug.console("Freezing and reflex : ok")
+		-- Debug.console("Freezing and reflex : ok")
 		nModifier = nModifier - 1;
 		sDescription = sDescription .. "[" .. Interface.getString("effect_name_freezing") .. " " .. Interface.getString("ref") .. " -1]";
 	elseif EffectManager2.hasEffect(nodeActor, "freezing") and sStatName:lower()=="speed" then
-		Debug.console("Freezing and speed : ok")
+		-- Debug.console("Freezing and speed : ok")
 		nModifier = nModifier - 3;
 		sDescription = sDescription .. "[" .. Interface.getString("effect_name_freezing") .. " " .. Interface.getString("spd") .. " -3]";
 	end
 
 	if bIsCombat and EffectManager2.hasEffect(nodeActor, "staggered") then
-		Debug.console("staggered and combat : ok")
+		-- Debug.console("staggered and combat : ok")
 		nModifier = nModifier - 2;
 		sDescription = sDescription .. "[" .. Interface.getString("effect_name_staggered") .. " -2]";
 	end
 
 	if EffectManager2.hasEffect(nodeActor, "intoxicated") and (sStatName:lower()=="reflex" or sStatName:lower()=="dexterity" or sStatName:lower()=="intelligence") then
-		Debug.console("intoxicated and ref or dex or int : ok")
+		-- Debug.console("intoxicated and ref or dex or int : ok")
 		nModifier = nModifier - 2;
 		sDescription = sDescription .. "[" .. Interface.getString("effect_name_intoxicated") .. " " .. Interface.getString(sStatName:sub(1,3)) .. " -2]";
 	end
 
 	if (bIsCombat or sSkillName:lower()==Interface.getString("char_skill_awareness_label"):lower()) and EffectManager2.hasEffect(nodeActor, "blinded") then
-		Debug.console("blinded and combat or awareness : ok")
+		-- Debug.console("blinded and combat or awareness : ok")
 		nModifier = nModifier - 5;
 		sDescription = sDescription .. "[" .. Interface.getString("effect_name_blinded") .. " -5]";
 	end
 
 	if bIsCombat and EffectManager2.hasEffect(nodeActor, "prone") then
-		Debug.console("prone and combat : ok")
+		-- Debug.console("prone and combat : ok")
 		nModifier = nModifier - 2;
 		sDescription = sDescription .. "[" .. Interface.getString("effect_name_prone") .. " -2]";
 	end

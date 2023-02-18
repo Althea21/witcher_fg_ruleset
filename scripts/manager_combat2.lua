@@ -41,7 +41,7 @@ function rollEntryInit(nodeEntry)
 		return;
 	end
 	
-	local rActor = ActorManager.getActorFromCT(nodeEntry);
+	local rActor = ActorManager.resolveActor(nodeEntry);
 	ActionInit.performRoll(null, rActor);
 end
 
@@ -118,11 +118,11 @@ aAttackQueueByDefender = {};
 --	* sIsStrongAttack 	: if attack is a strong Attack or not ("true"/"false") for later damage res
 --	* sWeaponEffects 	: all effects of offender weapon for later damage res
 function addPendingAttack(sSourceCT, sTargetCT, nAtkValue,  sLocation, sIsAimed, sIsStrongAttack, sSpecialAttack, sWeaponEffects)
-	Debug.console("--------------------------------------------");
-	Debug.console("Add pending attack of "..sSourceCT.." vs "..sTargetCT.." (attack value="..nAtkValue..", specialAttack="..sSpecialAttack..")");
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("Add pending attack of "..sSourceCT.." vs "..sTargetCT.." (attack value="..nAtkValue..", specialAttack="..sSpecialAttack..")");
 	
 	if sTargetCT == "" then
-		Debug.console("Target empty => do nothing");
+		-- Debug.console("Target empty => do nothing");
 		return;
 	end
 	
@@ -138,8 +138,8 @@ function addPendingAttack(sSourceCT, sTargetCT, nAtkValue,  sLocation, sIsAimed,
 	aAttack.sTgtVulnerabilities = "";
 	aAttack.sWeaponEffects = sWeaponEffects;
 	
-	Debug.console("aAttack");
-	Debug.console(aAttack);
+	-- Debug.console("aAttack");
+	-- Debug.console(aAttack);
 	
 	if not aAttackQueueByDefender[sTargetCT] then
 		aAttackQueueByDefender[sTargetCT] = {};
@@ -153,10 +153,10 @@ end
 --	* sTargetCT	: defender 
 --  * aAttack 	: array standing for the updated attack (see above for format)
 function updatePendingAttack(sSourceCT, sTargetCT, aAttack)
-	Debug.console("--------------------------------------------");
-	Debug.console("Update pending attack of "..sSourceCT.." vs "..sTargetCT);
-	Debug.console("aAttack");
-	Debug.console(aAttack);
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("Update pending attack of "..sSourceCT.." vs "..sTargetCT);
+	-- Debug.console("aAttack");
+	-- Debug.console(aAttack);
 
 	if aAttackQueueByDefender[sTargetCT] then
 		aAttackQueueByDefender[sTargetCT][1] = aAttack;
@@ -169,14 +169,14 @@ end
 --	* sTargetCT	: defender 
 --  * bForceRemove : force remove (aka defense success) even if special attack like twin shot
 function removePendingAttack (sSourceCT, sTargetCT, bForceRemove)
-	Debug.console("Remove pending attack of "..sSourceCT.." vs "..sTargetCT);
+	-- Debug.console("Remove pending attack of "..sSourceCT.." vs "..sTargetCT);
 	
 	if aAttackQueueByDefender[sTargetCT] then
 		-- if attack is twin shot and bForceRemove is false, then we're here after first damage roll :
 		-- we don't remove the pending attack but change it to "normal" pending attack for second damages
 		-- the second projectile is random location and never critical
 		if not bForceRemove and aAttackQueueByDefender[sTargetCT][1].sSpecialAttack == "twinshot" then
-			Debug.console("Pending attack is twin shot and bForceRemove is true, update it instead of remove it");
+			-- Debug.console("Pending attack is twin shot and bForceRemove is true, update it instead of remove it");
 			local aAttack = aAttackQueueByDefender[sTargetCT][1];
 			aAttack.sSpecialAttack = "";
 			aAttack.sLocation = "";
@@ -184,8 +184,8 @@ function removePendingAttack (sSourceCT, sTargetCT, bForceRemove)
 			-- remove potential critical:
 			aAttack.nDefValue = aAttack.nAtkValue-1; 
 			
-			Debug.console("New pending attack :");
-			Debug.console(aAttack);
+			-- Debug.console("New pending attack :");
+			-- Debug.console(aAttack);
 
 			aAttackQueueByDefender[sTargetCT][1] = aAttack;
 		else
@@ -196,7 +196,7 @@ end
 
 -- Remove all pending attacks from the queues
 function resetPendingAttacks ()
-	Debug.console("Reset all pending attacks.");
+	-- Debug.console("Reset all pending attacks.");
 	aAttackQueueByDefender = {};
 end
 
@@ -206,10 +206,10 @@ end
 --	* nDefValue	: defense roll value 
 --	* sBlockedWithWeapon : if action is "block" and a weapon is used, then this is the weapon node id
 function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
-	Debug.console("--------------------------------------------");
-	Debug.console("Resolve pending attack");
-	Debug.console("Defender :");
-	Debug.console(rTarget);
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("Resolve pending attack");
+	-- Debug.console("Defender :");
+	-- Debug.console(rTarget);
 
 	local sTargetCT = "";
 	if rTarget then
@@ -217,11 +217,11 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 	end
 	if sTargetCT == "" then
 		-- Debug.chat("no sTargetCT : resolve aborted");
-		Debug.console("No defender : resolve aborted");
+		-- Debug.console("No defender : resolve aborted");
 		return;
 	end
 	-- Debug.chat(sTargetCT);
-	Debug.console("Defender = "..sTargetCT);
+	-- Debug.console("Defender = "..sTargetCT);
 
 	-- retreive pending attack :
 	-- attacker vs defender must match
@@ -230,12 +230,12 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 	local nAttackIndex = 1;
 	repeat
 		if aAttackQueueByDefender[sTargetCT] and aAttackQueueByDefender[sTargetCT][nAttackIndex] then
-			Debug.console("nAttackIndex="..nAttackIndex);
-			Debug.console("aAttack found");
+			-- Debug.console("nAttackIndex="..nAttackIndex);
+			-- Debug.console("aAttack found");
 			aAttack = aAttackQueueByDefender[sTargetCT][nAttackIndex];
-			Debug.console("nDefValue"..aAttack.nDefValue);
+			-- Debug.console("nDefValue"..aAttack.nDefValue);
 		else
-			Debug.console("No pending attack : resolve aborted");
+			-- Debug.console("No pending attack : resolve aborted");
 			return;
 		end
 		nAttackIndex = nAttackIndex + 1;
@@ -248,8 +248,8 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 	if aAttack.nAtkValue <= nDefValue then
 		-- defense win : delete pending attack and create message
 		aAttack.nDefValue = nDefValue;
-		Debug.console("Attack information = ", aAttack);
-		Debug.console("Defense win");
+		-- Debug.console("Attack information = ", aAttack);
+		-- Debug.console("Defense win");
 
 		notifyDefense(aAttack.sSourceCT, sTargetCT, nil, "true");
 		rMessage.text = Interface.getString("defense_succeeded_message");
@@ -272,8 +272,8 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 	else
 		-- attack win : update pending attack and create message
 		aAttack.nDefValue = nDefValue;
-		Debug.console("Attack information = ", aAttack);
-		Debug.console("Attack win");
+		-- Debug.console("Attack information = ", aAttack);
+		-- Debug.console("Attack win");
 
 		local rActor = ActorManager.resolveActor(DB.findNode(rTarget.sCreatureNode));
 		local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
@@ -288,7 +288,7 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 		
 		-- check for critical
 		local successMargin = aAttack.nAtkValue - nDefValue;
-		Debug.console("Success Margin", successMargin);
+		-- Debug.console("Success Margin", successMargin);
 		if successMargin >= 15 then
 			-- Deadly crit
 			rMessage.text = rMessage.text .. string.format(Interface.getString("deadly_crit_message"), successMargin);
@@ -310,7 +310,7 @@ function resolvePendingAttack(rTarget, nDefValue, sBlockedWithWeapon)
 			rMessage.text = rMessage.text .. string.format(Interface.getString("no_crit_message"), successMargin);
 			rMessage.icon = "roll_attack_hit";
 		end
-		rMessage.text = rMessage.text .. " " .. string.format(Interface.getString("rollfordamage_message"), ActorManager.getDisplayName(ActorManager.getActor("ct", aAttack.sSourceCT)));
+		rMessage.text = rMessage.text .. " " .. string.format(Interface.getString("rollfordamage_message"), ActorManager.getDisplayName(ActorManager.resolveActor(aAttack.sSourceCT)));
 	end
 
 	-- display message
@@ -329,12 +329,12 @@ end
 --		- sWeaponEffects
 --		- sSuccessMargin
 function getPendingAttackDamageModifier(rSource, rTarget)
-	Debug.console("--------------------------------------------");
-	Debug.console("Get pending attack damage modifier");
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("Get pending attack damage modifier");
 	
 	local sSourceCT = ActorManager.getCTNodeName(rSource);
 	if sSourceCT == "" then
-		Debug.console("-- getPendingAttackDamageModifier called without legit CT source, abort");
+		-- Debug.console("-- getPendingAttackDamageModifier called without legit CT source, abort");
 		return nil, false;
 	end
 	
@@ -343,7 +343,7 @@ function getPendingAttackDamageModifier(rSource, rTarget)
 		sTargetCT = ActorManager.getCTNodeName(rTarget);
 	end
 	if sTargetCT == "" then
-		Debug.console("-- getPendingAttackDamageModifier called without legit CT target, abort");
+		-- Debug.console("-- getPendingAttackDamageModifier called without legit CT target, abort");
 		return nil, false;
 	end
 
@@ -367,7 +367,7 @@ function getPendingAttackDamageModifier(rSource, rTarget)
 		-- damage can be rolled with manual modifiers even if no pending attack is waiting in the queue
 	end 
 
-	Debug.console(aAttack);
+	-- Debug.console(aAttack);
 
 	local aDmgModifier = {};
 	
@@ -381,7 +381,7 @@ function getPendingAttackDamageModifier(rSource, rTarget)
 		aDmgModifier.sSuccessMargin = aAttack.nAtkValue - aAttack.nDefValue;
 	end
 	
-	Debug.console("--------------------------------------------");
+	-- Debug.console("--------------------------------------------");
 	
 	return aDmgModifier, bValidAttackExists;
 end
@@ -477,4 +477,4 @@ end
 
 
 -- retreive node from source ct name
--- local rSource = ActorManager.getActor("ct", msgOOB.sSourceNode);
+-- local rSource = ActorManager.resolveActor(msgOOB.sSourceNode);

@@ -44,7 +44,7 @@ end
 function onLocationChanged()
 	local nodeArmor = getDatabaseNode();
 	local nodeChar = nodeArmor.getChild("...");
-	local rActor = ActorManager.getActor("pc", nodeChar);
+	local rActor = ActorManager.resolveActor(nodeChar);
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	
 	

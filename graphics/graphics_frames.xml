@@ -557,13 +557,25 @@
 	</framedef>
 	
 	<!-- Sidebar -->
-	<framedef name="button_sidebar_dockitem">
-		<bitmap file="graphics/frames/button_sidebar.png" />
-		<offset>8,8,8,8</offset>
+	<framedef name="sidebar_dock_category">
+        <bitmap file="graphics/sidebar/sidebar_dock_category.png" />
+		<offset>12,12,12,12</offset>
+    </framedef>
+    <framedef name="sidebar_dock_category_down">
+        <bitmap file="graphics/sidebar/sidebar_dock_category_down.png" />
+		<offset>12,12,12,12</offset>
+    </framedef>
+    <framedef name="sidebar_dock_entry_icon">
+		<bitmap file="graphics/sidebar/sidebar_dock_icon.png" />
+		<offset>12,12,12,12</offset>
+    </framedef>
+ 	<framedef name="sidebar_dock_entry">
+		<bitmap file="graphics/sidebar/sidebar_dock_entry.png" />
+		<offset>12,12,12,12</offset>
 	</framedef>
-	<framedef name="button_sidebar_dockitem_down">
-		<bitmap file="graphics/frames/button_sidebar_down.png" />
-		<offset>8,8,8,8</offset>
+	<framedef name="sidebar_dock_entry_down">
+		<bitmap file="graphics/sidebar/sidebar_dock_entry_down.png" />
+		<offset>12,12,12,12</offset>
 	</framedef>
 	
 	<!--Toolbar-->

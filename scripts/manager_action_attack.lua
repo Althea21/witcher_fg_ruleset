@@ -337,10 +337,10 @@ end
 
 -- Modifier handler : additional modifiers to apply to the roll
 function onAttackModifier(rSource, rTarget, rRoll)
-	Debug.console("--------------------------------------------");
-	Debug.console("onAttackModifier");
-	Debug.console("rTarget :");
-	Debug.console(rTarget);
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("onAttackModifier");
+	-- Debug.console("rTarget :");
+	-- Debug.console(rTarget);
 
 	local aAddDesc = {};
 	local nAddMod = 0;
@@ -546,10 +546,15 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 	
 	for i, k in pairs (rRoll.aDice) do -- FGU compatibility : change loops "for i=1, # ..." in "for i,k in pairs ..."
 		local aDiceTmp = rRoll.aDice[i];
+		-- Debug.console('aDice',rRoll.aDice);
+		Debug.console('aDiceTmp', aDiceTmp);
+		
 		for j,l in pairs (aDiceTmp) do -- FGU compatibility : change loops "for j=1, # ..." in "for j,l in pairs ..."
+			Debug.console(j, l);
 			local aDieTmp = aDiceTmp[j];
+			-- Debug.console('aDieTmp', aDieTmp);
 			
-			if j ~= "expr" then -- -- FGU compatibility : don't propagate "expr" in aDice array
+			if j ~= "expr" and j ~= "total" then -- -- FGU compatibility : don't propagate "expr" in aDice array
 				-- 10 is always rerolled => set it green
 				if tonumber(aDieTmp.result)==10 then
 					aDieTmp.type="g10";

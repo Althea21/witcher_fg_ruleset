@@ -99,7 +99,7 @@ function addToArmorDB(nodeItem, nCarried)
 		DB.setValue(nodeArmor, "isidentified", "number", nItemID);
 		DB.setValue(nodeArmor, "shortcut", "windowreference", "item", "....inventorylist." .. nodeItem.getName());
 
-		Debug.console(aLocations[i]);
+		-- Debug.console(aLocations[i]);
 
 		for i = 1, #aLocations do
 			if aLocations[i] == "head" then

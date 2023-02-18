@@ -26,7 +26,7 @@ function performRoll(draginfo, rActor, sSkillName, nSkillMod, sSkillStat)
 end
 
 function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
-	Debug.console("Rolling for skill '"..sSkillName.."'");
+	-- Debug.console("Rolling for skill '"..sSkillName.."'");
 	--Debug.chat("---- getRoll");
     --Debug.chat(rActor);
     --Debug.chat(sSkillName);
@@ -53,7 +53,7 @@ function getRoll(rActor, sSkillName, nSkillMod, sSkillStat)
 	s = string.gsub(s, "/", "") -- remove /
 	-- Debug.chat(s);
 	if s=="dodgeescape" or s=="athletics" then
-		Debug.console("Rolling "..s.." : set skill roll as defense.");
+		-- Debug.console("Rolling "..s.." : set skill roll as defense.");
 		rRoll.sIsDefense = "true";
 	end
 
@@ -211,10 +211,10 @@ function onSkillRoll(rSource, rTarget, rRoll)
 		Comm.deliverChatMessage(rMessage);
 		
 		local nDefValue = ActionsManager.total(rRoll);
-		Debug.console("Skill result = "..nDefValue);
-		Debug.console(rRoll.sIsDefense);
+		-- Debug.console("Skill result = "..nDefValue);
+		-- Debug.console(rRoll.sIsDefense);
 		if rRoll.sIsDefense == "true" then
-			Debug.console("This was a defensive roll, call for resolution.");
+			-- Debug.console("This was a defensive roll, call for resolution.");
 			---- Resolve Defense
 			if nDefValue < 0 then
 				nDefValue = 0;
