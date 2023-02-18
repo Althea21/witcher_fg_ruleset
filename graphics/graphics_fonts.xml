@@ -18,4 +18,14 @@
 		<ttf file="graphics/fonts/Minion Pro Bold.ttf" name="Minion Pro Bold" size="28" />
 		<color value="#000" />
 	</font>
+
+	<!-- Utility Windows -->
+	<font name="utility_label">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="18" />
+		<color value="#000" />
+	</font>
+	<font name="sheetlabel_ct">
+		<ttf file="graphics/fonts/Noto_Sans/NotoSans-Bold.ttf" name="Noto Sans Bold" size="16" />
+		<color value="#000" />
+	</font>
 </root>

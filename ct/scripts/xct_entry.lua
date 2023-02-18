@@ -230,67 +230,70 @@ end
 --
 
 function setTargetingVisible()
-	-- GM only
-	if not User.isHost() then
-		return;
-	end
+	onSectionChanged("targets");
+	-- -- GM only
+	-- if not User.isHost() then
+	-- 	return;
+	-- end
 
-	local v = false;
+	-- local v = false;
 
-	if activatetargeting.getValue() == 1 then
-		v = true;
-	end
+	-- if activatetargeting.getValue() == 1 then
+	-- 	v = true;
+	-- end
 
-	targetingicon.setVisible(v);
-	sub_targeting.setVisible(v);
-	frame_targeting.setVisible(v);
-	target_summary.onTargetsChanged();
+	-- targetingicon.setVisible(v);
+	-- sub_targeting.setVisible(v);
+	-- frame_targeting.setVisible(v);
+	-- summary_targets.onTargetsChanged();
 end
 
 function setSpacingVisible()
-	-- GM only
-	if not User.isHost() then
-		return;
-	end
+	self.onSectionChanged("spacing");
+	-- -- GM only
+	-- if not User.isHost() then
+	-- 	return;
+	-- end
 
-	local v = false;
+	-- local v = false;
 	
-	if activatespacing.getValue() == 1 then
-		v = true;
-	end
+	-- if activatespacing.getValue() == 1 then
+	-- 	v = true;
+	-- end
 
-	spacingicon.setVisible(v);
-	space.setVisible(v);
-	spacelabel.setVisible(v);
-	reach.setVisible(v);
-	reachlabel.setVisible(v);
+	-- spacingicon.setVisible(v);
+	-- space.setVisible(v);
+	-- spacelabel.setVisible(v);
+	-- reach.setVisible(v);
+	-- reachlabel.setVisible(v);
 	
-	frame_spacing.setVisible(v);
+	-- frame_spacing.setVisible(v);
 end
 
 function setEffectsVisible()
-	-- GM only
-	if not User.isHost() then
-		return;
-	end
+	self.onSectionChanged("effects");
+	-- -- GM only
+	-- if not User.isHost() then
+	-- 	return;
+	-- end
 
-	local v = false;
+	-- local v = false;
 	
-	if activateeffects.getValue() == 1 then
-		v = true;
-	end
+	-- if activateeffects.getValue() == 1 then
+	-- 	v = true;
+	-- end
 	
-	effecticon.setVisible(v);
+	-- effecticon.setVisible(v);
 	
-	effects.setVisible(v);
-	effects_iadd.setVisible(v);
-	for _,w in pairs(effects.getWindows()) do
-		w.idelete.setValue(0);
-	end
+	-- effects.setVisible(v);
+	-- effects_iadd.setVisible(v);
+	-- for _,w in pairs(effects.getWindows()) do
+	-- 	w.idelete.setValue(0);
+	-- end
 
-	frame_effects.setVisible(v);
+	-- frame_effects.setVisible(v);
 
-	effect_summary.onEffectsChanged();
+	-- summary_effects.onEffectsChanged();
 end
 
 function updateHealthDisplay()

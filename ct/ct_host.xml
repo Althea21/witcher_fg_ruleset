@@ -5,111 +5,41 @@
   attribution and copyright information.
 -->
 
+
+
 <root>
-	<windowclass name="combattracker_host">
-		<frame>ctbox</frame>
+	<windowclass name="combattracker_host" merge="join">
 		<placement>
-			<size width="500" height="600" />
+			<size width="600" />
 		</placement>
 		<sizelimits>
-			<minimum width="500" height="400" />
-			<dynamic />
-		</sizelimits>
-		<softclose />
-		<nodelete />
+			<minimum width="600" />
+		</sizelimits>	
+		<!-- <script file="ct/scripts/ct_window_dnd.lua" /> -->
 		<sheetdata>
-			<windowtitlebar name="title">
-				<resource>ct_window_title</resource>
-			</windowtitlebar>
-			<anchor_title_ctbox name="contentanchor" />
+			<button_ctbox_host_header_visibility name="button_global_visibility">
+				<anchored to="header_vis" position="insidetopleft" offset="-5,2" width="22" height="22" />
+			</button_ctbox_host_header_visibility>
 
-			<anchor_ctbox_host_header />
-			<frame_ctbox_host_header_visibility />
-			<buttoncontrol name="button_global_visibility">
-				<anchored to="header_vis" position="insidetopleft" offset="10,8" width="20" height="20" />
-				<state icon="visibilityoff" tooltipres="ct_tooltip_shownpcallon" />
-				<state icon="visibilityon" tooltipres="ct_tooltip_shownpcalloff" />
-				<script>
-					function onValueChanged()
-						window.list.toggleVisibility();
-					end
-				</script>
-			</buttoncontrol>
-			<label_ct name="label_name">
-				<anchored to="headeranchor" position="insidetopleft" offset="33,0">
-					<right offset="-153" />
-				</anchored>
-				<static textres="ct_label_name" />
-				<center />
-			</label_ct>
-			<label_ct name="label_hp">
-				<anchored to="headeranchor" position="insidetopright" offset="193,0" width="40" />
-				<static textres="ct_label_hp" />
-				<center />
-			</label_ct>
-			<label_ct name="label_stamina">
-				<anchored to="headeranchor" position="insidetopright" offset="153,0" width="40" />
+			<spacer_ct_host_header_buttons name="spacer_buttons_header_add" insertbefore="label_init">
+				<anchored width="63" />
+			</spacer_ct_host_header_buttons>
+
+			<frame_ctbox_host_header_labels name="header_labels" insertbefore="rightanchor" />
+			<label_ct_right name="label_stamina" insertbefore="label_init">
 				<static textres="ct_label_stamina" />
-				<center />
-			</label_ct>
-			<label_ct name="label_init">
-				<anchored to="headeranchor" position="insidetopright" offset="113,0" width="40" />
-				<static textres="ct_label_init" />
-				<center />
-			</label_ct>
-			<frame_ctbox_host_header_toggles />
-			<buttoncontrol name="button_global_targeting">
-				<anchored to="header_toggles" position="insidetopleft" offset="10,8" width="20" height="20" />
-				<state icon="button_section_targeting" />
-				<state icon="button_section_targeting_down" />
-				<script>
-					function onValueChanged()
-						window.list.toggleTargeting();
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_global_spacing">
-				<anchored to="header_toggles" position="insidetopleft" offset="30,8" width="20" height="20" />
-				<state icon="button_space" />
-				<state icon="button_space_down" />
-				<script>
-					function onValueChanged()
-						window.list.toggleSpacing();
-					end
-				</script>
-			</buttoncontrol>
-			<buttoncontrol name="button_global_effects">
-				<anchored to="header_toggles" position="insidetopleft" offset="50,8" width="20" height="20" />
-				<state icon="button_effect" />
-				<state icon="button_effect_down" />
-				<script>
-					function onValueChanged()
-						window.list.toggleEffects();
-					end
-				</script>
-			</buttoncontrol>
-				
-			<list_ctbox_host />
-			<scrollbar_list />
-			
-			<button_ct_setactive />
-			<button_ct_nextactor />
-
-			<button_ct_faction_friend />
-			<button_ct_faction_neutral />
-			<button_ct_faction_foe />
-		
-			<button_ct_menu />
-
-			<label_ct_host_rounds />
-			<number_ct_host_rounds />
-			<button_ct_nextround />
-			
-			<resize_ctbox />
-			<helper_ct />
-			<close_ctbox />
+				<tooltip textres="ct_tooltip_stamina" />
+			</label_ct_right>
+			<label_ct_right name="label_hp" insertbefore="label_init">
+				<static textres="hp" />
+				<tooltip textres="hitpoints" />
+			</label_ct_right>
 		</sheetdata>
 	</windowclass>
+</root>
+
+
+
 	
 	<windowclass name="ct_entry">
 		<margins control="0,0,0,2" />
@@ -191,29 +121,33 @@
 			
 			<string_ctname name="name" />
 			<string_ctname_nonid name="nonid_name" />
+
+			<sub_ct_section name="sub_targets" />
+			<sub_ct_section name="sub_space" />
+			<sub_ct_section name="sub_effects" />
 			
 			<!-- Targeting subsection -->
-			<icon_ctsection_targeting name="targetingicon" />
+			<!-- <icon_ctsection_targeting name="targetingicon" />
 			<sub_ctsection_targeting name="sub_targeting" />
-			<frame_ctsection_targeting name="frame_targeting" />
+			<frame_ctsection_targeting name="frame_targeting" /> -->
 
 			<!-- Spacing subsection -->
-			<icon_ctsection_spacing name="spacingicon" />
+			<!-- <icon_ctsection_spacing name="spacingicon" />
 			<number_ctentry_space name="space" />
 			<label_ctentry_space name="spacelabel" />
 			<number_ctentry_reach name="reach" />
 			<label_ctentry_reach name="reachlabel" />
-			<frame_ctsection_spacing name="frame_spacing" />
+			<frame_ctsection_spacing name="frame_spacing" /> -->
 
 			<!-- Effect subsection -->
-			<icon_ctsection_effect name="effecticon" />
+			<!-- <icon_ctsection_effect name="effecticon" />
 			<list_ctsection_effect name="effects" />
 			<button_ctsection_effect_iadd name="effects_iadd" />
-			<frame_ctsection_effect name="frame_effects" />
+			<frame_ctsection_effect name="frame_effects" /> -->
 
 			<!-- Quick labels -->
-			<string_ctentry_targets name="target_summary" />
-			<string_ctentry_effects name="effect_summary" />
+			<string_ctentry_targets name="summary_targets" />
+			<string_ctentry_effects name="summary_effects" />
 
 			<spacer_ctentry_middle name="spacer" />
 			<spacer_ctentry_active_bottom name="active_spacer_bottom" />
@@ -240,7 +174,7 @@
 
 			<hs_ct_effect_source name="source_name" />
 			<string_ct_effect_source name="source" />
-			<string_ct_effect_targets name="target_summary" />
+			<string_ct_effect_targets name="summary_targets" />
 		</sheetdata>
 	</windowclass>
 
@@ -339,4 +273,4 @@
 			</tokencontrol>
 		</sheetdata>
 	</windowclass>
-</root>
+
