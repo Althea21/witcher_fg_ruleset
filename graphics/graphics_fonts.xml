@@ -15,7 +15,7 @@
 		<color value="#DD0000" />
 	</font>
 	<font name="dietotal">
-		<ttf file="graphics/fonts/Minion Pro Bold.ttf" name="Minion Pro Bold" size="18" />
+		<ttf file="graphics/fonts/Minion Pro Bold.ttf" name="Minion Pro Bold" size="28" />
 		<color value="#000" />
 	</font>
 </root>

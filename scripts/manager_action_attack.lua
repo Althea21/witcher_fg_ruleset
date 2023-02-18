@@ -546,13 +546,8 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 	
 	for i, k in pairs (rRoll.aDice) do -- FGU compatibility : change loops "for i=1, # ..." in "for i,k in pairs ..."
 		local aDiceTmp = rRoll.aDice[i];
-		-- Debug.console('aDice',rRoll.aDice);
-		Debug.console('aDiceTmp', aDiceTmp);
-		
 		for j,l in pairs (aDiceTmp) do -- FGU compatibility : change loops "for j=1, # ..." in "for j,l in pairs ..."
-			Debug.console(j, l);
 			local aDieTmp = aDiceTmp[j];
-			-- Debug.console('aDieTmp', aDieTmp);
 			
 			if j ~= "expr" and j ~= "total" then -- -- FGU compatibility : don't propagate "expr" in aDice array
 				-- 10 is always rerolled => set it green
@@ -574,10 +569,19 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 		end
 	end
 
+	-- A work around to make sure negative dice are taken into account
+	local nTotalNegative = 0
 	rRoll.aDice = aNewDice;
-	
-	-- Debug.chat("after :");
-	-- Debug.chat(rRoll.aDice);
+	for i, k in pairs (rRoll.aDice) do
+		if (rRoll.aDice[i].result < 0) then
+			nTotalNegative = nTotalNegative + (rRoll.aDice[i].result * 2);
+		end
+	end
+
+	if nTotalNegative < 0 then
+		nTotalNegative = nTotalNegative - 1;
+		rRoll.nMod = rRoll.nMod + nTotalNegative;
+	end
 	
 	return bFumble;
 end
