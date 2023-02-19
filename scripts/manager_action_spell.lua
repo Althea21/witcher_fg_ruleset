@@ -483,7 +483,7 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 		for j,l in pairs (aDiceTmp) do -- FGU compatibility : change loops "for j=1, # ..." in "for j,l in pairs ..."
 			local aDieTmp = aDiceTmp[j];
 			
-			if j ~= "expr" then -- FGU compatibility : don't propagate "expr" in aDice array
+			if j ~= "expr" and j ~= "total" then -- FGU compatibility : don't propagate "expr" in aDice array
 				-- 10 is always rerolled => set it green
 				if tonumber(aDieTmp.result)==10 then
 					aDieTmp.type="g10";
@@ -493,6 +493,7 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 					-- first die was a 1 => fumble, set ir red
 					bFumble = true;
 					aDieTmp.type="r10";
+					aDieTmp.result = 0;
 				elseif bFumble then
 					-- any result between 1 and 9 => get die as it is
 					aDieTmp.result = 0-tonumber(aDieTmp.result)
@@ -502,10 +503,19 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 			end
 		end
 	end
+	-- A work around to make sure negative dice are taken into account
+	local nTotalNegative = 0
 	rRoll.aDice = aNewDice;
+	for i, k in pairs (rRoll.aDice) do
+		if (rRoll.aDice[i].result < 0) then
+			nTotalNegative = nTotalNegative + (rRoll.aDice[i].result * 2);
+		end
+	end
 
-	-- Debug.chat("after :");
-	-- Debug.chat(rRoll.aDice);
+	if nTotalNegative < 0 then
+		nTotalNegative = nTotalNegative - 1;
+		rRoll.nMod = rRoll.nMod + nTotalNegative;
+	end
 	
 	return bFumble;
 end
