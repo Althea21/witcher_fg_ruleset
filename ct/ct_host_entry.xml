@@ -41,7 +41,7 @@
 				<tabtarget prev="initresult" />
 				<script>
 					function update()
-						window.updateHPDisplay();
+						window.onHealthChanged();
 					end
 					function handleDrop(draginfo)
 						local sDragType = draginfo.getType();

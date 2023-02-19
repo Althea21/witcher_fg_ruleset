@@ -14,15 +14,6 @@
 		</sizelimits>	
 		<!-- <script file="ct/scripts/ct_window_dnd.lua" /> -->
 		<sheetdata>
-			<button_ctbox_host_header_visibility name="button_global_visibility">
-				<anchored to="header_vis" position="insidetopleft" offset="-5,2" width="22" height="22" />
-			</button_ctbox_host_header_visibility>
-
-			<spacer_ct_host_header_buttons name="spacer_buttons_header_add" insertbefore="label_init">
-				<anchored width="63" />
-			</spacer_ct_host_header_buttons>
-
-			<frame_ctbox_host_header_labels name="header_labels" insertbefore="rightanchor" />
 			<label_ct_right name="label_stamina" insertbefore="label_init">
 				<static textres="ct_label_stamina" />
 				<tooltip textres="ct_tooltip_stamina" />
