@@ -559,6 +559,7 @@ function _restoreDiceBeforeFinalMessage(rRoll)
 					-- first die was a 1 => fumble, set ir red
 					bFumble = true;
 					aDieTmp.type="r10";
+					aDieTmp.result = 0;
 				elseif bFumble then
 					-- any result between 1 and 9 => get die as it is
 					aDieTmp.result = 0-tonumber(aDieTmp.result)
