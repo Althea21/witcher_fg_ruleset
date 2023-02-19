@@ -141,7 +141,7 @@
 			
 			<!-- Dodge / Escape -->
 			<label name="label_dodgeaction">
-				<anchored to="combat_frame" position="insidetopleft" offset="145,65" width="80"/>
+				<anchored to="combat_frame" position="insidetopleft" offset="145,65" width="100"/>
 				<static textres="char_skill_dodgeEscape_label"/>
 			</label>
 			<buttoncontrol name="button_dodge">
@@ -167,7 +167,7 @@
 			
 			<!-- Reposition -->
 			<buttoncontrol name="button_reposition">
-				<anchored to="combat_frame" position="insidetopleft" offset="440,65" width="20" height="20" />
+				<anchored to="combat_frame" position="insidetopleft" offset="400,65" width="20" height="20" />
 				<icon normal="button_action_reposition" />
 				<cursor hover="hand" />
 				<nodrag />
@@ -187,7 +187,7 @@
 				</script>
 			</buttoncontrol>
 			<label name="label_reposition">
-				<anchored to="button_reposition" position="left" offset="10,0" width="60"/>
+				<anchored to="button_reposition" position="left" offset="10,0" width="80"/>
 				<right/>
 				<static textres="char_label_reposition"/>
 			</label>
@@ -264,7 +264,7 @@
 				<static textres="char_label_weaponname" />
 			</label>
 			<label name="weapon_reliability_label">
-				<anchored position="insidetopright" offset="223,36" width="29"/>
+				<anchored position="insidetopright" offset="228,36" width="29"/>
 				<center />
 				<static textres="char_label_weaponreliability" />
 			</label>
@@ -274,12 +274,12 @@
 				<static textres="char_label_weapondamage" />
 			</label>
 			<label name="weapon_attacks_label">
-				<anchored to="weapon_damage_label" position="right" offset="22,0" width="50" />
+				<anchored to="weapon_damage_label" position="right" offset="17,0" width="65" />
 				<center />
 				<static textres="npc_label_weaponattacks" />
 			</label>
 			<label>
-				<anchored to="weapon_attacks_label" position="right" offset="15,0" width="50" />
+				<anchored to="weapon_attacks_label" position="right" offset="12,0" width="50" />
 				<center />
 				<static textres="char_label_weapondefense" />
 			</label>
