@@ -56,7 +56,7 @@ function onDodgeAction(draginfo)
 	local rActor = ActorManager.resolveActor(getDatabaseNode());
 	local sActorType, nodeActor = ActorManager.getTypeAndNode(rActor);
 	
-	local sStat = DB.getValue(v, "skill_stat", "reflex");
+	local sStat = DB.getValue(v, "skill_stat", "dexterity");
 	local nStat = DB.getValue(nodeActor, "attributs."..sStat, 0);
 
 	if sActorType == "pc" then
