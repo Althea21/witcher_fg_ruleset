@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+
+<!-- 
+  Please see the license.html file included with this distribution for 
+  attribution and copyright information.
+-->
+
+<root>
+	<windowclass name="ct_entry" merge="join">
+		<margins control="0,0,0,5" />
+		<sizelimits>
+			<minimum height="50" />
+		</sizelimits>
+		<script file="ct/scripts/ct_entry.lua" />
+		<sheetdata>
+			<hs name="status" />
+			<hnx name="init" />
+			
+            <number_ct_crosslink name="stamina" insertbefore="initresult">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="hit_points" />
+				<script>
+					function handleDrop(draginfo)
+						local sDragType = draginfo.getType();
+						if (sDragType == "number" or sDragType=="heal") then
+							window.stamina.setValue(window.stamina.getValue() + draginfo.getNumberData());
+						elseif sDragType == "damage" then
+							window.stamina.setValue(window.stamina.getValue() - draginfo.getNumberData());
+						end
+					end
+				</script>
+			</number_ct_crosslink>
+			<number_ct_crosslink name="hit_points" insertbefore="initresult">
+				<anchored to="rightanchor" width="30" height="20">
+					<top />
+					<right anchor="left" relation="relative" offset="-10" />
+				</anchored>
+				<tabtarget prev="initresult" />
+				<script>
+					function update()
+						window.onHealthChanged();
+					end
+					function handleDrop(draginfo)
+						local sDragType = draginfo.getType();
+						if (sDragType == "number" or sDragType=="heal") then
+							window.hit_points.setValue(window.hit_points.getValue() + draginfo.getNumberData());
+						elseif sDragType == "damage" then
+							window.hit_points.setValue(window.hit_points.getValue() - draginfo.getNumberData());
+						end
+					end
+				</script>
+			</number_ct_crosslink>
+		</sheetdata>
+	</windowclass>
+</root>

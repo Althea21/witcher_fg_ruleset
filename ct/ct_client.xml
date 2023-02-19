@@ -178,8 +178,8 @@
 			<spacer_clientctsection_effect name="effectspacer" />
 			<list_clientct_effect name="effects" />
  
-			<string_ctentry_targets name="target_summary" />
-			<string_ctentry_effects name="effect_summary" />
+			<string_ctentry_targets name="summary_targets" />
+			<string_ctentry_effects name="summary_effects" />
 			
 			<spacer_ctentry_middle name="spacer" />
 			<spacer_ctentry_active_bottom name="active_spacer_bottom" />
@@ -200,7 +200,7 @@
 
 			<string_clientct_effect name="label" />
 
-			<string_ct_effect_targets name="target_summary" />
+			<string_ct_effect_targets name="summary_targets" />
 		</sheetdata>
 	</windowclass>
 </root>

@@ -57,9 +57,11 @@
 	<includefile source="ref/ref_spells.xml" />
 
 	<!-- Combat tracker -->
-	<includefile source="ct/ct_host.xml" />
-	<includefile source="ct/ct_client.xml" />
 	<includefile source="ct/template_ct2.xml" />
+	<includefile source="ct/ct_host.xml" />
+	<includefile source="ct/ct_host_entry.xml" />
+	<!-- <includefile source="ct/ct_client.xml" /> -->
+	
 
 	<!-- PC Table -->
 	<script name="ProfessionTable" file="campaign/scripts/profession_table.lua" />
