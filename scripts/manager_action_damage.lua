@@ -96,9 +96,9 @@ end
 
 -- callback for ActionsManager, called after the dice have stopped rolling : resolve roll status and display chat message
 function onDamageRoll(rSource, rTarget, rRoll)
-	Debug.console("------- onDamageRoll");
-	Debug.console(rTarget);
-	Debug.console(rRoll);
+	-- Debug.console("------- onDamageRoll");
+	-- Debug.console(rTarget);
+	-- Debug.console(rRoll);
 
 	-- Decode damage types
 	decodeDamageTypes(rRoll, true);
@@ -189,11 +189,11 @@ function applyConditionDamage(rTarget, sCondition)
 	if sDamageType ~= "" and CharManager.isResistantTo(nodeTarget, sTargetType, sDamageType, "all") then
 		sMessage = sMessage .. " (" .. nDamage .. ") / 2 {resistance}";
 		nDamage = math.floor(nDamage/2);
-		Debug.console("target is resistant, damage after resistance : ", nDamage);
+		-- Debug.console("target is resistant, damage after resistance : ", nDamage);
 	elseif sDamageType ~= "" and CharManager.isVulnerableTo(nodeTarget, sTargetType, sDamageType) then
 		sMessage = sMessage .. " (" .. nDamage .. ") x 2 {vulnerable}";
 		nDamage = nDamage * 2;
-		Debug.console("target is vulnerable, damage after bVulnerability : ", nDamage);
+		-- Debug.console("target is vulnerable, damage after bVulnerability : ", nDamage);
 	elseif sDamageType == "fire" then
 		sMessage = sMessage .. " (" .. nDamage .. ")";
 	end
@@ -214,8 +214,8 @@ function applyConditionDamage(rTarget, sCondition)
 end
 
 function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
-	Debug.console("--------------------------------------------");
-	Debug.console("Apply Damage ");
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("Apply Damage ");
 	
 	local sTargetType, nodeTarget = ActorManager.getTypeAndNode(rTarget);
 	
@@ -224,9 +224,9 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	local sFinalDamageMessage = "";
 
 	local aPendingAttackDmgMod, bValidDmgModifier = CombatManager2.getPendingAttackDamageModifier(rSource, rTarget);
-	Debug.console("returned aPendingAttackDmgMod : ");
-	Debug.console(aPendingAttackDmgMod);
-	Debug.console(bValidDmgModifier);
+	-- Debug.console("returned aPendingAttackDmgMod : ");
+	-- Debug.console(aPendingAttackDmgMod);
+	-- Debug.console(bValidDmgModifier);
 	if aPendingAttackDmgMod == nil and not bValidDmgModifier then
 		return;
 	end
@@ -234,7 +234,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 
 	-- get rolled damage (= weapon + stat bonus + silver bonus if needed)
 	nFinalDamage = nFinalDamage + tonumber(nTotal);
-	Debug.console("rolled damage (= weapon + stat bonus + silver bonus if needed) : ", nFinalDamage);
+	-- Debug.console("rolled damage (= weapon + stat bonus + silver bonus if needed) : ", nFinalDamage);
 
 	-- Decode damage description
 	local rDamageOutput = decodeDamageText(nFinalDamage, rRoll.sDesc);
@@ -249,7 +249,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 	if not bIsSilverVulnerable and nSilverDamage > 0 then
 		-- don't count silver damage
 		nFinalDamage = nFinalDamage - nSilverDamage;
-		Debug.console("target is NOT silver vulnerable but weapon is silver = don't count silver damage : ", nFinalDamage);
+		-- Debug.console("target is NOT silver vulnerable but weapon is silver = don't count silver damage : ", nFinalDamage);
 	end
 
 	sFinalDamageMessage = sFinalDamageMessage .. tonumber(nFinalDamage);
@@ -259,9 +259,9 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 		-- check manual modifier
 		nFinalDamage = nFinalDamage*2;
 		sFinalDamageMessage = "(" .. sFinalDamageMessage .. "x2)";
-		Debug.console("after strong attack multiplier : ", nFinalDamage);
+		-- Debug.console("after strong attack multiplier : ", nFinalDamage);
 	else
-		Debug.console("no strong attack multiplier : ", nFinalDamage);
+		-- Debug.console("no strong attack multiplier : ", nFinalDamage);
 	end
 
 	-- LOCATION ?
@@ -297,7 +297,7 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 		end
 	end
 
-	Debug.console("location : ", sLocation);
+	-- Debug.console("location : ", sLocation);
 
 	-- CRITICAL ?
 	-- must be done here because it may affect location
@@ -333,16 +333,16 @@ function applyDamage(rSource, rTarget, bSecret, nTotal, rRoll)
 end
 
 function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffects, nCritDamage, nFinalDamage, sFinalDamageMessage)
-	Debug.console("--------------------------------------------");
-	Debug.console("Apply Damage 2 : ");
-	Debug.console("sSourceCT : "..sSourceCT);
-	Debug.console("sTargetCT : "..sTargetCT);
-	Debug.console("sLocation : "..sLocation);
-	Debug.console("sDamageText : "..sDamageText);
-	Debug.console("nFinalDamage : "..nFinalDamage);
-	Debug.console("sWeaponEffects : "..sWeaponEffects);
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("Apply Damage 2 : ");
+	-- Debug.console("sSourceCT : "..sSourceCT);
+	-- Debug.console("sTargetCT : "..sTargetCT);
+	-- Debug.console("sLocation : "..sLocation);
+	-- Debug.console("sDamageText : "..sDamageText);
+	-- Debug.console("nFinalDamage : "..nFinalDamage);
+	-- Debug.console("sWeaponEffects : "..sWeaponEffects);
 
-	local rTarget = ActorManager.getActor("ct", sTargetCT);
+	local rTarget = ActorManager.resolveActor(sTargetCT);
 	local sTargetType, nodeTarget = ActorManager.getTypeAndNode(rTarget);
 	
 	-- Decode damage description
@@ -370,7 +370,7 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		local sVulnerabilities = CharManager.getVulnerabilities(nodeTarget, sTargetType);
 		if sVulnerabilities:find("soft spot") then
 			nArmorValue = tonumber(sVulnerabilities:match("soft spot%s*(%d)"));
-			Debug.console("soft spot found, new SP is : ", nArmorValue);
+			-- Debug.console("soft spot found, new SP is : ", nArmorValue);
 		else
 			bSoftSpot = false;
 		end
@@ -380,11 +380,11 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		nArmorValue = CharManager.getArmorValueForLocationRoll(nodeTarget, sLocation);
 	end
 
-	Debug.console("armor sp of target for location : ", nArmorValue);
+	-- Debug.console("armor sp of target for location : ", nArmorValue);
 	
 	if bImprovedArmorPiercing then
 		nArmorValue = math.floor(nArmorValue/2);
-		Debug.console("weapon effect Imp. Armor piercing (half SP) : new SP = ", nArmorValue);
+		-- Debug.console("weapon effect Imp. Armor piercing (half SP) : new SP = ", nArmorValue);
 	end
 	-- substract SP
 	nFinalDamage = nFinalDamage - nArmorValue;
@@ -401,11 +401,11 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 
 		-- if damages are done, armor is also damaged
 		if nFinalDamage > 0 then
-			Debug.console("remove 1 SP from armor at : ", sLocation);
+			-- Debug.console("remove 1 SP from armor at : ", sLocation);
 			CharManager.damageArmorByLocation(nodeTarget, sLocation);
 		end
 	end
-	Debug.console("damage after armor : ", nFinalDamage);
+	-- Debug.console("damage after armor : ", nFinalDamage);
 	
 	-- SILVER susceptibility
 	local bIsSilverVulnerable = CharManager.isSilverVulnerable(nodeTarget);
@@ -419,7 +419,7 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		-- target is silver vulnerable but weapon is not silver : half damage 
 		nFinalDamage = math.floor(nFinalDamage/2);
 		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") / 2 {silver}";
-		Debug.console("target is silver vulnerable but weapon is NOT silver : ", nFinalDamage);
+		-- Debug.console("target is silver vulnerable but weapon is NOT silver : ", nFinalDamage);
 	end
 
 	-- METEORITE susceptibility
@@ -429,7 +429,7 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		-- target is meteorite vulnerable but weapon is not meteorite : half damage 
 		nFinalDamage = math.floor(nFinalDamage/2);
 		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") / 2 {meteorite}";
-		Debug.console("target is meteorite vulnerable but weapon is NOT meteorite : ", nFinalDamage);
+		-- Debug.console("target is meteorite vulnerable but weapon is NOT meteorite : ", nFinalDamage);
 	end
 
 	-- resistance (x0.5)
@@ -445,10 +445,10 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 		if bResistant then
 			nFinalDamage = math.floor(nFinalDamage/2);
 			sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") / 2 {resistance}";
-			Debug.console("target is resistant, damage after resistance : ", nFinalDamage);
+			-- Debug.console("target is resistant, damage after resistance : ", nFinalDamage);
 		end
 	else
-		Debug.console("by-pass resistance : ", bSoftSpot, bArmorPiercing, bImprovedArmorPiercing);		
+		-- Debug.console("by-pass resistance : ", bSoftSpot, bArmorPiercing, bImprovedArmorPiercing);		
 	end
 	
 	-- vulnerability (x2)
@@ -462,17 +462,17 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 	if bVulnerable then
 		nFinalDamage = nFinalDamage * 2;
 		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") x 2 {vulnerable}";
-		Debug.console("target is vulnerable, damage after bVulnerability : ", nFinalDamage);
+		-- Debug.console("target is vulnerable, damage after bVulnerability : ", nFinalDamage);
 	end
 
 	-- location multiplier
 	local nLocationMultiplier = CharManager.getDamageLocationModifierForLocationRoll(nodeTarget, sLocation);
-	Debug.console("location multiplier : ", nLocationMultiplier);
+	-- Debug.console("location multiplier : ", nLocationMultiplier);
 	nFinalDamage = math.floor(nFinalDamage*nLocationMultiplier);
 	if nLocationMultiplier ~= 1 then
 		sFinalDamageMessage = "(" .. sFinalDamageMessage .. ") x " .. nLocationMultiplier .. "{location}";
 	end
-	Debug.console("damage after location : ", nFinalDamage);
+	-- Debug.console("damage after location : ", nFinalDamage);
 	
 	if nCritDamage > 0 then
 		sFinalDamageMessage = sFinalDamageMessage .. " + " .. nCritDamage .. "{crit}"
@@ -482,10 +482,10 @@ function applyDamage2(sSourceCT, sTargetCT, sLocation, sDamageText, sWeaponEffec
 	local bLethal = true;
 	if ModifierStack.getModifierKey("DMG_NONLETHAL") then
 		bLethal = false;
-		Debug.console("non-lethal modifier activated");
+		-- Debug.console("non-lethal modifier activated");
 	elseif sWeaponEffects:find(Interface.getString("weapon_property_effect_nonethal"), 1, true) then
 		bLethal = false;
-		Debug.console("weapon has non-lethal effect");
+		-- Debug.console("weapon has non-lethal effect");
 	end
 
 	-- Output results
@@ -541,9 +541,9 @@ end
 -- CRITICAL MANAGEMENT
 ------------------------------------------------------------------------------------
 function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, sWeaponEffects, nFinalDamage, sFinalDamageMessage)
-	Debug.console("--------------------------------------------");
-	Debug.console("processCriticalDamageAndLocation : ");
-	Debug.console("sWeaponEffects : "..sWeaponEffects);
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("processCriticalDamageAndLocation : ");
+	-- Debug.console("sWeaponEffects : "..sWeaponEffects);
 	local nExtraDamage = 0;
 	if sCriticalLevel == "simple" then
 		nExtraDamage = 3;
@@ -558,7 +558,7 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 	local rRoll = getCriticalLocationRoll(sSourceCT, sTargetCT, sCriticalLevel, sIsAimed, sLocation, sDamageText, nExtraDamage, nFinalDamage, sFinalDamageMessage);
 	rRoll.sWeaponEffects = sWeaponEffects;
 
-	local rTarget = ActorManager.getActor("ct", sTargetCT);
+	local rTarget = ActorManager.resolveActor(sTargetCT);
 	
 	if sCriticalLevel == "none" then
 		-- no critical, we must roll for simple location
@@ -576,8 +576,8 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 
 		-- pin point aim ? (add their Pin Point Aim value to their critical roll. These points only affect the location value of the Critical Wound) 
 		if ModifierStack.getModifierKey("DMG_PINPOINTAIM") then
-			local ppaValue =  CharManager.getProfessionSkillValue(ActorManager.getActor("ct", sSourceCT), "pinPointAim")
-			Debug.console("[processCriticalDamageAndLocation]Add pin point roll to crit location : "..ppaValue);
+			local ppaValue =  CharManager.getProfessionSkillValue(ActorManager.resolveActor(sSourceCT), "pinPointAim")
+			-- Debug.console("[processCriticalDamageAndLocation]Add pin point roll to crit location : "..ppaValue);
 			rRoll.nMod = ppaValue;
 		end
 
@@ -587,7 +587,7 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 				-- head or torso roll 1D6 (if weapon balanced : 1D6+1 instead))
 				if (bBalanced) then
 					rRoll.nMod = rRoll.nMod + 1;
-					Debug.console("weapon balanced : crit roll 1D6+1 instead");
+					-- Debug.console("weapon balanced : crit roll 1D6+1 instead");
 				end
 				ActionsManager.performAction(nil, rTarget, rRoll);
 			elseif sLocation == "arm" then
@@ -595,13 +595,13 @@ function processCriticalDamageAndLocation(sSourceCT, sTargetCT, sCriticalLevel, 
 			elseif sLocation == "leg" or sLocation == "limb" or sLocation == "tail" then
 				outputCriticalMessage(sSourceCT, sTargetCT, 2, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage, sFinalDamageMessage);
 			else
-				Debug.console("[processCriticalDamageAndLocation error ]Attack aimed with no location specified");
+				-- Debug.console("[processCriticalDamageAndLocation error ]Attack aimed with no location specified");
 			end
 		else
 			-- roll 2D6 (if weapon balanced : 2d6+2)
 			if (bBalanced) then
 				rRoll.nMod = rRoll.nMod + 2;
-				Debug.console("weapon balanced : crit roll 2D6+2 instead");
+				-- Debug.console("weapon balanced : crit roll 2D6+2 instead");
 			end
 			ActionsManager.performAction(nil, rTarget, rRoll);
 		end
@@ -649,9 +649,9 @@ end
 -- callback for ActionsManager, called after the dice have stopped rolling : resolve roll status and display chat message
 -- rSource is the character receiving damage
 function onCriticalLocationRoll(rSource, rTarget, rRoll)
-	Debug.console("--------------------------------------------");
-	Debug.console("onCriticalLocationRoll");
-	Debug.console(rRoll);
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("onCriticalLocationRoll");
+	-- Debug.console(rRoll);
 
 	local sSourceType, nodeSource = ActorManager.getTypeAndNode(rSource);
 	local bIsMonster = CharManager.isMonster(nodeSource);
@@ -734,11 +734,11 @@ function onCriticalLocationRoll(rSource, rTarget, rRoll)
 end
 
 function outputCriticalMessage(sSourceCT, sTargetCT, nResult, sCriticalLevel, sLocation, sDamageText, sWeaponEffects, nExtraDamage, nFinalDamage, sFinalDamageMessage)
-	Debug.console("--------------------------------------------");
-	Debug.console("outputCriticalMessage");
-	Debug.console("nResult = "..tostring(nResult));
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("outputCriticalMessage");
+	-- Debug.console("nResult = "..tostring(nResult));
 	
-	local rTarget = ActorManager.getActor("ct", sTargetCT);
+	local rTarget = ActorManager.resolveActor(sTargetCT);
 	local sTargetType, nodeTarget = ActorManager.getTypeAndNode(rTarget);
 	local bIsMonster = CharManager.isMonster(nodeTarget);
 	local bIsTargetWithoutAnatomy = CharManager.isWithoutAnatomy(nodeTarget);
@@ -976,7 +976,7 @@ function decodeDamageText(nDamage, sDamageDesc)
 	if nDamageRemaining > 0 then
 		rDamageOutput.aDamageTypes[""] = nDamageRemaining;
 	elseif nDamageRemaining < 0 then
-		Debug.console("Total mismatch in damage type totals");
+		-- Debug.console("Total mismatch in damage type totals");
 	end
 	
 	return rDamageOutput;
@@ -988,12 +988,12 @@ end
 
 -- Notify damage / heal roll
 function notifyApplyDamage(sTargetCT, nTotalDamage, bLethal)
-	Debug.console("--------------------------------------------");
-	Debug.console("notifyApplyDamage - nTotalDamage : ");
-	Debug.console(nTotalDamage);
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("notifyApplyDamage - nTotalDamage : ");
+	-- Debug.console(nTotalDamage);
 	
 	if sTargetCT == "" then
-		Debug.console("notifyApplyDamage without legit rTarget : abort");
+		-- Debug.console("notifyApplyDamage without legit rTarget : abort");
 		return;
 	end
 
@@ -1013,11 +1013,11 @@ end
 
 -- Handle OOB damage / heal roll notification
 function handleDamage(msgOOB)
-	Debug.console("--------------------------------------------");
-	Debug.console("Handle Damage - msgOOB : ");
-	Debug.console(msgOOB);
+	-- Debug.console("--------------------------------------------");
+	-- Debug.console("Handle Damage - msgOOB : ");
+	-- Debug.console(msgOOB);
 	
-	local rTarget = ActorManager.getActor("ct", msgOOB.sTargetCT);
+	local rTarget = ActorManager.resolveActor(msgOOB.sTargetCT);
 	local sTargetType, nodeTarget = ActorManager.getTypeAndNode(rTarget);
 	if msgOOB.sLethal == "true" then
 		local nCurrentHP = DB.getValue(nodeTarget, "attributs.hit_points", 0);

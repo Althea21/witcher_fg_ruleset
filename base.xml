@@ -5,12 +5,12 @@
   attribution and copyright information.
 -->
 
-<root version="3.1" release="0.6.2" logo="logo.png">
-	<announcement text="The Witcher TRPG ruleset v0.6.2 (MBM Equipment) for Fantasy Grounds\r
-	The Witcher TRPG is edited by Talsorian Games Inc.
-	The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved.
-	The Witcher game is based on the prose of Andrzej Sapkowski.\r\r
-	This ruleset is a fan made project and not an official product from Talsorian Inc. nor CD Projekt Red.\r\r" font="emotefont" icon="rulesetlogo" />
+<root version="3.1" release="0.6.3" logo="logo.png">
+	<announcement text="The Witcher TRPG ruleset v0.6.3 (2023-02-18) for Fantasy Grounds" font="emotefont" />
+	<announcement text="The Witcher TRPG is edited by Talsorian Games Inc." font="emotefont" />
+	<announcement text="The Witcher (R) is a registered trademark of CD PROJEKT S.A. THE WITCHER game (C) CD PROJEKT S. A. All rights reserved." font="emotefont" icon="rulesetlogo" />
+	<announcement text="The Witcher game is based on the prose of Andrzej Sapkowski." font="emotefont" />
+	<announcement text="This ruleset is a fan made project and not an official product from Talsorian Inc. nor CD Projekt Red." font="emotefont-red" />
 	<!-- Attributes -->
 	<description>
 		<text>The Witcher</text>
@@ -71,6 +71,7 @@
 
 	<!-- Desktop -->
 	<includefile source="desktop/template_desktop.xml" />
+	<script name="DesktopTWTRPG" file="scripts/data_desktop_TWTRPG.lua" />
 
 	<!-- High-level scripts -->
 	<script name="DataCommon" file="scripts/data_common.lua" />

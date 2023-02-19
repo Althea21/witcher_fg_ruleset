@@ -117,16 +117,16 @@ function onEffectTextDecode(sEffect, rEffect)
 end
 
 function onEffectActorStartTurn(nodeActor, nodeEffect)
-    Debug.console("------------------------------------------")
-    Debug.console("onEffectActorStartTurn")
-    Debug.console(nodeActor)
-    Debug.console(nodeEffect)
+    -- Debug.console("------------------------------------------")
+    -- Debug.console("onEffectActorStartTurn")
+    -- Debug.console(nodeActor)
+    -- Debug.console(nodeEffect)
 
     local sEffName = DB.getValue(nodeEffect, "label", "");
     sEffName = sEffName:lower();
 
     if sEffName=="fire" or sEffName=="bleeding" or sEffName=="poisonned" or sEffName=="suffocating" then
-        local rTarget = ActorManager.getActorFromCT(nodeActor);
+        local rTarget = ActorManager.resolveActor(nodeActor);
         ActionDamage.applyConditionDamage(rTarget, sEffName);
     end
 
@@ -138,7 +138,7 @@ function onEffectActorStartTurn(nodeActor, nodeEffect)
 	-- 	if rEffectComp.type == "IFT" then
 	-- 		break;
 	-- 	elseif rEffectComp.type == "IF" then
-	-- 		local rActor = ActorManager.getActorFromCT(nodeActor);
+	-- 		local rActor = ActorManager.resolveActor(nodeActor);
 	-- 		if not checkConditional(rActor, nodeEffect, rEffectComp.remainder) then
 	-- 			break;
 	-- 		end
@@ -293,7 +293,7 @@ function applyOngoingDamageAdjustment(nodeActor, nodeEffect, rEffectComp)
 		end
 	end
 
-	local rTarget = ActorManager.getActorFromCT(nodeActor);
+	local rTarget = ActorManager.resolveActor(nodeActor);
 	local rRoll = { sType = "damage", sDesc = table.concat(aResults, " "), aDice = rEffectComp.dice, nMod = rEffectComp.mod };
 	if EffectManager.isGMEffect(nodeActor, nodeEffect) then
 		rRoll.bSecret = true;

@@ -19,7 +19,7 @@ end
 
 function handleApplyInit(msgOOB)
 	-- Debug.chat("---- handleApplyInit");
-	local rSource = ActorManager.getActor(msgOOB.sSourceType, msgOOB.sSourceNode);
+	local rSource = ActorManager.resolveActor(msgOOB.sSourceNode);
 	local nTotal = tonumber(msgOOB.nTotal) or 0;
 
 	DB.setValue(ActorManager.getCTNode(rSource), "initresult", "number", nTotal);
