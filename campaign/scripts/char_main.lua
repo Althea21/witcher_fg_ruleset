@@ -1,5 +1,5 @@
--- 
--- Please see the license.html file included with this distribution for 
+--
+-- Please see the license.html file included with this distribution for
 -- attribution and copyright information.
 --
 function onInit()
@@ -52,75 +52,46 @@ end
 function onBodyChanged()
 	local v = body_base.getValue()+body_modifier.getValue();
 	if v < 1 then
-		v=1;
+		v = 1;
+	elseif v > 13 then
+		v = 13;
 	end
 	body.setValue(v);
-	
-	-- change derived stat only if not under woundthreshold_state
+
+	-- change derived stat only
 	local woundthreshold_state = woundthreshold_state.getValue();
-	if (woundthreshold_state==0) then
-		local bodyValue = body.getValue();
-		
-		if bodyValue <= 2 then
-			meleebonusdamage.setValue(-4);
-			punch.setDice({"d6"});
-			punch.setModifier(-4);
-			kick.setDice({"d6"});
-			kick.setModifier(0);
-		elseif bodyValue <= 4 then
-			meleebonusdamage.setValue(-2);
-			punch.setDice({"d6"});
-			punch.setModifier(-2);
-			kick.setDice({"d6"});
-			kick.setModifier(2);
-		elseif bodyValue <= 6 then
-			meleebonusdamage.setValue(0);
-			punch.setDice({"d6"});
-			punch.setModifier(0);
-			kick.setDice({"d6"});
-			kick.setModifier(4);
-		elseif bodyValue <= 8 then
-			meleebonusdamage.setValue(2);
-			punch.setDice({"d6"});
-			punch.setModifier(2);
-			kick.setDice({"d6"});
-			kick.setModifier(6);
-		elseif bodyValue <= 10 then
-			meleebonusdamage.setValue(4);
-			punch.setDice({"d6"});
-			punch.setModifier(4);
-			kick.setDice({"d6"});
-			kick.setModifier(8);
-		elseif bodyValue <= 12 then
-			meleebonusdamage.setValue(6);
-			punch.setDice({"d6"});
-			punch.setModifier(6);
-			kick.setDice({"d6"});
-			kick.setModifier(10);
-		elseif bodyValue >= 13 then
-			meleebonusdamage.setValue(8);
-			punch.setDice({"d6"});
-			punch.setModifier(8);
-			kick.setDice({"d6"});
-			kick.setModifier(12);
-		end
-		
-		encumbrancemax.setValue(bodyValue*10);
-		onEncumbranceChanged();
-		
-		local physical = math.floor((bodyValue + will.getValue())/2);
-		hit_pointsmax.setValue(physical*5);
-		woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
-		staminamax.setValue(physical*5);
-		recovery.setValue(physical);
-		if physical > 10 then
-			physical = 10;
-		end
-		stun.setValue(physical);
-		onHPChanged();
+	local bodyValue = body.getValue();
+
+	-- add 1 to body to get an even number
+	if bodyValue % 2 == 1 then
+		bodyValue = bodyValue + 1;
 	end
-	
-	
+
+	meleebonusdamage.setValue(bodyValue -6);
+	punch.setDice({"d6"});
+	punch.setModifier(bodyValue -6);
+	kick.setDice({"d6"});
+	kick.setModifier(bodyValue -2);
+
+	encumbrancemax.setValue(bodyValue*10);
+	onEncumbranceChanged();
+
+	-- these totals should be set, regardless of wound threshold
+	local physical = 0;
+	if (woundthreshold_state == 0) then
+		physical = math.floor((bodyValue + will.getValue())/2);
+	else
+		physical = math.floor((bodyValue + (will_base.getValue() + will_modifier.getValue()))/2);
+	end
+	hit_pointsmax.setValue(physical*5);
+	woundthreshold.setValue(math.floor(hit_pointsmax.getValue()/5));
+	staminamax.setValue(physical*5);
+	recovery.setValue(physical);
+	if physical > 10 then
+		physical = 10;
+	end
+	stun.setValue(physical);
+	onHPChanged();
 end
 
 function onSpeedChanged()
@@ -158,7 +129,7 @@ function onWillChanged()
 	-- end
 	-- will.setValue(v);
 	applyStatMalus();
-	
+
 	local woundthreshold_state = woundthreshold_state.getValue();
 	if (woundthreshold_state==0) then
 		-- change derived stat only if not under woundthreshold_state
@@ -189,7 +160,7 @@ end
 
 function onToxicityChanged()
 	local value = toxicity.getValue();
-	
+
 	if value < 100 then
 		toxicity.setFont("sheetnumber");
 	elseif value == 100 then
@@ -204,7 +175,7 @@ function onRecoverAction()
 	local msg = ChatManager.createBaseMessage(rActor, nil);
 	msg.text = string.format(Interface.getString("char_recoveryaction"), recovery.getValue())
 	Comm.deliverChatMessage(msg);
-	
+
 	stamina.setValue(stamina.getValue()+recovery.getValue());
 	if stamina.getValue() > staminamax.getValue() then
 		stamina.setValue(staminamax.getValue());
@@ -216,8 +187,8 @@ function onHPChanged()
 	local node = getDatabaseNode();
 	local hpMax = hit_pointsmax.getValue();
 	local wt = woundthreshold.getValue();
-	
-	
+
+
 	if hit_points.getValue() <= 0 then
 		hit_points.setFont("sheetnumber_dead");
 		DB.setValue(node, "attributs.woundthreshold_state", "number", 1);
@@ -236,7 +207,7 @@ end
 function onEncumbranceChanged()
 	local encMax = encumbrancemax.getValue();
 	local enc = encumbrance.getValue();
-	
+
 	if enc > encMax then
 		encumbrance.setFont("sheetnumber_critical");
 		applyStatMalus();
@@ -254,26 +225,26 @@ function applyStatMalus()
 	--Debug.chat("applyStatMalus");
 	-- normal stats
 	local ref = reflex_base.getValue() + reflex_modifier.getValue();
-	if ref < 1 then 
+	if ref < 1 then
 		ref = 1;
 	end
 	local dex = dexterity_base.getValue() + dexterity_modifier.getValue();
-	if dex < 1 then 
+	if dex < 1 then
 		dex = 1;
 	end
 	local spd = speed_base.getValue() + speed_modifier.getValue();
-	if spd < 1 then 
+	if spd < 1 then
 		spd = 1;
 	end
 	local int = intelligence_base.getValue() + intelligence_modifier.getValue();
-	if int < 1 then 
+	if int < 1 then
 		int = 1;
 	end
 	local wil = will_base.getValue() + will_modifier.getValue();
-	if wil < 1 then 
+	if wil < 1 then
 		wil = 1;
 	end
-	
+
 	-- wound threshold status
 	local bWoundThresholdStatus = woundthreshold_state.getValue() > 0;
 	--Debug.chat(bWoundThresholdStatus);
@@ -284,13 +255,13 @@ function applyStatMalus()
 		end
 		reflex.setFont("sheetnumber_critical");
 		ref = reflex.getValue();
-	
+
 		if dex > 1 then
 			dexterity.setValue(math.floor(dex/2));
 		end
 		dexterity.setFont("sheetnumber_critical");
 		dex = dexterity.getValue();
-	
+
 		if int > 1 then
 			intelligence.setValue(math.floor(int/2));
 		end
@@ -314,7 +285,7 @@ function applyStatMalus()
 		will.setValue(wil);
 		will.setFont("sheetnumber");
 	end
-	
+
 	-- encumbrance status
 	local nEncExcess = encumbrance.getValue() - encumbrancemax.getValue();
 	local bOverburdened = false;
@@ -327,11 +298,11 @@ function applyStatMalus()
 		end
 	end
 	--Debug.chat("nOverburdenedMalus="..nOverburdenedMalus);
-	
+
 	ref_overburdened.setVisible(bOverburdened);
 	dex_overburdened.setVisible(bOverburdened);
 	spd_overburdened.setVisible(bOverburdened);
-	
+
 	if (bOverburdened) then
 		-- Overburdened : REF, DEX, and SPD impacted
 		if ref > nOverburdenedMalus then
@@ -340,14 +311,14 @@ function applyStatMalus()
 			reflex.setValue(1);
 		end
 		reflex.setFont("sheetnumber_critical");
-		
+
 		if dex > nOverburdenedMalus then
 			dexterity.setValue(dex-nOverburdenedMalus);
 		else
 			dexterity.setValue(1);
 		end
 		dexterity.setFont("sheetnumber_critical");
-		
+
 		if spd > nOverburdenedMalus then
 			speed.setValue(spd-nOverburdenedMalus);
 		else
@@ -360,15 +331,14 @@ function applyStatMalus()
 		if not bWoundThresholdStatus then
 			reflex.setFont("sheetnumber");
 		end
-		
+
 		dexterity.setValue(dex);
 		if not bWoundThresholdStatus then
 			dexterity.setFont("sheetnumber");
 		end
-		
+
 		speed.setValue(spd);
 		speed.setFont("sheetnumber");
 	end
 
 end
-
